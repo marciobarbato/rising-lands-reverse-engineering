@@ -7,7 +7,7 @@
 - Capture `c` was committed as `c162e68` before comparison. Its native differential passes **652 comparisons, 0 mismatches**; 1,251 S1 frame states reproduced, original code unchanged.
 - Window `a` is natively validated: **638 comparisons, 0 mismatches**, all seven registers, ESP, changed bytes and boundary requests; 951 S1 frame states reproduced, original code unchanged. Report: `relatorios/lacunas-s1-a-emulada.json`.
 - Window `b` is natively validated: **120 comparisons, 0 mismatches**; 1,201 S1 frame states reproduced, original code unchanged. Report: `relatorios/lacunas-s1-b-emulada.json`.
-- All three windows total **1,410 comparisons, 0 mismatches**. Register-provider completion and the two small requested query wrappers are next.
+- All three windows total **1,410 comparisons, 0 mismatches**. The strict S1 routing provider and two requested query wrappers add **546 fresh native comparisons, 0 mismatches** (EnginEstVivant 268, BatimentGetDecalageConstruction 278), also replayed without a CPU. Total fresh comparisons: **1,956**. See [STATE_QUERIES](STATE_QUERIES.md).
 - The next steps are in "Resume".
 
 ## Bench: S1 resumed from its own snapshots
@@ -108,9 +108,9 @@ The quadro128 directory comes from the same location. A failing comparison write
 - that the reports are bound to Core sources with 0 mismatches;
 - the synthetic properties of the translations.
 
-## Open
+## Owner reuse and remaining scope
 
-- **EnginRestaureEtat** (0x45315f, from 8057, 15 calls): a state-restore dispatcher of about 1.9 KB, with ResetOrdre and the order setters as callees.
-- **ChercheBatimentProximiteCaveOuSanctuaire** (0x4539f3, 11753, 1 call): it depends on Combat's Distance2d and on BatimentGetCase.
-
-Both need their own capture windows, starting from the S1 snapshots at 8000 and 11500.
+- **EnginRestaureEtat** (`0x45315f`, first S1 call 8057): Economy's `Restauracao` / `provedor_restauracao` already covers every switch target, with 58 published native restore comparisons and zero mismatches. Core's existing callees remain named dependencies; no further Core restore body is owed.
+- **ChercheBatimentProximiteCaveOuSanctuaire** (`0x4539f3`, first S1 call 11753): reuse Combat's `refugio_registradores`, exposed through `LutaFatalViva`, with two published native refuge comparisons and zero mismatches. Do not duplicate it in Core.
+- `provedor_lacunas_s1` forwards both owner callbacks with all seven registers and actual call addresses; [STATE_QUERIES](STATE_QUERIES.md) records the exact binding contract. No additional Core capture window is needed to repeat their existing proofs.
+- Full reconstructed S1 phase/whole-state equality remains a coordinator/consumer proof. The original survey is historical; these isolated comparisons do not establish M3.1/M4.1 acceptance. Search type/radius limits, readable-stack requirements and missing Audio/owner providers remain explicit.

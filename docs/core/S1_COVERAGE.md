@@ -2,6 +2,8 @@
 
 Data: [`relatorios/cobertura-s1.json`](../../relatorios/cobertura-s1.json). Generator: `python3 -B ferramentas/cobertura_s1.py` (read-only; about 30 s, no Unicorn). It is a coverage survey, not evidence.
 
+Core continuation, 2026-10-30: the 16 Core gap names below now have bounded original-validated bodies or committed Economy/Combat providers. Core's windows a/b/c pass 1,410 fresh comparisons; the two additional register queries pass 546, all zero mismatches. See [S1_GAPS](S1_GAPS.md) and [STATE_QUERIES](STATE_QUERIES.md) for exact domains, counts and owner reuse. The historical main snapshot, raw survey and counts below remain unchanged; this note does not claim complete reconstructed S1-chain acceptance or update other owners' status.
+
 ## Sources
 
 - **Capture.** Missions' replay-checked S1 (feat/re-missions `82ec5ea`, `pesquisas-paralelas/missoes/m3/sondas/S1/`), frames 129–17050. `quadros.jsonl` holds per-frame entry counts for every symbol. They come from one block hook over the code section, the same method as `cobrir_quadros_exibicao.py`. The file also holds every routine's first entry with its caller. The tool reads the files from the git object and checks them against `replay.json`, after the same normalisation: sorted keys, `seconds` dropped.

@@ -1,0 +1,8793 @@
+{
+ "by_routine": {
+  "BatimentGetDecalageConstruction": 278,
+  "EnginEstVivant": 268
+ },
+ "capture": {
+  "path": "evidencias/lacunas-s1/consultas-estado-original.json.xz",
+  "sha256": "2df59b5ea684598d147e7930d2c59e1128a4ad154b68e7f4e0e2b8f864256c53"
+ },
+ "capture_cases": 546,
+ "cases": [
+  {
+   "label": "unit 15, state 0, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 1, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 2, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 3, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 4, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 5, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 6, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 7, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 8, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 9, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 10, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 11, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 12, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 13, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 14, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 15, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 16, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 17, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 18, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 19, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 20, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 21, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 22, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 23, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 24, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 25, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 26, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 27, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 28, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 29, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 30, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 31, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 32, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 33, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 34, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 35, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 36, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 37, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 38, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 39, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 40, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 41, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 42, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 43, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 44, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 45, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 46, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 47, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 48, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 49, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 50, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 51, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 52, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 53, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 54, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 55, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 56, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 57, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 58, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 59, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 60, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 61, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 62, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 63, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 64, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 65, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 66, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 67, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 68, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 69, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 70, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 71, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 72, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 73, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 74, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 75, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 76, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 77, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 78, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 79, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 80, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 81, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 82, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 83, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 84, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 85, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 86, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 87, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 88, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 89, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 90, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 91, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 92, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 93, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 94, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 95, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 96, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 97, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 98, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 99, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 100, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 101, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 102, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 103, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 104, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 105, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 106, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 107, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 108, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 109, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 110, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 111, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 112, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 113, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 114, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 115, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 116, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 117, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 118, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 119, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 120, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 121, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 122, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 123, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 124, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 125, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 126, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 127, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 128, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 129, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 130, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 131, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 132, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 133, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 134, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 135, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 136, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 137, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 138, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 139, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 140, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 141, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 142, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 143, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 144, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 145, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 146, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 147, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 148, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 149, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 150, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 151, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 152, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 153, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 154, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 155, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 156, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 157, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 158, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 159, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 160, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 161, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 162, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 163, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 164, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 165, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 166, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 167, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 168, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 169, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 170, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 171, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 172, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 173, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 174, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 175, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 176, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 177, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 178, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 179, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 180, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 181, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 182, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 183, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 184, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 185, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 186, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 187, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 188, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 189, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 190, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 191, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 192, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 193, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 194, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 195, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 196, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 197, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 198, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 199, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 200, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 201, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 202, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 203, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 204, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 205, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 206, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 207, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 208, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 209, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 210, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 211, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 212, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 213, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 214, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 215, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 216, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 217, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 218, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 219, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 220, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 221, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 222, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 223, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 224, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 225, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 226, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 227, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 228, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 229, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 230, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 231, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 232, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 233, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 234, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 235, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 236, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 237, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 238, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 239, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 240, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 241, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 242, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 243, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 244, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 245, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 246, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 247, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 248, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 249, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 250, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 251, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 252, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 253, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 254, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15, state 255, high 0x5a5a0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 0, state 0, high 0xffff0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 0, state 4, high 0xffff0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 0, state 1, high 0xffff0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 0, state 255, high 0xffff0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 799, state 0, high 0x80000000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 799, state 4, high 0x80000000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 799, state 1, high 0x80000000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 799, state 255, high 0x80000000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15 active, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15 active, high 0xffff0000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15 active, high 0x80000000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "unit 15 active, high 0x12340000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "EnginEstVivant"
+  },
+  {
+   "label": "type 0, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 1, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 2, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 3, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 4, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 5, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 6, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 7, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 8, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 9, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 10, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 11, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 12, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 13, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 14, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 15, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 16, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 17, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 18, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 19, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 20, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 21, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 22, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 23, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 24, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 25, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 26, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 27, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 28, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 29, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 30, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 31, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 32, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 33, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 34, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 35, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 36, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 37, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 38, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 39, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 40, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 41, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 42, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 43, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 44, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 45, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 46, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 47, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 48, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 49, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 50, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 51, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 52, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 53, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 54, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 55, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 56, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 57, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 58, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 59, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 60, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 61, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 62, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 63, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 64, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 65, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 66, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 67, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 68, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 69, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 70, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 71, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 72, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 73, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 74, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 75, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 76, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 77, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 78, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 79, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 80, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 81, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 82, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 83, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 84, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 85, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 86, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 87, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 88, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 89, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 90, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 91, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 92, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 93, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 94, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 95, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 96, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 97, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 98, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 99, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 100, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 101, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 102, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 103, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 104, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 105, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 106, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 107, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 108, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 109, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 110, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 111, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 112, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 113, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 114, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 115, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 116, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 117, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 118, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 119, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 120, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 121, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 122, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 123, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 124, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 125, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 126, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 127, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 128, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 129, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 130, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 131, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 132, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 133, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 134, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 135, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 136, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 137, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 138, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 139, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 140, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 141, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 142, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 143, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 144, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 145, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 146, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 147, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 148, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 149, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 150, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 151, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 152, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 153, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 154, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 155, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 156, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 157, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 158, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 159, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 160, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 161, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 162, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 163, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 164, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 165, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 166, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 167, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 168, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 169, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 170, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 171, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 172, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 173, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 174, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 175, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 176, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 177, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 178, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 179, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 180, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 181, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 182, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 183, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 184, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 185, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 186, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 187, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 188, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 189, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 190, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 191, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 192, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 193, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 194, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 195, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 196, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 197, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 198, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 199, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 200, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 201, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 202, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 203, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 204, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 205, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 206, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 207, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 208, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 209, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 210, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 211, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 212, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 213, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 214, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 215, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 216, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 217, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 218, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 219, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 220, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 221, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 222, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 223, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 224, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 225, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 226, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 227, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 228, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 229, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 230, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 231, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 232, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 233, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 234, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 235, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 236, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 237, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 238, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 239, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 240, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 241, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 242, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 243, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 244, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 245, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 246, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 247, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 248, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 249, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 250, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 251, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 252, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 253, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 254, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 255, high 0xa5a50000",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 0, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 1, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 2, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 3, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 4, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 5, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 6, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 7, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 8, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 9, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 10, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 11, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 12, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 13, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 14, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 15, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 16, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 17, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 18, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 19, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 20, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  },
+  {
+   "label": "type 21, high 0x0",
+   "memory_changed": {
+    "direct": false,
+    "provider": false,
+    "s1_provider": false
+   },
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {
+    "direct": {},
+    "provider": {},
+    "s1_provider": {}
+   },
+   "routine": "BatimentGetDecalageConstruction"
+  }
+ ],
+ "comparisons": 546,
+ "fixture": {
+  "code_unchanged": true,
+  "frames_checked": 1,
+  "last_frame": 11250,
+  "snapshot": {
+   "path": ".local/m3/passo2/S1/instantaneo-11250.pickle",
+   "sha256": "6f577100f02bb330495bcab9d6eeb46905391b2c506023cd5de3f4bde67c7cb6"
+  }
+ },
+ "mismatches": [],
+ "original_intervals": [
+  {
+   "end_exclusive": "0x443ddd",
+   "name": "EnginEstVivant",
+   "sha256": "86d5313b2dabe2b67b5019eb0dfbcd7600ada43f681f26186d0b6111408907f0",
+   "start": "0x443dad"
+  },
+  {
+   "end_exclusive": "0x41aee2",
+   "name": "BatimentGetDecalageConstruction",
+   "sha256": "41eb0b671cabaff25da6c4c837a83e2f92584040fe7cbe7d4036719dd85b4756",
+   "start": "0x41aea4"
+  },
+  {
+   "end_exclusive": "0x41aea4",
+   "name": "construction jump table",
+   "sha256": "040e1af18b93888fe6e3ef7a274dc5f275edd724377af7f325686f36297876de",
+   "start": "0x41ae4c"
+  }
+ ],
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "schema": "rising-lands/core-state-queries-differential/1",
+ "scope": "declared read-only leaves from S1 frame 11250; no frame advance",
+ "seconds": 104.26,
+ "source_revision": "ab9bb7d6a82d0c437df13059b7e3814b9dbed56f",
+ "source_sha256": {
+  "ferramentas/bancada_s1.py": "43736ccf37c1ce6bf980e6d6beba0000c91acc7a508df4e1b3a133b7f7097d19",
+  "ferramentas/consultas_estado_core.py": "09de268cc917e6e5c5970652819d01d92c22344b7d9f61c8e311016930765fba",
+  "ferramentas/memoria_quadro_core.py": "346e60dbf08f64c0a8dd21b3f3442fa7b8241e90c02f3c0876500b742ffe7020",
+  "ferramentas/provedores_lacunas_core.py": "9bf99c2782b96f92ba595de95e151497115925cf0d8c219f2b1446585b73e241",
+  "ferramentas/selecao_ordens.py": "acf5ebde927f1c5a0275ddffa191d03bdb78a810dd5179cb1f7088b46eba17e8",
+  "ferramentas/validar_consultas_estado_core.py": "c95ea481da4ab00d8b2e5f53fd1ea052d3c3857775c06d0a71bbf0b92b44299f"
+ }
+}
