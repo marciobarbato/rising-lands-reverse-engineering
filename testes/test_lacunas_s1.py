@@ -28,8 +28,7 @@ class EvidenciaOriginal(unittest.TestCase):
         from validar_lacunas_s1 import JANELAS as FRAMES, captura_padrao
         for j in JANELAS:
             with self.subTest(window=j):
-                if not captura_padrao(j).exists():
-                    continue                      # window c: capture not run yet (see docs/core/S1_GAPS.md)
+                self.assertTrue(captura_padrao(j).exists(), f'missing committed capture for window {j}')
                 d = json.loads(lzma.decompress(captura_padrao(j).read_bytes()))
                 self.assertFalse(d['translation_executed'])
                 self.assertEqual(d['frames'], list(FRAMES[j]))
@@ -44,8 +43,7 @@ class DiferencialNativo(unittest.TestCase):
         from validar_lacunas_s1 import FONTES, captura_padrao, relatorio_padrao
         for j in JANELAS:
             with self.subTest(window=j):
-                if not relatorio_padrao(j).exists():
-                    continue                      # native differential not run yet (see docs/core/S1_GAPS.md)
+                self.assertTrue(relatorio_padrao(j).exists(), f'missing native report for window {j}')
                 rel = json.loads(relatorio_padrao(j).read_text())
                 self.assertEqual(rel['capture']['sha256'], hashlib.sha256(captura_padrao(j).read_bytes()).hexdigest())
                 self.assertEqual(set(rel['source_sha256']), set(FONTES))
@@ -125,6 +123,29 @@ class Traducoes(unittest.TestCase):
         canal = 0x49a0c8 + 2 * 276 + 0x100
         self.assertEqual(pedidos, [('PlaySnd_StopSound', 0, 5, []), ('PlaySnd_PostSound', canal, 0x20100, [0x100])])
         self.assertEqual((s['EAX'], s['EBX'], s['ECX'], s['EDX']), (5, canal, 0x1100, 0x20100))
+
+    def test_voice_passes_the_native_saved_record_and_call_address_to_sound(self):
+        from consultas_luta import ConsultasLuta, REG7
+        calls = []
+
+        def som(nome, regs, pilha, **kwargs):
+            calls.append((nome, dict(regs), kwargs['chamada']))
+            return regs['EAX']
+
+        r = dict(EAX=2, EBX=7, ECX=0x112200, EDX=5, ESI=0x12345678, EDI=9, EBP=10)
+        s = ConsultasLuta(self._memoria(), som=som).chamar('VoixOffAsk', r)
+        self.assertEqual([c[2] for c in calls], [0x41a1d3, 0x41a221])
+        for _, regs, _ in calls:
+            self.assertEqual(set(regs), set(REG7))
+            self.assertEqual(regs['ESI'], 0x49a0c8 + 2 * 276)  # mov esi, base; add esi, record offset
+            self.assertEqual((regs['EDI'], regs['EBP']), (9, 10))
+        self.assertEqual(s['ESI'], r['ESI'])  # the original pops the saved caller ESI after both sound calls
+
+    def test_structure_index_outside_the_captured_pool_is_explicit(self):
+        from consultas_luta import ConsultasLuta, ForaDoDominioLuta
+        r = dict(EAX=0x1234, EBX=0, ECX=0, EDX=0, ESI=0, EDI=0, EBP=0)
+        with self.assertRaises(ForaDoDominioLuta):
+            ConsultasLuta(self._memoria()).chamar('GetCaseIndiceBatiment', r)
 
 
 if __name__ == '__main__':

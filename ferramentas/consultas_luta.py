@@ -1,7 +1,7 @@
 """S1's first fight (frames 11500-12460): Core's terrain/structure queries, task-list helpers and structure voice.
 
-Translated from the intact bytes (original SHA-256 6c556520...43fb) after the original-only S1 capture
-``evidencias/lacunas-s1/captura-c.json.xz`` (``validar_lacunas_s1.py --janela c --capturar``). Every register:
+Translated from the intact bytes (original SHA-256 6c556520...43fb). The original-only S1 capture
+``evidencias/lacunas-s1/captura-c.json.xz`` was committed before the full native comparison. Every register:
 
 - TerrainEstMontagne 0x47653c: AL = 1 when the tile word [0x507d70][cell] is in [0x1dd, 0x260); EAX = the tile's
   high byte above AL; EDX preserved.
@@ -85,7 +85,8 @@ class ConsultasLuta:
     def _som(self, nome, chamada, regs, pilha):
         if self.som is None:
             raise DependenciaLuta(nome, chamada)
-        if 'chamada' in inspect.signature(self.som).parameters:
+        parametros = inspect.signature(self.som).parameters.values()
+        if any(p.name == 'chamada' or p.kind is p.VAR_KEYWORD for p in parametros):
             return self.som(nome, regs, pilha, chamada=chamada) & M32
         return self.som(nome, regs, pilha) & M32
 
@@ -95,6 +96,8 @@ class ConsultasLuta:
         return dict(r, EAX=(t & 0xff00) | int(0x1dd <= t < 0x260))
 
     def _GetCaseIndiceBatiment(self, r, esp):
+        if r['EAX'] & 0xffff > 999:
+            raise ForaDoDominioLuta('GetCaseIndiceBatiment', 0x41aac4, f'structure index {r["EAX"] & 0xffff}')
         return dict(r, **caso_indice_estrutura(self.m, r['EAX']))
 
     def _estrutura(self, nome, endereco, i):
@@ -211,10 +214,11 @@ class ConsultasLuta:
         canal = (ESTRUTURAS + PASSO_ESTRUTURA * i + 0x100) & M32
         cl = r['EBX'] & 0xff
         ecx = (r['ECX'] & 0xffffff00) | cl
-        eax = self._som('PlaySnd_StopSound', 0x41a1d3, dict(r, EAX=canal, EBX=0, ECX=ecx), [])
+        rec = ESTRUTURAS + PASSO_ESTRUTURA * i
+        eax = self._som('PlaySnd_StopSound', 0x41a1d3, dict(r, EAX=canal, EBX=0, ECX=ecx, ESI=rec), [])
         dx = r['EDX'] & 0xffff
         a, b = VOZ[dx] if dx <= 6 else (0, r['EDX'])
         edx = ((a & 0xffff) << 16) | ((b & 0xffff) << 8)
-        regs = dict(r, EAX=0x41, EBX=canal, ECX=cl, EDX=edx & M32)
+        regs = dict(r, EAX=0x41, EBX=canal, ECX=cl, EDX=edx & M32, ESI=rec)
         eax = self._som('PlaySnd_PostSound', 0x41a221, regs, [0x100])
         return dict(r, EAX=eax, EBX=canal, EDX=edx & M32)

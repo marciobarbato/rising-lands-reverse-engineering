@@ -4,9 +4,10 @@
 
 **Status (resumed under Codex, 2026-10-30):**
 - Captures `a` and `b` are committed.
-- Capture `c` is complete: **652 original-only cases**, 1,251 S1 frame states reproduced, original code unchanged. Its native differential is pending.
+- Capture `c` was committed as `c162e68` before comparison. Its native differential passes **652 comparisons, 0 mismatches**; 1,251 S1 frame states reproduced, original code unchanged.
 - Window `a` is natively validated: **638 comparisons, 0 mismatches**, all seven registers, ESP, changed bytes and boundary requests; 951 S1 frame states reproduced, original code unchanged. Report: `relatorios/lacunas-s1-a-emulada.json`.
-- Window `b` is natively validated: **120 comparisons, 0 mismatches**; 1,201 S1 frame states reproduced, original code unchanged. Report: `relatorios/lacunas-s1-b-emulada.json`. `consultas_luta` is awaiting its native differential against the committed original-only `c` capture.
+- Window `b` is natively validated: **120 comparisons, 0 mismatches**; 1,201 S1 frame states reproduced, original code unchanged. Report: `relatorios/lacunas-s1-b-emulada.json`.
+- All three windows total **1,410 comparisons, 0 mismatches**. Register-provider completion and the two small requested query wrappers are next.
 - The next steps are in "Resume".
 
 ## Bench: S1 resumed from its own snapshots
@@ -49,8 +50,18 @@ python3 "…/heavy_lease.py" core -- python3 -B ferramentas/validar_lacunas_s1.p
 | b | ChercheVeget | 45 | 0 |
 | b | ChercheGc | 35 | 0 |
 | b | ChercheGcLibre | 40 | 0 |
+| c | TerrainEstMontagne | 325 | 0 |
+| c | BatimentGetCaseAdjacent | 284 | 0 |
+| c | ChercheCaseBatiment | 16 | 0 |
+| c | GetCaseIndiceBatiment | 6 | 0 |
+| c | listDeleteElem | 3 | 0 |
+| c | listUnlinkElem | 3 | 0 |
+| c | iaProbReturnTo | 4 | 0 |
+| c | VoixOffAsk | 11 | 0 |
 
 These are fresh native comparisons under `heavy_lease.py`, not historical smoke totals. The committed original-only captures were reproduced exactly in every case. No translation correction was needed for windows `a` or `b`.
+
+Window c also compares all seven exit registers and ESP, every changed game byte and Audio's four request-argument registers plus pushed volume. Before that comparison, the register review corrected the sound callback's ESI to the native structure-record pointer, forwarded `chamada` to `**kwargs` sound providers, and protected GetCaseIndiceBatiment's out-of-pool inputs. The ESI/call-address callback details have focused static-instruction contract tests; c's sound-boundary records contain only EAX/EDX/EBX/ECX. Neither callback returns nor unknown memory are defaulted.
 
 ### Window c capture preparation
 
