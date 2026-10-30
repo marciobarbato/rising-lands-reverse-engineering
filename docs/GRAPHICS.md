@@ -1088,3 +1088,14 @@ and unreadable text remain dependencies. The
 [handoff](../pesquisas-paralelas/graficos-animacao/HANDOFF.md#s1-objectives-and-native-font1-glyphs-outside-afftext)
 records the exact input contract and original hashes. Full MenuInit/result transitions and integration in the
 gameplay frame API remain separate; its version is still1.9.
+
+The separate [S1 drawing-flow compositor](../pesquisas-paralelas/graficos-animacao/telas_fluxo_s1.py) also matches
+the complete AffGame phases: **11/11** result surfaces and **7/7** objectives surfaces/raster traces. The result
+mode0x13 follows the original immediate return. Objectives mode0x11 requires an explicit menu bank and research
+branch result0, draws the original INVENTE.CMP animation bob2/3/4, then restores the normal STRAT glyph source
+for AffObjectif. All three compressed menu payloads equal the captured native allocation hashes and sizes.
+Missing menu data and other branches/phases raise named dependencies. No callbacks or gameplay state mutate.
+This is a separate pixel API; the gameplay renderer still reports unsupported menu modes. Initial MenuInit,
+LoadPie backgrounds and opaque victory text remain separate transition dependencies. The
+[reference surface](../pesquisas-paralelas/graficos-animacao/artefatos/s1-objetivos-prova.png) retains the benchmark's
+declared LoadPie non-execution; it is not a newly captured background-enabled screen.

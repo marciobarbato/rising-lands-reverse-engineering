@@ -1129,3 +1129,33 @@ the unchanged6c556520…8543fb oracle. This is an isolated screen compositor, no
 dispatcher: MenuInit/LoadPie/AffText result/transition dependencies remain explicit, and gameplay
 render API remains1.9. Fresh native dependency observations and the domain gate are still leased
 queue items; the seven comparisons above replay immutable committed native captures.
+
+## S1 AffGame result/objectives phases
+
+`telas_fluxo_s1.compor_affgame_s1(memoria, superficie, *, catalogo, catalogo_menu=None,
+ramo_pesquisa_u16=None)` is a separate bounded screen API. Original AffGame mode0x13 immediately returns
+at0x417EF3..0x417F2F: it preserves the full input surface and returns no raster/clip effects without
+reading gameplay state, querying research or invoking any callback. This is an executed original return,
+not a missing renderer replaced with a no-op.
+
+Mode0x11 requires camera0, the caller's actual RechercheGetBranche result0, the captured animation
+phases1/2/3 of `[0x508F84]&15`, and the objectives domain above. The caller must supply the menu bank;
+absence raises0x418590, unresolved/other branches raise0x4717B1, and uncaptured phases raise0x417765.
+`BancoInventeS1` reads the original72-frame INVENTE.CMP using the existing read-only asset manifest.
+It has its own raw1-based IDs: bob2/3/4 at(397,484), unclipped, precedes the restored STRAT font bank
+and AffObjectif. No menu-bank fallback is installed. Other game modes remain0x4176A8.
+
+`validacao/s1-fluxo-telas-provider-final.json`: complete800×600 pixels and every raster argument match
+in **11/11** between-frames result phases(17033–17043) and **7/7** objectives phases(17044–17050), zero
+mismatches. Each of the three menu payload hashes and sizes equals its captured native allocation;
+using STRAT's same-numbered bob instead produces9752 wrong pixels on the first objectives phase and
+is rejected by the comparison. Two focused tests pass2/2, including no extra result-state reads and
+the missing-bank stop. Whole native MenuInit/PartieGetResultat/AffObjectif state equality remains
+the separately preserved12/12+8/8 native isolation proof; this pixel API does not reconstruct mission
+advance, research mutation, lock/flip bookkeeping or menu initialization.
+
+Original AffGame/SetBank/query intervals are appended in `evidencias/s1-fluxo-intervalos.json`.
+[The reference PNG](artefatos/s1-objetivos-prova.png) shows the exact benchmark surface under its
+declared absent LoadPie background; it is not a text/background-enabled retail screenshot. Mode0x13's
+initial MenuInit still needs LoadPie0x4799C4 and explicit handling of its opaque AffText pointer0.
+Full menu transitions, other branches/animation phases, and insertion into gameplay ABI1.9 remain open.
