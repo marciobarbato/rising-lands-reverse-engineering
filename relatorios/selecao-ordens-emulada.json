@@ -131,12 +131,12 @@
   "som": "returns the received EAX (the frame bench declaration for PlaySnd_*)"
  },
  "schema": "rising-lands/monde01-selection-orders-differential/1",
- "seconds": 117.855,
+ "seconds": 134.423,
  "source_sha256": {
   "ferramentas/bancada_selecao_ordens.py": "6a8a3010476e862624dc91421b153b995fca70fbf3fefd72d5f2bbcfa88146e1",
   "ferramentas/capturar_selecao_ordens.py": "8272e3ee1ac57881fd07baf3ce223cb8e17706e3525c9c9f6058df768e15358b",
   "ferramentas/casos_selecao_ordens.py": "9e0762020feae983b2753b16db043144491a1d6c1d43db152f8ab0ff5e6b3e42",
-  "ferramentas/selecao_ordens.py": "e8eb78134dd44adbbef88354ea3219c6513f2a2173cc68227fa9fecaf47ab67c",
+  "ferramentas/selecao_ordens.py": "acf5ebde927f1c5a0275ddffa191d03bdb78a810dd5179cb1f7088b46eba17e8",
   "ferramentas/validar_selecao_ordens.py": "2d7d4e83e999db5d55b9030fc8ce39c2f5685e40fddac706c1f79cff8fb2c2f8"
  }
 }

@@ -860,6 +860,7 @@ def _provedores_incursao(memoria, bonus):
                                                                                                 tipo)['EAX'],
         'Chemin_Accessible': lambda sitio, origem, destino: ic.acessivel(m, origem, destino)['EAX'],
         'TerrainEnCollision': lambda sitio, caso, mascara: ic.terreno_em_colisao(m, caso, mascara)['EAX'],
+        'TerrainEstGc': lambda sitio, caso: ic.terreno_esta_gc(m, caso)['EAX'],
         'ResetCollision': lambda sitio, caso, mascara: ic.remover_colisao(m, caso, mascara)['EAX'],
         'iaProbPost': lambda sitio, jogador, tipo, ebx, ecx, pilha: ic.postar_tarefa(m, jogador, tipo, ebx, ecx,
                                                                                       pilha)['EAX'],

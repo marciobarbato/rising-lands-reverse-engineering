@@ -1,0 +1,431 @@
+{
+ "capture": {
+  "path": "evidencias/consultas-trabalho/captura-trabalho.json.xz",
+  "sha256": "ffcb587d9df0f2db3de796930a7f6aadc465b0b850a73820db509310e4957b37"
+ },
+ "capture_cases": 32,
+ "cases": [
+  {
+   "changed_equal": true,
+   "frame": 18,
+   "kind": "in_situ",
+   "label": "SetMiniMap in situ from AvanceEngin+0x2c4",
+   "native_changed": 8,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "SetMiniMap",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 20,
+   "kind": "in_situ",
+   "label": "SetMiniMap in situ from AvanceEngin+0x2c4",
+   "native_changed": 8,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "SetMiniMap",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 261,
+   "kind": "in_situ",
+   "label": "TerrainEstGc in situ from CalculWorkEngin+0x1c5e",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 261,
+   "kind": "variant",
+   "label": "TerrainEstGc: object 0x0",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 261,
+   "kind": "variant",
+   "label": "TerrainEstGc: object 0x1",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 261,
+   "kind": "variant",
+   "label": "TerrainEstGc: object 0x1c",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 261,
+   "kind": "variant",
+   "label": "TerrainEstGc: object 0x1d",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 261,
+   "kind": "variant",
+   "label": "TerrainEstGc: object 0x1e",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 261,
+   "kind": "variant",
+   "label": "TerrainEstGc: object 0x28",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 261,
+   "kind": "variant",
+   "label": "TerrainEstGc: object 0x33",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 261,
+   "kind": "variant",
+   "label": "TerrainEstGc: object 0x34",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 261,
+   "kind": "variant",
+   "label": "TerrainEstGc: object 0x35",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 261,
+   "kind": "variant",
+   "label": "TerrainEstGc: object 0x36",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 261,
+   "kind": "variant",
+   "label": "TerrainEstGc: object 0x42",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 261,
+   "kind": "variant",
+   "label": "TerrainEstGc: object 0x43",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 261,
+   "kind": "variant",
+   "label": "TerrainEstGc: object 0x46",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 261,
+   "kind": "variant",
+   "label": "TerrainEstGc: object 0x80",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 261,
+   "kind": "variant",
+   "label": "TerrainEstGc: object 0xff",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 261,
+   "kind": "variant",
+   "label": "TerrainEstGc: upper register bits",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 293,
+   "kind": "in_situ",
+   "label": "TerrainEstGc in situ from CalculWorkEngin+0x1c5e",
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "TerrainEstGc",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 572,
+   "kind": "in_situ",
+   "label": "SetMiniMap in situ from CalculWorkEngin+0x7c8",
+   "native_changed": 8,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "SetMiniMap",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 572,
+   "kind": "variant",
+   "label": "SetMiniMap mode 4: owner 0",
+   "native_changed": 8,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "SetMiniMap",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 572,
+   "kind": "variant",
+   "label": "SetMiniMap mode 4: owner 1",
+   "native_changed": 8,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "SetMiniMap",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 572,
+   "kind": "variant",
+   "label": "SetMiniMap mode 4: owner 2",
+   "native_changed": 8,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "SetMiniMap",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 572,
+   "kind": "variant",
+   "label": "SetMiniMap mode 4: owner 3",
+   "native_changed": 8,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "SetMiniMap",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 572,
+   "kind": "variant",
+   "label": "SetMiniMap mode 4: owner 4",
+   "native_changed": 8,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "SetMiniMap",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 572,
+   "kind": "variant",
+   "label": "SetMiniMap mode 4: owner 200",
+   "native_changed": 8,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "SetMiniMap",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 572,
+   "kind": "variant",
+   "label": "SetMiniMap mode 4: cell lit (light byte 0)",
+   "native_changed": 8,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "SetMiniMap",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 572,
+   "kind": "variant",
+   "label": "SetMiniMap mode 4: cell unlit (light byte 0x10)",
+   "native_changed": 4,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "SetMiniMap",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 572,
+   "kind": "variant",
+   "label": "SetMiniMap mode 4: corner (0,0)",
+   "native_changed": 4,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "SetMiniMap",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 572,
+   "kind": "variant",
+   "label": "SetMiniMap mode 4: corner (w-1,h-1)",
+   "native_changed": 4,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "SetMiniMap",
+   "uncertain_bits": {}
+  },
+  {
+   "changed_equal": true,
+   "frame": 572,
+   "kind": "variant",
+   "label": "SetMiniMap mode 4: upper register bits",
+   "native_changed": 8,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "SetMiniMap",
+   "uncertain_bits": {}
+  }
+ ],
+ "changed_bytes_compared": 100,
+ "comparisons": 32,
+ "economy_sources": {
+  "bancada_ciclo_trabalho": {
+   "path": "pesquisas-paralelas/economia/bancada_ciclo_trabalho.py",
+   "sha256": "7139f3e24ec1b7c4da8c6d0e67bcc7707a36811f57e90ecadd4adb939af937d8"
+  },
+  "capturar_ciclo_trabalho": {
+   "path": "pesquisas-paralelas/economia/capturar_ciclo_trabalho.py",
+   "sha256": "4a3ffccf1b7ed1d23fe903b22e16b560335e8caf20efb4f86eeefa3a3e8dc1f7"
+  }
+ },
+ "mismatches": [],
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "path_reproduction": {
+  "between_frames": true,
+  "code_unchanged": true,
+  "frame1": true,
+  "load_tail": true
+ },
+ "per_routine": {
+  "SetMiniMap": {
+   "cases": 14,
+   "mismatches": 0
+  },
+  "TerrainEstGc": {
+   "cases": 18,
+   "mismatches": 0
+  }
+ },
+ "schema": "rising-lands/core-work-cycle-queries-differential/1",
+ "seconds": 252.46,
+ "source_sha256": {
+  "ferramentas/chamadas_quadro_core.py": "67de7367d75a5e50176c43fe2c01cd48e281e56cd0d9eae22b22f74a44b70428",
+  "ferramentas/incursao_core.py": "1ad2df51b5273a405769d6f51c373a21d27e9b7cf439079ad212d41023cc8867",
+  "ferramentas/validar_consultas_trabalho.py": "64b6efa4f1bb5fb8c4157cfbea460cbc9a1f74ec81c5b325f7e0f9c815c43325",
+  "ferramentas/validar_fadiga_vegetacao.py": "f6b72aea7f5f6d81517472290e6f2c65257b16bada263fb6c085046d809a3556"
+ }
+}
