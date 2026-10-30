@@ -50,11 +50,5 @@
     "pesquisas-paralelas/missoes/m3/sondas/P7/replay.json": "65fa2c507fce1b62a3799ba6e8edc2957238e71cbb9c8444dc7797fdb57684c0"
   },
   "input_revision": "a7f5d4939e7826e02a8b348995edb9c793657f4c",
-  "revision_backed_evidence": {
-    "pesquisas-paralelas/ia-runtime/evidencias/leituras-entrada-ordens-ia.json.xz": {
-      "reason": "Auxiliary read footprint from the ported original leaf campaign. Upstream 7cc733e replaces its shared base; this proof continues to use exactly the old Git-pinned bytes. Captures and policies retain live immutability checks.",
-      "revision": "a7f5d4939e7826e02a8b348995edb9c793657f4c"
-    }
-  },
   "schema": "rising-lands/rust-input-reference-pins/1"
 }

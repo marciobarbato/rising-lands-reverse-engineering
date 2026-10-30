@@ -668,11 +668,12 @@ proofs: policy 2 is checked against the unchanged evidence contract and policy 1
 is additionally checked against it for every byte, register, clock and retained
 order/request event. Reference revisions and immutable evidence masks are unchanged.
 
-The merged main `fcc0ba8` includes AI/runtime's `7cc733e` replacement of the
-auxiliary `leituras-entrada-ordens-ia.json.xz` shared read base. The input proof
-continues to read and hash exactly its ported `a7f5d49` Git object
-(`6bcc9de7…143fce`); no reference hash or compared original capture is refreshed.
-Only that explicitly declared auxiliary footprint uses revision-backed evidence
-validation. Original case captures, policies and all other evidence still check
-both frozen and working-tree bytes. A regression rejects corrupt frozen footprint
-bytes while allowing an independent later working-tree campaign.
+Main's coordinator fix `1c1fade` verifies player-input evidence in the exact
+commit-backed snapshot that the proofs consume. The final merge adopts that
+scheme, retaining every `a7f5d49` evidence digest unchanged. In particular, the
+auxiliary leaf-read footprint remains `6bcc9de7…143fce` although a later campaign
+replaced its working-tree shared base at `7cc733e`. The regression rejects corrupt
+frozen captures and footprints while permitting independent later working-tree
+campaigns. M2 package/capture/policy immutability checks remain unchanged. The
+full phase proofs used the same frozen input bytes before the merge; native
+sources, header and release-library bytes are verified identical afterward.

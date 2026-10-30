@@ -1,0 +1,3587 @@
+{
+ "schema": "rising-lands/combat-turret-orders-differential/1",
+ "native": true,
+ "capture_sha256": "0a58d23a911b5a7ce9dba72f525650060bf077c2884244e34bef3f675730fee6",
+ "summary": {
+  "cases": 188,
+  "mismatches": 0,
+  "routines": {
+   "BatimentPeutAttaquer": 148,
+   "BatimentInitAttaqueSelect": 40
+  }
+ },
+ "cases": [
+  {
+   "case": "P1-frame250-actual-type-0",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-actual-type-1",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-actual-type-999",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-unit0",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-unit1",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-unit2",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-unit12",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-unit15",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-unit799",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-flying16",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-flying17",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-neutral-unit",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-building0",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-neutral-building",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner0-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner0-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner0-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner1-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner1-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner1-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner2-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner2-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner2-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner3-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner3-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner3-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner4-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner4-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner4-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner200-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner200-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-owner200-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-range-0",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-range-7",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-range-8",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-range-700",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-range-800",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type10-range-ffff",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-unit0",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-unit1",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-unit2",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-unit12",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-unit15",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-unit799",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-flying16",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-flying17",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-neutral-unit",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-building0",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-neutral-building",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner0-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner0-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner0-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner1-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner1-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner1-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner2-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner2-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner2-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner3-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner3-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner3-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner4-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner4-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner4-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner200-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner200-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-owner200-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-range-0",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-range-7",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-range-8",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-range-700",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-range-800",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P1-frame250-type11-range-ffff",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-actual-type-0",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-actual-type-1",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-actual-type-999",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-unit0",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-unit1",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-unit2",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-unit12",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-unit15",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-unit799",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-flying16",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-flying17",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-neutral-unit",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-building0",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-building1",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-neutral-building",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner0-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner0-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner0-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner1-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner1-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner1-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner2-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner2-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner2-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner3-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner3-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner3-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner4-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner4-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner4-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner200-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner200-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-owner200-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-range-0",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-range-7",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-range-8",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-range-700",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-range-800",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type10-range-ffff",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-unit0",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-unit1",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-unit2",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-unit12",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-unit15",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-unit799",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-flying16",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-flying17",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-neutral-unit",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-building0",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-building1",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-neutral-building",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner0-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner0-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner0-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner1-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner1-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner1-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner2-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner2-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner2-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner3-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner3-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner3-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner4-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner4-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner4-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner200-mode1-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner200-mode3-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-owner200-mode5-bonus255",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-range-0",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-range-7",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-range-8",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-range-700",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-range-800",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-type11-range-ffff",
+   "routine": "BatimentPeutAttaquer",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p0-s0-m0-r0",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p0-s0-m0-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p0-s0-m1-r0",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p0-s0-m1-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p0-s0-m3-r0",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p0-s0-m3-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p0-s0-m5-r0",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p0-s0-m5-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p0-s0-m255-r0",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p0-s0-m255-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p1-s1-m0-r1",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p1-s1-m0-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p1-s1-m1-r1",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p1-s1-m1-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p1-s1-m3-r1",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p1-s1-m3-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p1-s1-m5-r1",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p1-s1-m5-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p1-s1-m255-r1",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p1-s1-m255-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p2-s999-m0-r999",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p2-s999-m0-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p2-s999-m1-r999",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p2-s999-m1-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p2-s999-m3-r999",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p2-s999-m3-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p2-s999-m5-r999",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p2-s999-m5-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p2-s999-m255-r999",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p2-s999-m255-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p3-s0-m0-r0",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p3-s0-m0-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p3-s0-m1-r0",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p3-s0-m1-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p3-s0-m3-r0",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p3-s0-m3-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p3-s0-m5-r0",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p3-s0-m5-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p3-s0-m255-r0",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  },
+  {
+   "case": "P6-frame2020-set-p3-s0-m255-r65535",
+   "routine": "BatimentInitAttaqueSelect",
+   "registers_compared": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP",
+    "EFLAGS",
+    "ESP",
+    "EIP"
+   ],
+   "register_differences": {},
+   "whole_state_equal": true,
+   "native_errors": []
+  }
+ ]
+}
