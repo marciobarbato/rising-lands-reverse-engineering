@@ -2,6 +2,16 @@
 use crate::{EngineError, FrameRegisters, MemoriaJogo, Result};
 pub fn entry(m: &mut MemoriaJogo, name: &str, r: FrameRegisters) -> Result<FrameRegisters> {
     match name {
+        "GetCaseCentrale" => Ok(FrameRegisters {
+            eax: (r.edi & 0xffff0000).wrapping_add(crate::chain_entry::central_offset(m, r.eax)?),
+            esp: r.esp.wrapping_add(4),
+            ..r
+        }),
+        "EnginSetType"
+        | "EnginAddVie"
+        | "EnginResetFatigue"
+        | "EnginSetExperimente"
+        | "SetSortEngin" => crate::chain_recruit::entry(m, name, r),
         "EnginSelectPeutEntrer:AL" => {
             let ok = crate::chain_entry::can_enter(m, r.eax & 255, r.edx & 255, r.ebx & 65535)?;
             Ok(FrameRegisters {

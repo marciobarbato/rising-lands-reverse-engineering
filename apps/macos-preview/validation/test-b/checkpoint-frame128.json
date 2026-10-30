@@ -1,0 +1,23 @@
+{
+ "accepted_capture": {
+  "path": "pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz",
+  "xz_sha256": "4c8f5c14a9623131dd019eafcdc49ea63054ee358f9defde58c12cb949f59ff3"
+ },
+ "evidence": false,
+ "frame": 128,
+ "frame128_summary": {
+  "blocks": 25197,
+  "bytes": 16175335,
+  "sha256": "eb714f7d5a694ad91bab9b41c37a28860006c89be03f9170e3b312064a4b04b2"
+ },
+ "reproduced_summaries": {
+  "frame1": true,
+  "frame128": true
+ },
+ "schema": "rising-lands/m3-frame128-snapshot/1",
+ "seconds": 196.0,
+ "snapshot": "instantaneo-00128.pickle",
+ "snapshot_sha256": "c284439c2cf62368a99ff014c450ab5dd8741e12e233698774f82e32d372813e",
+ "source_revision": "2225dafb66c7a75c2f910c129e51a6aad178009a",
+ "ticks": 1000000
+}

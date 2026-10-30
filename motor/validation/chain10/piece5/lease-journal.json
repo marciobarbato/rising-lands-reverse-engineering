@@ -1,0 +1,99 @@
+[
+  {
+    "at": "2026-10-30T17:26:09.248524+00:00",
+    "command": [
+      "sh",
+      ".local/chain9/timing-final.sh"
+    ],
+    "cwd": "/Users/marcio/git/Rising-Lands-Codex-Engine",
+    "event": "wait",
+    "exclusive": true,
+    "owner": "engine-chain10-timing-final2"
+  },
+  {
+    "at": "2026-10-30T17:38:11.635178+00:00",
+    "event": "grant",
+    "owner": "engine-chain10-timing-final2",
+    "slots": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "at": "2026-10-30T17:40:10.398894+00:00",
+    "event": "release",
+    "owner": "engine-chain10-timing-final2",
+    "slots": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "at": "2026-10-30T17:40:10.399030+00:00",
+    "code": 0,
+    "event": "exit",
+    "owner": "engine-chain10-timing-final2"
+  },
+  {
+    "at": "2026-10-30T17:40:44.799658+00:00",
+    "command": [
+      "env",
+      "RL_REFERENCE_PROFILE=logic",
+      "python3",
+      "-B",
+      "motor/testes/play_benchmark.py",
+      "--library",
+      "motor/target/release/librising_engine.dylib",
+      "--frames",
+      "9200",
+      "--mode",
+      "1",
+      "--output",
+      ".local/chain9/timing-M2-play-final.json"
+    ],
+    "cwd": "/Users/marcio/git/Rising-Lands-Codex-Engine",
+    "event": "wait",
+    "exclusive": true,
+    "owner": "engine-chain10-M2-play-final"
+  },
+  {
+    "at": "2026-10-30T17:44:59.310136+00:00",
+    "event": "grant",
+    "owner": "engine-chain10-M2-play-final",
+    "slots": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "at": "2026-10-30T17:45:09.480904+00:00",
+    "event": "release",
+    "owner": "engine-chain10-M2-play-final",
+    "slots": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "at": "2026-10-30T17:45:09.481075+00:00",
+    "code": 0,
+    "event": "exit",
+    "owner": "engine-chain10-M2-play-final"
+  }
+]

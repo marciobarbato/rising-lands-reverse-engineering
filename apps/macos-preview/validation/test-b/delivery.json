@@ -1,0 +1,227 @@
+{
+ "app_replay": {
+  "first_frame": 129,
+  "frames": 3573,
+  "full_session_ready": true,
+  "last_frame": 3701,
+  "order_coverage": {
+   "build_cave": true,
+   "ctrl_depot": true,
+   "lodge_colonist": true,
+   "move": true,
+   "recruit": true,
+   "select": true
+  },
+  "order_tags": [
+   1,
+   4,
+   2,
+   33,
+   1,
+   16,
+   1,
+   5,
+   5,
+   5,
+   1,
+   7,
+   7,
+   2,
+   17
+  ],
+  "rendering_after_prefix": false,
+  "seconds": 254.06035762499997,
+  "status": "completed"
+ },
+ "capture": {
+  "completed_frame": 3700,
+  "export_frames_after_prefix": 3573,
+  "export_stop_frame": 3701,
+  "native_phases_equal": 257,
+  "native_surfaces_equal": 3700,
+  "orders_applied_in_capture": false,
+  "policy": "existing Validar record-only UI",
+  "tail_frame": "Existing recorder stop barrier includes the next frame. The app replay validates that extra quiet frame; the original prefix stops at350, and the pending full original command includes the tail.",
+  "ui_frames_after_prefix": 3572
+ },
+ "files": {
+  "app-build.log.gz": {
+   "bytes": 157,
+   "sha256": "bbe3a65d2a1aa18be30c622d077eae9a443e4b722d7d047e2a7237f55c263d4f"
+  },
+  "app-manifest.json": {
+   "bytes": 1635,
+   "sha256": "e4c2df5040f0138d231cc45250c1a0be2c946e7796a8b32b4b95cedb6ea41cfb"
+  },
+  "app-orders.jsonl.xz": {
+   "bytes": 516,
+   "sha256": "54bedadc74935227a991f856915b1a3fba4ca67cca5a8824e236d183b0fb26f9"
+  },
+  "app-states.jsonl.xz": {
+   "bytes": 526492,
+   "sha256": "cd21af68cc5b9dbb4c8e6713608482ce202fa532af11d149aad04d173c7c3f2e"
+  },
+  "checkpoint-frame128.json": {
+   "bytes": 741,
+   "sha256": "0acaeb7b58750139e5007a095977df53e7ce5cf8f19b813239d0a39eb05f855f"
+  },
+  "comparison-prefix.json.xz": {
+   "bytes": 14372,
+   "sha256": "3ea530a2ad247a088c559cfb342db9d71a93d7897c226c0fa1980bc656de0548"
+  },
+  "comparison-prefix.md": {
+   "bytes": 77,
+   "sha256": "ef7f36153df0b9fccb8b0ff8dd9e812c477921f1dd9918badb0e5c56e9a11fe3"
+  },
+  "consumer-tests.log": {
+   "bytes": 17849,
+   "sha256": "213b495777d40dc0edef073c840dd49f39b17fd86a21cf3b3929129437b62065"
+  },
+  "engine-gate.log.gz": {
+   "bytes": 4696,
+   "sha256": "26557c8f79e347a898509a2a7bf4880a438309ffeaceb29a3bd6165c6bef852a"
+  },
+  "entradas/normal-ui-stopped.json": {
+   "bytes": 811,
+   "sha256": "1df1784b5c60c69982466a747ea07e08ae2d7cab73812c63b09dc5a46f9e49bb"
+  },
+  "entradas/synthetic.json": {
+   "bytes": 8681,
+   "sha256": "394364c4e57737cf35abd858aebc85809e125a6622661d944b7e2406c6636fe0"
+  },
+  "executed-pipeline.py.txt": {
+   "bytes": 1858,
+   "sha256": "998191af5641d03e56cd10d435e34ae2e5d2f9f65c2564e71b5755ed12995486"
+  },
+  "failed-preflight-summary.json": {
+   "bytes": 26417,
+   "sha256": "361566183b6bab6bfe9ea36c398b9f5bb9311ffbf878c95d5fb12056c8ce2e9f"
+  },
+  "lease-journal.jsonl": {
+   "bytes": 5942,
+   "sha256": "2baed29681d7dbf7f15ac4c46bcc33f4fb6d181d0f0deb71900f18f353969609"
+  },
+  "native-inspection-smoke.json": {
+   "bytes": 4823,
+   "sha256": "0e0b9eee4348ee4a48417120475c1d8fe5cabc79432e495df9890e5efc9d2966"
+  },
+  "native-smoke.json": {
+   "bytes": 7546,
+   "sha256": "0491496889b24d8023b0834ed74f3472a67e3d046dc13dd685a09bfa573d656a"
+  },
+  "normal-ui-stopped.json.xz": {
+   "bytes": 1812,
+   "raw_sha256": "e46972dc5be9c5940ae1c1554a1dd8d23b09336473b1625150938ea3c3747b72",
+   "sha256": "3974e7b4ac54f428532502e1e83ababdd10bc5c32a8ac5ed93eb895a777c9c4d"
+  },
+  "original-prefix-manifest.json": {
+   "bytes": 40408,
+   "sha256": "627849a86f3961d75cc4ee2a5814066e8a840aef34f3bdc8fe70a42409af4ba8"
+  },
+  "original-prefix-orders.jsonl.xz": {
+   "bytes": 364,
+   "sha256": "1cfba7a2e0911a9f3a8662cf5d1d7bf4a5beb682c4bd36f0a143c7846d30b36e"
+  },
+  "original-prefix-quadros.jsonl.xz": {
+   "bytes": 53920,
+   "sha256": "ee58054063d247702c77b71135ff81f53c5ef3df771cce1236e92afd5a507703"
+  },
+  "original-prefix-states.jsonl.xz": {
+   "bytes": 33040,
+   "sha256": "59344039fb3ed4d59ee19225d2e04f1b1e84d76a3d29ab3be33fa357404c7cb1"
+  },
+  "preflight-comparison.json": {
+   "bytes": 35067,
+   "sha256": "3424e4a2d95214ec5a95d5802b4097bd95888e01ba77b44d89c448eb969efa64"
+  },
+  "saved-input.log.gz": {
+   "bytes": 168,
+   "sha256": "2c05db1f42f6b8dd105670108c46d5d4965a08b08d08b37429318c5b4b74fc87"
+  },
+  "synthetic-ui.json": {
+   "bytes": 57108,
+   "sha256": "7a3724286509f890d0f1a0bbd47fe20373880e37ff81efbda8f577cd2e58fc5c"
+  },
+  "validation-app-replay.log.gz": {
+   "bytes": 1007,
+   "sha256": "f707d1d0512981454530cf650917c58cecf68f7d9039819c78c2bfd67705c926"
+  },
+  "validation-build.log.gz": {
+   "bytes": 1022,
+   "sha256": "cad508fecf382c1b6cb643653f1c2369d748c06ad22ebb9e44fedc42f827ef2f"
+  },
+  "validation-comparison.log.gz": {
+   "bytes": 533,
+   "sha256": "6e8945d400482911acc86bb213c02ab9b30b54c9c1819827acd6b6b284a85cfe"
+  },
+  "validation-original-prefix.log.gz": {
+   "bytes": 171,
+   "sha256": "4396db8ee5d4144047f18548efe8157bc1e49763e29b4f48a376e69f46ac5921"
+  },
+  "validation-pipeline.log.gz": {
+   "bytes": 224,
+   "sha256": "882796aa6ae7ae5c823a79f73f2e3e9ba24b6a86978824fa6e9dd57c3df213c5"
+  },
+  "validation-ui.log.gz": {
+   "bytes": 173,
+   "sha256": "12bb33a1b5a8e556e4062081a7b4b6dc4721278641b291fd30ad25a59d9258c6"
+  }
+ },
+ "gates": {
+  "APP_BUILD": true,
+  "consumer_skips": 0,
+  "consumer_tests": 116,
+  "exercise_checks": 27,
+  "inspection_live_checks": 21,
+  "motor_validate": true,
+  "original_x86_comparisons": 75,
+  "original_x86_mismatches": 0,
+  "original_x86_skips": 0
+ },
+ "hash_contract": {
+  "indicator_reader_sha256": "2d391d854b0497bc6d7fc8418a3547d90e8f93b9be54b7e9ebf29b533a1a67ad",
+  "mask_path": "pesquisas-paralelas/missoes/m3/sondas/P6/mascara-janela.json",
+  "mask_sha256": "56cf9039a04d32bfbea4a4098a1111f4d7f59669028d633fadb41e06e3c05dbb",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "scope": "All mapped game blocks, names/base/length preserved; published P6 cumulative exclusion mask, zeroed verbatim. Static executable tables and native stack excluded as in Test A. No session-specific mask additions."
+ },
+ "human_blocker": {
+  "address": "0x459454",
+  "callee": "AffText",
+  "frame": 141,
+  "last_completed_frame": 140,
+  "owner": "engine/Graphics",
+  "scope": "normal Jogar UI; CAVE tooltip; no production glyph provider"
+ },
+ "human_test_b_accepted": false,
+ "human_test_b_ready": false,
+ "input_sha256": "394364c4e57737cf35abd858aebc85809e125a6622661d944b7e2406c6636fe0",
+ "lease_journal_source": "/Users/marcio/git/Rising Lands/local-data/coordination/claude-20261028/heavy-lease-journal.jsonl",
+ "limitations": [
+  "Capture is synthetic Validar record-only, not a human play session.",
+  "Normal UI blocks at frame141 on the missing AffText glyph renderer.",
+  "Full original replay and actual human Test B remain unrun; only 129..350 compared here.",
+  "Hashing uses the published P6 cumulative mask unchanged; no session-specific policy acceptance.",
+  "Recruitment is the final issued order; production completion is outside the captured UI window."
+ ],
+ "main_base": "40ecde428859adf511022c04bb66487e04b5fee1",
+ "mini": {
+  "checkpoint_command": "python3 -B pesquisas-paralelas/missoes/m3/checkpoint_quadro128.py --saida .local/test-b/quadro128",
+  "estimated_seconds_one_full_replay": 2760.8289217125407,
+  "eta_scope": "Linear extrapolation from the fresh 222-frame prefix; machine/contention and later frames vary. Checkpoint creation is separate (196 seconds observed).",
+  "original_command": "python3 -B apps/macos-preview/scripts/test_b_pipeline.py original --input apps/macos-preview/validation/test-b/entradas/synthetic.json --inicio .local/test-b/quadro128 --output .local/test-b/original-full",
+  "seconds_per_frame_on_macbook": 0.7726921135495496,
+  "working_directory": "feature checkout of this delivery"
+ },
+ "original_prefix": {
+  "divergences": [],
+  "frames": 222,
+  "frames_equal": 222,
+  "seconds": 171.537649208,
+  "source_code_unchanged": true,
+  "status": "completed"
+ },
+ "runtime_revision": "c9bc5d79b048f579a2ee9323db955e7a3cf05086",
+ "schema": "rising-lands/macos-test-b-delivery/1",
+ "synthetic_pipeline_proven": true
+}

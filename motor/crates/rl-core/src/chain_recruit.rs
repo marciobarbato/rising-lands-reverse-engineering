@@ -100,6 +100,9 @@ pub fn abandon(m: &mut MemoriaJogo, s: u32, neuter: bool) -> Result<()> {
     crate::chain_vision::structure_minimap(m, s as u16, 1)
 }
 pub fn set_sort(m: &mut MemoriaJogo, u: u32, c: u32) -> Result<()> {
+    place(m, u, c).map(|_| ())
+}
+fn place(m: &mut MemoriaJogo, u: u32, c: u32) -> Result<(u32, u32)> {
     let r = unit(m, u)?;
     for off in [0x7e, 0x7c, 8, 0x7e] {
         m.sw(r + off, c)?;
@@ -119,6 +122,9 @@ pub fn set_sort(m: &mut MemoriaJogo, u: u32, c: u32) -> Result<()> {
     let p = m.b(r)?;
     if !matches!(p, 4 | 200) {
         let radius = m.b(r + 0xbb)? + m.b(r + 0xf5)?;
+        if radius > 11 {
+            return stop("SetSortEngin vision sum outside validated domain", 0x446146);
+        }
         crate::player_sight::area(m, m.w(r + 8)? as u16, radius + 2, p as u8, 0)?;
         crate::player_sight::area(
             m,
@@ -128,10 +134,42 @@ pub fn set_sort(m: &mut MemoriaJogo, u: u32, c: u32) -> Result<()> {
             1,
         )?;
     }
-    crate::player_sight::minimap(m, m.b(r)? as u8, m.w(r + 8)? as u16, 4)?;
-    Ok(())
+    let owner = m.b(r)?;
+    let cell = m.w(r + 8)?;
+    let rows = crate::player_sight::minimap(m, owner as u8, cell as u16, 4)?;
+    // SetMiniMap leaves EDX at the live local light pointer, replacing DL
+    // with the owner colour only when the final pixel is illuminated.
+    let light = m.d(0x507d88 + 4 * m.b(0x508041)?)?;
+    let edx = if m.b(light.wrapping_add(cell))? & 31 == 0 {
+        let color = if owner == 200 {
+            30
+        } else {
+            m.b(0x4e24dc + owner)?
+        };
+        (light & !255) | color
+    } else {
+        light
+    };
+    Ok((rows, edx))
 }
-fn experience(m: &mut MemoriaJogo, u: u32) -> Result<()> {
+fn heal(m: &mut MemoriaJogo, u: u32, amount: u16) -> Result<(u32, u32)> {
+    let r = unit(m, u)?;
+    let life = m.w(r + 0x9a)?.wrapping_add(u32::from(amount)) & 65535;
+    m.sw(r + 0x9a, life)?;
+    let maximum = m.w(0x4965b6 + 50 * m.b(r + 1)?)?;
+    let clamped = life > maximum;
+    if clamped {
+        m.sw(r + 0x9a, maximum)?;
+    }
+    Ok(((maximum & 0xff00) | u32::from(clamped), r))
+}
+fn reset_fatigue(m: &mut MemoriaJogo, u: u32) -> Result<u32> {
+    let r = unit(m, u)?;
+    m.sw(r + 0x74, 0)?;
+    m.sw(r + 4, m.w(r + 0x76)?)?;
+    Ok(r)
+}
+fn experience(m: &mut MemoriaJogo, u: u32) -> Result<u32> {
     let r = unit(m, u)?;
     let p = m.b(r)?;
     if p >= 4 {
@@ -140,7 +178,7 @@ fn experience(m: &mut MemoriaJogo, u: u32) -> Result<()> {
     let a = 0x4e19c4 + 10 * p; // original queue binding verified against recuperacao_experiencia
     let exp = m.b(a + 1)?;
     if exp == 0 || m.b(a)? != m.b(r + 1)? {
-        return Ok(());
+        return Ok(p * 10);
     }
     m.sb(r + 0xaf, exp)?;
     let level = exp >> 5;
@@ -165,7 +203,7 @@ fn experience(m: &mut MemoriaJogo, u: u32) -> Result<()> {
     }
     m.sb(a + 9, 0)?;
     m.sb(a + 8, 255)?;
-    Ok(())
+    Ok(p * 5)
 }
 pub fn sortie(m: &mut MemoriaJogo, s: u32, dir: u32) -> Result<()> {
     let a = structure(s);
@@ -194,14 +232,8 @@ pub fn sortie(m: &mut MemoriaJogo, s: u32, dir: u32) -> Result<()> {
         },
     )? & 65535;
     crate::frame_spawn::call(m, "EnginSetType", &[u, c, dir, m.b(a + 0x7b)?])?;
-    let life = m.w(rec + 0x9a)?.wrapping_add(1000) & 65535;
-    m.sw(rec + 0x9a, life)?;
-    let max = m.w(0x4965b6 + 50 * m.b(rec + 1)?)?;
-    if life > max {
-        m.sw(rec + 0x9a, max)?;
-    }
-    m.sw(rec + 0x74, 0)?;
-    m.sw(rec + 4, m.w(rec + 0x76)?)?;
+    heal(m, u, 1000)?;
+    reset_fatigue(m, u)?;
     experience(m, u)?;
     set_sort(m, u, c)?;
     crate::frame_spawn::order(m, u, m.w(a + 0x7c)? as u16)?;
@@ -302,4 +334,50 @@ pub fn status(m: &MemoriaJogo, s: u32, t: u32) -> Result<u32> {
         return stop("CalculStatusRecrute division", 0x423f9d);
     }
     Ok(m.d(a + 0x8c)? / divisor)
+}
+
+/// Core recruitment owners, exact seven data GPRs plus RET for original fixtures.
+/// These are Rust validation entries; no C ABI identifier or layout is changed.
+pub fn entry(m: &mut MemoriaJogo, name: &str, mut r: R) -> Result<R> {
+    let index = r.eax & 65535;
+    let u = unit(m, index)?;
+    match name {
+        "EnginSetType" => {
+            let kind = r.ecx & 255;
+            if kind >= 26 || !matches!(m.b(u)?, 0..=4 | 200) {
+                return stop("EnginSetType recruitment domain", 0x457b87);
+            }
+            r.eax = crate::frame_spawn::call(m, name, &[index, r.edx & 65535, r.ebx & 255, kind])?;
+            r.ebx = 0x1d;
+            r.ecx = u.wrapping_add(10);
+            r.edx = 0x1e;
+        }
+        "EnginAddVie" => {
+            if m.b(u + 1)? >= 26 {
+                return stop("EnginAddVie recruitment type", 0x457122);
+            }
+            (r.eax, r.edx) = heal(m, index, r.edx as u16)?;
+        }
+        "EnginResetFatigue" => r.eax = reset_fatigue(m, index)?,
+        "EnginSetExperimente" => r.eax = experience(m, index)?,
+        "SetSortEngin" => {
+            let cell = r.edx & 65535;
+            let (w, h) = (m.w(0x497168)?, m.w(0x49716a)?);
+            if m.b(u + 1)? >= 26
+                || !matches!(m.b(u)?, 0..=4 | 200)
+                || !(1..=256).contains(&w)
+                || !(1..=256).contains(&h)
+                || cell & 255 >= w
+                || cell >> 8 >= h
+                || m.b(0x508041)? >= 4
+                || (m.w(0x496fe0)?, m.w(0x496fe2)?) != (128, 128)
+            {
+                return stop("SetSortEngin recruitment domain", 0x445fbc);
+            }
+            (r.eax, r.edx) = place(m, index, cell)?;
+        }
+        _ => return stop("unknown recruitment owner", 0x420f69),
+    }
+    r.esp = r.esp.wrapping_add(4);
+    Ok(r)
 }
