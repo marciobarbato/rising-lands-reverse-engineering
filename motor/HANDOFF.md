@@ -1325,3 +1325,31 @@ input files and the measured release library are byte-identical before/after
 it; logic/input/chain5/chain6 revision-backed sources and applicable input/window
 pins pass fresh verification. The [identity record](validation/chain6/piece2/post-merge-identity.json)
 retains that check; the full native gate above ran on these same engine bytes.
+
+## Third continuation piece — recovered entry and habitation
+
+Main `92fab50` is merged into this feature only. Recovered unvalidated work from
+`acaa7c2` is reviewed against immutable logic `89575fad00ad3ee506879b275bdceb8f63423baf`
+and Graphics `24f0ec85714dbbfa4645212ca81f8f4145a76143` as additive profile chain7.
+[Audit](research/CHAIN7_AUDIT.md) records inputs, widths, store/callback order,
+original identity/addresses and explicit domain stops. ABI stays1.6.
+
+[Report package](validation/chain7/piece3/summary.json): 153 original Bag/entry
+cases and10 habitation/ownership cases equal all supplied memory and their
+explicit register masks. Twelve original sound-nonexecution sparse fixtures
+are skipped, without installing a production callback. The larger state13
+sparse-fixture attempt is retained:11/129 equal and118 undeclared-input errors;
+it is not a passing battery. Existing whole-world movement requires additional
+input bytes on those sparse cases. No oracle byte is invented to satisfy them.
+
+P6 advances129–428:300 indicator frames against original/pinned Python,
+600/600 whole-state phases under the unchanged published mask and600/600 paired
+play/audit phases. Independently,300/300 advancing surfaces match original and
+Python pixels, cache, raster order, carried backgrounds and declared text requests.
+No stop/difference. The state run precedes three precedence-only parentheses
+corrections required by Clippy; subsequent full gate and surface run use the
+corrected source, with both binary/source identities retained in the reports.
+
+`sh motor/validate.sh`: fmt, strict Clippy,30 Rust/63 Python tests,75/75 pilot
+captures, C layout and actual Swift/Metal smoke pass. No fresh x86 run, later
+Economy continuation or new throughput measurement is claimed for this piece.

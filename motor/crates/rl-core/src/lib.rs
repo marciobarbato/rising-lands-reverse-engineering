@@ -68,6 +68,9 @@ mod player_sight;
 
 mod play;
 
+mod chain_bags;
+mod chain_entry;
+mod chain_habitation;
 pub mod chain_stage5;
 mod chain_vision;
 mod player_cave;

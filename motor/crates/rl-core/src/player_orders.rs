@@ -682,7 +682,7 @@ pub fn process(m: &mut MemoriaJogo, p: u32) -> Result<u32> {
             if w[1] == 1 {
                 return stop("SetEnginSelectRentreEngin", 0x45f17a);
             } else if w[1] == 3 {
-                return stop("SetEnginSelectRentreBatiment", 0x45f195);
+                crate::chain_entry::select_enter(m, p as u8, w[2] as u16)?;
             }
         }
         33 => return stop("BatimentRetireColon", 0x45f22a),
