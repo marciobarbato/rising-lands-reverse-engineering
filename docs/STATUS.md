@@ -1,47 +1,39 @@
-# Research status — Codex recovery, 2026-10-28
+# Research status — 2026-10-30 07:00
 
-The recovery started at fetched8810b3730a0fb788af3eac2b447dea65372f597f. Verified research main now includes Core15 reset/map, raw AI initialization, Core16 bindings/classification, Missions11 complete placement and Core17 complete Chemin_Remap, pushed/reproduced at09d3953c6dda02ba6e4f6ca9ac61e51ca48782e6, followed by3Economy initializer queries at85dc8130cf45966f8cde6001b6ccb860d32d4db1. [PROGRESS](PROGRESS.md) records each round and all four stage dimensions; [Claude handover](HANDOVER_CLAUDE_20261028.md) records final freeze, pending work and exact next actions. No M1–M4 acceptance. Original-first methodology, ownership and quality gates are unchanged.
+Development on the MacBook paused at 07:00 on 2026-10-30; the user stopped every Codex session at about 07:15. The Mac mini keeps its long native runs. Main is `3874fcc` at this update. Round-by-round evidence is in [PROGRESS](PROGRESS.md); the in-flight work, preserved branches and next steps are in [HANDOVER_CLAUDE_20261030_0700](HANDOVER_CLAUDE_20261030_0700.md). The 2026-10-28 recovery status that this file used to hold is preserved in the [CXR snapshots](progress/README.md) and in git history.
 
-## Verified integrated scope
+## Milestones
 
-These findings come from committed history, domain contracts and preserved reports. Earlier domain results remain historical. Core15 and AI initialization recovery results below are fresh from this resumption, including mandatory integration gates and committed-main reproductions.
-
-| Front | Integrated evidence and behavior | Remaining boundary |
+| Milestone | State | Record |
 |---|---|---|
-| Core | Stage 14 discovery/light domain (`f8d9371`, main `7b7b969`): MONDE01 unit 15 and its type-2 structure's 13/10 radii are supported. Existing physical world, navigation, task/VM, pool/reset, placement and experience-queue providers remain available. | Complete Chemin_Remap is integrated/reproduced at09d3953; experience retrieval remains open; Stage15 terrain/minimap/reset providers are now validated/integrated at `b610bfa`; caller composition remains. |
-| Missions | Stage 9 complete eight-loader auxiliary chain; Stage 10 reset-prefix composition (`a0e0211`, main `57aa441`) with explicit missing-provider stops. Stage11 complete unit+structure placement with actual providers is integrated/reproduced at7f617fa; mission-number and existence getters are available. | Close inherited raw-state/file-resource handlers and compose all load tails, then compare whole `MissionLoad`; events and `TestFinDeMission` remain separate. |
-| AI/runtime | Stage1 contracts plus Stage2 bounded raw-memory IaReset/IaAlloc/IAResetAttaque, recovered from ad97e42 and integrated at `5d24c91`. Core retains VM/task primitives. | Concrete production adapters and Core experience retrieval remain needed for L9. Frame/unit/structure dispatchers, kernels, operations and messages remain open. |
-| Economy | Structure habitation and economy `MissionLoad` initializer tails (`b6eebec`, main `8204deb`), plus prepared production through the supported cleanup boundary. | Natural production inventory is integrated at2456848 (research only); complete transport/work cycles remain open. |
-| Combat | Stage 18 live state-1/24 attack chain through emission, projectile simulation, impact, damage and supported physical death (`248d055`, main `b602b07`); reset provider is integrated. | Real mission raid, AI messages, audio, diplomacy, level effects and building-target/turret/trap branches remain separate. |
-| Graphics | Cache lifecycle and bounded `AffGame` composition (`7eff798`, checkpoint correction `d483dec`, main `0756062`). MONDE01 input is a pinned partial-load checkpoint. | Type-2 structure facade/lookup, overlays, unit types 1/8, HUD and remaining viewport/render paths; no complete loaded-mission frame. |
-| Audio | Bank readers and IMA ADPCM decoding (`fa4a759`, `0fc99df`); fresh three-way report `9a0c171`; merge `8810b37`. Committed native/Python/capture comparisons pass for 551 bank sounds. | `PlaySnd_PostSound`, queues, `Manage`, lifecycle and actual playback remain open. |
-| macOS | Existing app consumes an immutable committed revision in a synthetic training exercise via `compilar-jogável`. | Switch to real mission state at the M1 trigger. The training exercise is not MONDE01. |
+| M1 MONDE01 loaded | **accepted** at `927c7e5` | [M1 record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json) |
+| M2 frames 0–9,200 without input, first raid | **accepted**: M2.1 `32bb391`, M2.2 `b9f4b5d`, M2.3 and M2 `ea62eb4` (18,401/18,401 phases) | [M2.3 record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json) |
+| M3.1 input path, P1/P2 part | **accepted** at `c9c85eb`: P1 1,002/1,002, P2 1,202/1,202 phases, 0 crossings, reproduced on both machines | [M3.1 P1/P2 record](../integracao/validacao/cxr-20261030-m3r1-m3-1-p1-p2-acceptance.json) |
+| M3.1 rest (P6, S1 order windows), M3.2–M3.5 | open | [M3 plan status](M3_PLAN.md#status-2026-10-30-0700) |
+| M4.1 victory, M4.2 defeat, M4.3 app | open; original captures of S1 (victory) and D1 (defeat) exist | [M3 plan status](M3_PLAN.md#status-2026-10-30-0700) |
 
-All listed feature and merge commits are reachable from the fetched `origin/main` snapshot. Consult each domain manual and handoff for precise supported inputs, original executable identity, mutation order and validation limits. Original media and predecessor captures have been preserved.
+## Original captures (Mac mini)
 
-## Pending local recovery
+- **S1 wins MONDE01** on the intact executable: two independent runs from F0 (frames 129–17,050) give equal records (`82ec5ea`, on main). AL = 1 at 16,933, `MenuInit(0x13)` at 17,032, `MissionNext` at 17,043, no `MissionLoad`. Pass 2 (whole-state segments) is being captured; the MacBook ran 9,750–12,500.
+- **D1 reaches the defeat branch**: the player unit count `0x4e1a3a` reaches 0 at 15,555; `PartieGetResultat` returns 0 at 15,655. The input is on `feat/re-missions` (`bab6c7c`), not yet on main; its replay check from F0 and packaging run on the mini.
+- Probes P1–P7 and K1, each replay-equal on two runs; pass-2 windows P1, P2 and P6.
 
-At initial recovery inspection all worktrees were clean; the shared integration lock was free and no earlier native comparison/integration child process was running. Claude application processes were still present, without a research child process at that inspection. Two old detached integration candidates remain preserved at `worktrees/integration-graphics-a0f20f22` and `worktrees/integration-macos-56537e42`.
+## State by front
 
-| Front | Preserved local commit | Required recovery gate |
+| Front | Latest on main | Open |
 |---|---|---|
-| Core | Preserved `a572e8c`, recovery `2f9d0df`, merge `b610bfa` | **Recovered/integrated/reproduced.** Fresh reset14/759entries/2139segments and discovery32/4293entries/10503segments pass,0 native skips/faults/limits. Core382/181optional; common gate passed. |
-| AI/runtime | Preserved `ad97e42`, recovery `1e56e5c`, merge `5d24c91` | **Recovered/integrated/reproduced.** Fresh native36/36,0 skips/failures; local/domain36/4optional. Two failed initial cycle proofs preserved; final explicit repeated-state proof passed. Adapter/full MissionLoad remain open. |
-| Economy | Inventory3868ce5/auditcbb0728 integrated at2456848; live-query implementation4181758 is validated/integrated/reproduced at85dc813. | Final disposition in the handover; natural production remains inventory only. |
-| Audio | Already integrated at `8810b37` | Do not duplicate integration or rerun the full unchanged corpus without cause. Continue queue research as a new bounded stage. |
+| Core | All 16 S1 coverage gaps validated (windows a/b/c 1,410 comparisons, register queries 546, 0 mismatches); frame-125 minimap divergence explained; hunger, `TerrainEstGc`, `SetMiniMap` mode 4; [S1 coverage survey](core/S1_COVERAGE.md) | — |
+| Economy | Exit position, hunger (state 19), sanctuary abandonment, `EnginRestaureEtat`, `BatimentEnleveMatiere`, cave meal and tag 19, all 0 mismatches | Transport states 18/20 (unvalidated WIP on `wip/*`) |
+| Combat | Turret `BatimentPeutAttaquer`, tag 14, fatal raid path through death and recount (1,186 cases, 0 mismatches); fatal-window runner | Fatal windows for S1/D1 on the mini |
+| Graphics | Render API 1.9 (K1 501/501, P4/P5 3,001/3,001), S1 end screens, P6 guard fixes | Glyphs, view origins (unvalidated WIP on `wip/*`) |
+| AI/runtime | M3.1 P1/P2 proof; hunger, restoration, turret and Core providers wired; P6 planning diagnostic 4,544/4,544 phases; S1 proof driver ready | Strict P6 proof; S1 windows once pass 2 lands |
+| Missions | S1 victory capture, probes, pass-2 windows | Pass-2 S1, D1 packaging (mini) |
+| Audio | Sound-request provider and request log | — |
+| Rust engine (`motor/`) | Stage 4 orders (ABI 1.5) and play mode (ABI 1.6): logic 0.26 ms/frame, logic plus render 0.65 ms | Chain past frame 220 (unvalidated WIP on `wip/*`) |
+| macOS app | Live play on the Rust engine with orders (ABI 1.5); play mode 60 game frames/s, display ~120 fps; Test A answer half 155,597/155,597, state half P1 501/501, P2 601/601, P3/P6/P7 91/91, K1 12/12 up to the engine's stops | ABI 1.6 adoption (unvalidated WIP on `wip/*`); the 60 game-frames/s run with orders stops at frame 2,952 on a named renderer limit; Test B |
 
-The coordinator reuses six archived Codex executor chats and creates only the missing AI/runtime chat. Work proceeds in waves of at most three active executors plus the coordinator. Heavy native runs, domain/integration checks and Ghidra are serialized separately. Historical Claude `local_` IDs are retained as references, never used as Codex chat IDs. Current dispatch and heavy-work ownership live in workspace `local-data/coordination/progress.json` and `CODEX_RESUME.md`.
+## Estimate
 
-## Milestones and estimate
+The coarse full-game estimate stays at about **50% (40–60%)**. It is reviewed only from the [roadmap inventory](ROADMAP_MONDE01.md#inventory-for-the-completion-estimate), never from counts of tests, files or runs. M3 (input and orders) and M4 (objectives, transport, combat on the victory path) remain the main uncertainty; save/load, menus and campaign progression are beyond MONDE01.
 
-M1 complete load, M2 advancing mission, M3 interactive original mission and M4 demonstrated objective/transitions have not been accepted. The next critical path is Core's remaining full-remap region/cleanup/final-return sequence, Core experience retrieval and concrete AI provider adaptation, then Missions' complete composition and whole-state oracle. The Core reset/map and raw AI initialization providers are already integrated. The old unit-15 discovery boundary is resolved.
-
-MONDE01 starts with a type-2 Santuário, not a type-3 Armazém/CAVE. The objective condition must be established by `TestFinDeMission`, not inferred from briefing prose.
-
-The coarse full-game estimate remains **50% (40–60%, change 0 percentage points)**. The inventory in [the roadmap](ROADMAP_MONDE01.md#inventory-for-the-completion-estimate) separates implemented, original-validated, integrated and real-mission-tested work. Recovering accurate status does not itself increase completion. Save/load, menus/campaign progression and broader original-game behavior remain beyond the immediate M1 work.
-
-## Final timed handover
-
-Development stops18:25BRT on28October2026; handover only until18:40. Preserve Core local handoff-only commit, Missions pushed Stage12checkpoint33a09a1 (scaffolde7ea60f), AI pushed adapter/proof checkpoint16e5ada (sourceWIP1a455b0), Graphics2921122, Audio c464dcd and six uncommitted Combat paths. Consult the final handover rather than replaying older recovery instructions.
-
-Actual AI adapter fresh11case comparison passed before cutoff:2completeMONDE01+9explicitstoppedimages, all whole images/providerorder/checkedaliases equal. This is feature-only proof; fullsuite/domain/helper/mainintegration were NOTRUN. See handover for the exact commands and preserved remoteSHA.
+MONDE01 starts with a type-2 Santuário, not a type-3 CAVE. The objective is established by `TestFinDeMission`, not by the briefing prose.

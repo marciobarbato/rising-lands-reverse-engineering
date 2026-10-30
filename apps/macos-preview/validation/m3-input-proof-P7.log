@@ -1,0 +1,137 @@
+[lease] macos-input-final-P7 waiting
+[lease] macos-input-final-P7 granted slots [4]
+{
+ "schema": "rising-lands/macos-test-a-state/1",
+ "probe": "P7",
+ "world_source": "S0 plus original static tables; 128 real no-input frames; no oracle state reload",
+ "driver_sha256": "bff17d09b48dd53437ea9fec5ef70224cac69804f4dc32f2c38f720a9113c9e1",
+ "library_sha256": "5fa0292dc7485957baf8106be007b6292b9c64578d4b9e574a3357d14911b477",
+ "input_sha256": "914758b0446d561ec590bc5ab854adb95692e58626709ed2d56ac6107aa51590",
+ "canonical_roundtrip": true,
+ "reference": {
+  "logic": "a7f5d4939e7826e02a8b348995edb9c793657f4c",
+  "graphics": "ce441852bcada750a8f91da8ed3302f1668c4405",
+  "tree_manifest_sha256": "5942cc4f4c76d7a9311be6f61be5a146819a7a99685a4f6f46011767c7c31276",
+  "source_and_fixtures": "Git objects; no working-tree source hash gate"
+ },
+ "frames_equal": 91,
+ "frames_compared": 91,
+ "frames_requested": 3572,
+ "frame_hash_scope": "Exact engine indicator comparator fields, including unit record hashes and objective/UI bytes; DGROUP excluded",
+ "first_difference": null,
+ "first_engine_stop": {
+  "frame": 220,
+  "phase": 3,
+  "code": 5,
+  "detail": "entrada CalculGame \u00b7 quadro 220 \u00b7 ABI 5: BatimentNextEtape type 3 at 0x00426aff",
+  "inputs_before_stop": [
+   {
+    "frame": 220,
+    "kind": "peek_message",
+    "site": "0x4601d8",
+    "message": null
+   },
+   {
+    "frame": 220,
+    "kind": "cursor",
+    "site": "0x47504b",
+    "x": 688,
+    "y": 400
+   },
+   {
+    "frame": 220,
+    "kind": "key",
+    "site": "0x429300",
+    "vk": 27,
+    "value": 0
+   },
+   {
+    "frame": 220,
+    "kind": "key",
+    "site": "0x429556",
+    "vk": 16,
+    "value": 0
+   },
+   {
+    "frame": 220,
+    "kind": "key",
+    "site": "0x4295fc",
+    "vk": 17,
+    "value": 0
+   },
+   {
+    "frame": 220,
+    "kind": "key",
+    "site": "0x42967e",
+    "vk": 46,
+    "value": 0
+   },
+   {
+    "frame": 220,
+    "kind": "key",
+    "site": "0x4296ad",
+    "vk": 18,
+    "value": 0
+   },
+   {
+    "frame": 220,
+    "kind": "key",
+    "site": "0x4296dc",
+    "vk": 32,
+    "value": 0
+   },
+   {
+    "frame": 220,
+    "kind": "key",
+    "site": "0x4296f1",
+    "vk": 38,
+    "value": 0
+   },
+   {
+    "frame": 220,
+    "kind": "key",
+    "site": "0x42970b",
+    "vk": 40,
+    "value": 0
+   },
+   {
+    "frame": 220,
+    "kind": "key",
+    "site": "0x429732",
+    "vk": 39,
+    "value": 0
+   },
+   {
+    "frame": 220,
+    "kind": "key",
+    "site": "0x42974c",
+    "vk": 37,
+    "value": 0
+   },
+   {
+    "frame": 220,
+    "kind": "key",
+    "site": "0x429773",
+    "vk": 13,
+    "value": 0
+   },
+   {
+    "frame": 220,
+    "kind": "key",
+    "site": "0x429781",
+    "vk": 88,
+    "value": 0
+   },
+   {
+    "frame": 220,
+    "kind": "key",
+    "site": "0x42a76b",
+    "vk": 69,
+    "value": 0
+   }
+  ],
+  "orders_before_stop": []
+ },
+ "rendering_executed": false,
+ "seconds": 4.844296333
+}

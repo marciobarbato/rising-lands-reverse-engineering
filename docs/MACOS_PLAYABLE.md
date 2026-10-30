@@ -500,3 +500,95 @@ this feature worktree with `/usr/bin/python3 -B scripts/check.py` and `.local/py
 [delivery manifest](../apps/macos-preview/validation/m3-play-delivery.json) pins
 all evidence and the tested static/shared libraries. Final evidence/documentation
 commits do not change the validated executable source.
+
+## ABI 1.5 live orders
+
+The native Jogar window applies mouse/keyboard input after its 128 real startup
+frames. Select a unit, then click its target; clicks are declared as move/down/up
+at k/k+1/k+3. Ctrl remains held until release or focus loss, including depot-mode
+selection. Engine-supported construction/recruitment/help-page controls now reach
+the same input/order path. Unsupported engine or renderer branches stop visibly
+with the original name/address and actual partial surface. Rust Graphics remains
+1.7; Python inspection/oracles now pin Graphics1.9. No glyph or audio substitute
+is installed. Text/sound non-execution boundaries are explicitly declared as in
+Missions' probe contract. Validar retains the no-input equality proofs.
+
+The current engine completes P1/P2's order scenarios, but its CAVE body still
+stops at frame220 in P3/P6/P7, and K1 at frame141. Those are simulation bounds;
+Rust's independently bounded renderer may stop earlier on an input-time text or
+panel state. The app does not hide that limit. Recording still exports the owner
+schema unchanged; a recording begun after earlier unrecorded orders does not
+establish a full-session replay from frame128. Test B remains pending.
+
+### ABI1.5 orders-on performance and renderer boundary
+
+Executable/build **04dea3927ab4b9846f60a3d9a86c0b72cd2b59a0**, based on main
+**2eadf69**, passes APP_BUILD with **112 consumer tests, 27 native exercise
+checks and 20 inspection/live checks**. `motor/validate.sh` passes unchanged.
+The native recorder check explicitly exercises Ctrl received with a mouse event
+before a flags-change event; normal play sends those same key/mouse declarations
+to the engine. The UI now states the actual per-mode order policy.
+
+The [65-second default-rate orders run](../apps/macos-preview/validation/m3-input-orders20.json)
+uses actual AppKit selection/movement clicks. It records real engine
+`SetPlayerOrdre` tags **1 and 5**, then moves the pointer to empty ground before
+the known tooltip dwell boundary. With **20.010 game frames/s**, the visible,
+unoccluded UI delivers **118.752 displayed fps average / 111 minimum full-second
+fps**, zero proof work and zero publication drops. All **1,920,000** final GPU
+readback pixels match the actual Rust indexed buffer through the asynchronous
+texture/upload path. No warmup bin is discarded. Input is active for 1,173 of the
+1,301 completed game frames after the protected 128-frame prefix.
+
+The [accelerated 60-game-frames/s attempt](../apps/macos-preview/validation/m3-input-orders60.json)
+issues the same real orders but stops at **frame2,952**, with the named Rust
+renderer dependency **AffInfoSelection 0x410be4**:
+`fatigue words outside captured +4 = +0x76 = 4`. Its result is explicitly **failed**;
+the paused tail is not a sustained performance success. No fatigue value, surface
+or callback is substituted to pass it. The uncapped orders variant was not run
+because this new bounded-domain stop already prevents a comparable full window.
+This limits broader/faster play even though default-rate UI throughput exceeds
+60 fps. The separate engine workstream must extend the renderer's fatigue domain.
+
+Production Rust also retains the **AffText 0x459454** glyph dependency. The
+owner's longer Graphics1.7 probe proofs use an original attested text boundary
+available only to offline fixtures; the production ABI cannot install it. The
+app never uses that fixture switch. Therefore build/recruitment/help dispatch is
+wired, while complete visual/simulation continuation still depends on the
+engine's CAVE body, viewport domain and renderer/glyph ports. Test A state proofs
+omit rendering explicitly and do not claim those UI surfaces are complete.
+
+Fresh no-input proofs retain **257 states / 11 checkpoints / 128 original and
+Python1.9 surfaces**, plus **18,401 states / 9,200 original surfaces** over the
+long chain. The answer-stream proof remains **155,597/155,597**, with all six
+canonical round trips equal. See the [handoff](../apps/macos-preview/HANDOFF.md)
+for source/library provenance, rejected build attempts and gate counts.
+
+### Test A state results
+
+All first differences are null. Counts below cover reached original frames;
+P1/P2/P6 also have independently pinned whole-state windows.
+
+| Probe | Frame hashes equal | Whole-state phases equal | First engine stop |
+|---|---:|---:|---|
+| P1 | 501/501 | 1,002/1,002 | None |
+| P2 | 601/601 | 1,202/1,202 | None |
+| P3 | 91/91 | Not available in this proof | Frame220, CAVE body `0x426aff` |
+| P6 | 91/91 | 183/183 reached | Frame220, CAVE body `0x426aff` |
+| P7 | 91/91 | Not available in this proof | Frame220, CAVE body `0x426aff` |
+| K1 | 12/12 | Not available in this proof | Frame141, AffGame view `0x415b77` |
+
+P6 includes `between_frames220`; its failing frame phase is not counted equal.
+The other frame hashes cover the engine owner's exact indicator/unit-record
+hash scope, with original input answers and order packets also equal; they do
+not imply whole-memory comparison where no full window exists. Each world starts
+from S0 and runs its prefix without loading captured frame128 or later states.
+State proofs explicitly omit rendering, so a renderer stop is reported separately.
+Full requested windows beyond named stops remain pending engine support.
+
+The [delivery manifest](../apps/macos-preview/validation/m3-input-delivery.json)
+links the per-probe results, no-input regressions and native UI evidence. Current
+APP_BUILD validation UI timing is **46.489 displayed fps average / 27 minimum**
+over **8.712 seconds**, including startup audits. The optional new 65-second
+validation timing repeat was cancelled before execution; validation UI tests and
+9,200-frame equality passed. Common checks pass **2,009 tests / 622 optional
+skips**, with zero failures/errors. No milestone acceptance is made.

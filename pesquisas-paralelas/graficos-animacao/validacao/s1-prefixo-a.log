@@ -1,0 +1,11 @@
+[lease] graphics-S1-prefix-a waiting
+[lease] graphics-S1-prefix-a granted slots [3]
+S1 200 original structure inventory [[0, 2, 5, 0]]
+S1 300 original structure inventory [[0, 2, 5, 0], [1, 3, 2, 200]]
+S1 400 original structure inventory [[0, 2, 5, 0], [1, 3, 2, 200]]
+S1 500 original structure inventory [[0, 2, 5, 0], [1, 3, 2, 200]]
+S1 600 original structure inventory [[0, 2, 5, 0], [1, 3, 2, 200]]
+S1 700 original structure inventory [[0, 2, 5, 0], [1, 3, 2, 200]]
+S1 800 original structure inventory [[0, 2, 5, 0], [1, 3, 2, 200]]
+S1 900 original structure inventory [[0, 2, 5, 0], [1, 3, 2, 200]]
+{'path': '.local/graficos-api17-start/S1-00928.pickle', 'sha256': 'cf9fbd85d900cd9a96a73b31f425cd905dc6831b3129b2ed98c85bcb01eeee34'}

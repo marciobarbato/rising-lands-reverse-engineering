@@ -12,9 +12,11 @@ from pathlib import Path
 
 SCHEMA = 'rising-lands/monde01-scripted-input/1'
 VKEYS = (13,16,17,18,27,32,37,38,39,40,46,88)
+MESSAGE_VKEYS=VKEYS+tuple(range(0x30,0x3a))
 MESSAGES = (0x100,0x101,*range(0x200,0x206))
 SCANS = {13:0x1c,16:0x2a,17:0x1d,18:0x38,27:1,32:0x39,37:0x4b,38:0x48,39:0x4d,40:0x50,46:0x53,88:0x2d}
 
+SCANS.update({0x30:0x0b,**{k:k-0x31+2 for k in range(0x31,0x3a)}})
 
 @lru_cache(maxsize=8)
 def owner_contract(root):
@@ -87,6 +89,15 @@ class FrameAnswerMapper:
         if any(self.script.frames[k][1] for k in self.script.frames if self.frame<k<frame):raise ValueError('Skipped frame with messages')
         self.frame=frame;self.queue=list(messages);self.keys=dict(keys)
 
+    def declared_answers(self):
+        """The ABI consumes these declarations; its emitted poll sites verify them.
+
+        Only an explicit cursor change is sent. Omitted cursor holds in the engine,
+        and key answers are the full literal table for this frame (no key carry).
+        """
+        cursor=self.script.frames.get(self.frame,(None,(),{}))[0]
+        return dict(cursor=cursor,messages=list(self.queue),keys=dict(self.keys))
+
     def poll(self,kind,*,phase,site,vk=None):
         if phase not in (f'between_frames{self.frame}',f'frame{self.frame}'):raise ValueError('Poll phase/frame mismatch')
         address=int(site,0) if isinstance(site,str) else site
@@ -146,7 +157,7 @@ class MacOSSessionRecorder:
             self.mouse_until=k+3
         elif kind=='key':
             key,down=event['vkey'],event['down']
-            if type(key) is not int or key not in VKEYS or type(down) is not bool:raise ValueError('Unsupported macOS virtual key')
+            if type(key) is not int or key not in MESSAGE_VKEYS or type(down) is not bool:raise ValueError('Unsupported macOS virtual key')
             held=self._held(frame);previous=key in held
             extended=key in (37,38,39,40,46)
             lp=1|(SCANS[key]<<16)|(int(extended)<<24)|(int(18 in held)<<29)|(int(previous)<<30)|(int(not down)<<31)
@@ -171,7 +182,8 @@ class MacOSSessionRecorder:
             for key,down in transitions.get(frame,[]):
                 if down:held.add(key)
                 else:held.discard(key)
-            if held:rows.setdefault(frame,{'frame':frame})['keys']={hex(k):-32768 for k in sorted(held)}
+            polled={hex(k):-32768 for k in sorted(held) if k in VKEYS}
+            if polled:rows.setdefault(frame,{'frame':frame})['keys']=polled
         script=ScriptedInput(self.root,dict(schema=SCHEMA,name='macOS recording',start=dict(frame=128,checkpoint='M2.2 frame128'),stop_frame=end,frames=[rows[k] for k in sorted(rows)]))
         return script
 

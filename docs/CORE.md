@@ -123,3 +123,48 @@ None of these routines runs in the no-input run, so they were captured natively 
 Economy's frame-125 work-cycle divergence (196 minimap bytes from 0x47933a26) was settled original-first at that exact state: the bytes are BatimentModifyMap's SetMiniMap mode 6, and the composition passed DL = 0 (mode 7) because Economy's `ciclo_trabalho` omits EDX at 0x41fa88. Core's DecouvreTerrain/IllumineTerrain/BatimentModifyMap match natively (7 cases, 0 mismatches); `provedor_entrada` now raises `ArgumentoNaoPassado` for an omitted behaviour argument. Contract: [frame-125 minimap](core/MINIMAP_FRAME125.md).
 
 The S1 hunger path's Core routines are translated with every register: EnginSetFatigue, ChercheVegetLibre, ChercheTypeBatimentProximite and EteintTerrain (`fadiga_vegetacao.FadigaVegetacao`, `provedor_fadiga`). They were captured first on Economy's own hunger and abandonment scenarios, then validated natively: 444 comparisons, 0 mismatches (EnginSetFatigue 182, ChercheVegetLibre 58, ChercheTypeBatimentProximite 112, EteintTerrain 92, including SortieTroupe's radius 10 and declared radii 8/10). Contract: [hunger, search and light](core/HUNGER_SEARCH_LIGHT.md).
+
+AI/runtime's two CalculWorkEngin stops were settled natively on Economy's work-cycle scenario: TerrainEstGc (new `incursao_core.terreno_esta_gc`, served by `provedores_core`) and SetMiniMap mode 4 at 0x44c437 (the existing `definir_minimapa`, unchanged): 32 comparisons, 0 mismatches. `som` providers that declare `chamada` now receive the call address (`selecao_ordens.chamar_som`). Contract: [work-cycle queries](core/WORK_CYCLE_QUERIES.md).
+
+The S1 coverage survey's work-cycle searches/blocking tests and first-fight Core queries now pass **1,410 native comparisons, zero mismatches** across windows a/b/c. The original-only c capture was committed before comparison. `provedores_lacunas_core.provedor_lacunas_s1` publishes a strict seven-register adapter, forwarding Economy's existing restore and Combat's refuge providers rather than copying their bodies. `consultas_estado_core` adds the public EnginEstVivant / BatimentGetDecalageConstruction register queries, reusing the existing Core helpers; **546 original-only query cases replay without a CPU and pass 546 fresh native comparisons, zero mismatches**, through direct calls and both provider routes. Contracts: [S1 gaps](core/S1_GAPS.md), [register queries and routing](core/STATE_QUERIES.md). Integrated on main at `71335aa` (Core commit `3f3913f`). This is bounded routine evidence; no complete reconstructed S1-chain acceptance is claimed.
+
+## Current state (2026-10-30 07:15)
+
+Main `3874fcc` contains every Core delivery above; `feat/re-core` has no unintegrated Core code and Core has no parked `wip/*` branch. M3.1's P1/P2 part was accepted at `c9c85eb` with these providers in the chain. The original oracle is the intact executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`. Core's own gate (`python3 -B scripts/check.py --domain core`) passes 598 tests with 215 optional skips (skips are native corpora or foreign captures that are absent locally).
+
+### Provider index for consumers
+
+All of these run over live flat memory, return every register EAX..EBP as the original leaves it, and raise named errors (`ArgumentoNaoPassado`, `DependenciaRamoCore`, missing-callback errors) instead of inventing defaults. Every one was captured on the original first and then compared natively with 0 mismatches.
+
+| Provider (module) | Routines | Native evidence | Consumers on main |
+|---|---|---|---|
+| `provedores_core` (`chamadas_quadro_core`), `fundacoes_quadro` | M2 frame primitives, RNG family, reached frame callees, InitGameZone, NextAnim*, TerrainEstGc, SetMiniMap | 659 + 1,918 + 2,034 + 194 + 484/2,048 comparisons; TerrainEstGc/SetMiniMap mode 4: 32 | AI/runtime chain, Combat, Missions M3 harness, Rust engine tests |
+| raid routines (`incursao_core`) | GetFreeCell, CreerEngin, PlaceEngin, target picks, Chemin_Accessible, path search | 689 forced-state comparisons (v1 and display); movement 251/261/135 | AI/runtime and Combat raid chains (M2.3 accepted) |
+| `SelecaoOrdens` (`selecao_ordens`) | selection and order setters, EnginAsk | 130 | AI/runtime input chain, Economy order setters, Combat raid |
+| `provedor_construcao` (`construcao_core`) | construction leaves of the build path | 153 | AI/runtime construction input, Economy |
+| `provedor_entrada` (`entrada_estruturas`) | Bags, entry, lodging, CalculEntreBatiment, state 13 | 505 | Economy work cycle, AI/runtime |
+| `provedores_visao`, `provedor_saida`, `escolher_saida` (`visao_grupos`) | structure vision, group save/restore/centre, minimap view, exit position | 329 | AI/runtime, Economy recruitment |
+| frame-125 minimap (`entrada_estruturas`) | DecouvreTerrain, IllumineTerrain, BatimentModifyMap | 7 | Economy (EDX=1 at `0x41fa88` now passed) |
+| `provedor_fadiga` (`fadiga_vegetacao`) | EnginSetFatigue, ChercheVegetLibre, ChercheTypeBatimentProximite, EteintTerrain | 444 | Economy hunger/abandonment/restore, AI/runtime |
+| `provedor_buscas` (`buscas_bloqueios`), `ConsultasLuta` | S1 work-cycle searches, path-search blocking, first-fight queries | 1,410 (windows a 638, b 120, c 652) | AI/runtime (`DonosM3.externo`, on `feat/re-ai-runtime`) |
+| `provedor_consultas_estado` (`consultas_estado_core`) | EnginEstVivant, BatimentGetDecalageConstruction | 546 (also 546/546 CPU-free) | same |
+| `provedor_lacunas_s1` (`provedores_lacunas_core`) | all 16 S1 survey names plus the two queries; forwards Economy restore and Combat refuge | routes the evidence above; owner proofs stay with owners (restore 58/0, refuge 2/0) | same |
+
+The [S1 coverage survey](core/S1_COVERAGE.md) listed 16 Core gaps; all 16 now have a validated Core body or a committed owner provider.
+
+### Open stops and owners
+
+| Stop | Owner |
+|---|---|
+| AI/runtime's wiring of `provedor_buscas`, `provedor_consultas_estado` and `provedor_lacunas_s1` (`d2777b1`) is on `feat/re-ai-runtime`, not yet on main; fresh strict P6/P3/P7 and S1/P4 indicator runs with it are pending | AI/runtime, then coordinator integration |
+| Full reconstructed S1 phase/whole-state chain (M3.1 S1 windows) | AI/runtime and Missions (pass-2 S1 capture) |
+| Unsupported search radius/type branches, readable-stack requirements and unreached `DependenciaRamoCore` branches, if a chain reaches them | Core, original-first, when a stop names them |
+| Audio `PlaySnd_*` requests and Combat's `SetAttaqueEngin` stay named callbacks with no default | Audio, Combat |
+| D1 defeat chain (M4.2): Core callees on the death path beyond `SetDyingEngin`'s bounded domain | Combat leads; Core supplies any named Core stop |
+| Mission loading/remap orchestration, structure creation costs, demolition, final corpse removal | Missions, Economy, Combat (see [REMAINING](core/REMAINING.md)) |
+
+### Next steps
+
+1. Wait for a named Core stop from AI/runtime's strict S1/P6 runs or from Combat's D1 fatal windows, then capture it on the original first, translate, and compare natively.
+2. Replay the S1 window reports on main once AI/runtime's consumer wiring lands, if the integration gate asks for it.
+3. Keep tests free of foreign byte pins (bind only Core files; accept any foreign version with a committed native run).

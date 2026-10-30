@@ -1,0 +1,754 @@
+{
+ "schema": "rising-lands/combat-fatal-differential/1",
+ "native": false,
+ "capture_sha256": "8f2b53751fdf815e7608873cbbdd8353e4f3ce4f61072f4a6e3d2d3f22171dcb",
+ "summary": {
+  "cases": 82,
+  "mismatches": 0,
+  "routines": {
+   "CalculEnginNextEtape": 82
+  },
+  "outside_protected_domain": 0
+ },
+ "outside_protected_domain": [],
+ "cases": [
+  {
+   "case": "late-death-type0-t1",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t2",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t3",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t4",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t5",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t6",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t7",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t8",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t9",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t10",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t11",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t12",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t13",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t14",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t15",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t16",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t17",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t18",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t19",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t20",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t21",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t22",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t23",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t24",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t25",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t26",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t27",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t28",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t29",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t30",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t31",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t32",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t33",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t34",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t35",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t36",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t37",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t38",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t39",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t40",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type0-t41",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t1",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t2",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t3",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t4",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t5",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t6",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t7",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t8",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t9",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t10",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t11",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t12",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t13",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t14",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t15",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t16",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t17",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t18",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t19",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t20",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t21",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t22",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t23",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t24",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t25",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t26",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t27",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t28",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t29",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t30",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t31",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t32",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t33",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t34",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t35",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t36",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t37",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t38",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t39",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t40",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  },
+  {
+   "case": "late-death-type5-t41",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": true,
+   "native_errors": []
+  }
+ ]
+}

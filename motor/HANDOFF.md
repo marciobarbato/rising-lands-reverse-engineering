@@ -1,5 +1,12 @@
 # Rust engine pilot handoff
 
+> **Current state (2026-10-30).** Stages 2–4 and the ABI 1.6 play execution are
+> on main; the macOS app runs this engine live. Latest deliveries:
+> [Stage 4 delivery](#stage-4-delivery--2026-10-30) (declared input and orders,
+> ABI 1.5) and [Sustained play delivery](#sustained-play-delivery) (ABI 1.6:
+> logic 0.26 ms/frame, logic plus render 0.65 ms). Overview in
+> [ENGINE](../docs/ENGINE.md). The pilot text that follows is historical.
+
 Workstream D owns motor/ and docs/ENGINE.md on feat/codex-rust-engine in the
 independent Rising-Lands-Codex-Engine clone. No other front was edited; no
 merge into or push to main is performed. This is a pilot, not a frame engine or milestone.
@@ -957,3 +964,99 @@ with the same workspace/lockfile first. The complete command descriptions and
 source revisions are in `validation/stage4/commands.json`; M2.3 parts must be
 separate leased invocations before aggregation. No native runtime or original
 reference file changes are needed to reproduce these results.
+
+## Sustained play delivery
+
+Implementation `98c40c6`, frozen proof revision `74a3fbe`, merged main `54d148d` as `4bd1112`. Native source/header/library bytes and every
+frozen input digest are identical across the final merge.
+The release library SHA-256 is
+`5076e85bbc34e755933cbe6b0e856aead3f4f4c482337a29209dc0fd42c0abf0`.
+ABI 1.6 adds `rl_execucao_definir` and `rl_execucao_modo`; Graphics remains 1.7.
+The default execution policy is unchanged. The macOS consumer must accept ABI 1.6
+and opt into `RL_EXECUCAO_JOGO` after loading the complete mission, before its
+first live frame. Existing render and frame calls, owned buffers and palette
+contract remain unchanged. Validation consumers can select policy 2 for the same
+persistent backend with full observations.
+
+The old app-order sample attributes 2,618 of 4,628 frame-call samples to full
+projection and 1,144 to full state reload, about 81% together. Ordinary persistent
+phases perform neither. Writes use a reusable rollback journal; only changed
+semantic records refresh. Frame/input/render audit sinks stop producing
+bookkeeping in play mode, while real game calls, order packets, text/sound
+requests and every named dependency remain. Drawing reuses its private buffers
+and borrows the execution view, preserving error atomicity and carried cache.
+
+| Phase | ABI 1.5 baseline (ms/frame) | ABI 1.6 play (ms/frame) |
+|---|---:|---:|
+| between_frames / phase 2 | 4.616 | 0.014 |
+| CalculGame / phase 3 | 5.007 | 0.246 |
+| Logic total | 9.623 | 0.260 |
+| Render with HUD | 3.777 | 0.386 |
+| Logic + render | 13.401 | 0.646 |
+| Complete ABI loop | 13.416 | 0.649 |
+
+Complete ABI throughput improves from **74.54 to 1540.23 frames/s**.
+Logic p99/max are **0.360/1.264 ms**; logic + render
+p99/max are **0.798/1.718 ms**. Both targets
+are met across the measured window, including the slowest frame. Policy 2 retains
+complete audits at **0.652 ms logic + render / 1,534.17 frames/s**.
+
+
+These are release C ABI measurements on the Apple M4 Pro MacBook with HUD,
+reused caller buffers and 9,200 chained frames per run, under exclusive heavy
+leases. Both complete terminal projections, surfaces, generation and virtual
+clock match the preserved ABI 1.5 baseline. Timing excludes initialization,
+explicit state/audit exports, proof comparisons and app presentation. It measures
+backend throughput; macOS integration and presentation still require the app's
+own measurement. The sampled run is reported separately because sampling adds
+cost. The baseline dylib is preserved locally and identified by SHA-256 in the
+report; no binary or asset payload is committed.
+
+The fresh exact regressions are **257/257 M2.2 phases** and **18,401/18,401 M2.3
+phases**, with unchanged masks and zero mismatched bytes, RNGs, allocator records,
+bindings, boundaries or modeled registers. M2.3 also pairs policy 1 and policy 2
+on all 18,401 phases, checking every projected byte including masked display
+bytes, full frame context and virtual clock. This does not substitute one Rust
+mode for the original comparison: policy 2 separately meets the entire unchanged
+original-evidence contract. The ten original openings are independent shards;
+the benchmark and 9,200-surface renderer proof separately carry native state from
+S0 without later checkpoint loads.
+
+Renderer surfaces equal **128/128 Python and original**, **9,200/9,200 original**
+in production play mode, and qualified Graphics 1.7 P1/P2/P3 remain **501/601/172**
+equal. The qualified probes retain their explicit original AffText non-execution
+attestations; production glyph rendering still stops at `0x459454`.
+
+P1/P2 remain **501/601 frames** and **1,002/1,202 whole-state phases** equal.
+P6 remains **91 frames / 183 whole-state prefix phases** equal; its remaining
+4,361 phases are not claimed. P3/P6/P7 stop at frame 220, phase 3,
+`BatimentNextEtape type 3 0x426aff`; K1 remains 12 frames and stops at frame 141,
+phase 2, `AffGame 0x415b77`. The play/audit pairing also checks the failed attempt,
+retained order/request events and diagnostic replay. The leaf battery remains
+**659 completed equal / 666 exercised**, seven exact stops, two explicit
+out-of-frame skips and zero mismatches.
+
+On final merged tree `4bd1112`, `sh motor/validate.sh` passes **30 Rust tests**,
+**63 Python tests** (including isolated ten-case input and renderer batteries),
+fmt, strict Clippy, the **75/75** pilot differential, C header layout and Swift
+ABI 1.6/actual Metal smoke. Execution after lease grant is **259.788 s**.
+`python3 -B scripts/check.py` passes **2,024 tests**, with **623 documented
+optional skips**, in **447.553 s**. The subsequent release rebuild reproduces
+exactly the measured dylib SHA-256. All native jobs are bounded under the shared
+heavy lease; the five-command aggregate/timing battery uses one exclusive lease.
+
+
+No fresh x86 emulation or later Economy/Core/Combat/input/Graphics extension is
+claimed. Python references are read-only and revision pinned. Main replaced one
+auxiliary leaf-read shared base at `7cc733e`; the full proof deliberately retains
+the exact old `a7f5d49` footprint and hash. The final merge adopts coordinator
+`1c1fade`: player evidence is verified exactly where consumed, in its Git-backed
+snapshot, independently of later working-tree campaigns. Capture and footprint
+corruption controls reject changed frozen bytes; every evidence digest is unchanged.
+M2 original package/capture/policy checks remain unchanged. The first merged-tree
+gate caught the provenance conflict and an aggregate metadata typo; its failure
+log is retained, and the entire suite was restarted after correction. The final
+merged tree reruns both gates and rebuilds the identical native library.
+
+[The hashed report package](validation/play60/summary.json) records phase
+coverage, stops, identities, timings, reproduction commands and validation logs.

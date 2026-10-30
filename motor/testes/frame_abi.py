@@ -4,7 +4,7 @@ import struct
 
 from pilot_abi import Pilot
 
-FRAME_VERSION = 0x00010005
+FRAME_VERSION = 0x00010006
 REGISTERS = ('eax', 'ebx', 'ecx', 'edx', 'esi', 'edi', 'ebp', 'esp')
 
 
@@ -66,6 +66,17 @@ class Frames(Pilot):
             fn = getattr(self.lib, name)
             fn.argtypes = [u64, C.POINTER(C.c_uint8), u32, C.POINTER(u32)]
             fn.restype = C.c_int32
+
+    def execution(self, handle, mode):
+        self.lib.rl_execucao_definir.argtypes = [C.c_uint64,C.c_uint32]
+        self.lib.rl_execucao_definir.restype = C.c_int32
+        self.check(self.lib.rl_execucao_definir(handle,mode))
+
+    def load(self, handle, blocks):
+        super().load(handle, blocks)
+        import os
+        mode=int(os.environ.get('RL_EXECUTION_MODE','0'))
+        if mode: self.execution(handle,mode)
 
     def snapshot(self, handle, freed=False):
         fn = self.lib.rl_projetar_liberados if freed else self.lib.rl_projetar_tudo

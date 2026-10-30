@@ -64,6 +64,7 @@ pub struct Outcome {
 }
 #[derive(Clone)]
 pub struct Renderer {
+    pub audit: bool,
     pub saved_background: Option<SavedBackground>,
     pub recorded_text_boundaries: Option<std::collections::VecDeque<RecordedTextBoundary>>,
     pub tick: Option<u32>,
@@ -80,6 +81,7 @@ impl Renderer {
             return Err(Error::Invalid("initial surface must have 480000 indices"));
         }
         Ok(Self {
+            audit: true,
             saved_background: None,
             recorded_text_boundaries: None,
             tick: None,
@@ -89,6 +91,28 @@ impl Renderer {
             cache_generation: 0,
             last: None,
         })
+    }
+    /// Reuse the atomic render transaction's buffers. Previous pixels/cache are
+    /// copied because skipped drawing and unexpected errors must preserve them.
+    pub fn prepare_from(&mut self, previous: &Self) {
+        self.audit = previous.audit;
+        self.surface.clone_from(&previous.surface);
+        self.cache.keys.clone_from(&previous.cache.keys);
+        self.cache.raw.clone_from(&previous.cache.raw);
+        self.cache.cursor = previous.cache.cursor;
+        self.assets = Arc::clone(&previous.assets);
+        self.tick = previous.tick;
+        self.cache_generation = previous.cache_generation;
+        self.last.clone_from(&previous.last);
+        self.recorded_text_boundaries
+            .clone_from(&previous.recorded_text_boundaries);
+        match (&mut self.saved_background, &previous.saved_background) {
+            (Some(next), Some(old)) => {
+                next.address = old.address;
+                next.pixels.clone_from(&old.pixels);
+            }
+            _ => self.saved_background.clone_from(&previous.saved_background),
+        }
     }
     pub fn reset(&mut self, surface: &[u8], cache: Cache) -> Result<()> {
         cache.validate()?;
@@ -123,6 +147,7 @@ impl Renderer {
             cache: &mut self.cache,
             assets: &assets,
             observations: Vec::new(),
+            audit: self.audit,
             clip: [
                 m.u16(0x49a020)? as i32,
                 m.u16(0x49a01c)? as i32,
@@ -160,6 +185,7 @@ impl Renderer {
             cache: &mut self.cache,
             assets: &assets,
             observations: Vec::new(),
+            audit: self.audit,
             clip: [0, 0, 799, 599],
             camera: 0,
         };
@@ -196,6 +222,7 @@ pub(crate) struct Context<'a> {
     pub cache: &'a mut Cache,
     pub assets: &'a Assets,
     pub observations: Vec<Observation>,
+    pub audit: bool,
     pub clip: [i32; 4],
     pub camera: u32,
 }
@@ -237,6 +264,9 @@ impl Context<'_> {
         Err(Error::Stop(a, s.into()))
     }
     pub fn observe(&mut self, name: &str, a: u32, args: &[i32]) {
+        if !self.audit {
+            return;
+        }
         let mut n = [0; 48];
         let len = name.len().min(47);
         n[..len].copy_from_slice(&name.as_bytes()[..len]);
@@ -254,7 +284,7 @@ impl Context<'_> {
     }
     pub fn put(&mut self, name: &str, a: u32, b: &[u8]) -> Result<()> {
         let old = self.read(a, b.len())?;
-        if old != b {
+        if old != b && self.audit {
             self.observe(name, a, &[]);
             let e = self.observations.last_mut().unwrap();
             e.kind = 1;
@@ -482,6 +512,7 @@ mod tests {
             cache: &mut cache,
             assets: &assets,
             observations: vec![],
+            audit: true,
             clip: [0, 0, 799, 599],
             camera: 0,
         };

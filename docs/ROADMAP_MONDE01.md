@@ -6,6 +6,19 @@ Coordinator architecture for the seven-front research round, written 2026-10-28 
 
 Recovery starting main8810b37 has advanced through Core15 resets, raw AI initialization, Core16 declared bindings/classification, Missions11 complete placement and Core17 full remap at09d3953c6dda02ba6e4f6ca9ac61e51ca48782e6, freshly validated/integrated/reproduced. Economy natural-production inventory is integrated at2456848 as research only. Final query/adapter dispositions and worktree checkpoints are in [HANDOVER_CLAUDE_20261028](HANDOVER_CLAUDE_20261028.md), with round-by-round evidence in [PROGRESS](PROGRESS.md). Earlier lists below remain the sequence, not instructions to redo completed work. M1–M4 remained unaccepted at that handover. **Update, CXR-20261028-08: M1 is accepted at main `927c7e57e555eb0f55d509db35aa36fb70454e85`.** The strict Python MissionLoad composition (Missions Stage14) equals the whole original MONDE01 post-load state, the allocation records, the 1,400 ordered external requests and AL, with no bridges, and it was reproduced on main ([acceptance record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json), [oracle review](M1_ORACLE_REVIEW.md)). M2–M4 remain unaccepted. **Update, CXR-20261029-M2R5: M2.1 (first frame) is accepted at main `32bb39131931ba615c78e13c60b5d0740d6ccfd7`** ([record](../integracao/validacao/cxr-20261029-m2r5-m2-1-acceptance.json)). The chained Python composition of the load tail, the between-frames phase and frame 1 equals the original display-scenario reference under the published display-only mask, with zero crossings. It was reproduced on main and on a second machine. **Update, CXR-20261029-M2R6: M2.2 (128 frames) is accepted at main `b9f4b5d`** ([record](../integracao/validacao/cxr-20261029-m2r6-m2-2-acceptance.json)), with 257/257 phases equal under the cumulative mask and zero crossings, reproduced on two machines. M2.3 (first raid, frame 9000) was then captured on the Mac mini. **Update, CXR-20261029-M2R7: M2.3 (frames 0–9,200, first raid) and therefore M2 are accepted at main `ea62eb45d15488abe6c76266536cc65f4148855a`** ([record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json)): 18,401/18,401 phases equal under the cumulative mask, zero crossings, reproduced on two machines with identical part chain hashes. M3 is the current milestone ([plan](M3_PLAN.md)). **Checkpoint CXR-20261029-M3R1:** native scripted-input probes P1–P7/K1 and pass-2 windows P1/P2/P6 are captured; the input path, construction, structure entry, work cycle, CAVE body and recruitment are translated with zero native mismatches; render API 1.8 equals the probes' full surfaces; the Rust engine and renderer run M2 at about 100 fps and the macOS app at about 41 fps. No M3 criterion is accepted yet; next is the M3.1 whole-state proof of P1/P2 ([handover](HANDOVER_CLAUDE_20261030.md)).
 
+## Status — 2026-10-30 07:00
+
+Main `3874fcc`. The recovery snapshot above and the wave-1 lists below are historical sequence, not open instructions. Per-criterion M3/M4 state is in the [M3 plan status](M3_PLAN.md#status-2026-10-30-0700).
+
+| Milestone | State |
+|---|---|
+| M1 MONDE01 loaded | **accepted** at `927c7e5` |
+| M2 MONDE01 advances | **accepted**: M2.1 `32bb391`, M2.2 `b9f4b5d`, M2.3 (frames 0–9,200, first raid) `ea62eb4` |
+| M3 MONDE01 playable | in progress. **M3.1 P1/P2 part accepted** at `c9c85eb`; M3.1 P6 and S1 windows open; M3.2 render 1.9 equal on every probe, not yet over S1; M3.3 Test A partial (answers complete, state half up to the Rust engine's frame-220 stop), Test B not run; M3.4 partial; M3.5 ≥ 60 fps met in play mode on current coverage |
+| M4 Mission 1 complete | open. Original captures exist: S1 wins MONDE01 (replay-checked, `82ec5ea`) and D1 reaches the defeat branch (`bab6c7c` on `feat/re-missions`); Python chain proofs follow M3.1 |
+
+The playable engine is now the native Rust port in `motor/` ([ENGINE](ENGINE.md)); the macOS app runs it live with player orders. Python remains the reference validated against the original, and Rust is validated against both.
+
 ## Goal and milestones
 
 The first major milestone is **loading MONDE01 exactly as the original does, running the complete mission, and comparing its behavior with the original executable**. MONDE01's PT-BR briefing (`WORLD/MONDE01.TXT`, read-only) sets the player goal: protect a cave and store 50 bags of food and 50 bags of stone in it, while the "Grupo dos Assassinos" raids the region. The map holds one structure (disk type byte +8 = 2, origin cell 2828) and 16 owner-0 units (disk type byte +1): three type 0, eight type 9 in state 14 at cell 3086, and single units of types 1, 7, 5, 5, 8. The hostile group is not serialized as units; it comes from the loaded attack table (`IALoadAttaqueIni`, 100×8-byte records) and the AI war/unit kernels. Economy confirmed from original tables during this round that structure type 2 is **not** the cave. The type-name table read by `BatimentGetTypeName 0x418af7` (`0x495d8c + type*52 + 0x13`) names type 2 `SANCTUAIRE` (PT-BR "Santuário") and type 3 `CAVE` (PT-BR "Armazém"). `BatimentInitCave 0x419112` counts only type 3, so MONDE01 starts with no cave and a zero warehouse count. Its structure 0 (owner 0, state 5) holds the eight type-9 colonists. The missions front must establish from the objective/end-condition trace whether the objective requires building a type-3 cave; the story does not settle it.
@@ -149,22 +162,24 @@ A requested contract is recorded in the requester's handoff with the exact origi
 
 ## Inventory for the completion estimate
 
-The estimate stays approximately **50% (40–60%)** at the start of this round. It is reviewed from this inventory, not computed from counts of tests, files or native executions. A component moves only when its status column changes with original comparison.
+The estimate stays approximately **50% (40–60%)** (unchanged at the 2026-10-30 07:00 update; the rows below were refreshed then). It is reviewed from this inventory, not computed from counts of tests, files or native executions. A component moves only when its status column changes with original comparison.
 
 | Component | Implemented | Validated vs original | Integrated | Mission-tested |
 |---|---|---|---|---|
 | File formats, readers, symbols | complete | complete | yes | n/a |
-| World/navigation/tasks (core) | large subset | large subset | yes | no |
-| Mission loading | L1/L3/L5–L7 complete; L2 composition and L8 units/habitation partial | yes | yes | no |
-| Remapping | prefix | yes | yes | no |
-| AI kernels, VM operations, messages | VM control flow, five operations, orchestration skeleton | partial | yes | no |
-| Economy rules, production, market | large subset to cleanup boundary | yes | yes | no |
-| Transport/work cycles | read-only status queries | partial | yes | no |
-| Combat targeting, projectiles, damage, death | supported modes | yes | yes | no |
-| Rendering passes and composition | terrain/sprite/projectile passes, cache lifecycle, bounded AffGame | yes | yes | no |
-| Frame loop, input, events | counters only | partial | yes | no |
-| End conditions/objectives | table loaders | yes | yes | no |
-| Audio (`PlaySnd_*`, `HandleSnd_*`, HED/SND) | bank readers and IMA decoding; requests remain descriptors | bank/decoder whole-buffer fixtures | yes (banks/decoder only) | no |
+| World/navigation/tasks (core) | large subset, including selection, orders, construction, structure entry, vision/groups, hunger and S1 query gaps | yes | yes | M2 window, M3.1 P1/P2 |
+| Mission loading | complete for MONDE01 (M1) | yes | yes | yes (M1) |
+| Remapping | complete `Chemin_Remap` | yes | yes | yes (M1) |
+| AI kernels, VM operations, messages | frame/unit/structure dispatchers, raid kernels, input path (`InputGame`/`ProcessInputGame`) | yes | yes | M2 window, M3.1 P1/P2 |
+| Economy rules, production, market | large subset: setters, construction cost, cave body, recruitment, hunger, restoration | yes | yes | M2 window, M3.1 P1/P2 |
+| Transport/work cycles | work cycle (state 5) and cave meal/tag 19; transport states 18/20 in progress | partial | partial | planning diagnostics only |
+| Combat targeting, projectiles, damage, death | supported modes plus raid fights, turrets, fatal path through death and recount | yes | yes | M2 raid window |
+| Rendering passes and composition | render API 1.9: HUD, cursor, selection, panels, scroll origins, S1 end screens; text is a declared boundary | yes | yes | M2 surfaces, M3 probe surfaces |
+| Frame loop, input, events | frame loop and scripted input; events (R3) open | yes | yes | M2, M3.1 P1/P2 |
+| End conditions/objectives | `fim_missao` evaluator; S1 victory and D1 defeat captured on the original | isolated cases plus original captures | yes | not yet proven in a chain |
+| Audio (`PlaySnd_*`, `HandleSnd_*`, HED/SND) | bank readers, IMA decoding, request queue and provider | yes (169 provider calls) | yes | request log over M2 |
+| Native Rust engine (`motor/`) | M2 logic and renderer, orders (ABI 1.5), play mode (ABI 1.6) | against the accepted evidence | yes | to frame 220 in the cave probes |
+| macOS app | live play on the Rust engine, orders, recorder, Test A | Test A partial | yes | to the engine's stops |
 | Save/load (`GameSave`/`GameLoad`) | none | no | n/a | no |
 | Menus, campaign progression, briefings | filename only | partial | yes | no |
 

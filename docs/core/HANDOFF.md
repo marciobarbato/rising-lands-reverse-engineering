@@ -700,3 +700,99 @@ Contract and counts: [HUNGER_SEARCH_LIGHT](HUNGER_SEARCH_LIGHT.md).
 - **Next (coordinator):**
   - AI/runtime's stops: SetMiniMap from CalculWorkEngin `0x44c437` (P5 760) and TerrainEstGc for objects ≥ 0x1d (P7 2801, P4 460);
   - the call address passed to `som`.
+
+### AI/runtime's CalculWorkEngin stops: TerrainEstGc and SetMiniMap at 0x44c437; `som` call address on `feat/re-core`
+
+Contract and counts: [WORK_CYCLE_QUERIES](WORK_CYCLE_QUERIES.md).
+- **Captured first** on Economy's work-cycle scenario (frame 600), original only:
+  - TerrainEstGc in situ at `0x44d8cd` (frames 261/293, objects ≥ 0x1d → 1);
+  - SetMiniMap at `0x44c437` (frame 572: the builder leaves the mine; mode 4, owner 0);
+  - AvanceEngin's mode 4;
+  - declared variants.
+- **Translated:** `incursao_core.terreno_esta_gc`, with `traducao_core` and `provedores_core['TerrainEstGc'] (keywords sitio, caso)`. SetMiniMap mode 4 is the existing `definir_minimapa`, unchanged, and already in `provedores_core`.
+- **Native:** 32 comparisons, 0 mismatches.
+- **`som`:** `selecao_ordens.chamar_som` passes `chamada` = the original call address to providers that declare it. It is used by `selecao_ordens`, `visao_grupos` and `fadiga_vegetacao`.
+- **Reruns:** the native differentials bound to the changed files were rerun (selection orders, vision groups, hunger fome/abandono, queries). Results are in the commit message.
+- **For AI/runtime:**
+  - route CalculWorkEngin's TerrainEstGc to `provedores_core['TerrainEstGc']`;
+  - route its SetMiniMap to `provedores_core['SetMiniMap']` with DL = 4 (`0x44c427`);
+  - a `som` with a `chamada` parameter receives the call address.
+
+### S1 coverage survey and S1's Core gaps (stopped mid-stage for the Codex handover) on `feat/re-core`
+
+- **Coverage.** [S1_COVERAGE](S1_COVERAGE.md) and `relatorios/cobertura-s1.json` come from `ferramentas/cobertura_s1.py`.
+  - Method: read-only, from Missions' S1 capture at `82ec5ea`, with no native run.
+  - Totals: 495 routines; gaps are Core 16, Economy 28, AI/runtime 22, Combat 20, Missions 14, Graphics 2 (+21 display-only), Audio 0.
+- **Foreign pins removed** (`0d6138a`). Missions' frame-1 capture and Economy's bench version are now skips, never failures.
+- **Gap stage.** See [S1_GAPS](S1_GAPS.md).
+  - Committed: the bench (`bancada_s1`), the validator (`validar_lacunas_s1`), and captures `a` and `b`.
+  - Written but NOT natively validated: `buscas_bloqueios` and `consultas_luta`. The smoke run gave 37/0.
+  - Not run: capture `c`.
+  - Open: EnginRestaureEtat and ChercheBatimentProximiteCaveOuSanctuaire.
+
+### Codex continuation: S1 window a validated (2026-10-30)
+
+- Worktree `re-core`, branch `feat/re-core`, resumed at `cce81926d0123e5485ad3ccb2f2af242abf9d64f`. The current user authorizes Core-only commits and feature pushes and explicitly prohibits merging into main; this overrides older integration instructions above.
+- Fresh `heavy_lease.py core -- python3 -B ferramentas/validar_lacunas_s1.py --janela a`: **638 comparisons, 0 mismatches**, exact committed capture reproduction. Counts: ChercheVeget 42, ChercheGc 32, ChercheGcLibre 20, TypeEnginPeutEcraser 198, IsIndirectlyBlocking 294, IsDirectlyBlocking 52. Every seven-register exit, ESP, changed byte and boundary request matches. All 951 frame states from 2250 through 3200 reproduced; original code unchanged; 965.9 seconds.
+- API remains `BuscasBloqueios(memoria).chamar(nome, regs, pilha=())` / `provedor_buscas(buscas, outros=None)`, with the widths and protected domain in [S1_GAPS](S1_GAPS.md) and the module docstring. Searches/blocking queries store no game bytes and invoke no callbacks. ChercheGcLibre needs readable entry ESP for exact stack-residue high bits. Required argument registers omitted at the provider raise `ArgumentoNaoPassado`.
+- Oracle remains intact executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`; original addresses are ChercheVeget `0x47790d`, ChercheGc `0x4781cc`, ChercheGcLibre `0x477ead`, TypeEnginPeutEcraser `0x442409`, IsIndirectlyBlocking `0x42ece0`, IsDirectlyBlocking `0x42eba4`.
+- Baseline and post-report Core gates both passed 586 discovered tests, 215 optional skips; documentation links passed. Window b is next. A local predecessor log also records a failed c capture at frame 11860: the declared out-of-domain GetCaseIndiceBatiment index `0x1234` faults in the original; no c capture was published. Its case table must be corrected before capture.
+- Read-only overlap audit: Economy's committed `Restauracao` covers every EnginRestaureEtat switch target (58 isolated native comparisons, plus composed bodies), and Combat's committed `refugio_registradores` / `LutaFatalViva` covers ChercheBatimentProximiteCaveOuSanctuaire (two isolated comparisons). Reuse those owners' implementations; no duplicate Core body is owed. `0x4731d3` is an EnginEstVivant call site; its entry is `0x443dad`. Core register wrappers and first-fight validation remain pending.
+
+### Codex continuation: S1 window b validated (2026-10-30)
+
+- Window a report and handoff were committed/pushed as `8e7095b`. Fresh sequential `heavy_lease.py core -- python3 -B ferramentas/validar_lacunas_s1.py --janela b`: **120 comparisons, 0 mismatches** (ChercheVeget 45, ChercheGc 35, ChercheGcLibre 40), exact committed capture reproduction, all seven registers/ESP/changed bytes/boundaries equal. All 1,201 frame states from 3250 through 4450 reproduced; original code unchanged; 1,035.6 seconds.
+- Same API, addresses, domain and no-mutation/no-callback order as window a. No translation correction was needed. Both windows together compare 758 calls; this does not establish a complete reconstructed S1 chain.
+- Post-report Core gate: 586 discovered tests, 215 optional skips, zero failures; documentation links passed. Next: correct c's declared invalid-index variant, commit the original-only c capture before any comparison, then validate c. Core-only ownership and feature-only push authorization remain in force; do not run the main integration helper.
+
+### Codex continuation: window c case-table preparation (2026-10-30)
+
+- Window b was committed/pushed as `b431db8`. Removed only c's unsupported declared GetCaseIndiceBatiment index `0x1234`; the predecessor log records its actual native protected-read fault at `0x41aac4`. Valid declared indexes 0/1/2/5/999 remain. No original executable, capture, predecessor report or snapshot changed.
+- The evidence test now verifies driver/bench and the unexecuted opposite-window module against each report's recorded immutable Core source revision, while keeping every executed translation dependency bound to current bytes. This preserves reproducibility of a/b without a needless native rerun for a c-only fixture change; no foreign source pins are introduced.
+- The original-only c capture is next and must be committed before the c comparison. No c result or full S1-chain acceptance is claimed by this preparatory change.
+
+### Codex continuation: S1 window c captured before comparison (2026-10-30)
+
+- Preparatory driver change `4c235b4` passed Core 586 tests / 215 optional skips, documentation links clean, and was pushed before capture. Fresh leased `validar_lacunas_s1.py --janela c --capturar` recorded **652 original-only cases**: TerrainEstMontagne 325, BatimentGetCaseAdjacent 284, ChercheCaseBatiment 16, GetCaseIndiceBatiment 6, listDeleteElem 3, listUnlinkElem 3, iaProbReturnTo 4, VoixOffAsk 11. Of these, 498 are in situ and 154 are declared variants.
+- All 1,251 S1 frame states (11250–12500 inclusive) reproduced; original code unchanged; no translation imported/executed; 770.6 seconds. Raw uncompressed capture SHA-256 `e24b9c49f86886efe106343643f9d2053aede07fce95399e152b5a39b90df6a9`. Snapshot provenance and executable hash are embedded in `evidencias/lacunas-s1/captura-c.json.xz`.
+- The corrected valid-index variants returned in the original. The failed predecessor's out-of-domain read is not counted as a supported case. This commit publishes evidence before any c comparison; the comparison is next.
+
+### Codex continuation: S1 window c validated (2026-10-30)
+
+- Capture commit `c162e68` was pushed before comparison; its gate passed 586 tests / 215 optional skips. Fresh leased `validar_lacunas_s1.py --janela c`: **652 comparisons, 0 mismatches**, exact committed capture reproduction and 1,251 matching S1 frame states, original code unchanged; 882.8 seconds. Counts are unchanged from the capture entry above. Windows a/b/c together compare **1,410 calls, zero mismatches**.
+- `ConsultasLuta(memoria, som=...).chamar(nome, regs, pilha=())` takes seven registers plus optional readable entry ESP; addresses and widths are in [S1_GAPS](S1_GAPS.md) and the module docstring. Terrain/structure queries are read-only. listDeleteElem stores the element's next link, list head, then count; listUnlinkElem splices the first matching link before decrementing count. iaProbReturnTo stores task +5e, +5f, +14, +54 in that order. VoixOffAsk calls StopSound before PostSound with pushed volume 0x100, forwarding the original call addresses. Missing Audio raises explicitly; unsupported structure indexes are protected before reads.
+- Before the comparison, original-instruction review fixed sound-call ESI to the structure record, enabled `chamada` for `**kwargs` providers, and added the explicit GetCaseIndiceBatiment index guard. Focused tests cover those callback fields; the native c records compare Audio's four argument registers, not ESI/EDI/EBP at the boundary. The native exits still compare every seven-register value and ESP.
+- Evidence tests now require every a/b/c capture and report to exist; there is no silent success for missing windows. Next: add the requested public EnginEstVivant / BatimentGetDecalageConstruction register queries original-first, publish strict seven-register providers, and reuse Economy's restore / Combat's refuge instead of duplicating either body.
+
+### Codex continuation: query capture preparation (2026-10-30)
+
+- C comparison/source commit `a34f425` is pushed; post-report Core gate passed 588 tests, 215 optional skips, documentation links clean.
+- Prepared `validar_consultas_estado_core.py`: 546 declared intact-original leaves from the verified S1 frame-11250 snapshot, 268 EnginEstVivant / 278 BatimentGetDecalageConstruction. It records native non-stack reads for a later CPU-free replay, all seven exits/ESP and every changed game byte. It refuses capture replacement and requires a committed capture before comparison. No wrapper implementation has been added yet.
+- [Query and provider contract](STATE_QUERIES.md) records AX/AL widths, full-EAX results, unchanged registers, no mutations/callbacks, protected unit bounds, original ranges/table, and the exact committed Economy/Combat reuse interfaces. Capture, comparison and strict provider implementation remain pending.
+
+### Codex continuation: register-query original capture (2026-10-30)
+
+- Driver/contract commit `5d984a2` was pushed after Core 588 tests / 215 optional skips. Fresh leased `validar_consultas_estado_core.py --capturar`: **546 original-only calls**, EnginEstVivant 268 and BatimentGetDecalageConstruction 278, 111.32 seconds, original code unchanged. Every call is read-only and makes no boundary request. Both new wrapper modules were absent and were not imported.
+- Capture `evidencias/lacunas-s1/consultas-estado-original.json.xz` includes native non-stack read sets, all register exits/ESP, explicit fixture writes and original code/table hashes. It starts from S1's verified frame-11250 snapshot but makes declared leaves without frame advance; it is not an additional S1 trajectory window. Commit this capture before implementing or comparing the new register wrappers.
+
+### Codex continuation: query/provider implementation, final native gate pending (2026-10-30)
+
+- Original-only query capture committed/pushed as `ab9bb7d`, after Core 588 tests / 215 optional skips. Then added `consultas_estado_core.py`, `provedores_lacunas_core.py` and `test_consultas_estado_core.py` in Core-owned paths only.
+- `ConsultasEstadoCore` / `provedor_consultas_estado` reuse the existing live Core state predicate and construction table, returning every seven-register value. The strict `provedor_lacunas_s1` serves all 16 survey names plus those two queries; it forwards the committed Economy restore / Combat refuge callbacks with the original address and complete register file. See [STATE_QUERIES](STATE_QUERIES.md) for required ESP, protected domains, failure/store order and explicit dependencies.
+- Actual CPU-free replay: **546/546 cases, zero mismatches**, direct calls and both provider routes on exactly the original read bytes. Nine focused checks passed, including mutation detection, every omitted register, owner forwarding, missing/incomplete/uncertain callbacks and retained stores on callback failure. Owner stubs test routing only and do not replace the published native owner evidence.
+- Final leased `python3 -B ferramentas/validar_consultas_estado_core.py` is queued; no result is claimed yet. A macOS exclusive timing lease is reserving slots while earlier jobs finish. After this gate passes: update final counts/status here and in STATE_QUERIES/S1_GAPS, run `python3 -B scripts/check.py --domain core`, commit/push owned changes. The native-report test deliberately fails if the final report is absent. Never merge into main.
+
+### Codex continuation: final query/provider native gate passed (2026-10-30)
+
+- Fresh leased `validar_consultas_estado_core.py`: **546 comparisons, zero mismatches**, 268 EnginEstVivant and 278 BatimentGetDecalageConstruction; exact committed capture reproduction, code unchanged, 104.26 seconds. Direct calls compare all seven registers/ESP; both provider routes compare all seven registers. Every query is read-only with no boundary request. No native faults, limits, skips or dependency stops. The three Python routes compare the same native calls and are not counted as three native executions.
+- Total fresh comparisons for this continuation: **1,956**, comprising a 638 / b 120 / c 652 / queries 546, all zero mismatches. Published owner reuse remains separate: Economy restore 58/0 and Combat refuge 2/0; no fresh Core replay of those owner bodies is claimed.
+- Public providers: `buscas_bloqueios.provedor_buscas` (existing), `consultas_estado_core.provedor_consultas_estado`, and strict `provedores_lacunas_core.provedor_lacunas_s1`. The strict provider serves all 16 survey names plus the two query names, forwards full registers/call addresses, rejects omitted required inputs with `ArgumentoNaoPassado`, and requires real owner callbacks. State-query code/table hashes, supported inputs, mutation/callback order and failure semantics are in [STATE_QUERIES](STATE_QUERIES.md); first-fight/list/task contracts remain in [S1_GAPS](S1_GAPS.md). No foreign source hashes are pinned in tests.
+- Final `python3 -B scripts/check.py --domain core`: **598 discovered tests, 215 optional skips, zero failures**, 34.595 seconds; documentation links passed. New module basenames are unique across Core/research/app paths; `git diff --check` passed. No historical optional native corpus was rerun.
+- No survey-listed Core body remains newly untranslated within the published domains. Remaining work is binding committed Economy/Combat/Audio providers in consumers, handling explicit unsupported search/stack/domain branches when reached, and proving the complete reconstructed S1 phase/whole-state chain. No M3.1/M4.1 or main-integration acceptance follows from these isolated proofs. Publication is a Core-owned feature commit/push only; never merge into main.
+
+### State at 2026-10-30 07:15 (documentation refresh)
+
+- `feat/re-core` = main `3874fcc` plus this docs commit. Core's last delivery `3f3913f` (strict S1 providers, 546 register queries) was integrated at `71335aa`; there is no unintegrated Core code and no Core `wip/*` branch. Core gate: 598 tests, 215 optional skips, documentation links clean.
+- Validated this round, all 0 mismatches: S1 windows a 638 / b 120 / c 652 and the register queries 546 (1,956 fresh native comparisons); frame-125 minimap 7; hunger path 444; work-cycle queries 32. The 16 S1 survey gaps are closed by Core bodies or owner providers (Economy restore, Combat refuge).
+- Consumers: Economy now passes EDX=1 at `0x41fa88` and ECX for ChercheVegetLibre, and routes `provedor_fadiga`/`provedor_saida`. AI/runtime routes `provedor_buscas`, `provedor_consultas_estado` and `provedor_lacunas_s1` through `DonosM3.externo` on `feat/re-ai-runtime` (`d2777b1`, not on main); its fresh strict P6/P3/P7 and S1/P4 runs are pending.
+- [CORE.md](../CORE.md#current-state-2026-10-30-0715) now holds the provider index, open stops with owners and next steps; REMAINING, S1_GAPS, S1_COVERAGE and STATE_QUERIES point to it. Next Core work starts only from a named stop (AI/runtime's S1/P6 strict chain, Combat's D1 fatal windows), original-first as before.

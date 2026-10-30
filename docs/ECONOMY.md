@@ -2,6 +2,54 @@
 
 Owner: economy. All implementations, tests, original-byte evidence, and validation reports live in `pesquisas-paralelas/economia/`. The API retains Portuguese identifiers and original French symbol names. Player-facing resource names stay PT-BR.
 
+## Current state (2026-10-30 07:15)
+
+Everything in this section is on `main` (last Economy merge `41ab539`; order-setter report rebind `57099c0`). The sections after this one are the per-slice contracts, oldest first; their "not integrated" or "pending" notes are history.
+
+**M3 providers** (each is a translation over live flat memory; `chamar(nome, regs)` takes EAX..EBP plus ESP and returns the exit registers the original leaves, with `_incertos` where a provider's uncertain bits reach them; every foreign callee gets the whole register file and is a named `externo` dependency, never defaulted):
+
+| Module / provider | Routines | Consumers on main |
+|---|---|---|
+| `ordens_economia.OrdensEconomia`, `provedor_core` | EnginTravailSelectionne, Set{Mine,Depot,Ramasse}EnginSelect and single-unit setters, TestRessource, GetRessourceStock, EnleveMatiere, CreerBatiment, CalculConstruireBatiment tick | AI/runtime input chain (`provedores_entrada_ia.py`) |
+| `ciclo_trabalho.CicloTrabalho` | CalculWorkEngin types 5/7 (unit state 5), BatimentLogeEngin, BatimentAjouteMatiere, AjouteMatiere, TerrainRecolte, mine leaves | AI/runtime `DonosM3` |
+| `caverna_recrutamento.CavernaRecrutamento`, `provedor_caverna`, `corpo_caverna` | cave body (BatimentNextEtape type 3), BatimentHabitable, BatimentSetTechnologie (types 2/3), InitBatimentPlayer/Neutre, InitRecruteTroupe (tag 17), CalculTroupe (types 1/2), SortieTroupe including sanctuary abandonment | AI/runtime `DonosM3` (tag 17, frame-220 cave body); offered to Core for InitBatimentNeutre at `0x41e0d7` |
+| `alimentacao.Alimentacao`, `provedor_fome` | hunger state 19 body, TerrainRetireMatiere | AI/runtime (`EnginNextEtape:state19`); TerrainRetireMatiere offered to Core's states 16/17 |
+| `restauracao.Restauracao`, `provedor_restauracao` | EnginRestaureEtat (every switch target), BatimentEnleveMatiere, SetDechargeCaveEnginSelect (tag 19), SetDechargeCaveEngin | AI/runtime (tag 19 at `0x45f085`, the state-19 body); Core `STATE_QUERIES` binds it directly |
+| `bonus_unidades.BonusUnidades`, `quadro_economia` frame providers | BonusGetValEngin and capacity queries, the M2 frame routines, GetMeteo, MAJSympathie event branch, PlayerGetColor | AI/runtime frame loop; Combat turret providers (BonusUnidades) |
+
+Core providers Economy consumes: `visao_grupos.provedor_saida` (CalculPosition, RechercheDecalageSortie), `fadiga_vegetacao.provedor_fadiga` (ChercheVegetLibre, EteintTerrain), `provedor_entrada` with `construcao_core` (DeplaceEngin and the structure callees).
+
+**M3 validated coverage** (original-first captures committed before translation; native reruns equal to the captures):
+
+| Slice | CPU-free replay | Native differential |
+|---|---|---|
+| Order setters and construction gates | 95 cases | 121 compared, 0 mismatches (rerun in Core's tree after its legitimate `selecao_ordens.py` change, `57099c0`) |
+| Work cycle, deposit, lodging credit | 407/407 | 407 compared, 0 mismatches |
+| Cave body, habitation, recruitment | 342/342 (also with Core's `provedor_saida`) | 342 compared, 0 mismatches |
+| Sanctuary abandonment | 81/81 | 81 compared, 0 mismatches (EteintTerrain by `provedor_fadiga`) |
+| Hunger state 19 | 231/231 | 231 compared, 0 mismatches (ChercheVegetLibre by `provedor_fadiga`) |
+| Restore, cave meal, tag 19 (`rotinas`) | 58 + 27 + 7 | 92 compared, 0 mismatches |
+| Restore with state-19 bodies (`corpo`) | 804 (712 bodies) | 804 compared, 0 mismatches |
+| Work cycle composed with Core's providers | 403 match, 4 uncertain (DeplaceEngin's EAX, which Core declares unreconstructed), 0 mismatch | same over native entry states |
+
+The frame-125 minimap divergence in that composition was Economy's: BatimentModifyMap at `0x41fa88` needs DL = 1 (fixed in `aef912b`). Last domain gate recorded in the HANDOFF: 543 tests, 209 optional skips, 0 failures.
+
+**Open stops and owners.**
+- Economy: CalculTransporteEngin (state 18) and CalculDechargeCaveEngin (state 20). Neither lies on the S1 path (S1 delivers through Ctrl depot orders, mode 2), but tag 19 leads into state 20. The state-19 validity checks of saved states 1, 0xb, 0xd, 0xf, 0x12, 0x15, 0x17, 0x18 and the aborts `0x455107`/`0x454ddd`/`0x454ef8` stay `ForaDoDominioFome`.
+- Economy: TerrainDeposeMatiere over live memory; BatimentSetTechnologie types 1/5/6/0xd/0xf/0x10/0x12/0x14; balloons (type 0x12); CalculTroupe types other than 0–4; depot mode 1 and unit types 6/13 in CalculWorkEngin; the market state-3/4/5 branches (CalculValeur `0x466533`, ForgetMarche `0x4610a4`), InitNova, InventionSetEffet, AnimBallonStatic.
+- Economy, from Core's S1 coverage survey ([S1_COVERAGE](core/S1_COVERAGE.md), a historical snapshot): TuyauEstSortie, SacGetCapacite, the research/technology routines reached at the result screen (frame 17,043: RechercheCalculNew, Technologie*, Set*Recrutable, IaRechercheAjuste and others), CalculStatusRecrute (display only). AjouteMatiere, MineEstSurTerrain, TerrainRetireMatiere and the recruitment-time routines listed there are now covered by the slices above.
+- Rust engine (separate repository): port `restauracao`, `alimentacao` and `caverna_recrutamento` over the same register contract.
+
+**Parked, unvalidated WIP (not on main, not on `feat/re-economy`).** None of these has a committed transport capture, so original-first is not satisfied; do not integrate them as they are.
+- `origin/wip/re-economy-transporte` (`cc439b7`, Claude): draft `transporte.py` (states 18/20), the remaining state-19 checks in `alimentacao.py`, and the capture script; never run against evidence. Its `alimentacao.py` change would unbind the committed hunger and restore reports.
+- `origin/wip/re-economy-transporte-0700` (`746e497`, Codex, stopped at the 07:00 pause): the same, plus `extrair_transporte.py` and the static intervals in `evidencias/transporte/`, a malformed-Bag probe, and a Stage 28 handoff note.
+- `origin/wip/re-economy-0715` (`d41a17e`, Codex, stopped ~07:15): the 0700 branch plus the structure-sentinel probe from the case-173 fault. Its native capture batch was still running when stopped; no capture was committed.
+
+**Next steps.**
+1. Resume Stage 28 from `wip/re-economy-0715`: rerun the original-only smoke and capture batch under the heavy lease, commit the capture, then replay `transporte.py` to 0 differences and rerun natively.
+2. Refresh the native hunger and restore reports after the changed `alimentacao.py`, then run the domain gate and push `feat/re-economy`.
+3. Support AI/runtime's strict S1 proof and Missions' S1 windows with any Economy stop they report; then the research/technology routines at the S1 result screen.
+
 ## Resource layout and arithmetic
 
 `LoadGameRessource` (`0x46AB21`) and `SauveRessource` (`0x46AB33`) read/write the same 128 bytes without conversion. Base address is `0x4E2EA8`, with four players, four resource records per player, and eight bytes per record:
@@ -1167,10 +1215,11 @@ python3 -B pesquisas-paralelas/economia/replay_ciclo_trabalho.py                
 ### Not covered yet
 
 - `CalculTransporteEngin 0x44f2d4` (state 18, Ctrl + sack, tag 8) and `CalculDechargeCaveEngin` (state 20, tag 0x13). Neither lies on a no-Ctrl S1. The state-16 pickup (`SetRamasseEngin`, a press on a sack) only matters once sacks exist, which they do only after a deposit without room or without a cave.
-- `TerrainRetireMatiere 0x476662` (sack pickup), `CalculEntreBatiment` itself (Core/AI state 13), `InitBatimentPlayer` as a translation (its type-3 count is shown natively).
+- `CalculEntreBatiment` itself (Core/AI state 13).
 - Paths the run did not reach: the voice, ChercheGcLibre, depleted mines, excess sacks.
+- Since covered by later slices: `TerrainRetireMatiere 0x476662` (the hunger slice) and `InitBatimentPlayer` (the cave/recruitment slice).
 
-**Mac mini / scripted input.** P3 should send the colonist into the completed cave: release it with a double-click on the selected sanctuary, select it, then click the cave. Only then can P4/P5 deliveries count.
+**Scripted input (historical note).** P3 sends the colonist into the completed cave: release it with a double-click on the selected sanctuary, select it, then click the cave. Only then can P4/P5 deliveries count.
 
 ## Hunger state (unit state 19), M3 S1
 
@@ -1182,9 +1231,43 @@ python3 -B pesquisas-paralelas/economia/replay_ciclo_trabalho.py                
   - the meal: while not at the food (sack: cell ≠ +0x7e; cave: not BatimentAdjacent) or byte +0x86/+0x87 set, DeplaceEngin. On a food sack (TerrainGetSacType = 1): TerrainRetireMatiere, provisions +4 := +0x76, +0x74 := 0, the eating sound, EnginRestaureEtat. At an own cave (+0xc2, type 3, owner) with TestRessource(1 food): **BatimentEnleveMatiere(food, 1)** (eating at the cave costs one food from the totals), the same refill. Otherwise ChercheVegetLibre again: a sack → state 19 towards it; none → the hungry voice, EnginRestaureEtat;
   - `TerrainRetireMatiere 0x476662`: the sack byte of grid `[0x507dac]` minus one; AL = object byte − 0x42 (sack type) when it was nonzero; an emptied sack clears the object byte.
 - **Validation.** CPU-free ([`replay_alimentacao.py`](../pesquisas-paralelas/economia/replay_alimentacao.py), [test](../pesquisas-paralelas/economia/testes/test_alimentacao.py)): **231/231 match**, three mutations caught. Native ([`validar_alimentacao.py`](../pesquisas-paralelas/economia/validar_alimentacao.py) → [report](../pesquisas-paralelas/economia/validacao-alimentacao-emulada.json)): **231 compared, 0 mismatches**, rerun equal to the capture (754 s).
-- **Named dependencies.** Core: BatimentAdjacent, DeplaceEngin, BatimentGetType/GetPlayer/EnDestruction, TerrainGetSacType, TerrainEstDecouvert, EnginGetVolume (and EnginSetFatigue, which enters the state). Economy, not translated yet: **EnginRestaureEtat `0x45315f`** (1,947 bytes; saved state 5 → ResetOrdre and the work order again), BatimentEnleveMatiere `0x4235bd`; TestRessource (`ordens_economia`). Terrain search: ChercheVegetLibre. Audio: PlaySnd_PostSound.
-- **Outside the domain** (`ForaDoDominioFome`, before any store): the checks of saved states other than 5, and state 5's abort. Not exercised by the capture: the cave meal and the "nothing found" branch (translated from the bytes, unvalidated).
-- **API.** `Alimentacao(memoria, *, externo=None)`; `chamar('EnginNextEtape:19' | 'EstadoFome', regs)` with ESI = record, DI = unit, returns EAX..EBP and ESP; `provedor_fome(alimentacao, outros)` serves it and TerrainRetireMatiere (also Core's states 16/17).
+- **Named dependencies.** Core: BatimentAdjacent, DeplaceEngin, BatimentGetType/GetPlayer/EnDestruction, TerrainGetSacType, TerrainEstDecouvert, EnginGetVolume (and EnginSetFatigue, which enters the state); ChercheVegetLibre (Core's `fadiga_vegetacao.provedor_fadiga`). Economy: EnginRestaureEtat and BatimentEnleveMatiere (`restauracao.provedor_restauracao`, below), TestRessource (`ordens_economia`). Audio: PlaySnd_PostSound.
+- **Every register is passed** to each callee (the whole register file EAX..EBP, the callee's entry ESP = the body's ESP minus the pushed words and the return address, and `_pilha`); `ARGUMENTOS` names the bits each callee reads, which the validators compare. ChercheVegetLibre's ECX (0x43) is among them (Core's provider requires it).
+- **Saved state 0x14** (unloading, `0x454db5`): the unload structure +0xc0 must stand and be the owner's, and with depot mode +0x82 = 2 its structure +0x80 too; then the meal. Validated by the restore capture below (the hunger of a unit in state 20).
+- **Outside the domain** (`ForaDoDominioFome`, before any store): the checks of saved states 1, 0xb, 0xd, 0xf, 0x12, 0x15, 0x17, 0x18, state 5's abort `0x455107` and state 0x14's aborts `0x454ddd`/`0x454ef8`. The cave meal and both "nothing found" branches are now validated natively (restore capture, `corpo` mode).
+- **API.** `Alimentacao(memoria, *, externo=None)`; `chamar('EnginNextEtape:19' | 'EstadoFome', regs)` with ESI = record, DI = unit, returns EAX..EBP and ESP; `provedor_fome(alimentacao, outros)` serves it and TerrainRetireMatiere (also Core's states 16/17) in the shape of Core's providers: `ArgumentoNaoPassado` without ESI/EDI/EDX (the body) or EAX (TerrainRetireMatiere); any other missing register enters as 0 and comes back in `_incertos` when returned unchanged.
+- **Core's search wired** (main `fcc0ba8`): the native rerun serves ChercheVegetLibre by `provedor_fadiga` (`validar_alimentacao.provedores_fadiga`, `--sem-core` replays the original). Report below.
+
+## Restoring the saved state, the cave meal and the tag-19 unload (M3, S1)
+
+**Why.** S1 enters EnginRestaureEtat (its only caller is the state-19 body, `0x45566a`) with saved state 5 at frame 8057. Eating at a cave removes one food from the totals through BatimentEnleveMatiere (`0x4556d7`), which matters for S1's food count. ai-runtime and the Rust engine stop at SetDechargeCaveEnginSelect (ProcessInputGame tag 19, `0x45f085`).
+
+### Answer (native, MONDE01)
+
+- **EnginRestaureEtat `0x45315f`** (1,947 bytes; exit `0x45305a -> 0x44f29d -> 0x440d58`, every register but EAX restored). By the saved state u16 +0xa0 (written by EnginSetFatigue):
+  - **5 (work, S1's)**: the depot tuple +0x80/+0x82/+0x84 is read first, then ResetOrdre (Core), then the work order again: +0x7e := +0xb2, the path search (`0x496304`) released when it is this unit's, +0x88 := 0, +0x89 := 0, state 5, +0x82 := 0, +0xb2 kept, and the saved tuple put back (+0x85 := 0). A builder (type 7) passes EDI = +0xb2 − 0x100 to ResetOrdre and recomputes the same cell. EAX = (entry EAX upper half) | byte +0x84.
+  - 2, 3, 7: state 2 towards the saved target (+0x7e := +0xa2), search released, +0x88 := 0; no call.
+  - 1: SetAttaqueEngin(unit, DL = +0xb7, BX = +0xb8) (Combat).
+  - 0xb, 0xf: type 7 with a structure +0xc0: ResetOrdre, BatimentGetCase(+0xc0) → +0x7e and +0xb2, state 0xf; type 7 without one: BatimentTailleGet (inline, the type record's two words into the frame) and BatimentGetDecalageConstruction of type +0xbe, then SetEnginConstruitBatiment(unit, +0xbe, +0xb2 + offset − (h − h/2 − 1 + 256·(w − w/2) − 256)); type 6: ResetOrdre, +0x7e/+0xb2 := the cell +0x7c of unit +0xc0, state 0xf; other types: nothing.
+  - 0xd: a structure +0xc0: SetEnginRentreBatiment(unit, +0xc0); else a unit +0xb8: follow it (+0x7e := its cell, +0xc0 := 0xffff, state 0xd); else nothing.
+  - 0x10: ResetOrdre, +0x7e := +0xb2, state 0x10. 0x11: +0x82 := 2, +0x80 := +0x84, +0x84 := 0. 0x12: state 0x12 towards +0xb2.
+  - 0x14 (unloading): state 0x14, BatimentGetCase(+0xc0) → +0xb2 and +0x7e, the depot tuple put back.
+  - 0x18: ResetOrdre; a type-4 unit gets +0xf4 back and, with target mode +0xb7 = 5, or 1 on another unit, state 0x18 (+0x8a := 0, the saved +0xb7/+0xb8).
+  - any other value (0, 4, 6, 8–0xa, 0xc, 0xe, 0x13, 0x15–0x17, ≥ 0x19): SetDeplaceEngin(unit, +0x7c).
+- **BatimentEnleveMatiere `0x4235bd`** (AL resource, DX quantity, BL player): EnleveMatiere, then, when the cave count u16 `0x4dfb2c + 6p` is nonzero, the level byte +4 := ((food + stone stock) low word // count) · 7 // the per-cave word (100 in MONDE01) through GetRessourceStock into its frame. With a cave and a per-cave word 0 the original faults at `0x423635` (ZeroDivisionError after the debit). Exit: ECX/ESI/EDI/EBP restored; EAX/EBX/EDX as left.
+- **SetDechargeCaveEnginSelect `0x473194`** (AL player, DX structure): every live unit of the player's selection list (no owner or type test) gets **SetDechargeCaveEngin `0x444dee`** (state 0x14, +0x89 := 0, +0xb2 := BatimentGetCase(structure), +0xc0 := structure, +0x7e := +0xb2, search released, +0x88 := 0); the first one asks EnginAsk(unit, 0xf, 0) when the player is local. State 20 (CalculDechargeCaveEngin, not translated) then **takes goods out of the cave**: BatimentEnleveMatiere every 33 frames from `0x44e565` (food 17 → 4 over frames 1602–1998 here).
+- **The cave meal costs one food**: units 14 (frame 1422) and 12 (1483) eat at the cave, food 22 → 20 (`0x4e2ea8 + 8`, RMI and total). With food 0 at the cave (declared case), TestRessource fails, ChercheVegetLibre finds no sack, and EnginRestaureEtat runs after the hungry voice: the "nothing found" branch from the cave. Unit 12, walking to a sack that was removed, takes the same branch from the sack (frame 1281).
+
+### Method (original first)
+
+- **Capture source** [`capturar_restauracao.py`](../pesquisas-paralelas/economia/capturar_restauracao.py) (`baca0c1`, fixed in `f115e40` before any run completed): the committed hunger scenario plus every food sack removed at frame 1150 (9 sacks), restored cases at frame 30 (EnginRestaureEtat with every saved state and the branch inputs declared: types, targets, the path-search owner; BatimentEnleveMatiere with 11 AL/DX/BL triples; SetDechargeCaveEnginSelect with 6 selection lists), restored cases with food 0 while a unit reaches the cave, and a real tag 19 (selection [14], SetDechargeCaveEnginSelect(0, cave), SetDepotEnginSelect(0, 2, cave, 1)) at 1500 followed by unit 14's hunger in state 20 at 1520.
+- **Captures**, each committed before any translation ran against it: `rotinas` (`4b3fb35`; raw SHA-256 `b6c3288e…56b4`, 757 s): 58 EnginRestaureEtat (7 at the real call site `0x45566a`: saved states 5 ×6 and 0x14), 27 BatimentEnleveMatiere (3 cave meals `0x4556d7`, 13 state-20 debits `0x44e565`, 11 cases), 7 SetDechargeCaveEnginSelect. `corpo` (`2524050`; raw SHA-256 `c4bc4ac0…cfbf`, 903 s): the same timeline plus 712 state-19 bodies. Frames 0/1 reproduced, code unchanged.
+- **Translation** [`restauracao.py`](../pesquisas-paralelas/economia/restauracao.py), class `Restauracao`, over live flat memory; EnleveMatiere/GetRessourceStock are `ordens_economia`'s, run in-process (GetRessourceStock's outputs land in a local overlay of the frame).
+- **Validation.** CPU-free ([`replay_restauracao.py`](../pesquisas-paralelas/economia/replay_restauracao.py), [test](../pesquisas-paralelas/economia/testes/test_restauracao.py)) over each call's read-before-write bytes: rotinas 58 + 27 + 7 match; corpo 58 + 27 + 7 + **712/712 bodies** match (alimentacao composed with `provedor_restauracao`, ChercheVegetLibre served by Core's `provedor_fadiga`: 4 calls). EAX..EDX of every foreign call are compared in full. Three mutations are caught. Native: [`validar_restauracao.py`](../pesquisas-paralelas/economia/validar_restauracao.py) → [rotinas report](../pesquisas-paralelas/economia/validacao-restauracao-rotinas-emulada.json), [corpo report](../pesquisas-paralelas/economia/validacao-restauracao-corpo-emulada.json) — rotinas **92 compared, 0 mismatches** (740 s), corpo **804 compared (712 bodies), 0 mismatches**, ChercheVegetLibre ×4 served by `provedor_fadiga` (1,038 s); both reruns equal to the captures.
+
+### API
+
+`Restauracao(memoria, *, externo=None)`; `chamar(nome, regs)` for EnginRestaureEtat, BatimentEnleveMatiere, SetDechargeCaveEnginSelect and SetDechargeCaveEngin takes EAX..EBP and ESP and returns EAX..EBP and ESP after RET (`_incertos` when a provider's uncertain bits reach them). Each foreign callee gets the whole register file and its entry ESP through `externo(nome, chamada, registradores)`: Core ResetOrdre, BatimentGetCase, SetDeplaceEngin, SetEnginRentreBatiment, SetEnginConstruitBatiment, BatimentGetDecalageConstruction, EnginEstVivant, EnginAsk; Combat SetAttaqueEngin. `provedor_restauracao(restauracao, outros)` serves the four routines in the shape of Core's providers (`ArgumentoNaoPassado` without EAX; EAX/EDX/EBX for BatimentEnleveMatiere; EAX/EDX for the unload setters). Suggested wiring: ai-runtime's tag 19 → `SetDechargeCaveEnginSelect` (EAX = player, EDX = word 2, EBX = player << 2 at `0x45f085`); the state-19 body's `EnginRestaureEtat`/`BatimentEnleveMatiere` (`alimentacao` with `provedor_restauracao` as `externo`); CalculDechargeCaveEngin's BatimentEnleveMatiere (`0x44e565`) and V_SetNavetteCaveToCulture's SetDechargeCaveEngin (`0x482120`) when those callers are translated.
 
 ## Cave body, habitation and sanctuary recruitment (M3, S1)
 
@@ -1250,7 +1333,7 @@ For S1-b: a builder takes about 570 frames and a worker about 270 with 6–7 col
 
 - **Original first.** Capture source `9654850` ([`capturar_abandono_santuario.py`](../pesquisas-paralelas/economia/capturar_abandono_santuario.py)), capture `1fd1d22`: seven tag-33 releases (frames 2–8), BatimentSelection + InitRecruteTroupe(5, 0) at frame 9; the recruit takes the last colonist at **frame 455** and the sanctuary is abandoned (owner 0xc8). 81 recorded calls, frames 0/1 reproduced, code unchanged.
 - **Answer** (`0x42101d..0x42114e`, `CavernaRecrutamento._abandonar`): structure types 1/2/5 reset the request first; unless type 9/0xc, `BatimentGetCase(structure, DX = radius, BL = owner)` with the radius from table `0x420df4` (BatimentHabitable's: sanctuary 10, cave 8, …) then `EteintTerrain(cell, its EDX, its EBX)` (Core, `0x421116`); the owner's structure selection `0x495be0 + 2·owner` := 0xffff when it is this structure; owner +4 := 0xc8; `BatimentModifyMap(structure, 1)` (Core, `0x42114e`); then the common reset and the two messages.
-- **Validation.** CPU-free 81/81 match, with and without Core's `provedor_saida`; native ([report](../pesquisas-paralelas/economia/validacao-abandono-santuario-emulada.json)): **81 compared, 0 mismatches**, rerun equal to the capture. New named dependency: `EteintTerrain` (Core; not in `provedor_entrada` yet).
+- **Validation.** CPU-free 81/81 match, with and without Core's `provedor_saida`; native ([report](../pesquisas-paralelas/economia/validacao-abandono-santuario-emulada.json)): **81 compared, 0 mismatches**, rerun equal to the capture. `EteintTerrain` (`0x421116`) is served by Core's `fadiga_vegetacao.provedor_fadiga` in the native differential (`validar_caverna_recrutamento.provedores_core`, rerun after main `fcc0ba8`: 81 compared, 0 mismatches, 2 EteintTerrain calls served by the translation, 319 s). The CPU-free replay keeps the original's call there: Core's provider binds its live world, which reads bytes no recorded call reads.
 
 ### Composition of the work cycle with Core's providers
 

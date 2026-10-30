@@ -58,6 +58,31 @@ class EfeitosExibicao:
     eax: object = None            # EAX observed at the original return; None when it is a leftover register
 
 
+def _guardas_estruturas(memoria, rotina, lidas, habitado=None):
+    estados = {memoria.u8(ESTRUTURAS + i*ESTRUTURA_PASSO + ESTRUTURA_ESTADO) for i in range(1000)}
+    lidas.append(('structure states', tuple(sorted(estados))))
+    ocupadas = [i for i in range(1000) if memoria.u8(ESTRUTURAS + i*ESTRUTURA_PASSO + ESTRUTURA_ESTADO)]
+    simples = estados <= ESTADOS_ESTRUTURA_PROVADOS and len(ocupadas) <= 1 and all(
+        memoria.u8(ESTRUTURAS + i*ESTRUTURA_PASSO + 8) == TIPO_ESTRUTURA_PROVADO for i in ocupadas)
+    par_cave = False
+    if rotina == 'AffGame' and ocupadas == [0, 1]:
+        r0, r1 = ESTRUTURAS, ESTRUTURAS+ESTRUTURA_PASSO
+        modo = memoria.u8(r1+5);dono = memoria.u8(r1+4);vida = memoria.u16(r1+0xa);dano = memoria.u16(r1+6)
+        par_cave = (memoria.u8(0x508041) == 0 and memoria.u8(r0+8) == 2 and memoria.u8(r0+5) in (4,5) and memoria.u8(r0+4) == 0
+            and memoria.u16(r0+6) == 0 and memoria.u16(r0+0xa) == 600
+            and memoria.u8(r1+8) == 3 and dano == 0
+            and ((modo == 2 and dono == 0xc8 and vida <= 100) or (modo == 5 and dono in (0,0xc8) and vida == 100)))
+        if par_cave:lidas.append(('native sanctuary/CAVE pair', (memoria.u8(r0+5),modo,dono,vida,dano)))
+    if not simples and not par_cave:
+        raise DependenciaExibicao(rotina, CURSOR_RNG_SITIOS[0], f'structure states {sorted(estados)}, occupied '
+                                  f'records {ocupadas}: outside the single sanctuary or native sanctuary/CAVE pair domain')
+    for i in ocupadas:
+        # AffBatiments 0x408627: mode 3 without habitation advances 0x4e1d18 (0x408679); the captured Santuario is inhabited
+        if memoria.u8(ESTRUTURAS + i*ESTRUTURA_PASSO + ESTRUTURA_ESTADO) == 3 and not (callable(habitado) and habitado(i)):
+            raise DependenciaExibicao(rotina, 0x40863e, f'structure {i} in mode 3 needs BatimentEstHabiter true '
+                                      '(uninhabited advances the RNG cursor; not captured)')
+
+
 def _guardas(memoria, rotina, habitado=None):
     lidas = []
     def ler(nome, valor):
@@ -72,28 +97,22 @@ def _guardas(memoria, rotina, habitado=None):
     if origem not in origens:
         raise DependenciaExibicao(rotina, CURSOR_RNG_SITIOS[3], f'view origin {origem}: vegetation/terrain handlers '
                                   '(0x411147, 0x412392, 0x415b77/0x415c19) only proved native on the sampled origins')
-    estados = {memoria.u8(ESTRUTURAS + i*ESTRUTURA_PASSO + ESTRUTURA_ESTADO) for i in range(1000)}
-    lidas.append(('structure states', tuple(sorted(estados))))
-    ocupadas = [i for i in range(1000) if memoria.u8(ESTRUTURAS + i*ESTRUTURA_PASSO + ESTRUTURA_ESTADO)]
-    if not estados <= ESTADOS_ESTRUTURA_PROVADOS or len(ocupadas) > 1 or any(
-            memoria.u8(ESTRUTURAS + i*ESTRUTURA_PASSO + 8) != TIPO_ESTRUTURA_PROVADO for i in ocupadas):
-        raise DependenciaExibicao(rotina, CURSOR_RNG_SITIOS[0], f'structure states {sorted(estados)}, occupied '
-                                  f'records {ocupadas}: captured only for one type-{TIPO_ESTRUTURA_PROVADO} structure in '
-                                  'modes 0..7 (AffBatiments has 69 0x4e1d18 sites, none reached there)')
-    for i in ocupadas:
-        # AffBatiments 0x408627: mode 3 without habitation advances 0x4e1d18 (0x408679); the captured Santuario is inhabited
-        if memoria.u8(ESTRUTURAS + i*ESTRUTURA_PASSO + ESTRUTURA_ESTADO) == 3 and not (callable(habitado) and habitado(i)):
-            raise DependenciaExibicao(rotina, 0x40863e, f'structure {i} in mode 3 needs BatimentEstHabiter true '
-                                      '(uninhabited advances the RNG cursor; not captured)')
+    _guardas_estruturas(memoria, rotina, lidas, habitado)
     monstros = memoria.u8(MONSTROS)
     if monstros > 1:
         raise DependenciaExibicao(rotina, 0x41591f, f'monster count {monstros}: only 0 and 1 (raid unit 16, '
                                   'on screen or not) captured; a second monster is not proved')
     pool = memoria.u32(POOL_PROJETEIS)
     ativos = [i for i in range(100) if memoria.u8(pool + 56*i + 2)]
-    if len(ativos) > 1 or any(memoria.u8(pool + 56*i) not in TIPOS_PROJETIL_PROVADOS for i in ativos):
+    def projetil_provado(i):
+        r = pool + 56*i
+        if memoria.u8(r) in TIPOS_PROJETIL_PROVADOS:return True
+        # Native P3 frames245..260 / 309..324: types15/16, all16 phases, active state1, slot0; no logic writer.
+        return (rotina == 'AffGame' and i == 0 and memoria.u8(r) in (15,16) and memoria.u8(r+2) == 1
+                and memoria.u8(r+0x18) < 16)
+    if len(ativos) > 1 or any(not projetil_provado(i) for i in ativos):
         raise DependenciaExibicao(rotina, 0x46ff70, f'projectile slots {ativos}: captured only one raid effect '
-                                  f'projectile of type {sorted(TIPOS_PROJETIL_PROVADOS)}')
+                                  f'projectile of type {sorted(TIPOS_PROJETIL_PROVADOS)} or the native AffGame type15/16 cycles')
     return tuple(lidas)
 
 

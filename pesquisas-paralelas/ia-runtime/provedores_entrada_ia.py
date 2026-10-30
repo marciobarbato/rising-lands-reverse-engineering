@@ -19,8 +19,11 @@ copied or edited), over the same memory object ``m`` (``u8/u16/u32`` and ``vista
 - the caller's declared input answers (``janelas``): GetAsyncKeyState, GetCursorPos; its allocator
   (``alocar``) for MemAlloc's GlobalAlloc/GlobalLock; and the sound-library boundary (``som``) for PlaySnd_PostSound/PlaySnd_StopSound.
 
+Combat ``ordens_torres_combate.OrdensTorresCombate`` (when importable): BatimentPeutAttaquer (else this front's
+type prefix, turrets a named stop) and BatimentInitAttaqueSelect.
+
 Not provided (named dependencies, raised at their original call): SetDechargeCaveEnginSelect,
-InitRecruteTroupe, BatimentInitAttaqueSelect, BatimentPeutAttaquer (Combat), SacGetCapacite, MiniMapSetPos
+InitRecruteTroupe, SacGetCapacite, MiniMapSetPos
 (MiniMapRecentre), and BatimentPosable/EnginSelectPeutEntrer while Core's ``construcao_core``/``entrada_estruturas``
 are not importable.
 """
@@ -267,6 +270,33 @@ def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None, estrutura
     from entrada_ordens_ia import batiment_peut_attaquer_prefixo
     funcoes['BatimentPeutAttaquer'] = lambda regs: batiment_peut_attaquer_prefixo(
         m, {k: regs.get(k, 0) & M32 for k in REG7})
+    try:
+        from ordens_torres_combate import OrdensTorresCombate
+    except ImportError:
+        pass
+    else:
+        # Combat's turret providers (BatimentPeutAttaquer, the whole routine, and BatimentInitAttaqueSelect for
+        # tag 14), over the live memory with Economy's live BonusUnidades (Combat's default), built at first use
+        # (its constructor reads the bonus table).
+        torres = {}
+
+        class BonusTardio:
+            """Economy's live ``BonusUnidades`` (Combat's default), read at the first bonus query: a non-turret
+            source returns before any, and reads no bonus byte."""
+            def consultar(self, *args, **kwargs):
+                if 'b' not in torres:
+                    from bonus_unidades import BonusUnidades
+                    torres['b'] = BonusUnidades.da_memoria(m)
+                return torres['b'].consultar(*args, **kwargs)
+
+        def combate(nome):
+            def chamar(regs):
+                if 'o' not in torres:
+                    torres['o'] = OrdensTorresCombate(m, bonus=BonusTardio())
+                return torres['o'].provedores()[nome](regs)
+            return chamar
+        funcoes.update(BatimentPeutAttaquer=combate('BatimentPeutAttaquer'),
+                       BatimentInitAttaqueSelect=combate('BatimentInitAttaqueSelect'))
     funcoes['GetStatusRecrute'] = lambda tipo, jogador: recrutamento().status(tipo, jogador)
     if donos is not None:
         # The M3 owners (``DonosM3``): group selection and view (tags 0xb/0xc, the group key), the minimap
@@ -278,11 +308,30 @@ def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None, estrutura
         # Tag 17 (0x45f1a9): Economy's InitRecruteTroupe (AL unit type, DL player), its callees through DonosM3.
         funcoes['InitRecruteTroupe'] = lambda regs: {k: v for k, v in donos.caverna.chamar(
             'InitRecruteTroupe', dict({k: regs.get(k, 0) & M32 for k in REG7}, ESP=0)).items() if k != 'ESP'}
+        if donos.restauracao is not None:
+            # Tag 19 (0x45f085): Economy's SetDechargeCaveEnginSelect (AL player, DX packet word 2, EBX player << 2).
+            funcoes['SetDechargeCaveEnginSelect'] = lambda regs: {k: v for k, v in donos._restauracao(
+                'SetDechargeCaveEnginSelect', 0x45f085, {k: regs.get(k, 0) & M32 for k in REG7}).items()
+                if k in REG7}
         funcoes['MiniMapSetPos'] = lambda x, y: donos.visao.chamar(
             'MiniMapSetPos', dict(dict.fromkeys(REG7, 0), EAX=x & M32, EDX=y & M32, EBX=0, ECX=1))
     if alocar is not None:
         funcoes['GlobalAlloc'] = lambda flags, tamanho: alocar(flags, tamanho)
     return Provedores(funcoes)
+
+
+def _convencao_core(regs, entrada, saida):
+    """A result in the shape of Core's providers (``entrada_estruturas.provedor_entrada``): EAX..EBP after the
+    routine (a register its translation does not return keeps its entry value), plus ``_incertos`` = the full mask
+    for each register the caller did not pass (it entered as 0) and that comes back unchanged."""
+    resultado = {k: saida.get(k, entrada[k]) & M32 for k in REG7}
+    incertos = {k: M32 for k in REG7 if k not in regs and resultado[k] == entrada[k]}
+    for k, v in (saida.get('_incertos') or {}).items():
+        if k in REG7:
+            incertos[k] = incertos.get(k, 0) | v
+    if incertos:
+        resultado['_incertos'] = incertos
+    return resultado
 
 
 class DonosM3:
@@ -296,7 +345,29 @@ class DonosM3:
     - Economy ``ciclo_trabalho.CicloTrabalho`` (``ciclo``): CalculWorkEngin (unit state 5), BatimentLogeEngin,
       BatimentAjouteMatiere, the mine/field leaves;
     - Core ``visao_grupos.VisaoGrupos`` (``visao``): BatimentIllumine/BatimentDecouvre, the group selection,
-      MiniMapSetPos/MiniMapRecentre, CalculPosition and RechercheDecalageSortie.
+      MiniMapSetPos/MiniMapRecentre, CalculPosition and RechercheDecalageSortie;
+    - Economy ``alimentacao.Alimentacao`` (``fome``): unit state 19 (the hunger body) and TerrainRetireMatiere,
+      its callees through ``_externo_fome``: Core's BatimentAdjacent, DeplaceEngin, TerrainEstDecouvert,
+      EnginGetVolume (``provedor_entrada``) and BatimentGetType, BatimentGetPlayer, BatimentEnDestruction
+      (``EntradaEstruturas``), Economy's TestRessource (``ordens_economia``), the sound boundary. Not provided yet
+      (named stops at their call while Economy's ``restauracao`` is not importable): BatimentEnleveMatiere,
+      EnginRestaureEtat (Economy); TerrainGetSacType is this
+      front's leaf ``entrada_quadro_ia.terrain_get_sac_type`` (checked against the original bytes under Unicorn
+      over every object byte, ``testes/test_despacho_donos_ia``);
+    - Economy ``restauracao.Restauracao`` (when importable): EnginRestaureEtat, BatimentEnleveMatiere,
+      SetDechargeCaveEnginSelect (tag 19) and SetDechargeCaveEngin; its Core callees ResetOrdre, EnginAsk,
+      SetEnginConstruitBatiment (``selecao_ordens``), SetDeplaceEngin, BatimentGetCase, SetEnginRentreBatiment;
+      not provided: BatimentGetDecalageConstruction, EnginEstVivant (Core), SetAttaqueEngin (Combat);
+    - Core ``incursao_core``: SetMiniMap (``definir_minimapa``; CalculWorkEngin's mode 4 at 0x44c437) and, once
+      published, TerrainEstGc (``terreno_esta_gc``, CalculWorkEngin 0x44d8cd); ``chamadas_quadro_core``: Random
+      (CalculWorkEngin 0x44db44/0x44db54);
+    - Core ``fadiga_vegetacao.FadigaVegetacao`` (``fadiga``, when importable): EnginSetFatigue, ChercheVegetLibre,
+      ChercheTypeBatimentProximite, EteintTerrain (Economy's SortieTroupe abandonment), TestRessource through
+      ``externo``.
+
+    A Core routine reaches its caller as soon as Core exports it through ``provedor_entrada``
+    (``ROTINAS_ECONOMIA``) or ``EntradaEstruturas.ROTINAS``: e.g. EteintTerrain for Economy's SortieTroupe
+    abandonment (0x421116), TerrainEstGc/SetMiniMap for CalculWorkEngin, EnginSetFatigue for EnginNextEtape.
 
     Every named dependency one of them raises goes through ``externo(nome, chamada, regs)``: the routine of the
     module that owns it, ``bonus(jogador, tipo, seletor)`` for BonusGetValEngin, ``mensagem_unidade(regs,
@@ -320,6 +391,37 @@ class DonosM3:
         self.nomes_core = frozenset(ROTINAS_ECONOMIA)
         self.nomes_caverna = frozenset(caverna_recrutamento.ROTINAS)
         self.nomes_ciclo = frozenset(ciclo_trabalho.ROTINAS)
+        # Core's single-record queries that ``provedor_entrada`` does not export (BatimentGetType, BatimentGetPlayer,
+        # BatimentEnDestruction, ...): ``EntradaEstruturas.chamar`` runs them; each says which registers it changes.
+        import entrada_estruturas as _ee
+        self.nomes_ee = frozenset(n for n in _ee.ROTINAS if ':' not in n) - self.nomes_core
+        # Economy's hunger state (unit state 19) and TerrainRetireMatiere (``alimentacao``).
+        alimentacao = _modulo_economia('alimentacao')
+        self.fome = alimentacao.Alimentacao(m, externo=self._externo_fome)
+        self._fome = alimentacao.provedor_fome(self.fome)
+        self.nomes_fome = frozenset(alimentacao.ROTINAS)
+        self._ordens = None
+        # Economy's hunger exits and the tag-19 unload (``restauracao``: EnginRestaureEtat, BatimentEnleveMatiere,
+        # SetDechargeCaveEngin(Select)), once it is importable; its Core callees through ``externo``.
+        try:
+            restauracao = _modulo_economia('restauracao')
+        except ImportError:
+            self.restauracao, self._restauracao, self.nomes_restauracao = None, None, frozenset()
+        else:
+            self.restauracao = restauracao.Restauracao(m, externo=self.externo)
+            self._restauracao = restauracao.provedor_restauracao(self.restauracao)
+            self.nomes_restauracao = frozenset(restauracao.ROTINAS)
+        self._selecao = None
+        # Core's hunger entry, food search and light removal (``fadiga_vegetacao``: EnginSetFatigue,
+        # ChercheVegetLibre, ChercheTypeBatimentProximite, EteintTerrain), once it is on the import path.
+        try:
+            import fadiga_vegetacao
+        except ImportError:
+            self.fadiga, self._fadiga, self.nomes_fadiga = None, None, frozenset()
+        else:
+            self.fadiga = fadiga_vegetacao.FadigaVegetacao(m, externo=self.externo, som=self._som_fadiga())
+            self._fadiga = fadiga_vegetacao.provedor_fadiga(self.fadiga)
+            self.nomes_fadiga = frozenset(fadiga_vegetacao.ROTINAS)
         self.chamadas = []                       # (name, original call) of every cross-module call, in order
 
     def externo(self, nome, chamada, regs):
@@ -336,6 +438,47 @@ class DonosM3:
             entrada['ESP'] = 0
             saida = getattr(self.ciclo, '_' + nome)(entrada)
             return {k: v for k, v in saida.items() if k != 'ESP'}
+        if nome in self.nomes_fome:
+            return self._fome(nome, chamada, regs)
+        if nome in self.nomes_fadiga:
+            return self._fadiga(nome, chamada, regs)
+        if nome in self.nomes_restauracao:
+            return self._restauracao(nome, chamada, regs)
+        entrada = {k: regs.get(k, 0) & M32 for k in REG7}
+        saida = None
+        if nome in ('ResetOrdre', 'EnginAsk', 'SetEnginConstruitBatiment'):
+            # Core's ``selecao_ordens`` (Economy's ``restauracao`` passes the whole register file).
+            saida = self.selecao().chamar(nome, dict(entrada))
+        elif nome in self.nomes_ee:
+            # Core's single-record queries; each rebuilds its result from its entry registers.
+            saida = self.ee.chamar(nome, dict(entrada))
+        elif nome == 'SetMiniMap':
+            # Core's ``incursao_core.definir_minimapa`` (AL owner, DL mode, BX cell; mode 4 translated, the mode
+            # CalculWorkEngin passes at 0x44c437): EAX rows, EBX pixel cursor, EDX; other registers kept.
+            import incursao_core
+            saida = incursao_core.definir_minimapa(self.m, entrada['EAX'], entrada['EDX'], entrada['EBX'])
+        elif nome == 'Random':
+            # Core's Random 0x4704dc (``chamadas_quadro_core.ROTINAS``): the world seed 0x497164 advanced, EAX = it;
+            # EBX, ECX, EDX pushed and popped, nothing else changes.
+            from chamadas_quadro_core import ROTINAS as ROTINAS_QUADRO
+            saida = ROTINAS_QUADRO['Random'][1](self.m, dict(entrada), None, None)
+        elif nome == 'TerrainEstGc':
+            import incursao_core
+            if not hasattr(incursao_core, 'terreno_esta_gc'):
+                raise DependenciaIA(nome, chamada)
+            # Core's TerrainEstGc 0x4762b9: EAX = 0/1 (upper bits 0), EDX pushed and popped, nothing else.
+            saida = incursao_core.terreno_esta_gc(self.m, entrada['EAX'])
+        elif nome == 'TerrainGetSacType':
+            # This front's leaf (``entrada_quadro_ia.terrain_get_sac_type``, read-only, every register).
+            from entrada_quadro_ia import terrain_get_sac_type
+            saida = terrain_get_sac_type(self.m, dict(entrada))
+        elif nome == 'TestRessource':
+            # Economy's ``ordens_economia`` (the single TestRessource): AX food, DX stone, BX parts, one pushed word
+            # (the player).
+            saida = self.ordens().chamar('TestRessource', dict(entrada, ESP=ESP_CHAMADA),
+                                         list(regs.get('_pilha') or ()))
+        if saida is not None:
+            return _convencao_core(regs, entrada, saida)
         if nome == 'BonusGetValEngin' and self.bonus is not None:
             return dict(EAX=self.bonus(regs['EAX'] & 0xff, regs['EBX'] & 0xff, regs['EDX'] & 0xff))
         if nome in ('PlaySnd_PostSound', 'PlaySnd_StopSound') and self.som is not None:
@@ -348,6 +491,66 @@ class DonosM3:
         if nome == 'iagUnitSendMessage' and self.mensagem_unidade is not None:
             return self.mensagem_unidade(regs, chamada)
         raise DependenciaIA(nome, chamada)
+
+    def selecao(self):
+        """Core's ``selecao_ordens.SelecaoOrdens`` over the live memory (its SetAttaqueEngin through Combat), built
+        once."""
+        if self._selecao is None:
+            from selecao_ordens import SelecaoOrdens
+            self._selecao = SelecaoOrdens(self.m, som=self.som)
+            self._selecao.definir_ataque = _ataque_combate(self.m, self._selecao)
+        return self._selecao
+
+    def estado_19(self, unidade):
+        """Unit state 19 through Economy's ``alimentacao.provedor_fome`` (``EnginNextEtape:19``): ESI = the record,
+        EDI = the unit, EAX/EBX/ECX/EDX/EBP 0 (see ``construcao_entrada_ia.instalar_donos``), ESP 0."""
+        zero = dict.fromkeys(REG7, 0)
+        return self._fome('EnginNextEtape:19', 0x4554db, dict(
+            zero, ESI=(self.m.u32(POOL) + (unidade & 0xffff) * PASSO) & M32, EDI=unidade & 0xffff, ESP=0))
+
+    def ordens(self):
+        """Economy's ``ordens_economia.OrdensEconomia`` over the live memory (its Core callees through
+        ``selecao_ordens``), built once."""
+        if self._ordens is None:
+            from ordens_economia import OrdensEconomia, provedor_core
+            from selecao_ordens import SelecaoOrdens
+            self._ordens = OrdensEconomia(self.m, externo=provedor_core(SelecaoOrdens(self.m, som=self.som)))
+        return self._ordens
+
+    def _externo_fome(self, nome, chamada, regs):
+        """``externo`` for Economy's ``alimentacao``: ``externo`` above, except that a register the hunger body did
+        not pass and that comes back unchanged and fully uncertain (Core's ``provedor_entrada`` marks so a
+        register it was not given and left as it was) is dropped from the result, so the body keeps its own value
+        (the callee preserved it). Any other uncertain bit is kept and reported."""
+        saida = dict(self.externo(nome, chamada, regs))
+        incertos = dict(saida.pop('_incertos', None) or {})
+        for k in REG7:
+            if k not in regs and k in saida and incertos.get(k) == M32 and saida[k] & M32 == 0:
+                del saida[k]
+                del incertos[k]
+        if incertos:
+            saida['_incertos'] = incertos
+        return saida
+
+    def _som_fadiga(self):
+        """``som`` for Core's ``fadiga_vegetacao``: its only sound is EnginSetFatigue's hungry voice, posted from the
+        shared tail's CALL 0x44b33d (the address its own ``DependenciaFadiga`` declares); that call site is handed to
+        a boundary recorder that takes one (``chamada``), since ``fadiga_vegetacao`` passes none."""
+        if self.som is None:
+            return None
+        import inspect
+        if 'chamada' not in inspect.signature(self.som).parameters:
+            return self.som
+        return lambda nome, regs, pilha: self.som(nome, regs, pilha, chamada=0x44b33d)
+
+    def rotina_core(self, nome):
+        """``f(regs, chamada=0) -> regs`` for a Core routine ``nome`` this composition can run (``fadiga_vegetacao``,
+        ``provedor_entrada``'s exports or ``EntradaEstruturas``' routines), or None while Core has not published it."""
+        if nome in self.nomes_fadiga:
+            return lambda regs, chamada=0: self._fadiga(nome, chamada, {k: regs.get(k, 0) & M32 for k in REG7})
+        if nome in self.nomes_core or nome in self.nomes_ee:
+            return lambda regs, chamada=0: self.ee.chamar(nome, {k: regs.get(k, 0) & M32 for k in REG7})
+        return None
 
     def registros(self, nome):
         """``f(regs) -> regs`` running Core's/visao's routine ``nome`` (the ``Provedores`` register shape)."""
