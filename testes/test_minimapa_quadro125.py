@@ -64,19 +64,37 @@ class EvidenciaOriginal(unittest.TestCase):
 
 
 class DiferencialNativo(unittest.TestCase):
-    def test_report_is_bound_to_the_sources_and_has_no_mismatch(self):
-        from validar_minimapa_quadro125 import CASOS
-        rel = json.loads(RELATORIO.read_text())
+    """Every committed native differential is strictly bound to Core's own files. Economy's bench files are foreign:
+    the current ones must equal the files one committed report actually ran, so a new Economy bench version needs a
+    native rerun committed here (``validar_minimapa_quadro125.py --bancada-economia``), never a re-pin."""
+
+    def _verificar(self, rel):
+        from validar_minimapa_quadro125 import CASOS, FONTES, FONTES_ECONOMIA
         self.assertEqual(rel['capture']['sha256'], hashlib.sha256(CAPTURA.read_bytes()).hexdigest())
+        self.assertEqual(set(rel['source_sha256']), set(FONTES))
         for caminho, sha in rel['source_sha256'].items():
             self.assertEqual(hashlib.sha256((RAIZ / caminho).read_bytes()).hexdigest(), sha,
                              f'{caminho} changed since the native differential: rerun validar_minimapa_quadro125.py')
+        self.assertEqual(set(rel['economy_source_sha256']), set(FONTES_ECONOMIA))
         self.assertTrue(all(rel['path_reproduction'].values()))
         self.assertTrue(rel['economy_record']['equal'])
         self.assertEqual((rel['comparisons'], rel['mismatches']), (len(CASOS), []))
         self.assertTrue(all(r['ok'] and r['native_equals_capture'] for r in rel['cases']))
         self.assertTrue(all(f['ok'] for f in rel['provider_shapes']))
         self.assertEqual(rel['dl0_vs_in_situ']['bytes'], 196)
+
+    def test_reports_are_bound_to_core_sources_and_have_no_mismatch(self):
+        from validar_minimapa_quadro125 import RELATORIOS_VERIFICADOS
+        for caminho in RELATORIOS_VERIFICADOS:
+            with self.subTest(report=caminho):
+                self._verificar(json.loads((RAIZ / caminho).read_text()))
+
+    def test_current_economy_bench_was_run_natively(self):
+        from validar_minimapa_quadro125 import FONTES_ECONOMIA, RELATORIOS_VERIFICADOS
+        atuais = {c: hashlib.sha256((RAIZ / c).read_bytes()).hexdigest() for c in FONTES_ECONOMIA}
+        verificados = [json.loads((RAIZ / c).read_text())['economy_source_sha256'] for c in RELATORIOS_VERIFICADOS]
+        self.assertIn(atuais, verificados, 'Economy changed its work-cycle bench: rerun validar_minimapa_quadro125.py '
+                      '--bancada-economia <that file> and add the report to RELATORIOS_VERIFICADOS')
 
 
 class FormasProvedor(unittest.TestCase):

@@ -75,8 +75,8 @@
   },
   "InputGame": {
    "cases": 92,
-   "dependency_stops": 2,
-   "equal": 90,
+   "dependency_stops": 0,
+   "equal": 92,
    "mismatches": 0
   },
   "PlayerEstAllie": {
@@ -90,23 +90,11 @@
   "path": "pesquisas-paralelas/ia-runtime/evidencias/captura-paginas-deposito-ia.json",
   "sha256": "de83e57388b93a187bf6d5e5468a7f72a456a5f0b2759d38a9385ae4a91bab96"
  },
- "changed_bytes_compared": 34904,
+ "changed_bytes_compared": 35672,
  "comparisons": 203,
- "core_structure_entry_reference": {
-  "entrada_estruturas_sha256": "5221608b3ddee3cebf884762f514c86aecd575ecda190675fef1cc0b3a37327c",
-  "path": ".local/entrada/nucleo-ref-r3"
- },
- "dependency_stops": [
-  {
-   "case": "structure_selected_other_structure",
-   "dependency": "BatimentPeutAttaquer required at 0x0042b2a3; earlier stores retained"
-  },
-  {
-   "case": "page2_structure_selected",
-   "dependency": "BatimentPeutAttaquer required at 0x0042a4dc; earlier stores retained"
-  }
- ],
- "equal": 201,
+ "core_structure_entry_reference": null,
+ "dependency_stops": [],
+ "equal": 203,
  "excluded_registers": {
   "ctrl_carrier_terrain": [
    "EAX"
@@ -157,6 +145,9 @@
    "EAX"
   ],
   "page2_soldier_unit13_release": [
+   "EAX"
+  ],
+  "page2_structure_selected": [
    "EAX"
   ],
   "page7_enemy_release": [
@@ -309,6 +300,9 @@
   "pagec_release_unit13_invisible": [
    "EAX"
   ],
+  "structure_selected_other_structure": [
+   "EAX"
+  ],
   "troops_allied_cave_soldier": [
    "EAX"
   ],
@@ -411,14 +405,14 @@
  },
  "providers": "provedores_entrada_ia.provedores_vivos (committed Core/Economy/Combat owners; Core entrada_estruturas for EnginSelectPeutEntrer from --nucleo-ref); sound requests return the EAX they receive (the frame bench declaration for PlaySnd_*)",
  "schema": "rising-lands/monde01-input-pages-deposit-differential/1",
- "seconds": 154.772,
+ "seconds": 145.299,
  "source_sha256": {
   "ferramentas/selecao_ordens.py": "e8eb78134dd44adbbef88354ea3219c6513f2a2173cc68227fa9fecaf47ab67c",
   "pesquisas-paralelas/economia/ordens_economia.py": "48c8fd6d63b7acdf7883e1a6a5b913435c3e35ab8e5eae2925f9f4ee84d46e69",
   "pesquisas-paralelas/ia-runtime/capturar_paginas_deposito_ia.py": "60c7361f97fca3154d848e8c613d42132531c7b8e42cda29aa6cd9fd518de970",
   "pesquisas-paralelas/ia-runtime/casos_paginas_deposito_ia.py": "32b4a7d94dc847310c8642ca02a6b6bc076c9adb4e156544285ba90520ae5875",
-  "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "4f8bc333485662076c4dfb119743f162c819bbc133f7790171387292067e7d8e",
-  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "ab6021866dfe15839344b4882c79218e8c372a19288330dc1947091fc1eda470",
-  "pesquisas-paralelas/ia-runtime/validar_paginas_deposito_ia.py": "ccb63ac2362f96fdfd683665117b77b7ee83e67a574471a53c72440efac1fecc"
+  "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "ec5e1dbea911ab260c2f9441aee35d1cabdd11dcddd86e47c507ec2612a87798",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "4ded79cded5227e461cc1ce6eac092ddc91a82d202a2cb5c3aeab8ab62d35110",
+  "pesquisas-paralelas/ia-runtime/validar_paginas_deposito_ia.py": "4d2a1fa4a86b1aaf03acf8c13b43d06ea7fe1d1c5759d649af6bcfb27d61c6bf"
  }
 }

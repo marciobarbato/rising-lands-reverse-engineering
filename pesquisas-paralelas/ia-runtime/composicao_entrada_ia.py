@@ -34,8 +34,8 @@ import struct
 from composicao_encadeada_ia import (JanelasDeclaradas, MemoriaMapaRapida, Registro, provedores)
 from composicao_quadros_ia import ComposicaoQuadros, PRESERVADOS_CALCUL_GAME, MSG_LACO
 from construcao_entrada_ia import proxima_etapa_entrada
-from entrada_ordens_ia import Entrada, LIMPAR, PACOTES, Provedores
-from provedores_entrada_ia import construcao_viva, provedores_vivos
+from entrada_ordens_ia import Entrada, LIMPAR, PACOTES, Provedores, REG7
+from provedores_entrada_ia import DonosM3, construcao_viva, provedores_vivos
 from quadro_calcul_game import calcular_quadro
 from reinicio_ia import DependenciaIA
 
@@ -71,6 +71,35 @@ class RoteiroEntrada:
             teclas = {_inteiro(vk): _inteiro(v) for vk, v in (q.get('keys') or {}).items()}
             self.quadros[k] = (cursor, mensagens, teclas)
         self.quadro, self.fase, self.xy, self.fila, self.teclas, self.eventos = inicio, None, (0, 0), [], {}, []
+
+    def posicionar(self, k):
+        """Start after frame ``k`` instead of the file's start (a checkpoint start): the cursor answer is the last
+        one declared at a frame <= k (frames before k have no other carried input state)."""
+        self.quadro = k
+        for q in sorted(self.quadros):
+            if q <= k and self.quadros[q][0] is not None:
+                self.xy = self.quadros[q][0]
+
+    def ultima_mensagem(self, k, janela):
+        """The MSG words (hwnd, message, wParam, lParam) of the last message dispatched at a frame <= k: what the
+        loop's MSG buffer holds when frame k + 1 starts (``MSG_LACO`` when none was)."""
+        from composicao_quadros_ia import MSG_LACO
+        ultima = None
+        for q in sorted(self.quadros):
+            if q <= k and self.quadros[q][1]:
+                ultima = self.quadros[q][1][-1]
+        return MSG_LACO if ultima is None else (janela, *ultima)
+
+    def palavras_salvas(self, k):
+        """ProgIteration's saved (EDX, ECX, EBX) words when frame k + 1 starts: WndProc leaves EDX = wParam and
+        ECX = lParam of the last message dispatched at a frame <= k, the message loop keeps them through frames
+        without messages, and EBX enters every loop as the saved EBX, 0 since the start ((0, 0, 0) when no message
+        was dispatched)."""
+        ultima = None
+        for q in sorted(self.quadros):
+            if q <= k and self.quadros[q][1]:
+                ultima = self.quadros[q][1][-1]
+        return (0, 0, 0) if ultima is None else (ultima[1] & 0xffffffff, ultima[2] & 0xffffffff, 0)
 
     def iniciar_quadro(self, k):
         if self.fila:
@@ -148,7 +177,12 @@ class ComposicaoEntrada(ComposicaoQuadros):
         super().__init__(estado, captura_quadro, entrada, captura_m1, **kw)
         self.roteiro = roteiro
         self.palavras_msg = MSG_LACO
+        # ProgIteration's saved (EDX, ECX, EBX) words entering the first between_frames phase: (0, 0, 0) at the
+        # file's start; at a checkpoint start, those the loop left (``RoteiroEntrada.palavras_salvas``).
+        self.palavras_inicio = (0, 0, 0)
         self.textos = []              # TextGetMessage boundary events (frame, call site, message number)
+        from inventario_ia_runtime import OriginalImage
+        self.imagem = OriginalImage()
 
     # ---------------------------------------------------------------- between_frames{k}
     def _entre(self, regs, entradas, registro, fase):
@@ -180,14 +214,15 @@ class ComposicaoEntrada(ComposicaoQuadros):
             if r['EBX'] & 0xff != mm.u8(0x49a059):
                 raise DependenciaIA('_WinMain@16 quit path', 0x460227)
             mensagem = self.roteiro.peek()
+            janela = mm.u32(JANELA)
+            # PeekMessageA (PM_NOREMOVE) fills the MSG with the head message as GetMessageA then does.
+            corpo = None if mensagem is None else struct.pack('<IIIIIii', janela, *mensagem, 0, *self.roteiro.xy)
             registro.vinculo('USER32.PeekMessageA', (msg, r['EBX'], r['EBX'], r['EBX'], r['EBX']), 0x4601d8,
-                             int(mensagem is not None))
+                             int(mensagem is not None), escritas=((msg, corpo),) if corpo else ())
             if mensagem is None:
                 r['EAX'] = 0
                 break
-            janela = mm.u32(JANELA)
             m, wp, lp = self.roteiro.get()
-            corpo = struct.pack('<IIIIIii', janela, m, wp, lp, 0, *self.roteiro.xy)
             registro.vinculo('USER32.GetMessageA', (msg, 0, 0, 0), 0x4601eb, 1, escritas=((msg, corpo),))
             registro.vinculo('USER32.TranslateMessage', (msg,), 0x4601f9, 0)
             self.roteiro._evento('translate_message', 0x4601f9, result=0)
@@ -218,10 +253,25 @@ class ComposicaoEntrada(ComposicaoQuadros):
         janelas = JanelasRoteiro(self.roteiro)
         p, _ = provedores(self.mapa, self.prov, mm, self.ctx, registro, janelas, self.travessias, fase, regs)
 
-        def som(nome, regs_som, pilha):
-            registro.fronteira(nome, 0, None, regs_som, palavras=list(pilha))
+        def som(nome, regs_som, pilha, chamada=None):
+            """The sound-library boundary (PlaySnd_PostSound/StopSound), recorded as the original records it: call
+            site and caller from the provider's declared call address, the pushed words (the stale caller words
+            after them are not modeled), and the callee's ``ret`` cleanup of the pushed words."""
+            chamada = _sitio_chamada() if chamada is None else chamada
+            retorno, chamador = 0, None
+            if chamada is not None:
+                retorno = chamada + 5
+                inicio, dono = self.imagem.owner(retorno)
+                chamador = f'{dono}+0x{retorno - inicio:x}'
+            palavras = list(pilha) + [None] * (4 - len(pilha))
+            registro.fronteira(nome, retorno, chamador, regs_som, palavras=palavras, limpeza=4 * len(pilha))
             return regs_som['EAX']
-        vivos = provedores_vivos(mm, janelas=_TeclasSitio(self.roteiro), som=som)
+        donos = DonosM3(mm, som=som, bonus=lambda j, t, s: p['BonusGetValEngin'](sitio=0, jogador=j, tipo=t,
+                                                                                  seletor=s, ecx=0),
+                        mensagem_unidade=lambda regs, chamada: mensagem_unidade(mm, p, regs, chamada))
+        self.donos = donos
+        vivos = provedores_vivos(mm, janelas=_TeclasSitio(self.roteiro, registro), som=som, estruturas=donos.ee,
+                                 donos=donos)
         def texto(n, local):
             """TextGetMessage as Missions' declared display-scenario boundary: EAX 0, no cleanup, logged."""
             registro.fronteira('TextGetMessage', local + 5, f'InputGame+0x{local + 5 - 0x429278:x}', dict(EAX=n),
@@ -246,6 +296,7 @@ class ComposicaoEntrada(ComposicaoQuadros):
         etapa_pinada = p['EnginNextEtape']
         p['EnginNextEtape'] = lambda sitio, unidade: proxima_etapa_entrada(
             mm, p, unidade, self.ctx.tabelas, construcao, etapa=lambda: etapa_pinada(sitio=sitio, unidade=unidade))
+        self._donos_quadro(mm, p, donos)
         p['InputGame'] = lambda sitio, jogador: e.input_game(jogador)
         p['ProcessInputGame'] = process
         p['CalculIconeAction'] = lambda sitio: e.calcul_icone_action(dict(EAX=0, EBX=0, ECX=0, EDX=0, ESI=0, EDI=0,
@@ -257,9 +308,14 @@ class ComposicaoEntrada(ComposicaoQuadros):
             raise DependenciaIA(f'CalculGame state 0x{estado:x}', self.ctx.estados[estado] if estado <= 0x18 else 0x42d4e2)
         return calcular_quadro(mm, p)
 
+    def _donos_quadro(self, mm, p, donos):
+        """The frame phase's providers past frame 220 (``construcao_entrada_ia.instalar_donos``)."""
+        from construcao_entrada_ia import instalar_donos
+        instalar_donos(mm, p, donos, self.ctx.tabelas)
+
     def executar(self, n):
         from oraculo_quadro_missao import nomes_fases
-        palavras, entrada_anterior = (0, 0, 0), None
+        palavras, entrada_anterior = tuple(self.palavras_inicio), None
         for k in range(self.inicio + 1, self.inicio + n + 1):
             entre, quadro = nomes_fases(k)
             if entrada_anterior is None:
@@ -286,13 +342,49 @@ class ComposicaoEntrada(ComposicaoQuadros):
                        eventos=self.roteiro.eventos[inicio_eventos:])
 
 
+def mensagem_unidade(mm, p, regs, chamada):
+    """iagUnitSendMessage 0x4829c8 (AX unit, DL message, EBX argument) for a unit whose owner is not an AI player:
+    PlayerGetType(AL = the owner byte +0) at 0x482a01 (Economy) returns AL != 2, and the routine leaves through
+    0x482eb5 with EAX = that type (``and eax, 0xff``), EBX = the u16 unit, EDX = the entry EBX, ECX/ESI/EDI/EBP
+    restored; nothing is stored. An AI owner (type 2) enters the message handlers (``incursao_ia`` translates 0x49
+    only): ``DependenciaIA`` at 0x482a14."""
+    u = regs['EAX'] & 0xffff
+    rec = (mm.u32(0x4e19a0) + 276 * u) & 0xffffffff
+    tipo = p['PlayerGetType'](sitio=0x482a01, jogador=mm.u8(rec)) & 0xff
+    if tipo == 2:
+        raise DependenciaIA(f"iagUnitSendMessage 0x{regs['EDX'] & 0xff:x} for an AI player's unit", 0x482a14)
+    saida = {k: regs[k] for k in ('ECX', 'ESI', 'EDI', 'EBP') if k in regs}
+    saida.update(EAX=tipo, EBX=u, EDX=regs.get('EBX', 0) & 0xffffffff)
+    return saida
+
+
+def _sitio_chamada(profundidade=12):
+    """The original CALL address a provider declared for a boundary it raises: Core's ``SelecaoOrdens._fronteira(
+    nome, endereco, ...)`` passes the boundary to ``som`` without the site, so it is read from that frame's
+    ``endereco`` argument (Core's own declared address, never inferred). None when no such frame is found."""
+    import sys
+    f = sys._getframe(2)
+    for _ in range(profundidade):
+        if f is None:
+            return None
+        if f.f_code.co_name == '_fronteira' and isinstance(f.f_locals.get('endereco'), int):
+            return f.f_locals['endereco']
+        f = f.f_back
+    return None
+
+
 class _TeclasSitio:
-    """``janelas`` for ``provedores_vivos``: keys and cursor from the script, each key logged at its poll."""
-    def __init__(self, roteiro):
-        self.r = roteiro
+    """``janelas`` for ``provedores_vivos``: keys and cursor from the script. Each key poll is logged as an input
+    event and as the ``USER32.GetAsyncKeyState`` binding (argument vk, the poll's return address, EAX = the
+    declared answer & 0xffff), as the original's import binding records it."""
+    def __init__(self, roteiro, registro=None):
+        self.r, self.registro = roteiro, registro
 
     def tecla(self, vk, local):
-        return self.r.tecla(vk, local)
+        valor = self.r.tecla(vk, local)
+        if self.registro is not None:
+            self.registro.vinculo('USER32.GetAsyncKeyState', (vk,), local, valor)
+        return valor
 
     def cursor(self):
         return self.r.xy
