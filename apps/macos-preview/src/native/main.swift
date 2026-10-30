@@ -7,6 +7,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
     var web: WKWebView!
     var nativeLive: NativeLiveWindow?
     var testBOutput: URL?
+    var testBRecordOnly=false
     var horizonOutput: URL?
     var horizonFinished=false
     var horizonLastProgress=0.0
@@ -43,6 +44,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         config.userContentController.add(self, name: "engine")
         let smokeConfiguration = "window.nativeSmoke={enabled:\(smokeOutput != nil),readyDelayMs:\(readyDelayMs)};"
         config.userContentController.addUserScript(WKUserScript(source:smokeConfiguration,injectionTime:.atDocumentStart,forMainFrameOnly:true))
+        testBRecordOnly = testBOutput != nil && args.contains("--test-b-record-only")
         if testBOutput != nil,let i=args.firstIndex(of:"--test-b-plan"),args.count>i+1,
            let plan=try? String(contentsOfFile:args[i+1],encoding:.utf8) {
             config.userContentController.addUserScript(WKUserScript(source:"window.nativeTestB=\(plan);",injectionTime:.atDocumentStart,forMainFrameOnly:true))
@@ -223,8 +225,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             if operation.hasPrefix("live-") {
                 do {
                     if nativeLive == nil {
-                        nativeLive=try NativeLiveWindow(root:resourceRoot,validationMode:smokeOutput != nil)
-                        nativeLive?.benchmarkInput = testBOutput != nil
+                        nativeLive=try NativeLiveWindow(root:resourceRoot,validationMode:smokeOutput != nil || testBRecordOnly)
+                        nativeLive?.benchmarkInput = testBOutput != nil && !testBRecordOnly
                         nativeLive?.update={ [weak self] value in self?.nativeReply(nil,value:value) }
                         nativeLive?.recordedEvent={ [weak self] value in
                             if let data=try? JSONSerialization.data(withJSONObject:value),let json=String(data:data,encoding:.utf8){self?.web.evaluateJavaScript("window.recordNativeInput(\(json));",completionHandler:nil)}

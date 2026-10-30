@@ -166,6 +166,7 @@ def main():
     sub = p.add_subparsers(dest='command', required=True)
     q = sub.add_parser('record', help='Drive the actual app UI; produces synthetic evidence, never human acceptance')
     q.add_argument('--app', type=Path, required=True)
+    q.add_argument('--record-only', action='store_true', help='Explicit existing Validar UI capture; actual orders are checked by the separate app replay')
     q.add_argument('--output', type=Path, required=True)
     q.add_argument('--plan', type=Path, default=Path(__file__).resolve().parents[1]/'test-b-ui-plan.json')
     for command in ('validate', 'app', 'original'):
@@ -188,6 +189,7 @@ def main():
         a.output.parent.mkdir(parents=True, exist_ok=True)
         command = ['open', '-W', '-n', str(a.app.resolve()), '--args', '--inspection',
                    '--test-b-session', str(a.output.resolve()), '--test-b-plan', str(a.plan.resolve())]
+        if a.record_only: command.append('--test-b-record-only')
         result = subprocess.run(command, timeout=900, capture_output=True, text=True)
         a.output.with_suffix('.launch.log').write_text(result.stdout+result.stderr)
         report = json.loads(a.output.read_text())
@@ -196,6 +198,8 @@ def main():
             print(json.dumps(dict(passed=False, error=report.get('error'), phase=report.get('phase')), indent=1))
             return 1
         print(json.dumps(dict(passed=True, synthetic=True, frames=script.stop_frame-128,
+                              capture_policy=report.get('capture_policy'),
+                              orders_applied_in_capture=report.get('orders_applied_in_capture'),
                               input_sha256=sha(a.output.with_suffix('.input.json')))))
         return 0
     if a.command == 'compare':

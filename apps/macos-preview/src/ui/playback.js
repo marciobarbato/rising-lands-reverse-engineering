@@ -141,11 +141,11 @@ async function runTestBSynthetic(plan){
    }
    if(!await run('live-step')||image.live_stop)throw Error(JSON.stringify(image.live_stop));
   }
-  if(![1,5,4,16,7,17].every(tag=>image.benchmark_order_tags.includes(tag)))throw Error('TestBMissingNativeOrderKinds: '+JSON.stringify(image.benchmark_order_tags));
+  if(image.execution_mode==='play'&&![1,5,4,16,7,17].every(tag=>image.benchmark_order_tags.includes(tag)))throw Error('TestBMissingNativeOrderKinds: '+JSON.stringify(image.benchmark_order_tags));
   await window.toggleRecording();await recordChain;
   const exported=await window.exportRecording();
   const journal=await request('export-journal');
-  await request('test-b-result',{result:{passed:true,synthetic:true,frames:plan.stop_frame-128,gestures,inputExport:exported,journal,...image}});
+  await request('test-b-result',{result:{passed:true,synthetic:true,capture_policy:image.input_policy,orders_applied_in_capture:image.execution_mode==='play',frames:plan.stop_frame-128,gestures,inputExport:exported,journal,...image}});
  }catch(e){
   if(recording)await window.toggleRecording();
   let exported=null;try{exported=await window.exportRecording();}catch(_){}
