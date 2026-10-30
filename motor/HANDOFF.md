@@ -1689,3 +1689,63 @@ The final native gate already passes on these identical source bytes (piece3).
 Exclusive play timing and prior terminal state/surface hash checks are the last
 verification piece and remain pending here. No main merge or project acceptance
 is performed or claimed.
+
+## Chain10 piece5 — final exclusive play measurement and terminal equality
+
+[Final package](validation/chain10/piece5/summary.json) completes verification
+without changing implementation **a410074**. Measurement revision59cac4d adds
+only documentation and reports. All native/harness/header inputs and the release
+library remain byte-identical to the successful final gate and regression set.
+The aggregate result independently checks those identities and every stated
+prefix/stop contract, performance budget and prior terminal field.
+
+Exclusive coordinated-lease play logic includes both C ABI calls and Python
+input packing; it excludes initialization, render/audit/export/hash work and
+app presentation. Policy1 is explicitly selected.
+
+| Probe | Frames | Mean ms/frame | p99 ms | Maximum ms |
+| --- | ---: | ---: | ---: | ---: |
+| K1 |501 |0.2730 |0.3344 |0.4787 |
+| P3 |3,001 |0.2986 |0.3894 |0.4638 |
+| P6 |2,272 |0.2942 |0.3457 |0.5345 |
+| P7 |3,572 |0.3024 |0.4129 |0.5986 |
+| S1 |3,722 |0.3021 |0.4887 |0.6420 |
+
+Every measured scripted play frame is below4ms. The exclusive9,200-frame M2
+run, with **`--mode 1`**, averages **0.2754ms logic**, p990.3690, maximum1.6225;
+logic+render averages0.6753ms, maximum3.9160. Terminal full-state/surface hashes,
+counter, generation18402, phase3 and clock(9201,460050) exactly equal the earlier
+chain8 release. P3/P6/P7 terminal full-projection hashes, clocks, frame counts and
+input identities also exactly equal chain8. The first M2 command omitted the
+mode flag and measured its legacy audit default; that result is retained,
+likewise terminal-equal, and is not used for the play budget.
+
+The own lease-journal extract separates queue time from measured execution.
+No native or harness source changed after the final passing `validate.sh`.
+Fresh final-source12/12 GetCaseCentrale comparisons also pass after the timing
+batch. All prior state/surface equalities remain exact at their published scope,
+including4,544/4,544 P6 whole-state and paired phases. The source tree is clean
+at delivery, and only the feature branch is pushed; integration/acceptance are
+coordinator-owned.
+
+Final S1 limits remain distinct: original indicators/inputs/orders through3850,
+then Rust SacGetCapacite at3851/0x4299da;1,885 original/Python full surfaces through
+2013, then the matching Graphics selection stop at2014/0x4022c8; pinned Python
+logic through2546, then missing DX at SetSortEngin2547/0x420f8c. Graphics must
+publish the supported selected-structure contract for S1's2014 context; the
+committed S1 script and native raster/text attestations reproduce that context.
+Economy must forward the actual exit-cell DX into the recruitment call. Rust's
+later SacGetCapacite callback is the next logic boundary. No unknown callback,
+selection mode or glyph was made to succeed artificially, and no S1 whole-state,
+victory or TestB acceptance is claimed.
+
+Reproduce timing from this checkout with fresh output paths:
+
+```sh
+python3 "$lease" --exclusive engine-s1-play -- env RL_REFERENCE_PROFILE=chain10 \
+  python3 -B motor/testes/probe_benchmark.py --probe S1 --frames 3722 \
+  --library motor/target/release/librising_engine.dylib --output .local/s1-play-new.json
+python3 "$lease" --exclusive engine-m2-play -- env RL_REFERENCE_PROFILE=logic \
+  python3 -B motor/testes/play_benchmark.py --frames 9200 --mode 1 \
+  --library motor/target/release/librising_engine.dylib --output .local/m2-play-new.json
+```

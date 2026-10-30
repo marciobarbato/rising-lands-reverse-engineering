@@ -1,0 +1,207 @@
+{
+  "artifacts": {
+    "central-timing-final.json": {
+      "compressed_sha256": "bba0c6ba41067b8317fa9fe329083f1f74b483bf474e7a85630eec58e03e3987",
+      "path": "central-timing-final.json.xz",
+      "raw_bytes": 33038,
+      "raw_sha256": "7339b747293ba01f4b9baad1cc9dfda7494e99db47d9395a63738a589dd01cd5"
+    },
+    "final-result-verification.json": {
+      "compressed_sha256": "514639fc5ce8d7b5e73741c2356dda708ae001c3efcb7c64f654f3da98a0283a",
+      "path": "final-result-verification.json.xz",
+      "raw_bytes": 1011,
+      "raw_sha256": "8c597ad7c8efd7452319f113b03fad46efc1aade94dc868677a8157b36d2a767"
+    },
+    "timing-K1-final.json": {
+      "compressed_sha256": "321011595290b8fb768706d29d983fc6ebb57ec0c24e20ef3f5159ea4252d53f",
+      "path": "timing-K1-final.json.xz",
+      "raw_bytes": 15627,
+      "raw_sha256": "25bb2acc9c87fa5a50ee2f1d014fa68d4689bac4455a5b1bb79b3b3fcd03141c"
+    },
+    "timing-M2-final.json": {
+      "compressed_sha256": "4270755fb9e0e0ec2c49fb45e19ae67c4c9b6b1388a100e63a2ac633bb331a08",
+      "path": "timing-M2-final.json.xz",
+      "raw_bytes": 2877,
+      "raw_sha256": "e24baec65feb6aa71a0342071133bdb94e1cfdfe8b9332a2c651498cd1c21edf"
+    },
+    "timing-M2-play-final.json": {
+      "compressed_sha256": "96a237eba8d85f89a3f7e477b19c2681eed4ca2e9d1e7e3a67bdd458926f34f8",
+      "path": "timing-M2-play-final.json.xz",
+      "raw_bytes": 2883,
+      "raw_sha256": "91548f55f5a92b465657bca2e49d8b1bdb9b121f81480c7ddb1c8a6d6918602c"
+    },
+    "timing-M2-play-final.log": {
+      "compressed_sha256": "4f14edf9e4068c16478c003d72825c72646d6509cde109359e31d829d9cb9e9e",
+      "path": "timing-M2-play-final.log.xz",
+      "raw_bytes": 597,
+      "raw_sha256": "079b6b8e455248ec00663f83248c4b3fbaeb6ced2721a1bf5a802968cae89562"
+    },
+    "timing-P3-final.json": {
+      "compressed_sha256": "2c594d3efb5166c89366e2fc6abc1935985eadd8d2aa76ef38447042f0b44938",
+      "path": "timing-P3-final.json.xz",
+      "raw_bytes": 15633,
+      "raw_sha256": "2275fa560982ab8dd5775c01a8897c682e81083b228e6f357384cc08018194a0"
+    },
+    "timing-P6-final.json": {
+      "compressed_sha256": "31256a67ae1edfad624248bf89cbb201ad9366d1a2d68e13aba22916cf58cc9e",
+      "path": "timing-P6-final.json.xz",
+      "raw_bytes": 15631,
+      "raw_sha256": "ac8c8b95f0950e1377a3682e83f4cea38d6089915a67b38b0a92aa4a7f33a005"
+    },
+    "timing-P7-final.json": {
+      "compressed_sha256": "306bc77a381d1baf1b7f8e43995a4f4425390e5a871fe122072c4ec0789da830",
+      "path": "timing-P7-final.json.xz",
+      "raw_bytes": 15630,
+      "raw_sha256": "0fbec964e5dba351c142ed0ecdc0dd00aaf3d8edab8f05607f913a8613f3f3df"
+    },
+    "timing-S1-final.json": {
+      "compressed_sha256": "cc31344d2176de62dd25307e3b62e3d68f421850373dddd6702d7325abb16d4a",
+      "path": "timing-S1-final.json.xz",
+      "raw_bytes": 15630,
+      "raw_sha256": "9219ffd01ef9553d1e5817c865ba501065803d56b42da30d07b9bf1dac23ac18"
+    },
+    "timing-final2.log": {
+      "compressed_sha256": "4addc2552f6a8dce551ae0f89cee75211972873cb28e0f950fc5e5a2b695a37d",
+      "path": "timing-final2.log.xz",
+      "raw_bytes": 1392,
+      "raw_sha256": "4d27b012949bd0109598d86cf161b78c74cacd49c4c5eca304dd04ab89a69b98"
+    }
+  },
+  "audit_scope": "The initial M2 invocation omitted --mode1 and measured the legacy audit default; retained separately, not used for the play budget. Its terminal fields also equal the prior release and explicit mode1.",
+  "budget": "Every measured play-logic frame stays at or below4ms; initialization, rendering, auditing, snapshots, hashing and app presentation excluded. Scripted probes include both C ABI calls and Python input packing.",
+  "exclusive_scripted_play": {
+    "K1": {
+      "frames": 501,
+      "logic_mean_ms": 0.27301371856286905,
+      "max_ms": 0.4787080000001609,
+      "p99_ms": 0.3344159999998375,
+      "stop": null
+    },
+    "P3": {
+      "frames": 3001,
+      "logic_mean_ms": 0.29855562812395925,
+      "max_ms": 0.46375000000020705,
+      "p99_ms": 0.38937500000013614,
+      "stop": null
+    },
+    "P6": {
+      "frames": 2272,
+      "logic_mean_ms": 0.2942188749999974,
+      "max_ms": 0.5344589999998206,
+      "p99_ms": 0.34566699999993844,
+      "stop": null
+    },
+    "P7": {
+      "frames": 3572,
+      "logic_mean_ms": 0.3023708709406461,
+      "max_ms": 0.5985840000000131,
+      "p99_ms": 0.4129169999997906,
+      "stop": null
+    },
+    "S1": {
+      "frames": 3722,
+      "logic_mean_ms": 0.3021496856528794,
+      "max_ms": 0.6420419999999538,
+      "p99_ms": 0.4887079999997823,
+      "stop": null
+    }
+  },
+  "implementation_revision": "a410074",
+  "m2_play": {
+    "frames": 9200,
+    "logic": {
+      "count": 9200,
+      "max_ms": 1.6225409999996998,
+      "mean_ms": 0.27542060521738587,
+      "p50_ms": 0.2703329999995674,
+      "p95_ms": 0.3074579999999827,
+      "p99_ms": 0.36895799999925316,
+      "seconds": 2.5338695679999503
+    },
+    "logic_render": {
+      "count": 9200,
+      "max_ms": 3.9159580000003302,
+      "mean_ms": 0.6752531922826002,
+      "p50_ms": 0.66466600000048,
+      "p95_ms": 0.7470840000012302,
+      "p99_ms": 0.8296669999996453,
+      "seconds": 6.212329368999921
+    },
+    "mode": 1,
+    "terminal": {
+      "final_clock": [
+        9201,
+        460050
+      ],
+      "final_counter": 9200,
+      "final_generation": 18402,
+      "final_phase": 3,
+      "final_state_sha256": "4ef7471043dd66011d9ad68873ae1c27f8c84f32063bd359c9a23e4cb48dfd36",
+      "final_surface_sha256": "8ce7ad456a1d94cefb7f880c94553a3d7ea7ffca8c4aaa303894f511116f10e3"
+    }
+  },
+  "measurement_revision": "59cac4d",
+  "qualifications": "S1 state is published indicators/inputs/orders; surfaces are original/Python exact through2013 with matching Rust/Python dependency at2014. Original AffText nonexecution remains strictly attested; no production glyph or full S1 whole-state/mission/TestB claim. No main merge or acceptance.",
+  "schema": "rising-lands/rust-chain10-final-play-verification/1",
+  "stops": {
+    "k1": null,
+    "s1_graphics": {
+      "address": "0x4022c8",
+      "frame": 2014,
+      "reason": "structure selection outside captured API1.8 domain"
+    },
+    "s1_python_logic": {
+      "address": "0x420f8c",
+      "callee": "SetSortEngin",
+      "frame": 2547,
+      "reason": "Economy omitted actual EDX exit cell"
+    },
+    "s1_rust_logic": {
+      "address": "0x4299da",
+      "callee": "SacGetCapacite",
+      "frame": 3851,
+      "phase": 3
+    }
+  },
+  "verification": {
+    "all_bounded_checks_passed": true,
+    "release_sha256": "dbe6403a5ce67af0872b521bf31838b956eb0aaa5c47bca0afaeaffd38e4948b",
+    "s1_surface_limit": {
+      "address": "0x4022c8",
+      "equal": 1885,
+      "rust_python_partial_equal": true,
+      "stop_frame": 2014,
+      "through": 2013
+    },
+    "schema": "rising-lands/rust-chain10-final-result-verification/1",
+    "terminal_regression_checks": {
+      "M2": {
+        "final_clock": true,
+        "final_counter": true,
+        "final_generation": true,
+        "final_phase": true,
+        "final_state_sha256": true,
+        "final_surface_sha256": true,
+        "frames": true
+      },
+      "P3": {
+        "clock": true,
+        "frames": true,
+        "input_sha256": true,
+        "terminal_projection_sha256": true
+      },
+      "P6": {
+        "clock": true,
+        "frames": true,
+        "input_sha256": true,
+        "terminal_projection_sha256": true
+      },
+      "P7": {
+        "clock": true,
+        "frames": true,
+        "input_sha256": true,
+        "terminal_projection_sha256": true
+      }
+    }
+  }
+}

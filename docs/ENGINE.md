@@ -784,3 +784,11 @@ not forwarded DX into SetSortEngin0x420f8c. S1 whole-state equality, completed
 selection rendering, glyph reconstruction, mission completion and Test B remain
 outside these bounded proofs. Exact contracts and retained diagnostics are in
 [the handoff](../motor/HANDOFF.md#chain10-piece4--final-source-regression-and-s1-render-boundary).
+
+The [final exclusive play measurement](../motor/validation/chain10/piece5/summary.json)
+keeps every measured logic frame below4ms. S1's3,722 completed frames average
+0.3021ms (maximum0.6420);9,200 M2 frames average0.2754ms (maximum1.6225), with
+logic+render0.6753ms. Prior P3/P6/P7 full terminal projections and M2 terminal
+state/surface hashes, generation and clock remain exact. These are explicit
+play-mode C ABI measurements, excluding initialization, proof work and app
+presentation. The bounded S1 renderer/Python dependencies above remain open.
