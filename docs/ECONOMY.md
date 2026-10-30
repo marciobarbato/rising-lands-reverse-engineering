@@ -89,6 +89,34 @@ Gate: **552 tests, 209 optional skips, 0 failures**, documentation links OK.
 Transport WIP remains parked. The consumer-owned AI/runtime and Rust dispatchers
 must wire this provider; no consumer files are changed by this delivery.
 
+## S1 exit-pipe query (2026-10-30)
+
+`tuyau_economia_s1.TuyauEconomiaS1` and `provedor_tuyau_economia_s1`
+serve **TuyauEstSortie 0x420c7c..0x420cae** over live `u8/u16/u32` memory.
+AX is a protected structure index 0..999. AL is one only when byte +0x76 is
+**exactly 15** and byte +0x75 is nonzero. The upper 24 EAX bits retain the
+structure pointer (`0x49a0c8 + 276*AX`); all six other registers are preserved.
+There are no stores, callbacks, flags or x87 results. Optional ESP advances
+by four; the external provider requires all seven general registers before
+any read and returns all seven exact exit values.
+
+Original-only capture `065b6c0`: **273 cases** (four real S1 calls from
+AffBatiments at frames 1977–1980, every possible +0x76 byte, enable-byte
+boundaries and indices 0/999 with sentinels). Every frame 1750–1980 equals
+the replay-checked S1 record. Native rerun under the heavy lease: **273
+comparisons, 0 mismatches**, equal to the immutable capture (203.662 s),
+including CPU-free sparse replay and the external provider. See the
+[native report](../pesquisas-paralelas/economia/validacao-tuyau-s1-emulada.json).
+
+```sh
+python3 '/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py' economy-s1-tuyau -- \
+  python3 -B pesquisas-paralelas/economia/sondar_tuyau_economia_s1.py
+```
+
+Gate: **557 tests, 209 optional skips, 0 failures**, documentation links OK.
+The query does not advance the pipe animation. Its later S1 calls and a
+consumer-wide chain rerun remain outside this bounded differential.
+
 ## Recruitment placement DX correction (2026-10-30, feature delivery)
 
 Base: `origin/main` `e41cc77`, merged into `feat/re-economy`. At SortieTroupe CALL `0x420f8c`

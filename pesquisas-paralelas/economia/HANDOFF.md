@@ -35,6 +35,26 @@ heavy lease). `scripts/check.py --domain economy`: **552 tests, 209 optional
 skips, 0 failures**, documentation links OK (51.906 s). Other native suites
 were not opted into. Transport remains parked.
 
+## S1 TuyauEstSortie delivery (2026-10-30)
+
+Original-only capture `065b6c0`, followed by `tuyau_economia_s1` translation.
+API: `TuyauEconomiaS1(m).chamar(name, regs)` and
+`provedor_tuyau_economia_s1(instance, outros=None)`. All EAX..EBP inputs are
+required (`ArgumentoNaoPassado` before reads), optional ESP returns +4.
+AX must index 0..999; live structure bytes +0x76/+0x75 are read in that order,
+the second only when the first equals 15. AL is their predicate; EAX upper
+24 bits come from the structure pointer. EDX/EBX/ECX/ESI/EDI/EBP are unchanged.
+No stores or callbacks occur.
+
+Identity: intact EXE `6c556520…8543fb`, entry `0x420c7c`, end `0x420cae`.
+The capture covers AffBatiments' four real calls (1977–1980), all counter
+bytes, enable boundaries, structure 0/999 and upper-register sentinels.
+**273/273 sparse replays and 273 fresh native comparisons, 0 mismatches**;
+native rerun equal to the capture (203.662 s, heavy lease). Later S1 calls,
+the pipe animation and consumer wiring remain outside this query delivery.
+No foreign source hashes are pinned. Gate: **557 tests, 209 optional skips,
+0 failures**, documentation links OK (52.207 s).
+
 ## Recruitment placement DX delivery (2026-10-30)
 
 Base: `origin/main` `e41cc77`, merged into `feat/re-economy`. Only Economy-owned paths changed.
