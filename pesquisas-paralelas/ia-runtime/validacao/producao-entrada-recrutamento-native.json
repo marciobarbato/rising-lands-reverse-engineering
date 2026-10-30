@@ -1,0 +1,371 @@
+{
+ "cases": [
+  {
+   "changed_bytes_equal": true,
+   "consumed_return_equal": true,
+   "equal": true,
+   "frame": 296,
+   "missing_final_arguments": [],
+   "native_changed_bytes": 2,
+   "native_owner_arguments": [],
+   "native_prefix_matches_capture": true,
+   "native_stop": "0x3000000",
+   "owner_requests": [],
+   "provided_arguments_equal": true,
+   "python_changed_bytes": 2,
+   "python_stop": null,
+   "structure": 0
+  },
+  {
+   "changed_bytes_equal": true,
+   "consumed_return_equal": true,
+   "equal": true,
+   "frame": 297,
+   "missing_final_arguments": [
+    "EDX"
+   ],
+   "native_changed_bytes": 46,
+   "native_owner_arguments": [
+    {
+     "registers": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType"
+    },
+    {
+     "registers": {
+      "EAX": 4,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie"
+    },
+    {
+     "registers": {
+      "EAX": 4
+     },
+     "routine": "EnginResetFatigue"
+    },
+    {
+     "registers": {
+      "EAX": 4,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente"
+    },
+    {
+     "registers": {
+      "EAX": 4,
+      "EDX": 3599
+     },
+     "routine": "SetSortEngin"
+    }
+   ],
+   "native_prefix_matches_capture": true,
+   "native_stop": "0x445fbc",
+   "owner_requests": [
+    {
+     "call": "0x420f69",
+     "registers": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType"
+    },
+    {
+     "call": "0x420f75",
+     "registers": {
+      "EAX": 4,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie"
+    },
+    {
+     "call": "0x420f7c",
+     "registers": {
+      "EAX": 4
+     },
+     "routine": "EnginResetFatigue"
+    },
+    {
+     "call": "0x420f85",
+     "registers": {
+      "EAX": 4,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente"
+    },
+    {
+     "call": "0x420f8c",
+     "registers": {
+      "EAX": 4
+     },
+     "routine": "SetSortEngin"
+    }
+   ],
+   "provided_arguments_equal": true,
+   "python_changed_bytes": 46,
+   "python_stop": {
+    "call": "0x420f8c",
+    "missing": [
+     "EDX"
+    ],
+    "routine": "SetSortEngin"
+   },
+   "structure": 0
+  },
+  {
+   "changed_bytes_equal": true,
+   "consumed_return_equal": true,
+   "equal": true,
+   "frame": 868,
+   "missing_final_arguments": [],
+   "native_changed_bytes": 2,
+   "native_owner_arguments": [],
+   "native_prefix_matches_capture": true,
+   "native_stop": "0x3000000",
+   "owner_requests": [],
+   "provided_arguments_equal": true,
+   "python_changed_bytes": 2,
+   "python_stop": null,
+   "structure": 0
+  },
+  {
+   "changed_bytes_equal": true,
+   "consumed_return_equal": true,
+   "equal": true,
+   "frame": 869,
+   "missing_final_arguments": [
+    "EDX"
+   ],
+   "native_changed_bytes": 46,
+   "native_owner_arguments": [
+    {
+     "registers": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType"
+    },
+    {
+     "registers": {
+      "EAX": 5,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie"
+    },
+    {
+     "registers": {
+      "EAX": 5
+     },
+     "routine": "EnginResetFatigue"
+    },
+    {
+     "registers": {
+      "EAX": 5,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente"
+    },
+    {
+     "registers": {
+      "EAX": 5,
+      "EDX": 3599
+     },
+     "routine": "SetSortEngin"
+    }
+   ],
+   "native_prefix_matches_capture": true,
+   "native_stop": "0x445fbc",
+   "owner_requests": [
+    {
+     "call": "0x420f69",
+     "registers": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType"
+    },
+    {
+     "call": "0x420f75",
+     "registers": {
+      "EAX": 5,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie"
+    },
+    {
+     "call": "0x420f7c",
+     "registers": {
+      "EAX": 5
+     },
+     "routine": "EnginResetFatigue"
+    },
+    {
+     "call": "0x420f85",
+     "registers": {
+      "EAX": 5,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente"
+    },
+    {
+     "call": "0x420f8c",
+     "registers": {
+      "EAX": 5
+     },
+     "routine": "SetSortEngin"
+    }
+   ],
+   "provided_arguments_equal": true,
+   "python_changed_bytes": 46,
+   "python_stop": {
+    "call": "0x420f8c",
+    "missing": [
+     "EDX"
+    ],
+    "routine": "SetSortEngin"
+   },
+   "structure": 0
+  },
+  {
+   "changed_bytes_equal": true,
+   "consumed_return_equal": true,
+   "equal": true,
+   "frame": 1362,
+   "missing_final_arguments": [],
+   "native_changed_bytes": 1,
+   "native_owner_arguments": [],
+   "native_prefix_matches_capture": true,
+   "native_stop": "0x3000000",
+   "owner_requests": [],
+   "provided_arguments_equal": true,
+   "python_changed_bytes": 1,
+   "python_stop": null,
+   "structure": 0
+  },
+  {
+   "changed_bytes_equal": true,
+   "consumed_return_equal": true,
+   "equal": true,
+   "frame": 1363,
+   "missing_final_arguments": [
+    "EDX"
+   ],
+   "native_changed_bytes": 45,
+   "native_owner_arguments": [
+    {
+     "registers": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType"
+    },
+    {
+     "registers": {
+      "EAX": 6,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie"
+    },
+    {
+     "registers": {
+      "EAX": 6
+     },
+     "routine": "EnginResetFatigue"
+    },
+    {
+     "registers": {
+      "EAX": 6,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente"
+    },
+    {
+     "registers": {
+      "EAX": 6,
+      "EDX": 3599
+     },
+     "routine": "SetSortEngin"
+    }
+   ],
+   "native_prefix_matches_capture": true,
+   "native_stop": "0x445fbc",
+   "owner_requests": [
+    {
+     "call": "0x420f69",
+     "registers": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType"
+    },
+    {
+     "call": "0x420f75",
+     "registers": {
+      "EAX": 6,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie"
+    },
+    {
+     "call": "0x420f7c",
+     "registers": {
+      "EAX": 6
+     },
+     "routine": "EnginResetFatigue"
+    },
+    {
+     "call": "0x420f85",
+     "registers": {
+      "EAX": 6,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente"
+    },
+    {
+     "call": "0x420f8c",
+     "registers": {
+      "EAX": 6
+     },
+     "routine": "SetSortEngin"
+    }
+   ],
+   "provided_arguments_equal": true,
+   "python_changed_bytes": 45,
+   "python_stop": {
+    "call": "0x420f8c",
+    "missing": [
+     "EDX"
+    ],
+    "routine": "SetSortEngin"
+   },
+   "structure": 0
+  }
+ ],
+ "comparisons": 6,
+ "equal": 6,
+ "fixture": "pesquisas-paralelas/economia/evidencias/caverna-recrutamento/captura-caverna-recrutamento-exibicao.json.xz",
+ "fixture_sha256": "4b48d4e3cbf127562f1bd1f622b2253c8dae27309b93f2cd0479c086edc0d21c",
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "schema": "rising-lands/ai-runtime-recruit-production-prefix/2",
+ "scope": "Native CalculTroupe through return or before SetSortEngin; missing Economy DX retained as ABI stop",
+ "source_revision": "491553f383705b0521f99e6f5f50b30263339617",
+ "source_sha256": {
+  "pesquisas-paralelas/ia-runtime/composicao_entrada_ia.py": "4dff2595d83ba90bfa88a2710fc009bd9a78657177ba09129f644d661f90e754",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "03a314d152c6e0673d3aef7d2c6051b9d48ee985f94f70b358a908e8a7d07694",
+  "pesquisas-paralelas/ia-runtime/validar_producao_entrada_ia.py": "6214f411b1e87addc419c2a26732ae3c579ca48879bd3265aa35f88351844e7a"
+ }
+}
