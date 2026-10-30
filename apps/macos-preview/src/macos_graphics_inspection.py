@@ -1,11 +1,11 @@
-"""Consume Graphics API 1.9 in an isolated inspection process. No drawing code."""
+"""Consume Graphics API 1.10 in an isolated inspection process. No drawing code."""
 import base64
 import importlib.util
 from pathlib import Path
 import sys
 from macos_state_consumer import StateValidationError, _sha
 
-EXPECTED_GRAPHICS_VERSION = (1, 9)
+EXPECTED_GRAPHICS_VERSION = (1, 10)
 
 
 class GraphicsVersionError(StateValidationError):
@@ -32,7 +32,7 @@ def load_graphics(root):
 
 def require_version(version):
     if version != EXPECTED_GRAPHICS_VERSION:
-        raise GraphicsVersionError('Graphics API version mismatch: expected (1, 9), got ' + repr(version))
+        raise GraphicsVersionError('Graphics API version mismatch: expected (1, 10), got ' + repr(version))
 
 
 GRAPHICS_EVIDENCE = 'pesquisas-paralelas/graficos-animacao/evidencias/'
@@ -104,7 +104,7 @@ class GraphicsInspectionRenderer:
         status = ('partial' if stop else 'full') if drawing else 'undrawn'
         if result is not None and result.chamadas == (('CalculFrame',),): status = 'undrawn'
         frame = (1 if name == 'between_frames' else int(name[len('between_frames'):])) if drawing else None
-        record = dict(status=status, phase=name, api_called=drawing, version=[1, 9], hud=True, stop=stop,
+        record = dict(status=status, phase=name, api_called=drawing, version=[1, 10], hud=True, stop=stop,
                       required_regions=regions,
                       pixels_sha256=_sha(next_pixels), cache_keys_sha256=_sha(next_cache.registros),
                       cache_payloads_sha256=_sha(next_cache.blocos_crus), cache_cursor=next_cache.proximo,
@@ -135,7 +135,7 @@ class GraphicsInspectionRenderer:
 
     def present(self, raw=False):
         if self.index < 0:
-            return dict(status='undrawn', api_called=False, version=[1, 9], hud=True,
+            return dict(status='undrawn', api_called=False, version=[1, 10], hud=True,
                         detail='Initial surface is available only after the load tail; select a phase')
         record = dict(self.records[-1])
         if raw:

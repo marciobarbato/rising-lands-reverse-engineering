@@ -1,0 +1,65 @@
+{
+ "capture": "pesquisas-paralelas/ia-runtime/evidencias/s1-recarga-proxima-etapa-original.json",
+ "capture_sha256": "6ae4402ea611c52750609c6a24399e43fc3f97c6e35e7f5b8cde3ceeb6c44e9a",
+ "cases": [
+  {
+   "equal": true,
+   "frame": 11742,
+   "game_blocks_compared": 25197,
+   "handoffs": [
+    {
+     "arguments": {
+      "unidade": 17
+     },
+     "routine": "EnginNextEtape:state1",
+     "site": "0x456886"
+    }
+   ],
+   "handoffs_equal": true,
+   "memory_differences": [],
+   "native_capture_reproduced": true,
+   "native_handoff_registers": [
+    {
+     "address": "0x454587",
+     "registers": {
+      "EAX": "0x0",
+      "EBP": "0x14",
+      "EBX": "0x0",
+      "ECX": "0x474a9254",
+      "EDI": "0x11",
+      "EDX": "0x3",
+      "ESI": "0x474a9254",
+      "ESP": "0x2007e2c"
+     }
+    },
+    {
+     "address": "0x456886",
+     "registers": {
+      "EAX": "0x1",
+      "EBP": "0x14",
+      "EBX": "0x1254",
+      "ECX": "0x474a9254",
+      "EDI": "0x11",
+      "EDX": "0x1254",
+      "ESI": "0x474a9254",
+      "ESP": "0x2007e2c"
+     }
+    }
+   ],
+   "original_changed_bytes": 3,
+   "passages_equal": true,
+   "unit": 17
+  }
+ ],
+ "comparisons": 1,
+ "equal": 1,
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "schema": "rising-lands/s1-attack-dispatch-differential/1",
+ "source_revision": "6985c6017b08ef95013178bc0bfe80051714ab52",
+ "source_sha256": {
+  "ataque_despacho_ia.py": "62e89b5db446a9502ba1ddc5c669aab698868c426a57bfa522358ae43106fc17",
+  "composicao_encadeada_ia.py": "957ccf27d0e13b29153c332d897f35f49bb7b9542174aef3772faa233be82cb0",
+  "proxima_etapa_quadro.py": "ef606fca77ad06a0afb75fe32cd7fc68e36f280d3d451017b84f4ea3a9f8b970",
+  "validar_ataque_despacho_ia.py": "4344371d1ecfeaf7cea1095b9c4f3c94c1ec272dad7a7a8176205ce1d122b7b8"
+ }
+}

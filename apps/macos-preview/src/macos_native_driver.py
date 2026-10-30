@@ -23,6 +23,9 @@ class DeclaredInput(C.Structure):
         out._storage=(messages,keys)
         return out
 
+class SoundEvent(C.Structure):
+    _fields_=[(n,C.c_uint32) for n in ('kind','frame','phase','site','eax','edx','ebx','ecx','volume','has_volume')]
+
 class NativeDriver:
     def __init__(self,driver_library,engine_library,inputs):
         self.lib=C.CDLL(str(Path(driver_library).resolve()))
@@ -44,6 +47,11 @@ class NativeDriver:
         }
         for name,(args,result) in signatures.items():
             f=getattr(self.lib,name);f.argtypes=args;f.restype=result
+        # Sound transport (play mode); older proof dylibs simply lack it.
+        for name,(args,result) in {'macos_live_sound_capture':([C.c_void_p,C.c_uint32],C.c_int32),
+                                   'macos_live_sound_events':([C.c_void_p,C.POINTER(SoundEvent),C.c_uint32],C.c_uint32),
+                                   'macos_live_sound_dropped':([C.c_void_p],C.c_uint64)}.items():
+            if hasattr(self.lib,name):f=getattr(self.lib,name);f.argtypes=args;f.restype=result
         if self.lib.macos_live_abi_version()!=1 or self.lib.macos_live_status_size()!=C.sizeof(NativeStatus):
             raise RuntimeError('Native driver ABI/layout mismatch')
         error=C.create_string_buffer(512)
@@ -65,6 +73,11 @@ class NativeDriver:
     def event(self,event):
         kind=event['kind']
         return self.lib.macos_live_event(self.handle,1 if kind=='mouse' else 2,event.get('msg',0),event.get('x',0),event.get('y',0),event.get('wParam',0),event.get('vkey',0),int(event.get('down',False)))
+    def sound_events(self):
+        out=[];buffer=(SoundEvent*1024)()
+        while True:
+            n=self.lib.macos_live_sound_events(self.handle,buffer,1024);out+=[SoundEvent.from_buffer_copy(buffer[i]) for i in range(n)]
+            if n<1024:return out
     def pixels(self):return C.string_at(self.lib.macos_live_pixels(self.handle),480000)
     def palette(self):return C.string_at(self.lib.macos_live_palette(self.handle),768)
     def close(self):
