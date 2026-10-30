@@ -84,7 +84,7 @@ MacOSLiveDriver *macos_live_create(const char*library,const char*root,char*error
 #endif
  LOAD(rl_execucao_definir);LOAD(rl_execucao_modo);LOAD(rl_versao);LOAD(rl_criar_mundo);LOAD(rl_carregar_blocos);LOAD(rl_passo_quadro);LOAD(rl_liberar_mundo);LOAD(rl_passo_quadro_entrada);LOAD(rl_eventos_entrada);LOAD(rl_projetar_tudo);LOAD(rl_erro_mensagem);
  LOAD(rl_render_contrato);LOAD(rl_render_criar);LOAD(rl_render_geracao);LOAD(rl_render_quadro);LOAD(rl_render_liberar);
- if((d->rl_versao()>>16)!=1||(d->rl_versao()&0xffff)<6||d->rl_render_contrato()!=0x10007){snprintf(error,capacity,"ABI1.6 / Graphics1.7 required");goto bad;}
+ if((d->rl_versao()>>16)!=1||(d->rl_versao()&0xffff)<6||d->rl_render_contrato()!=0x10009){snprintf(error,capacity,"ABI1.6 / Graphics1.9 required");goto bad;}
  uint32_t n=0;uint8_t*s0=file(root,"s0.bin",&n);if(!s0){snprintf(error,capacity,"Missing S0");goto bad;}
  d->bulk_capacity=n;d->bulk=malloc(n);uint32_t count=n>=4?le(s0):0,off=4;if(!count||count>65536){free(s0);goto bad;}RlBloco*blocks=calloc(count,sizeof(*blocks));
  if(!d->bulk||!blocks||count>65536){free(s0);free(blocks);goto bad;}
