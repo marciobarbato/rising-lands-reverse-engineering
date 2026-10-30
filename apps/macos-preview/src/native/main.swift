@@ -270,7 +270,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             let rate=Double(argument("--game-fps","0")) ?? -1
             guard ["play","test"].contains(mode),duration>=60,duration<=180,rate>=0,rate<=120 else{throw NSError(domain:"InvalidNativeBenchmarkArguments",code:1)}
             let live=try NativeLiveWindow(root:resourceRoot,validationMode:mode=="test");nativeLive=live
-            live.gameFPS=rate;live.update={_ in};live.benchmarkInput=args.contains("--benchmark-orders")
+            var firstStop:[String:Any]?
+            var gestures=[[String:Any]]()
+            live.gameFPS=rate;live.update={value in
+                if firstStop==nil,value["live_stop"] is [String:Any]{firstStop=value}
+            };live.benchmarkInput=args.contains("--benchmark-orders")
             if let index=[15.0,20.0,30.0,60.0,0.0].firstIndex(of:rate){live.rateControl.selectItem(at:index)}
             live.perform("live-reset"){_ in live.perform("live-step"){_ in live.perform("live-play"){_ in
                 if live.benchmarkInput{
@@ -281,6 +285,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
                     inputTimer=Timer.scheduledTimer(withTimeInterval:0.01,repeats:true){_ in
                         live.inputBarrier{frame in
                             guard gesture<4,frame>=lastGestureFrame+8 else{return}
+                            gestures.append(["gesture":gesture,"observedNextFrame":frame])
                             switch gesture{
                             case 0:live.benchmarkClick(560,528)
                             case 1:live.benchmarkClick(624,432)
@@ -299,6 +304,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
                         var result=value;result["mainTimerMaxGapMS"]=maxPulseGap*1000;result["mainTimerPulses"]=pulses;result["mainTimerMaxDelayMS"]=max(0,maxPulseGap-0.05)*1000;result["commit"]=Bundle.main.object(forInfoDictionaryKey:"RisingLandsSourceCommit") as? String
                         result["native_window_visible"]=live.window.isVisible
                         result["requestedSeconds"]=duration
+                        result["benchmark_gestures"]=gestures
+                        result["first_stop_snapshot"]=firstStop ?? NSNull() as Any
                         result["screenMaximumFPS"]=live.window.screen?.maximumFramesPerSecond ?? 0
                         result["native_window_unoccluded"]=live.window.occlusionState.contains(.visible)
                         result["passed"]=live.window.isVisible && value["live_stop"] is NSNull
