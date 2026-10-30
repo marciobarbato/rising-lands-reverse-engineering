@@ -176,7 +176,7 @@
  },
  "providers": "provedores_entrada_ia.provedores_vivos (committed Core/Economy/Combat owners); sound requests return the EAX they receive (the frame bench declaration for PlaySnd_*)",
  "schema": "rising-lands/monde01-input-orders-differential/1",
- "seconds": 129.676,
+ "seconds": 130.523,
  "source_sha256": {
   "ferramentas/selecao_ordens.py": "acf5ebde927f1c5a0275ddffa191d03bdb78a810dd5179cb1f7088b46eba17e8",
   "pesquisas-paralelas/combate/alvos_alcance.py": "b0006a64869041997ab85d51f2758c7bd4c1d602e0f7bc6de3bb7ba75878dc17",
@@ -186,7 +186,7 @@
   "pesquisas-paralelas/ia-runtime/capturar_entrada_ordens_ia.py": "79c33f81f219c99562e788e85b4ef1f4d990fba6c346e260e65d5a5263a6e36c",
   "pesquisas-paralelas/ia-runtime/casos_entrada_ordens_ia.py": "026041d6ff4129fa4668e89d41291b89b5b9da8dccf7b9d97308a997298524cb",
   "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "0d3c50f9c07dcd4badb4d37217e3d6e8407c9146de968258addff2a2de982928",
-  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "e2a9561e97ad97c1c90c44d051974b68b285b4665c4f350e7ad6e0a839aebd12",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "03a314d152c6e0673d3aef7d2c6051b9d48ee985f94f70b358a908e8a7d07694",
   "pesquisas-paralelas/ia-runtime/validar_entrada_ordens_ia.py": "9e6d51fe3732f9e95bb54840ba494f5c682bdfa35140046c82b2a7f47835fc1d"
  }
 }

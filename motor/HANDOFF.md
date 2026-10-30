@@ -1534,3 +1534,218 @@ published windows above; S1/D1 mission completion is outside this verification.
 Reproductions use the coordinated lease, fresh output paths and the explicit
 release library argument for `player_proof.py`. Every job stayed within its
 1,140-second execution bound after lease grant. No merge into main was performed.
+
+## Chain9 piece1 — current-main K1 reproduction
+
+Main `6cdbc5a` was fast-forwarded into `feat/codex-rust-engine` before this work.
+No native source, ABI1.6, Graphics1.9 contract, mask or prior profile changed.
+[Fresh report](validation/chain9/piece1/summary.json) reproduces K1 frames129–629:
+**501/501** original/pinned-Python indicator/input/order frames, **1,002/1,002**
+paired play/audit phases and **501/501** advancing original/Python surfaces.
+Pixels, raster calls, carried cache/background, effects and exact recorded
+AffText requests all pass. No stop occurs; the old frame141 origin stop is
+already resolved by the committed Graphics1.9 port. This is not whole-state K1
+coverage. The engine gate is queued separately and is not yet claimed here.
+
+The retained S1 baseline passes **2,418 frames129–2546** against the chain8
+Python/original indicators, inputs and orders. In frame2547 the pinned Python
+raises `EnginSetType` at call0x420f69 while Rust continues. Therefore the strict
+same-stop reader reports a dependency-contract difference, not a passing S1
+continuation. The next piece will test all five new Core owner adapters against
+the original capture and use a separate commit-backed continuation profile.
+
+### Chain9 original-only S1 render evidence
+
+The mini's first completed [compact segment](research/evidence/chain9-s1-render-2250-3000.json.xz)
+replays **750/750 frames2251–3000** from the original frame2250 checkpoint.
+Every whole-state hash and both phase surface hashes exactly reproduce the
+committed Missions S1 trajectory. Raster calls and complete AffText argument/
+pre-text-surface attestations are observed from the unmodified intact x86.
+No translation runs in the capture. It takes321.833s after the shared lease
+grant; the observer/harness and original executable hashes are in the artifact.
+The [bounded recorder](testes/s1_render_capture.py) consumes immutable chain8
+Git-object sources and refuses output replacement. This evidence contains
+hashes and arguments only; it is not an advancing Rust or Python comparison.
+The original checkpoint remains solely an oracle opening, never a Rust reset.
+Earlier segments and the Rust comparison are still pending at this commit.
+
+## Chain9 piece2 — exact recruitment owner returns
+
+[Contract](research/CHAIN9_CONTRACT.md) and [measured package](validation/chain9/piece2/summary.json)
+add the five Core recruitment entries to the Rust fixture transport and reuse
+those same healing/fatigue/experience/placement bodies in production. Actual
+BL direction and DX exit cell are retained. Register outputs include all seven
+data GPRs and ESP; no C function, ABI identifier or copied layout changes.
+
+Fresh intact-x86 reexecution reproduces all **277/277** committed original
+cases; native Rust matches every mapped byte and all eight returned GPRs, with
+**zero masks, differences, skips or dependency stops**. Counts: conversion57,
+healing83, fatigue11, experience103, placement23. The fixture binary is debug;
+the release library is separately rebuilt from the identical source. Runtime
+fixtures include the actual S1 frame2547 calls and declared variants, not an
+advancing whole-state S1 proof. The named placement vision-sum limit is11,
+stopping at0x446146 after collision/visibility and before discovery.
+
+The fresh full gate passes fmt, strict Clippy, **30 Rust /63 Python tests**,
+**666/666** input leaves, **75/75** pilot original comparisons and C/Swift/Metal.
+No source edits followed that passing gate. Additive reference profile `chain9`
+pins logic6cdbc5a and Graphics92fab50; every earlier profile/mask stays unchanged.
+
+The retained advancing release S1 diagnostic independently agrees with original
+indicators, input answers and orders for **2,707 frames129–2835**. Frame2836
+first differs in unit12's record hash, with its published state/cell/order fields
+still equal and no provider stop. This is an unresolved diagnostic, not a
+passing extension or a concealed dependency. The older pinned Python still
+stops before conversion at2547; AI/runtime's committed continuation is pending.
+The next piece investigates that byte difference and runs the carried S1 surfaces.
+
+Additional original-only render attestations now cover frames129–750 and
+1501–2250 (622/622 and750/750 native whole-state/both-phase surface checks).
+Their compact immutable artifacts live beside the earlier2251–3000 segment.
+Frames751–1500 and the complete Rust surface comparison remain pending.
+
+## Chain10 piece3 — S1 through3850 and geometric work destinations
+
+[Contract](research/CHAIN9_CONTRACT.md#geometric-depot-centre-correction) and
+[report package](validation/chain10/piece3/summary.json) resolve the frame2836
+unit12 difference: only destination+7e differed (original0x0c15, Rust0x0a14).
+A replay-checked original2750 opening agrees through2836; every byte of unit12
+matches at2835. Its actual work call0x44c49e requires geometric
+GetCaseCentrale0x423b27, not collision-centre BatimentGetCase0x41aee2.
+
+The first shared-helper correction regressed farmer unit13 at2352. That failed
+report is retained. Routing is now exact per caller: GetCaseCentrale at44da02,
+44bf6a and44c49e; BatimentGetCase remains at44dc4b,44df64 and44c6b8.
+The isolated geometric query passes12/12 original full-register/memory cases;
+its body is unchanged by the narrower routing. A final-source repeat is queued.
+The complete corrected gate passes30 Rust/63 Python,666 input leaves,75 pilot
+captures and C/Swift/Metal. The earlier partial gate was canceled before the
+caller correction and is not counted as complete. ABI1.6/Graphics1.9 remain.
+
+Final-source release S1 agrees with original indicators, consumed inputs and
+orders over **3,722 frames129–3850**, with **zero differences**. The first
+actual Rust stop is **frame3851, phase3, SacGetCapacite at0x4299da**.
+This remains the published indicator domain, not a whole-state S1 claim.
+
+Additive profile `chain10` pins AI/runtime `bf8ec61` and Graphics92fab50.
+The pinned Python agrees over **2,418 completed frames129–2546**. It raises
+`ArgumentoNaoPassado` for actual EDX omitted at SetSortEngin call0x420f8c in
+frame2547. Rust completes that call. The strict same-stop reader therefore
+retains an explicit dependency-contract difference; preceding inputs/orders
+match, and no completed Python phase2547 equality is invented. All **4,838/4,838**
+paired Rust play/audit phases remain exact. Economy must forward the actual
+exit-cell DX; no foreign provider or reference callback is patched here.
+
+The mini's compact original attestations now cover **3,723/3,723 frames129–3851**,
+without gaps or duplicate frames. Every committed original whole-state hash and
+both phase surface hashes reproduce. The six bounded segments and observer
+hashes are in research/evidence; no later checkpoint becomes a Rust input.
+The earlier carried Rust surface prefix passes622/622 through750. Final S1
+surfaces through3850, prior-window regressions and exclusive timing are queued
+and remain the next verification piece; their results are not assumed here.
+
+## Chain10 piece4 — final-source regression and S1 render boundary
+
+Implementation **a410074** remains unchanged throughout
+[the final regression package](validation/chain10/piece4/summary.json).
+Every state/surface report has the same engine/harness/header input hashes and
+release-library identity. The source checks also match the committed files.
+
+| Probe | Original state/input/order frames | Own-world original/Python surfaces | Stop |
+| --- | --- | --- | --- |
+| K1 |501/501,129–629 (also pinned Python) |501/501 |None |
+| P3 |3,001/3,001,129–3129 |3,001/3,001 |None |
+| P6 |2,272/2,272,129–2400 |2,272/2,272 |None |
+| P7 |3,572/3,572,129–3700 |3,572/3,572 |None |
+
+P6 additionally reproduces **4,544/4,544 whole-state phases** under the unchanged
+published173,046-byte mask (16,002,289 compared bytes/phase), with **4,544/4,544**
+paired play/audit phases. Clock, block identity/lengths, original registers,
+static inputs and checkpoint integrity remain exact. This run takes933.822s;
+the advancing P3/P6/P7 surfaces take741.188/602.655/923.018s. These are proof
+wall times, not game-loop timings. All executed jobs stay below1,140s after
+lease grant. K1 again pairs all1,002 phases exactly. Fresh final-source
+GetCaseCentrale entries pass **12/12** with full registers and supplied bytes.
+
+S1's carried surface proof completes **1,885/1,885 full surfaces129–2013**,
+including original/Python pixels, original/Python raster order, carried cache/
+background and Python effects. At **frame2014**, both Rust and pinned Graphics1.9
+stop at **0x4022c8**, `structure selection outside captured API-1.8 domain`.
+Their partial pixels, cache, raster calls and effects match each other. The
+original completed the routine, so its complete frame2014 surface/raster tail
+is not claimed equal to this partial result. The strict full-window reader's
+stopped row and exit1 are retained, rather than changing its comparison masks
+or pretending that the remaining original drawing ran. No S1 whole-state or
+production-glyph claim is added. The prior qualified AffText contract remains.
+
+Thus the independent S1 logic prefix remains3,722 exact indicator/input/order
+frames through3850, with SacGetCapacite0x4299da stopping phase3 of3851; its
+render prefix ends2013. The pinned Python logic prefix ends2546, then requires
+Economy's actual DX forwarding at SetSortEngin0x420f8c. These are three separate
+limits, with their real outputs recorded. The remaining S1 selection contract
+belongs to Graphics; no unsupported mode was silently admitted in Rust.
+
+The final native gate already passes on these identical source bytes (piece3).
+Exclusive play timing and prior terminal state/surface hash checks are the last
+verification piece and remain pending here. No main merge or project acceptance
+is performed or claimed.
+
+## Chain10 piece5 — final exclusive play measurement and terminal equality
+
+[Final package](validation/chain10/piece5/summary.json) completes verification
+without changing implementation **a410074**. Measurement revision59cac4d adds
+only documentation and reports. All native/harness/header inputs and the release
+library remain byte-identical to the successful final gate and regression set.
+The aggregate result independently checks those identities and every stated
+prefix/stop contract, performance budget and prior terminal field.
+
+Exclusive coordinated-lease play logic includes both C ABI calls and Python
+input packing; it excludes initialization, render/audit/export/hash work and
+app presentation. Policy1 is explicitly selected.
+
+| Probe | Frames | Mean ms/frame | p99 ms | Maximum ms |
+| --- | ---: | ---: | ---: | ---: |
+| K1 |501 |0.2730 |0.3344 |0.4787 |
+| P3 |3,001 |0.2986 |0.3894 |0.4638 |
+| P6 |2,272 |0.2942 |0.3457 |0.5345 |
+| P7 |3,572 |0.3024 |0.4129 |0.5986 |
+| S1 |3,722 |0.3021 |0.4887 |0.6420 |
+
+Every measured scripted play frame is below4ms. The exclusive9,200-frame M2
+run, with **`--mode 1`**, averages **0.2754ms logic**, p990.3690, maximum1.6225;
+logic+render averages0.6753ms, maximum3.9160. Terminal full-state/surface hashes,
+counter, generation18402, phase3 and clock(9201,460050) exactly equal the earlier
+chain8 release. P3/P6/P7 terminal full-projection hashes, clocks, frame counts and
+input identities also exactly equal chain8. The first M2 command omitted the
+mode flag and measured its legacy audit default; that result is retained,
+likewise terminal-equal, and is not used for the play budget.
+
+The own lease-journal extract separates queue time from measured execution.
+No native or harness source changed after the final passing `validate.sh`.
+Fresh final-source12/12 GetCaseCentrale comparisons also pass after the timing
+batch. All prior state/surface equalities remain exact at their published scope,
+including4,544/4,544 P6 whole-state and paired phases. The source tree is clean
+at delivery, and only the feature branch is pushed; integration/acceptance are
+coordinator-owned.
+
+Final S1 limits remain distinct: original indicators/inputs/orders through3850,
+then Rust SacGetCapacite at3851/0x4299da;1,885 original/Python full surfaces through
+2013, then the matching Graphics selection stop at2014/0x4022c8; pinned Python
+logic through2546, then missing DX at SetSortEngin2547/0x420f8c. Graphics must
+publish the supported selected-structure contract for S1's2014 context; the
+committed S1 script and native raster/text attestations reproduce that context.
+Economy must forward the actual exit-cell DX into the recruitment call. Rust's
+later SacGetCapacite callback is the next logic boundary. No unknown callback,
+selection mode or glyph was made to succeed artificially, and no S1 whole-state,
+victory or TestB acceptance is claimed.
+
+Reproduce timing from this checkout with fresh output paths:
+
+```sh
+python3 "$lease" --exclusive engine-s1-play -- env RL_REFERENCE_PROFILE=chain10 \
+  python3 -B motor/testes/probe_benchmark.py --probe S1 --frames 3722 \
+  --library motor/target/release/librising_engine.dylib --output .local/s1-play-new.json
+python3 "$lease" --exclusive engine-m2-play -- env RL_REFERENCE_PROFILE=logic \
+  python3 -B motor/testes/play_benchmark.py --frames 9200 --mode 1 \
+  --library motor/target/release/librising_engine.dylib --output .local/m2-play-new.json
+```

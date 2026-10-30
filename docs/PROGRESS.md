@@ -2,6 +2,19 @@
 
 Round: **CXR-20261030-M3R2 (M3 round 2 — M3.1 P1/P2 part ACCEPTED at `c9c85eb`, P6 part ACCEPTED at `92fab50`; S1 victory and D1 defeat on the original)**. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)); M2.1 at `32bb391`; M2.2 at `b9f4b5d`; **M2.3 and M2 at `ea62eb4`** ([record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json)); **M3.1 P1/P2 part at `c9c85eb`** ([record](../integracao/validacao/cxr-20261030-m3r1-m3-1-p1-p2-acceptance.json)). Handover: [HANDOVER_CLAUDE_20261030_0700](HANDOVER_CLAUDE_20261030_0700.md). [Roadmap](ROADMAP_MONDE01.md), [M3 plan](M3_PLAN.md), [snapshots](progress/README.md).
 
+## Indicadores medidos (atualizados a cada integração)
+
+Estimativa global da MONDE01: **~60% (50–70%)** desde 30/10 13h50 (era 50% (40–60%); subiu com o M2 aceito, o M3.1 P1/P2/P6, o Teste A completo e as capturas originais de vitória e derrota). Os indicadores abaixo são medidos, não estimados.
+
+| Indicador | Valor | Atualizado |
+|---|---|---|
+| Critérios aceitos (M1, M2.1–2.3, M3.1–3.5, M4.1–4.3) | **4 de 12** completos + M3.1 com 3 de 4 janelas (P1, P2, P6; falta S1) | 30/10 13h50 |
+| Alcance da cadeia Python no S1 (vitória no quadro 17.050) | **2.546 / 17.050 quadros (15%)** — para no 2547 (`SetSortEngin` DX, Economia) | 30/10 13h50 |
+| Alcance do motor Rust | P1, P2, P3, P6 (estado completo 4.544/4.544), P7 e K1 completos; S1 em andamento | 30/10 13h50 |
+| Teste A no app (metade de estado) | **6 de 6 sondas iguais** (P1 501, P2 601, P3 3.001, P6 2.272, P7 3.572, K1 501 quadros) | 30/10 13h50 |
+| Capturas originais (S1, D1, passo 2 do S1) | **2 de 3** (passo 2 do S1: 60/69 segmentos) | 30/10 13h50 |
+| Modo jogo no app | 60 quadros de jogo/s com ordens; lógica Rust ~0,28 ms/quadro | 30/10 13h50 |
+
 ## Resumo executivo
 
 **30/10, manhã e tarde.** **M3.1, parte P6, aceita** (main `92fab50`): prova estrita de estado completo da sonda P6 (ordem da caverna, construção, entrada do colono e ciclo de trabalho, quadros 129–2.400), 4.544/4.544 fases iguais ao original, 0 cruzamentos, reproduzida na MacBook e no Mac mini com hashes idênticos ([registro](../integracao/validacao/cxr-20261030-m3r2-m3-1-p6-acceptance.json)). O motor Rust passou do quadro 220 (main `6cdbc5a`): P3, P6 e P7 iguais em estado e tela, P6 de estado completo 4.544/4.544, lógica a ~0,28 ms/quadro. A derrota D1 (replay igual) e toda a documentação foram conciliadas na main; o trabalho do Codex não validado está em ramos `wip/*`. Falta no M3.1 só a janela do S1 (passo 2 em captura no Mac mini).

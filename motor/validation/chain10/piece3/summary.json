@@ -1,0 +1,161 @@
+{
+  "abi": "1.6 unchanged",
+  "artifacts": {
+    "S1-python-final2.json": {
+      "compressed_sha256": "f0047bde7b4d16f8829733e7b7443dc5d2754fdc3a726cb90a24c633b0888d09",
+      "path": "S1-python-final2.json.xz",
+      "raw_bytes": 5531148,
+      "raw_sha256": "59e09e6f0cf9edc17b2f4b438138219aa6015504c258c5436a4d25e8d4690957"
+    },
+    "S1-python-final2.log": {
+      "compressed_sha256": "7d535b739f79218818f59ad01f228836e7bfba628107b8c8ebc339237a50fdad",
+      "path": "S1-python-final2.log.xz",
+      "raw_bytes": 4363,
+      "raw_sha256": "50831f30cfd234f5c75a610e077c646bb1447a529005735e6431922c8497349c"
+    },
+    "S1-state-central.json": {
+      "compressed_sha256": "4226f083acb1459786d1691cd29e3026ddd2e2722014f50994286d40a8506fde",
+      "path": "S1-state-central.json.xz",
+      "raw_bytes": 4229640,
+      "raw_sha256": "dc17e5f2efe9e867fb4461620929e91011c9a14f3f9646aedfc5b0f05f82f1f7"
+    },
+    "S1-state-central.log": {
+      "compressed_sha256": "132f1cf04e5c49fdabc9fcc984f33aff28df55d6b71302088bafaa3e465acafe",
+      "path": "S1-state-central.log.xz",
+      "raw_bytes": 2389,
+      "raw_sha256": "6251a56c8de80846a339d876c4494865d13401281f5f8d88b7eafb5aa9abe842"
+    },
+    "S1-state-final2.json": {
+      "compressed_sha256": "978806ed51c19fa87800d3dcf465358ccafc7ad3001d54a1c7ac9e4f51e26778",
+      "path": "S1-state-final2.json.xz",
+      "raw_bytes": 7068826,
+      "raw_sha256": "90293779272d9ffdcf3025553514dfd9bacef99223c9007af9004949ae8c3dd1"
+    },
+    "S1-state-final2.log": {
+      "compressed_sha256": "8206796ce22b44e1fe57fab0ef746c47e7c8dabd87993a037cc55536e973283d",
+      "path": "S1-state-final2.log.xz",
+      "raw_bytes": 1951,
+      "raw_sha256": "55075c12d418990cfe9537954025c3ad88637ffb356de378c9ca3387b866cade"
+    },
+    "S1-surface-prefix.json": {
+      "compressed_sha256": "25dd48332fd888121d8ae818b26478f9146929e30b5935645184ffe70af6af58",
+      "path": "S1-surface-prefix.json.xz",
+      "raw_bytes": 334543,
+      "raw_sha256": "eec3b88d5cdfc5367f1394d9d1b46e6a05b7fb66913e426ebab8417686fafe64"
+    },
+    "S1-surface-prefix.log": {
+      "compressed_sha256": "38963657b7f5fa327f5de169b708de7d359e7875f76e18e9e3bfd34c52640f7c",
+      "path": "S1-surface-prefix.log.xz",
+      "raw_bytes": 280,
+      "raw_sha256": "614526587ec6fbf7929f107c25e33e839f506eee3a72ac0f44fdd74d38df7095"
+    },
+    "S1-unit12-rust.json": {
+      "compressed_sha256": "19dfe12b8c6a03241c9ec6da38ee0dbc4a5ce9b30f9fdeede8d2257f12e683b3",
+      "path": "S1-unit12-rust.json.xz",
+      "raw_bytes": 1197,
+      "raw_sha256": "5e4a2ff562b22aa36eb43f240b77b1c48989848ed37c697970bc6c5dce495f81"
+    },
+    "build-central.log": {
+      "compressed_sha256": "bf2fc2e4a4c959b5fc954129065b50ac881116c73ffa233951e2b57c91542e19",
+      "path": "build-central.log.xz",
+      "raw_bytes": 334,
+      "raw_sha256": "18949c123e1697c4bede22c730109ebb4ae5ef27909a7bdfeaf1c018f216a741"
+    },
+    "build-central2.log": {
+      "compressed_sha256": "40bc8028c6b9b5adae6183a3aea2450d75936f3fc5c5bccc8b6a6215da4a332d",
+      "path": "build-central2.log.xz",
+      "raw_bytes": 346,
+      "raw_sha256": "6635ef19d2dadfdbaffad6164d3b95032bd589f32ab30c713395899bf3539610"
+    },
+    "central-native.json": {
+      "compressed_sha256": "f4e58de678a2e774ec159a9051834032c74c7c7a31f9406eec720b19252c51e4",
+      "path": "central-native.json.xz",
+      "raw_bytes": 33036,
+      "raw_sha256": "6aebad9d316d9b96c877889092300c04668d37db16d85977e22a6c96eaa787b4"
+    },
+    "central-native.log": {
+      "compressed_sha256": "7dd7d9f160d2d638c912979221cf8a9be6b38e2326f709a9b2f6a09d6034f2d0",
+      "path": "central-native.log.xz",
+      "raw_bytes": 186,
+      "raw_sha256": "7c1ec66f51205d189a49ca724897a94ece1fd4bd79abea6a91b9bb0d24200540"
+    },
+    "final-inputs.json": {
+      "compressed_sha256": "d343284e73ed6ab6a9745aec8436b61380accfe263cd218be8fe2d19d6dff5d4",
+      "path": "final-inputs.json.xz",
+      "raw_bytes": 14569,
+      "raw_sha256": "10c9bbb856f5e6e65051c2d53907f3ad251989f704eed185ce7fac03831b4579"
+    },
+    "gate-central.log": {
+      "compressed_sha256": "8a4836eaffa6a42ccb411fa1d6cf708b46257867664bb016bc9089e1b64be82d",
+      "path": "gate-central.log.xz",
+      "raw_bytes": 12208,
+      "raw_sha256": "e2d9d974054b56fe220383f708b9e943e2d7742e2d47ad36f784d4b8740ec449"
+    },
+    "gate-final2.log": {
+      "compressed_sha256": "dac75813ef8c9e68a19750756757621a9346aa40a14c40d214ab3811df72e46a",
+      "path": "gate-final2.log.xz",
+      "raw_bytes": 15942,
+      "raw_sha256": "5a2e9046053a832df853344bf5a846bf54eb3198adf712bda9e1ef48533fd077"
+    }
+  },
+  "central": {
+    "equal": 12,
+    "original_cases": 12,
+    "qualification": "Isolated query body verified before narrowing caller routing; query implementation unchanged. Fresh final-source repeat is queued."
+  },
+  "gate": {
+    "c_swift_metal": true,
+    "input_leaves": 666,
+    "passed": true,
+    "pilot_original_cases": 75,
+    "python_tests": 63,
+    "rust_tests": 30
+  },
+  "graphics": "1.9 unchanged",
+  "pending": [
+    "Final advancing S1 surfaces through3850",
+    "Fresh K1/P3/P6/P7 regressions, including4544 P6 whole-state phases",
+    "Exclusive final-source play timing"
+  ],
+  "python": {
+    "dependency": {
+      "address": 4329356,
+      "callee": "SetSortEngin",
+      "dependency": "SetSortEngin called at 0x420f8c without its argument register(s) EDX; pass them (the original passes them), nothing was run",
+      "type": "ArgumentoNaoPassado"
+    },
+    "diagnostic_exit": "strict same-stop reader reports Rust completion versus Python missing DX; inputs/orders before the dependency match; no equality is claimed for the unreturned Python phase",
+    "equal": 2418,
+    "frames": [
+      129,
+      2546
+    ],
+    "paired_play_audit_phases_equal": 4838,
+    "reference": "bf8ec61c28062da151e74613613a6ec9e9a76686"
+  },
+  "retained_attempts": {
+    "partial_gate": "gate-central was canceled before correcting the shared caller helper; it is not claimed as a completed gate",
+    "shared_helper_regression": "S1 frame2352 unit13 record hash; fixed by preserving BatimentGetCase at its original call sites"
+  },
+  "schema": "rising-lands/rust-chain10-geometric-work-correction/1",
+  "state": {
+    "equal": 3722,
+    "original_indicator_frames": [
+      129,
+      3850
+    ],
+    "stop": {
+      "error": "SacGetCapacite at 0x004299da",
+      "frame": 3851,
+      "phase": 3
+    }
+  },
+  "surface": {
+    "equal": 622,
+    "preliminary_prefix": [
+      129,
+      750
+    ],
+    "qualification": "Before geometric work correction, using identical renderer source; final carried surfaces are queued"
+  }
+}

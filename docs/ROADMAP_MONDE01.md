@@ -162,7 +162,7 @@ A requested contract is recorded in the requester's handoff with the exact origi
 
 ## Inventory for the completion estimate
 
-The estimate stays approximately **50% (40–60%)** (unchanged at the 2026-10-30 07:00 update; the rows below were refreshed then). It is reviewed from this inventory, not computed from counts of tests, files or native executions. A component moves only when its status column changes with original comparison.
+The estimate is approximately **60% (50–70%)** as of 2026-10-30 13:50 (raised from 50% (40–60%): M2 accepted, M3.1 P1/P2/P6 accepted, Test A complete in the app, original victory and defeat captures). Progress is now also tracked by measured indicators at the top of [PROGRESS](PROGRESS.md) — above all the Python chain's frame reach in S1 —, updated at every integration. It is reviewed from this inventory, not computed from counts of tests, files or native executions. A component moves only when its status column changes with original comparison.
 
 | Component | Implemented | Validated vs original | Integrated | Mission-tested |
 |---|---|---|---|---|
