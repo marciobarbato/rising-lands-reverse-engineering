@@ -208,3 +208,31 @@ All three policies pass:
 The window mask (`sondas/<P>/mascara-janela.json`) is the published M2.3 mask, plus the display-only bytes the window proves, minus any byte the window classifies as game logic (none). P6 contains P3's window, because their inputs are equal through frame 2004.
 
 Pass 2 ran at about 2–3 s/frame per job on the Mac mini.
+
+## S1 script (stages 1–6 verified; final runs not launched)
+
+[roteiro_s1.py](roteiro_s1.py) builds [entradas/S1.json](entradas/S1.json), the S1-b plan. Each stage was run natively, resumed from the previous stage's snapshot, and checked through its `comandos.jsonl` and objective trace (`.local/m3/s1dev`):
+
+| Stage | Frames | Orders (native) |
+|---|---|---|
+| 1 | 133–203, 1833–1845 | builder → CAVE (as P3); 13 → field (26,32) and 14 → (27,32) by minimap moves (tag 5); sanctuary select; double click → tag 33 (colonist out to (14,14)) |
+| 2 | 1863–2183 | colonist → cave (tag 16), lodged at about 1975; recruit type 7 (tag 17, 20 → 14 food); Ctrl routes 13: field (28,32) → cave (tag 7, 2069) and 14: field (26,32) → cave (2139); builder 12 minimap move to the mine |
+| 3 | 2563–2669 | recruit type 7 (14 → 8); recruit 1 (unit 4) minimap move to the mine; builder 12 Ctrl route mine → cave at view (19,0) (tag 6, 2669) |
+| 4 | 3173–3299 | recruit type 5 (10 → 6); recruit 2 (unit 5) route with a diagonal scroll under Ctrl (tag 6, 3238); unit 4 route (tag 6, 3299) |
+| 5 | 3753–4423 | recruit type 5 (7 → 3); routes for recruits 3 and 4 with a down/up scroll to view (10,17), fields (24,33) and (23,33) (tag 7, 3865 and 4225); recruit type 5 (4 → 0) |
+| 6 | 4833–4875 | route for recruit 5, field (21,33) (tag 7, 4875) |
+
+**First credits.** Food at about 2750 and stone at about 3250. At frame 5300 the team is 5 food workers and 3 builders, with food 4 and stone 31; 2 colonists remain in the sanctuary.
+
+**Rules learned while writing the script** [B]:
+- Recruitment takes 308–534 frames. A recruit leaves at (14,14) or (16,14), and is selectable only about 40 frames after the sanctuary returns to +5 = 5.
+- A press on a cell holding a unit selects that unit, never a field or mine under it. A route's source must therefore be a free field cell (row 33 needs view (10,17)).
+
+**Continuation.** A run resumed from the stage-6 snapshot at frame 5300 continues to frame 18000 or victory. Its result is recorded below when it ends.
+
+### Resumable next steps
+
+1. From the continuation, take the frames of the first AL = 1, of `0x4e061c` = 100 and of `MenuInit(0x13)`.
+2. Add the confirmation click on the result screen (to be found on that screen) and a stop at the `MissionNext` return. Set `stop_frame` just after.
+3. Run S1 twice from F0 (`entrada_roteirizada.py correr --entrada .../entradas/S1.json --instantaneo-cada 1000`, two lease slots, about 2 h each). Compare the runs, then package with `relatorio_sondas.py S1`.
+4. Pass 2 of the S1 segments with `passo2_sondas.py`, as needed by the proofs.
