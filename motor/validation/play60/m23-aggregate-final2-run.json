@@ -1,0 +1,29 @@
+{
+  "command": [
+    "env",
+    "RL_EXECUTION_MODE=2",
+    "RL_COMPARE_PLAY=1",
+    "python3",
+    "-B",
+    "motor/testes/frame_long_differential.py",
+    "aggregate",
+    "--reports",
+    ".local/performance-60fps/final2/m23-part0.json.xz",
+    ".local/performance-60fps/final2/m23-part1.json.xz",
+    ".local/performance-60fps/final2/m23-part2.json.xz",
+    ".local/performance-60fps/final2/m23-part3.json.xz",
+    ".local/performance-60fps/final2/m23-part4.json.xz",
+    ".local/performance-60fps/final2/m23-part5.json.xz",
+    ".local/performance-60fps/final2/m23-part6.json.xz",
+    ".local/performance-60fps/final2/m23-part7.json.xz",
+    ".local/performance-60fps/final2/m23-part8.json.xz",
+    ".local/performance-60fps/final2/m23-part9.json.xz",
+    "--plan",
+    ".local/performance-60fps/final2/m23-plan.json",
+    "--output",
+    ".local/performance-60fps/final2/m23-aggregate.json"
+  ],
+  "seconds": 1.612834666,
+  "returncode": 0,
+  "lease": "engine-perf-bench-battery exclusive"
+}

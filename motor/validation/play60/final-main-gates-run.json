@@ -1,0 +1,8 @@
+{
+  "command": [
+    "python3",
+    ".local/performance-60fps/final_gate_battery.py"
+  ],
+  "seconds": 707.549973625,
+  "returncode": 0
+}

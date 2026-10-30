@@ -677,3 +677,34 @@ frozen captures and footprints while permitting independent later working-tree
 campaigns. M2 package/capture/policy immutability checks remain unchanged. The
 full phase proofs used the same frozen input bytes before the merge; native
 sources, header and release-library bytes are verified identical afterward.
+
+### Sustained play measured delivery
+
+Over 9,200 chained frames on the MacBook, the release ABI loop improves from
+**74.54 to 1,540.23 frames/s**. Phase 2 falls **4.616 → 0.014 ms**, CalculGame
+**5.007 → 0.246 ms**, and rendering **3.777 → 0.386 ms** per frame. Logic averages
+**0.260 ms**; logic + render averages **0.646 ms**, p99 **0.798 ms**, maximum
+**1.718 ms**. These meet the 4/8 ms targets throughout the measured window.
+Generation queries and caller-buffer copies bring the full ABI loop to **0.649 ms**.
+The scope excludes initialization, proof/export work and macOS presentation.
+The baseline and all optimized runs finish with identical full-state and surface
+hashes, generation and virtual clock. Full-audit policy 2 retains **0.652 ms**
+logic + render; sampling confirms full projection/reload is absent from the hot loop.
+
+Fresh regressions are **257/257 M2.2**, **18,401/18,401 M2.3**, renderer
+**128/128 Python + original** and **9,200/9,200 original**. All M2.3 phases also
+match play/audit modes for every projected byte, frame context and clock.
+P1/P2 retain **501/601 frames, 1,002/1,202 whole-state phases**; P6 retains its
+**183-phase whole-state prefix**. The leaf battery retains **659 completed equal**,
+seven exact stops, two declared skips and zero mismatches. Qualified Graphics 1.7
+probes retain **501/601/172** surfaces equal. All dependency and glyph stops remain.
+
+Implementation `98c40c6`; full proof revision `74a3fbe`; final main `54d148d`
+merged as `4bd1112`. Native source, header, evidence digests and measured release
+bytes are unchanged across that merge. The merged gate passes **30 Rust / 63 Python
+tests**, fmt/strict Clippy, **75/75** pilot differential and C/Swift/Metal checks;
+the common check passes **2,024 tests**, **623 optional skips**. No fresh original-x86
+emulation or later functional port is claimed. The macOS consumer must accept ABI
+1.6 and select `RL_EXECUCAO_JOGO` before its live loop to obtain this play path.
+[The report package](../motor/validation/play60/summary.json) and
+[handoff](../motor/HANDOFF.md) record exact timings, hashes, masks, commands and gaps.

@@ -1,0 +1,1528 @@
+{
+ "execution_mode": 2,
+ "first_difference": null,
+ "frames_compared": 12,
+ "frames_equal": 12,
+ "input_events": 171,
+ "input_sha256": "92a69cdd087cdc644ef3b8d7abdbf3cfa176d7f564a914b17b2dfc901e4a0600",
+ "library_sha256": "5076e85bbc34e755933cbe6b0e856aead3f4f4c482337a29209dc0fd42c0abf0",
+ "native_seconds": 0.0061931679999993605,
+ "orders": [],
+ "play_comparison": {
+  "checks": [
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 129,
+    "phase": 2,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 129,
+    "phase": 3,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 130,
+    "phase": 2,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 130,
+    "phase": 3,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 131,
+    "phase": 2,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 131,
+    "phase": 3,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 132,
+    "phase": 2,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 132,
+    "phase": 3,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 133,
+    "phase": 2,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 133,
+    "phase": 3,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 134,
+    "phase": 2,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 134,
+    "phase": 3,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 135,
+    "phase": 2,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 135,
+    "phase": 3,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 136,
+    "phase": 2,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 136,
+    "phase": 3,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 137,
+    "phase": 2,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 137,
+    "phase": 3,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 138,
+    "phase": 2,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 138,
+    "phase": 3,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 139,
+    "phase": 2,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 139,
+    "phase": 3,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 140,
+    "phase": 2,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 140,
+    "phase": 3,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   },
+   {
+    "clock_equal": true,
+    "equal": true,
+    "events_equal": true,
+    "frame": 141,
+    "phase": 2,
+    "registers_equal": true,
+    "state_equal": true,
+    "stop_equal": true
+   }
+  ],
+  "equal": 25,
+  "phases": 25
+ },
+ "probe": "K1",
+ "probe_files_sha256": {
+  "comandos.jsonl.xz": "81cb6fa8dcb0ff585db02fd397aecc5dfd8e7930b984df02f5c2dd162f6545bb",
+  "entradas.jsonl.xz": "8f22f25d6307b7b9a9d7b6b9733a8ebe8802e6a902e5503845fed317aad7891b",
+  "quadros.jsonl.xz": "2680b6b8b6fe8ac1b91edfd0c656f2f5f624a25d3699d9a3d0b9331408ed84da",
+  "replay.json": "168ab609ba0e61f62652c4af7d528447e5b2c61667e73faed28d2120eecbb9a8"
+ },
+ "provenance": {
+  "binary_sha256": "5076e85bbc34e755933cbe6b0e856aead3f4f4c482337a29209dc0fd42c0abf0",
+  "binary_stable": true,
+  "source_dirty": false,
+  "source_revision": "74a3fbeab35aee4d27ff6b33cbdc64ec5861be51",
+  "source_sha256": {
+   "motor/Cargo.lock": "fc59e953bced91cbfb748499f1fb2f9ea794afbf573af9e616869461d2c59189",
+   "motor/Cargo.toml": "457458d7fdd0288a30a29dab5791bada6f6061b7ba6dda9fce9c815bfd248491",
+   "motor/crates/rl-core/Cargo.toml": "d91e9f869887b6c520bc9a39c7f0b204e53553c78e46f2ca0656f53492521cef",
+   "motor/crates/rl-core/src/bin/player_fixtures.rs": "df436bf3be3f66559cdcba1ce0974de3994ff4c43da5232f0bd54ca3a436c90c",
+   "motor/crates/rl-core/src/bin/render_fixtures.rs": "f853f090dc86020912ebb3f6e4872e6eb8cc4f397aa942fb2163758e7e26607e",
+   "motor/crates/rl-core/src/bin/render_probe_stream.rs": "dd6ac273d7eadceed84d0c8e103a6e461bb5ce9783f76d312bc37e4b6b0de650",
+   "motor/crates/rl-core/src/clock.rs": "c1ee5833dd254feeb61503733305c881f2c8c751142181ede0438a35377df40a",
+   "motor/crates/rl-core/src/frame.rs": "496d40fe7f11bfe41cda377fe10efcbba362fab6d011a2f6ad59d417c8681479",
+   "motor/crates/rl-core/src/frame_ai.rs": "41625137d3e1d85ede46ca18fc2370f4e217084f09eeb12c4956c59d9873a85d",
+   "motor/crates/rl-core/src/frame_combat.rs": "1c2f9090f2bb9e272a59f580631dfd3e0a833d1267dc5cd56c4cdfdc47cea1ed",
+   "motor/crates/rl-core/src/frame_core.rs": "971697c9ee2d083ea56dfb5705d310536d7c8512ae628cbd48858842c0c0d2b3",
+   "motor/crates/rl-core/src/frame_economy.rs": "f144a7304d4ca1f1062c389092941862f10f61878abf334410ccfbee625f1278",
+   "motor/crates/rl-core/src/frame_input.rs": "6b46c5e85fccbf8e4a1e8a9adbc7e72fec8376d9a2212508c1af9df57371e88b",
+   "motor/crates/rl-core/src/frame_missions.rs": "4a4fc5c845a22be27e1d2194e32439052ebe6277d53680c9f74c154bba11cf8c",
+   "motor/crates/rl-core/src/frame_movement.rs": "5f1b3af9f26b61dbf26ff9412218ef3f90a975da35b96c52a0f4e070713fa1f0",
+   "motor/crates/rl-core/src/frame_path.rs": "80d303cde21aec8ada3550d90db51fe8c2d42d5a7b44fce4b14d6276f4758ba0",
+   "motor/crates/rl-core/src/frame_raid.rs": "991be736acb4408fc4fe79aca4c4612861dd885e0617ea3c5ea30443038a0297",
+   "motor/crates/rl-core/src/frame_runtime_state.rs": "6e7c8e60a4fd628d025f5680c1cebb3331aa47ccda82174201770e17ee5b4c9f",
+   "motor/crates/rl-core/src/frame_spawn.rs": "26158efcf459591c3d699d09da2a447997a245dd68292c39421aa94ea4e9977f",
+   "motor/crates/rl-core/src/frame_state.rs": "0669412301a2110f7e9fa0e1cb4e7dfc62e4777c14aa097d5cddd64699377789",
+   "motor/crates/rl-core/src/frame_tasks.rs": "2a8d437f8e307d0814ad37f551dd137bf3c83e7f9bb7191486573c15b7fbebef",
+   "motor/crates/rl-core/src/frame_units.rs": "8abdb14fe42823af906da8eff09b0bfa8399705bfb50fb1ab17a72c760594e0d",
+   "motor/crates/rl-core/src/lib.rs": "47b2ee06ef5b6e7330b61613e563ad64940fa23ce7914d1969be285744ce9153",
+   "motor/crates/rl-core/src/memory.rs": "6a3ae9f162f84720ab376cdbbe759e0f0127dff626193bb74ed29a6e271e001d",
+   "motor/crates/rl-core/src/play.rs": "b340ed20f157abe7e5a00b37ec1bb2bef9e286bb34561add0f56903c01404e0f",
+   "motor/crates/rl-core/src/player.rs": "7ea230fa8f64977cc5799c57ba0a04a5032a992ae613cd167bd1624333565e44",
+   "motor/crates/rl-core/src/player_audio.rs": "3c790da4a7c231cad184c5e1cec4446431f56ab9f5c6d3b75bb6d86672c15417",
+   "motor/crates/rl-core/src/player_build.rs": "6f40d2bc1b0d8e3c130c86f4503c4a3efc9a8690bbec68f827dc68ed380a42e4",
+   "motor/crates/rl-core/src/player_input.rs": "c38fc738c4a4307ca499e2257628e7fbcdd7467e49f1a09ba2968d7c98df5832",
+   "motor/crates/rl-core/src/player_loop.rs": "b6eb6d3cd1b955db1a23148761de6200b1b2dadd640fd3405ca2e6419360f88f",
+   "motor/crates/rl-core/src/player_orders.rs": "931ba86d76112318ab772564203d302ee6d04e3aa5f536d563ae079386592b76",
+   "motor/crates/rl-core/src/player_pages.rs": "61ec0bf1f626e03a2904f16e12e011a6455f08889946ca383c8ed3eb99ce4d0d",
+   "motor/crates/rl-core/src/player_sight.rs": "7ae7ff87ba20fe793eef7f90c7c9564e27e5242f21b55147aa9cc399a17d567d",
+   "motor/crates/rl-core/src/render.rs": "3ad6e192732913c9ed4b07e7cc61486dd39ad5c35817a3f357544fa4bf701abe",
+   "motor/crates/rl-core/src/render_assets.rs": "c97265f927e2835f017b11b4bc05ebf2170d9d6a02079abce26ccc04b53d9063",
+   "motor/crates/rl-core/src/render_hud.rs": "35727d3c7dfa410cafba39e6f79eeac4ed77b2ef02b0589b7dab9c09727743f8",
+   "motor/crates/rl-core/src/render_scene.rs": "2f6ad46541385ace4406f5afc75071c54ce6b744e0e09bca54397e3c49d57a4f",
+   "motor/crates/rl-core/src/render_scripted.rs": "8d0a4cb1cda4490c7223f2b013f9f7deb77d0028e3bf2d7e1f1c5428f0530af0",
+   "motor/crates/rl-core/src/render_units.rs": "c9c1489e7bcb8ef2ff399481b28bf06e46b2bd1bc9c4cde670d07ce87adba6d3",
+   "motor/crates/rl-core/src/state.rs": "6cf2bfdea777e8d60bf298ee12cd39898c283e727bf238c0d042db5cc7cd7095",
+   "motor/crates/rl-core/tests/frame_runtime_state.rs": "d46a07b75697c6ba6eaf820946e0b737324e35206626399f701d4f38220eb08d",
+   "motor/crates/rl-core/tests/frame_state.rs": "c88a74bd290b488721111043655d896c81498c638e665fde8fce15a8cdfaa57c",
+   "motor/crates/rl-core/tests/pilot.rs": "93639c3d3e3a293a4eba32cb3d118948e7bd2446369546af39f38297d98e1bd7",
+   "motor/crates/rl-ffi/Cargo.toml": "984b03c847eb8e7bdb015607ae0ba13b22ebb5e51a0230a05f0a41a243feb848",
+   "motor/crates/rl-ffi/src/lib.rs": "662992af492dc0bc7178ab91754b3e459c1c995457527f181461ceef25777bd0",
+   "motor/crates/rl-ffi/src/player_abi.rs": "572af1ed9c95061cb17a0bd6e82b33df6821313ca92b8a893a4462c8a222a823",
+   "motor/crates/rl-ffi/src/render_abi.rs": "f0faf45d88686c81eafe6d400117caf779744a26aabfa2b250194369d773f88f",
+   "motor/include/module.modulemap": "2648b6970ff597900f90bf1eb208170fa5995fa41cd6d0d90c4ec8fd472d295a",
+   "motor/include/rising_engine.h": "02e067056082b796d37261806b3243a97719128e3b2b1929848f98d9a886fffd",
+   "motor/testes/differential.py": "ca29599adea265d392108048e250c4cf4dd26ad3d4bf19f234e7524ace879cde",
+   "motor/testes/frame_abi.py": "af0ac6027fdc060633ee821db5509cbe0dae4abef531d341c9c07ad63b899e7c",
+   "motor/testes/frame_differential.py": "6d4e3f33fef6efacbd69490b372d90496941fd263a8d96db74a01117e2ba65e4",
+   "motor/testes/frame_evidence.py": "e22c2c1d5e483cbec14d84bc61e16662d82b89caac5f03bcbb2197a9a3e9121d",
+   "motor/testes/frame_long_benchmark.py": "534d750373e6089d70b19ddec4b3573d6fbec9271c2b4ef9a2f42bd0a7e14d75",
+   "motor/testes/frame_long_differential.py": "0b40c69af02cb9a110783f92e1ae71a91cb37fbee4768cffbc05b8082e563241",
+   "motor/testes/frame_long_evidence.py": "6287c86483673fd9785f8b84b5d7030448b4b556f6300cf52d1c194c39348b6a",
+   "motor/testes/pilot_abi.py": "83b131982914eee152f3674d3ea0efd63ebd3fe49f03801d0e61cae7b9156eb1",
+   "motor/testes/pinned_reference.py": "92948c8b58b24682977f6f9b44f2841337ad6176d585cfef1121c8f9c7726aba",
+   "motor/testes/play_benchmark.py": "6dde37098946188b1b0a1ca245c815e262c3d4822aa8a1a71652bf65abc8faac",
+   "motor/testes/player-reference-pins.json": "4e4e48d396bde2651e52d4d1387f108a604c42ea1510042db8b4f1575faba89c",
+   "motor/testes/player-window-pins.json": "61aad98f5ae93dce213f2a6b73779b8cab68823d7d7fc2166d47842cd6d03a49",
+   "motor/testes/player_abi.py": "e7c8d784ee936eee0772fcce166dc0e62b773e1ace6b5c694f18d2391643047b",
+   "motor/testes/player_contract_checks.py": "30e5e17b3e00a2497a74760e57280af3bc10e8a5d6f47af2bb8f6418a3fec2ae",
+   "motor/testes/player_leaf_proof.py": "8ea97c1a3b8e71e987f824206414868fb8df06f55514d61a52ee957853fb0339",
+   "motor/testes/player_pins.py": "456ae91d8060e1fd89297a1d9a4ffb98e79c4a9a91a12b6a84512f00a13dc6b9",
+   "motor/testes/player_proof.py": "1f4f0b9727d771e5948aa129af07172c159ea8a06945d4f3ba185c899adb59ff",
+   "motor/testes/player_provenance.py": "6b56e52046e5d4c1fa0e9a3c678f2a2a39a4b578056c3f27652b4a67a11b699a",
+   "motor/testes/player_state_evidence.py": "8eb6241e2e7ca2a673e59dbcf6b1cd53df6652573ed1442e01057d2be63bb33f",
+   "motor/testes/player_window_reference.py": "95a3c4e5c0a81c9a91164b3c07ab6b134fe44895d60cc04a0a324fd1202d7b24",
+   "motor/testes/reference-pins.json": "1ffd342ffa117e411829f5140db335c359ad0773ec88e15e1d38983aaecb9650",
+   "motor/testes/render-reference-pins.json": "184d2af64e636c199f5cdbdfeb0d03ca54f2c5886b964b2bb4aec2a06ed2fe5b",
+   "motor/testes/render_abi.py": "8333a0ab867cf20f084c4ed3ee22cc2a9d3fc41c6547cd059ebcbff364727507",
+   "motor/testes/render_contract_checks.py": "94ffba2180041a93eab210917711eadd20e747272ae732ce90a5b9de59249f6e",
+   "motor/testes/render_facade_proof.py": "566c13d01607aebd0e97b8dfbc1b8fb263e40226b9485768fd3420d87d04461a",
+   "motor/testes/render_matrix.py": "53a75aaf6f6e1cf1a07e19e1b73545f42e403a6b597ad1d26adebb8c2ed93733",
+   "motor/testes/render_probe_proof.py": "9d86d710f58427c4749cd7a9c3ce0806268bd22cd4bdb6f80dc122f2d2f1ef4e",
+   "motor/testes/render_proof.py": "b0e5861047921682c1d9e9a7f8762243089629f1d28335c927c9f9de92b4fafd",
+   "motor/testes/render_stops.py": "dba61a98d544cf6c7d904996a3be4f4fc102eddb48c5eae65eb7e1d43a8e6afd",
+   "motor/testes/render_swift_benchmark.py": "fa7dac046c8616e3c79f964c95377da7e00e4b93cc82d6ee42e6b0aaef9a93d6",
+   "motor/testes/render_swift_inputs.py": "527e52538b8a29d887434e03441b0bdec98af46a5d98dfa48bc3b177a149ba42",
+   "motor/testes/test_frame_ai_units.py": "451115cbb8f26b6798bfe987584faddf677831dbe0ee9d368a3e852249aae629",
+   "motor/testes/test_frame_combat.py": "a3b35b308b7076a14f532aa66508f91f88701bd1e8b19ad45965501b0c5ce5c8",
+   "motor/testes/test_frame_contract.py": "04f9e5393d1059b2e15f25cd84dc0db9bf276c127b32569b2734d00fe5ce4022",
+   "motor/testes/test_frame_core_economy.py": "9d5ba3fc0aa44938bba29efa96b094a2d8ee324763c918672fad3ff168755724",
+   "motor/testes/test_frame_evidence.py": "c96080cb94af6cb8d75ea6514c1efc0c174126088bb2a02fb8b3f3d557d1ad37",
+   "motor/testes/test_frame_input_missions.py": "06cbd7c442a0d31dc15f82ab1ea3a71bfec92cf1b4ffae69bf7016766c9e2744",
+   "motor/testes/test_frame_long.py": "773dd91e73cde165b2d90276bbc71ef0384a136b29f2a45c7b94c882ba98a32f",
+   "motor/testes/test_frame_movement.py": "55863cc4e51a2848633be741431a5eed8b38eacb7fd64049aa8a7f23e6198739",
+   "motor/testes/test_frame_raid.py": "ff5c6b3dffaa71e527594417289448aace3157f34284b101100190454b435c48",
+   "motor/testes/test_pilot.py": "3db81a7a0ce9de160049313948a04578d854f603c7e44c51b3d3a3cf9279f6a6",
+   "motor/testes/test_pinned_reference.py": "f0e3545876debf39e7cc254c3b5693cc0a90f63bbb501ffb81ce1aacaef8f2a0",
+   "motor/testes/test_player.py": "e5025553edcbc23611185ae895f19940aec6c27b70be0747d80972ac6f0cab7c",
+   "motor/testes/test_render.py": "c132c83eb4b9ec683b28ebf95cb9a9e4e0a4a187c51e68a8bddd4693a8e54643"
+  },
+  "source_stable": true
+ },
+ "python_compared": true,
+ "reference": {
+  "graphics": "ce441852bcada750a8f91da8ed3302f1668c4405",
+  "logic": "a7f5d4939e7826e02a8b348995edb9c793657f4c",
+  "source_and_fixtures": "Git objects; no working-tree source hash gate",
+  "tree_manifest_sha256": "5942cc4f4c76d7a9311be6f61be5a146819a7a99685a4f6f46011767c7c31276"
+ },
+ "results": [
+  {
+   "equal": true,
+   "frame": 129,
+   "indicators": {
+    "ai_rng": "0x3212b7ce",
+    "counter": 129,
+    "crt_seed": "0xf6131d17",
+    "cursor": 38,
+    "game_frame": 131,
+    "objective": {
+     "al": "00",
+     "food": 30,
+     "forced": "1000",
+     "marks": "0000000000000000000000000000",
+     "parts": 0,
+     "player0_resources": "00000000000000001e001e001e0000001e001e001e0000000000000000000000",
+     "stone": 30,
+     "structures": [
+      [
+       0,
+       0,
+       2,
+       2828,
+       5
+      ]
+     ],
+     "ui": {
+      "0x496207": 255,
+      "0x496208": 255,
+      "0x4e05ae": 0
+     },
+     "units": {
+      "11": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 5387,
+       "f110": "00000000",
+       "sha256": "9274e0ec4190347f",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "12": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4113,
+       "f110": "00000000",
+       "sha256": "f8853507356e78fa",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "13": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4110,
+       "f110": "00000000",
+       "sha256": "da788799e51ec670",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "14": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4108,
+       "f110": "00000000",
+       "sha256": "e59aac296699fe1b",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "15": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4877,
+       "f110": "00000000",
+       "sha256": "9a45724821ea418e",
+       "state": 7,
+       "target_b2": 65535
+      }
+     },
+     "victory_counter": "00000000"
+    },
+    "selection": "0000000000000000",
+    "view_origin": [
+     0,
+     0
+    ],
+    "world_rng": "0x5289f113"
+   }
+  },
+  {
+   "equal": true,
+   "frame": 130,
+   "indicators": {
+    "ai_rng": "0x3212b7ce",
+    "counter": 130,
+    "crt_seed": "0xac28f17c",
+    "cursor": 39,
+    "game_frame": 132,
+    "objective": {
+     "al": "00",
+     "food": 30,
+     "forced": "1000",
+     "marks": "0000000000000000000000000000",
+     "parts": 0,
+     "player0_resources": "00000000000000001e001e001e0000001e001e001e0000000000000000000000",
+     "stone": 30,
+     "structures": [
+      [
+       0,
+       0,
+       2,
+       2828,
+       5
+      ]
+     ],
+     "ui": {
+      "0x496207": 255,
+      "0x496208": 255,
+      "0x4e05ae": 0
+     },
+     "units": {
+      "11": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 5387,
+       "f110": "00000000",
+       "sha256": "b571c0dfacc8b730",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "12": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4113,
+       "f110": "00000000",
+       "sha256": "b871a96c48495529",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "13": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4110,
+       "f110": "00000000",
+       "sha256": "40bacc2ab365dcd8",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "14": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4108,
+       "f110": "00000000",
+       "sha256": "209eb7be15f0f661",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "15": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4877,
+       "f110": "00000000",
+       "sha256": "637768591d4d711a",
+       "state": 7,
+       "target_b2": 65535
+      }
+     },
+     "victory_counter": "00000000"
+    },
+    "selection": "0000000000000000",
+    "view_origin": [
+     0,
+     0
+    ],
+    "world_rng": "0x7e5e3b0d"
+   }
+  },
+  {
+   "equal": true,
+   "frame": 131,
+   "indicators": {
+    "ai_rng": "0x3212b7ce",
+    "counter": 131,
+    "crt_seed": "0x3eae801d",
+    "cursor": 40,
+    "game_frame": 133,
+    "objective": {
+     "al": "00",
+     "food": 30,
+     "forced": "1000",
+     "marks": "0000000000000000000000000000",
+     "parts": 0,
+     "player0_resources": "00000000000000001e001e001e0000001e001e001e0000000000000000000000",
+     "stone": 30,
+     "structures": [
+      [
+       0,
+       0,
+       2,
+       2828,
+       5
+      ]
+     ],
+     "ui": {
+      "0x496207": 255,
+      "0x496208": 255,
+      "0x4e05ae": 0
+     },
+     "units": {
+      "11": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 5387,
+       "f110": "00000000",
+       "sha256": "b94bccae6d65fd4c",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "12": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4113,
+       "f110": "00000000",
+       "sha256": "e95e0f6f3b7e1b6e",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "13": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4110,
+       "f110": "00000000",
+       "sha256": "8d45b47cd6e31348",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "14": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4108,
+       "f110": "00000000",
+       "sha256": "d8ee70f4c60ef752",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "15": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4877,
+       "f110": "00000000",
+       "sha256": "bc204fb71bb156fb",
+       "state": 7,
+       "target_b2": 65535
+      }
+     },
+     "victory_counter": "00000000"
+    },
+    "selection": "0000000000000000",
+    "view_origin": [
+     0,
+     0
+    ],
+    "world_rng": "0x37fc7a06"
+   }
+  },
+  {
+   "equal": true,
+   "frame": 132,
+   "indicators": {
+    "ai_rng": "0x3212b7ce",
+    "counter": 132,
+    "crt_seed": "0x283705ca",
+    "cursor": 46,
+    "game_frame": 134,
+    "objective": {
+     "al": "00",
+     "food": 30,
+     "forced": "1000",
+     "marks": "0000000000000000000000000000",
+     "parts": 0,
+     "player0_resources": "00000000000000001e001e001e0000001e001e001e0000000000000000000000",
+     "stone": 30,
+     "structures": [
+      [
+       0,
+       0,
+       2,
+       2828,
+       5
+      ]
+     ],
+     "ui": {
+      "0x496207": 255,
+      "0x496208": 255,
+      "0x4e05ae": 0
+     },
+     "units": {
+      "11": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 5387,
+       "f110": "00000000",
+       "sha256": "123d717a17d63c8b",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "12": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4113,
+       "f110": "00000000",
+       "sha256": "8f9e66eb8d3a7dbe",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "13": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4110,
+       "f110": "00000000",
+       "sha256": "885277ec0648624d",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "14": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4108,
+       "f110": "00000000",
+       "sha256": "c55bda7754677fbb",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "15": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4877,
+       "f110": "00000000",
+       "sha256": "6a9e98f433cae9c5",
+       "state": 7,
+       "target_b2": 65535
+      }
+     },
+     "victory_counter": "00000000"
+    },
+    "selection": "0000000000000000",
+    "view_origin": [
+     0,
+     0
+    ],
+    "world_rng": "0x3e2b1801"
+   }
+  },
+  {
+   "equal": true,
+   "frame": 133,
+   "indicators": {
+    "ai_rng": "0x3212b7ce",
+    "counter": 133,
+    "crt_seed": "0xc439b113",
+    "cursor": 47,
+    "game_frame": 135,
+    "objective": {
+     "al": "00",
+     "food": 30,
+     "forced": "1000",
+     "marks": "0000000000000000000000000000",
+     "parts": 0,
+     "player0_resources": "00000000000000001e001e001e0000001e001e001e0000000000000000000000",
+     "stone": 30,
+     "structures": [
+      [
+       0,
+       0,
+       2,
+       2828,
+       5
+      ]
+     ],
+     "ui": {
+      "0x496207": 255,
+      "0x496208": 255,
+      "0x4e05ae": 0
+     },
+     "units": {
+      "11": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 5387,
+       "f110": "00000000",
+       "sha256": "a4687862c9f5be1c",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "12": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4113,
+       "f110": "00000000",
+       "sha256": "b73add047c095009",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "13": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4110,
+       "f110": "00000000",
+       "sha256": "28f6a7d524b35f09",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "14": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4108,
+       "f110": "00000000",
+       "sha256": "9c3057fc6a958896",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "15": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4877,
+       "f110": "00000000",
+       "sha256": "dc9693330a10bc24",
+       "state": 7,
+       "target_b2": 65535
+      }
+     },
+     "victory_counter": "00000000"
+    },
+    "selection": "0000000000000000",
+    "view_origin": [
+     0,
+     0
+    ],
+    "world_rng": "0x2bb30c12"
+   }
+  },
+  {
+   "equal": true,
+   "frame": 134,
+   "indicators": {
+    "ai_rng": "0x3212b7ce",
+    "counter": 134,
+    "crt_seed": "0xf9521748",
+    "cursor": 48,
+    "game_frame": 136,
+    "objective": {
+     "al": "00",
+     "food": 30,
+     "forced": "1000",
+     "marks": "0000000000000000000000000000",
+     "parts": 0,
+     "player0_resources": "00000000000000001e001e001e0000001e001e001e0000000000000000000000",
+     "stone": 30,
+     "structures": [
+      [
+       0,
+       0,
+       2,
+       2828,
+       5
+      ]
+     ],
+     "ui": {
+      "0x496207": 255,
+      "0x496208": 255,
+      "0x4e05ae": 0
+     },
+     "units": {
+      "11": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 5387,
+       "f110": "00000000",
+       "sha256": "090f143bbcd67753",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "12": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4113,
+       "f110": "00000000",
+       "sha256": "9fffcc84b05800ef",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "13": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4110,
+       "f110": "00000000",
+       "sha256": "c5ca090eb7f84d5f",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "14": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4108,
+       "f110": "00000000",
+       "sha256": "b80aef726a6df5e5",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "15": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4877,
+       "f110": "00000000",
+       "sha256": "3e9675d2943f1701",
+       "state": 7,
+       "target_b2": 65535
+      }
+     },
+     "victory_counter": "00000000"
+    },
+    "selection": "0000000000000000",
+    "view_origin": [
+     0,
+     0
+    ],
+    "world_rng": "0x1cd719b5"
+   }
+  },
+  {
+   "equal": true,
+   "frame": 135,
+   "indicators": {
+    "ai_rng": "0x3212b7ce",
+    "counter": 135,
+    "crt_seed": "0xbbc3a579",
+    "cursor": 49,
+    "game_frame": 137,
+    "objective": {
+     "al": "00",
+     "food": 30,
+     "forced": "1000",
+     "marks": "0000000000000000000000000000",
+     "parts": 0,
+     "player0_resources": "00000000000000001e001e001e0000001e001e001e0000000000000000000000",
+     "stone": 30,
+     "structures": [
+      [
+       0,
+       0,
+       2,
+       2828,
+       5
+      ]
+     ],
+     "ui": {
+      "0x496207": 255,
+      "0x496208": 255,
+      "0x4e05ae": 0
+     },
+     "units": {
+      "11": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 5387,
+       "f110": "00000000",
+       "sha256": "93ed4226e4b10103",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "12": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4113,
+       "f110": "00000000",
+       "sha256": "e69983677967de49",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "13": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4110,
+       "f110": "00000000",
+       "sha256": "4091d30cf9ec03f7",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "14": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4108,
+       "f110": "00000000",
+       "sha256": "b28b74b98327ead4",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "15": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4877,
+       "f110": "00000000",
+       "sha256": "f183f82fea092041",
+       "state": 7,
+       "target_b2": 65535
+      }
+     },
+     "victory_counter": "00000000"
+    },
+    "selection": "0000000000000000",
+    "view_origin": [
+     0,
+     0
+    ],
+    "world_rng": "0xdcffef0"
+   }
+  },
+  {
+   "equal": true,
+   "frame": 136,
+   "indicators": {
+    "ai_rng": "0x3212b7ce",
+    "counter": 136,
+    "crt_seed": "0xcf85dd76",
+    "cursor": 55,
+    "game_frame": 138,
+    "objective": {
+     "al": "00",
+     "food": 30,
+     "forced": "1000",
+     "marks": "0000000000000000000000000000",
+     "parts": 0,
+     "player0_resources": "00000000000000001e001e001e0000001e001e001e0000000000000000000000",
+     "stone": 30,
+     "structures": [
+      [
+       0,
+       0,
+       2,
+       2828,
+       5
+      ]
+     ],
+     "ui": {
+      "0x496207": 255,
+      "0x496208": 255,
+      "0x4e05ae": 0
+     },
+     "units": {
+      "11": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 5387,
+       "f110": "00000000",
+       "sha256": "4002184131d4f566",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "12": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4113,
+       "f110": "00000000",
+       "sha256": "59a25c533acdc653",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "13": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4110,
+       "f110": "00000000",
+       "sha256": "2ae5d5dd7905857e",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "14": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4108,
+       "f110": "00000000",
+       "sha256": "e629807ebbf4b3ed",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "15": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4877,
+       "f110": "00000000",
+       "sha256": "7c64b7eec9af8710",
+       "state": 7,
+       "target_b2": 65535
+      }
+     },
+     "victory_counter": "00000000"
+    },
+    "selection": "0000000000000000",
+    "view_origin": [
+     0,
+     0
+    ],
+    "world_rng": "0x3a65d89b"
+   }
+  },
+  {
+   "equal": true,
+   "frame": 137,
+   "indicators": {
+    "ai_rng": "0x3212b7ce",
+    "counter": 137,
+    "crt_seed": "0x58fceecf",
+    "cursor": 56,
+    "game_frame": 139,
+    "objective": {
+     "al": "00",
+     "food": 30,
+     "forced": "1000",
+     "marks": "0000000000000000000000000000",
+     "parts": 0,
+     "player0_resources": "00000000000000001e001e001e0000001e001e001e0000000000000000000000",
+     "stone": 30,
+     "structures": [
+      [
+       0,
+       0,
+       2,
+       2828,
+       5
+      ]
+     ],
+     "ui": {
+      "0x496207": 255,
+      "0x496208": 255,
+      "0x4e05ae": 0
+     },
+     "units": {
+      "11": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 5387,
+       "f110": "00000000",
+       "sha256": "c25c202b1b6077d8",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "12": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4113,
+       "f110": "00000000",
+       "sha256": "0191d32424859736",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "13": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4110,
+       "f110": "00000000",
+       "sha256": "d14f083496b947a8",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "14": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4108,
+       "f110": "00000000",
+       "sha256": "a85a504539c1802c",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "15": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4877,
+       "f110": "00000000",
+       "sha256": "080b5a40cf4cdeb7",
+       "state": 7,
+       "target_b2": 65535
+      }
+     },
+     "victory_counter": "00000000"
+    },
+    "selection": "0000000000000000",
+    "view_origin": [
+     0,
+     0
+    ],
+    "world_rng": "0x1f64917"
+   }
+  },
+  {
+   "equal": true,
+   "frame": 138,
+   "indicators": {
+    "ai_rng": "0x3212b7ce",
+    "counter": 138,
+    "crt_seed": "0x8ce4fbd4",
+    "cursor": 57,
+    "game_frame": 140,
+    "objective": {
+     "al": "00",
+     "food": 30,
+     "forced": "1000",
+     "marks": "0000000000000000000000000000",
+     "parts": 0,
+     "player0_resources": "00000000000000001e001e001e0000001e001e001e0000000000000000000000",
+     "stone": 30,
+     "structures": [
+      [
+       0,
+       0,
+       2,
+       2828,
+       5
+      ]
+     ],
+     "ui": {
+      "0x496207": 255,
+      "0x496208": 255,
+      "0x4e05ae": 0
+     },
+     "units": {
+      "11": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 5387,
+       "f110": "00000000",
+       "sha256": "d3c4131ace27a263",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "12": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4113,
+       "f110": "00000000",
+       "sha256": "d64f7d6f5887d3cb",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "13": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4110,
+       "f110": "00000000",
+       "sha256": "5b6d104b94fbd7a1",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "14": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4108,
+       "f110": "00000000",
+       "sha256": "c1b4ebfdb02bac71",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "15": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4877,
+       "f110": "00000000",
+       "sha256": "631084cf7168ed88",
+       "state": 7,
+       "target_b2": 65535
+      }
+     },
+     "victory_counter": "00000000"
+    },
+    "selection": "0000000000000000",
+    "view_origin": [
+     0,
+     0
+    ],
+    "world_rng": "0x37d64fb3"
+   }
+  },
+  {
+   "equal": true,
+   "frame": 139,
+   "indicators": {
+    "ai_rng": "0x3212b7ce",
+    "counter": 139,
+    "crt_seed": "0x929a1a95",
+    "cursor": 58,
+    "game_frame": 141,
+    "objective": {
+     "al": "00",
+     "food": 30,
+     "forced": "1000",
+     "marks": "0000000000000000000000000000",
+     "parts": 0,
+     "player0_resources": "00000000000000001e001e001e0000001e001e001e0000000000000000000000",
+     "stone": 30,
+     "structures": [
+      [
+       0,
+       0,
+       2,
+       2828,
+       5
+      ]
+     ],
+     "ui": {
+      "0x496207": 255,
+      "0x496208": 255,
+      "0x4e05ae": 0
+     },
+     "units": {
+      "11": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 5387,
+       "f110": "00000000",
+       "sha256": "eac9b5a1bc88cd26",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "12": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4113,
+       "f110": "00000000",
+       "sha256": "211be7ce28137b22",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "13": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4110,
+       "f110": "00000000",
+       "sha256": "7ff12164226b0a57",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "14": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4108,
+       "f110": "00000000",
+       "sha256": "0a1661318919c4ea",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "15": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4877,
+       "f110": "00000000",
+       "sha256": "f74b85bfef41c7ee",
+       "state": 7,
+       "target_b2": 65535
+      }
+     },
+     "victory_counter": "00000000"
+    },
+    "selection": "0000000000000000",
+    "view_origin": [
+     0,
+     0
+    ],
+    "world_rng": "0x27745ed"
+   }
+  },
+  {
+   "equal": true,
+   "frame": 140,
+   "indicators": {
+    "ai_rng": "0x3212b7ce",
+    "counter": 140,
+    "crt_seed": "0x7657e1e2",
+    "cursor": 64,
+    "game_frame": 142,
+    "objective": {
+     "al": "00",
+     "food": 30,
+     "forced": "1000",
+     "marks": "0000000000000000000000000000",
+     "parts": 0,
+     "player0_resources": "00000000000000001e001e001e0000001e001e001e0000000000000000000000",
+     "stone": 30,
+     "structures": [
+      [
+       0,
+       0,
+       2,
+       2828,
+       5
+      ]
+     ],
+     "ui": {
+      "0x496207": 255,
+      "0x496208": 255,
+      "0x4e05ae": 0
+     },
+     "units": {
+      "11": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 5387,
+       "f110": "00000000",
+       "sha256": "b50d0ead15699389",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "12": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4113,
+       "f110": "00000000",
+       "sha256": "d9f0f0cb32554758",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "13": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4110,
+       "f110": "00000000",
+       "sha256": "1b28818c14ddc415",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "14": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4108,
+       "f110": "00000000",
+       "sha256": "1f017888ab5c30c4",
+       "state": 7,
+       "target_b2": 65535
+      },
+      "15": {
+       "b7": 0,
+       "b8": 255,
+       "be": 255,
+       "cell": 4877,
+       "f110": "00000000",
+       "sha256": "6b4237da9578f38a",
+       "state": 7,
+       "target_b2": 65535
+      }
+     },
+     "victory_counter": "00000000"
+    },
+    "selection": "0000000000000000",
+    "view_origin": [
+     1,
+     0
+    ],
+    "world_rng": "0x507a42b5"
+   }
+  }
+ ],
+ "schema": "rising-lands/rust-player-input-proof/1",
+ "seconds": 29.671413333,
+ "source_dirty": false,
+ "source_revision": "74a3fbeab35aee4d27ff6b33cbdc64ec5861be51",
+ "stop": {
+  "equal": true,
+  "frame": 141,
+  "inputs_before_stop": [],
+  "inputs_equal": true,
+  "orders_before_stop": [],
+  "orders_equal": true,
+  "phase": 2,
+  "python": {
+   "address": 4283255,
+   "callee": "AffGame",
+   "dependency": "AffGame @0x415b77: view origin (1, 0): vegetation/terrain handlers (0x411147, 0x412392, 0x415b77/0x415c19) only proved native on the sampled origins",
+   "type": "DependenciaExibicao"
+  },
+  "rust": "AffGame at 0x00415b77"
+ },
+ "virtual_clock": {
+  "end_tick": 141,
+  "milliseconds": 7050,
+  "rate": 20,
+  "start_tick": 129
+ },
+ "whole_state": null
+}

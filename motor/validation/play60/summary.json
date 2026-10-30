@@ -1,0 +1,1526 @@
+{
+  "abi": "1.6",
+  "abi_additions": [
+    "rl_execucao_definir",
+    "rl_execucao_modo"
+  ],
+  "artifacts_sha256": {
+    "K1-final2-run.json": "48e5f72a2a56b66783948140dcfa45ad75a65ae706ef18bc9834fc0a10ed1eb3",
+    "K1-final2.log.gz": "9c3246057a6c7802ee22d2742e40ccaf422f6ea1e122f5b485831dbb9150963c",
+    "K1.json": "99c80f349bdb041fd8796dfa59089acf361928e43660d49f3c4b5bfb69f8add8",
+    "P1-final2-run.json": "4ada5bf7863b2d21a9f59db32e30dd03336d4c213fec08c6241d394525a05c03",
+    "P1-final2.log.gz": "cb7df4bb07cbf366cc7094d9219d1e50340c162226c0261fb697f0a113f163a6",
+    "P1.json.xz": "080533d2c2f4a2a8afafafc68e52753b9f0feedaf74040bd8f4b008138deb1be",
+    "P2-final2-run.json": "bd6bdae1abf81098883fc01277138181bdc73c25e4e4e6e19e7657c4e421798c",
+    "P2-final2.log.gz": "4ec72127b4bdfd0fe5d7fd2882f6139a3baf7a7454675e10f07c4d03342b48dd",
+    "P2.json.xz": "7595359a24c00eb03250fac05aba9ec4c9643709194fd2b1b0e25502b5c1704d",
+    "P3-final2-run.json": "b9e0ae13ccd6f3faff3e27f6f1737fb99657b2c75ce05bb43c016b7820e22374",
+    "P3-final2.log.gz": "db4888ee60f75e762bc592cbadedf15ab0ce6d3f32cb4da69e66256d61e78feb",
+    "P3.json.xz": "1f013de5b10bec107de72a45d7515e171917bece4cf447a949f9d80b3716cc0b",
+    "P6-final2-run.json": "400392b8a167eae647ba95458daad4ee86634a8e38c8dad9f3dac5c30750627f",
+    "P6-final2.log.gz": "64b5f8b0d587e2f582805ba7856f9ea4172fb65edc37faf15c2ee30d4fde9698",
+    "P6.json.xz": "61e07fb8a8c5eeddd6ebe41cb1629db9cd219ba438510aafb88b1334126f19b5",
+    "P7-final2-run.json": "6b1a600bf1e954ee210b192457ed344da014f43d1708feb26f287de0686d1945",
+    "P7-final2.log.gz": "e512b048a88ed750c315124cefce1b274c79a712bcdbf3945a0dcc2eabd541f9",
+    "P7.json.xz": "aa95b44acf22fb79e06b6abc3306c3d4a076012019b41c99172541cd40aeabdb",
+    "README.md": "4e5d3a22bb020aea195339d27bf50b920f38676ef457733a1b38c6b579b2bf15",
+    "after-audit-run.json": "c24ae51c324016a256bf02c69a11ebc87158de15b60f456e06f6c6adf0ed06ac",
+    "after-audit.json": "be5a1e3976b5c258db82b65c9eb9d7b55df656a7ed1286ba254e0d9b86925de5",
+    "after-audit.log.gz": "4489006a9c808bf4308420bd85a649e8cbf4681373e8b0f3e3c15947a0efa9f8",
+    "after-play-run.json": "eff760ccd6c207bae847a6ca4e53c54d5695490a10b107f813929237a9428656",
+    "after-play.json": "698c58268e6bc9e01dadebc0de2d4a15847b7136f81bb48429b8bd5561d5e95a",
+    "after-play.log.gz": "be88d2ea209477b0a92a5c2984f090b804eeeba3e96c722e4a0ee6b3ca52f185",
+    "after-profile-run.json": "fae7c2b7f33e982fe7a10fd4224ac6263a5562599c4d7d7b9100fb90071c381a",
+    "after-profile.json": "5e16a61948dfe71e9f61590ef9ff235d7d3e9e154eab22068ddc00621320d15c",
+    "after-profile.log.gz": "972506394eecb5f1b49bd13488263941d6dfe476ff9725e6c39d2ac115f8d0ac",
+    "after-sample.txt.gz": "2f626febcc8ae7f3bf58aa544046c11ee8a5deb22da502fafcaab77215ba9dfa",
+    "before-final-run.json": "785fc718588d9be13e7263d108e04c1094b620a6151800ec6b2ac78adef3d450",
+    "before-final.json": "6b09e1f1443dd3e7c935e31219e9d7d1c90b1188292dd5b3144a51080f4d6cc5",
+    "before-final.log.gz": "5e4cd65b90d235e30146012d3a2596c827db3195fe5fed799dc458d617d32ab4",
+    "before-profile.json.gz": "e84d596e7265e67d4a90067d27c3ecf2c229488d81f3f8b5aa1e00022672facc",
+    "before-sample.txt.gz": "288b7f9cd9fbe045eb8bdbfcfac4b156ff7ae441fdebb62d2213366b28e70bdd",
+    "bench-battery-run.json": "2a36c4995d1276940e21277dc7a1d19b6349cf2592c4016afe3520fcc6e2813e",
+    "bench-battery.log.gz": "b4ed02fcb848bcc3ca7d7188d6a3d36b7f1269190c75377eea3545a64bcb3105",
+    "common-final2-run.json": "ee3848a110592cf4756acba6096375ef8ec34ef493bb16bfc3d05f7b21924ea2",
+    "common-final2.log.gz": "eaf6439b1ec3e8ec320b29dee2df12526647133dea6b89ca984ca48ec9e5c611",
+    "final-main-common-run.json": "259408a5fb91af6403634ecf64d7bae91faa5ce67adb3dd8b501e5822b76ae6a",
+    "final-main-common.log.gz": "d913409c7af2ecac7b136ace590e2df717ed36284a5395201a68ebca8d8bd652",
+    "final-main-gates-run.json": "0d1740160a76abb6504d0ae2ec3b6d64155c34145a2708a1551ab2c2acb3447c",
+    "final-main-gates.log.gz": "0bac7658076f99d053c5ec005be0a6698d698028a582ae76dfc33c41b919539f",
+    "final-main-release-run.json": "e7072cc18189d8780d72af4797de4816d42831d67f0a96256a6189ba7b9fc404",
+    "final-main-release.log.gz": "2bf89d1f57eb6996395727187599d56483aae8c4bd1592a3cd0a3da194a542f3",
+    "final-main-validate-run.json": "268bb7de2a787df030be55c44ce86528d8503627a0ce6d8b3400aa45490bf151",
+    "final-main-validate.log.gz": "d97b604dff18c834f3aad83e3344203e5eb438f72febff426206d0ef46f62ad3",
+    "gate-counts.json": "d1112d935ba47352a9ad0b8ec7c7e7879d40b71f3ae5b6d9c298716281ec5c4a",
+    "identity-before-final-merge.json": "7e9fe3b16ba989b0261abcaef7a53948e4376cc41d1528f234fa39f9b78274bd",
+    "leaf-final2-run.json": "c09b5631a620e31e09364942cbe09ea37f3543077be51513117ebf62507e17ed",
+    "leaf-final2.log.gz": "329320d77e6f2ad014cc1a231942cd050608ac143339db300611579f4b85cd6a",
+    "leaf.json.xz": "fa6f00fc3381651cc0f59e79b7eb2746c18c2565600e4baef9ae0a91a4cfb3b3",
+    "m22-final2-run.json": "03ff6e6052386725777f0e1d50f1b8898dab6c389d4d6db5ad06c6f0782a20d0",
+    "m22-final2.log.gz": "0f2e0301797e86187025dccc6b8f1264755c154c5a4a682c43ce2274f467b4f4",
+    "m22.json.xz": "5eeebf8cadffcdab03903354577eed501ebc80a9277e1d6b46cc0fcd288e0040",
+    "m23-aggregate-final2-run.json": "48c5ba8b289cc54f58f93e6f3f96e434925bcb1e394fc6c98d5b8753d2c84c92",
+    "m23-aggregate-final2.log.gz": "266ce4e958f7d556796206b4faf68cca5de114c1e159dde907e1f380a3b7814f",
+    "m23-aggregate.json": "9d79cbd96f71e0e97ee6a6ec90d4f5a6e755a379fc4622c6875a8aa34d0b98cb",
+    "m23-part0-final2-run.json": "2f3e681bd7f17ca1d36616388f45ecdb173e6d73e4372ce206119da3741bf7f9",
+    "m23-part0-final2.log.gz": "b86c3626463b9aeed76786012dc901d0683b351fae3f7d24d0eb8f27082208aa",
+    "m23-part0.json.xz": "662e957900b475df18c738f8e9b9bfe4969f57eb2b429b89734e73533387d02f",
+    "m23-part1-final2-run.json": "c0d845617118232d2b5358b9edf883a2dfdd05fefdca11e39df8c1c48eaf8cf2",
+    "m23-part1-final2.log.gz": "18c2ab804ed8c0ac72f09c1e4a3581906ffd83a58ce57155576eedb3b506f9ac",
+    "m23-part1.json.xz": "f7dc0b5dbb21c539b0196384e663bc7e29b815d074f5e0f7680d0effcd22b065",
+    "m23-part2-final2-run.json": "864d4769a114407444ed02ba9756710bbf9380f4b9b4b282474727472f9ee090",
+    "m23-part2-final2.log.gz": "fd71d4fa1ead729f7021fa2e140207b706547b9daa497831b302b749bc999341",
+    "m23-part2.json.xz": "fc14962af54e8fe15f903adff88b7a995ee8b533277eaa4a321a9c834808bfbd",
+    "m23-part3-final2-run.json": "9d9ec81242417ff7e446705c8804e441c9e15cdcf0a134cec335fdb961a176f4",
+    "m23-part3-final2.log.gz": "2ea1bfa5a83ef32d612cda32233a7314595bec0c2511b8439ac99a9b493619cc",
+    "m23-part3.json.xz": "3abc0f1de057e9f995a96b7bbc62d2977fa75bf9a878be9d7b4ccd123137bf56",
+    "m23-part4-final2-run.json": "eb7abbdfa3f45cca063c0b90eedf43419f6988c0e679e9f598478c96a11ba0dc",
+    "m23-part4-final2.log.gz": "5afb13e57c1f401de9a1cbd8492a342daaaa7a06b728930bbb37f6c11fcb06dc",
+    "m23-part4.json.xz": "a1473d68ccd63484294a7d6b903fbba46724c682c7a8a2487712a7e24f2784d8",
+    "m23-part5-final2-run.json": "0c51cb310ef3b42589bb5d82eaff7662b2fb10872cbbf68c75d422980eeffd6d",
+    "m23-part5-final2.log.gz": "a8c2e05453ba32e9a2502f9295552b142f7e4dcc9dd2409994cb72e8733fa7da",
+    "m23-part5.json.xz": "c59f629bed94149f861a8afd25ee0b6438986dc2c62abc374b3c5792a5dac890",
+    "m23-part6-final2-run.json": "d3f0a840477fd2abea1ecae3c9af618602f64e54595f6d5b2904a0f195293b78",
+    "m23-part6-final2.log.gz": "4908e0c3667dd52ec91886377c8d7735ad652d539e2f4bc170a45a12ac89288a",
+    "m23-part6.json.xz": "d48048edc75caff41535ea1d817fe0f5fb8fca08e3d6a7fbc1bae57480d25ebd",
+    "m23-part7-final2-run.json": "9529e25c4b8f83c7d0724f57bdf880e3b429892a539a28de2bddc097e73f9172",
+    "m23-part7-final2.log.gz": "5a036d0d079232418947b4782519c53bfdcf923a173301d39c5108132ec89be4",
+    "m23-part7.json.xz": "104566406e326642337617107d92ffe5f1f74ff05d8a360adbaa082f3d68255d",
+    "m23-part8-final2-run.json": "d2cca495461f585ff0f7546d099eb253d6447d291f290570f76864e7e1fc6ada",
+    "m23-part8-final2.log.gz": "7f870172f437ae8d32167154eb07caa7eb6b11a253f5628fb9c89f73d36283b8",
+    "m23-part8.json.xz": "7655ce229a8cf8fe8b8691dc6626b1e56fe44b9a88bfeedef1ee544d7e36d01d",
+    "m23-part9-final2-run.json": "5ede09d25557f993420b64ea2eb072677dca9db43c77c5547f918c988e4f5953",
+    "m23-part9-final2.log.gz": "6bce5899bd8f0b87917f5e6dd7a3d095b95cd29d92da410fb97e96aa75578591",
+    "m23-part9.json.xz": "d8f369c7477fff50587e91154e85e086aa6c1d928674f9d439e75c0f5c44dbff",
+    "m23-plan.json": "76dae78917985a2f0ac30908cb9770027ff332cc67ae96996bb075510449cbd2",
+    "m23-verify-final2-run.json": "f4eedabcaac1cae7a370d9578c4fd9263516d6dfbc7de146e5b98cd001bfb7a5",
+    "m23-verify-final2.log.gz": "0f75032255708573c1630fc68e7e4e11ea99b3cef379806493a9404095ce14b7",
+    "post-merge-identity.json": "940e637f5384360fee43908c72a69cc51c4af01898abe934af44f37297ad4ae7",
+    "render-probe-P1-final-run.json": "f85f24d762813db3a813a6351b636eb4d923d93825d89696358ef1e58d7cb820",
+    "render-probe-P1-final.log.gz": "17f50f1c13df8497aa08ee9c19952ac676797872654d90c9f8fec51c028aefd5",
+    "render-probe-P1.json.xz": "a52455c4400e3acc54eef307363bce070da10752b8c11c249e7a5af05fe4ebca",
+    "render-probe-P2-final-run.json": "5e8b411eae70baa46bcbf25b4d5ad6dc3c2b48c8daa45411aa87352af4923755",
+    "render-probe-P2-final.log.gz": "07c18dc39f79d516110b7de2a1437199fd20724757a95b41d7e1c50c3840666a",
+    "render-probe-P2.json.xz": "ef7e7b2f7ff8c4c08bd9d83d29e939d310853396cfcd4aaaa92eb6967688e552",
+    "render-probe-P3-final-run.json": "37e9acfe593ee66c618ad2fe1ae7648124cbe01471d3a4cdf82d538221b6fa95",
+    "render-probe-P3-final.log.gz": "8888a9e5e53965889aa6bbe42073e552fdf221152b17237dd60b12876759904f",
+    "render-probe-P3.json": "78621ce835d033b6269cd3d2c152ddc13532ee4eb9a95ba6e22143a013d416dd",
+    "render128-final2-run.json": "c3a4f40c044e1ae94022dc8c09354167fcfc53a493bd3a98809e46e9ff25f53f",
+    "render128-final2.log.gz": "65c32ba68b474e15bbd4518121fb76d3cf1ee971f6f7a1d020d0291ba73c1dea",
+    "render128.json": "fb658e0942bb8e8e74fea790c3e8334981cbe1747a2ef2f43c735c74664330c7",
+    "render9200-final2-run.json": "7a316bdc4cdece9a6a33614ff7620d67e5bde3ac167b997e7866831440fa14ab",
+    "render9200-final2.log.gz": "8f468719f8456dbd1c3cbd82fb3db3ed861ae468bf1a8fbea38667cde33bd452",
+    "render9200.json.xz": "c55b1cb6a4a1bc9b89cac077bc47505535b1595da00e0ebd40f01e7e678d156d",
+    "validate-final.log.gz": "1958831802ada2e541f8208523d8833b3b80940c401055ab91f3cd26ee75cd92",
+    "validate-final2-run.json": "c47ad73c6e542c534ab84c5d8071ff1cccfaf0ca38bc2e0c9dd1ec3c289bd5b0",
+    "validate-final2.log.gz": "25f3d8c9b736c7510c6803cb9a1f2f8abd619ee1dcfe21dd5dc7f93e649b3950"
+  },
+  "baseline_implementation_revision": "bbf1638aee5ed73f51f4b768ac51901ea38eb817",
+  "benchmark_provenance": "The source_revision field in timing reports identifies the benchmark harness checkout; the preserved before library is the ABI1.5 baseline frombbf1638. Library hashes identify the measured code bytes.",
+  "branch": "feat/codex-rust-engine",
+  "full_phase_proof_revision": "74a3fbeab35aee4d27ff6b33cbdc64ec5861be51",
+  "gaps": [
+    "Native release ABI timing excludes initialization, audit exports/proofs and macOS presentation. The app must accept ABI 1.6 and opt into play mode; no end-to-end app FPS claim.",
+    "CAVE body stop at frame 220 for P3/P6/P7 and AffGame view stop at frame 141 for K1 are unchanged. P6 proves only its 183-phase reachable whole-state prefix.",
+    "Graphics remains commit-pinned 1.7, with production AffText glyph stop 0x459454; qualified probes attest original non-execution boundaries.",
+    "Seven exact leaf dependencies and two explicit out-of-frame skips remain. No fresh original-x86 emulation battery was requested; common optional emulation tests remain skipped.",
+    "No later Economy/Core/Combat/input/Graphics extensions are ported by this performance change."
+  ],
+  "gates": {
+    "final-main-common": {
+      "command": [
+        "python3",
+        "-B",
+        "scripts/check.py"
+      ],
+      "lease": "engine-perf-final-main-gates",
+      "returncode": 0,
+      "seconds": 447.552884083
+    },
+    "final-main-release": {
+      "command": [
+        "cargo",
+        "build",
+        "--manifest-path",
+        "motor/Cargo.toml",
+        "--workspace",
+        "--release",
+        "--locked"
+      ],
+      "lease": "engine-perf-final-main-gates",
+      "returncode": 0,
+      "seconds": 0.1241040840000096
+    },
+    "final-main-validate": {
+      "command": [
+        "sh",
+        "motor/validate.sh"
+      ],
+      "lease": "engine-perf-final-main-gates",
+      "returncode": 0,
+      "seconds": 259.788078209
+    }
+  },
+  "graphics_contract": "1.7",
+  "host": "Apple M4 Pro MacBook, macOS27.2 ARM64, rustc1.99.1",
+  "implementation_revision": "98c40c6",
+  "initial_attempts": "First merged-tree gate rejected an aggregate metadata NameError and the replaced auxiliary live footprint. Both corrected; full suite rerun from scratch on74a3fbe. Preview reports are not proof claims.",
+  "leaf": {
+    "cases": 666,
+    "completed": 659,
+    "completed_state_equal": 659,
+    "mismatches": [],
+    "skips": [
+      {
+        "case": "key_test_release",
+        "corpus": "pesquisas-paralelas/ia-runtime/evidencias/captura-entrada-ordens-ia.json",
+        "reason": "leaf polls a changing key stream; per-frame schema supplies a fixed key table",
+        "routine": "KeyTestRelease"
+      },
+      {
+        "case": "init_input_player",
+        "corpus": "pesquisas-paralelas/ia-runtime/evidencias/captura-entrada-ordens-ia.json",
+        "reason": "outside this input routine adapter",
+        "routine": "InitInputPlayer"
+      }
+    ],
+    "stops": [
+      {
+        "case": "process_tag14_structure_selected",
+        "changed_byte_mismatches": [
+          [
+            "0x49a143",
+            1,
+            255
+          ],
+          [
+            "0x49a14e",
+            12,
+            255
+          ],
+          [
+            "0x49a14f",
+            0,
+            255
+          ],
+          [
+            "0x4797f000",
+            0,
+            14
+          ],
+          [
+            "0x4797f002",
+            0,
+            1
+          ],
+          [
+            "0x4797f004",
+            0,
+            12
+          ]
+        ],
+        "completed": false,
+        "corpus": "pesquisas-paralelas/ia-runtime/evidencias/captura-entrada-ordens-ia.json",
+        "expected_stop": "BatimentInitAttaqueSelect at 0x0045f13f",
+        "routine": "ProcessInputGame",
+        "semantic_return": null,
+        "state_equal": false,
+        "stop": "BatimentInitAttaqueSelect at 0x0045f13f",
+        "stop_equal": true,
+        "text_requests": [],
+        "text_requests_equal": true
+      },
+      {
+        "case": "process_tag17_recruit",
+        "changed_byte_mismatches": [
+          [
+            "0x49a0cd",
+            4,
+            5
+          ],
+          [
+            "0x49a13c",
+            1,
+            0
+          ],
+          [
+            "0x49a142",
+            0,
+            1
+          ],
+          [
+            "0x49a143",
+            0,
+            255
+          ],
+          [
+            "0x49a144",
+            14,
+            0
+          ],
+          [
+            "0x49a145",
+            14,
+            0
+          ],
+          [
+            "0x49a154",
+            1,
+            0
+          ],
+          [
+            "0x4e2eb0",
+            24,
+            30
+          ],
+          [
+            "0x4e2eb2",
+            24,
+            30
+          ],
+          [
+            "0x4797f000",
+            0,
+            17
+          ]
+        ],
+        "completed": false,
+        "corpus": "pesquisas-paralelas/ia-runtime/evidencias/captura-entrada-ordens-ia.json",
+        "expected_stop": "InitRecruteTroupe at 0x0045f1a9",
+        "routine": "ProcessInputGame",
+        "semantic_return": null,
+        "state_equal": false,
+        "stop": "InitRecruteTroupe at 0x0045f1a9",
+        "stop_equal": true,
+        "text_requests": [],
+        "text_requests_equal": true
+      },
+      {
+        "case": "process_tag19_unload",
+        "changed_byte_mismatches": [
+          [
+            "0x474a8e06",
+            20,
+            7
+          ],
+          [
+            "0x474a8e83",
+            12,
+            16
+          ],
+          [
+            "0x474a8eb6",
+            14,
+            255
+          ],
+          [
+            "0x474a8eb7",
+            12,
+            255
+          ],
+          [
+            "0x474a8ec4",
+            0,
+            255
+          ],
+          [
+            "0x474a8ec5",
+            0,
+            255
+          ],
+          [
+            "0x4797f000",
+            0,
+            19
+          ]
+        ],
+        "completed": false,
+        "corpus": "pesquisas-paralelas/ia-runtime/evidencias/captura-entrada-ordens-ia.json",
+        "expected_stop": "SetDechargeCaveEnginSelect at 0x0045f085",
+        "routine": "ProcessInputGame",
+        "semantic_return": null,
+        "state_equal": false,
+        "stop": "SetDechargeCaveEnginSelect at 0x0045f085",
+        "stop_equal": true,
+        "text_requests": [],
+        "text_requests_equal": true
+      },
+      {
+        "case": "icon_action_structure",
+        "changed_byte_mismatches": [
+          [
+            "0x496d48",
+            1,
+            255
+          ],
+          [
+            "0x4e2410",
+            212,
+            177
+          ],
+          [
+            "0x4e2416",
+            213,
+            177
+          ],
+          [
+            "0x4e241c",
+            214,
+            177
+          ]
+        ],
+        "completed": false,
+        "corpus": "pesquisas-paralelas/ia-runtime/evidencias/captura-entrada-ordens-ia.json",
+        "expected_stop": "CalculIconeAction structure selected at 0x0045e9bf",
+        "routine": "CalculIconeAction",
+        "semantic_return": null,
+        "state_equal": false,
+        "stop": "CalculIconeAction structure selected at 0x0045e9bf",
+        "stop_equal": true,
+        "text_requests": [],
+        "text_requests_equal": true
+      },
+      {
+        "case": "p2_minimap_right_held",
+        "changed_byte_mismatches": [
+          [
+            "0x4e0610",
+            3,
+            2
+          ],
+          [
+            "0x4e1da0",
+            180,
+            200
+          ],
+          [
+            "0x4e1da2",
+            168,
+            148
+          ],
+          [
+            "0x4e1da4",
+            1,
+            0
+          ],
+          [
+            "0x4e1da6",
+            52,
+            72
+          ],
+          [
+            "0x4e1da8",
+            138,
+            118
+          ],
+          [
+            "0x4e1daa",
+            2,
+            1
+          ],
+          [
+            "0x4e1dac",
+            15,
+            35
+          ],
+          [
+            "0x4e1dae",
+            93,
+            73
+          ],
+          [
+            "0x4e1db0",
+            1,
+            0
+          ],
+          [
+            "0x4e1db2",
+            93,
+            113
+          ],
+          [
+            "0x4e1db4",
+            0,
+            236
+          ]
+        ],
+        "completed": false,
+        "corpus": "pesquisas-paralelas/ia-runtime/evidencias/captura-entrada-ordens-ia.json",
+        "expected_stop": "MiniMapSetPos at 0x0042bb5d",
+        "routine": "InputGame",
+        "semantic_return": null,
+        "state_equal": false,
+        "stop": "MiniMapSetPos at 0x0042bb5d",
+        "stop_equal": true,
+        "text_requests": [],
+        "text_requests_equal": true
+      },
+      {
+        "case": "structure_selected_other_structure",
+        "changed_byte_mismatches": [
+          [
+            "0x4e060c",
+            59,
+            0
+          ],
+          [
+            "0x4e060d",
+            94,
+            0
+          ],
+          [
+            "0x4e060e",
+            73,
+            0
+          ],
+          [
+            "0x4e0610",
+            1,
+            2
+          ],
+          [
+            "0x4e1da0",
+            180,
+            200
+          ],
+          [
+            "0x4e1da2",
+            168,
+            148
+          ],
+          [
+            "0x4e1da4",
+            1,
+            0
+          ],
+          [
+            "0x4e1da6",
+            52,
+            72
+          ],
+          [
+            "0x4e1da8",
+            138,
+            118
+          ],
+          [
+            "0x4e1daa",
+            2,
+            1
+          ],
+          [
+            "0x4e1dac",
+            15,
+            35
+          ],
+          [
+            "0x4e1dae",
+            93,
+            73
+          ]
+        ],
+        "completed": false,
+        "corpus": "pesquisas-paralelas/ia-runtime/evidencias/captura-paginas-deposito-ia.json",
+        "expected_stop": "BatimentPeutAttaquer at 0x0042b2a3",
+        "routine": "InputGame",
+        "semantic_return": null,
+        "state_equal": false,
+        "stop": "BatimentPeutAttaquer at 0x0042b2a3",
+        "stop_equal": true,
+        "text_requests": [],
+        "text_requests_equal": true
+      },
+      {
+        "case": "page2_structure_selected",
+        "changed_byte_mismatches": [
+          [
+            "0x49a010",
+            14,
+            224
+          ],
+          [
+            "0x49a011",
+            30,
+            29
+          ],
+          [
+            "0x4e0610",
+            3,
+            2
+          ],
+          [
+            "0x4e1da0",
+            180,
+            200
+          ],
+          [
+            "0x4e1da2",
+            168,
+            148
+          ],
+          [
+            "0x4e1da4",
+            1,
+            0
+          ],
+          [
+            "0x4e1da6",
+            52,
+            72
+          ],
+          [
+            "0x4e1da8",
+            138,
+            118
+          ],
+          [
+            "0x4e1daa",
+            2,
+            1
+          ],
+          [
+            "0x4e1dac",
+            15,
+            35
+          ],
+          [
+            "0x4e1dae",
+            93,
+            73
+          ],
+          [
+            "0x4e1db0",
+            1,
+            0
+          ]
+        ],
+        "completed": false,
+        "corpus": "pesquisas-paralelas/ia-runtime/evidencias/captura-paginas-deposito-ia.json",
+        "expected_stop": "BatimentPeutAttaquer at 0x0042a4dc",
+        "routine": "InputGame",
+        "semantic_return": null,
+        "state_equal": false,
+        "stop": "BatimentPeutAttaquer at 0x0042a4dc",
+        "stop_equal": true,
+        "text_requests": [],
+        "text_requests_equal": true
+      }
+    ]
+  },
+  "library_sha256": "5076e85bbc34e755933cbe6b0e856aead3f4f4c482337a29209dc0fd42c0abf0",
+  "logic": {
+    "all_rng_allocations_bindings_boundaries_modeled_registers_clock_equal": true,
+    "bindings": 138597,
+    "boundaries": 27603,
+    "compared_bytes_per_phase": [
+      16022275
+    ],
+    "m22": {
+      "complete_proof": true,
+      "phases_compared": 257,
+      "phases_equal": 257,
+      "phases_requested": 257,
+      "result": "equal"
+    },
+    "m23": {
+      "complete_proof": true,
+      "phases": 18401,
+      "phases_equal": 18401,
+      "result": "equal"
+    },
+    "mismatches": 0,
+    "paired_play_equal": 18401,
+    "paired_play_phases": 18401,
+    "scope": "Ten exact original opening checkpoints, no subsequent oracle reload. Independent serial S0 rendering/benchmark carries all engine state through 9200 frames."
+  },
+  "merged_main": "54d148d",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "performance": {
+    "after-audit": {
+      "abi": 65542,
+      "final_clock": [
+        9201,
+        460050
+      ],
+      "final_counter": 9200,
+      "final_generation": 18402,
+      "final_phase": 3,
+      "final_state_sha256": "4ef7471043dd66011d9ad68873ae1c27f8c84f32063bd359c9a23e4cb48dfd36",
+      "final_surface_sha256": "8ce7ad456a1d94cefb7f880c94553a3d7ea7ffca8c4aaa303894f511116f10e3",
+      "fps": {
+        "logic": 3801.8691482207573,
+        "logic_render": 1534.1677863694702,
+        "loop": 1526.9311738082067,
+        "render": 2572.0781727760514
+      },
+      "frames": 9200,
+      "initialization_seconds": 2.359687458,
+      "library_sha256": "5076e85bbc34e755933cbe6b0e856aead3f4f4c482337a29209dc0fd42c0abf0",
+      "mode": 2,
+      "phases": {
+        "CalculGame": {
+          "count": 9200,
+          "max_ms": 1.371332999999808,
+          "mean_ms": 0.24868494891303353,
+          "p50_ms": 0.24291699999956506,
+          "p95_ms": 0.29120900000023653,
+          "p99_ms": 0.3521669999999588,
+          "seconds": 2.2879015299999086
+        },
+        "between_frames": {
+          "count": 9200,
+          "max_ms": 0.12166600000007577,
+          "mean_ms": 0.014343567065216662,
+          "p50_ms": 0.013332999999393635,
+          "p95_ms": 0.018750000000622435,
+          "p99_ms": 0.04241700000040538,
+          "seconds": 0.1319608169999933
+        },
+        "generation": {
+          "count": 9200,
+          "max_ms": 0.06520799999876203,
+          "mean_ms": 0.002493986413046926,
+          "p50_ms": 0.002166999999886343,
+          "p95_ms": 0.0035000000000451337,
+          "p99_ms": 0.010666000000103537,
+          "seconds": 0.022944675000031722
+        },
+        "logic": {
+          "count": 9200,
+          "max_ms": 1.3858330000005026,
+          "mean_ms": 0.2630285159782502,
+          "p50_ms": 0.25691600000055104,
+          "p95_ms": 0.3082490000014815,
+          "p99_ms": 0.36870799999988435,
+          "seconds": 2.419862346999902
+        },
+        "logic_render": {
+          "count": 9200,
+          "max_ms": 1.758541000000946,
+          "mean_ms": 0.6518191874999859,
+          "p50_ms": 0.6402490000003702,
+          "p95_ms": 0.7400410000011348,
+          "p99_ms": 0.8103759999995575,
+          "seconds": 5.9967365249998705
+        },
+        "loop": {
+          "count": 9200,
+          "max_ms": 1.7627089999994183,
+          "mean_ms": 0.6549083659782605,
+          "p50_ms": 0.6429579999998047,
+          "p95_ms": 0.7450840000000625,
+          "p99_ms": 0.817957999999841,
+          "seconds": 6.025156966999997
+        },
+        "render": {
+          "count": 9200,
+          "max_ms": 0.7854170000003435,
+          "mean_ms": 0.3887906715217357,
+          "p50_ms": 0.3807705000000716,
+          "p95_ms": 0.45245899999990513,
+          "p99_ms": 0.5147910000000699,
+          "seconds": 3.5768741779999687
+        }
+      },
+      "sample": null,
+      "schema": "rising-lands/native-abi-play-benchmark/1",
+      "scope": "Release C ABI in app play order, reused caller buffers, hud=True; excludes initialization, audit/export/hash work and presentation. Phase timers include ctypes call overhead. Optional sampling overhead is included.",
+      "source_revision": "4bd1112a6073ff93b051e7b47b3fa27e81c44d59"
+    },
+    "after-play": {
+      "abi": 65542,
+      "final_clock": [
+        9201,
+        460050
+      ],
+      "final_counter": 9200,
+      "final_generation": 18402,
+      "final_phase": 3,
+      "final_state_sha256": "4ef7471043dd66011d9ad68873ae1c27f8c84f32063bd359c9a23e4cb48dfd36",
+      "final_surface_sha256": "8ce7ad456a1d94cefb7f880c94553a3d7ea7ffca8c4aaa303894f511116f10e3",
+      "fps": {
+        "logic": 3839.0973973554273,
+        "logic_render": 1547.3791140530877,
+        "loop": 1540.230878167703,
+        "render": 2592.176871287647
+      },
+      "frames": 9200,
+      "initialization_seconds": 2.352073584,
+      "library_sha256": "5076e85bbc34e755933cbe6b0e856aead3f4f4c482337a29209dc0fd42c0abf0",
+      "mode": 1,
+      "phases": {
+        "CalculGame": {
+          "count": 9200,
+          "max_ms": 1.2307079999995807,
+          "mean_ms": 0.24647350456522357,
+          "p50_ms": 0.2408750000006954,
+          "p95_ms": 0.2865829999998404,
+          "p99_ms": 0.3416250000007892,
+          "seconds": 2.267556242000057
+        },
+        "between_frames": {
+          "count": 9200,
+          "max_ms": 0.10787499999986849,
+          "mean_ms": 0.01400438815217733,
+          "p50_ms": 0.013041999999963139,
+          "p95_ms": 0.017875000000167063,
+          "p99_ms": 0.041458000000105244,
+          "seconds": 0.12884037100003143
+        },
+        "generation": {
+          "count": 9200,
+          "max_ms": 0.05237500000010442,
+          "mean_ms": 0.002431012391296814,
+          "p50_ms": 0.0021660000006917812,
+          "p95_ms": 0.0033330000004383464,
+          "p99_ms": 0.009500000000883801,
+          "seconds": 0.02236531399993069
+        },
+        "logic": {
+          "count": 9200,
+          "max_ms": 1.2643739999997905,
+          "mean_ms": 0.26047789271740085,
+          "p50_ms": 0.2544584999999433,
+          "p95_ms": 0.3032510000000599,
+          "p99_ms": 0.35979099999927655,
+          "seconds": 2.396396613000088
+        },
+        "logic_render": {
+          "count": 9200,
+          "max_ms": 1.7178739999987869,
+          "mean_ms": 0.6462540375000123,
+          "p50_ms": 0.6354570000000059,
+          "p95_ms": 0.7284170000003698,
+          "p99_ms": 0.7981250000010931,
+          "seconds": 5.945537145000113
+        },
+        "loop": {
+          "count": 9200,
+          "max_ms": 1.727250000000069,
+          "mean_ms": 0.6492533127173927,
+          "p50_ms": 0.6381250000000449,
+          "p95_ms": 0.7332499999996855,
+          "p99_ms": 0.8050000000006108,
+          "seconds": 5.973130477000013
+        },
+        "render": {
+          "count": 9200,
+          "max_ms": 0.6374160000000018,
+          "mean_ms": 0.3857761447826114,
+          "p50_ms": 0.37850000000005934,
+          "p95_ms": 0.4451669999996355,
+          "p99_ms": 0.5018749999994299,
+          "seconds": 3.549140532000025
+        }
+      },
+      "sample": null,
+      "schema": "rising-lands/native-abi-play-benchmark/1",
+      "scope": "Release C ABI in app play order, reused caller buffers, hud=True; excludes initialization, audit/export/hash work and presentation. Phase timers include ctypes call overhead. Optional sampling overhead is included.",
+      "source_revision": "4bd1112a6073ff93b051e7b47b3fa27e81c44d59"
+    },
+    "after-profile": {
+      "abi": 65542,
+      "final_clock": [
+        9201,
+        460050
+      ],
+      "final_counter": 9200,
+      "final_generation": 18402,
+      "final_phase": 3,
+      "final_state_sha256": "4ef7471043dd66011d9ad68873ae1c27f8c84f32063bd359c9a23e4cb48dfd36",
+      "final_surface_sha256": "8ce7ad456a1d94cefb7f880c94553a3d7ea7ffca8c4aaa303894f511116f10e3",
+      "fps": {
+        "logic": 3725.1688479445597,
+        "logic_render": 1493.4600713851926,
+        "loop": 1485.6678712906853,
+        "render": 2492.8839246446287
+      },
+      "frames": 9200,
+      "initialization_seconds": 2.3478513750000003,
+      "library_sha256": "5076e85bbc34e755933cbe6b0e856aead3f4f4c482337a29209dc0fd42c0abf0",
+      "mode": 1,
+      "phases": {
+        "CalculGame": {
+          "count": 9200,
+          "max_ms": 3.4917500000002377,
+          "mean_ms": 0.2538170048913079,
+          "p50_ms": 0.2424999999997013,
+          "p95_ms": 0.321875000000027,
+          "p99_ms": 0.3752500000002712,
+          "seconds": 2.3351164450000326
+        },
+        "between_frames": {
+          "count": 9200,
+          "max_ms": 0.32362500000004957,
+          "mean_ms": 0.014627202826087524,
+          "p50_ms": 0.013250000000297746,
+          "p95_ms": 0.019374999999044462,
+          "p99_ms": 0.045666000000110785,
+          "seconds": 0.1345702660000052
+        },
+        "generation": {
+          "count": 9200,
+          "max_ms": 1.1176659999998506,
+          "mean_ms": 0.002847547934784719,
+          "p50_ms": 0.002208999999808725,
+          "p95_ms": 0.004249000000289271,
+          "p99_ms": 0.010167000000116388,
+          "seconds": 0.026197441000019417
+        },
+        "logic": {
+          "count": 9200,
+          "max_ms": 3.505041000000375,
+          "mean_ms": 0.2684442077173954,
+          "p50_ms": 0.25649900000024317,
+          "p95_ms": 0.33774900000027586,
+          "p99_ms": 0.39312500000043826,
+          "seconds": 2.469686711000038
+        },
+        "logic_render": {
+          "count": 9200,
+          "max_ms": 3.89687400000005,
+          "mean_ms": 0.6695860298913077,
+          "p50_ms": 0.6424580000010671,
+          "p95_ms": 0.7941660000003736,
+          "p99_ms": 1.2990830000001452,
+          "seconds": 6.160191475000031
+        },
+        "loop": {
+          "count": 9200,
+          "max_ms": 3.9052920000002267,
+          "mean_ms": 0.6730979509782643,
+          "p50_ms": 0.6454369999997489,
+          "p95_ms": 0.8005829999992997,
+          "p99_ms": 1.3213340000000073,
+          "seconds": 6.192501149000032
+        },
+        "render": {
+          "count": 9200,
+          "max_ms": 2.7469579999999105,
+          "mean_ms": 0.4011418221739122,
+          "p50_ms": 0.3757079999999746,
+          "p95_ms": 0.4925419999999292,
+          "p99_ms": 1.0176249999998,
+          "seconds": 3.6905047639999924
+        }
+      },
+      "sample": ".local/performance-60fps/after-sample.txt",
+      "schema": "rising-lands/native-abi-play-benchmark/1",
+      "scope": "Release C ABI in app play order, reused caller buffers, hud=True; excludes initialization, audit/export/hash work and presentation. Phase timers include ctypes call overhead. Optional sampling overhead is included.",
+      "source_revision": "4bd1112a6073ff93b051e7b47b3fa27e81c44d59"
+    },
+    "before-final": {
+      "abi": 65541,
+      "final_clock": [
+        9201,
+        460050
+      ],
+      "final_counter": 9200,
+      "final_generation": 18402,
+      "final_phase": 3,
+      "final_state_sha256": "4ef7471043dd66011d9ad68873ae1c27f8c84f32063bd359c9a23e4cb48dfd36",
+      "final_surface_sha256": "8ce7ad456a1d94cefb7f880c94553a3d7ea7ffca8c4aaa303894f511116f10e3",
+      "fps": {
+        "logic": 103.91421170851534,
+        "logic_render": 74.6232705727035,
+        "loop": 74.53580407784366,
+        "render": 264.73776655789965
+      },
+      "frames": 9200,
+      "initialization_seconds": 2.354886958,
+      "library_sha256": "7070b80561c84bc36cb3b4543f2a25d2e20bc8c6dc4318b754f1a73e159c38b2",
+      "mode": "legacy audit",
+      "phases": {
+        "CalculGame": {
+          "count": 9200,
+          "max_ms": 7.595790999999963,
+          "mean_ms": 5.007493303586913,
+          "p50_ms": 5.017416500000316,
+          "p95_ms": 5.2623750000009295,
+          "p99_ms": 5.384083999999234,
+          "seconds": 46.0689383929996
+        },
+        "between_frames": {
+          "count": 9200,
+          "max_ms": 5.60750000000354,
+          "mean_ms": 4.61582946967389,
+          "p50_ms": 4.621666499993182,
+          "p95_ms": 4.852249999999003,
+          "p99_ms": 4.956832999994276,
+          "seconds": 42.46563112099979
+        },
+        "generation": {
+          "count": 9200,
+          "max_ms": 0.10729200000092476,
+          "mean_ms": 0.011323274565251298,
+          "p50_ms": 0.010749999997727855,
+          "p95_ms": 0.015083999997500541,
+          "p99_ms": 0.022166999997352832,
+          "seconds": 0.10417412600031195
+        },
+        "logic": {
+          "count": 9200,
+          "max_ms": 12.561125000004836,
+          "mean_ms": 9.623322773260803,
+          "p50_ms": 9.625895500001924,
+          "p95_ms": 9.999625000006063,
+          "p99_ms": 10.175708000005557,
+          "seconds": 88.53456951399939
+        },
+        "logic_render": {
+          "count": 9200,
+          "max_ms": 16.750999999999294,
+          "mean_ms": 13.400645567065117,
+          "p50_ms": 13.412396499994372,
+          "p95_ms": 13.896834000000524,
+          "p99_ms": 14.161375000014687,
+          "seconds": 123.28593921699908
+        },
+        "loop": {
+          "count": 9200,
+          "max_ms": 16.767083000004845,
+          "mean_ms": 13.416370996086934,
+          "p50_ms": 13.428729500001069,
+          "p95_ms": 13.91200000000481,
+          "p99_ms": 14.180000000010295,
+          "seconds": 123.4306131639998
+        },
+        "render": {
+          "count": 9200,
+          "max_ms": 4.609208000005083,
+          "mean_ms": 3.777322793804315,
+          "p50_ms": 3.8047500000004675,
+          "p95_ms": 4.062666000002935,
+          "p99_ms": 4.170041000001845,
+          "seconds": 34.751369702999696
+        }
+      },
+      "sample": null,
+      "schema": "rising-lands/native-abi-play-benchmark/1",
+      "scope": "Release C ABI in app play order, reused caller buffers, hud=True; excludes initialization, audit/export/hash work and presentation. Phase timers include ctypes call overhead. Optional sampling overhead is included.",
+      "source_revision": "4bd1112a6073ff93b051e7b47b3fa27e81c44d59"
+    }
+  },
+  "players": {
+    "K1": {
+      "first_difference": null,
+      "frames_equal": 12,
+      "native_seconds": 0.0061931679999993605,
+      "play_equal": 25,
+      "play_phases": 25,
+      "stop": {
+        "equal": true,
+        "frame": 141,
+        "inputs_before_stop": [],
+        "inputs_equal": true,
+        "orders_before_stop": [],
+        "orders_equal": true,
+        "phase": 2,
+        "python": {
+          "address": 4283255,
+          "callee": "AffGame",
+          "dependency": "AffGame @0x415b77: view origin (1, 0): vegetation/terrain handlers (0x411147, 0x412392, 0x415b77/0x415c19) only proved native on the sampled origins",
+          "type": "DependenciaExibicao"
+        },
+        "rust": "AffGame at 0x00415b77"
+      },
+      "wall_seconds": 29.671413333,
+      "whole_state": null
+    },
+    "P1": {
+      "first_difference": null,
+      "frames_equal": 501,
+      "native_seconds": 0.24460342200039875,
+      "play_equal": 1002,
+      "play_phases": 1002,
+      "stop": null,
+      "wall_seconds": 233.904727417,
+      "whole_state": {
+        "compared_bytes_per_phase": [
+          16019748
+        ],
+        "mask_bytes": 155587,
+        "phases_compared": 1002,
+        "phases_equal": 1002,
+        "phases_requested": 1002
+      }
+    },
+    "P2": {
+      "first_difference": null,
+      "frames_equal": 601,
+      "native_seconds": 0.31568522199986404,
+      "play_equal": 1202,
+      "play_phases": 1202,
+      "stop": null,
+      "wall_seconds": 292.760977459,
+      "whole_state": {
+        "compared_bytes_per_phase": [
+          16014614
+        ],
+        "mask_bytes": 160721,
+        "phases_compared": 1202,
+        "phases_equal": 1202,
+        "phases_requested": 1202
+      }
+    },
+    "P3": {
+      "first_difference": null,
+      "frames_equal": 91,
+      "native_seconds": 0.04376587900000928,
+      "play_equal": 184,
+      "play_phases": 184,
+      "stop": {
+        "equal": true,
+        "frame": 220,
+        "inputs_before_stop": [
+          {
+            "frame": 220,
+            "kind": "peek_message",
+            "message": null,
+            "site": "0x4601d8"
+          },
+          {
+            "frame": 220,
+            "kind": "cursor",
+            "site": "0x47504b",
+            "x": 688,
+            "y": 400
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x429300",
+            "value": 0,
+            "vk": 27
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x429556",
+            "value": 0,
+            "vk": 16
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x4295fc",
+            "value": 0,
+            "vk": 17
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x42967e",
+            "value": 0,
+            "vk": 46
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x4296ad",
+            "value": 0,
+            "vk": 18
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x4296dc",
+            "value": 0,
+            "vk": 32
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x4296f1",
+            "value": 0,
+            "vk": 38
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x42970b",
+            "value": 0,
+            "vk": 40
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x429732",
+            "value": 0,
+            "vk": 39
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x42974c",
+            "value": 0,
+            "vk": 37
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x429773",
+            "value": 0,
+            "vk": 13
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x429781",
+            "value": 0,
+            "vk": 88
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x42a76b",
+            "value": 0,
+            "vk": 69
+          }
+        ],
+        "inputs_equal": true,
+        "orders_before_stop": [],
+        "orders_equal": true,
+        "phase": 3,
+        "python": {
+          "address": 4352767,
+          "callee": "BatimentNextEtape type 3",
+          "dependency": "BatimentNextEtape type 3 required at 0x00426aff; earlier stores retained",
+          "type": "DependenciaIA"
+        },
+        "rust": "BatimentNextEtape type 3 at 0x00426aff"
+      },
+      "wall_seconds": 39.430882958000005,
+      "whole_state": null
+    },
+    "P6": {
+      "first_difference": null,
+      "frames_equal": 91,
+      "native_seconds": 0.05239286799995213,
+      "play_equal": 184,
+      "play_phases": 184,
+      "stop": {
+        "equal": true,
+        "frame": 220,
+        "inputs_before_stop": [
+          {
+            "frame": 220,
+            "kind": "peek_message",
+            "message": null,
+            "site": "0x4601d8"
+          },
+          {
+            "frame": 220,
+            "kind": "cursor",
+            "site": "0x47504b",
+            "x": 688,
+            "y": 400
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x429300",
+            "value": 0,
+            "vk": 27
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x429556",
+            "value": 0,
+            "vk": 16
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x4295fc",
+            "value": 0,
+            "vk": 17
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x42967e",
+            "value": 0,
+            "vk": 46
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x4296ad",
+            "value": 0,
+            "vk": 18
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x4296dc",
+            "value": 0,
+            "vk": 32
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x4296f1",
+            "value": 0,
+            "vk": 38
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x42970b",
+            "value": 0,
+            "vk": 40
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x429732",
+            "value": 0,
+            "vk": 39
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x42974c",
+            "value": 0,
+            "vk": 37
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x429773",
+            "value": 0,
+            "vk": 13
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x429781",
+            "value": 0,
+            "vk": 88
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x42a76b",
+            "value": 0,
+            "vk": 69
+          }
+        ],
+        "inputs_equal": true,
+        "orders_before_stop": [],
+        "orders_equal": true,
+        "phase": 3,
+        "python": {
+          "address": 4352767,
+          "callee": "BatimentNextEtape type 3",
+          "dependency": "BatimentNextEtape type 3 required at 0x00426aff; earlier stores retained",
+          "type": "DependenciaIA"
+        },
+        "rust": "BatimentNextEtape type 3 at 0x00426aff"
+      },
+      "wall_seconds": 70.582128292,
+      "whole_state": {
+        "compared_bytes_per_phase": [
+          16002289
+        ],
+        "mask_bytes": 173046,
+        "phases_compared": 183,
+        "phases_equal": 183,
+        "phases_requested": 4544
+      }
+    },
+    "P7": {
+      "first_difference": null,
+      "frames_equal": 91,
+      "native_seconds": 0.04534620499990183,
+      "play_equal": 184,
+      "play_phases": 184,
+      "stop": {
+        "equal": true,
+        "frame": 220,
+        "inputs_before_stop": [
+          {
+            "frame": 220,
+            "kind": "peek_message",
+            "message": null,
+            "site": "0x4601d8"
+          },
+          {
+            "frame": 220,
+            "kind": "cursor",
+            "site": "0x47504b",
+            "x": 688,
+            "y": 400
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x429300",
+            "value": 0,
+            "vk": 27
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x429556",
+            "value": 0,
+            "vk": 16
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x4295fc",
+            "value": 0,
+            "vk": 17
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x42967e",
+            "value": 0,
+            "vk": 46
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x4296ad",
+            "value": 0,
+            "vk": 18
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x4296dc",
+            "value": 0,
+            "vk": 32
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x4296f1",
+            "value": 0,
+            "vk": 38
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x42970b",
+            "value": 0,
+            "vk": 40
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x429732",
+            "value": 0,
+            "vk": 39
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x42974c",
+            "value": 0,
+            "vk": 37
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x429773",
+            "value": 0,
+            "vk": 13
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x429781",
+            "value": 0,
+            "vk": 88
+          },
+          {
+            "frame": 220,
+            "kind": "key",
+            "site": "0x42a76b",
+            "value": 0,
+            "vk": 69
+          }
+        ],
+        "inputs_equal": true,
+        "orders_before_stop": [],
+        "orders_equal": true,
+        "phase": 3,
+        "python": {
+          "address": 4352767,
+          "callee": "BatimentNextEtape type 3",
+          "dependency": "BatimentNextEtape type 3 required at 0x00426aff; earlier stores retained",
+          "type": "DependenciaIA"
+        },
+        "rust": "BatimentNextEtape type 3 at 0x00426aff"
+      },
+      "wall_seconds": 43.734995417,
+      "whole_state": null
+    }
+  },
+  "post_merge_identity": {
+    "full_proof_revision": "74a3fbeab35aee4d27ff6b33cbdc64ec5861be51",
+    "input_evidence_digests_identical": true,
+    "library_sha256": "5076e85bbc34e755933cbe6b0e856aead3f4f4c482337a29209dc0fd42c0abf0",
+    "merged_main": "54d148d931cc3420fe256e6fec71462087597293",
+    "native_sources_and_header_identical": true,
+    "pinning_fix": "1c1fade05cf7b316f2baaa2f0916d8c0a76911b8"
+  },
+  "pre_merge_gates": {
+    "common-final2": {
+      "command": [
+        "python3",
+        "-B",
+        "scripts/check.py"
+      ],
+      "returncode": 0,
+      "seconds": 467.806153833
+    },
+    "validate-final2": {
+      "command": [
+        "sh",
+        "motor/validate.sh"
+      ],
+      "returncode": 0,
+      "seconds": 292.231228709
+    }
+  },
+  "provenance_note": "Exact reference revisions, evidence digests, masks and native code remain fixed. Full phase proofs ran on 74a3fbe. Final main merge 4bd1112 adopts coordinator 1c1fade snapshot-only verification for player-input evidence; actual frozen inputs are identical and reject corruption. M2 original package/capture/policy immutability checks are unchanged. Final gates rerun on the merged tree; release rebuild must be byte-identical.",
+  "renderer": {
+    "m22": {
+      "original_equal": 128,
+      "python_equal": 128
+    },
+    "m23": {
+      "first_stop": null,
+      "full_frames": 9200,
+      "original_equal": 9200
+    },
+    "qualified_probes": {
+      "P1": {
+        "first_difference": null,
+        "frames": 501,
+        "full_equal": 501,
+        "text_boundaries_checked": 460
+      },
+      "P2": {
+        "first_difference": null,
+        "frames": 601,
+        "full_equal": 601,
+        "text_boundaries_checked": 511
+      },
+      "P3": {
+        "first_difference": null,
+        "frames": 172,
+        "full_equal": 172,
+        "text_boundaries_checked": 66
+      }
+    }
+  },
+  "schema": "rising-lands/native-play-performance-proof/1",
+  "tested_revision": "4bd1112"
+}
