@@ -1,0 +1,20 @@
+[lease] macos-m33-service waiting
+[lease] macos-m33-service granted slots [5]
+test_live_memory_read_never_reads_or_closes_evidence_cursor (test_macos_playback_service.PlaybackServiceTests) ... ok
+test_unsupported_api_returns_explicit_error_not_a_playback_key (test_macos_playback_service.PlaybackServiceTests) ... ok
+test_worker_open_step_read_reset_errors_and_close (test_macos_playback_service.PlaybackServiceTests) ... ERROR
+
+======================================================================
+ERROR: test_worker_open_step_read_reset_errors_and_close (test_macos_playback_service.PlaybackServiceTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/testes/test_macos_playback_service.py", line 26, in test_worker_open_step_read_reset_errors_and_close
+    client = MacOSPlaybackClient(ROOT, ROOT/'apps/macos-preview/src', 'test-commit', graphics_inputs(self, ROOT))
+  File "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/testes/macos_test_inputs.py", line 15, in graphics_inputs
+    raise RuntimeError('Declare RISING_INPUTS_ROOT containing source/cd for Graphics integration tests')
+RuntimeError: Declare RISING_INPUTS_ROOT containing source/cd for Graphics integration tests
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.183s
+
+FAILED (errors=1)

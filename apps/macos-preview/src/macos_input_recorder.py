@@ -97,4 +97,9 @@ class MacOSInputRecorder:
         from pathlib import Path
         if not (Path(root)/'pesquisas-paralelas/missoes/m3/entrada_roteirizada.py').is_file():
             raise InputContractPending('Missions scripted-input schema is not integrated')
-        raise InputContractPending('Missions scripted-input exporter adapter awaits contract review')
+        if self.polls:
+            raise ValueError('LegacyPerPollJournalNotScriptable: use the frame-addressed session recorder')
+        from macos_scripted_input import MacOSSessionRecorder
+        recorder=MacOSSessionRecorder(root)
+        for item in self.events: recorder.event(item['frame'],item['event'])
+        return recorder.export_script().export()
