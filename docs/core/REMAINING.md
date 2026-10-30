@@ -1,5 +1,7 @@
 # Core dependency inventory — continued research round
 
+**Update 2026-10-30 07:15.** Everything in the table below through Stage 17, plus Engin_RetrieveExperimente, the M2 frame foundations, the M2.3 raid routines and the M3/S1 providers (selection and order setters, construction, structure entry, vision/groups/exit, hunger search/light, work-cycle queries, the 16 S1 gaps and the two register queries), is integrated on main (`3874fcc`). The current provider index, open stops with owners and next steps are in [CORE.md](../CORE.md#current-state-2026-10-30-0715); the "Current priority" paragraph below is historical. Remaining Core work is driven by named stops from the S1/P6 strict chain (AI/runtime) and the D1 death chain (Combat).
+
 Updated 2026-10-28 after completing Stage15 recovery and validating Stage16; historical recovery began from commit `a572e8c0320ff929a6c3dd2e75907bc121f7dea6` against fetched main `8810b3730a0fb788af3eac2b447dea65372f597f`. The new human authorization supersedes the previous stop; earlier work/evidence remains preserved. Original-address references use executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
 
 | Subcomponent | Evidence and present status | Remaining dependency |
