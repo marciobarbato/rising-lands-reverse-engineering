@@ -1129,11 +1129,15 @@ class Entrada:
     def _painel(self, p):
         m, loc = self.m, self.local
         si = self.icone_get_zone(m, m.u16(CURSOR_X), m.u16(CURSOR_Y))
-        if self._sel_estrutura(p) != 0xffff:
-            _parar('InputGame HUD with a structure selected (BatimentGetBagOrdre)', 0x42bd0d)
-        if self._nb(p) != 1:
+        estrutura = self._sel_estrutura(p)
+        if estrutura != 0xffff:
+            # 0x42bd0d: BatimentGetType(AX = the selected structure) then BatimentGetBagOrdre(AL type, DL player;
+            # both getters keep EDX), the structure's order Bag; then the common panel code at 0x42bd42.
+            bag = self.bag_ordre_estrutura(m.u8(0x49a0c8 + 276 * estrutura + 8), p)
+        elif self._nb(p) != 1:
             return
-        bag = self.bag_ordre(self._primeira(p))
+        else:
+            bag = self.bag_ordre(self._primeira(p))
         ae, af = m.u8(AE), m.u8(AF)
         if si in (8, 9):
             m.u8(0x4e05a2, 1)
@@ -1176,8 +1180,26 @@ class Entrada:
                 if ae and af:
                     m.u8(MODO_ACAO, tipo)
                     m.u16(PAGINA, 0xa)
-            elif codigo in (4, 6):
-                _parar(f'InputGame icon Bag code {codigo}', {4: 0x42be78, 6: 0x42c063}[codigo])
+            elif codigo == 6:
+                # 0x42c063 (a recruitable unit type): info = EnginGetTypeName(type) 0x441775 (0x4965ae + 50 type
+                # + 0xc; DL stays 0 -> flag 0), info2 = 0xffff; EnginGetRessource 0x4410d2 (food +2, stone +6,
+                # parts +4 of the type record) into 0x4e0612/0x4e0614/0x4e0616, 0x4e0618 = 0. A click (both
+                # flags) with TestRessource(food, stone, parts; push player) sends tag 0x11 (BX = type) at 0x42bf88.
+                t = tipo & 0xff
+                r = 0x4965ae + 50 * t
+                comida, pecas, pedra = m.u16(r + 2), m.u16(r + 4), m.u16(r + 6)
+                loc['info2'], loc['info'], loc['flag'] = 0xffff, (r + 0xc) & M32, 0
+                m.u16(0x4e0612, comida)
+                m.u16(0x4e0614, pedra)
+                m.u16(0x4e0616, pecas)
+                m.u16(0x4e0618, 0)
+                if ae and af:
+                    ok = self.p('TestRessource', 0x42c0fa, regs=dict(EAX=comida, EDX=pedra, EBX=pecas, ECX=0),
+                                pilha=[p])['EAX'] & 0xff
+                    if ok:
+                        self._ordre(p, 0x11, t, 0, sitio=0x42bf88)
+            elif codigo == 4:
+                _parar('InputGame icon Bag code 4', 0x42be78)
         if si != 0xff and m.u8(AE):
             m.u16(0x496d4a, si)
             m.u8(0x4e05a2, 1)
