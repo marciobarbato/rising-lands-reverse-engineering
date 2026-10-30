@@ -20,7 +20,7 @@ from emulador import BancadaX86, PILHA, RETORNO, mapear_paginas
 
 ENTRY, CALL, AI_STOP = 0x484808, 0x4211e5, 0x48484c
 REG7 = ('EAX', 'EBX', 'ECX', 'EDX', 'ESI', 'EDI', 'EBP')
-CAPTURA = ROOT / 'pesquisas-paralelas/ia-runtime/evidencias/mensagem-cidade-original.json.xz'
+CAPTURA = ROOT / 'pesquisas-paralelas/ia-runtime/evidencias/mensagem-cidade-original-v2.json.xz'
 ECONOMIA = ROOT / 'pesquisas-paralelas/economia/evidencias/caverna-recrutamento/captura-caverna-recrutamento-exibicao.json.xz'
 
 
@@ -30,6 +30,7 @@ class Leituras:
         self.uc, self.ativo, self.dados, self.escritos = uc, False, {}, set()
         self.hooks = [uc.hook_add(unicorn.UC_HOOK_MEM_READ, self.ler),
                       uc.hook_add(unicorn.UC_HOOK_MEM_WRITE, self.escrever)]
+        uc.ctl_flush_tb()  # Existing cached blocks must acquire the new memory hooks.
 
     def iniciar(self):
         self.dados, self.escritos, self.ativo = {}, set(), True
@@ -104,6 +105,13 @@ def executar(traduzir=False):
     import bancada_s1 as bs
     casos = []
     def registrar(c):
+        observed = MemoriaCapturada(c['read_before_write'])
+        structure = int(c['entry_registers']['EAX'],16) & 65535
+        owner = observed.u8(0x49a0c8+276*structure+4)
+        if owner < 4:
+            # Reject incomplete hooks: both reads must be present even when
+            # the original block was compiled before observation started.
+            observed.u8(observed.u32(0x5080a8)+20*owner+1)
         if traduzir:
             c['comparison'] = comparar(c)
         casos.append(c)

@@ -753,3 +753,18 @@ The capture refuses replacement and asserts that no city translation was
 imported. This commit supplies evidence only; the translation and native
 differential follow. Recruitment-provider binding is being validated
 separately; Economy still omits DX at SetSortEngin CALL `0x420f8c`.
+
+
+### Versioned city capture read-coverage correction
+
+`evidencias/mensagem-cidade-original-v2.json.xz` supersedes v1 for the
+read-before-write fixture. Review found that Unicorn's already compiled
+PlayerGetType blocks missed newly installed memory hooks in the three Economy
+cases. Their native outputs were correct, but the read fixtures were incomplete.
+The capture now flushes translation blocks after installing memory hooks and
+requires all owner/player prefix reads. The first evidence file remains unchanged.
+A fresh leased original-only run again records 27 cases (23 returns, four bounded
+AI prefixes), all 48 S1 states equal, unchanged original code. Every v2 case
+contains all required owner/player reads, checked independently before this commit.
+No translation has been added yet. The validation mode consumes v2 and will
+reproduce it from the original before comparing Python.
