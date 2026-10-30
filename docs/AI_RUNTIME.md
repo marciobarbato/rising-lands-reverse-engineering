@@ -4,7 +4,50 @@ Owner: the AI and Runtime front (`feat/re-ai-runtime`, `worktrees/re-ai-runtime`
 
 Every address applies to the intact executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`, the only execution oracle. The normalized analysis PE `26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0` is a different identity and was not read for any interval below. Routine names are the original SBL names decoded by core's `simbolos_ia`.
 
-**Current scope:** Stage 1 established the original-byte contract. Stage 2 recovers the `IaReset`, `IaAlloc` and uncalled `IAResetAttaque` table providers, with the bounded evidence described below. M2 adds the frame inventory at the M1 post-load state, 46 native captures at that input, the CalculGame frame-body skeleton, and the two dispatcher loops with IATestUtilite (sections at the end). EnginNextEtape/BatimentNextEtape bodies, AI kernels (AvanceMonstre first) and world operations are not implemented yet.
+**Current scope:** Stage 1 established the original-byte contract and Stage 2 the AI table providers (`IaReset`, `IaAlloc`, `IAResetAttaque`). M2 composed the whole frame (CalculGame, both dispatchers, the AI kernels reached by MONDE01) and proved it whole-state against the original through the first raid (M2.2, M2.3). M3.1 adds the input path (InputGame → SetPlayerOrdre → ProcessInputGame → setters) and the per-window input chain; its P1/P2 part is accepted. The current state, API and open stops are summarized in the next section; the later sections are the historical record, stage by stage.
+
+## Current state (2026-10-30, resumed front)
+
+**Milestones.** M2.2 (257/257 phases) and M2.3 (18,401/18,401 phases, frames 0–9,200 through the first raid) are accepted. **M3.1 P1/P2 is accepted at main `c9c85eb`**: P1 1,002/1,002 and P2 1,202/1,202 phases whole-state, zero crossings, reproduced on the MacBook and the Mac mini with identical chain hashes ([M3_1_PROVA_P1_P2.md](../pesquisas-paralelas/ia-runtime/M3_1_PROVA_P1_P2.md), `validacao/m3-1-prova-p1-p2.json`). The strict P6 proof is now recorded (4,544/4,544 phases, zero crossings, clean source `01c4319`); second-machine reproduction and coordinator acceptance remain pending. S1 windows are open.
+
+**Resumed delivery.** Merged main `3e2ed77`. Economy binding `377c625` passes 1,058 fresh native comparisons; detection `ad5147a` passes 35; attack dispatch `64128b5` and reload `1ce1d6c` pass two fresh full native parents (25,197 game blocks each), all with zero mismatches. Original captures precede each new adapter. The latest leased gate passes 141 tests with eight explicit skips. Strict S1 is equal through **10800**, then Graphics' two-monster guard at `between_frames10801`; planning is equal through **11752**, then the Combat sound emitter at frame11753. Native CALL evidence records the missing call-site metadata contract; no sound bypass is declared. Follow [S1_NEXT_STOPS.md](../pesquisas-paralelas/ia-runtime/S1_NEXT_STOPS.md). The earlier [recruit continuation](../pesquisas-paralelas/ia-runtime/S1_RECRUIT_CONTINUATION.md) retains its historical scope. Feature pushes only; main integration and acceptance remain coordinator-owned.
+
+**API (input chain).**
+- `provedores_entrada_ia.DonosM3(m, *, som, bonus=None, mensagem_unidade=None)`: one instance of each owner provider over one live memory (Core `entrada_estruturas`, `visao_grupos`, `recrutamento_core.provedor_recrutamento`, `buscas_bloqueios.provedor_buscas`, `consultas_estado_core.provedor_consultas_estado`, `provedores_lacunas_core.provedor_lacunas_s1`; Economy `caverna_recrutamento`, `ciclo_trabalho`, `alimentacao.estado_fome`, the restoration provider; Combat's turret providers and `refugio_registradores`). `externo(nome, chamada, regs)` routes every named dependency to its owner with the full register file; `rotina_core(nome)`, `.fome`, `.fadiga`, `.ordens()`, `registros(nome)`. Core's `_incertos` registers are carried, never invented; strict calls refuse an absent or nominal ESP.
+- `provedores_entrada_ia.provedores_vivos(m, *, janelas, som, ..., donos=)` and `construcao_viva(...)` bind the live providers for the validators and the window proofs; `construcao_entrada_ia.instalar_donos(m, p, donos, tabelas)` installs the cave body, BatimentIllumine/Decouvre, unit states 5/13/19 and EnginSetFatigue.
+- `mensagem_cidade_ia.mensagem_cidade(memory, regs, chamada)` binds iagVilleSendMessage's owner gate, exact register effects and named AI-dispatch stop in `DonosM3`.
+- `DonosM3.externo` binds `provedor_lacunas_economia_s1`, `provedor_tuyau_economia_s1`, and the seventeen `provedor_tecnologia_economia_s1` entries with all seven registers. Missing/unknown behavior inputs stop; `_x87_push` is retained. `capacidade_saco(celula)` is the explicitly projected InputGame query, with unknown preserved carriers discarded. Technology foreign getters use live owner queries.
+- `deteccao_conflito_ia.detectar_alvo(m, unidade, alvo)` binds the real monster behaviour9 detection handler to Combat's synchronous message model; `detectar_registradores` requires all seven known registers and returns EAX/EDX plus five preserved registers and optional ESP+4. `ataque_despacho_ia.AtaqueDespacho.ramo(sitio, unidade)` binds Combat's void state-1/24 body over the same live memory/Core world. Missing foreign effects retain prior mutations and raise a named stop. No battle/attack algorithm is copied.
+- `composicao_entrada_ia.ComposicaoEntrada` runs a window's scripted inputs over the M2 frame composition; `mensagem_unidade` is iagUnitSendMessage.
+- `provar_entrada_janelas_ia.py janela | agregar | tudo [--partes] [--diagnostico-planejamento] --lease <heavy_lease.py> | fixar <W> --ref <missions ref> | reproduzir`. Planning mode lets Graphics planning stops through; its output stays under `.local/` and is never acceptance evidence.
+
+**Validated coverage (native, 0 mismatches).**
+
+| Check | Cases / phases | Equal | Named stops | Mismatches |
+|---|---:|---:|---:|---:|
+| Input orders (`validar_entrada_ordens_ia.py`) | 124 | 118 | 6 | 0 |
+| Deposit pages (`validar_paginas_deposito_ia.py`) | 203 | 203 | 0 | 0 |
+| Construction/keys (`validar_construcao_teclas_ia.py`) | 90 | 85 | 5 | 0 |
+| Recruit binding prefix | 6 | 6 equal prefixes | 3 missing-DX boundaries | 0 |
+| City message | 27 | 23 returns | 4 AI-prefix stops | 0 |
+| MineGetCapacite consumer route | 101 | 101 | 0 | 0 |
+| Economy S1 raw/live routes | 1,058 | 1,058 | 0 | 0 |
+| S1 detection handler | 35 | 35 | 0 | 0 |
+| S1 attack/reload full parents | 2 (25,197 game blocks each) | 2 | 0 | 0 |
+| M3.1 P1 / P2 whole state | 1,002 / 1,202 phases | all | 0 | 0 |
+
+All three leaf differentials were freshly rerun with the recruitment/city binding in `bf8ec61`: 417 cases, 406 complete comparisons, 11 explicit dependency stops, zero mismatches. All native load-tail, between-frames, frame-1, pause and unchanged-code reproductions pass; reports retain the current source/provider provenance. No foreign source bytes are pinned by new tests. Remaining leaf stops: six unloaded-text cases (`0x478a47`), `BatimentHabitable` (`0x41d000`), `SetMurAllentour` (`0x41d012`), `SetEnginSelectRentreEngin` (`0x45f17a`), `iagUnitSendMessage` (`0x41da48`) and VK_SUBTRACT/MiniMapRecentre (`0x41843e`).
+
+**Window reach (indicators unless stated).** Fresh S1 runs at `1ce1d6c` have no earlier difference: strict equals 129–10800 (10,672 frames), planning equals 129–11752 (11,624 frames, 953 declared Graphics bypasses). Reports and exact contracts are in S1_NEXT_STOPS.md. The prior SacGetCapacite stop at3851 is resolved. The following older observations retain their original source/scope: P6 planning whole-state 4,544/4,544 phases through frame 2400 (diagnostic). K1 strict complete through 629, P5 strict complete through 3129, P3 planning 3,001/3,001 through 3129. Uncommitted local runs at `d2777b1` (logs under `.local/`, not evidence) show P3 and P4 strict complete through 3129; P7 strict through 3216 and S1 strict (pass-1 indicators) through 2057, both stopping on Graphics' AffGame view origin at `0x415b77`; S1 planning through 2546 with a first difference at 2547 in `objective.structures`; strict P6 parts 1 and 2 equal (2,000 and 544 phases, chains `5da71fab…` and `c557167f…`) while part 0 was cut off at the pause.
+
+**Open stops and owners.**
+- P6 reproduction (Mac mini/coordinator): strict proof [m3-1-prova-p6.json](../pesquisas-paralelas/ia-runtime/validacao/m3-1-prova-p6.json) is equal in all three parts (2,000 + 2,000 + 544 phases, frames 129–2400), with zero crossings and matching checkpoints; reproduce its three part chains on the mini before acceptance.
+- S1 windows (Missions → AI/runtime): wait for the pass-2 S1 capture from the Mac mini, then `fixar S1 --ref origin/feat/re-missions`, commit the pin, and run `tudo --janelas S1` in strict and planning modes.
+- Graphics: strict S1 stops at the two-monster AffGame guard `0x41591f`, between_frames10801. The exact native observation at11501 and live count2 contract are recorded in S1_NEXT_STOPS.md; the existing planning-only bypass is declared and logged.
+- S1 frame11753 (Combat emitter / Audio M3 transport): `CombateRaidVivo.som` needs original CALL-site metadata for the declared sound boundary; first call is `0x4525a1`, PostSound`0x48aa79`, selector`0x50`, code`0x2300`, flags0, handle`0x474a9358`, volume90. The actual native CALL registers and later requests are in S1_NEXT_STOPS.md. No sound planning bypass exists. Earlier Economy, detection, attack and reload stops pass.
+- Core/Economy/Combat leaf stops listed above.
+
+**Next dependencies.** Combat emitter CALL-site contract, then rerun S1. The existing planning mechanism declares only Graphics stops; the sound boundary is retained as a stop. Strict Graphics count2 and the absent Missions S1 pass-2 manifest remain separate owner dependencies. Latest fetched main `1531678` and Missions `7eeb395` contain no S1 window manifest, so `fixar S1` and strict `tudo --janelas S1` have not run. No S1 whole-state proof/part chains are claimed. Coordinator review/integration remains separate. AI-owner city message bodies retain a named AI/runtime stop at `0x48484c`. No later task was started.
 
 ## Evidence
 
@@ -409,7 +452,7 @@ The preserved WIP capture has 19 cases: 11 complete IaReset entries, three IaAll
 
 APIs are published only after original comparison. They follow the repository conventions: explicit inherited buffers with exact widths, read-only query callbacks, effect callbacks named after original routines, named dependency exceptions carrying the original call address, partial effects retained.
 
-| Entry (Stage 2 delivered; others planned) | Original | Inputs | Result |
+| Entry (Stage 2 delivered; others planned at the time — the current input-chain API is under "Current state") | Original | Inputs | Result |
 |---|---|---|---|
 | `iniciar_ia_programa(memoria, provedores)` | `IaAlloc 0x47fb15` | RNG clock binding, rule-file provider | Original EAX; ordered constant stores and RNG seed |
 | `reiniciar_ia(memoria, provedores)` | `IaReset 0x47f36e` | Player table, Recherche, unit, structure and resource queries, mission number | Original EAX; ordered stores into inherited regions |
@@ -799,3 +842,81 @@ The state-11 walk, the creation at 220 and the WndProc/key paths are now checked
 - The round-1 and round-2 differentials were rerun after these changes: 0 mismatches.
 
 **Next:** the whole-state proof over the P1/P2 pass-2 windows, then P6, and the Core vision/groups and structure-entry wiring (see the HANDOFF).
+
+## M3.1 continuation — integrated baseline and provider regressions (2026-10-30)
+
+The later M3.1 wiring, hunger path, accepted P1/P2 proof and current dependency sequence are recorded in the latest [AI/runtime handoff](../pesquisas-paralelas/ia-runtime/HANDOFF.md). Fresh native regressions on main `e70fda3` compare 417 cases: **405 equal, 12 explicit dependency stops, zero mismatches**. Input orders are 117/124 equal, deposit pages 203/203, and construction/keys 85/90; the reports under `validacao/` retain each stop and current source provenance. All native load/frame/code reproductions pass. The leased AI/runtime gate passes 120 tests with eight explicit native skips.
+
+This continuation changed validation records only; APIs, supported domains and ordered effects were unchanged. At the time Core `5422338` and Graphics' CAVE/construction-projectile guards were not yet on main; both have since landed (main `71335aa`), so only Missions' S1 pass-2 window is still awaited. See "Current state" for the follow-up.
+
+
+## S1 recruit owner binding (2026-10-30)
+
+`DonosM3` constructs Core's `RecrutamentoCore` on its live memory and routes
+`EnginSetType`, `EnginAddVie`, `EnginResetFatigue`, `EnginSetExperimente` and
+`SetSortEngin` through `provedor_recrutamento`. The supplied live bonus callback
+is reused; when absent, `bonus_recrutamento(memory)` is resolved on the first
+query against Economy's live tables. No bonus value is invented. The caller's
+partial register file, `_incertos` and pushed-word metadata reach Core unchanged;
+the adapter returns all seven data registers and explicit preserved unknown bits.
+`ArgumentoNaoPassado` propagates before that callee reads or writes memory,
+retaining all earlier producer effects.
+
+The behavior inputs are AX unit, DX cell, BL direction, CL type for
+`EnginSetType` (CALL `0x420f69`); AX/DX increment for `EnginAddVie` (`0x420f75`);
+AX for fatigue reset (`0x420f7c`); AX/DX preserved exit cell for experience
+(`0x420f85`); AX/DX exit cell for placement (`0x420f8c`). Core's original entries,
+supported domains and exact mutations remain its
+[recruitment adapter contract](core/RECRUITMENT_ADAPTERS.md).
+
+Economy's BL update is consumed directly. Its current `SetSortEngin` callback
+still supplies only AX, so DX is an explicit Economy ABI dependency. AI/runtime
+does not recover it from a previous callback or synthesize it. The S1 indicator
+driver reports the missing register, caller, native entry, owner and required
+masks as a structured stop. The six-case native prefix validator now runs
+through conversion, healing, fatigue and experience, stopping before placement
+if DX is missing; its original store sequence, callback arguments and every
+non-stack changed byte must agree. No recruit-completion claim follows from
+that bounded comparison.
+
+
+`mensagem_cidade_ia.mensagem_cidade(memory, regs, chamada=0x4211e5)` is the
+city-message provider bound directly in `DonosM3.externo`. Required inputs are
+AX structure, DL message and full EBX argument; missing/uncertain consumed
+bits raise `ArgumentoNaoPassado` before memory access. Structure indices are
+protected to 0..999. It reads BatimentGetPlayer's owner byte and, for owners
+0..3, imports Economy's live `quadro_economia.tipo_jogador` query. Owners
+>=4 return their owner byte; player types other than 2 return their type byte.
+EAX is that result, EBX the zero-extended structure, EDX the original full EBX.
+ECX/ESI/EDI/EBP are preserved with their explicit unknown masks; optional
+entry ESP returns ESP+4. There are no non-stack stores or external effects
+on these branches. An AI player raises a named `DependenciaIA` at `0x48484c`,
+before its unbound message dispatch, naming owner/message/argument.
+
+Original-first evidence was committed before translation: the corrected
+`evidencias/mensagem-cidade-original-v2.json.xz` supersedes v1's incomplete
+read hooks; neither evidence file is replaced. Native differential
+`validacao/mensagem-cidade-native.json`: **27 cases, zero mismatches**,
+23 exact returns and four explicit AI-prefix stops. It freshly replays the
+three Economy calls and the S1 frame-2547 call, verifies the 48 native S1
+states, reproduces the capture, compares all seven registers (plus S1 ESP),
+and rejects Python stores. CPU-free tests replay the same native reads and
+verify omitted/uncertain arguments.
+
+Recruitment binding differential `validacao/producao-entrada-recrutamento-native.json`:
+**6/6 equal bounded prefixes**, three returning below threshold and three
+stopping before placement on Economy's missing DX. Every provided owner
+argument, all changed non-stack bytes and the original native store sequence
+agree, including actual BL direction. These checks do not establish a complete
+S1 producer or a whole-state input-chain proof.
+
+
+Final S1 continuation validation: strict and planning indicators both compare
+2,418 equal frames (129–2546), then report Economy's missing DX at SetSortEngin
+in frame 2547; planning bypass count is zero. The three native regressions
+compare 417 cases (406 complete, 11 named stops), zero mismatches. Combined
+with six recruitment prefixes and 27 city cases, the bounded differentials
+have 450 cases, 18 named boundaries and zero mismatches. Final leased domain
+gate: 129 tests, eight explicit native skips, zero failures/errors, documentation
+links passed. See [the continuation report](../pesquisas-paralelas/ia-runtime/S1_RECRUIT_CONTINUATION.md)
+for the exact Economy request and reproduction commands.

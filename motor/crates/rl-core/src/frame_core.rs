@@ -482,8 +482,19 @@ pub fn call(m: &mut MemoriaJogo, name: &str, a: &[u32]) -> Result<u32> {
         "BatimentCollision" => collision(m, a[0], a[1]),
         "BatimentEstDecouvert" => building_visible(m, a[0], a[1], false),
         "BatimentContourEstIllumine" => building_visible(m, a[0], a[1], true),
-        "BatimentDecouvre" => Err(stop("BatimentDecouvre call site", 0x428345)),
-        "BatimentIllumine" => Err(stop("BatimentIllumine call site", 0x4283c7)),
+        "BatimentDecouvre" | "BatimentIllumine" => {
+            let r = crate::chain_vision::entry(
+                m,
+                name,
+                crate::FrameRegisters {
+                    eax: a[0],
+                    edx: a[1],
+                    ebx: if name == "BatimentIllumine" { a[2] } else { 0 },
+                    ..Default::default()
+                },
+            )?;
+            Ok(r.eax)
+        }
         "SetCollision" => {
             let ptr = m.u32(0x507da8)?;
             let addr = ptr.wrapping_add(a[0] & 0xffff);

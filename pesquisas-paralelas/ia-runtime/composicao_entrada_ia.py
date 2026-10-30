@@ -311,7 +311,23 @@ class ComposicaoEntrada(ComposicaoQuadros):
     def _donos_quadro(self, mm, p, donos):
         """The frame phase's providers past frame 220 (``construcao_entrada_ia.instalar_donos``)."""
         from construcao_entrada_ia import instalar_donos
+        from quadro_economia import ramo_producao_estrutura
         instalar_donos(mm, p, donos, self.ctx.tabelas)
+        producao = self.prov.habitacao.producao
+
+        def produzir(estrutura):
+            tipo = mm.u8(0x49a0c8 + 276 * estrutura + 8)
+            if tipo in (1, 2):
+                return donos.calcular_tropa_entrada(estrutura)
+            resultado = producao.calcular_tropa(estrutura)
+            if resultado is not None:
+                raise DependenciaIA('SortieTroupe world continuation (Core/Economy)', 0x420f5a)
+            return None
+
+        # Keep Economy's exact inhabited predicate and call once. The pinned M2
+        # callback only prepared a recruit and its caller discarded that handoff.
+        p['BatimentNextEtape:production'] = lambda sitio, estrutura: ramo_producao_estrutura(
+            producao, estrutura, produzir)
 
     def executar(self, n):
         from oraculo_quadro_missao import nomes_fases

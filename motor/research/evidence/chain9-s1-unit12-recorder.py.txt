@@ -1,0 +1,17 @@
+import json,os,signal,sys,hashlib
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).parent));os.environ['RL_REFERENCE_PROFILE']='chain8'
+import pinned_reference as pin
+pin.REPO=Path(sys.argv[1]);root=pin.activate()
+link=root/'.local/m3'
+if not link.exists():link.symlink_to(pin.REPO/'.local/m3',target_is_directory=True)
+import bancada_s1 as bs
+from ambiente_ia_runtime import EXE
+bs.EXE=Path(EXE);signal.alarm(1140);bench=bs.BancadaS1(2750);rows=[]
+while bench.k<2836:
+ bench.avancar()
+ if bench.k in (2835,2836):
+  pool=int.from_bytes(bench.b.cpu.mem_read(0x4e19a0,4),'little');data=bytes(bench.b.cpu.mem_read(pool+12*276,276));rows.append(dict(frame=bench.k,unit12=data.hex()))
+report=dict(original_sha256=hashlib.sha256(bs.EXE.read_bytes()).hexdigest(),snapshot=bench.reproducao(),reference=pin.provenance(),rows=rows)
+with Path(sys.argv[2]).open('x')as f:json.dump(report,f,indent=2);f.write('\n')
+print('Original unit12 records captured',flush=True)

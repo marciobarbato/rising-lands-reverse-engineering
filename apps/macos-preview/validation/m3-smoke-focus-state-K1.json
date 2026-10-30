@@ -1,0 +1,105 @@
+{
+ "canonical_roundtrip": true,
+ "driver_sha256": "9553fbdd52ecf471129a7b6b05d0688bfa0238939c92ed31c2000ea0e65a59db",
+ "first_difference": null,
+ "first_engine_stop": {
+  "code": 5,
+  "detail": "entrada entre quadros · quadro 141 · ABI 5: AffGame at 0x00415b77",
+  "frame": 141,
+  "inputs_before_stop": [],
+  "orders_before_stop": [],
+  "phase": 2
+ },
+ "frame_hash_scope": "Exact engine indicator comparator fields, including unit record hashes and objective/UI bytes; DGROUP excluded",
+ "frames_compared": 12,
+ "frames_equal": 12,
+ "frames_requested": 501,
+ "input_sha256": "92a69cdd087cdc644ef3b8d7abdbf3cfa176d7f564a914b17b2dfc901e4a0600",
+ "library_sha256": "513e134e99c7ce52cb69418ee3f5c2659029426f08b8340214a5f471a57c661d",
+ "probe": "K1",
+ "reference": {
+  "graphics": "ce441852bcada750a8f91da8ed3302f1668c4405",
+  "logic": "a7f5d4939e7826e02a8b348995edb9c793657f4c",
+  "source_and_fixtures": "Git objects; no working-tree source hash gate",
+  "tree_manifest_sha256": "5942cc4f4c76d7a9311be6f61be5a146819a7a99685a4f6f46011767c7c31276"
+ },
+ "rendering_executed": false,
+ "results": [
+  {
+   "actual_sha256": "bb9db54c2f62d5b983cdd3b4825538b9a699658ccbb6bcaa2159d4805077e7aa",
+   "equal": true,
+   "expected_sha256": "bb9db54c2f62d5b983cdd3b4825538b9a699658ccbb6bcaa2159d4805077e7aa",
+   "frame": 129
+  },
+  {
+   "actual_sha256": "09da6f8d2eb3591d9ff5c704086e06449fbe6c0a2a1f98f1ec817970e8832139",
+   "equal": true,
+   "expected_sha256": "09da6f8d2eb3591d9ff5c704086e06449fbe6c0a2a1f98f1ec817970e8832139",
+   "frame": 130
+  },
+  {
+   "actual_sha256": "e70ed7716dfdf37c7252e149fa94dd52f0bf77eafe8c933d141d9ecb07e1c8cc",
+   "equal": true,
+   "expected_sha256": "e70ed7716dfdf37c7252e149fa94dd52f0bf77eafe8c933d141d9ecb07e1c8cc",
+   "frame": 131
+  },
+  {
+   "actual_sha256": "783a28a734dbfcb9367dcf4298aeb3114cf10ca8faa32899ee5854a1e298784a",
+   "equal": true,
+   "expected_sha256": "783a28a734dbfcb9367dcf4298aeb3114cf10ca8faa32899ee5854a1e298784a",
+   "frame": 132
+  },
+  {
+   "actual_sha256": "183e9fa7b427445dd0a9c88fd1a06bd84cee51adf5ed23c547146d7944ebf0dc",
+   "equal": true,
+   "expected_sha256": "183e9fa7b427445dd0a9c88fd1a06bd84cee51adf5ed23c547146d7944ebf0dc",
+   "frame": 133
+  },
+  {
+   "actual_sha256": "fe04fceb37a1a5134b8977ac9bc9fa71c4ea96d21373dca6cba791a0536b9829",
+   "equal": true,
+   "expected_sha256": "fe04fceb37a1a5134b8977ac9bc9fa71c4ea96d21373dca6cba791a0536b9829",
+   "frame": 134
+  },
+  {
+   "actual_sha256": "12fd51fdc0ae32eb2eaa503ddcce65d65510c08c70edd570ef14b3c10ea2809b",
+   "equal": true,
+   "expected_sha256": "12fd51fdc0ae32eb2eaa503ddcce65d65510c08c70edd570ef14b3c10ea2809b",
+   "frame": 135
+  },
+  {
+   "actual_sha256": "b4d01fe8d7cb5ceee66d89a0a4207c24a85f6a73c1a541b8fc72ce405a5d2b67",
+   "equal": true,
+   "expected_sha256": "b4d01fe8d7cb5ceee66d89a0a4207c24a85f6a73c1a541b8fc72ce405a5d2b67",
+   "frame": 136
+  },
+  {
+   "actual_sha256": "1e614d0757c53728c14d2ab592b12175fb4596f3c7973e1df04c249b676a3972",
+   "equal": true,
+   "expected_sha256": "1e614d0757c53728c14d2ab592b12175fb4596f3c7973e1df04c249b676a3972",
+   "frame": 137
+  },
+  {
+   "actual_sha256": "18f1d1d73ae98360f88ee402ec2fff5cf7e7367685407f21ea74aef7e4257218",
+   "equal": true,
+   "expected_sha256": "18f1d1d73ae98360f88ee402ec2fff5cf7e7367685407f21ea74aef7e4257218",
+   "frame": 138
+  },
+  {
+   "actual_sha256": "f07518d5155681d5ab8b2d813720e67199c2fd1e72f310d099d63b1ecdbbfa2d",
+   "equal": true,
+   "expected_sha256": "f07518d5155681d5ab8b2d813720e67199c2fd1e72f310d099d63b1ecdbbfa2d",
+   "frame": 139
+  },
+  {
+   "actual_sha256": "50d365f7613178a9c36850ca7a5d95ce4be80e31a381f3b89822a29b0c1514c8",
+   "equal": true,
+   "expected_sha256": "50d365f7613178a9c36850ca7a5d95ce4be80e31a381f3b89822a29b0c1514c8",
+   "frame": 140
+  }
+ ],
+ "schema": "rising-lands/macos-test-a-state/1",
+ "seconds": 0.3475333340029465,
+ "whole_state": null,
+ "world_source": "S0 plus original static tables; 128 real no-input frames; no oracle state reload"
+}

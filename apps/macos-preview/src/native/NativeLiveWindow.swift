@@ -131,8 +131,8 @@ final class NativeMetalGameView: NSView {
     override func rightMouseDragged(with event:NSEvent){mouse(event,0x200)}
     override func mouseDown(with event:NSEvent){mouse(event,event.clickCount>1 && event.clickCount%2==0 ? 0x203:0x201)}
     override func mouseUp(with event:NSEvent){mouse(event,0x202)}
-    override func rightMouseDown(with event:NSEvent){mouse(event,event.buttonNumber==0 ? 0x201:0x204)}
-    override func rightMouseUp(with event:NSEvent){mouse(event,event.buttonNumber==0 ? 0x202:0x205)}
+    override func rightMouseDown(with event:NSEvent){mouse(event,0x204)}
+    override func rightMouseUp(with event:NSEvent){mouse(event,0x205)}
     func key(_ key:Int,_ down:Bool){if down{heldKeys.insert(key)}else{heldKeys.remove(key)};inputEvent?(["kind":"key","vkey":key,"down":down])}
     override func keyDown(with event:NSEvent){synchronizeModifiers(event.modifierFlags);if let k=[36:13,76:13,53:27,49:32,123:37,126:38,124:39,125:40,117:46,7:88,29:48,18:49,19:50,20:51,21:52,23:53,22:54,26:55,28:56,25:57][Int(event.keyCode)]{key(k,true)}}
     override func keyUp(with event:NSEvent){synchronizeModifiers(event.modifierFlags);if let k=[36:13,76:13,53:27,49:32,123:37,126:38,124:39,125:40,117:46,7:88,29:48,18:49,19:50,20:51,21:52,23:53,22:54,26:55,28:56,25:57][Int(event.keyCode)]{key(k,false)}}
@@ -232,10 +232,11 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
     let root:URL
     let work=DispatchQueue(label:"risinglands.native.live",qos:.userInitiated)
     var validationMode:Bool
-    var gameFPS=20.0
+    var gameFPS=0.0
     var nextGameTime=0.0
     var runID:UInt64=0
     var presenter:NativePlayPresenter?
+    var audio:NativeAudioPlayback?
     let modeControl=NSSegmentedControl(labels:["Jogar","Validar"],trackingMode:.selectOne,target:nil,action:nil)
     let rateControl=NSPopUpButton(frame:.zero,pullsDown:false)
     let metal:NativeMetalGameView
@@ -258,7 +259,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
     var orderBuffer=[UInt32](repeating:0,count:32)
     let recordButton=NSButton(title:"Nova gravação",target:nil,action:nil)
     let resetButton=NSButton(title:"Reiniciar",target:nil,action:nil)
-    let label=NSTextField(labelWithString:"MONDE01 · Rust ABI 1.5 · sem entrada aplicada")
+    let label=NSTextField(labelWithString:"MONDE01 · Rust ABI 1.6 · sem entrada aplicada")
     let button=NSButton(title:"Executar",target:nil,action:nil)
     init(root:URL,validationMode:Bool=false) throws {
         self.validationMode=validationMode;self.root=root;metal=try NativeMetalGameView(nativeFrame:NSRect(x:0,y:105,width:800,height:600))
@@ -289,16 +290,16 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         }
         modeControl.target=self;modeControl.action=#selector(changeMode);modeControl.selectedSegment=validationMode ? 1:0
         modeControl.frame=NSRect(x:15,y:66,width:190,height:25)
-        rateControl.addItems(withTitles:["15 quadros/s","20 quadros/s (nominal)","30 quadros/s","60 quadros/s","Sem limite"]);rateControl.selectItem(at:1)
+        rateControl.addItems(withTitles:["15 quadros/s","20 quadros/s","30 quadros/s","60 quadros/s","Original (sem limite)"]);rateControl.selectItem(at:4)
         rateControl.target=self;rateControl.action=#selector(changeRate);rateControl.frame=NSRect(x:220,y:66,width:225,height:25)
         rateControl.isEnabled = !validationMode;window.contentView?.addSubview(modeControl);window.contentView?.addSubview(rateControl)
         presenter=try metal.makePlayPresenter()
         window.center();window.makeKeyAndOrderFront(nil)
     }
-    func benchmarkClick(_ x:Double,_ y:Double){
+    func benchmarkClick(_ x:Double,_ y:Double,right:Bool=false,clickCount:Int=1,flags:NSEvent.ModifierFlags=[]){
         window.makeKeyAndOrderFront(nil);window.makeFirstResponder(metal)
         let point=metal.convert(NSPoint(x:metal.bounds.width*x/800,y:metal.bounds.height*(1-y/600)),to:nil)
-        for type in [NSEvent.EventType.leftMouseDown,.leftMouseUp]{if let event=NSEvent.mouseEvent(with:type,location:point,modifierFlags:[],timestamp:ProcessInfo.processInfo.systemUptime,windowNumber:window.windowNumber,context:nil,eventNumber:1,clickCount:1,pressure:1){window.sendEvent(event)}}
+        for type in (right ? [NSEvent.EventType.rightMouseDown,.rightMouseUp]:[NSEvent.EventType.leftMouseDown,.leftMouseUp]){if let event=NSEvent.mouseEvent(with:type,location:point,modifierFlags:flags,timestamp:ProcessInfo.processInfo.systemUptime,windowNumber:window.windowNumber,context:nil,eventNumber:1,clickCount:clickCount,pressure:1){window.sendEvent(event)}}
     }
     func benchmarkPointer(_ x:Double,_ y:Double){
         let point=metal.convert(NSPoint(x:metal.bounds.width*x/800,y:metal.bounds.height*(1-y/600)),to:nil)
@@ -329,6 +330,10 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         let candidate=macos_live_create(root.appendingPathComponent("librising_engine.dylib").path,directory.path,&error,512)
         guard let candidate=candidate else { throw NSError(domain:"NativeInitialization",code:1,userInfo:[NSLocalizedDescriptionKey:String(cString:error)]) }
         guard macos_live_validation(candidate,validationMode ? 1:0)==0 else{macos_live_free(candidate);throw NSError(domain:"NativeValidationModeRejected",code:1)}
+        // Sound is a play-mode consumer only; validation never enables the transport.
+        if !validationMode && audio==nil{audio=NativeAudioPlayback(directory:root.appendingPathComponent("audio"))}
+        audio?.reset()
+        if !validationMode,audio?.enabled==true,macos_live_sound_capture(candidate,1) != 0{macos_live_free(candidate);throw NSError(domain:"NativeSoundTransportRejected",code:1)}
         let previous=driver;driver=candidate;if let previous=previous{macos_live_free(previous)}
     }
     func status()->MacOSLiveStatus { var value=MacOSLiveStatus();macos_live_status(driver,&value);return value }
@@ -343,6 +348,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         timing["gameFPS"]=validationMode ? 0:gameFPS;timing["executionMode"]=validationMode ? "test":"play"
         let end=running ? ProcessInfo.processInfo.systemUptime:playEnded
         if !validationMode,let presenter=presenter{timing.merge(presenter.metrics(start:playStarted,end:end,detailed:!running)){_,new in new}}
+        if !validationMode,let audio=audio{timing.merge(audio.metrics()){_,new in new}}
         else{timing.merge(metal.testMetrics(start:playStarted,end:end,detailed:!running)){_,new in new}}
         let stop:Any = s.stopped != 0 || stoppedReason != nil ? ["type":"NativeStop","phase":"frame\(s.frames+1)","detail":stoppedReason ?? message(s)]:NSNull()
         let equal:Any = s.stopped==0 && stoppedReason==nil && s.frames>0 && s.frames<=9200 && s.surfaces_equal>=s.frames ? true:NSNull()
@@ -354,12 +360,12 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
                 "summary_sha256":index>=0 && index<=256 ? sha:"", "summary_verified":validationMode && s.stopped==0 && index>=0 && index<=256,
                 "checkpoint_verified":false,"verified_phases":s.phases_equal,"verified_checkpoints":s.checkpoints_equal,"verified_surfaces":s.surfaces_equal,
                 "observed":["counter":["address":"0x508f7c","bytes":4,"value":s.counter]],"blocks":0,"bytes":0,"memory":[],"input_policy":validationMode ? "record-only":"live-orders","live_stop":stop,
-                "benchmark_order_tags":benchmarkOrderTags,"execution_mode":validationMode ? "test":"play","native_metal":true,"native_engine_binding":macos_live_engine_binding()==1 ? "static-abi15":"dynamic-abi15","native_running":running,"native_metrics":timing,
-                "render":["status":s.disposition==2 ? "partial":s.frames==0 ? "undrawn":"full","hud":true,"version":[1,7],"backend":"Rust ABI 1.5 + Metal","equals_native_phase_end":equal,"native_phase_end_sha256":NSNull()]]
+                "benchmark_order_tags":benchmarkOrderTags,"execution_mode":validationMode ? "test":"play","native_metal":true,"native_engine_binding":macos_live_engine_binding()==1 ? "static-abi16":"dynamic-abi16","native_running":running,"native_metrics":timing,
+                "render":["status":s.disposition==2 ? "partial":s.frames==0 ? "undrawn":"full","hud":true,"version":[1,9],"backend":"Rust ABI 1.6 + Metal","equals_native_phase_end":equal,"native_phase_end_sha256":NSNull()]]
     }
     func deliver(_ completion:(([String:Any])->Void)?=nil){
         let value=snapshot(),s=status(),isRunning=running
-        let caption="\(validationMode ? "Validar":"Jogar · \(gameFPS==0 ? "sem limite":String(format:"%.0f q/s",gameFPS))") · Quadro \(s.frames) · \(running ? "executando":"pausado")" + (stoppedReason != nil || s.stopped != 0 ? " · Parada: \(stoppedReason ?? message(s))":validationMode ? " · sem entrada aplicada":" · ordens após q128 · áudio/texto: limites declarados")
+        let caption="\(validationMode ? "Validar":"Jogar · \(gameFPS==0 ? "sem limite":String(format:"%.0f q/s",gameFPS))") · Quadro \(s.frames) · \(running ? "executando":"pausado")" + (stoppedReason != nil || s.stopped != 0 ? " · Parada: \(stoppedReason ?? message(s))":validationMode ? " · sem entrada aplicada":" · ordens após q128 · som: \(audio?.availability ?? "—") · texto: limite declarado")
         DispatchQueue.main.async { [weak self] in
             guard let self=self else{return};var value=value;value["native_window_visible"]=self.window.isVisible
             self.button.title=isRunning ? "Pausar":"Executar"
@@ -370,6 +376,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
     }
     func advance(){
         let code=macos_live_advance(driver,nil,nil),s=status()
+        if !validationMode{audio?.pump(driver)}
         if benchmarkInput && code==0 && s.frames>128 {
             let count=macos_live_order_tags(driver,&orderBuffer,32)
             if count==UInt32.max{stoppedReason="Diagnóstico de entrada: \(message(status()))";running=false}

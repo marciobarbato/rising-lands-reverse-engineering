@@ -15,6 +15,9 @@ def builder_work(c,r,x,y,index):
     # AffWorkEngin returns before the selected-target prefix for builder mining tasks 1/2.
     if r[0x89] in spec['return_before_overlays']:return True
     task=spec['tasks'].get(str(r[0x89]))
+    # Native S1 frames3001/3177 onward; 0x4151A0 sends tasks3..5 to the same bag-dependent
+    # builder body as task0 (0x4150AF), with the common worker tail intact.
+    if r[0x89] in (3,4,5):task=spec['tasks']['0']
     if task is None:c.parar(0x414a8a,'uncaptured builder work task')
     active=bool(r[0xba] or r[0xbd] or c.tela.u('selecionada_unidade_u16')==index or c.tela.u('modo_selecao_u8'))
     dx,dy=struct.unpack_from('<bb',r,0x86);px,py=x+dx,y+dy

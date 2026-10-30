@@ -1,0 +1,131 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "intervals": [
+    {
+      "routine": "SacGetCapacite",
+      "start": "0x475736",
+      "end_exclusive": "0x475763",
+      "bytes_sha256": "655983fdf6179a2bb0d8f46be5d2eea5dda368b1d137fa3925fc94729083f3aa",
+      "file": "00475736.asm"
+    },
+    {
+      "routine": "TuyauEstSortie",
+      "start": "0x420c7c",
+      "end_exclusive": "0x420cae",
+      "bytes_sha256": "7e9fd888924a547510c2a39e3787a9dbb042b343d207b2913adc8379f816138e",
+      "file": "00420c7c.asm"
+    },
+    {
+      "routine": "RechercheCalculNew",
+      "start": "0x47150f",
+      "end_exclusive": "0x4716fe",
+      "bytes_sha256": "6bf7b9ae47c2e2657a40436539de7c30971b7a6c33bef659b753469fc97e5dad",
+      "file": "0047150f.asm"
+    },
+    {
+      "routine": "TechnologieReset",
+      "start": "0x46b517",
+      "end_exclusive": "0x46b57f",
+      "bytes_sha256": "c10c4b00d6371592cea6a436a3dc3131e6c9ac45a435b112cb6906b0f30b4ef6",
+      "file": "0046b517.asm"
+    },
+    {
+      "routine": "InventionSetEffet",
+      "start": "0x470f98",
+      "end_exclusive": "0x47125c",
+      "bytes_sha256": "a22088820928bd23daae455ba2d3a26b38b2487d83bb47de4921f28fe01d431b",
+      "file": "00470f98.asm"
+    },
+    {
+      "routine": "TypeBatimentEstRealisable",
+      "start": "0x418a93",
+      "end_exclusive": "0x418ad3",
+      "bytes_sha256": "9321dffcf44964385dc9525e25e8e700f66d4c0cbc635f6361efa8cc6690f5c3",
+      "file": "00418a93.asm"
+    },
+    {
+      "routine": "SetBatimentRecrutable",
+      "start": "0x418ad3",
+      "end_exclusive": "0x418af4",
+      "bytes_sha256": "0d11760bdd566086abba3418133864fd8550714b8259eee36b041025f0ea1cb1",
+      "file": "00418ad3.asm"
+    },
+    {
+      "routine": "SetTroupeRecrutable",
+      "start": "0x44244d",
+      "end_exclusive": "0x44246e",
+      "bytes_sha256": "bb1c3891558c41e9ab643ee672a4cf5b6ad0065015394eb88494845c9d7e57f9",
+      "file": "0044244d.asm"
+    },
+    {
+      "routine": "RechercheGetBranche",
+      "start": "0x4717b1",
+      "end_exclusive": "0x4717c2",
+      "bytes_sha256": "377fc64dfa6ac0931cc917edd395b5c667aee8bd2e5197f79442f78cf9522abd",
+      "file": "004717b1.asm"
+    },
+    {
+      "routine": "RechercheGetNiveau",
+      "start": "0x4717c2",
+      "end_exclusive": "0x4717e0",
+      "bytes_sha256": "4d17114af331fb416710b631c4b7f6be6c5a51ae4a84805e7cf03bb45d6c895a",
+      "file": "004717c2.asm"
+    },
+    {
+      "routine": "RechercheGetEtat",
+      "start": "0x4717a2",
+      "end_exclusive": "0x4717b1",
+      "bytes_sha256": "5aebee54add8ef46825915529c84cf4f97faad8ac7752caacad40f9dad34b95e",
+      "file": "004717a2.asm"
+    },
+    {
+      "routine": "InventionGetCout",
+      "start": "0x470c3d",
+      "end_exclusive": "0x470c70",
+      "bytes_sha256": "e083b2b75f24d1fc1a73d31da57dd417ae56b4cb758c00d1ecfa317ecf0da349",
+      "file": "00470c3d.asm"
+    },
+    {
+      "routine": "IaRechercheAjuste",
+      "start": "0x47fa88",
+      "end_exclusive": "0x47fb15",
+      "bytes_sha256": "1e07b35adcc4608715e6ef4d710923748e8111036f2644ba7fe3520e5ea4f47d",
+      "file": "0047fa88.asm"
+    },
+    {
+      "routine": "RechercheGetNbInvention",
+      "start": "0x470554",
+      "end_exclusive": "0x470560",
+      "bytes_sha256": "885b3aae02f2d050467ca2c878466ba25deedac2f3789480ffae0706bf23d321",
+      "file": "00470554.asm"
+    },
+    {
+      "routine": "SortilegeResetTechnologie",
+      "start": "0x4749f2",
+      "end_exclusive": "0x474a38",
+      "bytes_sha256": "c7c6b7659f5e35edfb7278604092214fbf602e492702a0fa98a085df9382cda8",
+      "file": "004749f2.asm"
+    },
+    {
+      "routine": "BonusReset",
+      "start": "0x428e71",
+      "end_exclusive": "0x428ef0",
+      "bytes_sha256": "e3b11b715be81247944984c3d4f71e70fda56980e8e9aede92b0eff696625953",
+      "file": "00428e71.asm"
+    },
+    {
+      "routine": "BatimentInitTechnologie",
+      "start": "0x41cde0",
+      "end_exclusive": "0x41cec4",
+      "bytes_sha256": "164819de5840f2a76c8f995b55df895f3d8ef50d0a4f5a7dd743504d6278120b",
+      "file": "0041cde0.asm"
+    },
+    {
+      "routine": "EnginSetTechnologie",
+      "start": "0x4411e1",
+      "end_exclusive": "0x441459",
+      "bytes_sha256": "e01afe101200b871738b62708cc6367fcdccef3a94c7f5a7adad08ab87b319e4",
+      "file": "004411e1.asm"
+    }
+  ]
+}

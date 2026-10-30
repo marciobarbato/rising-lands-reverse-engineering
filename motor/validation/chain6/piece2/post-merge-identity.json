@@ -1,0 +1,15 @@
+{
+  "files": 104,
+  "full_gate": "Passed before merge; merge changes only foreign research/docs paths, so all native and harness inputs remain identical.",
+  "implementation": "b9b6a3a3bfd75c1aed160368e5fd2d3459865b8f",
+  "library_sha256": "4fca8b7b0c5f75bd5d063aa9b39dac06ef2eaec42fce135c1880aecb43fe5f1d",
+  "merge": "0fc196011b1fb74faf08ab9d89bd3cda4f39052a",
+  "native_test_header_inputs_identical": true,
+  "post_merge_reference_checks": {
+    "chain5": "source/input/window pins verified",
+    "chain6": "source/input/window pins verified",
+    "input": "source/input/window pins verified",
+    "logic": "revision-backed source tree verified"
+  },
+  "upstream": "89575fad00ad3ee506879b275bdceb8f63423baf"
+}

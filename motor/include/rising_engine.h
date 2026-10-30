@@ -129,7 +129,7 @@ int32_t rl_render_liberar(RlRenderer renderer);
 int32_t rl_render_observacoes(RlRenderer renderer,RlRenderObservation *buffer,uint32_t capacity,uint32_t *required);
 int32_t rl_render_cache(RlRenderer renderer,uint8_t *keys,uint32_t key_capacity,
  uint8_t *payloads,uint32_t payload_capacity,uint32_t *key_required,uint32_t *payload_required,uint32_t *cursor);
-/* ABI 1.4: Graphics contract 1.7. Existing 1.3 structs/signatures remain.
+/* ABI 1.4+: additive Graphics contract 1.9. Existing structs/signatures remain.
  * Observation kind3: write-only saved_background_pixels; count is byte length,
  * full payload comes from rl_render_fundo_salvo (before/after are not old bytes).
  * kind4: AffText request at the named glyph dependency; args hold x,y,right,

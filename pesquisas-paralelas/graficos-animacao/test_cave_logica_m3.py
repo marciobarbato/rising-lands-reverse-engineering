@@ -1,5 +1,5 @@
 """AffBatiments logic-effect domain from corrected native writer/reader evidence."""
-import hashlib,json,lzma,unittest
+import base64,hashlib,json,lzma,unittest,zlib
 from pathlib import Path
 from validar_janelas_api18 import CapturaLimitada,AQUI
 from validar_efeitos_cave_sondas import EntradaEfeitos
@@ -33,7 +33,7 @@ class CaveLogicaM3(unittest.TestCase):
         for offset,value in ((5,b'\3'),(4,b'\1'),(6,b'\1\0')):
             memory=EntradaEfeitos(cap,row);dg=bytearray(memory.dg);address=0x49a0c8+276+offset;dg[address-0x494000:address-0x494000+len(value)]=value;memory.dg=bytes(dg)
             with self.assertRaises(DependenciaExibicao):desenhar_jogo(memory)
-        with self.assertRaises(DependenciaExibicao):restaurar_tudo(good)
+        self.assertEqual(restaurar_tudo(good).escritas,())
 
     def test_p4_484_original_text_boundary_has_no_glyph_execution(self):
         d=json.loads((AQUI/'evidencias/p4-texto-484-auditoria.json').read_text())
@@ -81,3 +81,42 @@ class CaveLogicaM3(unittest.TestCase):
                 [(0,16,1,phase) for phase in range(16)])
         cap=CapturaLimitada(AQUI/'evidencias/janela-P3-301-1050-api18.json.xz');row=next(r for r in cap.d['rows'] if r['frame']==309)
         self.assertEqual(desenhar_jogo(EntradaEfeitos(cap,row)).escritas,())
+
+    def test_native_restoreall_pairs_and_display_return_scope(self):
+        d=json.loads(lzma.decompress((AQUI/'evidencias/cave-restoreall-pares-matriz.json.xz').read_bytes()))
+        self.assertEqual(len(d['rows']),24)
+        cap=CapturaLimitada(AQUI/'evidencias/sonda-render-P3-api17.json.xz');row=next(r for r in cap.d['rows'] if r['frame']==221)
+        for r in d['rows']:
+            self.assertTrue(r['returned']);self.assertTrue(r['crt_unchanged'])
+            self.assertEqual(r['net_dgroup'],[]);self.assertEqual(r['changed_allocations'],{})
+            self.assertEqual(r['observation']['structure_calls'],[])
+            if r['sanctuary'] in (4,5):
+                m=EntradaEfeitos(cap,row);m.dg=zlib.decompress(base64.b64decode(r['before_dgroup_zlib']))
+                self.assertEqual(restaurar_tudo(m).escritas,())
+        d=json.loads(lzma.decompress((AQUI/'evidencias/cave-escopo-raizes-auditoria.json.xz').read_bytes()))
+        self.assertTrue(d['passes_equal']);self.assertEqual(len(d['scope_ends']),4)
+        self.assertTrue(all(not r['remaining_roots'] for r in d['scope_ends']))
+        old=json.loads(lzma.decompress((AQUI/'evidencias/cave-escritas-criacao-v2.json.xz').read_bytes()))
+        self.assertEqual(d['passes'][0]['observation'],old['passes'][0]['observation'])
+
+    def test_reported_p6_entries_use_current_guards(self):
+        for filename,frames in (
+            ('sonda-render-P3-api17.json.xz',(221,245)),
+            ('janela-P3-1051-1800-api18.json.xz',(1141,))):
+            cap=CapturaLimitada(AQUI/'evidencias'/filename)
+            for frame in frames:
+                row=next(r for r in cap.d['rows'] if r['frame']==frame)
+                self.assertEqual(desenhar_jogo(EntradaEfeitos(cap,row)).escritas,(),frame)
+
+    def test_owned_empty_cave_native_matrix(self):
+        d=json.loads(lzma.decompress((AQUI/'evidencias/cave-propria-vazia-matriz.json.xz').read_bytes()))
+        self.assertEqual(len(d['rows']),8)
+        self.assertTrue(all(r['returned'] and r['crt_unchanged'] for r in d['rows']))
+        self.assertEqual({r['cave'] for r in d['rows']},{'owned_empty'})
+        cap=CapturaLimitada(AQUI/'evidencias/sonda-render-P3-api17.json.xz')
+        row=next(r for r in cap.d['rows'] if r['frame']==221)
+        for r in d['rows']:
+            self.assertFalse(r['observation']['outside_display_readers'])
+            if r['sanctuary'] in (4,5):
+                m=EntradaEfeitos(cap,row);m.dg=zlib.decompress(base64.b64decode(r['before_dgroup_zlib']))
+                self.assertEqual(desenhar_jogo(m).escritas,())

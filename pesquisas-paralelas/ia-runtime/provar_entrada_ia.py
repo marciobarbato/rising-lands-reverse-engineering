@@ -43,7 +43,7 @@ UNIDADES = (11, 12, 13, 14, 15)
 FONTES = tuple(f'pesquisas-paralelas/ia-runtime/{n}' for n in (
     'provar_entrada_ia.py', 'composicao_entrada_ia.py', 'entrada_ordens_ia.py', 'provedores_entrada_ia.py',
     'composicao_quadros_ia.py', 'composicao_encadeada_ia.py', 'affgame_hud_ia.py', 'proxima_etapa_quadro.py',
-    'construcao_entrada_ia.py'))
+    'construcao_entrada_ia.py', 'deteccao_conflito_ia.py', 'ataque_despacho_ia.py'))
 
 
 def git_show(ref, caminho):
@@ -108,6 +108,14 @@ def eventos_referencia(entradas, k):
         'peek_message', 'get_message', 'translate_message', 'dispatch_message', 'cursor', 'key')])
 
 
+def indexar_por_quadro(eventos):
+    """Stable reference-only index; keep every event and its within-frame order."""
+    indexed = {}
+    for event in eventos:
+        indexed.setdefault(event['frame'], []).append(event)
+    return indexed
+
+
 def normalizar_eventos(eventos):
     saida = []
     for e in eventos:
@@ -123,6 +131,7 @@ def main():
     from composicao_quadros_ia import carregar_cenario_exibicao
     from composicao_encadeada_ia import MemoriaMapaRapida
     from reinicio_ia import DependenciaIA
+    from entrada_estruturas import ArgumentoNaoPassado
     from efeitos_logicos_exibicao import DependenciaExibicao      # Graphics' display-path named stop
     ap = argparse.ArgumentParser()
     ap.add_argument('--sonda', required=True)
@@ -130,10 +139,14 @@ def main():
     ap.add_argument('--quadros', type=int, help='frames after 128 (default: the probe\'s frames)')
     ap.add_argument('--nucleo-ref', help='directory with Core\'s construcao_core.py (read-only extraction)')
     ap.add_argument('--saida', required=True)
+    ap.add_argument('--progresso', type=int, default=0,
+                    help='emit a progress record to stderr every N completed frames (0 disables)')
     ap.add_argument('--diagnostico-planejamento', action='store_true',
                     help='diagnostic only (never evidence; --saida under .local/): a Graphics display-path stop is '
                          'recorded and the drawing taken as writing no logic byte')
     a = ap.parse_args()
+    if a.progresso < 0:
+        ap.error('--progresso must be nonnegative')
     if a.diagnostico_planejamento and not (ROOT / a.saida).resolve().is_relative_to((ROOT / '.local').resolve()):
         raise SystemExit('A planning diagnostic writes under .local/ only')
     if a.nucleo_ref:
@@ -150,6 +163,8 @@ def main():
     quadros_ref = {q['frame']: q for q in jsonl(arquivos['quadros.jsonl.xz'])}
     entradas_ref = jsonl(arquivos['entradas.jsonl.xz'])
     comandos_ref = jsonl(arquivos['comandos.jsonl.xz'])
+    entradas_por_quadro = indexar_por_quadro(entradas_ref)
+    comandos_por_quadro = indexar_por_quadro(comandos_ref)
     t0 = time.monotonic()
     cap, estado, regs = estado_quadro128()
     _, _, entrada, m1 = carregar_cenario_exibicao()
@@ -168,13 +183,13 @@ def main():
             if r['phase'].startswith('frame'):
                 eventos = normalizar_eventos(roteiro.eventos)
                 roteiro.eventos.clear()
-                ref_ev = eventos_referencia(entradas_ref, k)
+                ref_ev = eventos_referencia(entradas_por_quadro.get(k, ()), k)
                 py = indicadores(MemoriaMapaRapida(comp.mapa))
                 dif = comparar_quadro(k, py, quadros_ref[k])
                 if eventos != ref_ev:
                     dif['inputs'] = dict(python=eventos[:12], probe=ref_ev[:12])
                 ordens_k = [o for o in ordens_py if o['frame'] == k]
-                ref_k = [c for c in comandos_ref if c['frame'] == k]
+                ref_k = comandos_por_quadro.get(k, [])
                 ord_py = [(o.get('event', 'SetPlayerOrdre'), o['tag'], o.get('word2'), o.get('word4'), o.get('word6'),
                            o.get('word8'), o.get('jump_target')) for o in ordens_k]
                 ord_ref = [(c['event'], c['tag'], c.get('word2'), c.get('word4'), c.get('word6'), c.get('word8'),
@@ -183,6 +198,9 @@ def main():
                     dif['orders'] = dict(python=ord_py, probe=ord_ref)
                 quadros.append(dict(frame=k, equal=not dif, orders=len(ord_ref),
                                     dgroup_sha256_python=None))
+                if a.progresso and len(quadros) % a.progresso == 0:
+                    print(json.dumps(dict(progress_frame=k, completed_frames=len(quadros),
+                                          equal=not dif)), file=sys.stderr, flush=True)
                 n_py = sum(t['frame'] == k for t in comp.textos)
                 n_ref = quadros_ref[k].get('entries', {}).get('TextGetMessage', 0)
                 if n_py or n_ref:
@@ -191,11 +209,18 @@ def main():
                 if dif:
                     primeira_diferenca = dict(frame=k, differences=dif)
                     break
-    except (DependenciaIA, DependenciaExibicao) as erro:
+    except (DependenciaIA, DependenciaExibicao, ArgumentoNaoPassado) as erro:
         fase = (f'frame{k}' if r['phase'].startswith('between') else f'between_frames{k + 1}') if k > 128 else \
             'between_frames129'
         parada = dict(frame=k if fase.startswith('frame') else k + 1, phase=fase, dependency=str(erro),
                       owner='graphics' if isinstance(erro, DependenciaExibicao) else None)
+        if isinstance(erro, ArgumentoNaoPassado):
+            from recrutamento_core import ARGUMENTOS, ROTINAS
+            parada.update(routine=erro.rotina, call=hex(erro.chamada),
+                          missing_registers=list(erro.registradores),
+                          owner='economy' if erro.chamada in (0x420f69, 0x420f75, 0x420f7c, 0x420f85, 0x420f8c) else None,
+                          required_register_masks=ARGUMENTOS.get(erro.rotina),
+                          native_entry=hex(ROTINAS[erro.rotina]) if erro.rotina in ROTINAS else None)
         if r['phase'].startswith('between'):           # the stop is inside frame k's CalculGame
             ordens_k = [(o.get('event', 'SetPlayerOrdre'), o['tag'], o.get('word2'), o.get('word4'), o.get('word6'),
                          o.get('word8'), o.get('jump_target')) for o in getattr(comp, 'ordens_fase', [])]

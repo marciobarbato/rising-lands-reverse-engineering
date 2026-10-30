@@ -24,6 +24,9 @@ def verify(app):
     assert assets['commit'] == manifest['commit']
     for entry in assets['outputs']:
         assert hashlib.sha256((payload / 'assets' / entry['path']).read_bytes()).hexdigest() == entry['sha256']
+    audio = json.loads((payload / 'audio/manifest.json').read_text())
+    for name, digest in audio['files'].items():
+        assert hashlib.sha256((payload / 'audio' / name).read_bytes()).hexdigest() == digest, name
     runtime = app / 'Contents/Resources/Python/bin/python3'
     environment = {k: v for k, v in os.environ.items() if k not in ('RISING_APP_ROOT', 'PYTHONHOME', 'PYTHONPATH')}
     code = """import sys,json,pathlib

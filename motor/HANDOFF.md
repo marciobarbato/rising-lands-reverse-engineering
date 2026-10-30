@@ -1060,3 +1060,692 @@ merged tree reruns both gates and rebuilds the identical native library.
 
 [The hashed report package](validation/play60/summary.json) records phase
 coverage, stops, identities, timings, reproduction commands and validation logs.
+
+## Chain continuation — recovered cave and structure vision
+
+The service-interrupted work on `60c201d` was recovered without discarding its
+uncommitted files. Fetched main `51715e2` is merged as `83c830e`; only engine-owned
+paths are changed. This branch is pushed for coordinator review, never merged
+into main by this workstream.
+
+The additional `chain5` Python profile pins logic and Graphics independently of
+all earlier profiles, initially to `54d148d931cc3420fe256e6fec71462087597293`.
+The previous no-input/input/Graphics 1.7 references and evidence digests are
+unchanged. New original sources/capture footprints are listed in
+`testes/chain5-reference-pins.json`, and the complete transitive snapshot is
+verified against Git blobs. The new fixture transport is a separate Rust binary;
+it is not a production callback or C ABI extension. ABI remains additive 1.6,
+with every previous signature, layout and execution-policy meaning preserved.
+
+The cave body at `0x426aff` executes inside the existing structure dispatcher:
+BagContient's capacity scan for tag-1 type-9 units, animation gate, then the
+bounded counter `+0x76` increment/decrement controlled by `+0x75`. Its caller
+restores all registers other than EAX; the frame ignores EAX. Core's
+BatimentIllumine `0x419233`, BatimentDecouvre `0x419d54`, IllumineCase `0x476968`,
+EteintCase `0x476adc` and DecouvreCase `0x47670a` now run against the same live
+memory. Inputs are the original AX structure/cell, DL player and BL light flag;
+all other registers are preserved according to the individual original entry.
+Players 0–3 are supported, plus BatimentDecouvre's explicit early return for
+player `0xc8`. Footprint rows precede columns, followed by neighbor border writes,
+the cell flag and minimap update, then the light count. Cell routines return the
+original leftover EAX/EDX; structure routines preserve their original saved
+registers. Address arithmetic and aliasing remain the original flat-memory
+contract. Unsupported owners retain a named stop; no synthetic grid is supplied.
+
+SetMiniMap's existing modes 1–7 now read grids and layers only when their
+original branch uses them. This is required by original read-before-write leaf
+footprints; it introduces no default for missing bytes. The structure dispatcher
+calls vision after the cave body and in the existing per-player order.
+
+Original executable identity remains
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+The new comparisons consume the owner's committed intact-original captures;
+no fresh x86 execution, reference modification, evidence rehashing or oracle
+state reload is used. Reproduction uses the existing heavy-lease helper and
+`cargo build --manifest-path motor/Cargo.toml --workspace --locked --release`,
+then `motor/testes/chain_leaf_proof.py`, `chain_surface_proof.py` and the existing
+`player_proof.py` with `RL_REFERENCE_PROFILE=chain5`, policy 2 and paired policy 1.
+
+Preliminary results: cave **117/117** and vision **164/164** original cases match
+all supplied bytes and eight exit registers. P6 completes frames 129–220:
+**92 frames**, **184 whole-state phases**, zero differences; policy 1 matches
+policy 2 in all **185 attempted phases**, including the atomic stopped attempt.
+Both Rust and pinned Python stop in `between_frames221`, AffGame `0x407dd3`,
+outside this profile's single-sanctuary display-effects domain. This does not
+claim later work/recruitment/hunger or Graphics 1.8/1.9 continuation.
+
+The own-world surface proof keeps simulation and Graphics imports in separate
+processes because the historical reference profiles contain two different
+`construcoes` modules. It carries Rust state, pixels/cache and saved background;
+only the initial surface/cache and exactly attested non-executed AffText inputs
+come from the capture. It compares original pixels separately from raster-call
+order: display-only state in the logic mask can differ in an own-world run even
+when surfaces are identical. `original_calls_equal` is retained per frame and
+must not be described as a passing original-call equality when false. The
+independent prior captured-entry renderer proofs retain their stricter call
+contract. Final gate and measured timing results follow after execution.
+
+The advancing-world surface check additionally exposed two display-state gaps
+that captured-entry renderer fixtures could not expose. The renderer now carries
+its own tooltip restore byte `0x49a041` and rectangle words `0x49a046..0x49a04d`
+with the saved pixels, copies them with the atomic render transaction and clears
+them on explicit reset. It does not copy any later oracle state or publish those
+fields to game logic. Other world fields remain authoritative inputs.
+
+The declared-input AffGame logic provider now models the post-flip cursor handoff
+`0x417db2..0x417e78`. Flag `0x49a054` becomes 1 outside the inclusive viewport
+minus signed-byte margin; a flag of 1 becomes 0 only strictly inside it. This
+happens after flips and before the existing redraw-flag/palette tail. The next
+draw consumes that flag. The native Graphics capture's subsequent entries and
+surfaces are the independent check; no captured flag is loaded into Rust. The
+underlying ShowCursor OS presentation effect remains outside this C ABI, which
+has no OS callback. Its unused return is not fabricated. The static instructions
+were read directly from the intact original with Capstone before translation,
+consistent with Graphics' committed `ESCRITAS_AFFGAME_ENTRE_QUADROS.md` and its
+original static closure. Earlier no-input behavior and the display mask remain
+unchanged. The initial failed own-world surface runs are retained in the new
+stage report package; neither their expected pixels nor AffText hashes changed.
+
+### First continuation piece — passing gate
+
+[Report package](validation/chain5/piece1/summary.json): cave 117/117 and vision
+164/164 original cases, P6 92 frames / 184 whole-state phases / 185 paired
+play-audit attempts, and **93/93 own-world surfaces through frame221**. All93
+original raster-call sequences and Python pixels/cache agree after the two
+display-state fixes; the initial discrepancies are resolved, not exempted.
+The engine and Python still stop equally at AffGame `0x407dd3` in phase2 of221.
+Fresh M2.2 is **257/257** equal in paired audit/play modes. `sh motor/validate.sh`
+passes **30 Rust /63 Python tests**, fmt, strict Clippy,75 pilot captures and
+C/Swift/Metal checks in276.504s after lease grant. All jobs use the heavy lease.
+The exclusive 9,200-frame release timing is queued separately. No later stage or
+fresh M2.3 rerun is claimed in this first piece; earlier pinned proofs remain
+historical and unchanged. Later continuation must extend a separately pinned
+Graphics contract before crossing this display stop.
+
+First-piece native implementation `88e3f0f` is pushed. The subsequent
+[9,200-frame release play run](validation/chain5/piece1/timing-shared.json) uses
+its frozen dylib `35cf64afc360590abaac66774b7afaac400a7c5080d6497b00aa962048c79185`.
+Under a **shared** heavy lease, logic averages **0.3046ms/frame** (phase2 0.0170,
+CalculGame0.2876), rendering0.4538 and logic+render0.7585; full ABI loop0.7624.
+Initialization, snapshots/proof/hash work and presentation are excluded. This
+is the M2 9,200-frame play window, not a claim about later work/hunger frames.
+The exclusive measurement reservation was queued, never granted, and cancelled;
+these numbers are not an exclusive-baseline speed comparison. The full raw
+percentile/max distributions and terminal hashes remain in the linked report.
+
+## Chain continuation — Graphics 1.9 and remaining vision/group queries
+
+The next additive test profile is `chain6`: logic remains the immutable
+`54d148d931cc3420fe256e6fec71462087597293`; only Graphics is overlaid from
+`24f0ec85714dbbfa4645212ca81f8f4145a76143`. The `logic`, `input` and first-piece
+`chain5` profiles and their evidence digests are unchanged. The Git-blob
+snapshot check covers every transitive module/capture; additional source/table
+pins are in `testes/chain6-reference-pins.json`. Original executable identity
+remains `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+
+Core additions are SauveSelectionGroupe `0x4726f7`, RestaureSelectionGroupe
+`0x472769`, EnginGetCentreGroupe `0x442139`, MiniMapRecentre `0x46a01b`,
+MiniMapSetPos `0x46a19e`, CalculPosition `0x420698` and RechercheDecalageSortie
+`0x41d1d0`. Inputs/returns preserve the pinned register conventions. Saving
+scans unit indices in order, removes prior group membership before assigning
+selected members. Restoring removes current selection, appends eligible group
+members up to255, then issues at most the first eligible local voice, including
+the builder sound-stop prefix. Audio is the existing unopened provider or the
+caller's explicitly declared Missions sound boundary, never an empty callback.
+Group centre uses only the first live matching member, as the original does;
+without one it uses the view rectangle. Minimap queries preserve signed-word
+clamps, caller upper-register halves and store order. The exit search checks
+rows then columns, excluding the centre, with the original collision bit.
+
+`exit_cell` returns **u16 AX**, the value its game callers consume. No value is
+invented for the original's uninitialized upper EAX word. The full register
+fixture entry requires the actual stack-residue input; the semantic `:AX`
+fixture explicitly compares only AX, all other returned registers and all
+supplied memory. This uncertainty is declared in each result's register masks.
+The committed read footprints do not capture that stack-residue word. The
+17 group fixtures containing non-executed sound bodies are explicit sparse-
+fixture skips, with the original boundary requests retained; they do not supply
+Audio's actual private image. Production does not install this fixture skip.
+
+Graphics adds the exact35 AffGame origins and the original sanctuary/CAVE pair
+and construction-projectile15/16 guards from the pinned follow-ups. RestoreAll
+retains the previous108-origin, single-sanctuary/projectile domain. Other
+origins/owners/states still stop by original address. Added pixel paths are the
+inhabited owner0 mode5 CAVE layer plan (level0, bounded flags/variant), native
+structure bag/gauge slices, type9 state13, farmer work tasks0–3, builder work
+with task1/2's return before overlays, depot markers for the proved type3 centre,
+and the SANTUÁRIO/FAZENDEIRO tooltip strings. Rendering order, raw animation
+counts, palette and cache format follow Graphics' tables. The production AffText
+`0x459454` stop and the fixture's exact request/pre-text-surface check remain.
+`rl_render_contrato` advances independently to1.9; ABI1.6, layouts, buffers,
+previous creation versions and all signatures remain unchanged.
+
+The extended surface reader carries one Rust world and renderer through the
+whole requested window. It verifies shared P3→P6→P7 prefixes against the
+published native state and both phase-surface hashes before reusing only their
+**reference comparisons**. Rust state, pixels, cache, background and display
+metadata are never replaced by a later capture. Each row records its immutable
+capture identity. Original raster-call equality is now a strict gate as well
+as original/Python pixels, Python cache and native text-boundary attestation.
+
+Preliminary original comparisons: **310/310** Core vision/group/query cases at
+the declared register widths,17 explicit sound-fixture skips; **200/200** P3
+own-world surfaces (129–328), including both construction-projectile cycles,
+with no pixel/cache/raster/text difference. Longer probes and the full engine
+gate must finish before this piece is described as delivered.
+
+Additional completed checks before the minimap-drag fix: K1 **501/501** state
+frames against pinned Python/original and **501/501** own-world full surfaces,
+with no stop; P3 **1,683 frames (129–1811)** at indicator level, then the Rust
+provider stop BatimentModifyMap `0x41d021` in frame1812 (Python continues).
+P6/P7 prefixes **200 frames through328** agree with Python/original; P6 additionally
+compares all400 whole-state phases and paired play/audit execution. The
+inhabited-facade/gauge matrix passes **515/515** native original entries, and the
+isolated farmer raster window passes **600/600** original full surfaces/calls.
+These isolated renderer inputs are separate original openings, not an advancing
+Rust simulation. The passing-scope report must retain that distinction.
+
+The first full engine gate for this piece found the missing caller continuation
+`InitGameZone(1,0)` after MiniMapSetPos `0x42bb5d` (call `0x42bb66`): four mouse-zone
+bytes diverged in `p2_minimap_right_held`. The actual call is now included. The
+older `input` Python profile's provider stop is retained in the leaf report as a
+resolved dependency only if the native call completes with **all original bytes
+and declared text requests exact**. No source/evidence pin, expected byte, input
+or comparison mask was changed to accept the completion. A corrected gate rerun
+is required; the initial failure is retained with the new report package.
+
+The pending second piece also adds the immediate construction continuation:
+`BatimentModifyMap` `0x419e97`, called at `0x41d021`. Its typed API takes the
+structure u16 and active byte and returns only effects. Footprint rows precede
+columns, dimensions come from the live original type table, cells skip only at
+256, and each original owner byte selects SetMiniMap mode6 or7. No structure
+record is written by this provider. The builder then executes its common timer20
+and sound tail; it does not return early after completion. The owner's Python
+contract leaves EAX/EDX unspecified, so the separate `:effects` fixture compares
+all original supplied bytes and the six preserved register values including ESP,
+with EAX/EDX comparison masks explicitly0. No scratch-register value is exposed
+by the production typed API. Original assembly and the two original entry cases
+plus read footprints are additional `chain6` pins, never edited evidence.
+
+SetMiniMap now reads terrain/object colour only on branches that consume it;
+mode6's owner-colour write requires no invented terrain input. This is a sparse
+input dependency correction, with the same ordered writes. The new routine and
+all affected regressions are pending the consolidated `engine-chain6-delivery4`
+shared lease; preliminary earlier frame1812-stop reports predate this addition.
+
+### Second continuation piece — measured delivery
+
+The final [report package](validation/chain6/piece2/summary.json) replaces the
+preliminary frame1812 limitation with **3,001/3,001 P3 original indicator frames,
+129–3129**, no difference or stop. This longer P3 run does not claim Python or
+whole-state equality. K1 is **501/501** Python/original indicator/input/order
+frames (129–629) and **501/501** advancing full surfaces. P6/P7 retain **200/200**
+frames each (129–328) against Python/original; P6 additionally compares **all400
+whole-state phases** under the unchanged published mask. K1/P6/P7 compare paired
+play/audit execution over **1,802/1,802** phase attempts, with every projected byte,
+register, retained event and clock exact.
+
+The advancing P3 surface prefix is **200/200** (129–328). Both final surface
+runs now additionally require carried original entry cache/background, the
+native cache cursor and Python display-effect equality, besides original/Python
+pixels and raster calls and the exact recorded text boundary. No later capture
+is a Rust input. The separate native renderer matrix is **515/515** CAVE
+facade/gauge entries, **600/600** farmer and **600/600** builder entries; these
+are independent original openings, not advancing simulations.
+
+Final owner comparisons are **310/310** vision/group/query entries (33 AX-only
+exit queries and17 explicitly skipped Audio fixtures, as qualified above) and
+**2/2** BatimentModifyMap effect entries. The final gate passes fmt, strict
+Clippy, **30 Rust /63 Python tests** (including10 isolated renderer tests),
+**75/75** pilot original comparisons and C/Swift/Metal checks, in **248.558s**
+after lease grant. The old minimap-drag divergence and stale-count gate failure
+are retained with their logs; the corrected gate independently checks all666
+input cases:660 completed equal,6 exact stops,2 declared skips. Negative tests
+also retain their expected rejection diagnostics for corrupt text requests.
+
+The release library `4fca8b7b0c5f75bd5d063aa9b39dac06ef2eaec42fce135c1880aecb43fe5f1d`
+completes9,200 play frames with **0.2591ms/frame logic**, p990.2987, maximum1.3025;
+rendering0.3875, logic+render0.6466, full ABI loop0.6492. Terminal full-state and
+surface hashes, generation and virtual clock equal the prior play60 run. This
+is a **shared-lease M2-window** measurement, excluding initialization,
+audit/export/hash work and presentation; later work/hunger frames and an
+exclusive performance comparison are not covered. The lease execution is
+bounded; preceding queue time is not benchmark time.
+
+Remaining work: the Core structure-entry/state13/tag0x10/tag0x21 bodies; Economy
+habitation/lodging/recruitment/abandonment, state5 work, state19 hunger and saved
+state restoration; Combat turret providers; longer P6 whole-state and P3/P6/P7
+surface windows; S1/D1 endpoints. These are dependencies to port, not successful
+mission-completion claims. The macOS consumer separately updates its explicit
+render-contract acceptance to1.9; ABI1.6 and its copied layouts are unchanged.
+
+Implementation `b9b6a3a` is followed by upstream merge `0fc1960` (main89575fa).
+The merge changes foreign research/docs paths only. All104 native/test/header
+input files and the measured release library are byte-identical before/after
+it; logic/input/chain5/chain6 revision-backed sources and applicable input/window
+pins pass fresh verification. The [identity record](validation/chain6/piece2/post-merge-identity.json)
+retains that check; the full native gate above ran on these same engine bytes.
+
+## Third continuation piece — recovered entry and habitation
+
+Main `92fab50` is merged into this feature only. Recovered unvalidated work from
+`acaa7c2` is reviewed against immutable logic `89575fad00ad3ee506879b275bdceb8f63423baf`
+and Graphics `24f0ec85714dbbfa4645212ca81f8f4145a76143` as additive profile chain7.
+[Audit](research/CHAIN7_AUDIT.md) records inputs, widths, store/callback order,
+original identity/addresses and explicit domain stops. ABI stays1.6.
+
+[Report package](validation/chain7/piece3/summary.json): 153 original Bag/entry
+cases and10 habitation/ownership cases equal all supplied memory and their
+explicit register masks. Twelve original sound-nonexecution sparse fixtures
+are skipped, without installing a production callback. The larger state13
+sparse-fixture attempt is retained:11/129 equal and118 undeclared-input errors;
+it is not a passing battery. Existing whole-world movement requires additional
+input bytes on those sparse cases. No oracle byte is invented to satisfy them.
+
+P6 advances129–428:300 indicator frames against original/pinned Python,
+600/600 whole-state phases under the unchanged published mask and600/600 paired
+play/audit phases. Independently,300/300 advancing surfaces match original and
+Python pixels, cache, raster order, carried backgrounds and declared text requests.
+No stop/difference. The state run precedes three precedence-only parentheses
+corrections required by Clippy; subsequent full gate and surface run use the
+corrected source, with both binary/source identities retained in the reports.
+
+`sh motor/validate.sh`: fmt, strict Clippy,30 Rust/63 Python tests,75/75 pilot
+captures, C layout and actual Swift/Metal smoke pass. No fresh x86 run, later
+Economy continuation or new throughput measurement is claimed for this piece.
+
+## Fourth continuation piece — later-chain providers
+
+The [native contract](research/CHAIN8_CONTRACT.md) specifies API inputs,
+supported types/states, memory/register widths, mutation/callback order, original
+hash/addresses and named gaps. All new references use additive profile `chain8`
+at immutable `92fab50ccfa14271f6657fc0f6032b6b4b68dd4b`; earlier profiles/pins
+are unchanged. ABI1.6 and render contract1.9 are unchanged. No main integration
+is authorized or performed for this task.
+
+Native work/state5, fatigue/vegetation, hunger/state19 and saved-state restoration,
+recruitment/SortieTroupe/abandonment/tag33, debit/tag19, turret/tag14 and S1 query
+providers now consume the actual advancing world. Selected-structure icons and
+hover predicates use the same concrete providers. Display origins are an explicit
+finite pinned list, limited to the original player/map/camera/mode context.
+AI city handling keeps its original-proved non-AI prefix and a named real-AI stop.
+
+[Piece4 report](validation/chain8/piece4/summary.json) retains the individual
+source/binary identities: final-build **209/209** production/recruitment (6 sound
+skips), **87/87** restoration/debit/unload (5 sound skips), **306/306** fresh
+original fatigue/terrain/minimap variants and **60/60** full-world hunger
+meal/restoration variants. The latter declare arrival, sack, saved states2/5/17,
+discovery0/1/16/31 and an existing sound handle; every game byte and ESP match.
+Their before-fix **45/60** report exposed the wrong0x10 discovery predicate; the
+corrected code uses TerrainEstDecouvert0x1f and branch-specific sound sites.
+
+Additional original reports: **188/188** full-state/eight-register turret calls,
+S1 fresh snapshot variants **484/484**, **120/120**, **121/121** (10 voice skips).
+These reports precede the final sound correction, with their precise source hashes
+retained; final-source reruns belong to the following verification piece. S1c's
+initial14 EDX mismatches exposed BatimentGetCaseAdjacent's collision scratch
+result, now corrected. S1 snapshots are replay-checked openings plus explicit
+register/input variants, not historical in-situ replay claims.
+
+Sparse work remains **80/405** equal with325 extra-input errors; sparse hunger
+**12/229** equal with217 extra-input errors and2 sound skips. Both failed attempts
+are retained. Their old movement facade demands additional actual world bytes;
+no synthetic padding, default bytes or relaxed comparison makes them pass.
+Fresh whole-world comparisons cover the stated variants only. Unsupported
+validity/abort, terrain-deposit, vehicle and AI paths remain addressed stops.
+
+The final gate (`gate3`) passes fmt, strict Clippy, **30 Rust/63 Python tests**,
+**666/666** original input cases (2 declared skips), **75/75** pilot comparisons,
+C layout and actual Swift/Metal smoke. Six old dependency stops now complete with
+every original byte/text request/typed return exact; the gate permits only their
+six explicit address contracts. The late-stop rollback test now deliberately
+selects an unsupported structure Bag code3 after the supported icon prefix.
+`gate1` retains an in-run source-identity rejection and obsolete stop expectation;
+`gate2` retains the six exact completions before the expectation update.
+
+Exclusive coordinated-lease release play timing, both logic calls plus ctypes
+input packing, excluding initialization/render/audit/export/hash/presentation:
+P3 **0.2864ms/frame**, P6 **0.2856**, P7 **0.2839** (respective p99s0.3171/0.3225/
+0.3540, maxima0.4675/0.5215/0.5254). All full scripted windows complete without
+stops. The9,200-frame M2 regression is **0.2585ms/frame logic**,0.6366 logic+render;
+terminal full-state/surface hashes, generation and clock exactly match piece2.
+
+This commit delivers the bounded native providers and regression evidence.
+Final-source advancing P3/P6/P7 state/surface windows and P6 whole-state4544-phase
+proof are the following verification piece of this same task. No S1/D1 mission
+completion or coverage beyond those published windows is claimed.
+
+## Fifth continuation piece — shifted colonist fatigue icon
+
+The first own-world P6/P7 surface attempts each passed1,903 surfaces, then
+stopped at frame2032,0x4135fa. This exposed a renderer omission: pinned
+Graphics1.9 already permits shifted tired icons for type9 states2/7/13 and draws
+at `x+dx-8,y+dy-11`. Rust kept the old blanket shifted-icon stop and unshifted
+coordinates. The correction matches that exact domain; other guards remain.
+Original0x4135fa loads the saved origin locals before the draw calls0x41362e/
+0x413650. No ABI or render-contract version changes.
+
+[Piece5 report](validation/chain8/piece5/summary.json) preserves both failed
+advancing attempts and the interrupted P6 whole-state log. That run was canceled
+before source mutation after its logged frame1750 milestone; no completed proof
+is claimed for it. The corrected renderer passes **8/8** immutable original
+P6 snapshots2031–2038: exact pixels, original/Python raster calls, Python effects
+and cache. This is an isolated snapshot regression, not the final advancing run.
+
+The full gate passes again:30 Rust/63 Python tests,666/666 input cases,75/75 pilot
+comparisons,C/Swift/Metal. Exclusive full-window scripted play benchmarks and
+the9,200-frame M2 benchmark pass; M2 terminal state/surface hashes, generation
+and clock are unchanged. Exact timing/provenance are retained in piece5.
+Fresh final-byte S1 snapshot variants also pass484/484,120/120,121/121 (10 declared
+voice skips), with their full records reserved for the final verification report.
+Final advancing state/surface runs now use this corrected, separately committed
+implementation. Main remains untouched.
+
+## Sixth continuation piece — native structure clock guards
+
+After the shifted-icon correction, both advancing surface attempts passed1,942
+surfaces and stopped at frame2071,0x401d18. Pinned `hud_quadro.cronometro` already
+returns without a gauge for a hovered structure owned by another player, and for
+an own active CAVE independently of its timer word. Rust incorrectly required
+the old owner0/sanctuary/no-recruitment tuple for every selected structure.
+`render_hud` now follows the exact lazy branch order and retains the unsupported
+clock stop. It continues the remaining HUD after the no-gauge branch.
+
+[Piece6 report](validation/chain8/piece6/summary.json): **1,700/1,700** immutable
+original P6/P7 render-entry snapshots2001–3700 match pixels, raster calls, cache
+cursor and exact text-boundary consumption. Each snapshot loads its own original
+surface/cache; this is explicitly not advancing-world or full-cache/Python proof.
+The complete gate passes again (30 Rust/63 Python,666 input,75 pilot,C/Swift/Metal).
+Exclusive full-window play timing and9,200-frame M2 terminal equality pass; exact
+means, source/library identities and all prior failure attempts are retained.
+The three probe terminal projection hashes also equal piece5 before this
+renderer-only correction. No simulation provider, ABI or comparison mask changes.
+
+The completed **84bdc9f** P6 simulation run independently proves **2,272/2,272**
+frames129–2400, **4,544/4,544** whole-state phases (16,002,289 compared bytes/phase,
+unchanged173,046-byte cumulative mask) and **4,544/4,544** paired play/audit phases.
+Zero differences or stops. Its report predates only this HUD correction, with
+that exact source/library identity preserved. Final-source advancing state and
+surface runs form the last verification piece of this same task. No main merge.
+
+## Seventh continuation piece — complete final probe verification
+
+Implementation **3180b7541d17d64da099fd2271efec1f6a2e4a7f** is frozen throughout
+[the final report package](validation/chain8/piece7/summary.json). All22 raw
+reports/logs retain compressed and decompressed hashes. Probe, S1 and input
+proofs have identical full engine/harness/header source maps; M2 independently
+checks its recorded source set. Each binary stays stable, and all runs begin
+on this committed implementation. This final
+verification commit changes documentation and evidence only. ABI1.6/render1.9
+and every earlier reference profile and comparison mask remain unchanged.
+
+| Probe | Original state/input/order frames | Own-world original/Python surfaces | Stop |
+| --- | --- | --- | --- |
+| P3 | 3,001/3,001,129–3129 | 3,001/3,001 | None |
+| P6 | 2,272/2,272,129–2400 | 2,272/2,272 | None |
+| P7 | 3,572/3,572,129–3700 | 3,572/3,572 | None |
+
+P3/P7 state scope is the published indicators, consumed inputs and orders.
+P6 additionally proves **4,544/4,544 whole-state phases**, comparing16,002,289
+bytes per phase under the unchanged173,046-byte cumulative display mask, and
+**4,544/4,544 paired play/audit phases**. Block identities/lengths, immutable
+inputs, modeled registers, original checkpoint integrity and virtual clock
+contracts pass. Whole-state wall time876.474s includes replay, export, hashing
+and comparison; it is separate from gameplay timing.
+
+Each surface run carries Rust's own world, native renderer pixels/cache and
+saved backgrounds from the initial frame128 state. One attested between-frame
+surface per counter matches original pixels/raster calls and the pinned Python
+pixels/cache/effects; original shared prefixes, entry cache/background and text
+requests are checked. Original AffText nonexecution remains strictly attested,
+as in the published graphics proof. No later oracle state repairs the Rust world.
+Surface runs: P3 702.010s,P6 548.048s,P7 848.875s. The prior2032/2071 failures are
+retained in pieces5/6; both addressed renderer corrections now pass advancing replay.
+
+Final release **666/666** input leaves complete with exact captured state, typed
+returns and text requests (2 previously declared skips,0 stops). The fresh M2
+regression passes **257/257 phases**, including original events/registers,
+allocations and immutable tables. Fresh intact-x86 S1 snapshot variants pass
+**484/484 +120/120 +121/121**, with10 explicitly skipped voice fixtures. These
+remain declared snapshot variants, not historical in-situ replay claims. The
+current-source native gate in piece6 passes30 Rust/63 Python tests,75 pilot
+comparisons,C layout and actual Swift/Metal smoke; its source bytes equal this
+implementation. No additional engine edits followed that gate.
+
+Exclusive coordinated-lease play-mode logic (both calls and ctypes input packing,
+excluding initialization/render/audit/export/hash/presentation):
+
+| Probe | Mean ms/frame | p99 ms | Maximum ms |
+| --- | --- | --- | --- |
+| P3 | 0.2845 | 0.3180 | 0.4138 |
+| P6 | 0.2833 | 0.3176 | 0.5175 |
+| P7 | 0.2841 | 0.3520 | 0.5107 |
+
+All measured scripted frames stay below4ms. The9,200-frame M2 run averages
+0.2529ms logic (maximum1.3239), with terminal state/surface hashes, generation
+and clock exactly equal to the previous passing releases. The three probe
+terminal projection hashes also remain exact across the renderer corrections.
+Timing records are in piece6; proof wall times are not throughput measurements.
+
+The [native contract](research/CHAIN8_CONTRACT.md) and piece4 retain the explicit
+unsupported saved-state/abort, depot-mode, vehicle/AI and initialized-sound
+boundaries, plus the failed sparse movement-facade attempts. Coverage ends at the
+published windows above; S1/D1 mission completion is outside this verification.
+Reproductions use the coordinated lease, fresh output paths and the explicit
+release library argument for `player_proof.py`. Every job stayed within its
+1,140-second execution bound after lease grant. No merge into main was performed.
+
+## Chain9 piece1 — current-main K1 reproduction
+
+Main `6cdbc5a` was fast-forwarded into `feat/codex-rust-engine` before this work.
+No native source, ABI1.6, Graphics1.9 contract, mask or prior profile changed.
+[Fresh report](validation/chain9/piece1/summary.json) reproduces K1 frames129–629:
+**501/501** original/pinned-Python indicator/input/order frames, **1,002/1,002**
+paired play/audit phases and **501/501** advancing original/Python surfaces.
+Pixels, raster calls, carried cache/background, effects and exact recorded
+AffText requests all pass. No stop occurs; the old frame141 origin stop is
+already resolved by the committed Graphics1.9 port. This is not whole-state K1
+coverage. The engine gate is queued separately and is not yet claimed here.
+
+The retained S1 baseline passes **2,418 frames129–2546** against the chain8
+Python/original indicators, inputs and orders. In frame2547 the pinned Python
+raises `EnginSetType` at call0x420f69 while Rust continues. Therefore the strict
+same-stop reader reports a dependency-contract difference, not a passing S1
+continuation. The next piece will test all five new Core owner adapters against
+the original capture and use a separate commit-backed continuation profile.
+
+### Chain9 original-only S1 render evidence
+
+The mini's first completed [compact segment](research/evidence/chain9-s1-render-2250-3000.json.xz)
+replays **750/750 frames2251–3000** from the original frame2250 checkpoint.
+Every whole-state hash and both phase surface hashes exactly reproduce the
+committed Missions S1 trajectory. Raster calls and complete AffText argument/
+pre-text-surface attestations are observed from the unmodified intact x86.
+No translation runs in the capture. It takes321.833s after the shared lease
+grant; the observer/harness and original executable hashes are in the artifact.
+The [bounded recorder](testes/s1_render_capture.py) consumes immutable chain8
+Git-object sources and refuses output replacement. This evidence contains
+hashes and arguments only; it is not an advancing Rust or Python comparison.
+The original checkpoint remains solely an oracle opening, never a Rust reset.
+Earlier segments and the Rust comparison are still pending at this commit.
+
+## Chain9 piece2 — exact recruitment owner returns
+
+[Contract](research/CHAIN9_CONTRACT.md) and [measured package](validation/chain9/piece2/summary.json)
+add the five Core recruitment entries to the Rust fixture transport and reuse
+those same healing/fatigue/experience/placement bodies in production. Actual
+BL direction and DX exit cell are retained. Register outputs include all seven
+data GPRs and ESP; no C function, ABI identifier or copied layout changes.
+
+Fresh intact-x86 reexecution reproduces all **277/277** committed original
+cases; native Rust matches every mapped byte and all eight returned GPRs, with
+**zero masks, differences, skips or dependency stops**. Counts: conversion57,
+healing83, fatigue11, experience103, placement23. The fixture binary is debug;
+the release library is separately rebuilt from the identical source. Runtime
+fixtures include the actual S1 frame2547 calls and declared variants, not an
+advancing whole-state S1 proof. The named placement vision-sum limit is11,
+stopping at0x446146 after collision/visibility and before discovery.
+
+The fresh full gate passes fmt, strict Clippy, **30 Rust /63 Python tests**,
+**666/666** input leaves, **75/75** pilot original comparisons and C/Swift/Metal.
+No source edits followed that passing gate. Additive reference profile `chain9`
+pins logic6cdbc5a and Graphics92fab50; every earlier profile/mask stays unchanged.
+
+The retained advancing release S1 diagnostic independently agrees with original
+indicators, input answers and orders for **2,707 frames129–2835**. Frame2836
+first differs in unit12's record hash, with its published state/cell/order fields
+still equal and no provider stop. This is an unresolved diagnostic, not a
+passing extension or a concealed dependency. The older pinned Python still
+stops before conversion at2547; AI/runtime's committed continuation is pending.
+The next piece investigates that byte difference and runs the carried S1 surfaces.
+
+Additional original-only render attestations now cover frames129–750 and
+1501–2250 (622/622 and750/750 native whole-state/both-phase surface checks).
+Their compact immutable artifacts live beside the earlier2251–3000 segment.
+Frames751–1500 and the complete Rust surface comparison remain pending.
+
+## Chain10 piece3 — S1 through3850 and geometric work destinations
+
+[Contract](research/CHAIN9_CONTRACT.md#geometric-depot-centre-correction) and
+[report package](validation/chain10/piece3/summary.json) resolve the frame2836
+unit12 difference: only destination+7e differed (original0x0c15, Rust0x0a14).
+A replay-checked original2750 opening agrees through2836; every byte of unit12
+matches at2835. Its actual work call0x44c49e requires geometric
+GetCaseCentrale0x423b27, not collision-centre BatimentGetCase0x41aee2.
+
+The first shared-helper correction regressed farmer unit13 at2352. That failed
+report is retained. Routing is now exact per caller: GetCaseCentrale at44da02,
+44bf6a and44c49e; BatimentGetCase remains at44dc4b,44df64 and44c6b8.
+The isolated geometric query passes12/12 original full-register/memory cases;
+its body is unchanged by the narrower routing. A final-source repeat is queued.
+The complete corrected gate passes30 Rust/63 Python,666 input leaves,75 pilot
+captures and C/Swift/Metal. The earlier partial gate was canceled before the
+caller correction and is not counted as complete. ABI1.6/Graphics1.9 remain.
+
+Final-source release S1 agrees with original indicators, consumed inputs and
+orders over **3,722 frames129–3850**, with **zero differences**. The first
+actual Rust stop is **frame3851, phase3, SacGetCapacite at0x4299da**.
+This remains the published indicator domain, not a whole-state S1 claim.
+
+Additive profile `chain10` pins AI/runtime `bf8ec61` and Graphics92fab50.
+The pinned Python agrees over **2,418 completed frames129–2546**. It raises
+`ArgumentoNaoPassado` for actual EDX omitted at SetSortEngin call0x420f8c in
+frame2547. Rust completes that call. The strict same-stop reader therefore
+retains an explicit dependency-contract difference; preceding inputs/orders
+match, and no completed Python phase2547 equality is invented. All **4,838/4,838**
+paired Rust play/audit phases remain exact. Economy must forward the actual
+exit-cell DX; no foreign provider or reference callback is patched here.
+
+The mini's compact original attestations now cover **3,723/3,723 frames129–3851**,
+without gaps or duplicate frames. Every committed original whole-state hash and
+both phase surface hashes reproduce. The six bounded segments and observer
+hashes are in research/evidence; no later checkpoint becomes a Rust input.
+The earlier carried Rust surface prefix passes622/622 through750. Final S1
+surfaces through3850, prior-window regressions and exclusive timing are queued
+and remain the next verification piece; their results are not assumed here.
+
+## Chain10 piece4 — final-source regression and S1 render boundary
+
+Implementation **a410074** remains unchanged throughout
+[the final regression package](validation/chain10/piece4/summary.json).
+Every state/surface report has the same engine/harness/header input hashes and
+release-library identity. The source checks also match the committed files.
+
+| Probe | Original state/input/order frames | Own-world original/Python surfaces | Stop |
+| --- | --- | --- | --- |
+| K1 |501/501,129–629 (also pinned Python) |501/501 |None |
+| P3 |3,001/3,001,129–3129 |3,001/3,001 |None |
+| P6 |2,272/2,272,129–2400 |2,272/2,272 |None |
+| P7 |3,572/3,572,129–3700 |3,572/3,572 |None |
+
+P6 additionally reproduces **4,544/4,544 whole-state phases** under the unchanged
+published173,046-byte mask (16,002,289 compared bytes/phase), with **4,544/4,544**
+paired play/audit phases. Clock, block identity/lengths, original registers,
+static inputs and checkpoint integrity remain exact. This run takes933.822s;
+the advancing P3/P6/P7 surfaces take741.188/602.655/923.018s. These are proof
+wall times, not game-loop timings. All executed jobs stay below1,140s after
+lease grant. K1 again pairs all1,002 phases exactly. Fresh final-source
+GetCaseCentrale entries pass **12/12** with full registers and supplied bytes.
+
+S1's carried surface proof completes **1,885/1,885 full surfaces129–2013**,
+including original/Python pixels, original/Python raster order, carried cache/
+background and Python effects. At **frame2014**, both Rust and pinned Graphics1.9
+stop at **0x4022c8**, `structure selection outside captured API-1.8 domain`.
+Their partial pixels, cache, raster calls and effects match each other. The
+original completed the routine, so its complete frame2014 surface/raster tail
+is not claimed equal to this partial result. The strict full-window reader's
+stopped row and exit1 are retained, rather than changing its comparison masks
+or pretending that the remaining original drawing ran. No S1 whole-state or
+production-glyph claim is added. The prior qualified AffText contract remains.
+
+Thus the independent S1 logic prefix remains3,722 exact indicator/input/order
+frames through3850, with SacGetCapacite0x4299da stopping phase3 of3851; its
+render prefix ends2013. The pinned Python logic prefix ends2546, then requires
+Economy's actual DX forwarding at SetSortEngin0x420f8c. These are three separate
+limits, with their real outputs recorded. The remaining S1 selection contract
+belongs to Graphics; no unsupported mode was silently admitted in Rust.
+
+The final native gate already passes on these identical source bytes (piece3).
+Exclusive play timing and prior terminal state/surface hash checks are the last
+verification piece and remain pending here. No main merge or project acceptance
+is performed or claimed.
+
+## Chain10 piece5 — final exclusive play measurement and terminal equality
+
+[Final package](validation/chain10/piece5/summary.json) completes verification
+without changing implementation **a410074**. Measurement revision59cac4d adds
+only documentation and reports. All native/harness/header inputs and the release
+library remain byte-identical to the successful final gate and regression set.
+The aggregate result independently checks those identities and every stated
+prefix/stop contract, performance budget and prior terminal field.
+
+Exclusive coordinated-lease play logic includes both C ABI calls and Python
+input packing; it excludes initialization, render/audit/export/hash work and
+app presentation. Policy1 is explicitly selected.
+
+| Probe | Frames | Mean ms/frame | p99 ms | Maximum ms |
+| --- | ---: | ---: | ---: | ---: |
+| K1 |501 |0.2730 |0.3344 |0.4787 |
+| P3 |3,001 |0.2986 |0.3894 |0.4638 |
+| P6 |2,272 |0.2942 |0.3457 |0.5345 |
+| P7 |3,572 |0.3024 |0.4129 |0.5986 |
+| S1 |3,722 |0.3021 |0.4887 |0.6420 |
+
+Every measured scripted play frame is below4ms. The exclusive9,200-frame M2
+run, with **`--mode 1`**, averages **0.2754ms logic**, p990.3690, maximum1.6225;
+logic+render averages0.6753ms, maximum3.9160. Terminal full-state/surface hashes,
+counter, generation18402, phase3 and clock(9201,460050) exactly equal the earlier
+chain8 release. P3/P6/P7 terminal full-projection hashes, clocks, frame counts and
+input identities also exactly equal chain8. The first M2 command omitted the
+mode flag and measured its legacy audit default; that result is retained,
+likewise terminal-equal, and is not used for the play budget.
+
+The own lease-journal extract separates queue time from measured execution.
+No native or harness source changed after the final passing `validate.sh`.
+Fresh final-source12/12 GetCaseCentrale comparisons also pass after the timing
+batch. All prior state/surface equalities remain exact at their published scope,
+including4,544/4,544 P6 whole-state and paired phases. The source tree is clean
+at delivery, and only the feature branch is pushed; integration/acceptance are
+coordinator-owned.
+
+Final S1 limits remain distinct: original indicators/inputs/orders through3850,
+then Rust SacGetCapacite at3851/0x4299da;1,885 original/Python full surfaces through
+2013, then the matching Graphics selection stop at2014/0x4022c8; pinned Python
+logic through2546, then missing DX at SetSortEngin2547/0x420f8c. Graphics must
+publish the supported selected-structure contract for S1's2014 context; the
+committed S1 script and native raster/text attestations reproduce that context.
+Economy must forward the actual exit-cell DX into the recruitment call. Rust's
+later SacGetCapacite callback is the next logic boundary. No unknown callback,
+selection mode or glyph was made to succeed artificially, and no S1 whole-state,
+victory or TestB acceptance is claimed.
+
+Reproduce timing from this checkout with fresh output paths:
+
+```sh
+python3 "$lease" --exclusive engine-s1-play -- env RL_REFERENCE_PROFILE=chain10 \
+  python3 -B motor/testes/probe_benchmark.py --probe S1 --frames 3722 \
+  --library motor/target/release/librising_engine.dylib --output .local/s1-play-new.json
+python3 "$lease" --exclusive engine-m2-play -- env RL_REFERENCE_PROFILE=logic \
+  python3 -B motor/testes/play_benchmark.py --frames 9200 --mode 1 \
+  --library motor/target/release/librising_engine.dylib --output .local/m2-play-new.json
+```

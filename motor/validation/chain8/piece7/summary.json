@@ -1,0 +1,232 @@
+{
+  "artifacts": {
+    "M2-128.json": {
+      "compressed_sha256": "c303f6cd4bcae34cd4d1310d02aded6e15f735700f84ce5a03f00ef1215b4196",
+      "path": "M2-128.json.xz",
+      "raw_bytes": 570057,
+      "raw_sha256": "a69a296c195272b214f468bea756a93e587f510b658f7dec34e03b38f6082641"
+    },
+    "M2-128.log": {
+      "compressed_sha256": "2eb0046f3c6cb765b55584fd17421c283b6afe91ae4f44d3c140d3f3d59c0960",
+      "path": "M2-128.log.xz",
+      "raw_bytes": 5331,
+      "raw_sha256": "22854383f26399e2371b91e19c3f3c9b26f653646414d00a348098521e0fdd1c"
+    },
+    "P3-state.json": {
+      "compressed_sha256": "0198243035f400820f229cf0d7a68aa6cbd1a92f33057bfcd6b882d8c819ba74",
+      "path": "P3-state.json.xz",
+      "raw_bytes": 5694625,
+      "raw_sha256": "3a518eabb58574f201aa622ad5cefce227bafbe8153891019945765bbc89a7b8"
+    },
+    "P3-state.log": {
+      "compressed_sha256": "5c4c5109f324dede313bcef5fa5f5b31e33a651715d4c0fde3a88568ecc1e3bf",
+      "path": "P3-state.log.xz",
+      "raw_bytes": 417,
+      "raw_sha256": "4888363db2aef9375ec855cdcec8ae171bafb43632a170a54250ac88d5743381"
+    },
+    "P3-surface.json": {
+      "compressed_sha256": "a699a4d8baa0b1cc435ebb2109af7954f6be2df0a0f72a7a5d945d49ec2960c3",
+      "path": "P3-surface.json.xz",
+      "raw_bytes": 1942004,
+      "raw_sha256": "b755cac6eb943a63aa302e760763f5e3e9e5f23411f3e6ae39476d8e637ab598"
+    },
+    "P3-surface.log": {
+      "compressed_sha256": "0a8fc6a8398fd06f921d1c74fee8867d9dc457514f89249f17784a18f24e5208",
+      "path": "P3-surface.log.xz",
+      "raw_bytes": 221,
+      "raw_sha256": "22323240e61a08a07b49a9f792450231fcc62c5041bd371c4c7eb729bb6c1f43"
+    },
+    "P6-surface.json": {
+      "compressed_sha256": "69edf7fa249da09fccd32cd65a3d19619aa1e7503061be251434acc543f06057",
+      "path": "P6-surface.json.xz",
+      "raw_bytes": 1473257,
+      "raw_sha256": "9612cfc0aa7547bc347e4b737e96054637c3d08a46062dc09dbf133fe7a04144"
+    },
+    "P6-surface.log": {
+      "compressed_sha256": "342fb636e39b6e759730ad854b535cdd8f932241620dccb697400468154046c0",
+      "path": "P6-surface.log.xz",
+      "raw_bytes": 221,
+      "raw_sha256": "31d8de23d4855404b74a8753b20302395c8395d615bef48cee47cf6c009480bc"
+    },
+    "P6-whole.json": {
+      "compressed_sha256": "931001bb707a8d42582ed8f59058d471b87d75f9fd1f29cf194a3cab89bba9c9",
+      "path": "P6-whole.json.xz",
+      "raw_bytes": 7221973,
+      "raw_sha256": "a0b44539c2534960d2d80ee84e4bcab96fcc94e356ce5420195be1059cfd69a7"
+    },
+    "P6-whole.log": {
+      "compressed_sha256": "4cf5058c3198fc81e72e3ea5cac6f795cd8371d9874f7baae721e102cb1c694a",
+      "path": "P6-whole.log.xz",
+      "raw_bytes": 373,
+      "raw_sha256": "f22c1f89824542fc6897db60e79230cd7a808a25a618346b147bdcf36284d1ee"
+    },
+    "P7-state.json": {
+      "compressed_sha256": "1ef87f88c5338d218d5a5af966aed75ed4fbd4ee7a10aac8061dceff521ccf30",
+      "path": "P7-state.json.xz",
+      "raw_bytes": 6778617,
+      "raw_sha256": "cc746939db5bc4caf173056c8e36aedf9f62f5a9ee4f1ed131c6953d99135b8b"
+    },
+    "P7-state.log": {
+      "compressed_sha256": "8c49c0fdfc25028becee2d5c5a5a31517516e98caf76d160ff238a5041616d36",
+      "path": "P7-state.log.xz",
+      "raw_bytes": 441,
+      "raw_sha256": "f18eed3463270620c2777a8721c565a66ba4ed509080d3ffa371d22d37aa57bb"
+    },
+    "P7-surface.json": {
+      "compressed_sha256": "ca3a9828ba06ab52577c60d78f0c0979b0d6be1b0c0ff4dc9f13df6bb43b5a26",
+      "path": "P7-surface.json.xz",
+      "raw_bytes": 2306886,
+      "raw_sha256": "a99ac2fcf132a22a70661b007f4aa282ca65122fba80cc0a6d163e2484ee4590"
+    },
+    "P7-surface.log": {
+      "compressed_sha256": "48b3a4ba7833ffd0fcf2b5650a77104d6427b2d1e890b890e3c0d6dd526f673a",
+      "path": "P7-surface.log.xz",
+      "raw_bytes": 221,
+      "raw_sha256": "eb9e1ef5bf82c4f72ee108886f28559f714494ab7271345f6297dc8cf4885278"
+    },
+    "S1-a.json": {
+      "compressed_sha256": "32a66e99042109c370f9de62ae55256e588b2e40cdfa6b63ab34fc494a81440d",
+      "path": "S1-a.json.xz",
+      "raw_bytes": 198794,
+      "raw_sha256": "3f23a98fcacb25705f281f52df7ebb41de4e1a787dd31c79379b83a1dd2eecee"
+    },
+    "S1-a.log": {
+      "compressed_sha256": "db41258bcdc7894d468529103637674a99dfe28a9d61ff5a9075a05d4e8b9434",
+      "path": "S1-a.log.xz",
+      "raw_bytes": 729,
+      "raw_sha256": "562cb9f22e649d58d875aa8cdbe155b6669221d99db9efa072c70b30c9ae1589"
+    },
+    "S1-b.json": {
+      "compressed_sha256": "f8a5e0af218b9508aeff33d59c74ebb07878a671084d64da32bec9d2f3cf8846",
+      "path": "S1-b.json.xz",
+      "raw_bytes": 55550,
+      "raw_sha256": "839823b18aa1e5c42adfc94a9b2255d8ac3175d39648322dcd60e847a7eeee3d"
+    },
+    "S1-b.log": {
+      "compressed_sha256": "095d0ab03f6ef18272bbc92b309410c9488cc3e03899803c233a04bfddb76049",
+      "path": "S1-b.log.xz",
+      "raw_bytes": 308,
+      "raw_sha256": "4ddf06aefcccd1cc1f79dceb1a1f57ef5fc250ef929cccdf14cc78d17acbd374"
+    },
+    "S1-c.json": {
+      "compressed_sha256": "5a723f6da6f9b99a5025ab1743a2381e85b1fe78e0c5d2346b5ca31407aa4954",
+      "path": "S1-c.json.xz",
+      "raw_bytes": 59612,
+      "raw_sha256": "ec476272479ba18348c035484df5828720a39067bb6644f8e0bd403a0960d33d"
+    },
+    "S1-c.log": {
+      "compressed_sha256": "30e6dfabbc53236b4d64cb409b996daf155141d8c7fd80eda0307e48131c45da",
+      "path": "S1-c.log.xz",
+      "raw_bytes": 308,
+      "raw_sha256": "3efac5199d1cfb89de0639eda4572a9b10f52464b5659c7835dd8f5ca2dd4702"
+    },
+    "input-leaves.json": {
+      "compressed_sha256": "a83a5cb6c021b9700e38f920771b90b361a5e4fbaa93c8e0a3379cb98a56da59",
+      "path": "input-leaves.json.xz",
+      "raw_bytes": 299393,
+      "raw_sha256": "07ce01e3e073bbc999f9ace58123f64e2010b845256f6642aa4ae1d462f6d03d"
+    },
+    "input-leaves.log": {
+      "compressed_sha256": "77750a8893fba55b3ac8ea449d5331919e73231a12c32dd365a2e982f1be1ce8",
+      "path": "input-leaves.log.xz",
+      "raw_bytes": 217,
+      "raw_sha256": "58236bbf6ebcec06a0e091d9e2dc665e8ec9466dcf100dda423b8398e0774c86"
+    }
+  },
+  "gaps": "See CHAIN8_CONTRACT.md and piece4 for addressed unsupported domains, sparse dependency failures and explicit sound skips. No comparison mask was widened and no oracle state repaired an advancing Rust world.",
+  "implementation_revision": "3180b7541d17d64da099fd2271efec1f6a2e4a7f",
+  "library_sha256": "7e384977dd448dbbf570ca8b0d9c9d2ea428c4933022f30f7ae4d42be843a14e",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "p6_play_audit_equal_phases": 4544,
+  "p6_whole_state": {
+    "allocation_domain": "No allocation/free or binding changes in the published windows; all block identities and byte lengths compared.",
+    "compared_bytes_per_phase": [
+      16002289
+    ],
+    "evidence_revision": "16b63ac39b377cf4e86a5728475634e8f2e9f33e",
+    "mask_bytes": 173046,
+    "part_compressed_sha256": "0d630ac6c154f98b853691e13c1b8974a1bdef7e63097c387b5949c6c49369bf",
+    "part_raw_sha256": "129302bc0ba9c88f0ef258a20d89865cdccb45ff8327ac40d879429c5b8f2480",
+    "parts": [
+      {
+        "artifact": "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte00.json.xz",
+        "compressed_sha256": "0d630ac6c154f98b853691e13c1b8974a1bdef7e63097c387b5949c6c49369bf",
+        "phases": 2000,
+        "raw_integrity_verified": true,
+        "raw_sha256": "129302bc0ba9c88f0ef258a20d89865cdccb45ff8327ac40d879429c5b8f2480"
+      },
+      {
+        "artifact": "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte01.json.xz",
+        "compressed_sha256": "03976fb9ce9c539d1231fa130c0b8c875dceb26284e9e0eec5c8e1b05a7bb17c",
+        "phases": 2000,
+        "raw_integrity_verified": true,
+        "raw_sha256": "832bb4d18331ee666a79438177b36251b483a055631ff2eaaaba93a9d8ea9a15"
+      },
+      {
+        "artifact": "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte02.json.xz",
+        "compressed_sha256": "ee60b91ceae622134e5342f5311b67600490647664864adafed2df4d260288e6",
+        "phases": 544,
+        "raw_integrity_verified": true,
+        "raw_sha256": "c587fa29136e7bb9ecc05f9e64f2317786efa7825ba45ef2a4596266fba517c6"
+      }
+    ],
+    "phases_compared": 4544,
+    "phases_equal": 4544,
+    "phases_requested": 4544,
+    "schema": "rising-lands/rust-m3-whole-state-proof/1"
+  },
+  "probes": {
+    "P3": {
+      "first_frame": 129,
+      "indicator_frames_equal": 3001,
+      "last_frame": 3129,
+      "state_scope": "Published original indicators, inputs and orders; no whole-state claim",
+      "stop": null,
+      "surface_scope": "One original-attested between-frame surface per counter, from the advancing Rust world; pixels,cache,raster calls,backgrounds,text boundary and pinned Python renderer",
+      "surfaces_equal": 3001,
+      "whole_state_phases_equal": null
+    },
+    "P6": {
+      "first_frame": 129,
+      "indicator_frames_equal": 2272,
+      "last_frame": 2400,
+      "state_scope": "Published cumulative whole-state mask plus indicators, inputs and orders",
+      "stop": null,
+      "surface_scope": "One original-attested between-frame surface per counter, from the advancing Rust world; pixels,cache,raster calls,backgrounds,text boundary and pinned Python renderer",
+      "surfaces_equal": 2272,
+      "whole_state_phases_equal": 4544
+    },
+    "P7": {
+      "first_frame": 129,
+      "indicator_frames_equal": 3572,
+      "last_frame": 3700,
+      "state_scope": "Published original indicators, inputs and orders; no whole-state claim",
+      "stop": null,
+      "surface_scope": "One original-attested between-frame surface per counter, from the advancing Rust world; pixels,cache,raster calls,backgrounds,text boundary and pinned Python renderer",
+      "surfaces_equal": 3572,
+      "whole_state_phases_equal": null
+    }
+  },
+  "reference_revision": "92fab50ccfa14271f6657fc0f6032b6b4b68dd4b",
+  "s1_cases": {
+    "S1-a.json": {
+      "cases": 484,
+      "equal": 484,
+      "skips": 0
+    },
+    "S1-b.json": {
+      "cases": 120,
+      "equal": 120,
+      "skips": 0
+    },
+    "S1-c.json": {
+      "cases": 121,
+      "equal": 121,
+      "skips": 10
+    }
+  },
+  "schema": "rising-lands/rust-chain8-piece7/1",
+  "scope": "All advancing, native-leaf and input proofs use the same committed implementation; engine/harness bytes match across every recorded provenance map. Each heavy job has its own coordinated lease and <=1140-second execution bound. Proof wall time is not play timing. No main integration. No claim beyond the published windows or for S1/D1 mission completion.",
+  "source_hashes_equal_across_proofs": true,
+  "throughput_evidence": "../piece6/summary.json"
+}

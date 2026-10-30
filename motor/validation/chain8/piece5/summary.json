@@ -1,0 +1,93 @@
+{
+  "artifacts": {
+    "P6-state-interrupted.log": {
+      "compressed_sha256": "770bd92adc16792368bda91538cd925e2648369310bb2b783e445a63964b921f",
+      "path": "P6-state-interrupted.log.xz",
+      "raw_sha256": "0808471df33402af0c9b62372d22591883905a251c116f77cb1aca8f82879dfb"
+    },
+    "P6-surface-before.json": {
+      "compressed_sha256": "c450820dc02cb3440ca354ba4bb67241a5cff657e7e333922fee88fe2ef33e30",
+      "path": "P6-surface-before.json.xz",
+      "raw_sha256": "133f0370c13c9c559fc7926e1086e7e9598adb1c2a7a8d14b9bbbcb83c9ccdc9"
+    },
+    "P6-surface-before.log": {
+      "compressed_sha256": "d401ef8c82d503858f3efade06089747ef6669563cee7c67c2f6fda0fe7d1502",
+      "path": "P6-surface-before.log.xz",
+      "raw_sha256": "13238b5cdb2bc39d9f962ce54b006c83f41f11ad39bf4bbe337b30ed2187db69"
+    },
+    "P7-surface-before.json": {
+      "compressed_sha256": "cc0da416145794469c56e9eaf474c07f524d3925598f76dfb7ce8e51768a2d4c",
+      "path": "P7-surface-before.json.xz",
+      "raw_sha256": "0664d59de8cd8461379860fcbaeda11e730d6195d84ac086258b1770c8fd6a02"
+    },
+    "P7-surface-before.log": {
+      "compressed_sha256": "00d88a8ea634d2c48cb2647b265cf427a0241d78b132cb89f901129166ee1174",
+      "path": "P7-surface-before.log.xz",
+      "raw_sha256": "ad70465d682ad1089fe79fee634816b8f7d77a9b646119bc6495c961ec448be6"
+    },
+    "benchmark-M2.json": {
+      "compressed_sha256": "83712e1722fc1775cea88f6a97799ed2410441e7fda58461011f2282996c0c51",
+      "path": "benchmark-M2.json.xz",
+      "raw_sha256": "2054af26df147fe62417fc3b9f8957e66f6e895e8ac5748d255097ccfea25bc6"
+    },
+    "benchmark-P3.json": {
+      "compressed_sha256": "274f125cbc65ab6c7d4c33b3980053645f9a0c55177b7f8dab72c7f618d79dfa",
+      "path": "benchmark-P3.json.xz",
+      "raw_sha256": "1dbc272b9f81acbb457beced7b86e567edda43fdbaaaac2fcf30f83a24fa88dd"
+    },
+    "benchmark-P6.json": {
+      "compressed_sha256": "ec4fad8cb7f44c0fb82d99342163663eea6e3f007e750a8adcadd35f559bf132",
+      "path": "benchmark-P6.json.xz",
+      "raw_sha256": "14a2a4efef7af3f336ade7f630a040bc11becfa59f410139fff19198a47b307b"
+    },
+    "benchmark-P7.json": {
+      "compressed_sha256": "a9a67edc958a108ccfddaedf03244038f2ad9fd834860f6abb6b241f8e0c0b54",
+      "path": "benchmark-P7.json.xz",
+      "raw_sha256": "235c9d071fd7146e82061a3e9ec4ecffe4ad3a0f9429bb4691f43c8bb8d21327"
+    },
+    "gate.log": {
+      "compressed_sha256": "a491a15e643a17ca9f855dc30ad50405893436214906d1c79709ec92f919d7a3",
+      "path": "gate.log.xz",
+      "raw_sha256": "d70f1be7eafa6256d54c88c586f30179ca54541c156d80b413d8614338b55fc0"
+    },
+    "timing.log": {
+      "compressed_sha256": "e3c88ccbaa648a21cd175f8469a64584a4e01641d33a44eed81ac9cffc31d4d3",
+      "path": "timing.log.xz",
+      "raw_sha256": "0bba380411ed8315b3c5a279051f7746880a2703bb4940802acc997e448b07bb"
+    },
+    "tired-render.json": {
+      "compressed_sha256": "3538f1db04edb481c90da4c1ea260f6e681c0a02e9df6eee2d1a7cd057edf4f9",
+      "path": "tired-render.json.xz",
+      "raw_sha256": "4bfcbd34eb6ab4bb9b94b34c795cbcab379c156ce7522ee5b67b40526190d82e"
+    },
+    "tired-render.log": {
+      "compressed_sha256": "bdc4c9f5baa5641da33adb084e1d4d6921daaa73f912fe51435431ba1bcc32fd",
+      "path": "tired-render.log.xz",
+      "raw_sha256": "29be37dfc565f892dda467b62786dd1d374c449060dbf7424faf9ab6a5052ed8"
+    }
+  },
+  "before": "Both own-state surfaces equal1903/1904 attempts, first stop2032 at0x4135fa. P6 whole-state run was deliberately canceled after its logged1750 milestone before renderer source mutation; it has no completed proof claim. Prior original reports are not overwritten.",
+  "correction": "Exact pinned Graphics1.9 exception for type9 states2/7/13: shifted tired icon at x+dx-8,y+dy-11; all other shifted-tail guards remain. Original0x4135fa stack-local loads and0x41362e/0x413650 raster calls;8/8 immutable original render-entry snapshots2031\u20132038 compare pixels,calls,Python effects/cache.",
+  "gate": "Full validate.sh passed30 Rust/63 Python tests,666/666 input,75/75 pilot,C/Swift/Metal.",
+  "logic_mean_ms": {
+    "P3": 0.2878863938687144,
+    "P6": 0.2889917134683054,
+    "P7": 0.28366218924972364
+  },
+  "m2_terminal_unchanged": {
+    "final_clock": [
+      9201,
+      460050
+    ],
+    "final_counter": 9200,
+    "final_generation": 18402,
+    "final_phase": 3,
+    "final_state_sha256": "4ef7471043dd66011d9ad68873ae1c27f8c84f32063bd359c9a23e4cb48dfd36",
+    "final_surface_sha256": "8ce7ad456a1d94cefb7f880c94553a3d7ea7ffca8c4aaa303894f511116f10e3"
+  },
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "reference_revision": "92fab50ccfa14271f6657fc0f6032b6b4b68dd4b",
+  "schema": "rising-lands/rust-chain8-render-correction/1",
+  "scope": "This passing correction piece precedes final advancing-world reruns. No ABI or render-contract version change; the bug violated the existing1.9 pinned domain.",
+  "timing": "Exclusive coordinated lease; full scripted play-mode windows; excludes initialization/render/proof/audit/export/hash/presentation,includes ctypes input packing."
+}

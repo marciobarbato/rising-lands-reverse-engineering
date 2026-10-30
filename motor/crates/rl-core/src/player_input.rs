@@ -96,10 +96,10 @@ fn can_enter(m: &MemoriaJogo, p: u32, mode: u32, target: u32) -> Result<bool> {
         if t == 16 || !(11..=17).contains(&t) {
             return Ok(false);
         }
-        return stop("EnginSelectPeutEntrer over a vehicle", 0x472fbc);
+        return crate::chain_entry::can_enter(m, p, mode, target);
     }
     if mode == 3 {
-        return stop("EnginSelectPeutEntrer over a structure", 0x472bca);
+        return crate::chain_entry::can_enter(m, p, mode, target);
     }
     Ok(false)
 }
@@ -259,8 +259,12 @@ pub fn icons(m: &mut MemoriaJogo) -> Result<u32> {
         fill_icons(m, a, 1)?;
         return Ok(0);
     }
-    if sel_structure(m, p)? != 65535 {
-        return stop("CalculIconeAction structure selected", 0x45e9bf);
+    let selected = sel_structure(m, p)?;
+    if selected != 65535 {
+        let t = m.b(player::structure(selected) + 8)?;
+        fill_icons(m, 0x4dd6e8 + 0x8f0 * p + 104 * t, 3)?;
+        m.sb(0x496d48, 1)?;
+        return Ok(0);
     }
     for i in 0..10 {
         icon(m, i, 0x29b1, 1, 0)?
@@ -297,7 +301,30 @@ pub fn fill_icons(m: &mut MemoriaJogo, a: u32, mode: u32) -> Result<()> {
                 icon(m, slot, 0x29b9 + t, yes(ok), 0)?
             }
             4 => return stop("IconeFillContenu Bag code 4", 0x45e40c),
-            6 => return stop("IconeFillContenu Bag code 6", 0x45e430),
+            6 => {
+                let p = m.b(0x508041)?;
+                let selected = sel_structure(m, p)?;
+                let id = 0x29cf + if t == 25 { 18 } else { t };
+                let (active, status) =
+                    if selected != 65535 && m.b(player::structure(selected) + 0x7b)? == t {
+                        (0, crate::chain_recruit::status(m, selected, t)? & 65535)
+                    } else if selected != 65535 && m.d(player::structure(selected) + 0x8c)? != 0 {
+                        (0, 0)
+                    } else {
+                        let r = 0x4965ae + 50 * t;
+                        (
+                            yes(crate::player_orders::resources(
+                                m,
+                                p,
+                                m.w(r + 2)?,
+                                m.w(r + 6)?,
+                                m.w(r + 4)?,
+                            )?),
+                            0,
+                        )
+                    };
+                icon(m, slot, id, active, status)?;
+            }
             7 => return stop("IconeFillContenu Bag code 7", 0x45e696),
             _ => {}
         }
@@ -396,7 +423,17 @@ impl Input {
                 m.sw(0x507d6c, m.w(0x507d68)?.wrapping_sub(m.w(X)?))?;
                 m.sw(0x507d6e, m.w(0x507d6a)?.wrapping_sub(m.w(Y)?))?
             } else {
-                return stop("MiniMapSetPos", 0x42bb5d);
+                crate::chain_vision::extra(
+                    m,
+                    "MiniMapSetPos",
+                    crate::FrameRegisters {
+                        eax: m.w(X)?,
+                        edx: m.w(Y)?,
+                        ecx: 1,
+                        ..Default::default()
+                    },
+                )?;
+                crate::frame_core::init_zone(m, 1)?;
             }
         } else {
             m.sb(0x4e05a8, 0)?
@@ -416,16 +453,16 @@ impl Input {
     }
     fn panel(&mut self, m: &mut MemoriaJogo, p: u32) -> Result<()> {
         let si = icon_zone(m, m.w(X)?, m.w(Y)?)?;
-        if sel_structure(m, p)? != 65535 {
-            return stop(
-                "InputGame HUD with a structure selected (BatimentGetBagOrdre)",
-                0x42bd0d,
-            );
-        }
-        if count(m, p)? != 1 {
-            return Ok(());
-        }
-        let a = bag(m, first(m, p)?)?;
+        let selected = sel_structure(m, p)?;
+        let a = if selected != 65535 {
+            let t = m.b(player::structure(selected) + 8)?;
+            0x4dd6e8 + 0x8f0 * p + 104 * t
+        } else {
+            if count(m, p)? != 1 {
+                return Ok(());
+            }
+            bag(m, first(m, p)?)?
+        };
         let pressed = m.b(AE)? != 0 && m.b(AF)? != 0;
         if matches!(si, 8 | 9) {
             m.sb(0x4e05a2, 1)?;
@@ -482,7 +519,21 @@ impl Input {
                     }
                 }
                 4 => return stop("InputGame icon Bag code 4", 0x42be78),
-                6 => return stop("InputGame icon Bag code 6", 0x42c063),
+                6 => {
+                    let t = t & 255;
+                    let r = 0x4965ae + 50 * t;
+                    let (food, parts, stone) = (m.w(r + 2)?, m.w(r + 4)?, m.w(r + 6)?);
+                    self.info2 = 65535;
+                    self.info = r + 12;
+                    self.flag = false;
+                    m.sw(0x4e0612, food)?;
+                    m.sw(0x4e0614, stone)?;
+                    m.sw(0x4e0616, parts)?;
+                    m.sw(0x4e0618, 0)?;
+                    if pressed && crate::player_orders::resources(m, p, food, stone, parts)? {
+                        self.ord(m, p, 17, [t, 0, 0, 0], 0x42bf88)?;
+                    }
+                }
                 _ => {}
             }
         }
@@ -675,10 +726,19 @@ impl Input {
         if count(m, p)? != 0 && can_enter(m, p, 1, u)? && !mirror(m, u)? {
             return stop("InputGame enter-vehicle hover", 0x42a8ce);
         }
-        if sel_structure(m, p)? != 65535 {
+        let selected = sel_structure(m, p)?;
+        if selected != 65535
+            && self.core(
+                m,
+                "BatimentPeutAttaquer",
+                [selected, 1, m.w(0x496ac2)?, 0],
+                0x42a9ed,
+            )? & 255
+                != 0
+        {
             return stop(
-                "InputGame unit hover with a structure selected (BatimentPeutAttaquer)",
-                0x42a9d3,
+                "InputGame unit hover: the selected structure can attack the unit",
+                0x42a9f6,
             );
         }
         if m.b(B0)? != 0 && first(m, p)? == u && !mirror(m, u)? {

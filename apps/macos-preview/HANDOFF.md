@@ -1521,3 +1521,486 @@ input path; full execution/visual continuation still needs CAVE body, viewport,
 fatigue and glyph ports. The original timing probe, broader workload performance,
 continuous drag and human Test B remain gaps. Only the feature branch is pushed;
 no main merge or milestone acceptance is recorded.
+
+## ABI 1.6 consumer and original pacing audit
+
+Fetched main `240ea87` contains the persistent ABI 1.6 contract; the feature
+fast-forward adopts it without modifying `motor/`. The C consumer requires major
+1/minor >=6, loads complete S0 once, and selects `rl_execucao_definir(world,1)`
+when Jogar is selected before phase 1. Validar retains execution policy 0 and
+its unchanged projection/hash/observer path. Mode changes after phase 1 remain
+rejected. Failure of policy selection is a named stop, never a silent fallback.
+The engine selector takes an opaque uint64 world and uint32 mode 0/1/2 and
+returns int32 status; it does not advance generation or virtual ticks.
+`macos_live_validation` accepts uint32 0/1 only before phase 1. Complete MONDE01
+S0 and the committed renderer/input domains remain the supported domain.
+Order is S0 load → policy selection → phase 1 → repeated render → phase 2 →
+phase 3, with proof observers after successful phases only in validation.
+Caller buffers, carried cache and error atomicity remain unchanged. Test A state proofs
+select persistent audited policy 2 explicitly to preserve consumed-poll records.
+Production play policy 1 retains real order/text/sound requests.
+
+The read-only [pacing audit](validation/m3-abi16-original-pacing.json) and
+[original instructions](validation/m3-abi16-original-pacing.asm) identify intact
+RISING.EXE SHA256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+`WinMain 0x460205..0x46021b` calls `0x47500e` when active and the message queue
+is empty; inactive uses WaitMessage. `0x47505e` calls CalculGame, then
+`0x475063` calls rendering. `GameNextFrame 0x45d015` just increments the counter.
+`CalculFrame 0x43f710` calls GetTickCount to count frames per >=1,000 ms and
+formats a two-digit display, without throttling simulation. The render divisor
+at `0x417909` runs after simulation. `DDFlipPage 0x43f220..0x43f26b` calls
+BltFast with DDBLTFAST_WAIT and retries still-drawing; this is blitter readiness,
+not a fixed game timer or a WaitForVerticalBlank cadence.
+
+All executable-section timer-import and thunk references are recorded. The other
+timeGetTime references are FLI playback elapsed time, network input, CD audio
+deadlines and RNG seeding; WaitForSingleObject references are CRT semaphore/join
+paths. No fixed-Hz active-loop timer gate or named WaitFrame is established.
+The default now follows the original's uncapped idle-loop policy, with optional
+15/20/30/60 host caps. TickClock remains at its audited nominal 20 and recorded
+frame numbers are unchanged. This reproduces scheduling policy, not the speed
+of a particular historical computer. Historical Windows CPU/driver/refresh FPS
+is unmeasured. A historical elapsed-speed calibration, if wanted, requires the
+AI/runtime/coordinator owner to publish a real Windows hardware/session timing
+contract; no single fixed FPS can be inferred from this executable path.
+Requested calibration contract: intact hash above; original Windows CPU/OS,
+DirectDraw driver and refresh; active/unoccluded MONDE01; default draw divisor
+byte `0x497284 = 1`; >=65 seconds of real native GetTickCount start/end uint32
+values paired with game counter `0x496d40` start/end uint32 values and declared
+pause/input policy. Distinguish counter wraps, simulation iterations and actual
+presentations. Emulator execution time or a stubbed timer cannot supply the
+historical elapsed-speed measurement.
+
+Benchmark orders are real AppKit selection/movement clicks after the real
+128-frame prefix, followed by a real right-click on empty ground to deselect,
+then a pointer move to empty ground. Input remains enabled every frame. This is
+a declared narrower workload than keeping a fatigued actor selected. It changes
+no world bytes, renderer domain or stop handling. The production selected-actor
+fatigue stop at `0x410be4` remains. Gestures are anchored to observed game frames
+rather than an eight-second timer, allowing uncapped play to receive orders
+before the first-raid dependency horizon. Failed sustained runs retain every
+second, the named stop and the separate first-stop active-window snapshot.
+
+The frozen runtime/build is **b44fe804a696413f79904b9d36b01f30138cfac5**.
+[APP_BUILD](validation/m3-abi16-delivery-app-build.log) passes **112 consumer
+tests / zero skips**, **27 native exercise checks** and **20 inspection checks**;
+ARM64, relocated runtime/source/assets and strict deep signing pass. The app
+uses its immutable archive's integrated motor with static ABI 1.6 binding.
+No external engine override is used. [Engine validation](validation/m3-abi16-engine-gate.log)
+passes **30 Rust tests, 63 Python tests plus 10 renderer child tests, 75
+original-x86 comparisons / zero mismatches / zero skips**, C layouts, Swift
+ABI 1.6 and 128/128 Swift/Metal surfaces. Its debug timings are not UI throughput.
+
+Fresh [prefix](validation/m3-abi16-live-prefix.json) and
+[uninterrupted long proof](validation/m3-abi16-live-long.json) retain
+**257/257 states, 11 checkpoints, 128/128 original and Python surfaces**, and
+**18,401/18,401 states / 9,200/9,200 original surfaces**, respectively. There is
+no stop or observer failure in the 9,200-frame window. All prior prefix hashes
+match. All [21 prepared native binary inputs](validation/m3-abi16-input-regression.json)
+remain byte-identical to the ABI 1.5 build, including S0, masks, original expected
+state/surface hashes, assets and initial cache.
+
+Fresh [Test A answers](validation/m3-abi16-answers.json) retain **155,597/155,597**
+and six canonical byte round trips. All prior input, canonical, native log,
+expected-answer and actual-answer hashes are [unchanged](validation/m3-abi16-answer-regression.json).
+The six [state probes](validation/m3-abi16-correctness.json) also retain every
+prior frame hash: P1 501 frames / 1,002 whole-state phases; P2 601 / 1,202;
+P6 91 / 183; P3/P7 91 indicator-hash frames each; K1 12. P3/P6/P7 retain
+frame 220 phase 3 CAVE `0x426aff`; K1 retains frame 141 phase 2 viewport
+`0x415b77`. No requested phase beyond those stops is claimed.
+
+[Common checks](validation/m3-abi16-common.log.gz) pass **2,039 tests, 624
+optional skips, zero failures/errors**. `check.py` does not offer a macos domain
+selector; APP_BUILD supplies the consumer gate and the supported complete common
+suite was run. Only own queued correctness jobs were requeued before grant with
+50 ms polling to avoid starvation, using the unchanged shared helper/locks/slot
+limits; the [restart record](validation/m3-abi16-lease-poll-restart.json) preserves
+that distinction. Every executed macOS job remains below 20 minutes after grant.
+No original capture, pin or mask is changed. No main merge/push or acceptance.
+
+The three 75-second ordered UI runs are still queued for the unmodified exclusive
+heavy lease. This duration allows >=65 seconds with input enabled after the real
+128-frame prefix at nominal 20 Hz. No sustained UI result is claimed yet.
+
+## State at 2026-10-30 07:15
+
+Docs-only reconciliation at the MacBook pause; no build, gate or native run.
+
+- **Main** (app last integrated at `51715e2`, validated executable `04dea39`):
+  ABI 1.5 orders consumer, Rust Graphics 1.7, Python Graphics 1.9 oracles.
+  Play mode reaches 60 game frames/s and above in the no-input window (69.2
+  uncapped) with ~120 displayed fps; ordered play at 20 Hz gives 118.752
+  displayed fps. Test A answers 155,597/155,597; state half P1 501/501 frames
+  and 1,002/1,002 phases, P2 601/601 and 1,202/1,202, P3/P6/P7 91/91 (P6
+  183/183 phases reached), K1 12/12, all first differences null.
+- **This branch, awaiting integration:** `4dad27e`, `8de9b7e`, `b44fe80`,
+  `40c6295` (ABI 1.6 policies 0/1/2, original uncapped pacing default, gates
+  in the section above). The three 75-second ordered UI runs have not run.
+- **Parked, unvalidated:** `origin/wip/macos-abi16-0700` (`874a079`, the failed
+  first ordered attempts at AffText `0x459454` and the right-click
+  `event.type` fix; no gate rerun) and `origin/wip/macos-playable-0715`
+  (`d774d14`, only an empty corrected-run log). Neither is reviewed.
+  Uncommitted outputs of the corrected runs on a development build of
+  `874a079` were left untracked in this worktree
+  (`validation/m3-abi16-right-orders{20,60,-unlimited}*`, 06:57–06:59). As
+  written by the benchmark: 60 Hz passed (75 s, 60.01 game frames/s, 117.9
+  displayed fps, minimum 110, no stop); 20 Hz ran 75 s without a stop but is
+  marked failed (minimum one-second display 79); uncapped stopped at frame
+  10,801 on `Display monster count 0x0041591f` after ~141 game frames/s. They
+  are not committed, not gated and not claimed.
+- **Open stops:** engine CAVE `0x426aff` at frame 220 and viewport `0x415b77`
+  at frame 141 (Rust engine); renderer fatigue `0x410be4` and glyphs `0x459454`
+  (Rust renderer port); Test A beyond 220 and Test B (macOS, with the replay
+  on the original on the Mac mini).
+- **Next:** review `874a079`, rerun APP_BUILD and the ordered UI runs, then
+  integrate ABI 1.6; extend Test A when the engine passes 220; record Test B.
+
+The manual's [current state](../../docs/MACOS_PLAYABLE.md#current-state-2026-10-30-0715)
+holds the owner table and next steps.
+
+
+## Native recording smoke focus regression (2026-10-30)
+
+Implementation: `c5f1734f6a0fb517fd997862746c65c99f958f24`, on feature base
+`e553010` (merged main `00afd4b`). The coordinator's failing `8808d54` bundle
+reproduces `TypeError: undefined is not an object (evaluating 'down.frame')`.
+Its exported Missions script has no frames. A separate diagnostic build adds
+only native view receipt counters and reports **recording=true, hidden=false,
+appActive=false, windowKey=false, mouseCalls=0**. The visible-window and recording
+indicator checks did not establish input readiness: AppKit discarded the
+synthetic clicks while the application was inactive. Diagnostic logging or extra
+UI work changed timing and could conceal the failure. Timestamp-only and
+application-dispatch-only experiments still failed; neither is adopted.
+
+The smoke-only `recordNativeSmoke(body, live, deadline)` accepts the existing
+playback request dictionary and press/release stages. It runs on the AppKit main
+queue, requests activation and a key native window, then waits asynchronously
+for actual application/window focus. Its monotonic Double deadline is two
+seconds inside the unchanged 45-second checks budget. It requires the real
+Metal view as first responder before dispatching the unchanged NSEvents through
+NSWindow. Failure returns a named PT-BR error without dispatch. The native worker
+still stamps events with the next game frame; no wall-clock value enters a
+recording or the engine. Native input-barrier and WebView recording/export
+ordering are unchanged. An additional smoke assertion checks the actual active
+application, key window and Metal responder; every original click cadence,
+Ctrl-hold, state, surface, readback and timeout assertion remains.
+
+This is an AppKit smoke-fixture repair, with no new reconstructed behavior.
+Engine ABI 1.6, policies 0/1/2, original tables, references and masks are unchanged.
+Original identity remains RISING.EXE SHA256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`;
+recorded Windows messages still target WndProc `0x4181a1`. Supported engine and
+renderer domains and their named stops are unchanged. No parked WIP is adopted.
+
+The exact [APP_BUILD](validation/m3-smoke-focus-app-build.log) passes **112
+consumer tests / zero skips**, **27 native exercise checks** and **21
+inspection/live checks**. Architecture, relocated runtime/source/assets, source
+binding and strict deep signing pass. [Engine gate](validation/m3-smoke-focus-engine-gate.log.gz)
+passes **30 Rust tests, 63 Python tests plus 10 renderer children**, **75
+original-x86 comparisons / zero mismatches / zero skips**, C/Swift ABI layout and
+**128/128 Swift/Metal surfaces**. The engine source tree is unchanged from the
+pre-fix gate (`835d527e765fc0ebe6515016e1d7318bbebeff36`).
+
+Fresh [answer proof](validation/m3-smoke-focus-answers.json) reproduces every
+prior answer/provenance hash: **155,597/155,597**, six canonical round trips.
+The [prefix](validation/m3-smoke-focus-prefix.json) retains **257/257 states,
+11/11 checkpoints, 128/128 original and 128/128 Python surfaces**. The
+[uninterrupted long chain](validation/m3-smoke-focus-long.json) retains
+**18,401/18,401 states / 9,200/9,200 original surfaces**, no stop or observer
+failure. All prefix hashes and all [21 prepared native files](validation/m3-smoke-focus-input-regression.json)
+are unchanged.
+
+Every prior per-frame indicator hash and whole-state report is reproduced:
+
+| Probe | Frame hashes | Whole-state phases | First engine stop |
+|---|---:|---:|---|
+| [P1](validation/m3-smoke-focus-state-P1.json) | 501/501 | 1,002/1,002 | None |
+| [P2](validation/m3-smoke-focus-state-P2.json) | 601/601 | 1,202/1,202 | None |
+| [P3](validation/m3-smoke-focus-state-P3.json) | 91/91 | No published window | Frame220 phase3 CAVE `0x426aff` |
+| [P6](validation/m3-smoke-focus-state-P6.json) | 91/91 | 183/183 reached | Same CAVE stop |
+| [P7](validation/m3-smoke-focus-state-P7.json) | 91/91 | No published window | Same CAVE stop |
+| [K1](validation/m3-smoke-focus-state-K1.json) | 12/12 | No published window | Frame141 phase2 viewport `0x415b77` |
+
+Every first difference is null. These state proofs omit rendering after the real
+prefix; no requested continuation beyond the known stops is claimed.
+
+The [65-second no-order play run](validation/m3-smoke-focus-play60.json), at the
+60 game-fps cap under an exclusive lease, sustains **60.013 game frames/s**,
+zero audit counters/time, zero publication drops and 1,920,000 GPU pixels checked.
+This session's monitor reports **60 Hz**, so its **59.751 displayed fps /
+56 minimum full-second fps** is recorded separately from historical 120 Hz runs.
+An [unchanged pre-fix bundle](validation/m3-smoke-focus-baseline-app-play60.json)
+measures **60.013 game / 59.936 displayed fps**, minimum **57**, on the same
+60 Hz display, with the identical final GPU image. All bins, startup seconds,
+raw timings and both presentation rates are retained. The archived bundle's
+first launch was rejected before execution from its preserved directory without
+an `.app` suffix; an unchanged copy with that suffix passed strict deep codesign
+verification and supplied the comparison. No refresh setting or frame path was
+changed to obtain the measurements.
+
+The [delivery manifest](validation/m3-smoke-focus-delivery.json) binds current
+sources, runtime libraries, reports, real commands/lease events and diagnostics.
+The [diagnostic patch](validation/m3-smoke-focus-diagnostic.patch) is evidence-only,
+against `8808d54`; it is not applied to the delivered app. The
+[baseline failure](validation/m3-smoke-focus-baseline-failure.json) and
+[inactive-window diagnosis](validation/m3-smoke-focus-inactive-diagnosis.json)
+remain preserved. No parked run output is reused. Docs/evidence after `c5f1734`
+change no executable input. Only `feat/macos-playable` is pushed; no main merge,
+acceptance, new engine domain, ordered-UI claim or Test B work.
+
+## Main 6cdbc5a consumer rerun and selected-actor fatigue (2026-10-30)
+
+Runtime implementation/build: **afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0**,
+after a fast-forward merge of `origin/main` **6cdbc5a**. The app-owned C driver
+now explicitly accepts Rust Graphics **1.9** (`0x00010009`); ABI 1.6, copied
+buffers, generations, serial phase order, masks, inputs and failure publication
+remain unchanged. Swift/inspection version labels and the native ABI assertion
+follow that reviewed contract. No engine or research-front file is edited.
+
+Original identity remains intact RISING.EXE SHA256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+Test A still starts every world at S0 with the four immutable original tables,
+runs the real 128-frame prefix, and uses the app mapper and production C phase
+entry with audited persistent policy 2. Phase 2 consumes declared messages,
+cursor and signed key answers; phase 3 receives the same keys and no messages.
+The carried state/context is never replaced by a later oracle state. Frames require equal hashes of the owner's exact indicator fields and separately
+equal consumed inputs, orders and WndProc output flags; whole-state phases use
+the owner's published cumulative
+mask/block/register policy. Rendering after the prefix is excluded from Test A.
+A failed engine phase is a named dependency stop, not an equal phase.
+
+### Former frame 2,952 fatigue stop
+
+The new app-driver [bounded diagnostic](validation/m3-chain8-fatigue-diagnostic.json)
+reaches **4,500 completed frames**, including attempted render 2,952, without a
+stop. Its exact declared mouse events occur at 481/493/511; this is not a replay
+claim about the historical UI arrival times. It uses play policy 1 and the real
+advancing renderer, with no per-frame projection, proof observer or equality
+counter. Only boundary/stop projections are read for diagnosis.
+
+At completed frame 2,951, unit **12**, type **7**, owner **0**, state **7** stays
+selected (`+0xbd=1`) at original record address **0x474a8cf0**. The boundary has
+`u16(+4)=3`, `u16(+0x76)=4`, `u16(+0x74)=0`; frame 2,952 completes and the last
+word becomes 1. Both original-address 276-byte records and their SHA256 values
+are retained in the diagnostic. No consumer word is coerced, no draw is skipped,
+and no deselection or substitute image hides the boundary.
+
+This is the new renderer's explicit **type 5/7, word pair 3/4** extension in
+`motor/crates/rl-core/src/render_units.rs`, matching Graphics 1.9's committed
+`camadas_m3_api18.json` / `sobreposicoes_entrada_m3.validar_unidade`. It resolves
+this selected-builder boundary; it does not establish every fatigue pair or unit
+type. Other unsupported pairs keep the actual `AffInfoSelection 0x410be4` stop.
+The supported domain is owned by the engine/Graphics fronts, not broadened here.
+
+The app adds the separate `--orders-selected` benchmark option: the historical
+real AppKit selection/movement clicks at 8/8.2 seconds and pointer motion at
+8.5 seconds, keeping the actor selected. This workload does not use the newer
+benchmark's right-click/deselection gesture. The existing right-event fixture
+issue and other workloads are outside this task. Production input is unchanged.
+
+### Gates and preserved evidence
+
+Exact [APP_BUILD](validation/m3-chain8-app-build.log), run with
+`--development-ref HEAD --inputs-root "/Users/marcio/git/Rising Lands"
+--data-root "/Users/marcio/git/Rising Lands/local-data/macos-playable"`, passes
+**112 consumer tests / zero skips**, **27 native exercise checks**, and **21
+inspection/live checks**. The source/runtime/assets checks, ARM64 binaries and
+strict deep signing pass. Static Swift and the dynamically bound proof driver
+consume the same archived engine sources. No external engine override is used.
+
+The fresh [engine gate](validation/m3-chain8-engine-gate.log.gz) passes **30 Rust
+tests, 63 Python tests plus 10 renderer children**, **75 original-x86 comparisons /
+zero mismatches / zero skips**, C/Swift ABI checks and **128/128 Swift/Metal
+surfaces**. The player leaf subtest asserts **666/666 completed state comparisons**,
+zero mismatches/stops and **two declared adapter skips** (KeyTestRelease with a changing key stream and
+InitInputPlayer allocator setup, outside the fixed-key/already-loaded contract;
+separate from the
+75 fresh x86 comparisons, which have zero skips). The complete common gate
+passes **2,108 tests / 624 optional skips / zero failures or errors**. There is
+no `macos` selector in `scripts/check.py`; the requested selector's explicit
+usage error is preserved, and the supported complete suite supplies that gate.
+APP_BUILD separately supplies the app consumer/native UI gate.
+
+Fresh [prefix](validation/m3-chain8-prefix.json) and
+[uninterrupted long-chain](validation/m3-chain8-long.json) proofs retain
+**257/257 states, 11/11 checkpoints, 128/128 original and Python surfaces**, and
+**18,401/18,401 states / 9,200/9,200 original surfaces**, respectively. Both have
+null first stops and no observer failures. Proof wall times include auditing
+and are not play throughput.
+
+The first queued proof launch referenced the staging `.app`, which the successful
+builder moves into `dist/development/`. Those launch failures executed no state
+comparison; their logs and commands are preserved separately. The reruns use the
+delivered bundle. Two queued exclusive timing wrappers were stopped before grant
+so the remaining deterministic jobs could start, then requeued unchanged; the
+queue record distinguishes waiting from execution. All executed jobs use the
+unchanged shared lease helper and locks, with bounded native proof entry points.
+No other front's process or lease is modified.
+
+### Selected-actor UI result
+
+The actual [75-second ordered UI run](validation/m3-chain8-selected60.json)
+passes **4,501 completed frames**, with tags **1 and 5**, **five native human
+events**, observed next-frame gestures **482/494/512**, and null live/first stops.
+It sustains **60.009 game frames/s**, **59.942 displayed fps**, minimum full-second
+**58**, on the current **60 Hz** display. The actor stays selected; the
+[actual GPU readback](validation/m3-chain8-selected60.png) retains that visible
+selection. Play policy 1 has zero audit counts/time and zero publication drops;
+1,920,000 RGBA channel bytes are checked. This directly resolves the earlier
+2,952 failure for the historical selected-builder workload on the new engine.
+It does not claim a broader fatigue domain or fidelity beyond published original
+windows. All second bins and raw rates remain in the report.
+
+The separate [65-second no-order run](validation/m3-chain8-play60.json) also
+passes: **3,901 frames**, **60.013 game / 59.936 displayed fps**, minimum full
+second **57**, on the same 60 Hz monitor. Audits/time and publication drops are
+zero; GPU readback checks the same complete RGBA extent. This preserves the
+previous no-order play target. Neither display measurement is labeled 120 Hz.
+
+### Test A state half — new engine results
+
+| Probe | Frame hashes equal / compared | Whole-state phases equal / compared | First engine stop |
+|---|---:|---:|---|
+| [P1](validation/m3-chain8-state-P1.json.xz) | 501/501 | 1,002/1,002 | None in published window |
+| [P2](validation/m3-chain8-state-P2.json.xz) | 601/601 | 1,202/1,202 | None in published window |
+| [P3](validation/m3-chain8-state-P3.json.xz) | 3,001/3,001 | No published window | None in published window |
+| [P6](validation/m3-chain8-state-P6.json.xz) | 2,272/2,272 | 4,544/4,544 | None in published window |
+| [P7](validation/m3-chain8-state-P7.json.xz) | 3,572/3,572 | No published window | None in published window |
+| [K1](validation/m3-chain8-state-K1.json.xz) | 501/501 | No published window | None in published window |
+
+Every first difference and first engine stop is null. P3/P6/P7 now complete
+the original windows 129–3,129 / 129–2,400 / 129–3,700. K1 also completes all
+501 frames through 629; the former frame-141 viewport stop is resolved. No
+whole-state claim is added for P3/P7/K1 without a published window.
+
+Fresh [answers](validation/m3-chain8-answers.json) retain **155,597/155,597**
+with six canonical round trips. The [regression record](validation/m3-chain8-regression.json)
+checks every prior reached indicator hash and whole-state phase, both prefix
+row sequences, every answer/provenance field, and all **21 native binary inputs**:
+all are unchanged. The [correctness summary](validation/m3-chain8-correctness.json)
+keeps original evidence identities, requested/reached counts and actual stops.
+
+The [delivery manifest](validation/m3-chain8-delivery.json) binds the runtime,
+engine tree, reports, compressed raw hashes, commands and lease journal. Final
+docs/evidence/diagnostic-tool additions change no production runtime input after
+the validated build afbc0f0. Only `feat/macos-playable` is committed/pushed.
+No merge to main, acceptance, Test B or unrelated work is performed. Remaining
+dependencies include the broader renderer domain and human Test B replay on
+the original; full mission/campaign/audio are not claimed.
+
+## Recorded-session Test B pipeline (2026-10-30)
+
+The new `scripts/test_b_pipeline.py` accepts arbitrary actual
+`MacOSSessionRecorder` exports, validates them through the complete unchanged
+Missions validator, runs the production app C phase entry with audited policy
+2, wraps the unchanged Missions original runner with a read-only state observer,
+and reports every frame hash difference/missing frame. Input is Missions schema
+v1, start frame128, held signed key answers, ordered u32 message triples and
+800×600 cursor coordinates. App initialization remains S0 plus the original four
+static tables, then the actual 128-frame prefix; no later oracle-state reload.
+Mutation order is unchanged: render/prefix; phase2 declared messages/cursor/keys;
+phase3 same keys without messages; read-only state/order observations after each
+successful phase/frame. The input mapper independently checks actual consumed
+poll requests; WndProc flag stores remain engine/original outputs.
+
+Intact original SHA256 remains
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`;
+WndProc `0x4181a1`, SetPlayerOrdre `0x45ecd4`, ProcessInputGame `0x45edc0` and
+Missions' original input bindings are unchanged. The full-memory hash uses the
+published P6 cumulative exclusion mask verbatim; its source policy/hash and the
+indicator reader identity are carried in both manifests. Unknown allocations,
+changed layouts, unmasked display effects and engine stops are exposed, not
+replaced with defaults or newly excluded bytes. App recorded-input validation
+omits post-prefix rendering, as Test A does; the actual synthetic UI capture
+renders normally and keeps named renderer stops.
+
+The explicit CLI-only synthetic automation sends NSEvents through NSWindow to
+the real Metal view and uses the production WebView recorder/save path. It is
+never human acceptance evidence. Right-button handlers now use the AppKit
+right-event type rather than `buttonNumber`, which constructed NSEvents may
+report as zero. Other input semantics and click scheduling are unchanged.
+Three comparison tests check successful prefixes, all changed/missing frames,
+and refusal of mismatched identities/duplicate frames. Native build, synthetic
+UI, app replay and bounded original-prefix results follow after execution.
+
+The human recording procedure, feature/mini commands, hash scope and remaining
+acceptance requirements are in `docs/MACOS_PLAYABLE.md` under Test B. Only the
+macOS-owned paths change. No main merge or acceptance is performed.
+
+### Normal UI glyph stop and explicit diagnostic domain
+
+Fresh normal UI runtime `600c41a` reaches 140 completed frames and stops on
+attempted frame 141 at **AffText `0x459454`** after the pointer reaches the CAVE
+icon. Its exported recording/stop are retained. This does not originate in the
+recorder: the production Rust C ABI explicitly refuses glyph rendering. Fetched
+`origin/main` `65d9d50` has the same boundary. No engine/Graphics-owned source is
+changed and no partial production draw is treated as a full frame.
+
+The explicit `record --record-only` switch (`--test-b-record-only` on the app)
+selects the **existing Validar UI**, with real rendered no-input validation
+frames, actual NSEvents, serial recorder receipt, canonical export and native
+atomic save. Capture reports `capture_policy: record-only` and
+`orders_applied_in_capture: false`; no game state is coerced to match the gesture
+plan. The separate app replay must emit the six actual orders with the required
+CAVE/depot arguments through the production C phase entry. This is a synthetic
+plumbing diagnostic, not human-play acceptance. Normal `record` keeps its real
+play path, actual order-tag check, and the named renderer stop.
+
+**Cross-front contract request (engine/Graphics):** publish a committed render
+contract that renders the actual AffText request at `0x459454` in normal play,
+including the original font/flags, clipping, palette and saved-background
+semantics. Probe-only non-execution attestations cannot supply production
+glyphs. The app can then adopt that contract and rerun the normal capture and
+human procedure. Until then normal human Test B is blocked at frame 141.
+
+The original runner now imports the unchanged Missions module under its normal
+`entrada_roteirizada` identity, so its checkpoint scheduler class remains
+pickle-resolvable. The first `runpy` wrapper attempt stopped at frame133 during
+checkpoint serialization (five reached hashes equal); the corrected run
+completes 129..134 with **6/6 full masked state hashes and indicator hashes equal**.
+The failed setup/build attempt omitted `RISING_PYTHON_RUNTIME` and ran no build;
+the explicit-runtime reruns pass. These are setup/wrapper failures, not hidden
+logic comparisons or modified original evidence.
+
+### Fresh delivery evidence
+
+Runtime/build **c9bc5d79b048f579a2ee9323db955e7a3cf05086**; source base
+`40ecde4`. The [delivery package](validation/test-b/delivery.json) records actual
+commands, original identity, library/input/mask/source hashes, lease events,
+normal-UI failure, Validar capture and every prefix comparison.
+
+- APP_BUILD: **116 tests / zero skips**, **27 exercise** and **21 inspection/live**
+  checks pass, including architecture/signing/relocation/source binding.
+- Unchanged engine tree: `sh motor/validate.sh` passes; **75 fresh original-x86
+  comparisons, zero mismatches/skips**, plus the Swift C ABI/128 Metal surfaces.
+- Actual Validar UI: **3,572 captured frames after 128**, end frame3700, 80.6 s;
+  3,700 accepted surfaces, 257 prefix states and 11 checkpoints equal. Capture
+  is explicitly record-only. The canonical export's next-frame stop is 3701;
+  that additional quiet frame is validated by the app replay, not counted as
+  captured; the original prefix stops at350.
+- Export SHA256 **394364c4e57737cf35abd858aebc85809e125a6622661d944b7e2406c6636fe0**;
+  complete unchanged Missions validator and canonical round trip pass.
+- App validation replay: **3,573 frames, 129..3701, no stop**, 254.1 s after
+  initialization. Actual orders: select at 133; CAVE tag4/type3 at 153; lodge tag16
+  at 2073; move tag5 at 2421/2422/2423; Ctrl depot tag7/word4=2 at 3228; recruit
+  tag17 at 3700. All six coverage checks pass. No post-prefix rendering or later
+  oracle-state reload occurs in this explicit replay tool.
+- Original prefix: **129..350, 222/222 full mapped-state hashes under the
+  unchanged P6 cumulative mask equal**, also 222/222 indicator hashes equal;
+  divergence list **[]**. **171.5 seconds**, code unchanged, actual intact PE,
+  actual Missions checkpoints and standard outputs. It ran inside a normal
+  heavy lease with a 19-minute alarm. App and original both contain 25,197 game
+  blocks / 16,175,335 bytes per frame; excluded display bytes follow the published
+  policy, without new exclusions.
+- Corrected six-frame preflight: **6/6 equal**, original status completed. The
+  old wrapper's checkpoint PicklingError at 133 and missing-runtime setup stop
+  are preserved; neither is passed off as a state mismatch or successful run.
+
+Full original command/ETA and human steps are in `docs/MACOS_PLAYABLE.md`.
+Measured 0.773 s/frame projects **46 minutes** for one full original run; budget
+**45–60 minutes**, plus an optional fresh checkpoint (**196 s observed**).
+Full original frames 351..3701, actual human capture, and human Test B acceptance
+remain unrun. Normal Jogar still stops at frame 141 on the owned glyph dependency;
+this synthetic diagnostic is not a replacement for that missing production
+provider. No main merge or milestone acceptance is performed. Only the feature
+branch is pushed for coordinator review.

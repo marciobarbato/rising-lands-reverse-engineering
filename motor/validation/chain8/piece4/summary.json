@@ -1,0 +1,541 @@
+{
+  "abi": "1.6 unchanged",
+  "artifacts": {
+    "benchmark-M2.json": {
+      "compressed_sha256": "e36e5e577f3d30878f77ec3b20ab9b1da6af17f38ee0fb3afdd815172bc3b827",
+      "counts": {
+        "frames": 9200
+      },
+      "first_difference": null,
+      "path": "benchmark-M2.json.xz",
+      "raw_bytes": 2893,
+      "raw_sha256": "1fe6ce6ab85e0171cad24c18077d812162c114ebf6fd4bc172869d51dfde0bb5",
+      "skipped": 0
+    },
+    "benchmark-P3.json": {
+      "compressed_sha256": "985be535b5b184fe1c3983038f0eaa467219bf5476a1214b65f339509bff82b0",
+      "counts": {
+        "frames": 3001,
+        "logic_mean_ms": 0.2864127180939664,
+        "max_ms": 0.46754200000043156,
+        "p99_ms": 0.3170829999996627,
+        "requested": 3001
+      },
+      "first_difference": null,
+      "path": "benchmark-P3.json.xz",
+      "raw_bytes": 14834,
+      "raw_sha256": "3ebcc041a343b8f6b3e23478018b13cfe6c603691e3096c5ecc052d141d4836e",
+      "skipped": 0
+    },
+    "benchmark-P6.json": {
+      "compressed_sha256": "634f74eb9c565dd2b5823f7a8b1c5fde3b42e00c41dcfcb54373e068af2646fa",
+      "counts": {
+        "frames": 2272,
+        "logic_mean_ms": 0.2855736223591576,
+        "max_ms": 0.521541999999986,
+        "p99_ms": 0.3225000000002254,
+        "requested": 2272
+      },
+      "first_difference": null,
+      "path": "benchmark-P6.json.xz",
+      "raw_bytes": 14832,
+      "raw_sha256": "87b12de6262d59b4c871b457f9a5dc7c18f22a3a6d8db6ee5f5ea5430fad7079",
+      "skipped": 0
+    },
+    "benchmark-P7.json": {
+      "compressed_sha256": "f17ae229cc2fe01a796245aefe71d07e3f703cca244df3094a3e6f2df6e2b18c",
+      "counts": {
+        "frames": 3572,
+        "logic_mean_ms": 0.28390078219484716,
+        "max_ms": 0.5253750000000501,
+        "p99_ms": 0.3539580000002651,
+        "requested": 3572
+      },
+      "first_difference": null,
+      "path": "benchmark-P7.json.xz",
+      "raw_bytes": 14834,
+      "raw_sha256": "edd4e9d836041309b36511d9209a6577ec70ae0ad72a881129c3276bf31fa528",
+      "skipped": 0
+    },
+    "fatigue-terrain-minimap.json": {
+      "compressed_sha256": "15b5ca30779466120bd71886d2b83d7ce85cfde03e8543062dd1a701d1c4f299",
+      "counts": {
+        "cases": 306,
+        "equal": 306,
+        "seconds": 112.104764167
+      },
+      "first_difference": null,
+      "path": "fatigue-terrain-minimap.json.xz",
+      "raw_bytes": 195009,
+      "raw_sha256": "286742a4743f74fa482ab73a4da5ade817835cbc8494aee2e6e6045fedaf5c45",
+      "skipped": 0
+    },
+    "gate1.log": {
+      "compressed_sha256": "90f900d7bb2029dc6f3ed279aeacc8083080fd6831aa1137da9f4ced4996120f",
+      "path": "gate1.log.xz",
+      "raw_bytes": 19790,
+      "raw_sha256": "6da03b0b04a01962456d9daeeb407140f673aaebee8a28305277b2f402056483"
+    },
+    "gate2.log": {
+      "compressed_sha256": "4e5748b128fe4790a38d18e77eb9e0f2978cc9001e956412d9db517805d93bbb",
+      "path": "gate2.log.xz",
+      "raw_bytes": 18585,
+      "raw_sha256": "50578ac5a47c7445a5e23cc364fb30b7fc3eb0ca023207e60c5fde0262448a08"
+    },
+    "gate3.log": {
+      "compressed_sha256": "e930a0666ab43aa55a0f142d2df05eaac1707cdd26ca847998fce917cd0bd1ae",
+      "path": "gate3.log.xz",
+      "raw_bytes": 15987,
+      "raw_sha256": "4890489c12fde26885857825eafef0b9634b9172a39bedcdf466a92c27ca721e"
+    },
+    "hunger-sparse-dependencies.json": {
+      "compressed_sha256": "ffaeef900dd1f782765b8fdcf6e5ebf65fc9c5491956bce82296fd6a5dcbf298",
+      "counts": {
+        "cases": 229,
+        "equal": 12,
+        "seconds": 0.33348791599999994
+      },
+      "first_difference": {
+        "action": null,
+        "byte_differences": [
+          "0x474a8d80",
+          "0x474a8d81",
+          "0x47850d12",
+          "0x474a8d94",
+          "0x474a8d99",
+          "0x47940a24",
+          "0x47940a25",
+          "0x474a8d6c",
+          "0x474a8d6d"
+        ],
+        "bytes_compared": 58,
+        "case": null,
+        "compared_register_masks": {
+          "EAX": "0x0",
+          "EBP": "0x0",
+          "EBX": "0x0",
+          "ECX": "0x0",
+          "EDI": "0x0",
+          "EDX": "0x0",
+          "ESI": "0x0",
+          "ESP": "0xffffffff"
+        },
+        "counter": 1100,
+        "declared_dependency": false,
+        "equal": false,
+        "error": "UndeclaredAccess { address: 4813160, size: 2 }",
+        "frame": 1100,
+        "register_differences": {
+          "ESP": [
+            "0x0",
+            "0x2007e2c"
+          ]
+        },
+        "routine": "EnginNextEtape:19"
+      },
+      "path": "hunger-sparse-dependencies.json.xz",
+      "raw_bytes": 196032,
+      "raw_sha256": "fc615ff6a3e45561ce2b2db0194889e7b5e3f96ea2e988f67fa1c10dda0cb994",
+      "skipped": 2
+    },
+    "hunger-visibility-before.json": {
+      "compressed_sha256": "3185a62bb6bd4e7ef632d8bb375e0454c3669844f76f2e68124f22faaf0b4770",
+      "counts": {
+        "cases": 60,
+        "equal": 45,
+        "seconds": 24.068075459
+      },
+      "first_difference": {
+        "declared_writes": [
+          [
+            "0x508041",
+            "03"
+          ],
+          [
+            "0x474a8bde",
+            "13"
+          ],
+          [
+            "0x474a8c7c",
+            "0200"
+          ],
+          [
+            "0x474a8c9e",
+            "ffff"
+          ],
+          [
+            "0x474a8c5a",
+            "0b15"
+          ],
+          [
+            "0x474a8c62",
+            "0000"
+          ],
+          [
+            "0x474a8c5e",
+            "00"
+          ],
+          [
+            "0x4782150b",
+            "43"
+          ],
+          [
+            "0x4786150b",
+            "02"
+          ],
+          [
+            "0x4792250b",
+            "01"
+          ],
+          [
+            "0x474a8cd5",
+            "7f"
+          ],
+          [
+            "0x474a8ce0",
+            "00000000"
+          ]
+        ],
+        "differing_blocks": [
+          "0x474a8000"
+        ],
+        "discovery_byte": 1,
+        "equal": false,
+        "error": "",
+        "register_masks": {
+          "EAX": 0,
+          "EBP": 0,
+          "EBX": 0,
+          "ECX": 0,
+          "EDI": 0,
+          "EDX": 0,
+          "ESI": 0,
+          "ESP": 4294967295
+        },
+        "saved_state": 2,
+        "unit": 11,
+        "whole_game_memory_equal": false
+      },
+      "path": "hunger-visibility-before.json.xz",
+      "raw_bytes": 85171,
+      "raw_sha256": "345087f439cdf00f5ed5162dffe8e514d3e379e6e6175fb21641490577ad863c",
+      "skipped": 0
+    },
+    "hunger-visibility.json": {
+      "compressed_sha256": "f19ae3bab1fb301b2aa6e1e88003f280f0fb84f72a0e9763f473cf3f06518f56",
+      "counts": {
+        "cases": 60,
+        "equal": 60,
+        "seconds": 23.850578167000002
+      },
+      "first_difference": null,
+      "path": "hunger-visibility.json.xz",
+      "raw_bytes": 83791,
+      "raw_sha256": "c3b980ba87479a211b1965663e4ac9339b00fbc6d85bdff108caa364eb36c724",
+      "skipped": 0
+    },
+    "owner.log": {
+      "compressed_sha256": "67fcdc75f22f24d97c98d58b26b34141d7d38988679b63b69b2adabe67b0be34",
+      "path": "owner.log.xz",
+      "raw_bytes": 511,
+      "raw_sha256": "c1019b55b24b247bdb9c245e687b10a38ecda86f61d8ad862526bda4b31ddb22"
+    },
+    "production.json": {
+      "compressed_sha256": "09f4be6e67034400097ced34c2b7d49bd14f6564de3ef21f39999df7d92ed00a",
+      "counts": {
+        "cases": 209,
+        "equal": 209,
+        "seconds": 0.10392170799999989
+      },
+      "first_difference": null,
+      "path": "production.json.xz",
+      "raw_bytes": 144892,
+      "raw_sha256": "a8dc8cd23ad6a900f0df01be6982b0a2ec028e3b98f02c0e3adb10d205f4ba41",
+      "skipped": 6
+    },
+    "restoration.json": {
+      "compressed_sha256": "d0e10af728f56e31be2b163b173e8cd1a330b76e3e254b03f12a82a9c8d4b14b",
+      "counts": {
+        "cases": 87,
+        "equal": 87,
+        "seconds": 0.0765415840000001
+      },
+      "first_difference": null,
+      "path": "restoration.json.xz",
+      "raw_bytes": 78288,
+      "raw_sha256": "b30efc05d939123e8ea6ad7a6c942a312a66613a280aa8b235fa346f134e34f9",
+      "skipped": 5
+    },
+    "s1-a-diagnostic.json": {
+      "compressed_sha256": "f21564ca6ab6c748d62bd39655e7ddaafbda19477f45e7d57bf2b9812001be89",
+      "counts": {
+        "cases": 484,
+        "equal": 233,
+        "seconds": 185.65646929099998
+      },
+      "first_difference": {
+        "differing_blocks": [],
+        "equal": false,
+        "error": "Blocking unit index at 0x0042eba4",
+        "frame": 2250,
+        "label": "IsIndirectlyBlocking in situ from Chemin_Verouille+0x15f1 (frame 2604)",
+        "native_changed": 0,
+        "register_differences": {
+          "EAX": [
+            "0x0",
+            "0x101"
+          ],
+          "EBP": [
+            "0x0",
+            "0x1"
+          ],
+          "EBX": [
+            "0x0",
+            "0x1d092a"
+          ],
+          "ECX": [
+            "0x0",
+            "0x7"
+          ],
+          "EDI": [
+            "0x0",
+            "0x1"
+          ],
+          "EDX": [
+            "0x0",
+            "0x2"
+          ],
+          "ESI": [
+            "0x0",
+            "0x1d092a"
+          ],
+          "ESP": [
+            "0x0",
+            "0x2007eec"
+          ]
+        },
+        "routine": "IsIndirectlyBlocking",
+        "whole_game_memory_equal": true
+      },
+      "path": "s1-a-diagnostic.json.xz",
+      "raw_bytes": 293235,
+      "raw_sha256": "06f69345f563603e6a167b1239d2f2d476ffa2c6efde617264f31ad3b7c4dc3e",
+      "skipped": 0
+    },
+    "s1-a.json": {
+      "compressed_sha256": "93bc49e8060158ba5e547dc3d263ec0098f5971373568726a94b7e8686aaf7cc",
+      "counts": {
+        "cases": 484,
+        "equal": 484,
+        "seconds": 183.0523485
+      },
+      "first_difference": null,
+      "path": "s1-a.json.xz",
+      "raw_bytes": 198222,
+      "raw_sha256": "3876bb49094fe25775278670e6e1db81bca6eee93dbfe8ec156c2cad46b7443b",
+      "skipped": 0
+    },
+    "s1-b.json": {
+      "compressed_sha256": "470a0a7bf5e573b0092b595cb41f1d81f8e811179c162c473e7de838fc18224f",
+      "counts": {
+        "cases": 120,
+        "equal": 120,
+        "seconds": 45.032129875
+      },
+      "first_difference": null,
+      "path": "s1-b.json.xz",
+      "raw_bytes": 55322,
+      "raw_sha256": "ceadf7201586e8ac8185967fb818fdf59d30cea510f4b58327e422503ed7b3d6",
+      "skipped": 0
+    },
+    "s1-c-diagnostic.json": {
+      "compressed_sha256": "0ab472b140688602ffd725bf03bdd01250d026a0cc70714cd2b3e02adef462aa",
+      "counts": {
+        "cases": 121,
+        "equal": 107,
+        "seconds": 46.844229375000005
+      },
+      "first_difference": {
+        "declared_writes": [],
+        "differing_blocks": [],
+        "equal": false,
+        "error": "",
+        "frame": 12000,
+        "label": "BatimentGetCaseAdjacent in situ from CalculAttaqueEngin+0x1ce (frame 12164)",
+        "native_changed": 0,
+        "register_differences": {
+          "EDX": [
+            "0x5",
+            "0x3"
+          ]
+        },
+        "routine": "BatimentGetCaseAdjacent",
+        "whole_game_memory_equal": true
+      },
+      "path": "s1-c-diagnostic.json.xz",
+      "raw_bytes": 60397,
+      "raw_sha256": "56937144ab755077587c7c79eeb2fa20b59e7654175e6a91850f1ae43187db49",
+      "skipped": 10
+    },
+    "s1-c.json": {
+      "compressed_sha256": "373a82fc7f6c5a0ac4b5af7234e7e633972a9299e6c64ad5e89694489e2671f7",
+      "counts": {
+        "cases": 121,
+        "equal": 121,
+        "seconds": 43.462133416
+      },
+      "first_difference": null,
+      "path": "s1-c.json.xz",
+      "raw_bytes": 59269,
+      "raw_sha256": "eff11678061e2c3bc3c9c618ad3f76a5d9d16802e026ea85bdf56521bc318e4d",
+      "skipped": 10
+    },
+    "timing.log": {
+      "compressed_sha256": "8e34fb671d8c0d20e7894a8af1c3b861f2ef85f7c0a74e4d475e2d949a3a7d21",
+      "path": "timing.log.xz",
+      "raw_bytes": 1033,
+      "raw_sha256": "dd773c116e8274fb7706fbb0804800fc0864672c5643bbefa3121903d0f33741"
+    },
+    "turret.json": {
+      "compressed_sha256": "10f14c7b2e7d62bf7276b6c637adaa2e1d94a97a756385f2838b91e6b61fd53e",
+      "counts": {
+        "cases": 188,
+        "equal": 188,
+        "seconds": 38.353792542
+      },
+      "first_difference": null,
+      "path": "turret.json.xz",
+      "raw_bytes": 67767,
+      "raw_sha256": "9e49ae17d6980cc8c83e78727ffa3bc2236cc81ae8f3c62209ad42ccb5e74b38",
+      "skipped": 0
+    },
+    "visibility.log": {
+      "compressed_sha256": "d3298a1015524850ea559ec4d34623ee1dff030d1998e9a0f7236e08848fa0a3",
+      "path": "visibility.log.xz",
+      "raw_bytes": 2898,
+      "raw_sha256": "bd2618980129c2d9fc918bb3087943fe0825dcab67f7449ba56893ab1f421da3"
+    },
+    "work-sparse-dependencies.json": {
+      "compressed_sha256": "8d63cbb502c4fd40540dc834f5ec0ea8b8da55ff85cbb63b803f7c1ad11bb8e2",
+      "counts": {
+        "cases": 405,
+        "equal": 80,
+        "seconds": 0.36416899999999996
+      },
+      "first_difference": {
+        "action": null,
+        "byte_differences": [
+          "0x474a8d87",
+          "0x474a8d64",
+          "0x474a8d76",
+          "0x474a8d77"
+        ],
+        "bytes_compared": 39,
+        "case": null,
+        "compared_register_masks": {
+          "EAX": "0x0",
+          "EBP": "0xffffffff",
+          "EBX": "0xffffffff",
+          "ECX": "0xffffffff",
+          "EDI": "0xffffffff",
+          "EDX": "0xffffffff",
+          "ESI": "0xffffffff",
+          "ESP": "0xffffffff"
+        },
+        "counter": 50,
+        "declared_dependency": false,
+        "equal": false,
+        "error": "UndeclaredAccess { address: 5274996, size: 4 }",
+        "frame": 50,
+        "register_differences": {
+          "EBP": [
+            "0x0",
+            "0x64"
+          ],
+          "EBX": [
+            "0x0",
+            "0xcf0"
+          ],
+          "ECX": [
+            "0x0",
+            "0x474a8cf0"
+          ],
+          "EDI": [
+            "0x0",
+            "0xc"
+          ],
+          "EDX": [
+            "0x0",
+            "0xcf0"
+          ],
+          "ESI": [
+            "0x0",
+            "0x474a8cf0"
+          ],
+          "ESP": [
+            "0x0",
+            "0x2007e2c"
+          ]
+        },
+        "routine": "CalculWorkEngin"
+      },
+      "path": "work-sparse-dependencies.json.xz",
+      "raw_bytes": 446855,
+      "raw_sha256": "5ed4a9cebef52b6e8af49c8eaced620b0da973bbb15ae4d12823200cf61acc58",
+      "skipped": 0
+    }
+  },
+  "gaps": [
+    "Sparse work:80/405 equal,325 undeclared extra-input reads. Not a passing battery.",
+    "Sparse hunger:12/229 equal,217 undeclared extra-input reads;2 sound skips. Not a passing battery. Full-world fresh hunger60/60 supersedes the sparse input facade limitation for declared meal variants only.",
+    "Production6 and restoration5 original-declared sound-nonexecution cases skipped;S1c10 voice fixtures skipped. No stand-in callback.",
+    "S1 snapshots use explicitly declared register variants;not historical in-situ replays. Blocking search owner13 declared. Original callee stack writes and discarded typed scratch registers excluded explicitly.",
+    "Hunger visibility diagnostic45/60 exposed the0x10-vs0x1f query error;final60/60 fixes it.",
+    "S1a diagnostic used an invalid undeclared search owner;S1c diagnostic exposed EDX;both retained. S1a/b/c and turret raw reports predate the final sound correction;their exact hashes and bounds are retained."
+  ],
+  "gate": "gate3 passed fmt, strict Clippy,30 Rust/63 Python tests,666/666 input cases,75/75 pilot cases,C/Swift/Metal. gate1 rejected a changing source and an obsolete stop test; gate2 observed six newly implemented completions with every original byte exact. Explicit gate expectations then updated for these six addresses only.",
+  "m2_terminal_regression": {
+    "final_clock": {
+      "current": [
+        9201,
+        460050
+      ],
+      "equal": true,
+      "previous": [
+        9201,
+        460050
+      ]
+    },
+    "final_counter": {
+      "current": 9200,
+      "equal": true,
+      "previous": 9200
+    },
+    "final_generation": {
+      "current": 18402,
+      "equal": true,
+      "previous": 18402
+    },
+    "final_phase": {
+      "current": 3,
+      "equal": true,
+      "previous": 3
+    },
+    "final_state_sha256": {
+      "current": "4ef7471043dd66011d9ad68873ae1c27f8c84f32063bd359c9a23e4cb48dfd36",
+      "equal": true,
+      "previous": "4ef7471043dd66011d9ad68873ae1c27f8c84f32063bd359c9a23e4cb48dfd36"
+    },
+    "final_surface_sha256": {
+      "current": "8ce7ad456a1d94cefb7f880c94553a3d7ea7ffca8c4aaa303894f511116f10e3",
+      "equal": true,
+      "previous": "8ce7ad456a1d94cefb7f880c94553a3d7ea7ffca8c4aaa303894f511116f10e3"
+    }
+  },
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "reference_revision": "92fab50ccfa14271f6657fc0f6032b6b4b68dd4b",
+  "render_contract": "1.9 unchanged",
+  "schema": "rising-lands/rust-chain8-piece4/1",
+  "scope": "Native owner leaves and query variants plus prior-window regression. Full advancing P3/P6/P7 final-source proofs are a following verification piece; no new mission-completion claim here. Source/binary hashes in each raw report identify predecessor reports and the final build independently.",
+  "timing": "All four benchmarks executed under the shared machine coordination exclusive lease. Logic excludes initialization,rendering,audit/export/hashing and presentation. Scripted probes include ctypes input packing."
+}

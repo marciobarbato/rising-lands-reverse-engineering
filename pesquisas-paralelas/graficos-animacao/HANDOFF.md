@@ -1019,3 +1019,423 @@ guard now admits both construction types15/16 with the same explicit bounds. The
 has no stop in P3 or P6; P7 first stops at frame3217, view origin `(10,15)`, pending the independent origin matrix.
 Seven focused current-provider/native-evidence tests pass, zero skips, 6.336s (`validacao/cave-projeteis-focused.log`).
 The preceding full273-test gate and fresh128/128 HUD regression remain green; no pixel code changes.
+
+## Real S1 end-screen native preparation
+
+The initial late-checkpoint gap is resolved. A read-only local copy of Missions' native S1 frame17000 checkpoint
+was found in `worktrees/p2-s1-macbook`; its sequential input hash matches `fd56f69`, and its complete opening state
+matches the immutable S1 ledger at `54d148d`. `24f0ec8` commits the resulting original-only evidence before screen
+translation. See [S1_SCREEN_CAPTURE.md](S1_SCREEN_CAPTURE.md) for source identities, required inputs and reproduction.
+
+The original runs frames17001–17050 under the lease: **100/100 phase surfaces and50/50 whole states equal** the
+published S1 run. At actual entries, isolated native MenuInit/PartieGetResultat/AffObjectif calls then match their
+ordinary execution in full surface, whole state, raster arguments and text arguments: result12/12, objectives8/8,
+zero mismatches,71.216s. CPU/stack/native memory, DirectDraw pixels and declared host state are restored between the
+isolated and ordinary calls; no game-state write creates a victory, menu or cursor. Original executable/code hashes
+are unchanged. Text uses the existing declared non-execution boundary; opaque text pointers remain explicit stops.
+Only bounded render-state buffers and surfaces are exported, with full allocation metadata/hashes; complete native
+asset banks stay on original media. The optional full CRT-page input is explicitly unavailable, not defaulted.
+
+The full16922-frame S1 structure inventory contains only `(slot0,type2,mode4/5,owner0)` and
+`(slot1,type3,mode2,owner0xC8)` / `(slot1,type3,mode5,owner0/0xC8)`. No additional structure type/state is inferred.
+There are19 native S1 view origins. The gameplay renderer and pixel API remain1.9; menu0x13/0x11 composition stays
+`0x4176A8`. These native captures prepare a subsequent menu renderer and are not represented as Python screen proofs.
+
+## Interrupted-session recovery: CAVE and projectile dispatch
+
+The current feature branch retains the AffGame0x417698 CAVE guard, the native construction projectile15/16
+cycles (slot0/state1/phases0..15), and the existing at-most-one raid-effect31/32 guard at0x46FF70. Direct current
+provider checks pass for P6 between_frames221/245/1141, using its verified native shared prefix. No pixel code,
+input signature, callback order or contract1.9 version changed. The provider reads DGROUP and the declared
+projectile pool and returns no logic writes in this domain; unsupported state still raises the original address.
+
+The interrupted RestoreAll extension is grounded in the committed original24/24 pair matrix, with no DGROUP,
+CRT or allocation change and no AffBatiments call. Its view and projectile domains remain independent. The
+owned-empty AffGame CAVE matrix is8/8; the pair guard retains sanctuary modes4/5. Original executable identity
+remains6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb. The display-root return audit checks
+all four real root exits and agrees with the corrected writer/reader capture.
+
+Recovery initially found a stale source hash in `cave-dominio-atual.json` after the pending provider edit; the
+regenerated current report retains P3 3001/3001, P6 2272/2272, P7 3572/3572 structure-domain checks. These counts
+are guard coverage, not a new glyph-enabled full-chain proof. Focused current/native-evidence tests pass10/10.
+The initial full-suite failure and focused log are preserved. Glyph0x459454, unproved origins and S1 menu0x4176A8
+remain addressed stops. Delivery is feature-branch push only, with main integration reserved to the coordinator.
+
+### Fresh recovery verification
+
+Merged `origin/main` at `ad0a4a9` first. The recovered CAVE provider and its current-source report pass
+**10/10** focused tests against the unchanged native pair, projectile-cycle and scripted-input captures
+(`validacao/recovery-cave-focused.log`). The recovered S1 evidence tests pass **3/3**, retaining the
+12/12 result and 8/8 objectives native-call distinctions. The preserved 280-test gate log is historical;
+the newly requested domain gate and separate 24-call RestoreAll native rerun are queued behind the heavy
+lease and are not reported as completed here. No pixel implementation or callback signature changed.
+The completed native view inventory is documented in [the recovery ledger](RECOVERY_GRAPHICS_20261030.md).
+
+## Finite AffGame and RestoreAll view domain
+
+Original-only evidence `b1f07bf` precedes this translation. `origens_efeitos_monde01.json` enumerates exactly
+1920 captured origins for each routine: x0..39, y0..47. `ORIGENS_PROVADAS` and
+`ORIGENS_RESTOREALL_PROVADAS` now contain these finite sets. For an origin newly admitted by the matrix,
+the provider additionally requires native map words `(64,64)` at `0x497168/+2`, camera0 at `0x508041`,
+and mode0x12 at `0x4E2F78`. The previous 143/108 origin contracts retain their existing guards. There is
+no map-bounds fallback, clamping or default state. Outside the sets or these added bounds, the first
+stop remains `0x415B77`. Structure, habitation, monster/projectile and shake domains remain independent.
+
+Inputs are still immutable `u8/u16/u32` memory reads. Verification order remains shake → viewport →
+origin → (new origins only: map, camera, mode) → structures/habitation → monsters → projectiles;
+the existing flip/shake arithmetic follows. No callback or return-field change occurs. The unchanged
+original executable/code hashes and the exact two routines are recorded in the recovery ledger.
+
+Current-provider comparison: **3840/3840** native calls, zero logic/CRT/cursor-writer differences,
+`validacao/grade-vistas19-provider-final.json`. The seven actual P7 isolated origins also pass **7/7**,
+including `(10,15)`, with original whole-phase/state/surface equality, AI flag stores and leftover EAX
+checked separately against the unchanged display mask (`validacao/origens-p7-provider-final.json`).
+No other front's source hashes are pinned. Three new focused tests pass **3/3**, including rejection
+of uncaptured map/camera/mode and origins40/48. The regenerated current structure-domain scan retains
+P3 **3001/3001**, P6 **2272/2272**, P7 **3572/3572**, with **no full logic-provider stop** in those captures.
+This scan is not a completed pixel-chain proof; the fresh chained pixel replay and full domain gate
+remain queued under the lease at this checkpoint. Render API and gameplay pixels remain1.9.
+
+## S1 objectives and native font1 glyphs outside AffText
+
+`telas_objetivos_s1.compor_objetivos_s1(memoria, superficie, *, catalogo)` composes original
+`AffObjectif 0x47C6D3`, using the already committed real S1 frame17044–17050 calls (`24f0ec8`).
+It returns `pixels`, ordered raster `chamadas`, and ordered `(name,address,old_hex,new_hex)` clip
+`efeitos`; it never mutates input memory, pixels or the catalog. Memory provides u8/u16/u32 over
+DGROUP and the actual terminated strings addressed by the objectives pointer table. The loader
+and mission advancement remain Missions-owned. No text callback, lookup default or emulator is used.
+
+Supported page:800×600, camera-independent direct AffObjectif call, offset word0, last-line index36,
+language/multibyte words0/0, line-height word15, nonzero draw flag. A zero draw flag returns before
+all other reads, as in the original. Unknown pages/geometry/languages raise `DependenciaTextoBitmap`
+at0x47C6D3/0x4591C8; missing declared memory propagates its read error. In particular, an unreadable
+string pointer never becomes empty text. Inputs use original PT-BR bytes; the native next page is
+headed `- Missão 2 -`, preserved unchanged.
+
+Order: save four clip words → set inclusive(55,212,310,486) → fill palette42 → query/render18 lines
+→ restore the incoming clip. Width uses original font1 glyph dimensions and the lower-case-l
+advance for spaces. Horizontal centring is the original signed truncation and zero clamp. Each
+line uses `AffString 0x4591C8`, base bob0x23D5, with clipped glyph copies; NUL/newline terminates.
+`texto_bitmap_nativo` exposes the line compositor and width query independently, requiring explicit
+font/language/multibyte/clip inputs, bounded127-byte printable lines and signed16-bit positions.
+Other fonts, multibyte/control paths and AffText alignment remain dependencies in this first slice.
+
+Full current comparison: **7/7** complete800×600 objectives surfaces, **1519/1519** raster calls
+(1512 actual bitmap-glyph calls plus7 fills), and **7/7** full DGROUP projections equal the native
+captures. Inputs remain unchanged. Two regression tests pass2/2, including unknown-page/font and
+unreadable-pointer rejection. `validacao/s1-objetivos-provider-final.json` pins only owned sources
+and evidence. Original bytes/hashes are in `evidencias/s1-telas-intervalos.json`; the executable is
+the unchanged6c556520…8543fb oracle. This is an isolated screen compositor, not the full menu-mode
+dispatcher: MenuInit/LoadPie/AffText result/transition dependencies remain explicit, and gameplay
+render API remains1.9. Fresh native dependency observations and the domain gate are still leased
+queue items; the seven comparisons above replay immutable committed native captures.
+
+## S1 AffGame result/objectives phases
+
+`telas_fluxo_s1.compor_affgame_s1(memoria, superficie, *, catalogo, catalogo_menu=None,
+ramo_pesquisa_u16=None)` is a separate bounded screen API. Original AffGame mode0x13 immediately returns
+at0x417EF3..0x417F2F: it preserves the full input surface and returns no raster/clip effects without
+reading gameplay state, querying research or invoking any callback. This is an executed original return,
+not a missing renderer replaced with a no-op.
+
+Mode0x11 requires camera0, the caller's actual RechercheGetBranche result0, the captured animation
+phases1/2/3 of `[0x508F84]&15`, and the objectives domain above. The caller must supply the menu bank;
+absence raises0x418590, unresolved/other branches raise0x4717B1, and uncaptured phases raise0x417765.
+`BancoInventeS1` reads the original72-frame INVENTE.CMP using the existing read-only asset manifest.
+It has its own raw1-based IDs: bob2/3/4 at(397,484), unclipped, precedes the restored STRAT font bank
+and AffObjectif. No menu-bank fallback is installed. Other game modes remain0x4176A8.
+
+`validacao/s1-fluxo-telas-provider-final.json`: complete800×600 pixels and every raster argument match
+in **11/11** between-frames result phases(17033–17043) and **7/7** objectives phases(17044–17050), zero
+mismatches. Each of the three menu payload hashes and sizes equals its captured native allocation;
+using STRAT's same-numbered bob instead produces9752 wrong pixels on the first objectives phase and
+is rejected by the comparison. Two focused tests pass2/2, including no extra result-state reads and
+the missing-bank stop. Whole native MenuInit/PartieGetResultat/AffObjectif state equality remains
+the separately preserved12/12+8/8 native isolation proof; this pixel API does not reconstruct mission
+advance, research mutation, lock/flip bookkeeping or menu initialization.
+
+Original AffGame/SetBank/query intervals are appended in `evidencias/s1-fluxo-intervalos.json`.
+[The reference PNG](artefatos/s1-objetivos-prova.png) shows the exact benchmark surface under its
+declared absent LoadPie background; it is not a text/background-enabled retail screenshot. Mode0x13's
+initial MenuInit still needs LoadPie0x4799C4 and explicit handling of its opaque AffText pointer0.
+Full menu transitions, other branches/animation phases, and insertion into gameplay ABI1.9 remain open.
+
+The [AffText capture contract](GLYPH_PROVIDER_CAPTURE.md) declares the pending270-call prepared matrix and
+S1 dependency observer. Their syntax/import/CLI checks pass, but native calls have not yet acquired the
+lease at this source checkpoint. The source commit intentionally precedes these new evidence files.
+`validar_cadeia_exibicao_atual.py` also remains queued for a current-source P3/P6/P7 replay. Historical
+waiting-only logs are retained separately; they are not counted as completed validation.
+
+## Fresh leased RestoreAll reproduction
+
+The new original-x86 rerun passes **24/24** prepared sanctuary/CAVE pairs in **28.003s**.
+Every native row is identical to the immutable predecessor capture, including return value, surface,
+DGROUP, CRT, allocation changes and structure-call observations. No exception, skip or limit occurs.
+Fresh evidence is `evidencias/cave-restoreall-recovery.json.xz`; the byte-for-byte row comparison and
+both capture hashes are in `validacao/recovery-restoreall-reproduction.json`, with the complete lease
+log in `validacao/recovery-restoreall-native.log`. The original source and executable/code identities
+also match the predecessor. No frozen evidence is overwritten. The domain gate and P3/P6/P7 chain
+are now running under their own leases; AffText remains queued at this checkpoint.
+
+## State at 2026-10-30 07:15
+
+Documentation-only checkpoint written at the MacBook pause; no code, evidence or native run changed. The
+summary tables (API, coverage, stops with owners) are in [GRAPHICS.md, "Current state"](../../docs/GRAPHICS.md#current-state--2026-10-30-0715).
+
+- **On main** (through `ad0a4a9`): render API 1.9 (K1 501/501, P4/P5 3,001/3,001), the CAVE structure guard,
+  projectile types 15/16, the P4 frame-484 text verdict, the real S1 end-screen native capture (`24f0ec8`: 100/100
+  surfaces, 50/50 states, 12/12 + 8/8 isolated calls) and the P6 guard fixes the AI/runtime strict proof needs.
+- **On `feat/re-graphics`, awaiting integration** (`b1f07bf..bae1b18`, nine pushed commits): the sections above from
+  "Interrupted-session recovery" through "Fresh leased RestoreAll reproduction". Finite view matrix 3,840/3,840, P7
+  origins 7/7, RestoreAll pairs 24/24 (fresh rerun identical), S1 objectives 7/7 with 1,519/1,519 raster calls, S1
+  AffGame flow 11/11 + 7/7, all with 0 mismatches. `bae1b18` then captured the native AffText glyph matrix (270 calls,
+  54.0 s) and 20 isolated S1 dependency calls (69.7 s) under the lease; both are evidence only, not yet translated.
+- **Still open on the branch:** the current-source P3/P6/P7 chained pixel replay (`validar_cadeia_exibicao_atual.py`;
+  its committed log only shows the lease wait) and glyph-enabled AffText `0x459454`. The S1 transition still needs
+  MenuInit/LoadPie `0x4799C4` and opaque victory text; other game modes stay `0x4176A8`.
+- **Parked, unvalidated:** `origin/wip/re-graphics-codex-0430` (`2add6fc`, already recovered into the branch),
+  `origin/wip/re-graphics-codex-0700` (`e76b5f1`) and `origin/wip/re-graphics-0715` (`0c007c2`, a superset with tests),
+  both on `bae1b18`. They carry `texto_afftext_bitmap.py`, `telas_inicializacao_s1.py` and a P3/P6/P7 chain report.
+  Their self-reported 270/270, 2/2 and 3,001/2,272/3,572 results are not accepted: the final gate never completed.
+  Resume by reviewing `0c007c2`, rerunning its validators and the domain gate, then committing on this branch.
+- **Domain gate at this checkpoint:** `python3 -B scripts/check.py --domain graphics` on `bae1b18` merged with main
+  `3874fcc` (local merge `889cd39`): **287 tests, zero failures, PASS**, 165.6 s, documentation links OK. It replays
+  committed captures only; no native run. The log was not committed.
+- **Next:** coordinator integration of the nine commits, then the AffText provider and S1 MenuInit screens from the
+  committed captures, the chained replay, and a 1.9 hand-off to the Rust engine (which still renders Graphics 1.7).
+
+
+## Parked WIP recovery — 2026-10-30
+
+Recovery starts from integrated main `e41cc77`, without merging either WIP branch. Compared
+`e76b5f1` (`origin/wip/re-graphics-codex-0700`) and `0c007c2`
+(`origin/wip/re-graphics-0715`) against their base `bae1b18` and current main.
+The latter adds three test modules and an unfinished one-line gate log to the former.
+The glyph capture producer, CAVE domain/test corrections, finite origin matrix and P7
+origin evidence are already integrated and are retained byte-for-byte.
+
+Recovered `texto_afftext_bitmap.py` and its comparison/tests: explicit byte text,
+signed i16 rectangle coordinates, fonts 1..6, unsigned language/multibyte words 0/0,
+colour 0, clip flag 0/1, first NUL/newline-terminated printable line of at most 127 bytes.
+`planejar_texto_afftext` returns ordered original glyph calls and metrics;
+`compor_texto_afftext` returns new indexed 800×600 bytes and the plan;
+`TextoAffTextBitmap` implements the existing explicit `texto(request, surface)` callback.
+The caller supplies the actual inclusive unsigned-u16 clip words. Font pairs share the
+odd font's metrics; spaces advance by its `l` width; centring truncates signed halves
+toward zero. Glyph copies run in byte order, then the caller resumes drawing.
+There are no world writes, host fonts, hidden callbacks or text lookup defaults.
+Unknown modes, colour, controls, cursor overflow and unsafe unclipped writes stop at
+the addressed original dependency. An opaque message pointer is never empty text.
+
+Recovered `telas_inicializacao_s1.py` is a separate prepared drawing API for the two
+captured MenuInit transitions (owner/camera 0, 800×600, modes 0x12→0x13 and 0x13→0x11).
+Inputs explicitly include actual mission/message/research/colour query results;
+LoadPie executes first, research rectangles follow for mode 0x11, then AffText.
+Both callbacks must return a full surface and remain required. The validation adapters
+attest the recorded deliberate LoadPie/AffText non-execution against every argument
+and incoming surface. This is a drawing comparison, not a translated MenuInit or a
+text/background-enabled transition. Missing dependencies preserve an exact partial
+surface in `DependenciaInicializacaoS1`; mission/research mutation remains external.
+
+Native oracle identity remains `RISING.EXE`
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`, code
+`02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4`.
+AffText bytes/tables `0x4593DC..0x4598AF`, width query `0x458F2C..0x459143`,
+and dimensions `0x45ADD4..0x45ADF3` are preserved in the pre-translation
+`evidencias/glifos-afftext-nativos.json.xz`. No original evidence is overwritten.
+
+Discarded from recovery: both WIP gate logs (one incomplete), their stale documentation
+state/coverage claims, and their unverified comparison outputs as validation authority.
+The chain report is replayed afresh before delivery; glyph/MenuInit comparison reports
+are regenerated from the committed original captures. The WIP branches stay parked as
+historical sources and are never merged. No foreign implementation-file hash is pinned.
+
+
+Completed recovery validation: native glyph reproduction is **270/270** byte-identical
+rows in **54.870 s**, including full surfaces, every raster argument, stack balance,
+returns and unchanged game-memory observations. `recovery-native-glyph-reproduction.json`
+records both distinct capture hashes. Regenerated glyph/MenuInit comparisons are
+**270/270** + **2/2** (zero mismatches); all six focused recovered tests pass.
+The fresh current-source P3/P6/P7 chain is **3,001/3,001**, **2,272/2,272**,
+**3,572/3,572** complete surfaces, with matching raster arguments and display effects,
+no render/logic stop, and the strict recorded AffText boundary. This is a replay of
+committed native inputs, not a new original trajectory. Times are 415.497/56.144/172.872 s.
+Fresh S1 dependency reproduction is **20/20** identical isolated rows and **100/100**
+phase surfaces over **50/50** whole states (72.724 s native loop). Every phase and blob
+is identical to the pre-translation capture. The saved checks were additionally
+compared with the published S1 record after capture; all match. The two MenuInit
+surfaces also compare **2/2** on this fresh capture. See
+`validacao/recovery-native-s1-reproduction.json` and
+`validacao/recovery-native-menuinit-comparison.json`. No skip or native limit occurred.
+The full domain gate passes **293 tests**, no failures or skips, in **177.008 s**;
+documentation links pass. Log: `validacao/recovery-domain-gate.log`.
+This step is delivered on `feat/re-graphics` only; integration/acceptance remains with
+the coordinator.
+
+
+## P4 frame 484: explicit boundary classification — 2026-10-30
+
+`validar_fronteira_p4_graficos.py` classifies the existing native audit and executes
+both rendering contracts on the same native frame-484 entry surface/cache/state.
+Without `texto`, API 1.9 returns its exact `0x459454` partial-surface stop. With
+`FronteiraTextoGravada`, every text argument and the entire pre-text surface must
+match the captured native boundary before it returns the surface. The resulting
+800×600 pixels and all raster calls match frame 484 exactly (1/1).
+
+The native P4 oracle deliberately executes no body instruction in AffText or
+TextGetMessage: AffText retains EAX, TextGetMessage returns zero, and neither
+changes pixels. The overlapping read at `0x5099A6` is the mouse-position copy at
+`0x417CE2`; there is no read starting at `0x5099A4`. Thus P4 remains inside its
+declared boundary and needs no glyph provider. Enabling `TextoAffTextBitmap` is a
+separate explicitly requested rendering contract, proved by the 270-call original
+matrix; it is not silently substituted into a non-executed probe boundary.
+No world mutation, callback order, public API default or render version changes.
+The fresh native audit (`evidencias/p4-texto-484-recovery-20261030.json`) matches
+all historical observations byte-for-byte, excluding elapsed time: **356/356** frames
+with both phase surfaces and whole states equal, two boundary calls, zero body
+instructions, zero glyph/pointer-provider crossings; native loop 178.574 s.
+The fresh report is `validacao/p4-fronteira-provider-verdict.json`.
+The full gate passes **294 tests**, no failures or skips, **184.704 s**
+(`validacao/p4-boundary-domain-gate.log`). No additional provider is required by P4.
+
+
+## S1 order windows and render API 1.10 — 2026-10-30
+
+The input contract remains `renderizar_quadro(memoria, *, superficie_anterior,
+catalogo, paleta, habitado, relogio, cache, hud, texto)`. Minor version 1.10 adds
+originally observed S1 drawing branches; no caller argument is removed or default
+text boundary installed. Memory remains a read-only u8/u16/u32/`ler_mundo` view.
+The renderer returns new indexed bytes/RGBA, ordered drawing calls, display effects
+and the cache. No simulation/recruitment/mission state advances in these providers.
+
+`inventariar_janelas_s1_graficos.py` reads the immutable original S1 capture at
+`82ec5eaa98d4f212b650c2c8ce2b293a30fb50ef`. It unions every gameplay input record
+with 200 following frames, ending before the observed MenuInit(0x13) at 17032.
+The seven windows are 130–403, 1820–2383, 2400–2878, 3110–3508, 3730–4080,
+4170–4623 and 4820–5090: **2,792** required drawing phases. Every window's
+between-frame and frame-end surfaces are equal in the original record. The late
+confirmation at 17040/17041/17043 belongs to the separately captured result/objectives
+screen contract. The metadata tracks units 11..15 only; its unit list is explicitly
+partial. The new native captures retain all 800 unit records and all 1,000 structure
+records and produce the complete per-window census instead.
+
+All **19/19** origins anywhere in S1 are already inside both finite native AffGame
+and RestoreAll domains; no origin fallback or further camera rectangle is added.
+The new visible-state limits found and resolved from original inputs were:
+
+- 2014, `0x4022C8`: selected type-2 sanctuary in mode 4 during troop withdrawal.
+- 2014, `0x401D18`: the active sanctuary recruitment clock.
+- 2549, `0x4135FA`: shifted fatigue icon on newly recruited builder 4, state 2.
+- 2561 and 4788, `0x401A70`: progressively smaller sanctuary contents.
+- 2670, `0x412923`: a builder's selected depot marker, mode 2.
+- 3001/3177 and subsequent phases, `0x414A8A`: builder work tasks 3/4/5.
+- 4100, `0x4135FA`: the same shifted state-2 icon on newly recruited farmer 7.
+
+Selection/gauge drawing supports the observed owner/camera-0, full-health type-2
+sanctuary in modes 4/5, capacity 16, compact troop bags of counts 2..8; type-3 CAVE's
+previous domain stays intact. The old damaged 8-unit sanctuary path remains separate.
+The frame animation precedes the health fill and capacity-slot glyphs; no bag slot is
+invented. Builder state-5 tasks 3/4/5 follow the same original bag-dependent body
+branch as task 0 (`0x4151A0→0x4150AF`), including selection/depot overlays and the
+common tail. Mining tasks 1/2 retain their proved return. Depot mode 2 resolves the
+actual structure index at unit +0x80 and the already proved structure centre, then
+draws the resource and depot markers in original order. State-2 builders/farmers
+use the common fatigue-icon tail's shifted origin minus (8,11), with the actual u16
+words +4/+0x76, u16 +0x74, i8 shifts and original player-coloured bob.
+
+`cronometro_s1_graficos.compor_cronometro_s1` is the bounded AffChrono drawing path.
+It consumes owner/camera 0, structure type 2, mode 4/5; u8 active byte +0x74; u8
+requested unit kind +0x7B (5 or 7); u32 progress +0x8C; and the live unit-type u16
+duration at `0x4965AE + 50*kind`. The read-only Economy contract `CalculStatusRecrute`
+(`0x423F9D`) is floor(progress/duration), without saturation; the proved display
+strip requires percent 0..100. No Economy source or recruitment update is changed,
+and no foreign implementation-file hash is pinned. Zero duration, another target,
+uncaptured percentage, nonzero margin or unknown layout raises a named original
+stop instead of a numeric default. The i8 margin is the captured zero; minimap mode
+is 0/1. With mode 1 the original `0x46A1F8` returns the **minimap origin**, not the
+mouse position: its x selects the left/right screen edge for the clock.
+
+The active-clock callback/drawing order is existing minimap → actual
+`habitado(selected)` query → live progress/duration reads → clipped shadow bob
+`0x1E6C` → clipped clock bob `0x1E4B + floor(percent*32/100)` → existing zone-info
+and tooltip/cursor tail. The existing `habitado` argument and original shadow table
+are forwarded internally to the HUD; they are not substituted with empty callbacks.
+Direct HUD callers missing those active-clock dependencies stop at `0x41A5B8` or
+`0x45B796`. `texto` remains explicit and runs after the saved/framed/shaded tooltip
+background, before the cursor. Only local byte copies/effects are written; no callback
+is installed, no state read is silently defaulted, and no exception is suppressed.
+
+Original executable identity remains `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`,
+code hash `02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4`.
+`evidencias/s1-render-domain-intervals.json` adds intact original bytes for the contents/
+selection routines, AffChrono `0x401CC6..0x402094`, fatigue tail `0x413568..0x413656`,
+worker dispatch, marker switch and read-only percentage/duration queries. Historical
+bytes, releases, predecessor hashes and manifests are unchanged.
+
+Seven fresh leased original-only invocations capture **3,906/3,906** native frame
+instances (overlapping checkpoints are explicit), including complete state and both
+phase surfaces checked against the published S1 records. Every invocation completed
+within 20 minutes; none skipped, hit a budget or changed an original game routine.
+The observer has a 19-minute whole-invocation alarm and an earlier checkpoint budget.
+It resumes immutable native checkpoints, never live code from another worktree;
+opening state hashes are checked. The first three captures preceded the translations
+for their new cases. Later cases were likewise translated only after their native
+records existed. No normalized analysis executable is used.
+
+The original large new capture files/manifests are preserved unchanged in
+`.local/s1-native-archives/`. `empacotar_s1_graficos.py` creates transport parts by
+copying original rows and referenced zlib strings verbatim, verifies every part, and
+records the parent capture/manifest hashes and provenance in `*.partitions.json`.
+It refuses tracked inputs and overwrites. The committed set is enumerated in
+`validacao/s1-render-capture-set.json`. Consecutive transport parts carry Python
+surface, cache and saved-background outputs; overlapping independent captures are
+explicit and equal to the same published phases. Only the two previously proved DD
+pointer words are excluded from DGROUP effects, with no mask expansion.
+
+The source-frozen recovery proof remains at `validacao/cadeia-atual-P3P6P7.json`,
+bound to its own Graphics source revision `0cb6a4a`. The new current-source proof is
+`validacao/s1-regression-P3P6P7.json`; S1's final report is
+`validacao/s1-render-final.json`. Development stop diagnostics are local only and
+are not promoted to evidence. The final source-frozen proof passes **2,792/2,792** required surfaces across all
+seven windows and **3,906/3,906** captured frame instances, with **319,948** raster
+calls and **2,019** strictly checked text boundaries. No renderer/logic stop, pixel,
+argument or display-effect mismatch occurs. The current-source P3/P6/P7 regression
+passes **3,001/3,001**, **2,272/2,272**, **3,572/3,572** (423.400/54.300/170.544 s).
+The final full domain gate passes **298 tests**, zero failures or skips, in
+**192.738 s** (`validacao/s1-render-domain-gate.log`). Documentation links pass. The pass-2 S1 repository package was
+still absent on `origin/feat/re-missions` at the 15:41 BRT fetch; no missing package
+was treated as compared state. This render proof uses original native entry captures
+checked against the existing published S1 records instead.
+
+Review corrections are explicit: the first domain gate ran 297 tests and found one
+stale expected-stop assertion for builder marker mode 2, which is now native-proved.
+That negative case now uses unproved mode 3. Review also registered the clock's seven
+named HUD dependency stops and added missing-query/shadow, target, zero-duration,
+percentage, margin and minimap-layout regressions. The first gate output remains in
+`validacao/s1-render-domain-gate-pre-review.log`; intermediate comparison diagnostics
+remain local. The current-source whole-surface proofs are rerun after the stop-map
+correction rather than rewriting their source hashes. These corrections add no
+state mutation, blank callback or exception suppression.
+
+Scope/gaps: this is render API coverage of the seven M3.2 gameplay order windows,
+under Missions' explicitly recorded AffText/TextGetMessage boundary. It is not a
+whole-state Python simulation, a glyph-enabled retail trajectory, the full S1 raid/
+fire/death path, or mission acceptance. The bounded optional bitmap provider remains
+independently proved. General render modes other than 0x12 still stop at `0x4176A8`;
+the separate result/objectives APIs retain their own proofs. Actual MenuInit/LoadPie
+`0x4799C4` and opaque victory text, other maps/cameras/owners, fire and unproved
+unit/task variants remain addressed dependencies. Engine/macOS owners must consume
+or port the additive **Graphics 1.10** clock, bag/selection, marker and worker/icon
+coverage; this front does not modify their files or record acceptance.
+
+Exact Mac-mini reproduction commands and independent-checkpoint scope are in
+[S1_RENDER_WINDOWS.md](S1_RENDER_WINDOWS.md). Long runs remain the mini's job;
+feature integration remains the coordinator's job. No merge to main is performed.
+
+
+Resource note for the coordinator: this workstation had about 14 GiB free at entry
+and 13 GiB after capture, already below the repository's 20 GiB workspace floor.
+No other owner's files or original inputs were removed. The original new native
+archives and resumable checkpoints remain in ignored `.local/`; the published
+transport set is lossless. Workspace cleanup/offloading beyond Graphics ownership
+remains with maintenance. This did not cause a capture limit or skipped comparison.

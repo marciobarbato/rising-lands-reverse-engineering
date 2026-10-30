@@ -1,8 +1,32 @@
 {
+ "argument_masks": {
+  "EnginAddVie": {
+   "EAX": 65535,
+   "EDX": 65535
+  },
+  "EnginResetFatigue": {
+   "EAX": 65535
+  },
+  "EnginSetExperimente": {
+   "EAX": 65535,
+   "EDX": 65535
+  },
+  "EnginSetType": {
+   "EAX": 65535,
+   "EBX": 255,
+   "ECX": 255,
+   "EDX": 65535
+  },
+  "SetSortEngin": {
+   "EAX": 65535,
+   "EDX": 65535
+  }
+ },
  "capture": "pesquisas-paralelas/economia/evidencias/caverna-recrutamento/captura-caverna-recrutamento-exibicao.json.xz",
  "capture_raw_sha256": "431171cc0b618b039e0ffb43f40d15a6878c798cb40cccc857e530f88c642443",
  "compared": 342,
- "core_exit_provider": "d47c782fb100e4dc302e35765317fdd47d0986aa21f0b96c7d75628791bbed61",
+ "core_exit_provider": "dcefb04aed8fcc35d1aadaa44dd4b560b246b7238c46a0fb5c6ab9df979fa595",
+ "core_fatigue_provider": "fe7506392fc335ce39aaa97d1cbd2fa2474b9386e49dfcb59d8b82ec7bed531b",
  "counts": {
   "BatimentHabitable": {
    "error": 0,
@@ -1249,9 +1273,90 @@
    "action": null,
    "arg": "0x0",
    "changed_bytes": 133,
+   "conversion_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     },
+     "translation": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     }
+    }
+   ],
    "foreign_calls": 17,
    "frame": 297,
    "outcome": "match",
+   "recruitment_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType",
+     "translation": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f75",
+     "original": {
+      "EAX": 4,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie",
+     "translation": {
+      "EAX": 4,
+      "EDX": 1000
+     }
+    },
+    {
+     "call": "0x420f7c",
+     "original": {
+      "EAX": 4
+     },
+     "routine": "EnginResetFatigue",
+     "translation": {
+      "EAX": 4
+     }
+    },
+    {
+     "call": "0x420f85",
+     "original": {
+      "EAX": 4,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente",
+     "translation": {
+      "EAX": 4,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f8c",
+     "original": {
+      "EAX": 4,
+      "EDX": 3599
+     },
+     "routine": "SetSortEngin",
+     "translation": {
+      "EAX": 4,
+      "EDX": 3599
+     }
+    }
+   ],
    "routine": "CalculTroupe",
    "served_by_translation": {
     "CalculPosition": 1
@@ -1261,9 +1366,90 @@
    "action": null,
    "arg": "0x0",
    "changed_bytes": 133,
+   "conversion_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     },
+     "translation": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     }
+    }
+   ],
    "foreign_calls": 15,
    "frame": 297,
    "outcome": "match",
+   "recruitment_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType",
+     "translation": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f75",
+     "original": {
+      "EAX": 4,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie",
+     "translation": {
+      "EAX": 4,
+      "EDX": 1000
+     }
+    },
+    {
+     "call": "0x420f7c",
+     "original": {
+      "EAX": 4
+     },
+     "routine": "EnginResetFatigue",
+     "translation": {
+      "EAX": 4
+     }
+    },
+    {
+     "call": "0x420f85",
+     "original": {
+      "EAX": 4,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente",
+     "translation": {
+      "EAX": 4,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f8c",
+     "original": {
+      "EAX": 4,
+      "EDX": 3599
+     },
+     "routine": "SetSortEngin",
+     "translation": {
+      "EAX": 4,
+      "EDX": 3599
+     }
+    }
+   ],
    "routine": "SortieTroupe",
    "served_by_translation": {
     "CalculPosition": 1
@@ -2234,9 +2420,90 @@
    "action": null,
    "arg": "0x0",
    "changed_bytes": 133,
+   "conversion_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     },
+     "translation": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     }
+    }
+   ],
    "foreign_calls": 17,
    "frame": 869,
    "outcome": "match",
+   "recruitment_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType",
+     "translation": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f75",
+     "original": {
+      "EAX": 5,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie",
+     "translation": {
+      "EAX": 5,
+      "EDX": 1000
+     }
+    },
+    {
+     "call": "0x420f7c",
+     "original": {
+      "EAX": 5
+     },
+     "routine": "EnginResetFatigue",
+     "translation": {
+      "EAX": 5
+     }
+    },
+    {
+     "call": "0x420f85",
+     "original": {
+      "EAX": 5,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente",
+     "translation": {
+      "EAX": 5,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f8c",
+     "original": {
+      "EAX": 5,
+      "EDX": 3599
+     },
+     "routine": "SetSortEngin",
+     "translation": {
+      "EAX": 5,
+      "EDX": 3599
+     }
+    }
+   ],
    "routine": "CalculTroupe",
    "served_by_translation": {
     "CalculPosition": 1
@@ -2246,9 +2513,90 @@
    "action": null,
    "arg": "0x0",
    "changed_bytes": 133,
+   "conversion_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     },
+     "translation": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     }
+    }
+   ],
    "foreign_calls": 15,
    "frame": 869,
    "outcome": "match",
+   "recruitment_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType",
+     "translation": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f75",
+     "original": {
+      "EAX": 5,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie",
+     "translation": {
+      "EAX": 5,
+      "EDX": 1000
+     }
+    },
+    {
+     "call": "0x420f7c",
+     "original": {
+      "EAX": 5
+     },
+     "routine": "EnginResetFatigue",
+     "translation": {
+      "EAX": 5
+     }
+    },
+    {
+     "call": "0x420f85",
+     "original": {
+      "EAX": 5,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente",
+     "translation": {
+      "EAX": 5,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f8c",
+     "original": {
+      "EAX": 5,
+      "EDX": 3599
+     },
+     "routine": "SetSortEngin",
+     "translation": {
+      "EAX": 5,
+      "EDX": 3599
+     }
+    }
+   ],
    "routine": "SortieTroupe",
    "served_by_translation": {
     "CalculPosition": 1
@@ -3102,9 +3450,90 @@
    "action": null,
    "arg": "0x0",
    "changed_bytes": 133,
+   "conversion_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     },
+     "translation": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     }
+    }
+   ],
    "foreign_calls": 17,
    "frame": 1363,
    "outcome": "match",
+   "recruitment_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType",
+     "translation": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f75",
+     "original": {
+      "EAX": 6,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie",
+     "translation": {
+      "EAX": 6,
+      "EDX": 1000
+     }
+    },
+    {
+     "call": "0x420f7c",
+     "original": {
+      "EAX": 6
+     },
+     "routine": "EnginResetFatigue",
+     "translation": {
+      "EAX": 6
+     }
+    },
+    {
+     "call": "0x420f85",
+     "original": {
+      "EAX": 6,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente",
+     "translation": {
+      "EAX": 6,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f8c",
+     "original": {
+      "EAX": 6,
+      "EDX": 3599
+     },
+     "routine": "SetSortEngin",
+     "translation": {
+      "EAX": 6,
+      "EDX": 3599
+     }
+    }
+   ],
    "routine": "CalculTroupe",
    "served_by_translation": {
     "CalculPosition": 1
@@ -3114,9 +3543,90 @@
    "action": null,
    "arg": "0x0",
    "changed_bytes": 133,
+   "conversion_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     },
+     "translation": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     }
+    }
+   ],
    "foreign_calls": 15,
    "frame": 1363,
    "outcome": "match",
+   "recruitment_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType",
+     "translation": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f75",
+     "original": {
+      "EAX": 6,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie",
+     "translation": {
+      "EAX": 6,
+      "EDX": 1000
+     }
+    },
+    {
+     "call": "0x420f7c",
+     "original": {
+      "EAX": 6
+     },
+     "routine": "EnginResetFatigue",
+     "translation": {
+      "EAX": 6
+     }
+    },
+    {
+     "call": "0x420f85",
+     "original": {
+      "EAX": 6,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente",
+     "translation": {
+      "EAX": 6,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f8c",
+     "original": {
+      "EAX": 6,
+      "EDX": 3599
+     },
+     "routine": "SetSortEngin",
+     "translation": {
+      "EAX": 6,
+      "EDX": 3599
+     }
+    }
+   ],
    "routine": "SortieTroupe",
    "served_by_translation": {
     "CalculPosition": 1
@@ -3212,10 +3722,10 @@
   }
  ],
  "schema": "rising-lands/economy-cave-recruitment-validation/1",
- "seconds": 662.156,
+ "seconds": 596.974,
  "served_by_translation": {
   "CalculPosition": 6,
   "RechercheDecalageSortie": 7
  },
- "translation": "9d735d40292e4bce247fe4dffb46297a7d923c738cdad0b5e1b0aef3ce0145ba"
+ "translation": "4bd10420c1c02c3e149ba83b8de44daf95cf49b19f4373f96a55b62e487bd246"
 }

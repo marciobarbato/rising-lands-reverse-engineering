@@ -1,0 +1,20 @@
+from pathlib import Path
+import os,subprocess,sys,time
+root=Path('/Users/marcio/git/Rising Lands/worktrees/macos-playable')
+os.chdir(root)
+env=dict(os.environ,RISING_PYTHON_RUNTIME='/Users/marcio/git/Rising Lands/local-data/macos-preview/dependencies/python')
+pipe='apps/macos-preview/scripts/test_b_pipeline.py'
+app='/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app'
+steps=[
+ ('validation-build',['python3','-B','compilar-jogável','--development-ref','HEAD','--inputs-root','/Users/marcio/git/Rising Lands','--data-root','/Users/marcio/git/Rising Lands/local-data/macos-playable']),
+ ('validation-ui',['python3','-B',pipe,'record','--app',app,'--record-only','--output','.local/test-b/validation-ui.json']),
+ ('saved-input',['python3','-B',pipe,'validate','--input','.local/test-b/validation-ui.input.json']),
+ ('validation-app-replay',['python3','-B',pipe,'app','--input','.local/test-b/validation-ui.input.json','--bundle',app+'/Contents/Resources/preview','--output','.local/test-b/validation-app']),
+ ('validation-original-prefix',['python3','-B',pipe,'original','--input','.local/test-b/validation-ui.input.json','--inicio','.local/test-b/quadro128','--ate','350','--minutes','19','--output','.local/test-b/validation-original-prefix']),
+ ('validation-comparison',['python3','-B',pipe,'compare','--app','.local/test-b/validation-app','--original','.local/test-b/validation-original-prefix','--output','.local/test-b/validation-comparison-prefix.json'])]
+for name,cmd in steps:
+ started=time.monotonic();print('START',name,flush=True)
+ with open('.local/test-b-'+name+'.log','w') as f:
+  result=subprocess.run(cmd,env=env,stdout=f,stderr=subprocess.STDOUT)
+ print('END',name,'code',result.returncode,'seconds',round(time.monotonic()-started,3),flush=True)
+ if result.returncode:sys.exit(result.returncode)

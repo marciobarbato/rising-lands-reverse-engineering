@@ -1,0 +1,23 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "motor/testes/chain_leaf_proof.py",
+    "--capture",
+    "evidencias/visao-grupos/captura-visao-grupos-exibicao.json.xz",
+    "--routine",
+    "BatimentIllumine",
+    "--routine",
+    "BatimentDecouvre",
+    "--routine",
+    "IllumineCase",
+    "--routine",
+    "EteintCase",
+    "--routine",
+    "DecouvreCase",
+    "--output",
+    ".local/chain5/vision9.json"
+  ],
+  "seconds": 1.699196958,
+  "returncode": 0
+}

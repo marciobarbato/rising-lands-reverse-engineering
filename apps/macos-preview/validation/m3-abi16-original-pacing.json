@@ -1,0 +1,216 @@
+{
+  "schema": "rising-lands/macos-original-pacing-static/1",
+  "original_path": "/Users/marcio/git/Rising Lands/local-data/originals/cd/INSTALHD/RISING.EXE",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "scope": "Intact executable static instructions and all executable-section timer-import/thunk xrefs; not a wall-clock measurement",
+  "disassembler": "5.0.7",
+  "pefile": "2024.8.26",
+  "ranges": [
+    {
+      "name": "WinMain",
+      "start": "0x460170",
+      "end": "0x460277",
+      "sha256": "52e6f613ebbf95d670feec7c1537396b2ecf37bf15bef66e4cdda7c2da836822"
+    },
+    {
+      "name": "game_iteration",
+      "start": "0x47500e",
+      "end": "0x47509d",
+      "sha256": "4e0b8e1449e16cf7d855ab9bf92cd6b8ec32443e92cf6e17134ef64329c09789"
+    },
+    {
+      "name": "CalculFrame",
+      "start": "0x43f710",
+      "end": "0x43f7af",
+      "sha256": "ec7f8002a5ddc8d1c37e81f3929081c34666ca8b048aa5de43b219dba968a592"
+    },
+    {
+      "name": "draw_divisor",
+      "start": "0x4178f7",
+      "end": "0x41793c",
+      "sha256": "27b5f7b36c89f3cc6bc89a51d294a118baad153ca498380eb445d20f5005b9f1"
+    },
+    {
+      "name": "DDFlipPage",
+      "start": "0x43f14f",
+      "end": "0x43f31c",
+      "sha256": "ca181d5652c84f961ca8bd94da04560245effda3cb3c885ebed2ecf5ee5380f9"
+    },
+    {
+      "name": "GameNextFrame",
+      "start": "0x45d015",
+      "end": "0x45d01c",
+      "sha256": "a9e9abc6aa5e3a8171c47631c0530c44755094adfe04ce4518a7dd8b633cc869"
+    },
+    {
+      "name": "OpenFli_timer",
+      "start": "0x45a692",
+      "end": "0x45a6b1",
+      "sha256": "19a78c570fc4ea46dc3fb9ab10a5078ac1bff652f2ebdc719f6c77259f70deff"
+    },
+    {
+      "name": "ReadFli_timer",
+      "start": "0x45aac6",
+      "end": "0x45aaeb",
+      "sha256": "6320b5a6ac8369dd96e28142d9f886ef796b5d7f11084ca0c19d60d91233893b"
+    },
+    {
+      "name": "GetNextNbFrameEllapsedFli",
+      "start": "0x45abb1",
+      "end": "0x45abce",
+      "sha256": "17c06c361d20abda446f2e23b708583b1d68e048844fa585f8112803f9547ba0"
+    },
+    {
+      "name": "network_input_timer",
+      "start": "0x45ea7c",
+      "end": "0x45eabf",
+      "sha256": "7c01bc3c56a3653ba4cfb6006a003f6b41da396142b410b6bc61209ecfd9697e"
+    },
+    {
+      "name": "MCICD_deadline",
+      "start": "0x467a34",
+      "end": "0x467a4d",
+      "sha256": "589b10e4d54117c908b78a4e24d6a2a49088a78a69180041490c4f9dc4e08daa"
+    },
+    {
+      "name": "MCICD_Manage_timer",
+      "start": "0x467bf0",
+      "end": "0x467c33",
+      "sha256": "90d19c30883dcbf40908f68e4f95cbb67fe810bb18349c83c118c604b9c58058"
+    },
+    {
+      "name": "iaRandom_seed",
+      "start": "0x489775",
+      "end": "0x4897a4",
+      "sha256": "450590c6bfa735376cd5dc76d55b8449fb041139daf6acd63ec30726ede0ae01"
+    },
+    {
+      "name": "CRT_semaphore",
+      "start": "0x490d41",
+      "end": "0x490d9e",
+      "sha256": "820a2f4319560c6200df02199f738e466e1bcd5ef7b8ae1b1c07682b1696e979"
+    },
+    {
+      "name": "CRT_thread_join",
+      "start": "0x4936a7",
+      "end": "0x4936c9",
+      "sha256": "b3cad901a1838e5fe8e454e0795f1a39619e9eefb1beadf4f59eb262f554dad0"
+    }
+  ],
+  "timer_imports": {
+    "0x5231b8": "GetTickCount",
+    "0x5232e4": "WaitMessage",
+    "0x523444": "WaitForSingleObject",
+    "0x5234a4": "timeGetTime"
+  },
+  "timer_sites": [
+    {
+      "address": "0x0043f71a",
+      "bytes": "2eff15b8315200",
+      "instruction": "call dword ptr cs:[0x5231b8]",
+      "api": "GetTickCount"
+    },
+    {
+      "address": "0x00460214",
+      "bytes": "2eff15e4325200",
+      "instruction": "call dword ptr cs:[0x5232e4]",
+      "api": "WaitMessage"
+    },
+    {
+      "address": "0x0049381a",
+      "bytes": "ff25e4325200",
+      "instruction": "jmp dword ptr [0x5232e4]",
+      "api": "WaitMessage"
+    },
+    {
+      "address": "0x0049389e",
+      "bytes": "ff25b8315200",
+      "instruction": "jmp dword ptr [0x5231b8]",
+      "api": "GetTickCount"
+    },
+    {
+      "address": "0x0049395e",
+      "bytes": "ff2544345200",
+      "instruction": "jmp dword ptr [0x523444]",
+      "api": "WaitForSingleObject"
+    },
+    {
+      "address": "0x00493a24",
+      "bytes": "ff25a4345200",
+      "instruction": "jmp dword ptr [0x5234a4]",
+      "api": "timeGetTime"
+    },
+    {
+      "address": "0x0045a6a2",
+      "bytes": "e87d930300",
+      "instruction": "call 0x493a24",
+      "api": "timeGetTime"
+    },
+    {
+      "address": "0x0045aacf",
+      "bytes": "e8508f0300",
+      "instruction": "call 0x493a24",
+      "api": "timeGetTime"
+    },
+    {
+      "address": "0x0045abb6",
+      "bytes": "e8698e0300",
+      "instruction": "call 0x493a24",
+      "api": "timeGetTime"
+    },
+    {
+      "address": "0x0045ea96",
+      "bytes": "e8894f0300",
+      "instruction": "call 0x493a24",
+      "api": "timeGetTime"
+    },
+    {
+      "address": "0x00467a3f",
+      "bytes": "e8e0bf0200",
+      "instruction": "call 0x493a24",
+      "api": "timeGetTime"
+    },
+    {
+      "address": "0x00467c10",
+      "bytes": "e80fbe0200",
+      "instruction": "call 0x493a24",
+      "api": "timeGetTime"
+    },
+    {
+      "address": "0x00489789",
+      "bytes": "e896a20000",
+      "instruction": "call 0x493a24",
+      "api": "timeGetTime"
+    },
+    {
+      "address": "0x00490d8d",
+      "bytes": "e8cc2b0000",
+      "instruction": "call 0x49395e",
+      "api": "WaitForSingleObject"
+    },
+    {
+      "address": "0x004936ae",
+      "bytes": "e8ab020000",
+      "instruction": "call 0x49395e",
+      "api": "WaitForSingleObject"
+    }
+  ],
+  "anchors": {
+    "0x46020d": "e8fc4d0100",
+    "0x47505e": "e80578fbff",
+    "0x475063": "e83026faff",
+    "0x43f71a": "2eff15b8315200",
+    "0x43f730": "81fae8030000",
+    "0x45d015": "ff05406d4900",
+    "0x43f220": "6a10",
+    "0x43f244": "ff521c"
+  },
+  "finding": "Active idle loop advances one CalculGame per iteration, without a recovered fixed-Hz timer gate. GetTickCount counts display iterations per >=1000 ms; draw divisor does not divide logic.",
+  "presentation": "DDFlipPage calls surface vtable +0x1c (BltFast), flags 0x10 (DDBLTFAST_WAIT), retrying still-drawing; no fixed-Hz or vertical-blank wait in this routine.",
+  "default_policy": "Original active-loop policy: uncapped. Host 20/60 Hz remain explicit optional caps; virtual TickClock stays 20 to preserve audited states.",
+  "gaps": [
+    "No historical Windows/hardware wall-clock FPS measurement; CPU/driver/message/workload dependent.",
+    "No claim that native Apple Silicon throughput equals the wall-clock pace on a 1997 machine.",
+    "Static import scan cannot bound external DirectDraw/driver latency or runtime-loaded components."
+  ]
+}

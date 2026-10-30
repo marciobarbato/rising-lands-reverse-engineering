@@ -41,6 +41,9 @@ class MacOSBundleTests(unittest.TestCase):
             RisingLandsSourceCommit='fixture', CFBundleDisplayName='RisingLands-ptbr')))
         (self.payload / 'assets').mkdir()
         (self.payload / 'assets/fontes.json').write_text(json.dumps(dict(commit='fixture', outputs=[])))
+        # Explicit soundless audio payload; verify() re-hashes every listed file.
+        (self.payload / 'audio').mkdir()
+        (self.payload / 'audio/manifest.json').write_text(json.dumps(dict(files={}, audio=dict(status='absent'))))
 
     def verify_sources(self):
         # Only the unrelated game-runtime navigation subprocess is substituted.
@@ -69,6 +72,12 @@ class MacOSBundleTests(unittest.TestCase):
         self.assertTrue((self.payload / 'playable_session.py').is_file())
         self.assertFalse((self.payload / 'native/main.swift').exists())
         self.assertEqual(self.verify_sources()['commit'], 'fixture')
+
+    def test_real_verifier_detects_modified_audio_payload(self):
+        (self.payload / 'audio/A.HED').write_bytes(b'ABCD')
+        (self.payload / 'audio/manifest.json').write_text(json.dumps(dict(files={'A.HED': '0' * 64}, audio=dict(status='absent'))))
+        with self.assertRaises(AssertionError):
+            self.verify_sources()
 
     def test_real_verifier_detects_original_missing_consumer_regression(self):
         (self.payload / 'macos_state_consumer.py').unlink()

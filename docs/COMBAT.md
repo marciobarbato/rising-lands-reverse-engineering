@@ -2,6 +2,72 @@
 
 Owner: combat. Source and tests live in `pesquisas-paralelas/combate/`. Shared damage, reload, movement, and task primitives remain in `ferramentas/`; changes there belong to core and require a contract handoff.
 
+## Current state (2026-10-30 07:15)
+
+All Combat deliveries below are on `main` (the last Combat merge is
+`a174a78`, followed by `1430883` for the runner; main at the 07:00 pause is
+`3874fcc`). `feat/re-combat` carries no unintegrated code, and Combat has no
+parked `wip/*` branch. Sections further down are newest first; earlier
+sections keep their historical wording.
+
+**Public providers.** Both bind the caller's live `MemoriaQuadro` buffers
+after `ambiente_combate_raid`. They write nothing at construction, and they
+take and return the seven registers EAX/EBX/ECX/EDX/ESI/EDI/EBP exactly.
+An omitted input raises `ArgumentoNaoPassado` before any effect.
+
+| Provider object | Named providers | Consumers on main |
+|---|---|---|
+| `luta_fatal_viva_combate.LutaFatalViva` | `iagUnitSendMessage`, `MAJSympathie`, `PlayerResetAllie`, `PlayerAAttaqueSet`, `MessageBoxSet`, `KERNEL32.GetPrivateProfileStringA`, `EnginSetLevelExperience`, `SetDyingEngin`, `EnginNextEtape`(`:state4`), `RetireEngin`, `CalculEnginNextEtape`, `EnginInfligeDegat`, `InfligeDegat`, `ChercheBatimentProximiteCaveOuSanctuaire` | Core reuses the refuge provider for its S1 gap (`ferramentas/provedores_lacunas_core.py`, [STATE_QUERIES](core/STATE_QUERIES.md)) |
+| `ordens_torres_combate.OrdensTorresCombate` | `BatimentPeutAttaquer`, `BatimentInitAttaqueSelect` (tag 14) | AI/runtime's input chain (`provedores_entrada_ia.py`), built at first use; Economy's `BonusUnidades` is read at the first bonus query |
+
+The typed APIs (`AtaqueVivo`, `ConsumidorDanoUnidade`, `ImpactoUnidades`,
+`MaquinaProjeteis` and the damage modes 1/3/4/8/9) keep the domains described
+in their own sections.
+
+**Validated coverage, all with 0 mismatches against intact RISING.EXE**
+(SHA-256 `6c556520…8543fb`):
+
+| Delivery | Original cases | Native differential |
+|---|---:|---|
+| M4 fight, death, corpse and recount (`608ac91`, `8e34403` → `072481d`) | 1,186 | 1,186/1,186, all seven registers and every checkpoint byte |
+| M3 turret queries/setter (`40e05dc` → `1be4209`) | 188 | 148 + 40, all ten fields (registers, ESP, EIP, EFLAGS) |
+| M4 raid contact boundary (`aa82d33`) | 2 | 2/2 isolated entries |
+| Live raid attack and sanctuary damage (`7c78183`, 2026-10-29) | 174 | 174/174 equal under strict whole-memory and guarded-suffix comparison (returns plus named stops) |
+| AI/runtime's input-order differential with Combat's providers (`3347a50`) | 124 compared | 117 equal, 0 mismatches; tag 14 now equal |
+
+The domain gate passed 301 tests with 155 optional native skips at the
+runner follow-up (`1430883`).
+
+**What the original runs established.** S1 wins MONDE01 on the original
+(`82ec5ea`). D1 loses it (`bab6c7c`): the player unit count `0x4e1a3a`
+reaches 0 at frame 15,555, `PartieGetResultat` returns 0 at 15,655 and the
+failure branch runs. Only combat deaths lower that count. This matches the
+recount rule published here: death never subtracts counters, and the count
+drops at the next `CalculEnginNextEtape` phase. The mission-end latch
+`0x4e1d84` belongs to Missions.
+
+**Open stops and owners.**
+
+| Stop | Owner | State |
+|---|---|---|
+| S1 fatal windows 11000–12250 | coordinator / Mac mini | Queued after pass-2 S1 and D1 packaging. Command: `executar_janelas_fatais_combate.py S1 --intervals 11000-12250`. Results push to `runs/combat/fatal-s1`. |
+| D1 fatal windows 11250–11750 and 15250–15700 (optional 12250–13750) | coordinator / Mac mini | Queued. Command: `... D1 --intervals 11250-11750 15250-15700`. Results push to `runs/combat/fatal-d1`. Runbook: [FATAL_MAC_MINI_RUNS](../pesquisas-paralelas/combate/FATAL_MAC_MINI_RUNS.md). |
+| S1 live-state comparison of the first fight (from frame 11663) | Combat, from the fatal windows | The historical [S1 coverage survey](core/S1_COVERAGE.md) lists 20 Combat routines. Three of its `InfligeDegat` helpers (`PlayerAAttaqueSet`, `PlayerResetAllie`, `EnginSetLevelExperience`) are now native-validated in the raid domain by `LutaFatalViva`, as are `MessageBoxSet` and the refuge query, which the survey lists under AI/runtime and Core. Most of the others have typed translations validated only on synthetic or raid states: `EnginAPortee`, `EnginAdjacent`, line of fire / `AngleCalcul` with the CRT math, `AnimAttaqueEngin`, `ChercheIndiceEnginCible`, `ChercheTypeEnginProximite`, `EnginEstEnnemi`, `ProjectileInfligeDegat` and `EnginGetDegat`. The linear projectile path (`ProjectileLineaire`, `ProjectileCalculLineaire`, `TypeEnginGetSortieProjectile`) and `EnginAddVie` have little or no Combat translation yet. These still need comparison at S1's live states. |
+| Nonempty Bag `EnginRetire 0x443dfc`, vehicle/special death and corpses, active-handle `PlaySnd_PostVolume 0x48aacf` | Combat (with Audio for the sound handle) | Explicit scope stops; not reached by S1/D1 so far |
+| Non-fight unit bodies inside the recount (work, construction, transport, hunger, special) | Economy, AI/runtime | Passed in through `etapa(unit)`; the built-in prelude stops explicitly outside fight/move/idle/hidden |
+| War structure adjacency `0x42381f` | Core | Explicit provider request when that branch is reached |
+| Building-target damage (Stage 19 inventory) | Combat | Static readiness only; no runtime provider |
+| Rust port of the fight/death chain | Rust engine (Codex) | The engine is not past frame 220 yet; it consumes the same offsets and register results |
+
+**Next steps.**
+1. When the mini publishes `runs/combat/fatal-{s1,d1}`, compare every phase
+   and sampled leaf against `LutaFatalViva` and the typed fight APIs, and
+   translate whatever first diverges, original evidence first.
+2. Close the S1 first-fight gaps above with the live states from those
+   windows, then hand AI/runtime the providers its S1 and D1 proofs need
+   (M3.1 S1 windows, then M4.2 groundwork).
+3. Keep the remaining scope stops explicit until a real window reaches them.
+
 ## M4 raid fight and death composition (2026-10-30)
 
 `luta_fatal_viva_combate.LutaFatalViva(memoria, *, perfil=None, som=None,
@@ -205,13 +271,15 @@ continued into diplomacy/MessageBoxSet and faulted at unresolved
 `KERNEL32!GetPrivateProfileStringA` (IAT `0x5231b0`, target `0x1235f0`); its
 unchanged partial capture is preserved, not counted as a pass.
 
-AI damage message 0x48, diplomacy (`MAJSympathie`, `PlayerResetAllie`),
-presentation/import handling and Core lifecycle/level effects remain named
-dependencies of the fight chain. This window did not reach death/removal and
+At the time of this boundary, AI damage message 0x48, diplomacy
+(`MAJSympathie`, `PlayerResetAllie`), presentation/import handling and Core
+lifecycle/level effects were named dependencies of the fight chain. The M4
+composition above (`072481d`) now provides all of them. This window did not reach death/removal and
 does not establish a complete D1 defeat. Full S1 snapshots were not present in
 this checkout; the available committed Missions probe states were used.
-The all-16-unit D1 search and full scripted-input fight/death captures remain
-with the coordinator/Mac mini. No multi-hour native command is required for
+The all-16-unit D1 search and full scripted-input fight/death captures went
+to the coordinator/Mac mini; D1 now exists (`bab6c7c`) and its fatal windows
+are queued there (see Current state). No multi-hour native command is required for
 these two completed leaves.
 
 ## Real M2.3 raid memory API (2026-10-29)
@@ -574,7 +642,7 @@ python3 -B pesquisas-paralelas/combate/validar.py --emular
 
 The saved emulated result records 113 tests and 234,245 bounded original-x86 executions. Local-only execution explicitly skips optional differential cases. Harnesses, original-byte extracts, dispatch tables, field/cadence audits, and data tables stay in this domain's `evidencias/`. Use a worktree because the validation entry point writes its own report.
 
-The current Stage 19 [building-target inventory](../pesquisas-paralelas/combate/CONTRACT_BUILDING_DAMAGE.md) is static readiness only: original damage arithmetic, destruction stores and explicit dependency boundaries, plus the future type-10/11 turret contract. Its new byte exports are not runtime validation or a public provider. The bounded Stage 18 attack chain is already integrated. The human's later steering ends this recovery turn after the light inventory; native captures, translation, heavy gates and integration were not run. Unknown AI/audio/diplomacy effects and real mission behavior remain open.
+The current Stage 19 [building-target inventory](../pesquisas-paralelas/combate/CONTRACT_BUILDING_DAMAGE.md) is static readiness only: original damage arithmetic, destruction stores and explicit dependency boundaries, plus the future type-10/11 turret contract. Its new byte exports are not runtime validation or a public provider. The bounded Stage 18 attack chain is already integrated. The type-10/11 turret leaves were later delivered as `OrdensTorresCombate` (M3 section above); the building-target damage branch itself still has no native capture, translation or provider.
 
 The occupied-unit consumer has its own bounded validator, so it does not overwrite the historical 234,245-execution report:
 
@@ -608,7 +676,7 @@ python3 -B pesquisas-paralelas/combate/validar_ataque_vivo.py --emular
 python3 -B scripts/check.py --domain combat
 ```
 
-The slices' actual results and expected dependency stops are recorded in [the combat handoff](../pesquisas-paralelas/combate/HANDOFF.md) and their dedicated reports. General AI message, audio, level and diplomacy bodies remain external. The shared-world adapter delegates supported physical death to Core; special/vehicle effects remain explicit stops. The Stage 18 field audit above supersedes the older open producer inventory. Building-target behavior and natural MONDE01 runtime remain separate unimplemented work.
+The slices' actual results and expected dependency stops are recorded in [the combat handoff](../pesquisas-paralelas/combate/HANDOFF.md) and their dedicated reports. For the raid fight these AI message, level and diplomacy bodies are now provided by `LutaFatalViva` (M4 section above); outside that domain they remain external. The shared-world adapter delegates supported physical death to Core; special/vehicle effects remain explicit stops. The Stage 18 field audit above supersedes the older open producer inventory. Building-target damage remains unimplemented; natural MONDE01 fights are now captured on the original (S1, D1) and await the fatal-window comparison.
 
 M2 slice 1 captures the frame body's combat-relevant calls natively from the accepted M1 post-load state. `PlayerAttaqueReset 0x46d628` is a single `ret`. `PlayerAttaqueCalculSympa 0x46d629` is diplomacy, a periodic (`counter % 2000`) attack-matrix consumer owned outside Combat. `ProjectileCalcul` over the empty M1 pool clears the 100 stale `+1` fill bytes in its first pass; `MaquinaProjeteis.calcular` now matches that store trace. Run:
 

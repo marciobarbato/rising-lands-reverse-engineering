@@ -75,9 +75,10 @@ ARGUMENTOS = {
     'DecouvreTerrain': {'EAX': 0xffff, 'EDX': 0xffff, 'EBX': 0xff},
     'IllumineTerrain': {'EAX': 0xffff, 'EDX': 0xffff, 'EBX': 0xff},
     'CalculPosition': {'EAX': 0xffff, 'EBX': 0xff}, 'RechercheDecalageSortie': {'EAX': 0xffff},
-    'EnginSetType': {'EAX': 0xffff, 'EDX': 0xffff, 'ECX': 0xff}, 'EnginAddVie': {'EAX': 0xffff, 'EDX': 0xffff},
+    'EnginSetType': {'EAX': 0xffff, 'EDX': 0xffff, 'EBX': 0xff, 'ECX': 0xff},
+    'EnginAddVie': {'EAX': 0xffff, 'EDX': 0xffff},
     'EnginResetFatigue': {'EAX': 0xffff}, 'EnginSetExperimente': {'EAX': 0xffff, 'EDX': 0xffff},
-    'SetSortEngin': {'EAX': 0xffff}, 'SetDeplaceEngin': {'EAX': 0xffff, 'EDX': 0xffff},
+    'SetSortEngin': {'EAX': 0xffff, 'EDX': 0xffff}, 'SetDeplaceEngin': {'EAX': 0xffff, 'EDX': 0xffff},
     'EnginAsk': {'EAX': 0xffff, 'EDX': 0xff, 'EBX': 0xff},
     'BatimentAjouteMatiere': {'EAX': 0xff, 'EDX': 0xffff, 'EBX': 0xff, 'ECX': 0xffff},
     'TerrainDeposeMatiere': {'EAX': 0xff, 'EDX': 0xffff, 'EBX': 0xffff, 'ECX': 0xff},
@@ -468,7 +469,8 @@ class CavernaRecrutamento:
         """SortieTroupe 0x420e4c: AX structure, DL direction. Below the threshold (time * 100 > u32 +0x8c): EAX =
         time, EDX = time * 100. Otherwise: the first colonist leaves the Bag (BagRetire(B, 1, 9)), its carried
         stone (tag 2 value 2) then food (tag 2 value 1) are credited (BagRetire + BatimentAjouteMatiere(resource,
-        value, owner, structure)); CalculPosition(structure, direction); EnginSetType(unit, cell, CL = +0x7b);
+        value, owner, structure)); CalculPosition(structure, direction); EnginSetType(unit, cell,
+        BL preserved by CalculPosition, CL = +0x7b);
         EnginAddVie(unit, 1000); EnginResetFatigue; EnginSetExperimente(unit, cell); SetSortEngin;
         SetDeplaceEngin(unit, +0x7c); EnginAsk(unit, 6, 0) for the local player's structure. A structure that
         still holds a colonist (type 2: or a troop) then clears its request (+0x78 = 0xffff, +0x7b = 0xff, +0x7c =
@@ -494,11 +496,13 @@ class CavernaRecrutamento:
         unidade = u & 0xffff
         c = self._ext('CalculPosition', 0x420f5a, EAX=s, EBX=direcao, ECX=0, ESI=unidade, EDI=e)
         celula = c['EAX'] & 0xffff
-        self._ext('EnginSetType', 0x420f69, EAX=unidade, EDX=celula, ECX=_baixo(c['ECX'], m.u8(e + 0x7b)))
+        self._ext('EnginSetType', 0x420f69, EAX=unidade, EDX=celula, EBX=c['EBX'],
+                  ECX=_baixo(c['ECX'], m.u8(e + 0x7b)))
         self._ext('EnginAddVie', 0x420f75, EAX=unidade, EDX=1000)
         self._ext('EnginResetFatigue', 0x420f7c, EAX=unidade)
         self._ext('EnginSetExperimente', 0x420f85, EAX=unidade, EDX=celula)
-        self._ext('SetSortEngin', 0x420f8c, EAX=unidade)
+        # EBP saves CalculPosition's cell; EnginSetExperimente preserves its DX at this call.
+        self._ext('SetSortEngin', 0x420f8c, EAX=unidade, EDX=celula)
         self._ext('SetDeplaceEngin', 0x420f99, EAX=unidade, EDX=m.u16(e + 0x7c))
         if m.u8(e + 4) == m.u8(JOGADOR_LOCAL):
             self._ext('EnginAsk', 0x420fb2, EAX=unidade, EDX=6, EBX=0)

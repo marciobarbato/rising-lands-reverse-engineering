@@ -1,0 +1,71 @@
+{
+ "call": "0x4299da",
+ "cases": [
+  {
+   "boundaries": [],
+   "caller": "InputGame+0x767",
+   "caller_return": "0x4299df",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x1f18",
+    "EBP": "0x2007ea4",
+    "EBX": "0x1f18",
+    "ECX": "0x1f00",
+    "EDI": "0x0",
+    "EDX": "0x47891000",
+    "ESI": "0x1f18"
+   },
+   "esp": "0x2007e68",
+   "exit_registers": {
+    "EAX": "0x47860004",
+    "EBP": "0x2007ea4",
+    "EBX": "0x1f18",
+    "ECX": "0x1f00",
+    "EDI": "0x0",
+    "EDX": "0x47891000",
+    "ESI": "0x1f18",
+    "ESP": "0x2007e6c"
+   },
+   "frame": 3851,
+   "kind": "in_situ",
+   "phase": "frame3851",
+   "read_before_write": [
+    [
+     "0x507d74",
+     "00008247"
+    ],
+    [
+     "0x507dac",
+     "00008647"
+    ],
+    [
+     "0x47821f18",
+     "43"
+    ],
+    [
+     "0x47861f18",
+     "04"
+    ]
+   ],
+   "routine": "SacGetCapacite",
+   "stack_args": []
+  }
+ ],
+ "entry": "0x475736",
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "recorder_sha256": "cca629e38fa55d61f7a03077ca946ac71949325b085d14632dda0af5cfb14121",
+ "routine": "SacGetCapacite",
+ "s1": {
+  "code_unchanged": true,
+  "frames_checked": 602,
+  "last_frame": 3851,
+  "snapshot": {
+   "path": ".local/m3/passo2/S1/instantaneo-03250.pickle",
+   "sha256": "169488a6e34ce20586a087bf846682cdcba8cc2905efbc27f12f43125ae4a884"
+  }
+ },
+ "schema": "rising-lands/ai-runtime-s1-next-stop-original/1",
+ "seconds": 390.908,
+ "source_revision": "8b6f1c954620b63af47fa742d1e124aa0f396ecf",
+ "translation_executed": false
+}

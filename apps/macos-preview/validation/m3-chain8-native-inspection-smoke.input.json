@@ -1,0 +1,75 @@
+{
+ "frames": [
+  {
+   "cursor": [
+    400,
+    272
+   ],
+   "frame": 443,
+   "keys": {
+    "0x11": -32768
+   },
+   "messages": [
+    [
+     256,
+     17,
+     1900545
+    ],
+    [
+     512,
+     8,
+     17826192
+    ]
+   ]
+  },
+  {
+   "frame": 444,
+   "keys": {
+    "0x11": -32768
+   },
+   "messages": [
+    [
+     513,
+     9,
+     17826192
+    ]
+   ]
+  },
+  {
+   "frame": 445,
+   "keys": {
+    "0x11": -32768
+   }
+  },
+  {
+   "frame": 446,
+   "keys": {
+    "0x11": -32768
+   },
+   "messages": [
+    [
+     514,
+     8,
+     17826192
+    ]
+   ]
+  },
+  {
+   "frame": 447,
+   "messages": [
+    [
+     257,
+     17,
+     3223126017
+    ]
+   ]
+  }
+ ],
+ "name": "macOS recording",
+ "schema": "rising-lands/monde01-scripted-input/1",
+ "start": {
+  "checkpoint": "M2.2 frame128",
+  "frame": 128
+ },
+ "stop_frame": 447
+}

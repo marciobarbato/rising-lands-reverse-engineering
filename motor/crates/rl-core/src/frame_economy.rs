@@ -312,7 +312,12 @@ fn troop_in_bag(m: &MemoriaJogo, index: u32) -> Result<bool> {
     }
     Ok(false)
 }
-fn production(m: &mut MemoriaJogo, index: u32, require_inhabited: bool) -> Result<()> {
+pub fn production(
+    m: &mut MemoriaJogo,
+    index: u32,
+    require_inhabited: bool,
+    declared_chain: bool,
+) -> Result<()> {
     let a = 0x49a0c8 + (index & 0xffff) * 276;
     let kind = m.u8(a + 8)?;
     if require_inhabited {
@@ -341,7 +346,7 @@ fn production(m: &mut MemoriaJogo, index: u32, require_inhabited: bool) -> Resul
         } else if kind == 19 {
             divisor = divisor.wrapping_sub(m.u8(0x495be8)?);
         }
-        let coefficient = if kind == 14 { 10.0 } else { 100.0 };
+        let coefficient = f64_read(m, if kind == 14 { 0x494432 } else { 0x49443a })?;
         let converted = if divisor == 0 {
             0x80000000
         } else {
@@ -352,7 +357,11 @@ fn production(m: &mut MemoriaJogo, index: u32, require_inhabited: bool) -> Resul
     if m.u32(a + 0x8c)? < time {
         return Ok(());
     }
-    Err(stop("SortieTroupe completion", 0x420e4c))
+    if declared_chain {
+        crate::chain_recruit::sortie(m, index, 4)
+    } else {
+        Err(stop("SortieTroupe completion", 0x420e4c))
+    }
 }
 pub fn call(m: &mut MemoriaJogo, name: &str, a: &[u32]) -> Result<u32> {
     match name {
@@ -439,7 +448,7 @@ pub fn call(m: &mut MemoriaJogo, name: &str, a: &[u32]) -> Result<u32> {
             Ok(0)
         }
         "BatimentNextEtape:production" | "CalculTroupe" => {
-            production(m, a[0], name != "CalculTroupe")?;
+            production(m, a[0], name != "CalculTroupe", m.player.is_some())?;
             Ok(0)
         }
         "PlayerGetType" => {

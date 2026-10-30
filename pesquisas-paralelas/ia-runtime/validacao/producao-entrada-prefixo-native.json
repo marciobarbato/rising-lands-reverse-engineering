@@ -1,0 +1,179 @@
+{
+ "cases": [
+  {
+   "byte_differences": [],
+   "bytes_checked": 61,
+   "consumed_return_equal": true,
+   "equal": true,
+   "frame": 296,
+   "missing_conversion_arguments": [],
+   "native_conversion_arguments": {},
+   "native_prefix_matches_capture": true,
+   "native_stop": "0x3000000",
+   "native_written_bytes": 4,
+   "owner_requests": [],
+   "provided_arguments_equal": true,
+   "python_stop": null,
+   "python_written_bytes": 4,
+   "structure": 0
+  },
+  {
+   "byte_differences": [],
+   "bytes_checked": 592,
+   "consumed_return_equal": true,
+   "equal": true,
+   "frame": 297,
+   "missing_conversion_arguments": [
+    "EBX"
+   ],
+   "native_conversion_arguments": {
+    "EAX": 4,
+    "EBX": 4,
+    "ECX": 5,
+    "EDX": 3599
+   },
+   "native_prefix_matches_capture": true,
+   "native_stop": "0x457b87",
+   "native_written_bytes": 29,
+   "owner_requests": [
+    {
+     "call": "0x420f69",
+     "registers": {
+      "EAX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType"
+    }
+   ],
+   "provided_arguments_equal": true,
+   "python_stop": {
+    "call": "0x420f69",
+    "routine": "EnginSetType"
+   },
+   "python_written_bytes": 29,
+   "structure": 0
+  },
+  {
+   "byte_differences": [],
+   "bytes_checked": 58,
+   "consumed_return_equal": true,
+   "equal": true,
+   "frame": 868,
+   "missing_conversion_arguments": [],
+   "native_conversion_arguments": {},
+   "native_prefix_matches_capture": true,
+   "native_stop": "0x3000000",
+   "native_written_bytes": 4,
+   "owner_requests": [],
+   "provided_arguments_equal": true,
+   "python_stop": null,
+   "python_written_bytes": 4,
+   "structure": 0
+  },
+  {
+   "byte_differences": [],
+   "bytes_checked": 589,
+   "consumed_return_equal": true,
+   "equal": true,
+   "frame": 869,
+   "missing_conversion_arguments": [
+    "EBX"
+   ],
+   "native_conversion_arguments": {
+    "EAX": 5,
+    "EBX": 4,
+    "ECX": 7,
+    "EDX": 3599
+   },
+   "native_prefix_matches_capture": true,
+   "native_stop": "0x457b87",
+   "native_written_bytes": 26,
+   "owner_requests": [
+    {
+     "call": "0x420f69",
+     "registers": {
+      "EAX": 5,
+      "ECX": 7,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType"
+    }
+   ],
+   "provided_arguments_equal": true,
+   "python_stop": {
+    "call": "0x420f69",
+    "routine": "EnginSetType"
+   },
+   "python_written_bytes": 26,
+   "structure": 0
+  },
+  {
+   "byte_differences": [],
+   "bytes_checked": 55,
+   "consumed_return_equal": true,
+   "equal": true,
+   "frame": 1362,
+   "missing_conversion_arguments": [],
+   "native_conversion_arguments": {},
+   "native_prefix_matches_capture": true,
+   "native_stop": "0x3000000",
+   "native_written_bytes": 4,
+   "owner_requests": [],
+   "provided_arguments_equal": true,
+   "python_stop": null,
+   "python_written_bytes": 4,
+   "structure": 0
+  },
+  {
+   "byte_differences": [],
+   "bytes_checked": 591,
+   "consumed_return_equal": true,
+   "equal": true,
+   "frame": 1363,
+   "missing_conversion_arguments": [
+    "EBX"
+   ],
+   "native_conversion_arguments": {
+    "EAX": 6,
+    "EBX": 4,
+    "ECX": 6,
+    "EDX": 3599
+   },
+   "native_prefix_matches_capture": true,
+   "native_stop": "0x457b87",
+   "native_written_bytes": 23,
+   "owner_requests": [
+    {
+     "call": "0x420f69",
+     "registers": {
+      "EAX": 6,
+      "ECX": 6,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType"
+    }
+   ],
+   "provided_arguments_equal": true,
+   "python_stop": {
+    "call": "0x420f69",
+    "routine": "EnginSetType"
+   },
+   "python_written_bytes": 23,
+   "structure": 0
+  }
+ ],
+ "comparisons": 6,
+ "equal": 6,
+ "fixture": "pesquisas-paralelas/economia/evidencias/caverna-recrutamento/captura-caverna-recrutamento-exibicao.json.xz",
+ "fixture_sha256": "4b48d4e3cbf127562f1bd1f622b2253c8dae27309b93f2cd0479c086edc0d21c",
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "schema": "rising-lands/ai-runtime-recruit-production-prefix/1",
+ "scope": "Native CalculTroupe through return or before EnginSetType; no stubs, no completion claim",
+ "source_revision": "5568c00f477a726409acc3d2451bfff68ad1a599",
+ "source_sha256": {
+  "pesquisas-paralelas/ia-runtime/composicao_entrada_ia.py": "4dff2595d83ba90bfa88a2710fc009bd9a78657177ba09129f644d661f90e754",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "3aa706f689b76482d106f926cec60c9c884c838028cc8d83756197599b07bdae",
+  "pesquisas-paralelas/ia-runtime/validar_producao_entrada_ia.py": "4470cbf9fce40d9dc782a02fab731ffdc845453aff3b22245f6be4b2e6c9c295"
+ }
+}

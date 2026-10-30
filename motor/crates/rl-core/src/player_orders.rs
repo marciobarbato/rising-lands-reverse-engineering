@@ -8,6 +8,9 @@ const DECAL: [u32; 22] = [
     0x201, 0x300, 0x101, 0x202, 0x100, 0x202, 0x100, 0x300, 0x202, 0x100, 0, 0, 0x100, 0x200,
     0x300, 0x100, 0x100, 1, 0x201, 0x100, 0x100, 0x100,
 ];
+pub fn construction_offset(t: u32) -> u32 {
+    DECAL.get(t as usize).copied().unwrap_or(0)
+}
 fn selectable(m: &MemoriaJogo, u: u32) -> Result<bool> {
     let r = unit(m, u)?;
     let state = m.b(r + 2)?;
@@ -379,6 +382,17 @@ fn attack(m: &mut MemoriaJogo, u: u32, mode: u32, target: u32) -> Result<u32> {
 pub fn call(m: &mut MemoriaJogo, name: &'static str, r: [u32; 4], site: u32) -> Result<u32> {
     let [a, d, b, c] = r;
     match name {
+        "EnginGetCentreGroupe" => Ok(crate::chain_groups::centre(
+            m,
+            crate::FrameRegisters {
+                eax: a,
+                edx: d,
+                ebx: b,
+                ecx: c,
+                ..Default::default()
+            },
+        )?
+        .eax),
         "SelectionAddEngin" => {
             append(m, a & 65535, d & 255, false)?;
             Ok(0)
@@ -412,6 +426,27 @@ pub fn call(m: &mut MemoriaJogo, name: &'static str, r: [u32; 4], site: u32) -> 
             m.sb(0x496d48, 1)?;
             Ok(p)
         }
+        "BatimentPeutAttaquer" | "BatimentInitAttaqueSelect" => Ok(crate::chain_turret::entry(
+            m,
+            name,
+            crate::FrameRegisters {
+                eax: a,
+                edx: d,
+                ebx: b,
+                ecx: c,
+                ..Default::default()
+            },
+        )?
+        .eax),
+        "SetDechargeCaveEnginSelect" => {
+            crate::chain_restore::select_unload(m, a & 255, d & 65535)?;
+            Ok(0)
+        }
+        "SetDechargeCaveEngin" => {
+            crate::chain_restore::unload(m, a & 65535, d & 65535)?;
+            crate::player::unit(m, a & 65535)
+        }
+        "SetAttaqueEngin" => attack(m, a & 65535, d & 255, b & 65535),
         "SetRecolteEngin" => harvest_order(m, a & 65535, d),
         "SetTransporteEngin" => transport_order(m, a & 65535, d),
         "DeSelectionGroupe" => deselect(m, a & 255),
@@ -632,10 +667,21 @@ pub fn process(m: &mut MemoriaJogo, p: u32) -> Result<u32> {
                     0x45f105,
                 )?;
             } else {
-                return stop("BatimentInitAttaqueSelect", 0x45f13f);
+                crate::chain_turret::entry(
+                    m,
+                    "BatimentInitAttaqueSelect",
+                    crate::FrameRegisters {
+                        eax: p,
+                        edx: w[1] & 255,
+                        ebx: w[2],
+                        ..Default::default()
+                    },
+                )?;
             }
         }
-        17 => return stop("InitRecruteTroupe", 0x45f1a9),
+        17 => {
+            crate::chain_recruit::init(m, w[1] & 255, p)?;
+        }
         18 => {
             call(m, "SetRamasseEnginSelect", [p, w[1], p << 2, 0], 0x45f217)?;
         }
@@ -643,20 +689,40 @@ pub fn process(m: &mut MemoriaJogo, p: u32) -> Result<u32> {
             m.sw(0x495be0 + 2 * p, 65535)?;
             append(m, w[1], p, true)?;
         }
-        11 => return stop("SauveSelectionGroupe", 0x45eef8),
+        11 => {
+            crate::chain_groups::entry(
+                m,
+                "SauveSelectionGroupe",
+                crate::FrameRegisters {
+                    eax: p,
+                    edx: w[1] & 255,
+                    ..Default::default()
+                },
+            )?;
+        }
         12 => {
             m.sw(0x495be0 + 2 * p, 65535)?;
             deselect(m, p)?;
-            return stop("RestaureSelectionGroupe", 0x45ef2c);
+            crate::chain_groups::entry(
+                m,
+                "RestaureSelectionGroupe",
+                crate::FrameRegisters {
+                    eax: p,
+                    edx: w[1] & 255,
+                    ..Default::default()
+                },
+            )?;
         }
         16 => {
             if w[1] == 1 {
                 return stop("SetEnginSelectRentreEngin", 0x45f17a);
             } else if w[1] == 3 {
-                return stop("SetEnginSelectRentreBatiment", 0x45f195);
+                crate::chain_entry::select_enter(m, p as u8, w[2] as u16)?;
             }
         }
-        33 => return stop("BatimentRetireColon", 0x45f22a),
+        33 => {
+            crate::chain_recruit::retire_colonist(m, player::selected_structure(m, p)?)?;
+        }
         _ => {
             if jump != 0x45f2de {
                 return stop("ProcessInputGame tag", jump);

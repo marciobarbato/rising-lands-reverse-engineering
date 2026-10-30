@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "command": [
+    "/usr/bin/python3",
+    "-B",
+    "scripts/check.py"
+  ],
+  "domain_note": "check.py has no macos domain selector; APP_BUILD validates the consumer and the complete common suite was run as its supported repository gate.",
+  "tests": 2039,
+  "optional_skips": 624,
+  "failures": 0,
+  "errors": 0,
+  "domains": [
+    {
+      "domain": "core",
+      "tests": 576,
+      "optional_skips": 215,
+      "seconds": 32.476
+    },
+    {
+      "domain": "combat",
+      "tests": 291,
+      "optional_skips": 155,
+      "seconds": 131.835
+    },
+    {
+      "domain": "economy",
+      "tests": 543,
+      "optional_skips": 209,
+      "seconds": 51.145
+    },
+    {
+      "domain": "graphics",
+      "tests": 267,
+      "optional_skips": 0,
+      "seconds": 139.566
+    },
+    {
+      "domain": "missions",
+      "tests": 154,
+      "optional_skips": 33,
+      "seconds": 23.173
+    },
+    {
+      "domain": "ai-runtime",
+      "tests": 120,
+      "optional_skips": 8,
+      "seconds": 135.017
+    },
+    {
+      "domain": "audio",
+      "tests": 79,
+      "optional_skips": 4,
+      "seconds": 12.801
+    },
+    {
+      "domain": "workflow",
+      "tests": 9,
+      "optional_skips": 0,
+      "seconds": 2.265
+    }
+  ]
+}

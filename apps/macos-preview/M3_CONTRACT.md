@@ -1,11 +1,14 @@
 # macOS accepted-state consumption contract v6
 
-Identifier: `rising-lands/macos-state-consumer/6`. The current consumer explicitly
-accepts Python Graphics **1.8**, enables HUD/cursor composition and checks the
-original full 800×600 phase-end surface with read-only playback/cache chaining.
-Native live execution requires **ABI 1.4 / Rust Graphics 1.7**. The current
-integrated-backend section below supersedes the preserved earlier-stage notes.
-Orders remain record-only; no milestone acceptance is added.
+Identifier: `rising-lands/macos-state-consumer/6`. The evidence consumer enables
+HUD/cursor composition and checks the original full 800×600 phase-end surface
+with read-only playback/cache chaining; Python inspection and proofs now accept
+Graphics **1.9**. This feature delivery requires engine **ABI 1.6**
+(persistent execution, player input and orders) with Rust Graphics **1.9**,
+consuming main `6cdbc5a`. See the [persistent-execution contract](#current-consumer--abi-16-persistent-execution)
+and the Graphics adoption below. Sections are chronological: each later section supersedes
+the earlier-stage notes it names (ABI 1.1, 1.3, 1.4/Graphics 1.8 and the
+record-only input stage are historical). No milestone acceptance is added.
 
 ## Evidence and memory
 
@@ -396,7 +399,8 @@ phase and render sequence and retains every named capability stop, but never
 calls an observer, projects memory, computes hashes or increments equality counts.
 The status layout and engine ABI are unchanged. `macos_live_read` refuses play.
 The native UI changes modes by recreating S0. Its default is play; native smoke
-and horizon tools explicitly request validation. Input stays record-only in both.
+and horizon tools explicitly request validation. At this stage input stayed
+record-only in both; ABI 1.5 below applies it in play.
 
 ## ABI 1.5 player input
 
@@ -429,3 +433,75 @@ boundaries, matching its probes. This does not establish glyph rendering or audi
 playback. Engine failures retain atomic world/context semantics and publish the
 named stop. Rust renderer partial results also stop the UI with their actual
 surface; neither a skipped draw nor substitute pixels hide a dependency.
+
+## Current consumer — ABI 1.6 persistent execution
+
+The ABI 1.5 input descriptors and Graphics 1.7 renderer contracts above remain
+unchanged. Native execution now requires major 1/minor >=6. Complete S0 loads
+before the caller chooses play policy 1 through `macos_live_validation(driver,0)`;
+this selection occurs before phase 1 and propagates any ABI failure. Default
+proof drivers/Validar retain policy 0. The Test A state proof explicitly chooses
+policy 2, which runs the same persistent backend while retaining consumed input
+observations. Production play uses policy 1, without input/frame/render audit
+records; real orders/text/sound events and named stops remain available.
+
+Host pacing defaults to the intact original's uncapped active idle-loop policy,
+with optional fixed host caps. The virtual engine clock remains 20. The original
+pacing evidence and historical elapsed-time calibration boundary are documented
+in the [manual](../../docs/MACOS_PLAYABLE.md#abi-16-and-original-pacing).
+
+## Rust Graphics 1.9 adoption and selected-actor diagnostic
+
+The C driver now requires `rl_render_contrato() == 0x00010009`, alongside
+ABI major 1 / minor >=6. Swift metadata and the inspection label report 1.9.
+The renderer's copied-buffer ABI, dimensions, cache, generation checks and
+phase order are unchanged. Unknown renderer contracts fail before a driver is
+published. App code adds no rendering or simulation provider.
+
+`benchmark_native_macos.py --orders-selected --game-fps 60 --seconds 75`
+selects the historical fatigue workload: real AppKit left clicks at `(560,528)`
+and `(624,432)` after 8 and 8.2 seconds, then a real pointer move to `(400,272)`
+after 8.5 seconds. The actor stays selected. Timer arrival schedules native
+events; the serial world worker still assigns the next game frame. No timer
+value enters engine logic. The report records observed next-frame numbers,
+order tags, first stop, complete timing bins and actual GPU readback. This
+option is mutually exclusive with the existing `--orders` workload.
+
+`diagnose_selected_fatigue.py` is a bounded, declared-frame reproduction through
+the same C driver in play policy 1. Its default human events are at frames
+481/493/511; these are explicit diagnostic inputs, not a replay claim about
+historical UI arrival frames. It advances from S0, captures copied projections
+only around the attempted frame 2,952 and at the first stop, and records every
+selected/hovered unit's original-address 276-byte record, SHA256 and fatigue
+fields. Those bytes never become world or renderer inputs. The diagnostic's
+projection cost is outside production play and supplies no throughput result.
+Named stops and partial pixels retain their normal production behavior.
+
+## Recorded-input Test B tooling
+
+`test_b_pipeline.py` accepts recorder exports through the complete unchanged
+Missions validator. Its audited app replay uses the same `MacOSDeclaredInput`
+and C phase entry as Test A, with actual poll requests checked against
+`FrameAnswerMapper`. It runs from S0 through the real 128-frame prefix; the
+recorded-input proof omits later rendering. The separate synthetic UI capture
+runs the real visible AppKit/Metal path with NSEvents and the production
+`MacOSSessionRecorder`/canonical save action. Synthetic evidence is explicitly
+labeled and cannot establish human Test B acceptance.
+
+The original command invokes unchanged Missions `correr` in a child, retaining
+its intact-executable identity, input validator, callbacks, original WndProc
+and durable fast exit. An app-owned read-only `amostra` observer writes a
+companion full mapped-state hash per completed frame. Both sides use the
+published P6 cumulative mask verbatim; its policy integrity and exact identity
+are checked, with no new session exclusions. The comparator refuses differing
+input/mask identities and lists every differing or missing frame. Scope,
+commands, six-order coverage and remaining human/mini execution requirements
+are in [the Test B manual](../../docs/MACOS_PLAYABLE.md#m33-test-b-recording-and-replay-pipeline-2026-10-30).
+
+`record --record-only` explicitly selects the existing Validar record-only UI
+for synthetic input capture. Its metadata distinguishes real UI frames from
+orders: `orders_applied_in_capture=false`, `capture_policy=record-only`.
+Actual orders are checked in the separate audited Rust replay. Normal play
+capture retains the real renderer and first stop (currently frame141, AffText
+`0x459454`); no production text non-execution attestation is added. Human Test B
+remains a separate acceptance requirement blocked on that provider.

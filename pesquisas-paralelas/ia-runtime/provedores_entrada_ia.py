@@ -68,6 +68,36 @@ def _modulo_economia(nome):
 _ECONOMIA_CARREGADOS = {}
 
 
+def consulta_capacidade_mina(m, regs, chamada):
+    """MineGetCapacite 0x475541: Economy's live reserve, exact register ABI.
+
+    Original-first evidence: consulta-mina-original.json.xz (S1 CALL 0x44ca17).
+    AX is an index in 0..19; EAX is zero-extended, all other data registers
+    preserved with their unknown masks. No stores, callbacks or copied table.
+    """
+    from entrada_estruturas import ArgumentoNaoPassado
+    masks = dict(regs.get('_incertos') or {})
+    if 'EAX' not in regs or masks.get('EAX', 0) & 0xffff:
+        raise ArgumentoNaoPassado('MineGetCapacite', chamada, ['EAX'])
+    if regs.get('_pilha'):
+        raise ValueError('MineGetCapacite takes no pushed arguments')
+    index = regs['EAX'] & 0xffff
+    if index >= 20:
+        raise ValueError('MineGetCapacite requires AX in 0..19')
+    owner = _modulo_economia('extracao').RecursosTerreno.__new__(
+        _modulo_economia('extracao').RecursosTerreno)
+    owner.minas = m.vista(0x509954, 80)
+    out = {k: regs.get(k, 0) & M32 for k in REG7}
+    out['EAX'] = owner.capacidade_mina(index)
+    unknown = {k: (masks.get(k, 0) if k in regs else M32) & M32 for k in REG7 if k != 'EAX'}
+    unknown = {k: v for k, v in unknown.items() if v}
+    if unknown:
+        out['_incertos'] = unknown
+    if 'ESP' in regs:
+        out['ESP'] = (regs['ESP'] + 4) & M32
+    return out
+
+
 def _ataque_combate(m, core):
     """SetAttaqueEngin through Combat's committed translation (Core's validator binding, ``validar_selecao_ordens``)."""
     from alvos_alcance import ordem_ja_definida
@@ -299,6 +329,10 @@ def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None, estrutura
                        BatimentInitAttaqueSelect=combate('BatimentInitAttaqueSelect'))
     funcoes['GetStatusRecrute'] = lambda tipo, jogador: recrutamento().status(tipo, jogador)
     if donos is not None:
+        # InputGame consumes only EAX from this read-only AX query. The other
+        # six registers are explicitly unknown preserved carriers, never inputs
+        # selecting behavior; the exact seven-register route remains available.
+        funcoes['SacGetCapacite'] = donos.capacidade_saco
         # The M3 owners (``DonosM3``): group selection and view (tags 0xb/0xc, the group key), the minimap
         # press, entry into a structure (tag 0x10 sub 3) and the colonist release (tag 0x21).
         for nome in ('SauveSelectionGroupe', 'RestaureSelectionGroupe', 'EnginGetCentreGroupe',
@@ -357,13 +391,16 @@ class DonosM3:
     - Economy ``restauracao.Restauracao`` (when importable): EnginRestaureEtat, BatimentEnleveMatiere,
       SetDechargeCaveEnginSelect (tag 19) and SetDechargeCaveEngin; its Core callees ResetOrdre, EnginAsk,
       SetEnginConstruitBatiment (``selecao_ordens``), SetDeplaceEngin, BatimentGetCase, SetEnginRentreBatiment;
-      not provided: BatimentGetDecalageConstruction, EnginEstVivant (Core), SetAttaqueEngin (Combat);
+      Core state queries through ``provedor_consultas_estado``; SetAttaqueEngin remains Combat's dependency;
     - Core ``incursao_core``: SetMiniMap (``definir_minimapa``; CalculWorkEngin's mode 4 at 0x44c437) and, once
       published, TerrainEstGc (``terreno_esta_gc``, CalculWorkEngin 0x44d8cd); ``chamadas_quadro_core``: Random
       (CalculWorkEngin 0x44db44/0x44db54);
     - Core ``fadiga_vegetacao.FadigaVegetacao`` (``fadiga``, when importable): EnginSetFatigue, ChercheVegetLibre,
       ChercheTypeBatimentProximite, EteintTerrain (Economy's SortieTroupe abandonment), TestRessource through
       ``externo``.
+    - Core's S1 searches/blocking through ``provedor_buscas``, read-only state queries through
+      ``provedor_consultas_estado`` and fight/list queries through ``provedor_lacunas_s1``. The strict
+      provider requires every register and real readable entry ESP where its contract specifies it.
 
     A Core routine reaches its caller as soon as Core exports it through ``provedor_entrada``
     (``ROTINAS_ECONOMIA``) or ``EntradaEstruturas.ROTINAS``: e.g. EteintTerrain for Economy's SortieTroupe
@@ -377,6 +414,7 @@ class DonosM3:
     def __init__(self, m, *, som, bonus=None, mensagem_unidade=None):
         from entrada_estruturas import EntradaEstruturas, ROTINAS_ECONOMIA, provedor_entrada
         from visao_grupos import VisaoGrupos, provedor_saida
+        from recrutamento_core import RecrutamentoCore, bonus_recrutamento, provedor_recrutamento, ROTINAS as RECRUTAMENTO
         caverna_recrutamento = _modulo_economia('caverna_recrutamento')
         ciclo_trabalho = _modulo_economia('ciclo_trabalho')
         self.m, self.bonus, self.mensagem_unidade, self.som = m, bonus, mensagem_unidade, som
@@ -385,12 +423,29 @@ class DonosM3:
         self.visao = VisaoGrupos(m, som=som)
         self.caverna = caverna_recrutamento.CavernaRecrutamento(m, externo=self.externo)
         self.ciclo = ciclo_trabalho.CicloTrabalho(m, externo=self.externo)
+        self.recrutamento = RecrutamentoCore(m, bonus=bonus if bonus is not None else
+                                            lambda j, t, s: bonus_recrutamento(m)(j, t, s))
+        self._recrutamento = provedor_recrutamento(self.recrutamento)
+        self.nomes_recrutamento = frozenset(RECRUTAMENTO)
         self._core = provedor_entrada(self.ee)
         self._saida = provedor_saida(self.visao)
         self._caverna = caverna_recrutamento.provedor_caverna(self.caverna)
         self.nomes_core = frozenset(ROTINAS_ECONOMIA)
         self.nomes_caverna = frozenset(caverna_recrutamento.ROTINAS)
         self.nomes_ciclo = frozenset(ciclo_trabalho.ROTINAS)
+        lacunas = _modulo_economia('lacunas_economia_s1')
+        tuyau = _modulo_economia('tuyau_economia_s1')
+        tecnologia = _modulo_economia('tecnologia_economia_s1')
+        self._economia_s1 = {
+            **{n: lacunas.provedor_lacunas_economia_s1(lacunas.LacunasEconomiaS1(m))
+               for n in lacunas.ROTINAS},
+            **{n: tuyau.provedor_tuyau_economia_s1(tuyau.TuyauEconomiaS1(m))
+               for n in tuyau.ROTINAS},
+        }
+        self.tecnologia_s1 = tecnologia.TecnologiaEconomiaS1(m, externo=self._externo_tecnologia_s1)
+        provedor_tecnologia = tecnologia.provedor_tecnologia_economia_s1(self.tecnologia_s1)
+        self._economia_s1.update({n: provedor_tecnologia for n in tecnologia.ROTINAS})
+        self.nomes_tecnologia_s1 = frozenset(tecnologia.ROTINAS)
         # Core's single-record queries that ``provedor_entrada`` does not export (BatimentGetType, BatimentGetPlayer,
         # BatimentEnDestruction, ...): ``EntradaEstruturas.chamar`` runs them; each says which registers it changes.
         import entrada_estruturas as _ee
@@ -422,11 +477,32 @@ class DonosM3:
             self.fadiga = fadiga_vegetacao.FadigaVegetacao(m, externo=self.externo, som=self._som_fadiga())
             self._fadiga = fadiga_vegetacao.provedor_fadiga(self.fadiga)
             self.nomes_fadiga = frozenset(fadiga_vegetacao.ROTINAS)
+        from buscas_bloqueios import BuscasBloqueios, ROTINAS as BUSCAS, provedor_buscas
+        from consultas_estado_core import ConsultasEstadoCore, ROTINAS as ESTADO, provedor_consultas_estado
+        from provedores_lacunas_core import ROTINAS as LACUNAS, provedor_lacunas_s1
+        self._buscas = provedor_buscas(BuscasBloqueios(m))
+        self._consultas_estado = provedor_consultas_estado(ConsultasEstadoCore(m))
+        self.nomes_buscas, self.nomes_estado = frozenset(BUSCAS), frozenset(ESTADO)
+        self.nomes_lacunas = frozenset(LACUNAS) - self.nomes_buscas - self.nomes_estado
+        # Core explicitly delegates these two bodies to their committed owners. No replacement bodies or
+        # empty callbacks: restoration may be unavailable, and Combat's refuge is imported only on demand.
+        self._lacunas = provedor_lacunas_s1(m, som=som, restauracao=self._restauracao,
+                                           refugio=self._refugio)
         self.chamadas = []                       # (name, original call) of every cross-module call, in order
 
     def externo(self, nome, chamada, regs):
         from reinicio_ia import DependenciaIA
         self.chamadas.append((nome, chamada))
+        if nome in self._economia_s1:
+            return self._chamar_economia_s1(nome, chamada, regs)
+        if nome == 'MineGetCapacite':
+            return consulta_capacidade_mina(self.m, regs, chamada)
+        if nome in self.nomes_recrutamento:
+            # Preserve the caller's actual partial register file and unknown masks.
+            # Core rejects missing behaviour inputs before touching memory.
+            return self._recrutamento(nome, chamada, regs)
+        if nome in self.nomes_buscas or nome in self.nomes_estado or nome in self.nomes_lacunas:
+            return self._nova_rotina_core(nome, chamada, regs)
         if nome in self.nomes_core:
             return self._core(nome, chamada, regs)
         if nome in ('CalculPosition', 'RechercheDecalageSortie'):
@@ -488,9 +564,106 @@ class DonosM3:
             argumentos = {'chamada': chamada} if 'chamada' in inspect.signature(self.som).parameters else {}
             return dict(EAX=self.som(nome, {k: regs.get(k, 0) & M32 for k in ('EAX', 'EDX', 'EBX', 'ECX')}, pilha,
                                      **argumentos) & M32)
+        if nome == 'iagVilleSendMessage':
+            from mensagem_cidade_ia import mensagem_cidade
+            return mensagem_cidade(self.m, regs, chamada)
         if nome == 'iagUnitSendMessage' and self.mensagem_unidade is not None:
             return self.mensagem_unidade(regs, chamada)
         raise DependenciaIA(nome, chamada)
+
+    def _chamar_economia_s1(self, nome, chamada, regs):
+        """Forward every supplied register and metadata; preserve query unknowns.
+
+        The strict owner rejects omitted registers. Only SacGetCapacite and
+        TuyauEstSortie permit unknown preserved bits: known AX selects behavior.
+        Technology requires a complete known register file and keeps _x87_push.
+        """
+        from entrada_estruturas import ArgumentoNaoPassado
+        from reinicio_ia import DependenciaIA
+        from tecnologia_economia_s1 import DependenciaTecnologiaS1, ForaDoDominioTecnologiaS1
+        masks = dict(regs.get('_incertos') or {})
+        missing = [k for k in REG7 if k not in regs or masks.get(k, 0) &
+                   (M32 if nome in self.nomes_tecnologia_s1 else (0xffff if k == 'EAX' else 0))]
+        if missing:
+            raise ArgumentoNaoPassado(nome, chamada, missing)
+        try:
+            out = self._economia_s1[nome](nome, chamada, regs)
+        except (DependenciaTecnologiaS1, ForaDoDominioTecnologiaS1) as erro:
+            raise DependenciaIA(f'{nome} (Economy): {erro}',
+                                getattr(erro, 'chamada', getattr(erro, 'endereco', chamada))) from erro
+        if nome not in self.nomes_tecnologia_s1:
+            unknown = {k: v for k, v in masks.items() if k != 'EAX' and v}
+            if unknown:
+                out['_incertos'] = unknown
+        return out
+
+    def capacidade_saco(self, celula):
+        """Scalar InputGame projection of the exact read-only AX query.
+
+        Non-argument registers have opaque sentinel values and full unknown
+        masks. They are preserved by all native object/quantity branches and
+        discarded here. No sentinel may become a behavior input or result.
+        """
+        regs = {k: (0xa5a50000 + i*0x1111) & M32 for i, k in enumerate(REG7)}
+        regs['EAX'] = celula & 0xffff
+        regs['_incertos'] = {k: M32 for k in REG7 if k != 'EAX'}
+        out = self.externo('SacGetCapacite', 0x4299da, regs)
+        if (out.get('_incertos') or {}).get('EAX'):
+            raise ValueError('Unknown SacGetCapacite result cannot reach InputGame')
+        return out['EAX']
+
+    def _externo_tecnologia_s1(self, nome, chamada, regs):
+        """Live owner getters, exact ABI, all seven registers retained."""
+        from entrada_estruturas import ArgumentoNaoPassado
+        from reinicio_ia import DependenciaIA
+        missing = [k for k in REG7 if k not in regs or (regs.get('_incertos') or {}).get(k)]
+        if missing:
+            raise ArgumentoNaoPassado(nome, chamada, missing)
+        out = {k: regs[k] & M32 for k in REG7}
+        if nome == 'MissionGetNum':
+            from chamadas_quadro_core import numero_missao
+            out.update(numero_missao(self.m, regs['EAX']))
+        elif nome == 'PlayerGetType':
+            jogador = regs['EAX'] & 255
+            valor = _modulo_economia('quadro_economia').tipo_jogador(self.m, jogador)
+            out['EAX'] = ((regs['EAX'] & 0xffffff00) | valor) if jogador >= 4 else valor
+        else:
+            raise DependenciaIA(nome, chamada)
+        self.chamadas.append((nome, chamada))
+        return out
+
+    def _nova_rotina_core(self, nome, chamada, regs):
+        """Keep Core's partial-search and strict-query protocols, without inventing preserved registers or ESP.
+
+        CicloTrabalho supplies only argument registers and consumes AX from ChercheGc/Libre. Core's search
+        adapter marks every unknown bit, including stack-residue EAX high bits. Strict fight/state queries
+        instead require the complete actual register file. Named owner/domain failures remain named chain
+        stops; unexpected exceptions still propagate.
+        """
+        from buscas_bloqueios import ForaDoDominioBuscas
+        from consultas_luta import DependenciaLuta, ForaDoDominioLuta
+        from entrada_estruturas import ArgumentoNaoPassado
+        from fadiga_vegetacao import ForaDoDominioFadiga
+        from provedores_lacunas_core import DependenciaLacunaS1, EXIGE_ESP
+        from reinicio_ia import DependenciaIA
+        try:
+            if nome in self.nomes_buscas:
+                return self._buscas(nome, chamada, regs)
+            if nome in self.nomes_estado:
+                return self._consultas_estado(nome, chamada, regs)
+            if nome in EXIGE_ESP and not regs.get('ESP'):
+                raise DependenciaLacunaS1(nome, chamada, 'actual readable entry ESP unavailable')
+            return self._lacunas(nome, chamada, regs)
+        except (ArgumentoNaoPassado, DependenciaLacunaS1, DependenciaLuta, ForaDoDominioBuscas,
+                ForaDoDominioLuta, ForaDoDominioFadiga) as erro:
+            raise DependenciaIA(f'{nome} (Core): {erro}', chamada) from erro
+
+    def _refugio(self, nome, chamada, regs):
+        """Core's explicit owner callback: Combat's exact refuge query, with original call site and registers."""
+        from refugio_luta_combate import refugio_registradores
+        if nome != 'ChercheBatimentProximiteCaveOuSanctuaire':
+            raise KeyError(nome)
+        return refugio_registradores(self.m, regs, chamada=chamada)
 
     def selecao(self):
         """Core's ``selecao_ordens.SelecaoOrdens`` over the live memory (its SetAttaqueEngin through Combat), built
@@ -507,6 +680,17 @@ class DonosM3:
         zero = dict.fromkeys(REG7, 0)
         return self._fome('EnginNextEtape:19', 0x4554db, dict(
             zero, ESI=(self.m.u32(POOL) + (unidade & 0xffff) * PASSO) & M32, EDI=unidade & 0xffff, ESP=0))
+
+    def calcular_tropa_entrada(self, estrutura):
+        """CalculTroupe at BatimentNextEtape's CALL 0x426983, types 1/2 only.
+
+        Economy advances once and executes SortieTroupe over the live memory, calling
+        the real owner routes. Missing callees stop in place; a preparation handoff
+        is never discarded. Only AX is consumed at entry; the structure dispatcher
+        discards the exit registers (0x426988 -> 0x4281c0).
+        """
+        return self._caverna('CalculTroupe', 0x426983, dict.fromkeys(REG7, 0) |
+                             dict(EAX=estrutura & 0xffff))
 
     def ordens(self):
         """Economy's ``ordens_economia.OrdensEconomia`` over the live memory (its Core callees through
@@ -546,6 +730,8 @@ class DonosM3:
     def rotina_core(self, nome):
         """``f(regs, chamada=0) -> regs`` for a Core routine ``nome`` this composition can run (``fadiga_vegetacao``,
         ``provedor_entrada``'s exports or ``EntradaEstruturas``' routines), or None while Core has not published it."""
+        if nome in self.nomes_buscas or nome in self.nomes_estado or nome in self.nomes_lacunas:
+            return lambda regs, chamada=0: self.externo(nome, chamada, regs)
         if nome in self.nomes_fadiga:
             return lambda regs, chamada=0: self._fadiga(nome, chamada, {k: regs.get(k, 0) & M32 for k in REG7})
         if nome in self.nomes_core or nome in self.nomes_ee:

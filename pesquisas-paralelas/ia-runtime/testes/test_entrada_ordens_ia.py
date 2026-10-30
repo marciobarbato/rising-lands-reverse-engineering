@@ -130,6 +130,9 @@ class ReplayCasos(unittest.TestCase):
         from validar_entrada_ordens_ia import REGISTROS, comparar_resultado, executar_traducao
         from provedores_entrada_ia import construcao_core
         dependencias = {d['case']: d['dependency'] for d in self.relatorio['dependency_stops']}
+        # Economy's live tag-19 provider now completes this case. It must reach the
+        # full original-result comparison below, rather than an expected stop.
+        self.assertNotIn('process_tag19_unload', dependencias)
         posavel_ausente = construcao_core(None) is None
         posaveis = {c['case'] for c in self.captura['cases'] if any('|BatimentPosable|' in x for x in c['calls'])}
         self.assertEqual(self.relatorio['mismatches'], [])

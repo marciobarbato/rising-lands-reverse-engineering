@@ -1,0 +1,32 @@
+{
+  "bundlePath" : "\/Users\/marcio\/git\/Rising Lands\/local-data\/macos-playable\/dist\/development\/RisingLands-ptbr.app",
+  "diagnosticReadyDelayMs" : 0,
+  "diagnostics" : {
+
+  },
+  "error" : "TypeError: undefined is not an object (evaluating 'down.frame')",
+  "nativeWindowVisible" : true,
+  "passed" : false,
+  "pythonStderr" : "",
+  "readiness" : {
+    "appReady" : true,
+    "checksBudgetSeconds" : 45,
+    "checksSeconds" : 22.899605500002508,
+    "documentLoaded" : true,
+    "elapsedSeconds" : 30.448795083335426,
+    "initializationBudgetSeconds" : 90,
+    "initializationSeconds" : 7.5491895833329181,
+    "phase" : "checks",
+    "windowBudgetSeconds" : 45,
+    "windowVisibleSignal" : true
+  },
+  "readySignal" : {
+    "action" : "appReady",
+    "assets" : true,
+    "commit" : "8808d541804d1b5dccb02383e278f03802ddaafe",
+    "mode" : "inspection",
+    "protocol" : 1,
+    "worker" : true
+  },
+  "stack" : "@file:\/\/\/Users\/marcio\/git\/Rising%20Lands\/local-data\/macos-playable\/dist\/development\/RisingLands-ptbr.app\/Contents\/Resources\/preview\/ui\/playback.js:62:143"
+}

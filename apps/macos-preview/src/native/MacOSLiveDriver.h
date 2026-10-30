@@ -1,6 +1,7 @@
 #ifndef MACOS_LIVE_DRIVER_H
 #define MACOS_LIVE_DRIVER_H
 #include <stdint.h>
+#include "MacOSAudioMapper.h"
 typedef struct MacOSLiveDriver MacOSLiveDriver;
 typedef struct {
  uint64_t world, generation, frames, surfaces_equal, phases_equal, checkpoints_equal;
@@ -41,6 +42,12 @@ int32_t macos_live_event(MacOSLiveDriver *,uint32_t kind,uint32_t message,int32_
 /* Optional test/benchmark diagnostics; never called by normal play. */
 uint32_t macos_live_order_tags(MacOSLiveDriver *,uint32_t *,uint32_t);
 uint64_t macos_live_human_events(MacOSLiveDriver *);
+/* Play-mode sound requests: enable after create; each successful input phase
+ * appends its kind-10 PostSound/StopSound copies plus PlaySnd_Manage ticks.
+ * Draining is the app's only consumer; game state and audits are untouched. */
+int32_t macos_live_sound_capture(MacOSLiveDriver *,uint32_t enabled);
+uint32_t macos_live_sound_events(MacOSLiveDriver *,MacOSSoundEvent *,uint32_t capacity);
+uint64_t macos_live_sound_dropped(MacOSLiveDriver *);
 uint64_t macos_live_declared_frames(MacOSLiveDriver *);
 void macos_live_status(MacOSLiveDriver *,MacOSLiveStatus *);
 uint64_t macos_live_renderer(MacOSLiveDriver *);

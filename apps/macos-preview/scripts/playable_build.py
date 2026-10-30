@@ -54,9 +54,9 @@ def main():
     engine_source=(args.source/'motor').resolve()
     engine_revision=revision
     if os.environ.get('RISING_MACOS_ENGINE_SOURCE'):
-        raise ValueError('ExternalEngineOverrideRetired: build uses integrated motor ABI1.5')
-    if '#define RL_ABI_VERSION 0x00010005u' not in (engine_source/'include/rising_engine.h').read_text():
-        raise RuntimeError('RustRendererABIVersionMismatch: app requires reviewed ABI1.5')
+        raise ValueError('ExternalEngineOverrideRetired: build uses integrated motor ABI1.6')
+    if '#define RL_ABI_VERSION 0x00010006u' not in (engine_source/'include/rising_engine.h').read_text():
+        raise RuntimeError('RustRendererABIVersionMismatch: app requires reviewed ABI1.6')
     # Build into our ignored target; never mutate either engine source tree.
     legacy.run(['cargo','build','--release','--locked','--manifest-path',engine_source/'Cargo.toml',
                 '--target-dir',base/'build/engine-target'], 'rust-engine-build.log')
@@ -66,7 +66,8 @@ def main():
     static_library=base/'build/engine-target/release/librising_engine.a'
     static_driver=base/'build/macos-live-static.o'
     static_codec=base/'build/macos-codec-static.o'
-    for source,target,extra in [('macos_live_driver.c',static_driver,['-DMACOS_STATIC_ENGINE','-I',engine_source/'include']),('macos_projection_codec.c',static_codec,[])]:
+    static_audio=base/'build/macos-audio-static.o'
+    for source,target,extra in [('macos_live_driver.c',static_driver,['-DMACOS_STATIC_ENGINE','-I',engine_source/'include']),('macos_projection_codec.c',static_codec,[]),('macos_audio_mapper.c',static_audio,[])]:
         legacy.run(['xcrun','clang','-O3','-c','-arch','arm64','-mmacosx-version-min=13.0','-Wno-deprecated-declarations',
                     *extra,app_source/'src/native'/source,'-o',target], 'native-static-'+source+'.log')
     projection_library=base/'build/librising_macos_projection.dylib'
@@ -76,7 +77,7 @@ def main():
     native_library=base/'build/librising_macos_live.dylib'
     legacy.run(['xcrun','clang','-O3','-dynamiclib','-arch','arm64','-mmacosx-version-min=13.0',
                 '-Wno-deprecated-declarations','-I',engine_source/'include',
-                app_source/'src/native/macos_projection_codec.c',app_source/'src/native/macos_live_driver.c',
+                app_source/'src/native/macos_projection_codec.c',app_source/'src/native/macos_live_driver.c',app_source/'src/native/macos_audio_mapper.c',
                 '-install_name','@rpath/librising_macos_live.dylib','-o',native_library],'native-driver-build.log')
     from prepare_native_macos import prepare
     prepare(args.source,library,args.workspace/'source/cd/INSTALHD/RISING.EXE',base/'graphics-inputs',base/'native-inputs',projection_library)
@@ -106,6 +107,8 @@ def main():
     shutil.copytree(base / 'assets', payload / 'assets')
     prepare_render_inputs(args.source, args.workspace / 'source/cd', payload / 'graphics-inputs')
     shutil.copytree(base/'native-inputs',payload/'native-inputs')
+    from playable_audio import prepare_audio
+    audio_report=prepare_audio(args.source,args.workspace,payload/'audio')
     shutil.copy2(native_library,payload/'librising_macos_live.dylib')
     legacy.run(['codesign','--force','--sign','-','--timestamp=none',payload/'librising_macos_live.dylib'],'sign-native-driver.log')
     shutil.copy2(library,payload/'librising_engine.dylib')
@@ -129,10 +132,10 @@ def main():
     (contents / 'Info.plist').write_bytes(plistlib.dumps(plist))
     legacy.run(['xcrun', 'swiftc', '-swift-version', '5', '-O', '-target', 'arm64-apple-macosx13.0',
                 '-module-cache-path', base / 'build/module-cache', '-framework', 'AppKit', '-framework', 'WebKit',
-                '-framework','Metal','-framework','QuartzCore',
+                '-framework','Metal','-framework','QuartzCore','-framework','AVFoundation',
                 '-import-objc-header',app_source/'src/native/MacOSLiveDriver.h',
-                static_driver,static_codec,static_library,
-                app_source/'src/native/NativeLiveWindow.swift',app_source / 'src/native/SmokeReadiness.swift', app_source / 'src/native/main.swift', '-o', contents / 'MacOS/RisingLands-ptbr'], 'swift-build.log')
+                static_driver,static_codec,static_audio,static_library,
+                app_source/'src/native/NativeAudio.swift',app_source/'src/native/NativeLiveWindow.swift',app_source / 'src/native/SmokeReadiness.swift', app_source / 'src/native/main.swift', '-o', contents / 'MacOS/RisingLands-ptbr'], 'swift-build.log')
     for path in sorted((resources / 'Python').rglob('*.so')):
         legacy.run(['codesign', '--force', '--sign', '-', '--timestamp=none', path])
     legacy.run(['codesign', '--force', '--sign', '-', '--timestamp=none', resources / 'Python/bin/python3'], 'sign-python.log')
@@ -167,8 +170,8 @@ def main():
                 raise SystemExit('Native UI smoke failed: ' + json.dumps(result, ensure_ascii=False))
     report = {'commit': revision, 'mode': mode, 'features': manifest['features'], 'bundle': str(final),
               'uiSmoke': not args.skip_ui_smoke, 'logs': str(base / 'build/logs'),
-              'inputsRoot': str(args.workspace), 'engineSourceRevision':engine_revision, 'engineSourceRoot':str(engine_source), 'engineStaticArchiveSHA256':hashlib.sha256(static_library.read_bytes()).hexdigest(), 'nativeEngineBinding':'static-abi15', 'pythonRuntimeInput': os.environ.get('RISING_PYTHON_RUNTIME'),
-              'inspectionSmoke': not args.skip_ui_smoke,
+              'inputsRoot': str(args.workspace), 'engineSourceRevision':engine_revision, 'engineSourceRoot':str(engine_source), 'engineStaticArchiveSHA256':hashlib.sha256(static_library.read_bytes()).hexdigest(), 'nativeEngineBinding':'static-abi16', 'pythonRuntimeInput': os.environ.get('RISING_PYTHON_RUNTIME'),
+              'inspectionSmoke': not args.skip_ui_smoke, 'audio': audio_report,
               'builtAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
               'files': [{'path': str(p.relative_to(final)), 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()}
                         for p in sorted(final.rglob('*')) if p.is_file()]}

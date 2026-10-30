@@ -1,0 +1,89 @@
+{
+  "schema": "rising-lands/graphics-s1-native-lossless-partition/1",
+  "native_capture_sha256": "81775f170493e3ddfd754b47dea0e3ade423eab593c29da1ec8d6d6dc5335b1f",
+  "native_manifest": {
+    "schema": "rising-lands/m3-probe-render-native/1",
+    "probe": "S1",
+    "probe_ref": "82ec5eaa98d4f212b650c2c8ce2b293a30fb50ef",
+    "frames": [
+      4001,
+      4750
+    ],
+    "requested_stop": 4750,
+    "status": "complete",
+    "original_opening_state_sha256": "7d3166afc28a959316f5aa5f75f94593ba76305544c4e93de547110564693cf1",
+    "opening_checkpoint_sha256": "4fa70b35fb73033f2cd028ab27158b10837aab942db647cd3eb0559f4122abff",
+    "executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+    "code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+    "source_sha256": "13b93b10829de4d36f0b58237cf2a977bc8b1ce241a2a82d836ddbae2e99e0b5",
+    "recording_helper_sha256": "93cc53512affcca833967067b2b94bacd03b9a8d1dccc47aa78e1c229ee51d11",
+    "producing_revision": "589dcacf782f73529bf02869d6411c1003a430fd",
+    "snapshot": {
+      "path": ".local/graficos-api17-start/S1-render-04750.pickle",
+      "sha256": "9a1ba73067cf3aa7834f26643640d89bbefd2ff479fa8fab26a6dab151820b13"
+    },
+    "boundary_contract": "Original Missions display-v2: AffText/TextGetMessage declared non-execution; no glyph substitution.",
+    "elapsed_seconds": 440.755,
+    "raw_sha256": "4b69594a9fe3708566900659446a6962022c128d49ca09e19c701210b3af6bba",
+    "compressed_sha256": "81775f170493e3ddfd754b47dea0e3ade423eab593c29da1ec8d6d6dc5335b1f",
+    "invocation_seconds": 480.042
+  },
+  "parts": [
+    {
+      "path": "s1-render-part-4001-4128.json.xz",
+      "frames": [
+        4001,
+        4128
+      ],
+      "sha256": "7b0ca7492de7e4f9706bc1b2127ca55ab71a85bfc56bd2830b82c21631f9fc21",
+      "bytes": 48089920
+    },
+    {
+      "path": "s1-render-part-4129-4256.json.xz",
+      "frames": [
+        4129,
+        4256
+      ],
+      "sha256": "03c80c0d97866484923760871b1fa672fc18932155a702ea17dede708e245463",
+      "bytes": 30068072
+    },
+    {
+      "path": "s1-render-part-4257-4384.json.xz",
+      "frames": [
+        4257,
+        4384
+      ],
+      "sha256": "2c3c9db2abdb4be9136de810cae6f4862b26c907b8eca36fe08f75914f1a63f9",
+      "bytes": 44112828
+    },
+    {
+      "path": "s1-render-part-4385-4512.json.xz",
+      "frames": [
+        4385,
+        4512
+      ],
+      "sha256": "331e93ad58ade116a5a4e0b54f919dadda7d7f3ebdc683e959a9fe3261adf1c1",
+      "bytes": 27651136
+    },
+    {
+      "path": "s1-render-part-4513-4640.json.xz",
+      "frames": [
+        4513,
+        4640
+      ],
+      "sha256": "c08d40623133d3f53ef62fe4284cd756eeccc890099b11b9a05a3ec27148c981",
+      "bytes": 26005856
+    },
+    {
+      "path": "s1-render-part-4641-4750.json.xz",
+      "frames": [
+        4641,
+        4750
+      ],
+      "sha256": "1b9706c4998a5eafc295341f572e30bef2e0721002eade53a89c8a5c8b8eb5c6",
+      "bytes": 22027904
+    }
+  ],
+  "complete_native_rows_equal": true,
+  "encoded_payloads_unchanged": true
+}

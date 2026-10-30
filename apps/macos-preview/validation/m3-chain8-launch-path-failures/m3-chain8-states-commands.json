@@ -1,0 +1,44 @@
+[
+ {
+  "label": "state-P1",
+  "command": [
+   "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+   "-B",
+   "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+   "--root",
+   "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "--driver",
+   "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+   "--library",
+   "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+   "--inputs",
+   "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+   "--probe",
+   "P1",
+   "--output",
+   "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-state-P1.json"
+  ],
+  "returncode": 1
+ },
+ {
+  "label": "state-P2",
+  "command": [
+   "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+   "-B",
+   "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+   "--root",
+   "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "--driver",
+   "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+   "--library",
+   "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+   "--inputs",
+   "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+   "--probe",
+   "P2",
+   "--output",
+   "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-state-P2.json"
+  ],
+  "returncode": 1
+ }
+]

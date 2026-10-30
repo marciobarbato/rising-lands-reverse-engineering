@@ -130,6 +130,122 @@ class Replay(unittest.TestCase):
             self.assertEqual(struct.unpack_from('<H', legado.mundo.estruturas, 276 * s + 0x7c)[0], esperado,
                              (r['frame'], r.get('action')))
 
+    def test_conversion_direction_is_compared(self):
+        casos = [r for r in captura()['calls'] if r['routine'] == 'SortieTroupe'
+                 and any(c[1] == 'EnginSetType' for c in r['calls'])]
+        self.assertEqual([r['frame'] for r in casos], [297, 869, 1363])
+        for r in casos:
+            conversao = next(c for c in r['calls'] if c[1] == 'EnginSetType')
+            self.assertEqual(int(conversao[2]['EBX'], 16) & 0xff, 4)
+            for omitir in (False, True):
+                class DirecaoErrada(cr.CavernaRecrutamento):
+                    def __init__(self, m, **kwargs):
+                        super().__init__(m, **kwargs)
+                        original = self.externo
+
+                        def externo(nome, chamada, regs):
+                            if nome == 'EnginSetType':
+                                regs = dict(regs)
+                                if omitir:
+                                    regs.pop('EBX')
+                                else:
+                                    regs['EBX'] ^= 1
+                            return original(nome, chamada, regs)
+                        self.externo = externo
+
+                resultado, detalhe = rp.replay_chamada(r, DirecaoErrada)
+                self.assertEqual(resultado, 'mismatch', detalhe)
+                self.assertTrue(any('EnginSetType' in e and 'EBX' in e for e in detalhe['replay']))
+
+    def test_conversion_forwards_position_provider_bl(self):
+        """Protocol probe: forward the provider's actual BL, including when it differs from incoming DL."""
+        from validar_caverna_recrutamento import Replay, proprias
+        r = next(r for r in captura()['calls'] if r['routine'] == 'SortieTroupe' and r['frame'] == 297)
+        m = rp.MemoriaEsparsa(r['read_before_write'])
+        original = Replay(r, proprias())(m)
+
+        class ConversaoObservada(Exception):
+            pass
+
+        def externo(nome, chamada, regs):
+            if nome == 'EnginSetType':
+                self.assertEqual(chamada, 0x420f69)
+                self.assertEqual(regs['EBX'], 0x85)
+                raise ConversaoObservada
+            saida = original(nome, chamada, regs)
+            if nome == 'CalculPosition':
+                saida = dict(saida, EBX=0xabcdef85)
+            return saida
+
+        regs = {k: int(v, 16) for k, v in r['entry_registers'].items()}
+        with self.assertRaises(ConversaoObservada):
+            cr.CavernaRecrutamento(m, externo=externo)._SortieTroupe(regs)
+
+    def test_recruitment_arguments_are_compared(self):
+        """Every Core recruitment input is checked for omission and wrong bits at all three completions."""
+        from validar_caverna_recrutamento import RECRUTAMENTO_CORE
+        casos = [r for r in captura()['calls'] if r['routine'] == 'SortieTroupe'
+                 and any(c[1] == 'SetSortEngin' for c in r['calls'])]
+        self.assertEqual([r['frame'] for r in casos], [297, 869, 1363])
+        for r in casos:
+            posicao = next(c for c in r['calls'] if c[1] == 'CalculPosition')
+            celula = int(posicao[5]['EAX'], 16) & 0xffff
+            for nome in RECRUTAMENTO_CORE:
+                chamada = next(c for c in r['calls'] if c[1] == nome)
+                if nome in ('EnginSetType', 'EnginSetExperimente', 'SetSortEngin'):
+                    self.assertEqual(int(chamada[2]['EDX'], 16) & 0xffff, celula)
+                elif nome == 'EnginAddVie':
+                    self.assertEqual(int(chamada[2]['EDX'], 16) & 0xffff, 1000)
+                for reg in cr.ARGUMENTOS[nome]:
+                    for omitir in (False, True):
+                        with self.subTest(frame=r['frame'], routine=nome, register=reg, omit=omitir):
+                            class ArgumentoErrado(cr.CavernaRecrutamento):
+                                def __init__(self, m, **kwargs):
+                                    super().__init__(m, **kwargs)
+                                    original = self.externo
+
+                                    def externo(n, chamada, regs):
+                                        if n == nome:
+                                            regs = dict(regs)
+                                            if omitir:
+                                                regs.pop(reg)
+                                            else:
+                                                regs[reg] ^= 1
+                                        return original(n, chamada, regs)
+                                    self.externo = externo
+
+                            resultado, detalhe = rp.replay_chamada(r, ArgumentoErrado)
+                            self.assertEqual(resultado, 'mismatch', detalhe)
+                            self.assertTrue(any(nome in e and reg in e for e in detalhe['replay']))
+
+    def test_placement_forwards_computed_exit_cell(self):
+        """Protocol probe: the computed cell survives conversion/healing and reaches experience and placement."""
+        from validar_caverna_recrutamento import Replay, proprias
+        r = next(r for r in captura()['calls'] if r['routine'] == 'SortieTroupe' and r['frame'] == 297)
+        m = rp.MemoriaEsparsa(r['read_before_write'])
+        original = Replay(r, proprias())(m)
+        observadas = []
+
+        class SaidaObservada(Exception):
+            pass
+
+        def externo(nome, chamada, regs):
+            if nome in ('EnginSetType', 'EnginSetExperimente', 'SetSortEngin'):
+                self.assertEqual(regs['EDX'], 0x1234)
+                observadas.append(nome)
+            if nome == 'SetSortEngin':
+                self.assertEqual(chamada, 0x420f8c)
+                raise SaidaObservada
+            saida = original(nome, chamada, regs)
+            if nome == 'CalculPosition':
+                saida = dict(saida, EAX=0xabcd1234)
+            return saida
+
+        regs = {k: int(v, 16) for k, v in r['entry_registers'].items()}
+        with self.assertRaises(SaidaObservada):
+            cr.CavernaRecrutamento(m, externo=externo)._SortieTroupe(regs)
+        self.assertEqual(observadas, ['EnginSetType', 'EnginSetExperimente', 'SetSortEngin'])
+
     def test_mutations_are_detected(self):
         c = captura()
         alvos = {}
@@ -228,13 +344,29 @@ class Abandono(unittest.TestCase):
 
 class Relatorio(unittest.TestCase):
     def test_native_report_bound_to_translation(self):
-        for caminho in (RELATORIO, RELATORIO_ABANDONO):
+        from validar_caverna_recrutamento import RECRUTAMENTO_CORE
+        for caminho, casos, conversoes_esperadas in ((RELATORIO, 342, 6), (RELATORIO_ABANDONO, 81, 2)):
             rel = json.loads(caminho.read_text())
             self.assertEqual(rel['translation'],
                              hashlib.sha256((PASTA / 'caverna_recrutamento.py').read_bytes()).hexdigest(), caminho.name)
             self.assertEqual((rel['mismatches'], rel['errors']), (0, 0))
+            self.assertEqual((rel['compared'], rel['outside_domain']), (casos, 0))
             self.assertTrue(rel['rerun_equals_capture'])
             self.assertIsNotNone(rel.get('core_exit_provider'))
+            self.assertEqual(rel['argument_masks'], {n: cr.ARGUMENTOS[n] for n in RECRUTAMENTO_CORE})
+            chamadas = [c for r in rel['results'] for c in r.get('recruitment_arguments', [])]
+            self.assertEqual(len(chamadas), 5 * conversoes_esperadas)
+            for nome in RECRUTAMENTO_CORE:
+                por_rotina = [c for c in chamadas if c['routine'] == nome]
+                self.assertEqual(len(por_rotina), conversoes_esperadas)
+                for c in por_rotina:
+                    self.assertEqual(c['original'], c['translation'])
+                    self.assertEqual(set(c['translation']), set(cr.ARGUMENTOS[nome]))
+            conversoes = [c for r in rel['results'] for c in r.get('conversion_arguments', [])]
+            self.assertEqual(len(conversoes), conversoes_esperadas)
+            for c in conversoes:
+                self.assertEqual(c['original'], c['translation'])
+                self.assertIn('EBX', c['translation'])
 
     @unittest.skipUnless(os.environ.get('RISING_EMULAR') == '1', 'native differential (RISING_EMULAR=1)')
     def test_native_differential(self):

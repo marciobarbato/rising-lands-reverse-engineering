@@ -41,8 +41,8 @@ pub fn reset_order(m: &mut MemoriaJogo, i: u32) -> Result<()> {
         m.set_u8(u + 0xa9, 0)?;
         m.set_u8(u + 0xa4, 0)?;
     }
-    let structure = m.u16(u + 0xc0)?;
-    if t == 13 && structure != 65535 {
+    if t == 13 && m.u16(u + 0xc0)? != 65535 {
+        let structure = m.u16(u + 0xc0)?;
         let s = 0x49a0c8 + 276 * u32::from(structure);
         m.set_u8(s + 0x74, 0)?;
         if m.u8(s + 0x76)? == 15 && m.u8(s + 0x75)? != 0 {
