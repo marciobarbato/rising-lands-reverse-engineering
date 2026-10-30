@@ -821,7 +821,8 @@ mask, reference pin, engine source or graphics fallback is changed.
 ## M3.3 Test B recording and replay pipeline (2026-10-30)
 
 `apps/macos-preview/scripts/test_b_pipeline.py` consumes the canonical JSON
-export from `MacOSSessionRecorder`. `validate` imports the complete Missions
+export from `MacOSSessionRecorder`. Normal human play currently stops at the
+CAVE tooltip; see [the renderer dependency](#current-normal-ui-dependency). `validate` imports the complete Missions
 module and calls its unchanged `carregar_entrada` on the actual saved bytes.
 `app` runs the production app C input entry in audited validation policy 2,
 starting at accepted S0 and executing the real 128-frame prefix. As in Test A,
@@ -851,7 +852,8 @@ Missions policy acceptance.
 
 ### Recording the real human session
 
-1. Build/open the app, open **Rust ao vivo**, choose **Jogar**, and start from
+1. Build/open the app, open **Rust ao vivo**, choose **Jogar** and
+   **60 quadros/s** (or 20 for a slower recording), and start from
    **Reiniciar**. Advance/run to frame 128 or later without touching the game
    surface or issuing orders. Pause. There must be no earlier unrecorded input;
    otherwise reset and start again.
@@ -890,9 +892,9 @@ recording controls, serial event queue and `MacOSSessionRecorder`; it saves the
 same canonical export as the native save action:
 
 ```sh
-python3 -B "$PIPE" record --app "$APP" --output .local/test-b/synthetic-ui.json
-python3 -B "$PIPE" validate --input .local/test-b/synthetic-ui.input.json
-python3 -B "$PIPE" app --input .local/test-b/synthetic-ui.input.json --bundle "$APP/Contents/Resources/preview" --output .local/test-b/synthetic-app
+python3 -B "$PIPE" record --record-only --app "$APP" --output .local/test-b/validation-ui.json
+python3 -B "$PIPE" validate --input .local/test-b/validation-ui.input.json
+python3 -B "$PIPE" app --input .local/test-b/validation-ui.input.json --bundle "$APP/Contents/Resources/preview" --output .local/test-b/validation-app
 ```
 
 On the Mac mini, use a checkout of this feature commit, fetch over HTTPS, and
@@ -907,10 +909,109 @@ python3 -B apps/macos-preview/scripts/test_b_pipeline.py original --input apps/m
 Copy the original output directory back without changing its files, then:
 
 ```sh
-python3 -B "$PIPE" compare --app .local/test-b/synthetic-app --original .local/test-b/original-full --output .local/test-b/comparison-full.json
+python3 -B "$PIPE" compare --app .local/test-b/validation-app --original .local/test-b/original-full --output .local/test-b/comparison-full.json
 ```
 
 `--ate FRAME` bounds either replay or the comparison. On the MacBook every
 original prefix must use `heavy_lease.py` and `original --minutes 19` (a hard
 wall-clock limit below 20 minutes). The full original run belongs on the mini.
 Synthetic proof results and the measured runtime estimate are recorded below.
+
+
+### Current normal-UI dependency
+
+The fresh normal **Jogar** synthetic attempt at runtime `600c41a` stops before
+frame **141**, after 140 completed frames, when the CAVE icon's tooltip enters
+**AffText `0x459454`**: the production Rust ABI supplies no glyph renderer. This
+is an explicit renderer dependency, not a state-hash mismatch. Its actual
+recording and stop are preserved in this delivery. No app callback, state edit,
+substitute pixels or skipped production draw is installed to hide it. Current
+`origin/main` `65d9d50` retains that C ABI boundary.
+
+The synthetic plumbing proof therefore has a separate, explicit command:
+
+```sh
+python3 -B "$PIPE" record --record-only --app "$APP" --output .local/test-b/validation-ui.json
+```
+
+This uses the app's existing **Validar** UI: real AppKit events and the normal
+recorder/save path, while its live world runs the no-input validation chain.
+Its report says `capture_policy: record-only` and
+`orders_applied_in_capture: false`. The separate audited `app` replay must
+actually emit all six order kinds with the required CAVE/depot arguments.
+This proves recording/interchange/replay/comparison plumbing; it is **not a
+human-play acceptance**. The normal human recording procedure above requires
+the engine/Graphics owner to supply the glyph contract before a player can
+continue past this tooltip. An actual human Test B remains pending that
+provider and the complete original replay on the mini.
+
+### Fresh synthetic pipeline result and per-frame divergence list
+
+Runtime/build **c9bc5d79b048f579a2ee9323db955e7a3cf05086**;
+[delivery manifest](../apps/macos-preview/validation/test-b/delivery.json).
+This is **synthetic Validar capture**, not human Test B acceptance.
+
+- Real AppKit/Metal Validar recording: **3,572 completed frames after 128**,
+  ending at frame **3,700**, **80.6 seconds**; 3,700 accepted no-input surfaces,
+  257 prefix states and 11 checkpoints equal. Events traverse NSWindow, the
+  Metal responder, serial frame stamping and `MacOSSessionRecorder`.
+- Canonical [saved input](../apps/macos-preview/validation/test-b/entradas/synthetic.json)
+  passes the complete unchanged Missions validator; SHA256
+  `394364c4e57737cf35abd858aebc85809e125a6622661d944b7e2406c6636fe0`.
+  The existing stop barrier exports the next frame, **3,701**; the app replay
+  validates that extra quiescent frame, and the pending full original command
+  includes it. It is not counted among the 3,572
+  actually completed captured UI frames.
+- Audited app replay: **3,573 frames (129–3,701), no stop**, 254.1 seconds after
+  initialization. All six actual order checks pass: select at 133; CAVE
+  tag4/type3 at 153; lodge tag16 at 2,073; move tag5 at 2,421–2,423;
+  Ctrl depot tag7/word4=2 at 3,228; recruit tag17 at 3,700. Recruitment completion
+  is outside this bounded UI recording. Post-prefix rendering is omitted only
+  in this explicit replay tool, as in Test A.
+- Fresh original replay **129–350**, under `heavy_lease.py`, completes in
+  **171.5 seconds** with original code unchanged. **222/222 full mapped-state
+  hashes under the unchanged published P6 mask equal**, and all 222 separate
+  indicator hashes equal. The [per-frame report](../apps/macos-preview/validation/test-b/comparison-prefix.md)
+  and [complete hash rows](../apps/macos-preview/validation/test-b/comparison-prefix.json.xz)
+  preserve every comparison.
+
+**State-hash divergences per frame, compared interval 129–350: `[]`.**
+Original frames 351–3,701 have not been executed for this input and are not
+reported equal. The separate normal-UI renderer stop is **frame141,
+AffText `0x459454`**, after frame140; it is preserved in the
+[failed normal-UI recording](../apps/macos-preview/validation/test-b/normal-ui-stopped.json.xz).
+No normal human session or complete original Test B acceptance is claimed.
+
+Fresh **APP_BUILD passes 116 consumer tests / zero skips, 27 exercise checks,
+21 inspection/live checks**. `sh motor/validate.sh` passes, including 75 original
+x86 comparisons / zero mismatches / zero skips and 128 Swift/Metal surfaces.
+The engine tree is unchanged through this app delivery. The six-frame corrected
+original-wrapper preflight also passes all six state/indicator hashes. Initial
+runtime-variable and wrapper-pickling setup failures are preserved separately.
+
+Reproduce the bounded original comparison on the MacBook with the committed
+input and a fresh app replay output, after preparing the checkpoint above:
+
+```sh
+python3 -B "$PIPE" app --input apps/macos-preview/validation/test-b/entradas/synthetic.json --bundle "$APP/Contents/Resources/preview" --output .local/test-b/replayed-app
+python3 "/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py" macos-test-b-prefix -- python3 -B "$PIPE" original --input apps/macos-preview/validation/test-b/entradas/synthetic.json --inicio .local/test-b/quadro128 --ate 350 --minutes 19 --output .local/test-b/replayed-original-prefix
+python3 -B "$PIPE" compare --app .local/test-b/replayed-app --original .local/test-b/replayed-original-prefix --output .local/test-b/replayed-comparison.json
+```
+
+**Exact Mac-mini command**, from a checkout of this feature delivery with the
+frame128 checkpoint prepared:
+
+```sh
+python3 -B apps/macos-preview/scripts/test_b_pipeline.py original --input apps/macos-preview/validation/test-b/entradas/synthetic.json --inicio .local/test-b/quadro128 --output .local/test-b/original-full
+```
+
+The measured prefix rate is **0.773 seconds/frame**. Linear projection gives
+**46 minutes for one full 3,573-frame original replay**; allow **45–60 minutes**
+for machine/contention and later-frame variation. A fresh checkpoint took
+**196 seconds**, separately; reuse an existing verified one. The entire local
+final validation sequence held one normal lease, and the original prefix was
+well below its explicit 19-minute hard limit. Lease events, commands, source/
+artifact hashes, raw logs and all report scopes are in the delivery package.
+After a full replay, run `compare` against `.local/test-b/original-full` and
+copy every row from its Markdown divergence report into this section; missing
+frames or nonempty differences cannot establish acceptance.

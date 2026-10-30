@@ -497,3 +497,11 @@ are checked, with no new session exclusions. The comparator refuses differing
 input/mask identities and lists every differing or missing frame. Scope,
 commands, six-order coverage and remaining human/mini execution requirements
 are in [the Test B manual](../../docs/MACOS_PLAYABLE.md#m33-test-b-recording-and-replay-pipeline-2026-10-30).
+
+`record --record-only` explicitly selects the existing Validar record-only UI
+for synthetic input capture. Its metadata distinguishes real UI frames from
+orders: `orders_applied_in_capture=false`, `capture_policy=record-only`.
+Actual orders are checked in the separate audited Rust replay. Normal play
+capture retains the real renderer and first stop (currently frame141, AffText
+`0x459454`); no production text non-execution attestation is added. Human Test B
+remains a separate acceptance requirement blocked on that provider.
