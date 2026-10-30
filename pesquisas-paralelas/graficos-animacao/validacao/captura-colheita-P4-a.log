@@ -1,0 +1,16 @@
+[lease] graphics-origins-P4-a waiting
+[lease] graphics-origins-P4-a granted slots [3]
+P4 150 native surface/state equal
+P4 200 native surface/state equal
+P4 250 native surface/state equal
+P4 300 native surface/state equal
+P4 350 native surface/state equal
+P4 400 native surface/state equal
+P4 422 isolated original origin (10, 16) returned
+P4 450 native surface/state equal
+P4 500 native surface/state equal
+P4 550 native surface/state equal
+P4 600 native surface/state equal
+P4 650 native surface/state equal
+P4 700 native surface/state equal
+{"probe": "P4", "frames": [129, 728], "status": "complete", "seconds": 335.117, "drawn": 600, "snapshot": {"path": ".local/graficos-api17-start/P4-00728.pickle", "sha256": "5c903dc825070fd7a3d04a89a6dc768f27da99907dfe9bf54c9cf7cfa86df002"}, "text_boundaries": 281, "text_pointer_reads": 600}
