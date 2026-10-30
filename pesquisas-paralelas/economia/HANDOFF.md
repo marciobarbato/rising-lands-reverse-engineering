@@ -55,6 +55,75 @@ the pipe animation and consumer wiring remain outside this query delivery.
 No foreign source hashes are pinned. Gate: **557 tests, 209 optional skips,
 0 failures**, documentation links OK (52.207 s).
 
+## S1 research/technology delivery (2026-10-30)
+
+- Original-first capture `cfff43e`, produced by
+  `sondar_tecnologia_economia_s1.py --capturar`, with all hooks prearmed before
+  native execution. An earlier multi-observer attempt reached the frame's
+  600-second wall stop after adding/flushing hooks inside native blocks; it
+  produced no accepted capture. The prearmed replacement completes in 131.841 s
+  and checks all 45 S1 states (17000–17044) with unchanged code.
+- Native: **511 comparisons / 0 mismatches**, fresh rerun equal (134.130 s).
+  CPU-free: **511/511**, including exact EAX..EBP/ESP, changed bytes, every final
+  stored value, ordered stores, original foreign-call arguments and provider.
+- Additional x87 original capture `3273096`: **9 cases**, one real getter plus
+  eight finite-double variants. Fresh native rerun: **9/9, 0 mismatches**, exact
+  FP states, ST0 and one push. Tuple/JSON-array normalization is lossless; no
+  register bits or native differences are masked.
+- Identity: intact EXE SHA-256
+  `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+  Entry addresses/hashes are in `evidencias/lacunas-s1/listagens/manifesto.json`;
+  the per-routine case counts and supported domains are in
+  [the Economy contract](../../docs/ECONOMY.md#s1-research-and-technology-providers-2026-10-30).
+
+**API and requested consumer contract.** Use
+`tecnologia_economia_s1.TecnologiaEconomiaS1(m, externo=owner_callbacks)` and
+`provedor_tecnologia_economia_s1(instance, outros=None)`. The live memory has
+`u8/u16/u32`; every general entry register is required before access
+(`ArgumentoNaoPassado`), and every exit register is returned. Optional ESP is
+RET control state. RechercheGetEtat also returns `_x87_push=(mantissa64,
+sign/exponent16)`, representing exactly one ST0 push. Consumers must process
+that metadata when consuming the floating return; a zero EAX is not its value.
+External MissionGetNum (`0x46c11a`) and PlayerGetType (`0x46d817`) must be supplied
+by their owners and receive the full register file, plus entry ESP when known.
+The differential explicitly replays those original read-only calls, rather
+than claiming they were newly translated here. An absent provider raises its
+named call and keeps earlier writes. No consumer-owned files were edited.
+
+**Order/domain.** TechnologieReset → BonusReset → four stored research records
+copied → stored unlocks replayed → each player's count cleared and mission-gated
+unlocks applied → level byte stored after its effect. Troop unlock: flag then
+BatimentInitTechnologie's increasing structure scan; cave stock/count/capacity
+level before its technology Bag. Building unlock: flag then EnginSetTechnologie's
+Bags 7/14/8, in that order. Selective reset gaps survive. The native supported
+world has active structures 2 and 3; existing cave/recruitment code is reused.
+All four players' S1 unlocks are executed, not prefilled from observed values.
+
+**Gaps.** Bonus/spell effects, notifications, the extra recruitment rebuilds,
+mission-3 AI catch-up, nonfinite research doubles and overlong research tables
+remain named stops (see the contract). This is routine-level proof, not a full
+S1 chain acceptance; consumer wiring and MissionNext file stores are still their
+owners' work. Transport WIP is untouched. No foreign source hashes are pinned.
+
+**Earlier survey entries deliberately reused.** The cave capture and its clean
+342-case native report contain EnginGetTimeRecrute ×302, BatimentGetColons ×100,
+BatimentGetCapacite ×100 and __CHP ×100. The clean 407-case work-cycle capture
+contains MineEstSurTerrain ×2 and AjouteMatiere ×7; the clean 231-case hunger
+capture contains TerrainRetireMatiere ×2. GetStatusRecrute already has
+`DiferencialRecrutamento.test_512_status_cobrem_256_tipos_de_construcao_e_reparo`
+and native recruitment report coverage (2,777 bounded recruitment executions in
+`validacao-emulada.json`); AI/runtime already calls `Recrutamento.status`.
+These bodies were not retranslated and their historical reports were preserved.
+The new technology report names all 17 reached routines, including the seven
+already-validated bodies adapted to the strict register API.
+
+Final research-group gate: **565 tests, 209 optional skips, 0 failures**,
+documentation links OK (51.455 s). All four new native reports are clean and
+bound only to owned sources: sack 274, pipe 273, technology 511, x87 9; every
+rerun equals its preserved original-only capture. `git diff --check` is clean.
+The feature branch is committed/pushed for coordinator review, never merged to
+main by this executor. No transport files or parked WIP branches were changed.
+
 ## Recruitment placement DX delivery (2026-10-30)
 
 Base: `origin/main` `e41cc77`, merged into `feat/re-economy`. Only Economy-owned paths changed.

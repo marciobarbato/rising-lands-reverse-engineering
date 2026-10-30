@@ -1,0 +1,1147 @@
+{
+ "capture_sha256": "b6f295c60c7f3d0f5ae65013c028d18dccf10f7d7401835502e6963933698824",
+ "cases": [
+  {
+   "boundaries": [],
+   "caller": "MenuInit+0x4a0",
+   "caller_return": "0x46875b",
+   "calls": [],
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004"
+   },
+   "esp": "0x2007d6c",
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004",
+    "ESP": "0x2007d70"
+   },
+   "frame": 17043,
+   "kind": "in_situ",
+   "phase": "frame17043",
+   "read_before_write": [
+    [
+     "0x5080fc",
+     "0000000000000000"
+    ]
+   ],
+   "routine": "RechercheGetEtat",
+   "stack_args": [],
+   "stores": [],
+   "x87_after": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     14488038916154245120,
+     16383
+    ],
+    "FP7": [
+     0,
+     0
+    ],
+    "FPCW": 0,
+    "FPSW": 14336,
+    "FPTAG": 32085
+   },
+   "x87_before": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     14488038916154245120,
+     16383
+    ],
+    "FP7": [
+     16888498602639360000,
+     16395
+    ],
+    "FPCW": 0,
+    "FPSW": 0,
+    "FPTAG": 64853
+   }
+  },
+  {
+   "boundaries": [],
+   "calls": [],
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004"
+   },
+   "esp": "0x2007c70",
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004",
+    "ESP": "0x2007c74"
+   },
+   "frame": 17043,
+   "kind": "variant",
+   "label": "finite double 0.0",
+   "read_before_write": [
+    [
+     "0x5080fc",
+     "0000000000000000"
+    ]
+   ],
+   "routine": "RechercheGetEtat",
+   "stack_args": [],
+   "stores": [],
+   "writes": [
+    [
+     "0x5080fc",
+     "0000000000000000"
+    ]
+   ],
+   "x87_after": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     0,
+     0
+    ],
+    "FP7": [
+     0,
+     0
+    ],
+    "FPCW": 0,
+    "FPSW": 12288,
+    "FPTAG": 23893
+   },
+   "x87_before": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     14488038916154245120,
+     16383
+    ],
+    "FP7": [
+     0,
+     0
+    ],
+    "FPCW": 0,
+    "FPSW": 14336,
+    "FPTAG": 32085
+   }
+  },
+  {
+   "boundaries": [],
+   "calls": [],
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004"
+   },
+   "esp": "0x2007c70",
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004",
+    "ESP": "0x2007c74"
+   },
+   "frame": 17043,
+   "kind": "variant",
+   "label": "finite double -0.0",
+   "read_before_write": [
+    [
+     "0x5080fc",
+     "0000000000000080"
+    ]
+   ],
+   "routine": "RechercheGetEtat",
+   "stack_args": [],
+   "stores": [],
+   "writes": [
+    [
+     "0x5080fc",
+     "0000000000000080"
+    ]
+   ],
+   "x87_after": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     0,
+     32768
+    ],
+    "FP7": [
+     0,
+     0
+    ],
+    "FPCW": 0,
+    "FPSW": 12288,
+    "FPTAG": 23893
+   },
+   "x87_before": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     14488038916154245120,
+     16383
+    ],
+    "FP7": [
+     0,
+     0
+    ],
+    "FPCW": 0,
+    "FPSW": 14336,
+    "FPTAG": 32085
+   }
+  },
+  {
+   "boundaries": [],
+   "calls": [],
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004"
+   },
+   "esp": "0x2007c70",
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004",
+    "ESP": "0x2007c74"
+   },
+   "frame": 17043,
+   "kind": "variant",
+   "label": "finite double 1.0",
+   "read_before_write": [
+    [
+     "0x5080fc",
+     "000000000000f03f"
+    ]
+   ],
+   "routine": "RechercheGetEtat",
+   "stack_args": [],
+   "stores": [],
+   "writes": [
+    [
+     "0x5080fc",
+     "000000000000f03f"
+    ]
+   ],
+   "x87_after": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     9223372036854775808,
+     16383
+    ],
+    "FP7": [
+     0,
+     0
+    ],
+    "FPCW": 0,
+    "FPSW": 12288,
+    "FPTAG": 19797
+   },
+   "x87_before": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     14488038916154245120,
+     16383
+    ],
+    "FP7": [
+     0,
+     0
+    ],
+    "FPCW": 0,
+    "FPSW": 14336,
+    "FPTAG": 32085
+   }
+  },
+  {
+   "boundaries": [],
+   "calls": [],
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004"
+   },
+   "esp": "0x2007c70",
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004",
+    "ESP": "0x2007c74"
+   },
+   "frame": 17043,
+   "kind": "variant",
+   "label": "finite double -1.0",
+   "read_before_write": [
+    [
+     "0x5080fc",
+     "000000000000f0bf"
+    ]
+   ],
+   "routine": "RechercheGetEtat",
+   "stack_args": [],
+   "stores": [],
+   "writes": [
+    [
+     "0x5080fc",
+     "000000000000f0bf"
+    ]
+   ],
+   "x87_after": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     9223372036854775808,
+     49151
+    ],
+    "FP7": [
+     0,
+     0
+    ],
+    "FPCW": 0,
+    "FPSW": 12288,
+    "FPTAG": 19797
+   },
+   "x87_before": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     14488038916154245120,
+     16383
+    ],
+    "FP7": [
+     0,
+     0
+    ],
+    "FPCW": 0,
+    "FPSW": 14336,
+    "FPTAG": 32085
+   }
+  },
+  {
+   "boundaries": [],
+   "calls": [],
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004"
+   },
+   "esp": "0x2007c70",
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004",
+    "ESP": "0x2007c74"
+   },
+   "frame": 17043,
+   "kind": "variant",
+   "label": "finite double 1.5",
+   "read_before_write": [
+    [
+     "0x5080fc",
+     "000000000000f83f"
+    ]
+   ],
+   "routine": "RechercheGetEtat",
+   "stack_args": [],
+   "stores": [],
+   "writes": [
+    [
+     "0x5080fc",
+     "000000000000f83f"
+    ]
+   ],
+   "x87_after": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     13835058055282163712,
+     16383
+    ],
+    "FP7": [
+     0,
+     0
+    ],
+    "FPCW": 0,
+    "FPSW": 12288,
+    "FPTAG": 19797
+   },
+   "x87_before": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     14488038916154245120,
+     16383
+    ],
+    "FP7": [
+     0,
+     0
+    ],
+    "FPCW": 0,
+    "FPSW": 14336,
+    "FPTAG": 32085
+   }
+  },
+  {
+   "boundaries": [],
+   "calls": [],
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004"
+   },
+   "esp": "0x2007c70",
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004",
+    "ESP": "0x2007c74"
+   },
+   "frame": 17043,
+   "kind": "variant",
+   "label": "finite double 123456.125",
+   "read_before_write": [
+    [
+     "0x5080fc",
+     "000000000224fe40"
+    ]
+   ],
+   "routine": "RechercheGetEtat",
+   "stack_args": [],
+   "stores": [],
+   "writes": [
+    [
+     "0x5080fc",
+     "000000000224fe40"
+    ]
+   ],
+   "x87_after": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     17374904954581417984,
+     16399
+    ],
+    "FP7": [
+     0,
+     0
+    ],
+    "FPCW": 0,
+    "FPSW": 12288,
+    "FPTAG": 19797
+   },
+   "x87_before": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     14488038916154245120,
+     16383
+    ],
+    "FP7": [
+     0,
+     0
+    ],
+    "FPCW": 0,
+    "FPSW": 14336,
+    "FPTAG": 32085
+   }
+  },
+  {
+   "boundaries": [],
+   "calls": [],
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004"
+   },
+   "esp": "0x2007c70",
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004",
+    "ESP": "0x2007c74"
+   },
+   "frame": 17043,
+   "kind": "variant",
+   "label": "finite double 2.2250738585072014e-308",
+   "read_before_write": [
+    [
+     "0x5080fc",
+     "0000000000001000"
+    ]
+   ],
+   "routine": "RechercheGetEtat",
+   "stack_args": [],
+   "stores": [],
+   "writes": [
+    [
+     "0x5080fc",
+     "0000000000001000"
+    ]
+   ],
+   "x87_after": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     9223372036854775808,
+     15361
+    ],
+    "FP7": [
+     0,
+     0
+    ],
+    "FPCW": 0,
+    "FPSW": 12288,
+    "FPTAG": 19797
+   },
+   "x87_before": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     14488038916154245120,
+     16383
+    ],
+    "FP7": [
+     0,
+     0
+    ],
+    "FPCW": 0,
+    "FPSW": 14336,
+    "FPTAG": 32085
+   }
+  },
+  {
+   "boundaries": [],
+   "calls": [],
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004"
+   },
+   "esp": "0x2007c70",
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x356",
+    "EDI": "0x1a9",
+    "EDX": "0x4",
+    "ESI": "0x450004",
+    "ESP": "0x2007c74"
+   },
+   "frame": 17043,
+   "kind": "variant",
+   "label": "finite double 8.98846567431158e+307",
+   "read_before_write": [
+    [
+     "0x5080fc",
+     "000000000000e07f"
+    ]
+   ],
+   "routine": "RechercheGetEtat",
+   "stack_args": [],
+   "stores": [],
+   "writes": [
+    [
+     "0x5080fc",
+     "000000000000e07f"
+    ]
+   ],
+   "x87_after": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     9223372036854775808,
+     17406
+    ],
+    "FP7": [
+     0,
+     0
+    ],
+    "FPCW": 0,
+    "FPSW": 12288,
+    "FPTAG": 19797
+   },
+   "x87_before": {
+    "FP0": [
+     0,
+     0
+    ],
+    "FP1": [
+     0,
+     0
+    ],
+    "FP2": [
+     0,
+     0
+    ],
+    "FP3": [
+     0,
+     0
+    ],
+    "FP4": [
+     0,
+     0
+    ],
+    "FP5": [
+     9223372036854775808,
+     16383
+    ],
+    "FP6": [
+     14488038916154245120,
+     16383
+    ],
+    "FP7": [
+     0,
+     0
+    ],
+    "FPCW": 0,
+    "FPSW": 14336,
+    "FPTAG": 32085
+   }
+  }
+ ],
+ "comparisons": 9,
+ "mismatches": [],
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "reproduction": {
+  "code_unchanged": true,
+  "frames_checked": 45,
+  "last_frame": 17044,
+  "snapshot": {
+   "path": ".local/m3/passo2/S1/instantaneo-17000.pickle",
+   "sha256": "87435b226829abf7c6fcdfcc88082062fc3452cf3543cd9d0531260302272719"
+  }
+ },
+ "rerun_equals_capture": true,
+ "results": [
+  {
+   "case": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "one_push": true,
+   "registers_equal": true,
+   "x87_equal": true
+  },
+  {
+   "case": 1,
+   "native_equals_capture": true,
+   "ok": true,
+   "one_push": true,
+   "registers_equal": true,
+   "x87_equal": true
+  },
+  {
+   "case": 2,
+   "native_equals_capture": true,
+   "ok": true,
+   "one_push": true,
+   "registers_equal": true,
+   "x87_equal": true
+  },
+  {
+   "case": 3,
+   "native_equals_capture": true,
+   "ok": true,
+   "one_push": true,
+   "registers_equal": true,
+   "x87_equal": true
+  },
+  {
+   "case": 4,
+   "native_equals_capture": true,
+   "ok": true,
+   "one_push": true,
+   "registers_equal": true,
+   "x87_equal": true
+  },
+  {
+   "case": 5,
+   "native_equals_capture": true,
+   "ok": true,
+   "one_push": true,
+   "registers_equal": true,
+   "x87_equal": true
+  },
+  {
+   "case": 6,
+   "native_equals_capture": true,
+   "ok": true,
+   "one_push": true,
+   "registers_equal": true,
+   "x87_equal": true
+  },
+  {
+   "case": 7,
+   "native_equals_capture": true,
+   "ok": true,
+   "one_push": true,
+   "registers_equal": true,
+   "x87_equal": true
+  },
+  {
+   "case": 8,
+   "native_equals_capture": true,
+   "ok": true,
+   "one_push": true,
+   "registers_equal": true,
+   "x87_equal": true
+  }
+ ],
+ "source_revision": "cfff43e0ef91831cf7538fa86138b35bbade26cf",
+ "source_sha256": {
+  "pesquisas-paralelas/economia/sondar_x87_pesquisa_s1.py": "deaa6c9986ab0b781fab6c03724674580810fb5632d140a0ccec4118be1a212b",
+  "pesquisas-paralelas/economia/tecnologia_economia_s1.py": "5b7438a8f774dc851a8156ffc443f3fe08c055745b665a75e57d40194690b23f"
+ },
+ "translation_executed": true
+}
