@@ -180,7 +180,7 @@
  },
  "providers": "provedores_entrada_ia.provedores_vivos (committed Core/Economy/Combat owners); sound requests return the EAX they receive (the frame bench declaration for PlaySnd_*)",
  "schema": "rising-lands/monde01-input-orders-differential/1",
- "seconds": 134.495,
+ "seconds": 151.987,
  "source_sha256": {
   "ferramentas/selecao_ordens.py": "e8eb78134dd44adbbef88354ea3219c6513f2a2173cc68227fa9fecaf47ab67c",
   "pesquisas-paralelas/combate/alvos_alcance.py": "b0006a64869041997ab85d51f2758c7bd4c1d602e0f7bc6de3bb7ba75878dc17",

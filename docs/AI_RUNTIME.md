@@ -799,3 +799,9 @@ The state-11 walk, the creation at 220 and the WndProc/key paths are now checked
 - The round-1 and round-2 differentials were rerun after these changes: 0 mismatches.
 
 **Next:** the whole-state proof over the P1/P2 pass-2 windows, then P6, and the Core vision/groups and structure-entry wiring (see the HANDOFF).
+
+## M3.1 continuation — integrated baseline and provider regressions (2026-10-30)
+
+The later M3.1 wiring, hunger path, accepted P1/P2 proof and current dependency sequence are recorded in the latest [AI/runtime handoff](../pesquisas-paralelas/ia-runtime/HANDOFF.md). Fresh native regressions on main `e70fda3` compare 417 cases: **405 equal, 12 explicit dependency stops, zero mismatches**. Input orders are 117/124 equal, deposit pages 203/203, and construction/keys 85/90; the reports under `validacao/` retain each stop and current source provenance. All native load/frame/code reproductions pass. The leased AI/runtime gate passes 120 tests with eight explicit native skips.
+
+This continuation changes validation records only. APIs, supported domains and ordered effects are unchanged. Core `5422338`, Graphics' CAVE/construction-projectile guards and Missions' S1 pass-2 window have not reached the required upstream locations at the last fetch. S1/P4/P7 indicator reruns and new S1/P6 whole-state proofs remain pending those publications; the earlier P6 planning equality is diagnostic only.

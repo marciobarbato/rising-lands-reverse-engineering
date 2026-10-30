@@ -405,14 +405,14 @@
  },
  "providers": "provedores_entrada_ia.provedores_vivos (committed Core/Economy/Combat owners; Core entrada_estruturas for EnginSelectPeutEntrer from --nucleo-ref); sound requests return the EAX they receive (the frame bench declaration for PlaySnd_*)",
  "schema": "rising-lands/monde01-input-pages-deposit-differential/1",
- "seconds": 145.299,
+ "seconds": 170.82,
  "source_sha256": {
   "ferramentas/selecao_ordens.py": "e8eb78134dd44adbbef88354ea3219c6513f2a2173cc68227fa9fecaf47ab67c",
   "pesquisas-paralelas/economia/ordens_economia.py": "48c8fd6d63b7acdf7883e1a6a5b913435c3e35ab8e5eae2925f9f4ee84d46e69",
   "pesquisas-paralelas/ia-runtime/capturar_paginas_deposito_ia.py": "60c7361f97fca3154d848e8c613d42132531c7b8e42cda29aa6cd9fd518de970",
   "pesquisas-paralelas/ia-runtime/casos_paginas_deposito_ia.py": "32b4a7d94dc847310c8642ca02a6b6bc076c9adb4e156544285ba90520ae5875",
-  "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "ec5e1dbea911ab260c2f9441aee35d1cabdd11dcddd86e47c507ec2612a87798",
-  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "4ded79cded5227e461cc1ce6eac092ddc91a82d202a2cb5c3aeab8ab62d35110",
+  "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "0d3c50f9c07dcd4badb4d37217e3d6e8407c9146de968258addff2a2de982928",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "457415a632d998584866b65f18d52995d22255076a596dfc0aac25cbe8ba0d00",
   "pesquisas-paralelas/ia-runtime/validar_paginas_deposito_ia.py": "4d2a1fa4a86b1aaf03acf8c13b43d06ea7fe1d1c5759d649af6bcfb27d61c6bf"
  }
 }

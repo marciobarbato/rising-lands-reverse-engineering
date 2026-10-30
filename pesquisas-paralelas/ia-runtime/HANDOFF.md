@@ -579,3 +579,41 @@ Merged main `3e0de77` then `fcc0ba8`. The report is [M3_1_FOME_E_S1.md](M3_1_FOM
   - Core: TerrainEstGc ≥ 0x1d and the SetMiniMap mode at 0x44c437;
   - Economy: EnginRestaureEtat, BatimentEnleveMatiere and SetDechargeCaveEnginSelect;
   - Combat: the turret BatimentPeutAttaquer and BatimentInitAttaqueSelect.
+
+## Codex continuation — main baseline and native provider regressions (2026-10-30)
+
+Resumed this front after reading the preceding handover and the three M3.1 reports. Fast-forwarded the feature worktree from `c6dbcf2` to fetched main `e70fda3`; `3347a50` is integrated there. The current user authorizes AI/runtime-owned commits and feature pushes only: do not run the main integration helper or commit merges of other feature branches.
+
+### Fresh validation on the main-only source tree
+
+All three commands ran through `/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py`, without reference extractions or test merges:
+
+| Validator | Cases | Equal | Named stops | Mismatches | Compute seconds |
+|---|---:|---:|---:|---:|---:|
+| `validar_entrada_ordens_ia.py` | 124 | 117 | 7 | 0 | 151.987 |
+| `validar_paginas_deposito_ia.py` | 203 | 203 | 0 | 0 | 170.820 |
+| `validar_construcao_teclas_ia.py` | 90 | 85 | 5 | 0 | 151.402 |
+
+Reports refreshed: [entrada-ordens-native.json](validacao/entrada-ordens-native.json), [paginas-deposito-native.json](validacao/paginas-deposito-native.json), [construcao-teclas-native.json](validacao/construcao-teclas-native.json). Every run reproduces `load_tail`, `between_frames`, `frame1`, the pause and unchanged original code. The replay-read evidence remains byte-identical. The leased `python3 -B scripts/check.py --domain ai-runtime` passes **120 tests, 8 explicit native skips**, with documentation links passing. The three differentials above actually executed natively; they were not skipped.
+
+No translation, API, supported domain or mutation/callback order changed. The validators still consume their declared frame-1 native case-entry images, register files, cursor/key answers and sound-boundary declarations, and compare original registers, changed bytes and ordered requests. Oracle identity remains intact `RISING.EXE` SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`; original entries and call addresses remain those documented in the linked M3.1 reports and per-case captures. The reports' foreign source hashes record provenance only; no new foreign-file test pins were added.
+
+The input-order stops remain Core's `EnginEstVivant` at call site `0x4731d3` (entry `0x443dad`) and six unloaded-text cases at `0x478a47`. Construction/key stops remain `BatimentHabitable` at `0x41d000`, `SetMurAllentour` at `0x41d012`, `SetEnginSelectRentreEngin` at `0x45f17a`, `iagUnitSendMessage` at `0x41da48`, and VK_SUBTRACT/MiniMapRecentre at `0x41843e`. These are explicit retained boundaries, not mismatches or substituted behavior.
+
+### Upstream readiness and next actions
+
+Repeated fetches through 04:54 BRT still show main `e70fda3`. Core `5422338` and Graphics' CAVE/type-15/type-16 guard commits (`fabbabf`, `9f9ee84`, `3a22f70`) are **not ancestors of main**. Core has advanced to `c162e68` and Graphics to `ff5cf34` on their own feature branches; neither was merged into this worktree. Missions remains at `bab6c7c`, with no S1 pass-2 `captura-janela.manifest.json` on that ref or main. Its existing S1 pass-1 victory capture does not replace pass 2.
+
+No new window proof or indicator rerun was produced in this continuation. Last recorded reach remains:
+
+| Window | Last recorded reach | Pending dependency / next run |
+|---|---|---|
+| P1 / P2 | accepted whole-state 1,002/1,002 and 1,202/1,202 phases | unchanged accepted proof |
+| S1 | planning indicators: 1,973 frames equal, through 2101; stop in frame 2102 | Core TerrainEstGc at `0x44d8cd`; after Core lands, rerun and report the actual next stop (expected ChercheGc call site `0x44db70`) |
+| P4 | indicators: 331 frames equal, through 459; stop in frame 460 | same Core TerrainEstGc; rerun after Core lands |
+| P7 | strict through 220; planning through 2800, stop in 2801 | Graphics AffBatiments; Core TerrainEstGc in planning; rerun after Core lands |
+| P6 | strict 184 phases through 220; planning whole-state 4,544/4,544 through 2400 | Graphics AffBatiments and construction-projectile guards; strict proof waits for main |
+| P3 | strict through 220; planning 3,001/3,001 frames through 3129 | Graphics guards |
+| K1 / P5 | strict indicators complete through 629 / 3129 | no recorded stop |
+
+Continue in the user's order: merge fetched main when Core lands; run S1/P4/P7 indicators and refresh all three leaf differentials for the provider update. When Missions publishes S1 pass 2, run `fixar S1 --ref origin/feat/re-missions`, commit/push the pin, then run every S1 part in strict and planning modes under the lease, reporting each part's reach and chain hash. When Graphics lands on main, run strict `tudo --janelas P6` from the clean main-only source tree and write `validacao/m3-1-prova-p6.json` only if equal. Planning output stays under `.local/` and is never acceptance evidence.
