@@ -50,6 +50,39 @@ The frame-125 minimap divergence in that composition was Economy's: BatimentModi
 2. Refresh the native hunger and restore reports after the changed `alimentacao.py`, then run the domain gate and push `feat/re-economy`.
 3. Support AI/runtime's strict S1 proof and Missions' S1 windows with any Economy stop they report; then the research/technology routines at the S1 result screen.
 
+## Recruitment placement DX correction (2026-10-30, feature delivery)
+
+Base: `origin/main` `e41cc77`, merged into `feat/re-economy`. At SortieTroupe CALL `0x420f8c`
+→ SetSortEngin `0x445fbc`, the callback now receives **AX = existing unit, DX = computed exit cell**;
+`ARGUMENTOS['SetSortEngin']` includes `EDX: 0xffff`. The cell comes from CalculPosition's returned AX
+at `0x420f5a` (saved by the original in EBP at `0x420f5f`), is reloaded into EDX at `0x420f83`, and
+is preserved by EnginSetExperimente through the placement call. No observed S1 value is injected.
+
+All five calls satisfy Core's [recruitment adapter contract](core/RECRUITMENT_ADAPTERS.md):
+
+| CALL / callee | Forwarded behaviour registers |
+|---|---|
+| `0x420f69` EnginSetType | AX unit, DX computed cell, BL returned direction, CL requested type |
+| `0x420f75` EnginAddVie | AX unit, DX 1000 |
+| `0x420f7c` EnginResetFatigue | AX unit |
+| `0x420f85` EnginSetExperimente | AX unit, DX computed cell |
+| `0x420f8c` SetSortEngin | AX unit, DX computed cell |
+
+The shared replay/native argument comparison checks every required register and the native reports record
+all five calls' original/translated arguments and masks. Focused probes reject missing/wrong inputs at
+each of the three captured completions; a synthetic protocol probe changes the returned position and
+checks its forwarding through conversion, experience and placement. Original captures and their hashes
+are unchanged. Supported domains, removal/credit/conversion/recovery/placement/movement/cleanup/message
+order and named dependency stops are unchanged. AI/runtime owns the subsequent S1 chain rerun; this
+delivery does not establish whole-state equality at frame 2547.
+
+CPU-free recruitment: **342/342**, including Core's exit-position provider; abandonment: **81/81**,
+with and without it. Fresh native runs through the heavy lease: **342 recruitment + 81 abandonment cases,
+0 mismatches/errors/outside-domain cases, both reruns equal to the unchanged captures**. Reports record
+30 recruitment and 10 abandonment callback-argument comparisons, all equal, including DX at placement.
+Domain gate: **547 tests, 209 optional skips, 0 failures**, documentation links OK. The two native
+differentials above ran separately under the lease.
+
 ## Recruitment direction ABI correction (2026-10-30, feature delivery)
 
 After merging `origin/main` `92fab50`, `caverna_recrutamento.ARGUMENTOS['EnginSetType']` includes `EBX: 0xff`.
