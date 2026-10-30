@@ -230,11 +230,17 @@ Pass 2 ran at about 2–3 s/frame per job on the Mac mini.
 - Recruitment takes 308–534 frames. A recruit leaves at (14,14) or (16,14), and is selectable only about 40 frames after the sanctuary returns to +5 = 5.
 - A press on a cell holding a unit selects that unit, never a field or mine under it. A route's source must therefore be a free field cell (row 33 needs view (10,17)).
 
-**Continuation.** A run resumed from the stage-6 snapshot at frame 5300 continues to frame 18000 or victory. Its result is recorded below when it ends.
+**Continuation to victory** [B, development run resumed from the stage-6 snapshot at 5300, not replay-checked]:
+- Stone reaches 50 at **frame 11784**: marks 0x4e1d8a and 0x4e1d91 (records 2 and 9).
+- Both raids (9000 and 10800) pass with no loss of the tracked units or structures.
+- Food reaches 50 at **frame 16933** (stone 67). `TestFinDeMission` stores **AL = 1** (0x4e05a0), mark 0x4e1d89 (record 1) and the latch 0x4e1d84 = 1. 0x4e061c then counts one per frame.
+- At **frame 17032** (counter 100): `PlaySnd_StopAllSound`, `MenuInit(0x13)`. From 17033 the result screen runs `PartieGetResultat`; it ran cleanly to frame 18000.
+- Stage 7 adds a left click at 17040. With both click flags set (CalculGame 0x42ca46), the UP at **frame 17043** runs `MissionNext` (MakeMissionName, FileExists), then `IaRechercheAjuste`, `Engin_StoreExperimente`, `RechercheStore`, `PlayerStore` and `MenuInit(0x11)` (`ObjectifLoadText`, the next objectives screen). No `MissionLoad` follows.
+- [entradas/S1.json](entradas/S1.json) therefore stops at frame 17050.
+- Enter must not be scripted on that screen: 0x42ca60 loops on `GetAsyncKeyState(0x0d)` while the key is held.
 
 ### Resumable next steps
 
-1. From the continuation, take the frames of the first AL = 1, of `0x4e061c` = 100 and of `MenuInit(0x13)`.
-2. Add the confirmation click on the result screen (to be found on that screen) and a stop at the `MissionNext` return. Set `stop_frame` just after.
-3. Run S1 twice from F0 (`entrada_roteirizada.py correr --entrada .../entradas/S1.json --instantaneo-cada 1000`, two lease slots, about 2 h each). Compare the runs, then package with `relatorio_sondas.py S1`.
-4. Pass 2 of the S1 segments with `passo2_sondas.py`, as needed by the proofs.
+1. Done: AL = 1 at 16933, `MenuInit(0x13)` at 17032, confirmation click → `MissionNext` at 17043 (stage 7, stop 17050).
+2. Run S1 twice from F0 (`entrada_roteirizada.py correr --entrada .../entradas/S1.json --instantaneo-cada 1000`, two lease slots, about 2 h each). Compare the runs, then package with `relatorio_sondas.py S1`.
+3. Pass 2 of the S1 window with `passo2_sondas.py` (records from F0, then segments every 250 frames).
