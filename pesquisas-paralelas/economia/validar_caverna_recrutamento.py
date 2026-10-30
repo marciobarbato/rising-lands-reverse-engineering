@@ -35,6 +35,7 @@ from validar_ciclo_trabalho import carregar  # noqa: E402
 TRADUZIDAS = ('BatimentNextEtape', 'BatimentHabitable', 'BatimentSetTechnologie', 'InitBatimentPlayer',
               'InitBatimentNeutre', 'InitRecruteTroupe', 'CalculTroupe', 'SortieTroupe')
 REG7 = cr.REG7
+RECRUTAMENTO_CORE = ('EnginSetType', 'EnginAddVie', 'EnginResetFatigue', 'EnginSetExperimente', 'SetSortEngin')
 CAPTURA = PASTA / 'evidencias/caverna-recrutamento/captura-caverna-recrutamento-exibicao.json.xz'
 
 
@@ -54,6 +55,7 @@ class Replay:
         self.erros = []
         self.servidas = {}
         self.conversoes = []
+        self.recrutamento = []
 
     def _fronteira(self):
         saida, pilha = [], []
@@ -91,11 +93,14 @@ class Replay:
                 elif (int(c[2][k], 16) & largura) != (regs[k] & largura):
                     self.erros.append(f'{nome} at {chamada:#x}: {k} {regs[k] & largura:#x} != original '
                                       f'{int(c[2][k], 16) & largura:#x}')
-            if nome == 'EnginSetType':
-                self.conversoes.append(dict(
+            if nome in RECRUTAMENTO_CORE:
+                argumentos = dict(
                     call=hex(chamada),
                     original={k: int(c[2][k], 16) & mask for k, mask in self.argumentos[nome].items()},
-                    translation={k: regs[k] & mask for k, mask in self.argumentos[nome].items() if k in regs}))
+                    translation={k: regs[k] & mask for k, mask in self.argumentos[nome].items() if k in regs})
+                self.recrutamento.append(dict(argumentos, routine=nome))
+                if nome == 'EnginSetType':
+                    self.conversoes.append(argumentos)
             original = {k: int(c[5][k], 16) for k in REG7}
             if nome in self.provedores:
                 # A real translation (Core's ``provedor_saida``): its registers are what the caller receives,
@@ -190,6 +195,8 @@ def comparar(nome, regs, antes, resultado, provedores=None):
         detalhe['served_by_translation'] = dict(replay.servidas)
     if replay.conversoes:
         detalhe['conversion_arguments'] = replay.conversoes
+    if replay.recrutamento:
+        detalhe['recruitment_arguments'] = replay.recrutamento
     if incertos:
         detalhe['uncertain'] = {k: hex(v) for k, v in incertos.items()}
     if not ok:
@@ -214,7 +221,7 @@ def main():
     provedores = None if a.sem_saida_core else provedores_core()
     relatorio = dict(schema='rising-lands/economy-cave-recruitment-validation/1', capture=a.captura,
                      capture_raw_sha256=sha,
-                     argument_masks={'EnginSetType': cr.ARGUMENTOS['EnginSetType']},
+                     argument_masks={nome: cr.ARGUMENTOS[nome] for nome in RECRUTAMENTO_CORE},
                      translation=hashlib.sha256((PASTA / 'caverna_recrutamento.py').read_bytes()).hexdigest(),
                      core_exit_provider=None if provedores is None else hashlib.sha256(
                          (RAIZ / 'ferramentas/visao_grupos.py').read_bytes()).hexdigest(),
