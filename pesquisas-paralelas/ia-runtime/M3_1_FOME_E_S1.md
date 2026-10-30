@@ -49,6 +49,25 @@ The Graphics view-origin stops from the last round (K1 141, P4 422, P5 572) are 
 - **Generic route.** A Core routine reaches its caller as soon as Core exports it through `provedor_entrada` (`ROTINAS_ECONOMIA`), `EntradaEstruturas.ROTINAS` or `fadiga_vegetacao.ROTINAS`. TerrainEstGc ≥ 0x1d and the SetMiniMap mode at 0x44c437 will route the same way.
 - **Still named stops on the hunger path:** BatimentEnleveMatiere 0x4235bd and EnginRestaureEtat 0x45315f (**Economy**, both not translated yet). EnginRestaureEtat ends every meal, so S1 is expected to stop there first, at about frame 8057, unless Economy lands it.
 
+## Later wiring in this round (commits `a0ad39d`..`45b4a99`)
+
+- **CalculWorkEngin's callees.**
+  - SetMiniMap at 0x44c437 (mode 4) goes to Core's `incursao_core.definir_minimapa`. With it, P5 is equal to 3129 in strict and planning mode (3,001/3,001 frames).
+  - Random (0x44db44/0x44db54) goes to Core's `chamadas_quadro_core.ROTINAS['Random']`.
+  - TerrainEstGc goes to Core's `incursao_core.terreno_esta_gc` once it is on main (Core `5422338`).
+- **Register convention.** `DonosM3` returns every register in Core's provider shape: `_incertos` marks the registers the caller did not pass and the callee left unchanged. Economy's work cycle reads Random's EDX.
+- **Combat** (`ordens_torres_combate.OrdensTorresCombate`, main `c7f86cd`): BatimentPeutAttaquer (the whole routine) and BatimentInitAttaqueSelect (tag 14). They are built at first use, and Economy's BonusUnidades is read at the first bonus query.
+- **Economy `restauracao`** (when importable, Economy `db1bbed`):
+  - EnginRestaureEtat and BatimentEnleveMatiere, the hunger body's exits;
+  - SetDechargeCaveEnginSelect for tag 19 at 0x45f085;
+  - the state-19 body now runs through `alimentacao.provedor_fome` (`DonosM3.estado_19`);
+  - restauracao's Core callees ResetOrdre, EnginAsk and SetEnginConstruitBatiment go to `selecao_ordens`. EnginEstVivant and BatimentGetDecalageConstruction (Core) and SetAttaqueEngin (Combat) stay named stops. With every front merged locally, the tag-19 leaf case stops at EnginEstVivant 0x4731d3.
+- **This front: InputGame's panel with a structure selected** (0x42bd0d), translated from the intact bytes:
+  - the structure's order Bag (BatimentGetType, then BatimentGetBagOrdre);
+  - icon code 6 (a recruitable type): EnginGetTypeName, EnginGetRessource, TestRessource at 0x42c0fa, and tag 0x11 at 0x42bf88.
+
+  The S1 indicator check stopped there at frame 2010, on the sanctuary's recruit panel.
+
 ## S1 by parts (ready for the capture)
 
 `provar_entrada_janelas_ia.py` now has an S1 entry, unpinned until the Mac mini's pass-2 capture lands on feat/re-missions. Steps:
