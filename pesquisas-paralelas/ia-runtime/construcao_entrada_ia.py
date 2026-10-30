@@ -353,7 +353,8 @@ def instalar_donos(m, p, donos, tabelas):
     - ``EnginNextEtape:state13``: Core's ``estado_entrada`` with ESI = the unit record, EDI = the unit;
     - ``EnginNextEtape:state5``: ``estado_trabalho`` with Core's BatimentEnDestruction/BatimentGetPlayer and
       Economy's CalculWorkEngin;
-    - ``EnginNextEtape:state19``: Economy's ``alimentacao.estado_fome`` (the hunger body 0x4554db) with ESI = the
+    - ``EnginNextEtape:state19``: Economy's hunger body 0x4554db through ``alimentacao.provedor_fome``
+      (``DonosM3.estado_19``; its EnginRestaureEtat/BatimentEnleveMatiere through ``restauracao``) with ESI = the
       unit record, DI = the unit; EBX, ECX and EBP enter as 0. The body overwrites EBX and EBP before reading
       them and sets CX = DI (0x4555f2) before using ECX as the unit index; ECX's high word enters 0, as at all 231
       state-19 entries of Economy's native capture (``captura-alimentacao-exibicao``, return EnginNextEtape+0x8a1).
@@ -392,8 +393,7 @@ def instalar_donos(m, p, donos, tabelas):
             return donos.ciclo.calcul_work_engin(dict(regs, ESP=0))
         return donos.ee.chamar(nome, regs)
     p['EnginNextEtape:state5'] = lambda sitio, unidade: estado_trabalho(m, chamar, unidade)
-    p['EnginNextEtape:state19'] = lambda sitio, unidade: donos.fome.estado_fome(dict(
-        zero, ESI=(m.u32(0x4e19a0) + unidade * 276) & 0xffffffff, EDI=unidade, ESP=0))
+    p['EnginNextEtape:state19'] = lambda sitio, unidade: donos.estado_19(unidade)
     fadiga = donos.rotina_core('EnginSetFatigue')
     if fadiga is not None and 'EnginSetFatigue' not in p:
         p['EnginSetFatigue'] = lambda sitio, unidade: fadiga(dict(zero, EAX=unidade), sitio)['EAX']

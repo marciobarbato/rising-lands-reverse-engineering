@@ -62,23 +62,27 @@ class Despacho(unittest.TestCase):
     def test_instalar_donos_estado_19(self):
         recebidos = []
 
-        class Fome:
-            def estado_fome(self, regs):
-                recebidos.append(regs)
-                return dict(regs)
-
         class Donos:
-            fome = Fome()
+            def estado_19(self, unidade):
+                recebidos.append(unidade)
 
             def rotina_core(self, nome):
                 return None
-        m = Memoria({0x4e19a0: 0x2000000})
         p = {'BatimentNextEtape': lambda sitio, estrutura: None}
-        cei.instalar_donos(m, p, Donos(), dict(estados=[0] * 25, tipos_estrutura=[0] * 21))
+        cei.instalar_donos(Memoria({}), p, Donos(), dict(estados=[0] * 25, tipos_estrutura=[0] * 21))
         self.assertNotIn('EnginSetFatigue', p)
         p['EnginNextEtape:state19'](sitio=cei.ESTADO_19, unidade=12)
-        self.assertEqual(recebidos, [dict(EAX=0, EBX=0, ECX=0, EDX=0, ESI=0x2000000 + 12 * 276, EDI=12, EBP=0,
-                                          ESP=0)])
+        self.assertEqual(recebidos, [12])
+
+    def test_estado_19_pelo_provedor_fome(self):
+        from provedores_entrada_ia import DonosM3
+        d = DonosM3.__new__(DonosM3)
+        d.m = Memoria({0x4e19a0: 0x2000000})
+        chamadas = []
+        d._fome = lambda nome, chamada, regs: chamadas.append((nome, chamada, regs))
+        d.estado_19(0x1000c)
+        self.assertEqual(chamadas, [('EnginNextEtape:19', cei.ESTADO_19, dict(
+            EAX=0, EBX=0, ECX=0, EDX=0, ESI=0x2000000 + 12 * 276, EDI=12, EBP=0, ESP=0))])
 
     def test_instalar_donos_fadiga_quando_core_publica(self):
         chamadas = []
