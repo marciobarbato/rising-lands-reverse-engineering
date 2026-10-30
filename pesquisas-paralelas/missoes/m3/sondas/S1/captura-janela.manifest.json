@@ -1,0 +1,341 @@
+{
+ "schema": "rising-lands/compressed-evidence-manifest/2",
+ "probe": "S1",
+ "capture": "M3 probe S1: frames 129-17050 from the M2.2 frame-128 state, scripted input, complete deltas",
+ "encoding": {
+  "format": "xz",
+  "check": "crc64",
+  "filter": "lzma2",
+  "preset": "9e"
+ },
+ "parts": [
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/S1/captura-janela.parte00.json.xz",
+   "compressed_sha256": "aca04195bc5861888010a6277fc3e7215bc7b6cc30b8641da121a50ec1802669",
+   "compressed_bytes": 10238544,
+   "raw_sha256": "9e7d3730bc109ba62ffcd9fd15daef9679916aeac99761eeff44545d4dd0c325",
+   "raw_bytes": 174685592,
+   "part": 0,
+   "frames": [
+    129,
+    1128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/S1/captura-janela.parte01.json.xz",
+   "compressed_sha256": "5a3561687ef1b5012f6369045d0e590e7e4682be11b8d6c2eb2ca6a1a3606b6b",
+   "compressed_bytes": 10481896,
+   "raw_sha256": "79d3a93a42905b4946a53ab5b4656df7f0e08d95431c5e5e9dc292b778b78f20",
+   "raw_bytes": 175604077,
+   "part": 1,
+   "frames": [
+    1129,
+    2128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/S1/captura-janela.parte02.json.xz",
+   "compressed_sha256": "83f560708f059ac9b832849ff632fd33bce4a9849173b50007d0e7f0ab915b73",
+   "compressed_bytes": 13938672,
+   "raw_sha256": "240839e5b6d1110425c012c1bde27cd057d3f763b0b1398b27e76858c6af12d2",
+   "raw_bytes": 180703324,
+   "part": 2,
+   "frames": [
+    2129,
+    3128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/S1/captura-janela.parte03.json.xz",
+   "compressed_sha256": "e4ee474ffac1825c976cafde99628f3bca55d21818bc2e3ba8ecc08db46520b7",
+   "compressed_bytes": 15280488,
+   "raw_sha256": "a3f3975bb7e95e6c870edfd26b284da8069c8b1a11d50103d36a29e01d9bd4b9",
+   "raw_bytes": 184006550,
+   "part": 3,
+   "frames": [
+    3129,
+    4128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/S1/captura-janela.parte04.json.xz",
+   "compressed_sha256": "2c3f6b4cab24c59f78d04cabc6f8218585149758cd60289bf9f901670554b78a",
+   "compressed_bytes": 15969012,
+   "raw_sha256": "0989e03537de8c939669afb13b5135de96a25c60bcc1a8eea157382b8ce9bbbf",
+   "raw_bytes": 184623957,
+   "part": 4,
+   "frames": [
+    4129,
+    5128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/S1/captura-janela.parte05.json.xz",
+   "compressed_sha256": "4d5bbda7eab980667c3926cc8cb296d1711640f3c9b31854c49ba97cf4280639",
+   "compressed_bytes": 16061904,
+   "raw_sha256": "5f32e0290c51bbe45cdef3cf922a55b0fcdecd5bc965b3a51cbe78a9366b8d42",
+   "raw_bytes": 186678459,
+   "part": 5,
+   "frames": [
+    5129,
+    6128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/S1/captura-janela.parte06.json.xz",
+   "compressed_sha256": "9215fe1fc8a781e7a25268c628ed45b26e643f13a8e62d775bf21d0ec6826462",
+   "compressed_bytes": 15909368,
+   "raw_sha256": "f0bfdcbb8f47d299769948a90f31091d5b552094f646cc5e7f4a0229422495fb",
+   "raw_bytes": 186641209,
+   "part": 6,
+   "frames": [
+    6129,
+    7128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/S1/captura-janela.parte07.json.xz",
+   "compressed_sha256": "f3247fe31ad6ac14d10ae2336fb49c13a6745c2c5f0c8796ced38c17cb0481ee",
+   "compressed_bytes": 15940872,
+   "raw_sha256": "fd3e4fcde84cd377fbf96efc87e24c221e991beb8ea6f980c5b3ea2dd4f2c0e8",
+   "raw_bytes": 186723892,
+   "part": 7,
+   "frames": [
+    7129,
+    8128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/S1/captura-janela.parte08.json.xz",
+   "compressed_sha256": "a665fec5bdfae05625b78a4d4e25618ff64fb810650e984aa11482c10fca305b",
+   "compressed_bytes": 16913408,
+   "raw_sha256": "34fe8756f25ba2ad6957839e892d7de3f51828dbf2e7df4cd2c897947997bdb2",
+   "raw_bytes": 186760777,
+   "part": 8,
+   "frames": [
+    8129,
+    9128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/S1/captura-janela.parte09.json.xz",
+   "compressed_sha256": "d5b4c5b9ae714b8a519831baa157bb4be22d5e2abd3e66b4b383ee18787d7c4a",
+   "compressed_bytes": 16320640,
+   "raw_sha256": "84e2a187e94a03134e00f58740c6efd0f7e048f80b9b77686c68b034eb08610d",
+   "raw_bytes": 186867050,
+   "part": 9,
+   "frames": [
+    9129,
+    10128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/S1/captura-janela.parte10.json.xz",
+   "compressed_sha256": "87aababdd2d55db9ba5df98f440023a45a375fdd7246a82765d44ddf21ed5ea2",
+   "compressed_bytes": 17316576,
+   "raw_sha256": "3c1a32afa7d53cfb8b18ea9c6e74f1d4de7b3522caf4e79e0a3a330bdc09b1d7",
+   "raw_bytes": 186892906,
+   "part": 10,
+   "frames": [
+    10129,
+    11128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/S1/captura-janela.parte11.json.xz",
+   "compressed_sha256": "96f7eea057a23c5eeaa9ad401b5d11b0f1707540aacef28dff56789d9f6923a5",
+   "compressed_bytes": 16284524,
+   "raw_sha256": "7f64016e9a81e5c241656fa676829fff35a1acb9dffec16a44052d3220b89254",
+   "raw_bytes": 187119504,
+   "part": 11,
+   "frames": [
+    11129,
+    12128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/S1/captura-janela.parte12.json.xz",
+   "compressed_sha256": "f48f0f1dc5e77197f4383669dda194dcc4cbcd9cf3cab2dd47fa1654ec06e6fe",
+   "compressed_bytes": 15600620,
+   "raw_sha256": "13f0b6b796f4a7dca0088886b34dc755d4ea55c08dc900c0ef756053bc5ac3e4",
+   "raw_bytes": 185943175,
+   "part": 12,
+   "frames": [
+    12129,
+    13128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/S1/captura-janela.parte13.json.xz",
+   "compressed_sha256": "f2058a2e14b75cb412b19ba6f067a41888f6c7ff4252587124f14bc0c0f6227e",
+   "compressed_bytes": 15200252,
+   "raw_sha256": "e3d80b37b95b6c8187b415da93fa0e919ac2a45517ecb15f1ba653b7772bec6c",
+   "raw_bytes": 185662336,
+   "part": 13,
+   "frames": [
+    13129,
+    14128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/S1/captura-janela.parte14.json.xz",
+   "compressed_sha256": "6d36e5c99d309d49254ea4600b8e46479a231dc22173ca2e7dbdc8f0f7901a76",
+   "compressed_bytes": 15654772,
+   "raw_sha256": "8953d51adb21840ebb7ffd317f39c7e7ba7299d49564600c8edc09b8942517a5",
+   "raw_bytes": 185810110,
+   "part": 14,
+   "frames": [
+    14129,
+    15128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/S1/captura-janela.parte15.json.xz",
+   "compressed_sha256": "9e09115ed245be26f88fe4fe535368955bd96ad6c8160ebbccb8a582b63209e9",
+   "compressed_bytes": 16167720,
+   "raw_sha256": "ffac3804f25d69f4c9c4643d4b0f0f0c39c1cc275e372fcee2e18a59ca1f7d35",
+   "raw_bytes": 185747462,
+   "part": 15,
+   "frames": [
+    15129,
+    16128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/S1/captura-janela.parte16.json.xz",
+   "compressed_sha256": "40d57decde8602e7a7a61a2849bb25802265736261972e7cec28ba66a7b3c7b5",
+   "compressed_bytes": 15052884,
+   "raw_sha256": "64a1132e66d386efe9b1d225c14fcab8d93189bca9bc398c5ea06620bcdf678b",
+   "raw_bytes": 188933239,
+   "part": 16,
+   "frames": [
+    16129,
+    17050
+   ],
+   "phases": 1844
+  }
+ ],
+ "mask": {
+  "path": "pesquisas-paralelas/missoes/m3/sondas/S1/mascara-janela.json",
+  "sha256": "80878022fc46d3e66caba4fc264844449c738a56c0a9457dc7d8f0dcc82c3c59"
+ },
+ "opening": {
+  "blocks": 25197,
+  "bytes": 16175335,
+  "sha256": "eb714f7d5a694ad91bab9b41c37a28860006c89be03f9170e3b312064a4b04b2"
+ },
+ "definitions": {
+  "mask": "policy cumulative.exclusion_mask: sorted address ranges [start, end)",
+  "compared_summary": "resumo_imagem of the state (native_stack excluded) with every masked byte set to 0: blocks sorted by name, each hashed as struct.pack(\"<II\", base, size) + bytes",
+  "masked_sha256": "SHA-256 over, for each block sorted by name and each mask range intersecting it in address order, struct.pack(\"<II\", start, length) + the bytes of that intersection",
+  "summary": "resumo_imagem of the full state (native_stack excluded)",
+  "state_delta": "complete delta (display bytes included): released, then allocated, then ranges (delta_estado_missao)"
+ },
+ "replay_check": {
+  "result": "equal",
+  "parts": [
+   {
+    "part": 0,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 1,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 2,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 3,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 4,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 5,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 6,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 7,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 8,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 9,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 10,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 11,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 12,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 13,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 14,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 15,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 16,
+    "phases": 1844,
+    "full_states_checked": 6
+   }
+  ],
+  "chain": "part 0 opens with the frame-128 state; every later opening state is the previous replayed end"
+ }
+}
