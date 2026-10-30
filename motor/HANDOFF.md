@@ -1440,3 +1440,30 @@ Fresh final-byte S1 snapshot variants also pass484/484,120/120,121/121 (10 decla
 voice skips), with their full records reserved for the final verification report.
 Final advancing state/surface runs now use this corrected, separately committed
 implementation. Main remains untouched.
+
+## Sixth continuation piece — native structure clock guards
+
+After the shifted-icon correction, both advancing surface attempts passed1,942
+surfaces and stopped at frame2071,0x401d18. Pinned `hud_quadro.cronometro` already
+returns without a gauge for a hovered structure owned by another player, and for
+an own active CAVE independently of its timer word. Rust incorrectly required
+the old owner0/sanctuary/no-recruitment tuple for every selected structure.
+`render_hud` now follows the exact lazy branch order and retains the unsupported
+clock stop. It continues the remaining HUD after the no-gauge branch.
+
+[Piece6 report](validation/chain8/piece6/summary.json): **1,700/1,700** immutable
+original P6/P7 render-entry snapshots2001–3700 match pixels, raster calls, cache
+cursor and exact text-boundary consumption. Each snapshot loads its own original
+surface/cache; this is explicitly not advancing-world or full-cache/Python proof.
+The complete gate passes again (30 Rust/63 Python,666 input,75 pilot,C/Swift/Metal).
+Exclusive full-window play timing and9,200-frame M2 terminal equality pass; exact
+means, source/library identities and all prior failure attempts are retained.
+The three probe terminal projection hashes also equal piece5 before this
+renderer-only correction. No simulation provider, ABI or comparison mask changes.
+
+The completed **84bdc9f** P6 simulation run independently proves **2,272/2,272**
+frames129–2400, **4,544/4,544** whole-state phases (16,002,289 compared bytes/phase,
+unchanged173,046-byte cumulative mask) and **4,544/4,544** paired play/audit phases.
+Zero differences or stops. Its report predates only this HUD correction, with
+that exact source/library identity preserved. Final-source advancing state and
+surface runs form the last verification piece of this same task. No main merge.

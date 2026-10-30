@@ -48,13 +48,18 @@ impl Context<'_> {
         }
         if selected != 65535 {
             let a = 0x49a0c8 + 276 * selected;
-            if selected >= 1000
-                || self.u8(a + 4)? != 0
-                || self.camera != 0
-                || !matches!(self.u8(a + 8)?, 2 | 3)
-                || self.u8(a + 5)? != 5
-                || self.u16(a + 0x74)? != 0
-            {
+            if selected >= 1000 {
+                return self.stop(0x401d18, "AffChrono selected structure index");
+            }
+            let owner = self.u8(a + 4)?;
+            let no_clock = owner != self.camera
+                || (self.u8(a + 8)? == 3 && self.u8(a + 5)? == 5)
+                || (owner == 0
+                    && self.camera == 0
+                    && self.u8(a + 8)? == 2
+                    && self.u8(a + 5)? == 5
+                    && self.u16(a + 0x74)? == 0);
+            if !no_clock {
                 return self.stop(
                     0x401d18,
                     "AffChrono selected structure outside no-recruitment sanctuary domain",
