@@ -2,6 +2,128 @@
 
 Chat: `01a18262-c6d5-7cd3-80fa-8431bf5f2657` (Economy and Production). Worktree: `/Users/marcio/git/Rising Lands/worktrees/re-economy`. Branch: `feat/re-economy`. Organization base: `6634be3af2d255846a847d8aa21ad4edf1cdb589`. Implementation commit: `f5a5e9b` (`Reconstruct troop completion preparation and cargo credits`); the following handoff commit and serialized integration result are identified in the completion chat. Only economy-owned paths changed.
 
+## S1 SacGetCapacite delivery (2026-10-30)
+
+Merged `origin/main` `84e4fe7` into the clean feature branch before work.
+No transport WIP was resumed. All edits are Economy-owned; do not integrate
+this branch automatically: the coordinator reviews and merges it.
+
+- API: `lacunas_economia_s1.LacunasEconomiaS1(m).chamar(name, regs)`;
+  `provedor_lacunas_economia_s1(instance, outros=None)` is the seven-register
+  `externo(name, call_address, regs)` adapter. Missing EAX..EBP raises
+  `ArgumentoNaoPassado` before reads. Optional ESP is control state, RET +4.
+- Supported domain: all u16 cells and all object/quantity bytes in the live
+  65,536-cell grids `[0x507d74]` and `[0x507dac]`. No stores or callbacks;
+  EDX/EBX/ECX/ESI/EDI/EBP are preserved. For a sack, EAX keeps the quantity
+  pointer's upper half and replaces AX with its quantity byte. Other types
+  return EAX=0. No artificial capacity or default register is supplied.
+- Identity: intact RISING.EXE SHA-256
+  `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`;
+  entry `0x475736`, end exclusive `0x475763`; InputGame CALL `0x4299da`.
+- Original first: `b00175f`; corrected sparse read capture `d1f112b` keeps
+  the predecessor untouched. `captura-sac-v2.json.xz` is the replay input.
+  Both have equal native outputs; the predecessor missed one memory read.
+- Validation: 274/274 sparse replays; fresh native differential and the
+  Economy gate are recorded in the report and the completion note below.
+- Gaps: only the frame-3851 S1 call is in this segment, not the second call
+  at 4210. No full-chain acceptance is claimed. AI/runtime and the Rust
+  engine own dispatch wiring; the exact register provider is ready for it.
+
+Completion of the sack group: **274 fresh native comparisons, 0 mismatches**,
+all native cases equal to the corrected original-only capture (123.347 s,
+heavy lease). `scripts/check.py --domain economy`: **552 tests, 209 optional
+skips, 0 failures**, documentation links OK (51.906 s). Other native suites
+were not opted into. Transport remains parked.
+
+## S1 TuyauEstSortie delivery (2026-10-30)
+
+Original-only capture `065b6c0`, followed by `tuyau_economia_s1` translation.
+API: `TuyauEconomiaS1(m).chamar(name, regs)` and
+`provedor_tuyau_economia_s1(instance, outros=None)`. All EAX..EBP inputs are
+required (`ArgumentoNaoPassado` before reads), optional ESP returns +4.
+AX must index 0..999; live structure bytes +0x76/+0x75 are read in that order,
+the second only when the first equals 15. AL is their predicate; EAX upper
+24 bits come from the structure pointer. EDX/EBX/ECX/ESI/EDI/EBP are unchanged.
+No stores or callbacks occur.
+
+Identity: intact EXE `6c556520…8543fb`, entry `0x420c7c`, end `0x420cae`.
+The capture covers AffBatiments' four real calls (1977–1980), all counter
+bytes, enable boundaries, structure 0/999 and upper-register sentinels.
+**273/273 sparse replays and 273 fresh native comparisons, 0 mismatches**;
+native rerun equal to the capture (203.662 s, heavy lease). Later S1 calls,
+the pipe animation and consumer wiring remain outside this query delivery.
+No foreign source hashes are pinned. Gate: **557 tests, 209 optional skips,
+0 failures**, documentation links OK (52.207 s).
+
+## S1 research/technology delivery (2026-10-30)
+
+- Original-first capture `cfff43e`, produced by
+  `sondar_tecnologia_economia_s1.py --capturar`, with all hooks prearmed before
+  native execution. An earlier multi-observer attempt reached the frame's
+  600-second wall stop after adding/flushing hooks inside native blocks; it
+  produced no accepted capture. The prearmed replacement completes in 131.841 s
+  and checks all 45 S1 states (17000–17044) with unchanged code.
+- Native: **511 comparisons / 0 mismatches**, fresh rerun equal (134.130 s).
+  CPU-free: **511/511**, including exact EAX..EBP/ESP, changed bytes, every final
+  stored value, ordered stores, original foreign-call arguments and provider.
+- Additional x87 original capture `3273096`: **9 cases**, one real getter plus
+  eight finite-double variants. Fresh native rerun: **9/9, 0 mismatches**, exact
+  FP states, ST0 and one push. Tuple/JSON-array normalization is lossless; no
+  register bits or native differences are masked.
+- Identity: intact EXE SHA-256
+  `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+  Entry addresses/hashes are in `evidencias/lacunas-s1/listagens/manifesto.json`;
+  the per-routine case counts and supported domains are in
+  [the Economy contract](../../docs/ECONOMY.md#s1-research-and-technology-providers-2026-10-30).
+
+**API and requested consumer contract.** Use
+`tecnologia_economia_s1.TecnologiaEconomiaS1(m, externo=owner_callbacks)` and
+`provedor_tecnologia_economia_s1(instance, outros=None)`. The live memory has
+`u8/u16/u32`; every general entry register is required before access
+(`ArgumentoNaoPassado`), and every exit register is returned. Optional ESP is
+RET control state. RechercheGetEtat also returns `_x87_push=(mantissa64,
+sign/exponent16)`, representing exactly one ST0 push. Consumers must process
+that metadata when consuming the floating return; a zero EAX is not its value.
+External MissionGetNum (`0x46c11a`) and PlayerGetType (`0x46d817`) must be supplied
+by their owners and receive the full register file, plus entry ESP when known.
+The differential explicitly replays those original read-only calls, rather
+than claiming they were newly translated here. An absent provider raises its
+named call and keeps earlier writes. No consumer-owned files were edited.
+
+**Order/domain.** TechnologieReset → BonusReset → four stored research records
+copied → stored unlocks replayed → each player's count cleared and mission-gated
+unlocks applied → level byte stored after its effect. Troop unlock: flag then
+BatimentInitTechnologie's increasing structure scan; cave stock/count/capacity
+level before its technology Bag. Building unlock: flag then EnginSetTechnologie's
+Bags 7/14/8, in that order. Selective reset gaps survive. The native supported
+world has active structures 2 and 3; existing cave/recruitment code is reused.
+All four players' S1 unlocks are executed, not prefilled from observed values.
+
+**Gaps.** Bonus/spell effects, notifications, the extra recruitment rebuilds,
+mission-3 AI catch-up, nonfinite research doubles and overlong research tables
+remain named stops (see the contract). This is routine-level proof, not a full
+S1 chain acceptance; consumer wiring and MissionNext file stores are still their
+owners' work. Transport WIP is untouched. No foreign source hashes are pinned.
+
+**Earlier survey entries deliberately reused.** The cave capture and its clean
+342-case native report contain EnginGetTimeRecrute ×302, BatimentGetColons ×100,
+BatimentGetCapacite ×100 and __CHP ×100. The clean 407-case work-cycle capture
+contains MineEstSurTerrain ×2 and AjouteMatiere ×7; the clean 231-case hunger
+capture contains TerrainRetireMatiere ×2. GetStatusRecrute already has
+`DiferencialRecrutamento.test_512_status_cobrem_256_tipos_de_construcao_e_reparo`
+and native recruitment report coverage (2,777 bounded recruitment executions in
+`validacao-emulada.json`); AI/runtime already calls `Recrutamento.status`.
+These bodies were not retranslated and their historical reports were preserved.
+The new technology report names all 17 reached routines, including the seven
+already-validated bodies adapted to the strict register API.
+
+Final research-group gate: **565 tests, 209 optional skips, 0 failures**,
+documentation links OK (51.455 s). All four new native reports are clean and
+bound only to owned sources: sack 274, pipe 273, technology 511, x87 9; every
+rerun equals its preserved original-only capture. `git diff --check` is clean.
+The feature branch is committed/pushed for coordinator review, never merged to
+main by this executor. No transport files or parked WIP branches were changed.
+
 ## Recruitment placement DX delivery (2026-10-30)
 
 Base: `origin/main` `e41cc77`, merged into `feat/re-economy`. Only Economy-owned paths changed.
