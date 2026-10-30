@@ -24,6 +24,8 @@ def main():
     ap.add_argument('--de', type=int, required=True)
     ap.add_argument('--ate', type=int, required=True)
     ap.add_argument('--saida', required=True)
+    ap.add_argument('--unidade', type=int, help='select the actual zero-extended EAX unit at entry')
+    ap.add_argument('--estado-local', help='save full original entry blocks under ignored .local only')
     ap.add_argument('--entrada-deteccao', action='store_true',
                     help='also capture complete live records needed by Combat\'s public message adapter')
     args = ap.parse_args()
@@ -32,6 +34,9 @@ def main():
         raise SystemExit('Refusing to overwrite original evidence')
     if args.ate <= args.de:
         raise SystemExit('--ate must be after --de')
+    state_path = ROOT/args.estado_local if args.estado_local else None
+    if state_path and (not state_path.resolve().is_relative_to((ROOT/'.local').resolve()) or state_path.exists()):
+        raise SystemExit('--estado-local must be a new ignored .local path')
     import bancada_s1 as bs
     from inventario_ia_runtime import OriginalImage
     instruction = OriginalImage().instruction(args.chamada)
@@ -54,7 +59,8 @@ def main():
         s1.b.cpu.ctl_flush_tb()
 
     def choose(name, regs, ret, observer):
-        if observer.quadro == args.ate and ret == caller_return:
+        if (observer.quadro == args.ate and ret == caller_return
+                and (args.unidade is None or regs['EAX'] == args.unidade)):
             stores.clear()
             reads.iniciar()
             return True
@@ -62,6 +68,14 @@ def main():
 
     def close(case, blocks):
         case['read_before_write'] = reads.finalizar()
+        if state_path:
+            import pickle
+            state_path.parent.mkdir(parents=True, exist_ok=True)
+            raw_state = pickle.dumps(blocks, protocol=4)
+            with state_path.open('xb') as f:
+                f.write(raw_state)
+            case['local_entry_state'] = dict(path=str(state_path.relative_to(ROOT)),
+                sha256=hashlib.sha256(raw_state).hexdigest(), blocks=len(blocks))
         if args.entrada_deteccao:
             def get(address, size):
                 for base, raw in blocks.values():

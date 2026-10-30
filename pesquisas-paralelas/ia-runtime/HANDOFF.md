@@ -1104,3 +1104,22 @@ Original v1 capture `a0fedec` precedes the adapter; additive v2 inputs/stores
 are committed at `efb98b1`. Strict/planning indicators and the complete domain
 gate follow this passing implementation checkpoint. Graphics' strict guard
 remains a separate dependency; no main merge/acceptance or pass-2 proof.
+
+### Original-first attack-dispatch checkpoint
+
+The additive observer selects the actual zero-extended EAX unit and can save
+full entry blocks only to a new ignored `.local/` path. The native parent
+`EnginNextEtape 0x45442c`, CALL `0x456ead`, return `0x456eb2`, is captured for
+unit17 at frame11663 in `evidencias/s1-ataque-proxima-etapa-original.json`.
+All 164 original S1 states (11500–11663) equal, code unchanged, no boundaries,
+110.161 seconds. Entry EAX=EBX=17, ECX=0x400, EDX=4, ESI=EDI=EBP=0,
+ESP=0x2007ea8. Full entry data remain ignored and are hash-bound in the new
+evidence; no commercial input block dump is tracked. Native changes include
+the detection handler and the subsequent attack step. This capture precedes
+any new attack-dispatch binding.
+
+The post-detection strict indicator on `ad5147a` again equals 10,672 frames,
+129–10800, no first difference, then the unchanged Graphics monster guard
+at between_frames10801. Report: `validacao/s1-deteccao-strict.json`.
+The fresh domain gate passes 138 tests, eight skips, no failures/errors,
+140.392 seconds. Planning is still running at this capture checkpoint.
