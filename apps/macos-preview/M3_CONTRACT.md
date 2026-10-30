@@ -1,8 +1,11 @@
 # macOS accepted-state consumption contract v6
 
-Identifier: `rising-lands/macos-state-consumer/6`. This version explicitly accepts Graphics
-render API **1.5**, enables its HUD/cursor option, and checks the original full
-800×600 phase-end surface while preserving read-only playback and cache chaining. Live ABI 1.1 is a separate session described below. Orders remain record-only; no milestone acceptance is added.
+Identifier: `rising-lands/macos-state-consumer/6`. The current consumer explicitly
+accepts Python Graphics **1.8**, enables HUD/cursor composition and checks the
+original full 800×600 phase-end surface with read-only playback/cache chaining.
+Native live execution requires **ABI 1.4 / Rust Graphics 1.7**. The current
+integrated-backend section below supersedes the preserved earlier-stage notes.
+Orders remain record-only; no milestone acceptance is added.
 
 ## Evidence and memory
 
@@ -354,3 +357,31 @@ include all 155,597 records from P1/P2/P3/P6/P7/K1. The sole excluded field is
 deferred state half. No expected message/key/cursor/flag answer feeds the mapper.
 State hashes, WndProc effects and human Test B await engine order support;
 this stage does not inject orders or claim their state equivalence.
+
+## Current integrated backend — ABI 1.4 / Python Graphics 1.8
+
+This adoption supersedes the ABI 1.3 development backend above. C and ctypes
+consumers now require `rl_versao()==0x00010004`. Native driver creation also
+requires `rl_render_contrato()==0x00010007`, the engine's explicit Graphics 1.7
+contract. Existing copied-buffer layouts, phase order, generation checks,
+palette/cache ownership and stop behavior remain unchanged. The static native
+binding is labeled `static-abi14`; live metadata reports renderer version 1.7.
+ABI 1.4's saved-background and text observations do not install a glyph provider
+or change the sole ownership of display effects in phase 2.
+
+The isolated Python inspector/oracle explicitly accepts Graphics 1.8. It pins
+`verificacao-cadeia-m22-v2-api18-128.json`, SHA-256
+`613ec2348b7fe0d597690ca4601af7f825c0d227133cdddc6b10e822e8eee845`.
+Its regression checks all 128 full/chained surfaces against the 1.7 report.
+The new API declares no additional input callback or region; habitation remains
+an actual read through the unchanged Economy predicate, including CAVE bags.
+All unsupported text/other branches retain named stops. Python 1.8 acceptance
+does not imply that Rust has ported the added 1.8 families.
+
+APP_BUILD builds integrated `motor/` from the exact same Git archive as the app,
+without the former 363faa9 source override. The external-engine environment
+override is explicitly retired. Engine validation consumes the owner's
+commit-pinned logic and Graphics reference trees via `pinned_reference.py`;
+neither those pins nor their original evidence are edited by this consumer.
+Test A's answer-only API and canonical files are unchanged. Order injection,
+WndProc game-output flags, the state-hash half and Test B remain deferred.

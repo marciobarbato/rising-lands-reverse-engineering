@@ -1197,3 +1197,86 @@ order support; no orders were injected. Test B's 3,000-frame human original
 replay and new original-x86 captures were not run. No M3 acceptance is recorded.
 Final evidence/documentation commits change no executable code after ebacca2;
 only `feat/macos-playable` is pushed non-forcibly.
+
+## Integrated ABI 1.4 and Graphics 1.8 adoption
+
+Merged fetched main **ef52cb0** into the front at **091aee2**. Implementation
+and validated APP_BUILD commit: **e760756c44f79950cedc146ac17654b19c2d18c0**.
+Only owned app sources/manuals are changed; `motor/`, pinned references,
+provider implementations and original evidence are unmodified. The standard
+workstream preparation helper creates only ignored read-only input links.
+Build/test caches remain ignored. No main integration or acceptance occurs.
+
+Both ctypes and native consumers now require **ABI 1.4 / 0x00010004**. Native
+creation also checks `rl_render_contrato()==0x00010007`, the Rust Graphics 1.7
+domain. The checked C layouts and caller-buffer lifetimes are unchanged;
+generation query → read-only render → phase2 → phase3 ordering is preserved.
+Phase2 alone owns game display effects. The Swift binary statically links the
+same reviewed ABI and app driver, keeping hardened signing. The temporary
+363faa9 override is retired explicitly; APP_BUILD uses integrated `motor/`
+from the identical immutable source archive as the app, not another checkout.
+ABI/capability errors and render stops remain visible and named.
+
+The isolated Python inspector/oracle explicitly accepts **Graphics 1.8** and
+pins its 128-frame HUD report SHA-256
+`613ec2348b7fe0d597690ca4601af7f825c0d227133cdddc6b10e822e8eee845`.
+The consumer regression checks all 128 chained/full-surface hashes against
+1.7. The owner declares no new callback or heap region; the existing actual
+Economy habitation reader covers CAVE bags. Native labels/metadata accurately
+retain Rust Graphics 1.7 rather than claiming the Python 1.8 extensions.
+No glyph/text substitute, default habitation answer or order injection is added.
+The [current contract](M3_CONTRACT.md#current-integrated-backend--abi-14--python-graphics-18)
+supersedes the earlier development-backend notes.
+
+The exact [APP_BUILD](validation/m3-abi14-app-build.log) command is unchanged:
+`python3 -B compilar-jogável --development-ref HEAD --inputs-root
+"/Users/marcio/git/Rising Lands" --data-root
+"/Users/marcio/git/Rising Lands/local-data/macos-playable"`, with the existing
+relocatable Python runtime declared and no external-engine override. It passes
+**109 consumer tests, zero skips**, **27 native exercise checks** and **20
+inspection/live checks**. Source/assets, isolated relocated runtime, ARM64 and
+strict deep signing pass. Existing readiness/check budgets are unchanged.
+
+The [fresh bundled live proof](validation/m3-abi14-live-prefix.json) passes
+**257/257 masked states, 11/11 checkpoints, 128/128 original full surfaces and
+128/128 Python 1.8 surfaces**, with palette/cache/ordered-effect comparisons
+and zero observer failures. The production frame driver is the one under test.
+The [fresh Test A proof](validation/m3-abi14-test-a-answers.json) retains all
+**155,597/155,597 answers**, no first difference, and six byte-identical canonical
+round trips: P1 7,522; P2 9,034; P3 45,032; P6 33,873; P7 53,099; K1 7,037.
+Native poll logs supply requests only; WndProc output flags/state remain outside
+the answer half. Original input/evidence bytes and masks are unchanged.
+
+The [real native UI smoke](validation/m3-abi14-native-inspection-smoke.json)
+measures **41.386 fps** (401 frames, 9.689 s), with a visible Metal window,
+required startup proofs and actual presentation. GPU readback matches all
+1,920,000 displayed pixels. All 406 reached original surfaces are equal. The
+input recorder still receives constructed NSEvents through the AppKit responder
+chain, exports the literal frame file, and injects nothing into Rust.
+
+[`sh motor/validate.sh`](validation/m3-abi14-engine-validate.log) passes:
+fmt, clippy, **28 Rust tests**, **61 Python tests** plus **10 renderer child
+tests**, **75 original-x86 differential comparisons / zero mismatches / zero
+skips**, C header checks, Swift ABI interoperability and **128/128** Swift render
+surfaces. The engine gate's library is debug; the measured application is
+release. Its unchanged `pinned_reference.py` uses logic revision
+`7ceeff909b52b7d4f59723f35dfe43a9deda41ff` and Graphics revision
+`ce441852bcada750a8f91da8ed3302f1668c4405`, materialized/checked from Git objects.
+Current Graphics 1.8 source never replaces that engine reference tree.
+
+[Common checks](validation/m3-abi14-common.log.gz) also pass in this prepared
+feature worktree using `/usr/bin/python3 -B scripts/check.py` and `.local/python`:
+Core 561/213 optional skips, Combat 279/153, Economy 521/209, Graphics 261/0,
+Missions 154/33, AI/runtime 112/8, Audio 79/4, workflow 9/0 — **1,976 tests,
+620 optional skips, zero failures/errors**. All native/heavy runs used the
+coordination lease and stayed below 20 minutes. No new original capture is
+created or altered. The [delivery manifest](validation/m3-abi14-delivery.json)
+pins libraries, inputs and result artifacts, including tested shared library
+SHA-256 `7079b58383dba56bfd885883161a300650c697dd0053e38bb5dbb6c0364d556f`.
+
+Remaining scope: Test A game-state/WndProc-effect half, Test B and order support;
+continuous human drag capture; glyphs; Rust ports of the added Python 1.8
+families. The 9,200-frame/first-stop horizon was **not rerun on ABI 1.4**; prior
+ABI 1.3 results remain historical. Requested APP_BUILD, engine gate and bounded
+live/Test A proofs pass. Final evidence/docs commits change no executable code
+after e760756. Only the feature branch is pushed without force.
