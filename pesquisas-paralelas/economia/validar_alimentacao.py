@@ -42,8 +42,8 @@ FRONTEIRAS = ('PlaySnd_PostSound',)
 class Replay(ReplayBase):
     """The cave replay plus frame boundaries, served from the recorded ``boundaries`` in order."""
 
-    def __init__(self, resultado, proprias):
-        super().__init__(resultado, proprias, argumentos=al.ARGUMENTOS, erro=al.DependenciaFome)
+    def __init__(self, resultado, proprias, provedores=None):
+        super().__init__(resultado, proprias, argumentos=al.ARGUMENTOS, erro=al.DependenciaFome, provedores=provedores)
         self.fronteiras = list(resultado.get('boundaries', ()))
 
     def __call__(self, m):
@@ -69,12 +69,22 @@ class Replay(ReplayBase):
             self.erros.append(f'boundary {f["routine"]} != {nome}')
         r = {k: int(v, 16) for k, v in f['registers'].items()}
         for k in ('EAX', 'EDX', 'EBX', 'ECX'):
-            if k in regs and (r[k] & al.ARGUMENTOS[nome][k]) != regs[k]:
+            if k in regs and (r[k] ^ regs[k]) & al.ARGUMENTOS[nome][k]:
                 self.erros.append(f'{nome} at {chamada:#x}: {k} {regs[k]:#x} != original {r[k]:#x}')
         pilha = [int(x, 16) for x in f.get('stack_words', ())]
         if regs.get('_pilha') and pilha[:len(regs['_pilha'])] != list(regs['_pilha']):
             self.erros.append(f'{nome} at {chamada:#x}: pushed {regs["_pilha"]} != original {pilha[:1]}')
         return {} if f.get('declared_eax') is None else {'EAX': f['declared_eax'] & 0xffffffff}
+
+
+def provedores_fadiga():
+    """Core's ``fadiga_vegetacao.provedor_fadiga`` by callee name, a factory over the call's memory: ChercheVegetLibre
+    (the state-19 body's new search, 0x455756)."""
+    from fadiga_vegetacao import FadigaVegetacao, provedor_fadiga
+
+    def fabrica(m):
+        return provedor_fadiga(FadigaVegetacao(m))
+    return {'ChercheVegetLibre': fabrica}
 
 
 def proprias():
@@ -88,12 +98,13 @@ def comparar_saida(saida, resultado):
             if (saida[k] ^ v) & 0xffffffff & ~incertos.get(k, 0)}, incertos
 
 
-def comparar(nome, regs, antes, resultado):
-    """(ok, detail) of the translation of one recorded call over a copy of its entry state."""
+def comparar(nome, regs, antes, resultado, provedores=None):
+    """(ok, detail) of the translation of one recorded call over a copy of its entry state (``provedores``: callee
+    name -> a Core provider factory serving that callee instead of the original's replayed call)."""
     from memoria_quadro_core import MemoriaQuadro
     buffers = {n: (base, bytearray(d)) for n, (base, d) in antes.items() if n != 'native_stack'}
     m = MemoriaQuadro([(base, buf) for base, buf in buffers.values()])
-    replay = Replay(resultado, proprias())
+    replay = Replay(resultado, proprias(), provedores)
     fome = al.Alimentacao(m, externo=replay(m))
     entrada = {k: regs[k] & 0xffffffff for k in REG7 + ('ESP',)}
     detalhe = dict(routine=nome, frame=resultado['frame'], unit=hex(regs['EDI'] & 0xffff))
@@ -122,6 +133,8 @@ def comparar(nome, regs, antes, resultado):
     ok = not regs_dif and not bytes_dif and not replay.erros and sobras == 0 and not replay.fronteiras
     detalhe.update(outcome='match' if ok else 'mismatch', changed_bytes=len(resultado['changed_bytes']),
                    foreign_calls=replay.i, boundaries=len(resultado.get('boundaries', ())))
+    if replay.servidas:
+        detalhe['served_by_translation'] = dict(replay.servidas)
     if incertos:
         detalhe['uncertain'] = {k: hex(v) for k, v in incertos.items()}
     if not ok:
@@ -134,20 +147,27 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--captura', required=True)
     ap.add_argument('--saida', required=True)
+    ap.add_argument('--sem-core', action='store_true',
+                    help="replay the original's ChercheVegetLibre instead of Core's provedor_fadiga")
     a = ap.parse_args()
     captura, sha = carregar(RAIZ / a.captura)
     import capturar_alimentacao as cal
+    provedores = None if a.sem_core else provedores_fadiga()
     relatorio = dict(schema='rising-lands/economy-hunger-validation/1', capture=a.captura, capture_raw_sha256=sha,
                      translation=hashlib.sha256((PASTA / 'alimentacao.py').read_bytes()).hexdigest(),
-                     results=[], counts={})
+                     core_fatigue_provider=None if provedores is None else hashlib.sha256(
+                         (RAIZ / 'ferramentas/fadiga_vegetacao.py').read_bytes()).hexdigest(),
+                     results=[], counts={}, served_by_translation={})
     gravadas = []
 
     def observador(nome, regs, antes, resultado):
         gravadas.append(resultado)
         if nome not in TRADUZIDAS:
             return
-        ok, detalhe = comparar(nome, regs, antes, resultado)
+        ok, detalhe = comparar(nome, regs, antes, resultado, provedores)
         relatorio['results'].append(detalhe)
+        for k, v in detalhe.get('served_by_translation', {}).items():
+            relatorio['served_by_translation'][k] = relatorio['served_by_translation'].get(k, 0) + v
         c = relatorio['counts'].setdefault(nome, dict(match=0, mismatch=0, outside_domain=0, error=0))
         c[detalhe['outcome']] += 1
 
@@ -163,7 +183,8 @@ def main():
                      outside_domain=sum(1 for r in relatorio['results'] if r['outcome'] == 'outside_domain'))
     Path(RAIZ / a.saida).write_text(json.dumps(relatorio, indent=1, sort_keys=True) + '\n')
     print(json.dumps({k: relatorio[k] for k in ('counts', 'compared', 'mismatches', 'errors', 'outside_domain',
-                                                'rerun_equals_capture', 'recorded_calls', 'seconds')}, indent=1),
+                                                'rerun_equals_capture', 'recorded_calls', 'served_by_translation',
+                                                'seconds')}, indent=1),
           flush=True)
     from encerramento_captura import encerrar_captura
     encerrar_captura(0 if relatorio['mismatches'] == relatorio['errors'] == 0 and iguais else 1, RAIZ / a.saida)
