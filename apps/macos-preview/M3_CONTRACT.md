@@ -1,8 +1,11 @@
 # macOS accepted-state consumption contract v6
 
-Identifier: `rising-lands/macos-state-consumer/6`. This version explicitly accepts Graphics
-render API **1.5**, enables its HUD/cursor option, and checks the original full
-800×600 phase-end surface while preserving read-only playback and cache chaining. Live ABI 1.1 is a separate session described below. Orders remain record-only; no milestone acceptance is added.
+Identifier: `rising-lands/macos-state-consumer/6`. The current consumer explicitly
+accepts Python Graphics **1.8**, enables HUD/cursor composition and checks the
+original full 800×600 phase-end surface with read-only playback/cache chaining.
+Native live execution requires **ABI 1.4 / Rust Graphics 1.7**. The current
+integrated-backend section below supersedes the preserved earlier-stage notes.
+Orders remain record-only; no milestone acceptance is added.
 
 ## Evidence and memory
 
@@ -245,3 +248,140 @@ No PNG compression occurs on this path. `--png-output PATH` exports a final
 Graphics PNG for evidence, refusing overwrite; the immutable evidence inspector
 retains its PNG presentation for compatibility. Unsupported orders, display
 effects, clock/RNG semantics and Graphics 1.5 pixels are unchanged.
+
+## Current native live path — ABI 1.3 / app driver v1
+
+This section supersedes the Python-rendered live/v2 path above. The production
+UI intercepts live operations in Swift and never sends them to the Python
+worker, which explicitly refuses `NativeLivePathRequired`. Python remains the
+immutable evidence inspector and proof oracle. The inspector explicitly accepts
+Graphics 1.7 (native 128-frame pin `4448aeb44920d89b271e9af276477ee545fe797164b5b654e26c18a545d1a16c`);
+its optional `texto` callback stays absent. Rust retains Graphics 1.5 semantics.
+
+`macos_live_create` owns one actual ABI1.3 world/renderer and caller buffers.
+Only accepted S0 and four hash-checked original table inputs initialize world
+state. Prepared native files include the original initial surface/cache, nine
+verified assets, phase-entry inputs, layout/mask spans and original expected
+hashes. Expected hashes are comparisons only and never become world bytes.
+The runtime order is phase1; then repeatedly generation query → Rust render
+with HUD=1 → phase2 → phase3. The read-only render does not apply effects;
+phase2 owns them. Successful body phases increment the completed-frame count.
+
+The driver checks the first 257 states/11 checkpoints in production and every
+surface through 9200. Proof mode extends the identical full-state comparison
+to 18,401 phases, without a separate frame implementation. Callback hooks are
+proof observers only, not game providers. Cache/ordered-effect exports and
+Python rendering are compared in tests. Unknown paths latch the actual callee/
+address/reason; partial pixels remain actual prefixes. The native Metal view
+copies indexed/palette outputs into reusable textures/buffers, waits for GPU
+completion before reuse, and reports real presented-window throughput. No
+JSON pixels, PNG encoding, full Python projection or Python simulation runs
+in live play. GPU readback/PNG is an explicit evidence action only.
+
+The hardened Swift executable links the same Rust ABI and app C driver
+statically. This avoids loading an ad-hoc non-platform library into a hardened
+process and needs no weakened library-validation entitlement. The shared Rust
+library and dynamically bound driver remain in proof tooling; static and shared
+artifacts are built from the same pinned sources and recorded separately.
+All world/renderer/host-buffer access is serialized. Reset prepares a valid
+replacement before freeing the old handles. Native-window input orders remain
+unsupported; existing record/replay inspection scaffolding is separate.
+
+## M3.3 Test A — frame input interchange and answer stream
+
+The current recorder is `MacOSSessionRecorder` in `macos_scripted_input.py`.
+The former `MacOSInputRecorder` remains a separately versioned legacy poll
+journal; its pressed-since-last-poll model is not the Missions script contract.
+A legacy journal containing polls cannot be silently exported as a frame file.
+
+`ScriptedInput(root, dict_or_json)` imports Missions schema
+`rising-lands/monde01-scripted-input/1`. The adapter executes only the owner's
+unchanged pure validator AST (`carregar_entrada`, `_inteiro` and its constants),
+avoiding emulator imports/provider namespace changes. Missing definitions or a
+schema/start mismatch fail explicitly. Tests also import the complete actual
+Missions harness in a separate process and validate a human export unchanged.
+`export()` returns independent JSON data; `export_bytes()` emits canonical UTF-8
+JSON with sorted keys, one-space indentation and one final newline. All frame
+messages, literal signed key answers and metadata survive normalization.
+Export → import → export is byte-identical; original evidence is never rewritten.
+
+`FrameAnswerMapper(script, hwnd=explicit_u32)` consumes `begin_frame(k)` and
+`poll(kind, phase=..., site=..., vk=...)`. It implements cursor, key, peek, get,
+translate and dispatch answers. Sites are the original call return addresses,
+not routine entry addresses: e.g. GetCursorPos at `0x475044` records `0x47504b`,
+the loop PeekMessageA records `0x4601d8`, GetMessageA `0x4601eb`, TranslateMessage
+`0x4601f9` and DispatchMessageA `0x460203`. A cursor holds its last declared
+position, initially the owner's explicit `(0,0)`. Messages queue in file order;
+peek does not remove, get removes, translate returns zero, and dispatch targets
+WndProc `0x4181a1`. No WndProc/game flag is written or simulated by this layer.
+Keys reset to zero on every new frame and each poll repeats the frame's literal
+i16 value. This includes zero for native polls of unlisted vkey `0x45`.
+Poll phase/site validation and unconsumed/skipped message frames fail by name.
+
+`MacOSSessionRecorder(root).event(frame, event)` takes monotonic integer game
+frames >=129. Mouse dictionaries contain `kind='mouse', msg, x, y, wParam`;
+key dictionaries contain `kind='key', vkey, down`. Coordinates must fit 800×600.
+The human key set is Enter, Shift, Control, Option/Alt, Escape, Space, arrows,
+Delete and X (the prescribed 12 vkeys). Key messages use explicit normalized
+Windows scan/extended/previous/transition bits; held keys export `-32768` on
+every frame until release, including all of a depot-mode Control hold. Imported
+scripts additionally preserve arbitrary owner-accepted key messages/answers,
+including K1's digit-1 message, without inventing a human hotkey mapping.
+
+A human press schedules mouse move at k, button down at k+1 and release at k+3.
+The physical release remains in the raw journal but does not add a second
+scripted release. Right and double clicks use 0x204/0x205 and 0x203 respectively.
+Moves received during the gesture wait until k+4; consecutive clicks serialize.
+This stage records fixed clicks, not continuous drag gestures. Cursor holding,
+message ordering, signed key values and literal poll repetition are under test.
+`export_script(stop_frame=...)` rejects truncation of scheduled events and
+returns a validated `ScriptedInput`; `journal()` is separately named
+`rising-lands/macos-frame-input-recording/1`. Invalid events leave it unchanged.
+
+In the native window, NSEvents are assigned to the next frame on the same
+serial queue that owns the engine. No wall clock enters the file. Recording
+starts only after completed frame128; reset is disabled while recording.
+Control/Shift/Option changes, initial observed held modifiers and focus-loss
+releases are recorded. Native events never enter Rust's input structure.
+The visible **Gravando entrada** indicator and **Exportar entrada** action use
+the isolated worker for file preparation only. Stop/export drains native event
+work and the worker request chain. Export preserves canonical bytes through a
+native save panel; recording errors latch and prohibit partial-success export.
+**Ordens ao vivo indisponíveis** remains visible.
+
+Test A reads only request frame/phase/site/kind/vkey from each native poll log.
+Every answer is computed from the imported/exported script. Scenario HWND=0 is
+an explicit declaration, checked against every native dispatch. Comparisons
+include all 155,597 records from P1/P2/P3/P6/P7/K1. The sole excluded field is
+`wndproc_flags_after`, an original-game output: its 102 records belong to the
+deferred state half. No expected message/key/cursor/flag answer feeds the mapper.
+State hashes, WndProc effects and human Test B await engine order support;
+this stage does not inject orders or claim their state equivalence.
+
+## Current integrated backend — ABI 1.4 / Python Graphics 1.8
+
+This adoption supersedes the ABI 1.3 development backend above. C and ctypes
+consumers now require `rl_versao()==0x00010004`. Native driver creation also
+requires `rl_render_contrato()==0x00010007`, the engine's explicit Graphics 1.7
+contract. Existing copied-buffer layouts, phase order, generation checks,
+palette/cache ownership and stop behavior remain unchanged. The static native
+binding is labeled `static-abi14`; live metadata reports renderer version 1.7.
+ABI 1.4's saved-background and text observations do not install a glyph provider
+or change the sole ownership of display effects in phase 2.
+
+The isolated Python inspector/oracle explicitly accepts Graphics 1.8. It pins
+`verificacao-cadeia-m22-v2-api18-128.json`, SHA-256
+`613ec2348b7fe0d597690ca4601af7f825c0d227133cdddc6b10e822e8eee845`.
+Its regression checks all 128 full/chained surfaces against the 1.7 report.
+The new API declares no additional input callback or region; habitation remains
+an actual read through the unchanged Economy predicate, including CAVE bags.
+All unsupported text/other branches retain named stops. Python 1.8 acceptance
+does not imply that Rust has ported the added 1.8 families.
+
+APP_BUILD builds integrated `motor/` from the exact same Git archive as the app,
+without the former 363faa9 source override. The external-engine environment
+override is explicitly retired. Engine validation consumes the owner's
+commit-pinned logic and Graphics reference trees via `pinned_reference.py`;
+neither those pins nor their original evidence are edited by this consumer.
+Test A's answer-only API and canonical files are unchanged. Order injection,
+WndProc game-output flags, the state-hash half and Test B remain deferred.

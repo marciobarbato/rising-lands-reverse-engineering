@@ -1,0 +1,11 @@
+[lease] macos-abi14-test-a waiting
+[lease] macos-abi14-test-a granted slots [5]
+{
+ "schema": "rising-lands/macos-test-a-answers/1",
+ "owner_contract_sha256": "57cb30f1fd6f947107de38ccc2de09874bdd94c4b465af7ea84b2704dbddf609",
+ "equal": true,
+ "scope": "Declared answers on native-recorded requests; reference answers and WndProc flag stores never feed the mapper",
+ "state_hash_half": "Dependency stop: Rust orders are unsupported; WndProc flags and whole-state hashes are not claimed",
+ "orders_injected": false
+}
+[('P1', 7522, True, True), ('P2', 9034, True, True), ('P3', 45032, True, True), ('P6', 33873, True, True), ('P7', 53099, True, True), ('K1', 7037, True, True)]

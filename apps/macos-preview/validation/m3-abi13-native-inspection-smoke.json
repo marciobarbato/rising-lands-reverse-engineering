@@ -1,0 +1,66 @@
+{
+  "bundlePath" : "\/Users\/marcio\/git\/Rising Lands\/local-data\/macos-playable\/dist\/development\/RisingLands-ptbr.app",
+  "commit" : "869ffaa22db49105c39c31444790b4648551a886",
+  "diagnosticReadyDelayMs" : 0,
+  "metalReadback" : {
+    "commit" : "869ffaa22db49105c39c31444790b4648551a886",
+    "path" : "\/Users\/marcio\/git\/Rising Lands\/local-data\/macos-playable\/build\/development\/869ffaa22db49105c39c31444790b4648551a886\/build\/logs\/native-inspection-smoke.metal.png",
+    "pixelsChecked" : 1920000,
+    "sha256" : "c221d41ec84e1dc2b2d81141c222a198d8c710b982dce434659a792138931b2d"
+  },
+  "nativeMetrics" : {
+    "fps" : 40.914412084414991,
+    "frames" : 406,
+    "metalSeconds" : 0.37396654009353369,
+    "proofSeconds" : 3.247941,
+    "renderSeconds" : 1.8072889999999999,
+    "rustSeconds" : 4.4831440000000002,
+    "seconds" : 9.9231537083396688
+  },
+  "nativeWindowVisible" : true,
+  "passed" : true,
+  "pythonStderr" : "",
+  "readiness" : {
+    "appReady" : true,
+    "checksBudgetSeconds" : 45,
+    "checksSeconds" : 18.152089999988675,
+    "documentLoaded" : true,
+    "elapsedSeconds" : 25.380752708297223,
+    "initializationBudgetSeconds" : 90,
+    "initializationSeconds" : 7.2286627083085477,
+    "phase" : "checks",
+    "windowBudgetSeconds" : 45,
+    "windowVisibleSignal" : true
+  },
+  "readySignal" : {
+    "action" : "appReady",
+    "assets" : true,
+    "commit" : "869ffaa22db49105c39c31444790b4648551a886",
+    "mode" : "inspection",
+    "protocol" : 1,
+    "worker" : true
+  },
+  "render" : "full",
+  "scenario" : "MONDE01 · Rust e Metal · sem ordens",
+  "tests" : [
+    "257 summaries and 11 checkpoints shown",
+    "captured blocks listed",
+    "DOM next phase reaches frame1",
+    "DOM memory read returns captured counter",
+    "DOM frame selection reaches frame12",
+    "Graphics full image with HUD and cursor shown",
+    "undrawn frame preserves the full native phase-end surface",
+    "DOM block filter",
+    "DOM reset preserves initial state identity",
+    "DOM opens real Rust S0 with record-only inputs",
+    "Rust native frame1 state and full native surface equal",
+    "Rust ABI 1.3 native Metal window shown",
+    "native live prefix proves 257 states and 11 checkpoints",
+    "native Metal live rate is at least 25 fps",
+    "actual Metal GPU readback matches indexed palette",
+    "native current memory read matches the live counter"
+  ],
+  "verifiedCheckpoints" : 11,
+  "verifiedPhases" : 257,
+  "verifiedSurfaces" : 407
+}

@@ -1,0 +1,195 @@
+{
+ "all_schema_and_probe_blobs_match_fetched_main": 19,
+ "answer_stream": {
+  "equal": true,
+  "records": 155597,
+  "rows": [
+   {
+    "answers": 7522,
+    "equal": true,
+    "first_difference": null,
+    "frames": 501,
+    "probe": "P1",
+    "roundtrip_equal": true,
+    "wndproc_state_records_deferred": 3
+   },
+   {
+    "answers": 9034,
+    "equal": true,
+    "first_difference": null,
+    "frames": 601,
+    "probe": "P2",
+    "roundtrip_equal": true,
+    "wndproc_state_records_deferred": 6
+   },
+   {
+    "answers": 45032,
+    "equal": true,
+    "first_difference": null,
+    "frames": 3001,
+    "probe": "P3",
+    "roundtrip_equal": true,
+    "wndproc_state_records_deferred": 9
+   },
+   {
+    "answers": 33873,
+    "equal": true,
+    "first_difference": null,
+    "frames": 2272,
+    "probe": "P6",
+    "roundtrip_equal": true,
+    "wndproc_state_records_deferred": 23
+   },
+   {
+    "answers": 53099,
+    "equal": true,
+    "first_difference": null,
+    "frames": 3572,
+    "probe": "P7",
+    "roundtrip_equal": true,
+    "wndproc_state_records_deferred": 51
+   },
+   {
+    "answers": 7037,
+    "equal": true,
+    "first_difference": null,
+    "frames": 501,
+    "probe": "K1",
+    "roundtrip_equal": true,
+    "wndproc_state_records_deferred": 10
+   }
+  ]
+ },
+ "artifacts": [
+  {
+   "bytes": 13982,
+   "path": "apps/macos-preview/validation/m3-test-a-answers.json",
+   "sha256": "e5c40655c9d34e1fc2573879e0de24f200137d9147aa07e9498f7a6e54f189eb"
+  },
+  {
+   "bytes": 962,
+   "path": "apps/macos-preview/validation/m3-test-a-architecture.log",
+   "sha256": "9750335a4d84d0189332afafd9d3cf870238213b5725312bf48b1f36595aaca0"
+  },
+  {
+   "bytes": 7837,
+   "path": "apps/macos-preview/validation/m3-test-a-build.log",
+   "sha256": "ae5b40cb4e7234a068f6b9c901abea510c6a625e9b881643015f75f85fbc65fa"
+  },
+  {
+   "bytes": 327,
+   "path": "apps/macos-preview/validation/m3-test-a-codesign-verify.log",
+   "sha256": "ff266b3edf3bfd56bc81bd22e2557d0ed6a25862b22521c4360b09bab1784d74"
+  },
+  {
+   "bytes": 41708,
+   "path": "apps/macos-preview/validation/m3-test-a-common-maintenance.log.gz",
+   "sha256": "ca2975bfd2937886ae7bc029f1c3ce999f5efc617b1b2a83998de8f4f7ffd7ab"
+  },
+  {
+   "bytes": 16695,
+   "path": "apps/macos-preview/validation/m3-test-a-consumer-tests.log",
+   "sha256": "9aeaeec3fa0d6e042a9c31571b4195d22174ecb5c830db5251cbc7a5d745706f"
+  },
+  {
+   "bytes": 1034,
+   "path": "apps/macos-preview/validation/m3-test-a-mapper-tests.log",
+   "sha256": "74007d00aa36a966808f7fe40739451d370823a094771263df746f2c7c943a86"
+  },
+  {
+   "bytes": 1719,
+   "path": "apps/macos-preview/validation/m3-test-a-native-export.json",
+   "sha256": "0ff306b469ce189d8bb4225dab5bc5d35c1d06c3048b21bdecdfa27dda9c279d"
+  },
+  {
+   "bytes": 814,
+   "path": "apps/macos-preview/validation/m3-test-a-native-inspection-smoke.input.json",
+   "sha256": "39e9e1cce2c0455d12a0c637f24ff77053f4967ecf64ded9e2ab072c3bef4820"
+  },
+  {
+   "bytes": 4440,
+   "path": "apps/macos-preview/validation/m3-test-a-native-inspection-smoke.json",
+   "sha256": "815acb7de2d47569fbddc3ff4930fe70892fe2a3f557b870975a74b0ceabd3ea"
+  },
+  {
+   "bytes": 7545,
+   "path": "apps/macos-preview/validation/m3-test-a-native-smoke.json",
+   "sha256": "1abe8250430d395bc826c8aff8045007f7f4488de6e30f07322bc9c05e920642"
+  },
+  {
+   "bytes": 7825,
+   "path": "apps/macos-preview/validation/m3-test-a-pre-focus-build.log",
+   "sha256": "dfc0e20319c4c48750f6ed4e48354f22dc623333b863f7dce7254050ce9af969"
+  },
+  {
+   "bytes": 1719,
+   "path": "apps/macos-preview/validation/m3-test-a-pre-focus-native-export.json",
+   "sha256": "18dc70708f7ad2f0a5ffab163008baf04bcf20a94f32f3b5b3a250facdd755c0"
+  },
+  {
+   "bytes": 4441,
+   "path": "apps/macos-preview/validation/m3-test-a-pre-focus-native-inspection-smoke.json",
+   "sha256": "020c4daee07bae5cf05111f10f19c2988cb42390bd89bc6df8a580740c52925c"
+  },
+  {
+   "bytes": 1465,
+   "path": "apps/macos-preview/validation/m3-test-a-service-missing-inputs.log",
+   "sha256": "e912bf4d808ec8e89888c29941fefed9948a5e048f0730cae319e97d81c674b9"
+  },
+  {
+   "bytes": 538,
+   "path": "apps/macos-preview/validation/m3-test-a-service-with-inputs.log",
+   "sha256": "c4bfb2a38fba5f17df82d0421925e4b3c3f104cbd49ee03992f123f4f20d0576"
+  }
+ ],
+ "branch": "feat/macos-playable",
+ "build_command": "python3 -B compilar-jog\u00e1vel --development-ref HEAD --inputs-root \"/Users/marcio/git/Rising Lands\" --data-root \"/Users/marcio/git/Rising Lands/local-data/macos-playable\"",
+ "build_environment": {
+  "RISING_MACOS_ENGINE_SOURCE": "/Users/marcio/git/Rising-Lands-Codex-Engine/motor",
+  "RISING_PYTHON_RUNTIME": "/Users/marcio/git/Rising Lands/local-data/macos-preview/dependencies/python"
+ },
+ "common": {
+  "command": "/usr/bin/python3 -B scripts/check.py",
+  "cwd": "/Users/marcio/git/Rising Lands/worktrees/maintenance",
+  "dependencies": ".local/python",
+  "observed_revision": "c203400a833f44593a66d5fd5546532e746a19c7"
+ },
+ "engine_binding": "static-abi13",
+ "engine_shared_library_sha256": "68b79434096fe6547acf074ebc348be01ec4800aec6f11e31a24a2c343aedc29",
+ "engine_source_revision": "363faa9c252ffb00d62c81db0da2ee5d4a3d7615",
+ "engine_static_archive_sha256": "8b089afc9d1a92330c376dbdd62f155a6603377f01b796a11a56e393858faf7d",
+ "game_state_hash_half": "Not run: engine order input unsupported in the tested ABI1.3 path",
+ "gaps": [
+  "Test A game-state/WndProc-effect half waits for engine order support",
+  "Test B 3000-frame human original replay not run",
+  "Continuous human drags are not recorded as drags; fixed click gestures and keys are supported",
+  "Production NSSavePanel destination selection is not automated; same native save action validated at explicit smoke evidence destination",
+  "Latest fetched main is ABI1.4; this delivery uses the explicitly authorized 363faa9 ABI1.3 development library"
+ ],
+ "latest_fetched_main": "d1ff3e09e6deb723c14c2765e99dfb86d0189645",
+ "native_export": "m3-test-a-native-export.json",
+ "orders_injected": false,
+ "owner_contract_sha256": "57cb30f1fd6f947107de38ccc2de09874bdd94c4b465af7ea84b2704dbddf609",
+ "real_ui_metrics": {
+  "fps": 39.097034362413176,
+  "frames": 405,
+  "metalSeconds": 0.27964666625484824,
+  "proofSeconds": 3.424395,
+  "renderSeconds": 1.901123,
+  "rustSeconds": 4.742448,
+  "seconds": 10.358841958339326
+ },
+ "request_source": "Native recorded frame/phase/site/kind/vkey only; no answer bytes feed mapper",
+ "schema": "rising-lands/macos-test-a-delivery/1",
+ "state_field_deferred": "wndproc_flags_after (102 native game-output records)",
+ "tests": {
+  "common": 1944,
+  "common_optional_skips": 617,
+  "common_passed": true,
+  "consumer": 109,
+  "consumer_skips": 0,
+  "native_exercise": 27,
+  "native_inspection": 20
+ },
+ "validated_build_commit": "ebacca229f5fa72cdb3ab26d368e434c9c8e5979"
+}
