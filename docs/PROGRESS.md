@@ -1,6 +1,6 @@
 # Consolidated progress — MONDE01
 
-Round: **CXR-20261030-M3R2 (M3 round 2 — M3.1 P1/P2 part ACCEPTED at `c9c85eb`, P6 part ACCEPTED at `92fab50`; S1 victory and D1 defeat on the original)**. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)); M2.1 at `32bb391`; M2.2 at `b9f4b5d`; **M2.3 and M2 at `ea62eb4`** ([record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json)); **M3.1 P1/P2 part at `c9c85eb`** ([record](../integracao/validacao/cxr-20261030-m3r1-m3-1-p1-p2-acceptance.json)). Handover: [HANDOVER_CLAUDE_20261030_0700](HANDOVER_CLAUDE_20261030_0700.md). [Roadmap](ROADMAP_MONDE01.md), [M3 plan](M3_PLAN.md), [snapshots](progress/README.md).
+Round: **CXR-20261030-M3R2 (M3 round 2 — M3.1 P1/P2 part ACCEPTED at `c9c85eb`, P6 part ACCEPTED at `92fab50`; S1 victory and D1 defeat on the original)**. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)); M2.1 at `32bb391`; M2.2 at `b9f4b5d`; **M2.3 and M2 at `ea62eb4`** ([record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json)); **M3.1 P1/P2 part at `c9c85eb`** ([record](../integracao/validacao/cxr-20261030-m3r1-m3-1-p1-p2-acceptance.json)). Handover: [HANDOVER_CLAUDE_20261030_1910](HANDOVER_CLAUDE_20261030_1910.md). [Roadmap](ROADMAP_MONDE01.md), [M3 plan](M3_PLAN.md), [snapshots](progress/README.md).
 
 ## Indicadores medidos (atualizados a cada integração)
 
@@ -8,14 +8,18 @@ Estimativa global da MONDE01: **~60% (50–70%)** desde 30/10 13h50 (era 50% (40
 
 | Indicador | Valor | Atualizado |
 |---|---|---|
-| Critérios aceitos (M1, M2.1–2.3, M3.1–3.5, M4.1–4.3) | **4 de 12** completos + M3.1 com 3 de 4 janelas (P1, P2, P6; falta S1) | 30/10 13h50 |
-| Alcance da cadeia Python no S1 (vitória no quadro 17.050) | **2.546 / 17.050 quadros (15%)** — para no 2547 (`SetSortEngin` DX, Economia) | 30/10 13h50 |
-| Alcance do motor Rust | P1, P2, P3, P6 (estado completo 4.544/4.544), P7 e K1 completos; S1 em andamento | 30/10 13h50 |
+| Critérios aceitos (M1, M2.1–2.3, M3.1–3.5, M4.1–4.3) | **4 de 12** completos + M3.1 com 3 de 4 janelas (P1, P2, P6; falta S1) | 30/10 19h10 |
+| Alcance da cadeia Python no S1 (vitória no quadro 17.050) | **10.800 / 17.050 quadros (63%)** em indicadores estritos, na `main`; 11.752 em modo de diagnóstico. Próximas paradas: 10.801 (Gráficos, `AffGame` com 2 monstros), 11.753 (som do ataque, resolvido por Combate em `631d76b`) | 30/10 19h10 |
+| Alcance do motor Rust | P1, P2, P3, P6 (4.544/4.544), P7 e K1 completos na `main`; S1 até 10.800 (estado) e 2.013 (telas) em `feat/codex-rust-engine` `aaf7705`, ainda não integrado | 30/10 19h10 |
+| Telas do S1 (M3.2) | **2.792/2.792** telas completas iguais nas janelas de ordens 130–5.090 (Graphics API 1.10) | 30/10 19h10 |
 | Teste A no app (metade de estado) | **6 de 6 sondas iguais** (P1 501, P2 601, P3 3.001, P6 2.272, P7 3.572, K1 501 quadros) | 30/10 13h50 |
-| Capturas originais (S1, D1, passo 2 do S1) | **2 de 3** (passo 2 do S1: 60/69 segmentos) | 30/10 13h50 |
-| Modo jogo no app | 60 quadros de jogo/s com ordens; lógica Rust ~0,28 ms/quadro | 30/10 13h50 |
+| Teste B | pipeline pronto (prefixo 222/222 no original); sessão humana bloqueada pelos glifos do texto (`0x459454`, em andamento em Gráficos) | 30/10 19h10 |
+| Capturas originais (S1, D1, passo 2 do S1) | **3 de 3**: o passo 2 do S1 (33.844 fases, política aprovada) está em `feat/re-missions` `86c27f0`, ainda não integrado | 30/10 19h10 |
+| App macOS | 60 quadros de jogo/s com ordens e **som** (efeitos originais); lógica Rust ~0,3 ms/quadro | 30/10 19h10 |
 
 ## Resumo executivo
+
+**30/10, fim do dia (pausa até o reset da cota do Codex).** A cadeia Python passou de 2.546 para 10.800 quadros no S1, incluindo a primeira incursão, e o motor Rust acompanha até o mesmo ponto. Gráficos 1.10 cobre as janelas de ordens do S1 até o quadro 5.090. O app ganhou som. O passo 2 do S1 está pronto no ramo de Missões. Decisões do usuário: depois da MONDE01, rigor reduzido em todas as missões (só Rust, validação automática por rotina e por ponto de controle; volta ao rigor completo se algo divergir); seletor de velocidade e app abrindo direto no jogo só na versão final para humanos. Handover: [HANDOVER_CLAUDE_20261030_1910](HANDOVER_CLAUDE_20261030_1910.md).
 
 **30/10, manhã e tarde.** **M3.1, parte P6, aceita** (main `92fab50`): prova estrita de estado completo da sonda P6 (ordem da caverna, construção, entrada do colono e ciclo de trabalho, quadros 129–2.400), 4.544/4.544 fases iguais ao original, 0 cruzamentos, reproduzida na MacBook e no Mac mini com hashes idênticos ([registro](../integracao/validacao/cxr-20261030-m3r2-m3-1-p6-acceptance.json)). O motor Rust passou do quadro 220 (main `6cdbc5a`): P3, P6 e P7 iguais em estado e tela, P6 de estado completo 4.544/4.544, lógica a ~0,28 ms/quadro. A derrota D1 (replay igual) e toda a documentação foram conciliadas na main; o trabalho do Codex não validado está em ramos `wip/*`. Falta no M3.1 só a janela do S1 (passo 2 em captura no Mac mini).
 
