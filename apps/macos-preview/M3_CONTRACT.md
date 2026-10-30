@@ -1,11 +1,14 @@
 # macOS accepted-state consumption contract v6
 
-Identifier: `rising-lands/macos-state-consumer/6`. The current consumer explicitly
-accepts Python Graphics **1.8**, enables HUD/cursor composition and checks the
-original full 800×600 phase-end surface with read-only playback/cache chaining.
-Native live execution requires **ABI 1.4 / Rust Graphics 1.7**. The current
-integrated-backend section below supersedes the preserved earlier-stage notes.
-Orders remain record-only; no milestone acceptance is added.
+Identifier: `rising-lands/macos-state-consumer/6`. The evidence consumer enables
+HUD/cursor composition and checks the original full 800×600 phase-end surface
+with read-only playback/cache chaining; Python inspection and proofs now accept
+Graphics **1.9**. Native live execution on main requires engine **ABI 1.5**
+(player input and orders) with Rust Graphics **1.7**; `feat/macos-playable`
+carries the [ABI 1.6 persistent-execution consumer](#current-consumer--abi-16-persistent-execution)
+awaiting integration. Sections are chronological: each later section supersedes
+the earlier-stage notes it names (ABI 1.1, 1.3, 1.4/Graphics 1.8 and the
+record-only input stage are historical). No milestone acceptance is added.
 
 ## Evidence and memory
 
@@ -396,7 +399,8 @@ phase and render sequence and retains every named capability stop, but never
 calls an observer, projects memory, computes hashes or increments equality counts.
 The status layout and engine ABI are unchanged. `macos_live_read` refuses play.
 The native UI changes modes by recreating S0. Its default is play; native smoke
-and horizon tools explicitly request validation. Input stays record-only in both.
+and horizon tools explicitly request validation. At this stage input stayed
+record-only in both; ABI 1.5 below applies it in play.
 
 ## ABI 1.5 player input
 

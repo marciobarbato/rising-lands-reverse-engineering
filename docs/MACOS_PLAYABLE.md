@@ -1,10 +1,99 @@
 # Local macOS playable consumer
 
 `compilar-jogável` builds **RisingLands-ptbr.app** for this Apple Silicon Mac.
-The existing Swift/AppKit/WebKit shell and JSON-lines Python engine are reused.
-The new exercise consumes current committed core, combat, economy and graphics
-providers from one revision. It is a bounded interactive reconstruction, not a
-complete original mission or campaign.
+The primary game path is the native **Rust e Metal** window: MONDE01 from the
+accepted S0, Rust engine logic and rendering through the C ABI, Metal
+presentation, and live player orders. The Swift/AppKit/WebKit shell, the M2.2
+evidence inspector and the older synthetic **Treino livre** exercise (described
+in the historical sections below) remain available. It is a bounded
+reconstruction, not a complete original mission or campaign.
+
+## Current state (2026-10-30 07:15)
+
+This summary supersedes older "pending" or "not implemented" remarks in the
+chronological sections below, which are kept as the validation record.
+
+**On main** (app last integrated at `51715e2`; validated executable `04dea39`):
+
+- Consumer of engine **ABI 1.5** (`rl_passo_quadro_entrada`) with Rust Graphics
+  **1.7**; Python inspection and proof oracles pin Graphics **1.9**. Jogar
+  applies native mouse and keyboard orders after the real 128-frame prefix; the
+  recorder observes the same events. Validar keeps the no-input equality proofs.
+- Play mode runs without audits: no-input **69.2 game frames/s uncapped**
+  (60.001 at the 60 cap) with **~120 displayed fps**, minimum full second 117
+  (build `55cddc5`). With live orders at the 20 Hz cap: 20.010 game frames/s,
+  118.752 displayed fps average, minimum 111.
+- Gates: APP_BUILD 112 consumer tests / 0 skips, 27 native exercise checks,
+  20 inspection/live checks. Prefix proof 257/257 states, 11/11 checkpoints,
+  128/128 original and 128/128 Python surfaces. Long no-input chain 18,401/18,401
+  states and 9,200/9,200 original surfaces. Test A answer stream
+  **155,597/155,597**, six canonical round trips.
+- Test A state half, every first difference null (0 mismatches):
+
+  | Probe | Frame hashes | Whole-state phases | First engine stop |
+  |---|---:|---:|---|
+  | P1 | 501/501 | 1,002/1,002 | none |
+  | P2 | 601/601 | 1,202/1,202 | none |
+  | P3, P7 | 91/91 each | no published window | frame 220 phase 3, CAVE `0x426aff` |
+  | P6 | 91/91 | 183/183 reached | frame 220 phase 3, CAVE `0x426aff` |
+  | K1 | 12/12 | no published window | frame 141 phase 2, viewport `0x415b77` |
+
+  The P1/P2 whole-state results match the engine's M3.1 P1/P2 acceptance
+  (`c9c85eb`).
+
+**On `feat/macos-playable`, awaiting integration** (commits `4dad27e`,
+`8de9b7e`, `b44fe80`, `40c6295`; frozen build `b44fe80`):
+
+- ABI **1.6** consumer: requires major 1 / minor >=6; Jogar selects persistent
+  play policy 1 after S0 and before phase 1, Validar keeps policy 0, the Test A
+  state proof uses audited policy 2.
+- Static pacing audit of the intact RISING.EXE: the active loop is uncapped, so
+  the default speed is **Original (sem limite)**, with 15/20/30/60 caps optional.
+  The engine's virtual 20 Hz TickClock is unchanged.
+- Gates at `b44fe80`: APP_BUILD 112/0 skips, 27, 20; engine validation 30 Rust
+  tests, 63 Python tests plus 10 renderer children, 75 original-x86 comparisons
+  with 0 mismatches; prefix and long chain unchanged; Test A answers and all six
+  state probes reproduce every prior hash; 21 prepared native inputs
+  byte-identical to ABI 1.5; common checks 2,039 tests, 624 optional skips,
+  0 failures.
+- Not yet done: the three 75-second ordered UI runs under ABI 1.6. No ABI 1.6
+  sustained UI result is claimed.
+
+**Parked, unvalidated WIP** (not integrated, not reviewed):
+
+- `origin/wip/macos-abi16-0700` (`874a079`, on top of the four branch commits):
+  the first ABI 1.6 ordered UI attempts, which all failed at AffText `0x459454`
+  (frame 386 capped, 395 uncapped). The diagnosis is that the benchmark's right
+  click arrived as another left-click move (order tags 1,5,5), because
+  `NSEvent.mouseEvent` can build a right event with buttonNumber 0. The commit
+  derives right-button messages from `event.type` and extends the recorder and
+  mapper regressions. No APP_BUILD or gate was rerun after the fix.
+- `origin/wip/macos-playable-0715` (`d774d14`): adds only an empty
+  `m3-abi16-right-orders20.log`. The corrected 20 Hz ordered run was starting
+  when Codex was stopped at about 07:15.
+
+**Open stops and owners**
+
+| Stop | Owner |
+|---|---|
+| CAVE body `BatimentNextEtape` type 3 `0x426aff` at frame 220 (P3/P6/P7) | Rust engine (chain port past 220, `feat/codex-rust-engine`) |
+| AffGame viewport `0x415b77` at frame 141 (K1) | Rust engine / renderer port |
+| Renderer fatigue domain `AffInfoSelection 0x410be4` (orders at 60 game frames/s stop at frame 2,952) | Rust renderer port, from Graphics' validated domain |
+| Production glyphs `AffText 0x459454` | Rust renderer port, from Graphics' validated domain |
+| Test A state half beyond frame 220 (and K1 beyond 141) | macOS, once the engine passes those stops |
+| Test B: a recorded human session of at least 3,000 frames replayed on the original | macOS (recording and export); replay on the original on the Mac mini |
+| Historical elapsed-speed calibration (optional) | AI/runtime or coordinator, who must publish a real Windows timing contract |
+| Audio playback (not integrated) | Audio |
+
+**Next steps**
+
+1. Review `874a079`, rerun APP_BUILD and the three 75-second ordered UI runs
+   with the corrected right click, then integrate the ABI 1.6 branch.
+2. When the Rust engine passes frame 220, extend the Test A state half for
+   P3/P6/P7 (and K1 past 141) and record any per-frame divergence here.
+3. Record Test B and replay it on the original on the Mac mini.
+4. Adopt the renderer fatigue and glyph domains as the engine publishes them,
+   then remeasure ordered play at 60 game frames/s and uncapped.
 
 ## Build and run
 
@@ -223,8 +312,9 @@ to its first named engine/render stop. The driver latches the reason without
 replaying captured frames or inventing state. Reset creates valid replacement
 handles before releasing the previous world/renderer. Original-address reads
 are explicit diagnostics. The normal native no-input scenario injects no
-human orders. The prior recorder/export scaffolding remains an independent
-inspection feature; native gameplay input/orders are not implemented here.
+human orders. At this ABI 1.4 stage the recorder/export scaffolding was an
+independent inspection feature; native orders arrived with ABI 1.5 (see
+[ABI 1.5 live orders](#abi-15-live-orders)).
 
 The Swift executable statically links the unchanged Rust C ABI and app driver,
 so existing hardened ad-hoc signing remains enabled without a library-validation
@@ -335,8 +425,10 @@ Common checks pass 1,976 tests with 620 optional skips. See the
 [delivery evidence](../apps/macos-preview/validation/m3-abi14-delivery.json).
 
 The ABI 1.4 9,200-frame horizon was not rerun in this adoption; the previous
-ABI 1.3 horizon below is historical. Orders, Test A's game-state half, Test B,
-continuous human drags and glyph rendering remain separate dependencies.
+ABI 1.3 horizon below is historical. At that stage orders, Test A's game-state
+half, Test B, continuous human drags and glyph rendering were separate
+dependencies; orders and the reached state half have since landed (see
+[Current state](#current-state-2026-10-30-0715)).
 
 ### Historical ABI 1.3 application measurements
 
@@ -379,8 +471,9 @@ canonical bytes. A new recording replaces the preceding recording explicitly.
 Clicks use the declared k/k+1/k+3 cadence and hold the cursor through release.
 Ctrl remains held per frame until release/focus loss, supporting recorded depot
 mode. Moves during a click wait until its end; this first half does not record
-continuous drags. Reset is disabled while recording. Orders remain unavailable
-and no recorded answer enters the Rust world. Record/export failures are visible
+continuous drags. Reset is disabled while recording. When this recorder first
+shipped, orders were unavailable and no recorded answer entered the Rust world;
+since ABI 1.5 Jogar applies the same events as orders. Record/export failures are visible
 and block exporting an incomplete session as success.
 
 The [input contract](../apps/macos-preview/M3_CONTRACT.md#m33-test-a--frame-input-interchange-and-answer-stream)
@@ -389,9 +482,10 @@ The [Test A answer report](../apps/macos-preview/validation/m3-test-a-answers.js
 compares every declared answer against P1/P2/P3/P6/P7/K1, using the native logs
 only as poll requests. All **155,597 answers** match, with no first difference;
 all six export/import/export byte round trips match. Native WndProc flag stores
-and whole-state hashes belong to Test A's deferred state half. It requires
-engine order support. The 3,000-frame human original replay (Test B) is also
-pending; no M3 acceptance is claimed.
+and whole-state hashes belong to Test A's state half, recorded under
+[Test A state results](#test-a-state-results) up to the engine's stops. The
+3,000-frame human original replay (Test B) is still pending; no M3 acceptance is
+claimed.
 
 ## Native play mode and independent clocks
 
@@ -494,8 +588,9 @@ Fresh [prefix proof](../apps/macos-preview/validation/m3-play-live-prefix.json):
 oracle surfaces**, zero observer failures. Fresh [Test A answer proof](../apps/macos-preview/validation/m3-play-test-a-answers.json):
 **155,597/155,597**, all six canonical byte round trips equal. APP_BUILD passes
 **110 consumer tests, 27 native exercise checks and 20 inspection/live checks**;
-`sh motor/validate.sh` passes unchanged. Engine/order support, the original timing
-probe and the state-hash half of Test A remain dependencies. No 9,200-frame
+`sh motor/validate.sh` passes unchanged. At this build, engine/order support, the
+original timing probe and the state-hash half of Test A were still dependencies
+(all since addressed, see the later sections). No 9,200-frame
 performance/first-stop horizon was rerun for this change.
 
 [Common checks](../apps/macos-preview/validation/m3-play-common.log.gz) pass from

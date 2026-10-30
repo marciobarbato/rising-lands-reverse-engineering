@@ -1621,3 +1621,39 @@ No original capture, pin or mask is changed. No main merge/push or acceptance.
 The three 75-second ordered UI runs are still queued for the unmodified exclusive
 heavy lease. This duration allows >=65 seconds with input enabled after the real
 128-frame prefix at nominal 20 Hz. No sustained UI result is claimed yet.
+
+## State at 2026-10-30 07:15
+
+Docs-only reconciliation at the MacBook pause; no build, gate or native run.
+
+- **Main** (app last integrated at `51715e2`, validated executable `04dea39`):
+  ABI 1.5 orders consumer, Rust Graphics 1.7, Python Graphics 1.9 oracles.
+  Play mode reaches 60 game frames/s and above in the no-input window (69.2
+  uncapped) with ~120 displayed fps; ordered play at 20 Hz gives 118.752
+  displayed fps. Test A answers 155,597/155,597; state half P1 501/501 frames
+  and 1,002/1,002 phases, P2 601/601 and 1,202/1,202, P3/P6/P7 91/91 (P6
+  183/183 phases reached), K1 12/12, all first differences null.
+- **This branch, awaiting integration:** `4dad27e`, `8de9b7e`, `b44fe80`,
+  `40c6295` (ABI 1.6 policies 0/1/2, original uncapped pacing default, gates
+  in the section above). The three 75-second ordered UI runs have not run.
+- **Parked, unvalidated:** `origin/wip/macos-abi16-0700` (`874a079`, the failed
+  first ordered attempts at AffText `0x459454` and the right-click
+  `event.type` fix; no gate rerun) and `origin/wip/macos-playable-0715`
+  (`d774d14`, only an empty corrected-run log). Neither is reviewed.
+  Uncommitted outputs of the corrected runs on a development build of
+  `874a079` were left untracked in this worktree
+  (`validation/m3-abi16-right-orders{20,60,-unlimited}*`, 06:57–06:59). As
+  written by the benchmark: 60 Hz passed (75 s, 60.01 game frames/s, 117.9
+  displayed fps, minimum 110, no stop); 20 Hz ran 75 s without a stop but is
+  marked failed (minimum one-second display 79); uncapped stopped at frame
+  10,801 on `Display monster count 0x0041591f` after ~141 game frames/s. They
+  are not committed, not gated and not claimed.
+- **Open stops:** engine CAVE `0x426aff` at frame 220 and viewport `0x415b77`
+  at frame 141 (Rust engine); renderer fatigue `0x410be4` and glyphs `0x459454`
+  (Rust renderer port); Test A beyond 220 and Test B (macOS, with the replay
+  on the original on the Mac mini).
+- **Next:** review `874a079`, rerun APP_BUILD and the ordered UI runs, then
+  integrate ABI 1.6; extend Test A when the engine passes 220; record Test B.
+
+The manual's [current state](../../docs/MACOS_PLAYABLE.md#current-state-2026-10-30-0715)
+holds the owner table and next steps.
