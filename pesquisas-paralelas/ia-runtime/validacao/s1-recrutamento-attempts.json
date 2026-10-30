@@ -1,0 +1,51 @@
+{
+ "logs": [
+  {
+   "path": ".local/recruit-binding.log",
+   "sha256": "b80b9f1e850088d892145349e452959610e560b0ad3a02679dabfe56a40c315e",
+   "status": "harness-error: repository root was missing for integracao.providers"
+  },
+  {
+   "path": ".local/city-capture.log",
+   "sha256": "20e65c7092a1d7e42b57648fa202cfda2ec3e436e3039f44be1e298b9dd8c52b",
+   "status": "harness-error: write-only fixture pages were not mapped"
+  },
+  {
+   "path": ".local/city-capture-rerun.log",
+   "sha256": "f63aeb8865e40e8b46a468d41efa682cdeecbaede8a7ea1de768c37c623083ba",
+   "status": "harness-error: local native snapshot inputs were absent"
+  },
+  {
+   "path": ".local/city-capture-final.log",
+   "sha256": "abd382b185d8b1774291b904c7ab93368ae463841d57e2681ba1380ade394f2c",
+   "status": "original-only v1 captured; later superseded because cached blocks missed read hooks"
+  },
+  {
+   "path": ".local/city-capture-v2.log",
+   "sha256": "e74cdf35b5c36980bc32c5df6cb622ab53f73cd786ef5cb132720a8901fa02e7",
+   "status": "passed: v2 original-only capture with flushed hooks"
+  },
+  {
+   "path": ".local/city-native.log",
+   "sha256": "ce82c265d8a2a6d2325af3827bd3ebbd848dcd7721062e9424103b443d496152",
+   "status": "passed: fresh native city differential, 27 cases / 0 mismatches"
+  },
+  {
+   "path": ".local/recruit-binding-rerun.log",
+   "sha256": "0cb69afe021d2f04ed6d2fdfbbb73447aaf167a808d57a0d021e81ef0ead439e",
+   "status": "passed: fresh native recruit prefixes, 6 / 6 equal with missing-DX stops"
+  },
+  {
+   "path": ".local/s1-recrutamento-strict.log",
+   "sha256": "e74f748d6b371e666aa507a772ef71d3d49a27d9f7200c37ef6a77a0e6c703bd",
+   "status": "passed indicator prefix: strict frames 129..2546; missing DX at frame2547"
+  },
+  {
+   "path": ".local/s1-recrutamento-planejamento.log",
+   "sha256": "d22a8720b591e2988d6d67e95445a0fde0fb3ec1b55d91ebfd62fb17b731bc08",
+   "status": "diagnostic indicator prefix: planning frames 129..2546; missing DX at frame2547"
+  }
+ ],
+ "schema": "rising-lands/ai-runtime-s1-recruit-attempt-journal/1",
+ "scope": "Local execution provenance; failed setup and superseded v1 are not accepted comparison evidence"
+}
