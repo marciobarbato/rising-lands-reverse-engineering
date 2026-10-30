@@ -1,0 +1,25 @@
+{
+ "raw_sha256": "1dc9d628a7b3195f438840ecb6f95d9c936d164343abfdcb71340704f13e28a7",
+ "compressed_sha256": "649c113bf7e118224e9664f73dd1bc919ea3695692f7c98a55b731bde8205cdb",
+ "schema": "rising-lands/m3-probe-render-native/1",
+ "probe": "P7",
+ "probe_ref": "ce441852bcada750a8f91da8ed3302f1668c4405",
+ "frames": [
+  2851,
+  3275
+ ],
+ "input_sha256": "914758b0446d561ec590bc5ab854adb95692e58626709ed2d56ac6107aa51590",
+ "probe_records_sha256": "7e6d765e8e6027f0105575e2c24ecac4a60d4f5a8870a39a6b2ec42dab7bb21d",
+ "executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "source_sha256": "75d4703b5679981e72f479ec7f33372becb56f58ac4fc8bf7751844374a6497b",
+ "recording_helper_sha256": "93cc53512affcca833967067b2b94bacd03b9a8d1dccc47aa78e1c229ee51d11",
+ "producing_revision": "30ce7b7aeb70dbda6bda30986257ac39276430f0",
+ "status": "complete",
+ "requested_stop": 3275,
+ "snapshot": {
+  "path": ".local/graficos-api17-start/P7-03275.pickle",
+  "sha256": "7129c571456ab89a4ce6fef653f0a37558ad63697810733d1f9b824ed3c73257"
+ },
+ "elapsed_seconds": 224.757,
+ "code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4"
+}

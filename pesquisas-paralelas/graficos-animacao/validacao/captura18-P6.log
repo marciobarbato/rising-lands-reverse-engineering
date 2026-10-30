@@ -1,0 +1,11 @@
+[lease] graphics18-P6 waiting
+[lease] graphics18-P6 granted slots [4]
+P6 2050 native surface/state equal
+P6 2100 native surface/state equal
+P6 2150 native surface/state equal
+P6 2200 native surface/state equal
+P6 2250 native surface/state equal
+P6 2300 native surface/state equal
+P6 2350 native surface/state equal
+P6 2400 native surface/state equal
+{"probe": "P6", "frames": [2001, 2400], "status": "complete", "seconds": 226.544, "drawn": 400, "snapshot": {"path": ".local/graficos-api17-start/P6-02400.pickle", "sha256": "ed532dc98b11cf1954969d7e0332ab7bcc2696f0584c10f68c219ed194ff0509"}, "text_boundaries": 0, "text_pointer_reads": 400}

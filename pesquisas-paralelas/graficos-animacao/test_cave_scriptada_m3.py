@@ -1,5 +1,5 @@
 """Scripted M3 surfaces and every CAVE health step against the intact executable's frozen outputs."""
-import contextlib,hashlib,io,json,struct,unittest
+import contextlib,hashlib,io,json,struct,subprocess,unittest
 from pathlib import Path
 from graficos import Catalogo
 from validar_sondas_graficos_m3 import CapturaSondaGrafica,FronteiraTextoGravada,compare_matrix
@@ -46,12 +46,13 @@ class CaveScriptadaM3(unittest.TestCase):
         with self.assertRaises(AssertionError):FronteiraTextoGravada(cap,row)(request,bytes(len(pixels)))
         with self.assertRaises(AssertionError):FronteiraTextoGravada(cap,row)({**request,'text':b'UNKNOWN'},pixels)
 
-    def test_current_full_comparison_reports(self):
+    def test_frozen_api17_full_comparison_reports(self):
         for path,expected in (('sondas-api17-final.json',(('P1',501),('P2',601),('P3',172))),):
             report=json.loads((AQUI/'validacao'/path).read_text())
             self.assertTrue(report['probe_text_boundary_contract'])
             for source,digest in report['sources_sha256'].items():
-                self.assertEqual(hashlib.sha256((AQUI/source).read_bytes()).hexdigest(),digest,source)
+                frozen=subprocess.check_output(['git','show','f758ecd:pesquisas-paralelas/graficos-animacao/'+source],cwd=AQUI)
+                self.assertEqual(hashlib.sha256(frozen).hexdigest(),digest,source)
             self.assertEqual([(r['probe'],r['frames']) for r in report['probes']],list(expected))
             for probe in report['probes']:
                 self.assertIsNone(probe['first_difference'])
