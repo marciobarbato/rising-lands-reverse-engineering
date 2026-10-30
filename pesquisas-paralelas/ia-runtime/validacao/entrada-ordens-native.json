@@ -1,5 +1,5 @@
 {
- "boundary_requests_compared": 13,
+ "boundary_requests_compared": 14,
  "by_routine": {
   "BagGetCode": {
    "cases": 1,
@@ -93,8 +93,8 @@
   },
   "ProcessInputGame": {
    "cases": 18,
-   "dependency_stops": 1,
-   "equal": 17,
+   "dependency_stops": 0,
+   "equal": 18,
    "mismatches": 0
   },
   "SetPlayerOrdre": {
@@ -114,14 +114,10 @@
   "path": "pesquisas-paralelas/ia-runtime/evidencias/captura-entrada-ordens-ia.json",
   "sha256": "5a0ef0d7cecf1daa3dbefef0711d94c89fb37228bade5fef923b06e7a664168e"
  },
- "changed_bytes_compared": 18743,
+ "changed_bytes_compared": 18750,
  "comparisons": 124,
  "core_construction_reference": null,
  "dependency_stops": [
-  {
-   "case": "process_tag19_unload",
-   "dependency": "EnginEstVivant required at 0x004731d3; earlier stores retained"
-  },
   {
    "case": "p4_release_field_u13",
    "dependency": "TextGetMessage with the text table pointer 0x5099a4 = 0 (texts not loaded) required at 0x00478a47; earlier stores retained"
@@ -147,7 +143,7 @@
    "dependency": "TextGetMessage with the text table pointer 0x5099a4 = 0 (texts not loaded) required at 0x00478a47; earlier stores retained"
   }
  ],
- "equal": 117,
+ "equal": 118,
  "mismatches": [],
  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
  "path_reproduction": {
@@ -180,9 +176,9 @@
  },
  "providers": "provedores_entrada_ia.provedores_vivos (committed Core/Economy/Combat owners); sound requests return the EAX they receive (the frame bench declaration for PlaySnd_*)",
  "schema": "rising-lands/monde01-input-orders-differential/1",
- "seconds": 151.987,
+ "seconds": 129.676,
  "source_sha256": {
-  "ferramentas/selecao_ordens.py": "e8eb78134dd44adbbef88354ea3219c6513f2a2173cc68227fa9fecaf47ab67c",
+  "ferramentas/selecao_ordens.py": "acf5ebde927f1c5a0275ddffa191d03bdb78a810dd5179cb1f7088b46eba17e8",
   "pesquisas-paralelas/combate/alvos_alcance.py": "b0006a64869041997ab85d51f2758c7bd4c1d602e0f7bc6de3bb7ba75878dc17",
   "pesquisas-paralelas/combate/ataque_vivo.py": "21d3f0c9e2a307b82874c6634730a62b301751ec76c51e9ff7d151429fb7c86c",
   "pesquisas-paralelas/economia/extracao.py": "797d8092d8e9bc2679d7a18ec2833871bbeada67d0a281f6bba4d3d883952e29",
@@ -190,7 +186,7 @@
   "pesquisas-paralelas/ia-runtime/capturar_entrada_ordens_ia.py": "79c33f81f219c99562e788e85b4ef1f4d990fba6c346e260e65d5a5263a6e36c",
   "pesquisas-paralelas/ia-runtime/casos_entrada_ordens_ia.py": "026041d6ff4129fa4668e89d41291b89b5b9da8dccf7b9d97308a997298524cb",
   "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "0d3c50f9c07dcd4badb4d37217e3d6e8407c9146de968258addff2a2de982928",
-  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "457415a632d998584866b65f18d52995d22255076a596dfc0aac25cbe8ba0d00",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "e2a9561e97ad97c1c90c44d051974b68b285b4665c4f350e7ad6e0a839aebd12",
   "pesquisas-paralelas/ia-runtime/validar_entrada_ordens_ia.py": "9e6d51fe3732f9e95bb54840ba494f5c682bdfa35140046c82b2a7f47835fc1d"
  }
 }

@@ -640,3 +640,28 @@ Documentation-only checkpoint; no code or native run in this entry. `feat/re-ai-
   - strict P6 parts 1 and 2 equal (2,000 and 544 phases; chains `5da71fab…`, `c557167f…`, same as the planning chains); part 0 was interrupted at frame ~1014 by the pause (an earlier strict part 0 at `ad0a4a9` was equal in all 2,000 phases, chain `a3f35dfc…`).
 - **Next:** integrate the two branch commits; rerun P6 part 0 at the integrated source, `agregar`, write `validacao/m3-1-prova-p6.json` if equal, and reproduce on the mini; `fixar S1` and run S1 strict/planning when pass 2 lands; refresh leaf differentials and P7/S1 indicators after Graphics' finite view-origin validation (on `feat/re-graphics`) reaches main.
 - **Light gate at this merge (no native):** `scripts/check.py --domain ai-runtime` runs 124 tests, 8 native skips, documentation links pass, and **1 failure**: `test_entrada_ordens_ia.ReplayCasos` case `process_tag19_unload` no longer raises `DependenciaIA`, because Economy's tag 19 provider is now on main (the case is the 118th equal in the local rerun). The committed `validacao/entrada-ordens-native.json` (117/124) and the replay expectation need refreshing from a native rerun; not changed here.
+
+## Input-order replay refresh (2026-10-30, resumed AI/runtime front)
+
+Scope: refresh the native input-order differential and its CPU-free replay after Economy's committed
+`restauracao.provedor_restauracao` made `process_tag19_unload` complete. Starting tree `f8bb719` is clean
+and contains current `origin/main` `00afd4b`; no foreign research file is changed. The replay now explicitly
+requires this case to reach its original-result comparison instead of accepting a named stop.
+
+API and order are unchanged: `Entrada.process_input_game(regs)` consumes the original seven-register file
+and player packet; tag 19 calls `SetDechargeCaveEnginSelect` at `0x45f085` with AL = player, DX = packet
+word 2 and EBX = player × 4, then follows the original packet cleanup. Economy owns the unload body and
+its Core callbacks, over the same live memory; errors and prior mutations retain their existing semantics.
+Execution oracle remains intact `RISING.EXE` SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+
+Fresh leased native run: 124 comparisons, 118 equal (including tag 19), six explicit unloaded-text stops
+at `0x478a47`, zero mismatches. Load-tail, between-frames, frame-1, paused-state and unchanged-code
+reproductions all pass. Report: `validacao/entrada-ordens-native.json`; existing replay bytes are unchanged.
+Reproduce with `python3 -B pesquisas-paralelas/ia-runtime/validar_entrada_ordens_ia.py` through
+`/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py`.
+
+Leased `python3 -B scripts/check.py --domain ai-runtime`: 124 tests, 116 executed successfully, eight
+explicit native skips, no failures/errors; documentation links pass. Strict P6 and the S1 frame-2547
+investigation follow after this refresh is committed and pushed. No main integration or acceptance is
+performed here.

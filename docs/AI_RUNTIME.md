@@ -22,12 +22,12 @@ Every address applies to the intact executable SHA-256 `6c556520c084b9300d9ac019
 
 | Check | Cases / phases | Equal | Named stops | Mismatches |
 |---|---:|---:|---:|---:|
-| Input orders (`validar_entrada_ordens_ia.py`) | 124 | 117 | 7 | 0 |
+| Input orders (`validar_entrada_ordens_ia.py`) | 124 | 118 | 6 | 0 |
 | Deposit pages (`validar_paginas_deposito_ia.py`) | 203 | 203 | 0 | 0 |
 | Construction/keys (`validar_construcao_teclas_ia.py`) | 90 | 85 | 5 | 0 |
 | M3.1 P1 / P2 whole state | 1,002 / 1,202 phases | all | 0 | 0 |
 
-The leaf counts are the committed reports at `946685b` (main `e70fda3` providers). Remaining leaf stops: Core `EnginEstVivant` (`0x4731d3`), six unloaded-text cases (`0x478a47`), `BatimentHabitable` (`0x41d000`), `SetMurAllentour` (`0x41d012`), `SetEnginSelectRentreEngin` (`0x45f17a`), `iagUnitSendMessage` (`0x41da48`) and VK_SUBTRACT/MiniMapRecentre (`0x41843e`).
+Input orders were freshly rerun on `f8bb719` (containing main `00afd4b`): tag 19 now completes through Economy's restoration provider, with full original equality; all native load/frame/code reproductions pass. The other leaf counts remain the committed reports at `946685b`. Remaining leaf stops: six unloaded-text cases (`0x478a47`), `BatimentHabitable` (`0x41d000`), `SetMurAllentour` (`0x41d012`), `SetEnginSelectRentreEngin` (`0x45f17a`), `iagUnitSendMessage` (`0x41da48`) and VK_SUBTRACT/MiniMapRecentre (`0x41843e`).
 
 **Window reach (indicators unless stated).** P6 planning whole-state 4,544/4,544 phases through frame 2400 (diagnostic). K1 strict complete through 629, P5 strict complete through 3129, P3 planning 3,001/3,001 through 3129. Uncommitted local runs at `d2777b1` (logs under `.local/`, not evidence) show P3 and P4 strict complete through 3129; P7 strict through 3216 and S1 strict (pass-1 indicators) through 2057, both stopping on Graphics' AffGame view origin at `0x415b77`; S1 planning through 2546 with a first difference at 2547 in `objective.structures`; strict P6 parts 1 and 2 equal (2,000 and 544 phases, chains `5da71fab…` and `c557167f…`) while part 0 was cut off at the pause.
 
