@@ -579,3 +579,145 @@ Merged main `3e0de77` then `fcc0ba8`. The report is [M3_1_FOME_E_S1.md](M3_1_FOM
   - Core: TerrainEstGc ≥ 0x1d and the SetMiniMap mode at 0x44c437;
   - Economy: EnginRestaureEtat, BatimentEnleveMatiere and SetDechargeCaveEnginSelect;
   - Combat: the turret BatimentPeutAttaquer and BatimentInitAttaqueSelect.
+
+## Codex continuation — main baseline and native provider regressions (2026-10-30)
+
+Resumed this front after reading the preceding handover and the three M3.1 reports. Fast-forwarded the feature worktree from `c6dbcf2` to fetched main `e70fda3`; `3347a50` is integrated there. The current user authorizes AI/runtime-owned commits and feature pushes only: do not run the main integration helper or commit merges of other feature branches.
+
+### Fresh validation on the main-only source tree
+
+All three commands ran through `/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py`, without reference extractions or test merges:
+
+| Validator | Cases | Equal | Named stops | Mismatches | Compute seconds |
+|---|---:|---:|---:|---:|---:|
+| `validar_entrada_ordens_ia.py` | 124 | 117 | 7 | 0 | 151.987 |
+| `validar_paginas_deposito_ia.py` | 203 | 203 | 0 | 0 | 170.820 |
+| `validar_construcao_teclas_ia.py` | 90 | 85 | 5 | 0 | 151.402 |
+
+Reports refreshed: [entrada-ordens-native.json](validacao/entrada-ordens-native.json), [paginas-deposito-native.json](validacao/paginas-deposito-native.json), [construcao-teclas-native.json](validacao/construcao-teclas-native.json). Every run reproduces `load_tail`, `between_frames`, `frame1`, the pause and unchanged original code. The replay-read evidence remains byte-identical. The leased `python3 -B scripts/check.py --domain ai-runtime` passes **120 tests, 8 explicit native skips**, with documentation links passing. The three differentials above actually executed natively; they were not skipped.
+
+No translation, API, supported domain or mutation/callback order changed. The validators still consume their declared frame-1 native case-entry images, register files, cursor/key answers and sound-boundary declarations, and compare original registers, changed bytes and ordered requests. Oracle identity remains intact `RISING.EXE` SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`; original entries and call addresses remain those documented in the linked M3.1 reports and per-case captures. The reports' foreign source hashes record provenance only; no new foreign-file test pins were added.
+
+The input-order stops remain Core's `EnginEstVivant` at call site `0x4731d3` (entry `0x443dad`) and six unloaded-text cases at `0x478a47`. Construction/key stops remain `BatimentHabitable` at `0x41d000`, `SetMurAllentour` at `0x41d012`, `SetEnginSelectRentreEngin` at `0x45f17a`, `iagUnitSendMessage` at `0x41da48`, and VK_SUBTRACT/MiniMapRecentre at `0x41843e`. These are explicit retained boundaries, not mismatches or substituted behavior.
+
+### Upstream readiness and next actions
+
+Repeated fetches through 04:54 BRT still show main `e70fda3`. Core `5422338` and Graphics' CAVE/type-15/type-16 guard commits (`fabbabf`, `9f9ee84`, `3a22f70`) are **not ancestors of main**. Core has advanced to `c162e68` and Graphics to `ff5cf34` on their own feature branches; neither was merged into this worktree. Missions remains at `bab6c7c`, with no S1 pass-2 `captura-janela.manifest.json` on that ref or main. Its existing S1 pass-1 victory capture does not replace pass 2.
+
+No new window proof or indicator rerun was produced in this continuation. Last recorded reach remains:
+
+| Window | Last recorded reach | Pending dependency / next run |
+|---|---|---|
+| P1 / P2 | accepted whole-state 1,002/1,002 and 1,202/1,202 phases | unchanged accepted proof |
+| S1 | planning indicators: 1,973 frames equal, through 2101; stop in frame 2102 | Core TerrainEstGc at `0x44d8cd`; after Core lands, rerun and report the actual next stop (expected ChercheGc call site `0x44db70`) |
+| P4 | indicators: 331 frames equal, through 459; stop in frame 460 | same Core TerrainEstGc; rerun after Core lands |
+| P7 | strict through 220; planning through 2800, stop in 2801 | Graphics AffBatiments; Core TerrainEstGc in planning; rerun after Core lands |
+| P6 | strict 184 phases through 220; planning whole-state 4,544/4,544 through 2400 | Graphics AffBatiments and construction-projectile guards; strict proof waits for main |
+| P3 | strict through 220; planning 3,001/3,001 frames through 3129 | Graphics guards |
+| K1 / P5 | strict indicators complete through 629 / 3129 | no recorded stop |
+
+Continue in the user's order: merge fetched main when Core lands; run S1/P4/P7 indicators and refresh all three leaf differentials for the provider update. When Missions publishes S1 pass 2, run `fixar S1 --ref origin/feat/re-missions`, commit/push the pin, then run every S1 part in strict and planning modes under the lease, reporting each part's reach and chain hash. When Graphics lands on main, run strict `tudo --janelas P6` from the clean main-only source tree and write `validacao/m3-1-prova-p6.json` only if equal. Planning output stays under `.local/` and is never acceptance evidence.
+
+## Core S1 provider wiring checkpoint (2026-10-30)
+
+Merged main `71335aa` at `337740f`, consuming only committed main providers. The interrupted earlier P6 run at `5b78107` left part 0 equal in all 2,000 phases (chain `a3f35dfc7701065f135f5b50046f1ce9d416f7190d2a0d1e65186cda3086df98`); its remaining parts produced no reports, and no combined proof was written. Its leased domain gate passed 120 tests / 8 explicit skips. Those results are historical to that revision and will not be mixed with the new run.
+
+`DonosM3.externo(nome, chamada, regs)` now routes Core's `buscas_bloqueios.provedor_buscas`, `consultas_estado_core.provedor_consultas_estado` and `provedores_lacunas_core.provedor_lacunas_s1` over the same live memory. Search inputs remain their required argument registers (Economy's work cycle consumes AX); omitted preserved registers and unknown stack-residue high bits remain explicitly marked `_incertos` by Core. State/fight queries require all seven registers. Stack-dependent strict calls reject absent/nominal ESP rather than inventing native stack bytes. Economy's actual restoration provider and Combat's `refugio_registradores` are injected into Core's owner routes, with exact call addresses and register files. Named Core domain/argument failures become named `DependenciaIA` stops; unexpected exceptions propagate. Original callback/store order and partial effects are retained, with no retries or rollback.
+
+Original identity is unchanged: intact executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`. Consumed addresses/domains and Core's 1,956 native comparisons are published in `docs/core/S1_GAPS.md` and `docs/core/STATE_QUERIES.md`; no Core body or foreign hash-pin test was copied. Four focused consumer tests pass: carried state-query registers and no writes, missing-register rejection before reads, argument-only search uncertainty, and refusal of missing/nominal strict-query ESP.
+
+This is a clean-source checkpoint for fresh P6 strict, P3/P7 strict and S1/P4 indicator runs plus all three native leaf regressions. Those fresh results are pending at this checkpoint; no new whole-state acceptance is claimed. S1 pass 2 remains unpinned and pending Missions' publication.
+
+## State at 2026-10-30 07:15 (MacBook paused)
+
+Documentation-only checkpoint; no code or native run in this entry. `feat/re-ai-runtime` = main `3874fcc` plus `946685b` and `d2777b1` (awaiting integration). The Codex session `ai-runtime-s1-proof` stopped at the pause with a clean worktree and nothing unpushed; there is no AI/runtime `wip/*` branch.
+
+- **Upstream:** Core `5422338`/`c162e68` and Graphics' guards (`fabbabf`, `9f9ee84`, `3a22f70`, `ff5cf34`) are now ancestors of main. Missions is still at `bab6c7c` with no S1 pass-2 manifest; pass 2 is being captured on the Mac mini.
+- **Uncommitted local results at `d2777b1`** (logs in `.local/m3-1-*-d2777b1.log` and `.local/m3-1/core-s1-d2777b1/`; not evidence until rerun from a clean committed tree and recorded):
+  - leaf differentials: input orders 118/124, deposit pages 203/203, construction/keys 85/90, all 0 mismatches;
+  - strict P3 and P4 complete through 3129; strict P7 through 3216 and strict S1 (pass-1 indicators) through 2057, both stopping on Graphics' AffGame view origin (10, 15) at `0x415b77`;
+  - S1 planning through 2546, first difference at 2547 in `objective.structures` (owner to be assigned after pass 2);
+  - strict P6 parts 1 and 2 equal (2,000 and 544 phases; chains `5da71fab…`, `c557167f…`, same as the planning chains); part 0 was interrupted at frame ~1014 by the pause (an earlier strict part 0 at `ad0a4a9` was equal in all 2,000 phases, chain `a3f35dfc…`).
+- **Next:** integrate the two branch commits; rerun P6 part 0 at the integrated source, `agregar`, write `validacao/m3-1-prova-p6.json` if equal, and reproduce on the mini; `fixar S1` and run S1 strict/planning when pass 2 lands; refresh leaf differentials and P7/S1 indicators after Graphics' finite view-origin validation (on `feat/re-graphics`) reaches main.
+- **Light gate at this merge (no native):** `scripts/check.py --domain ai-runtime` runs 124 tests, 8 native skips, documentation links pass, and **1 failure**: `test_entrada_ordens_ia.ReplayCasos` case `process_tag19_unload` no longer raises `DependenciaIA`, because Economy's tag 19 provider is now on main (the case is the 118th equal in the local rerun). The committed `validacao/entrada-ordens-native.json` (117/124) and the replay expectation need refreshing from a native rerun; not changed here.
+
+## Input-order replay refresh (2026-10-30, resumed AI/runtime front)
+
+Scope: refresh the native input-order differential and its CPU-free replay after Economy's committed
+`restauracao.provedor_restauracao` made `process_tag19_unload` complete. Starting tree `f8bb719` is clean
+and contains current `origin/main` `00afd4b`; no foreign research file is changed. The replay now explicitly
+requires this case to reach its original-result comparison instead of accepting a named stop.
+
+API and order are unchanged: `Entrada.process_input_game(regs)` consumes the original seven-register file
+and player packet; tag 19 calls `SetDechargeCaveEnginSelect` at `0x45f085` with AL = player, DX = packet
+word 2 and EBX = player × 4, then follows the original packet cleanup. Economy owns the unload body and
+its Core callbacks, over the same live memory; errors and prior mutations retain their existing semantics.
+Execution oracle remains intact `RISING.EXE` SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+
+Fresh leased native run: 124 comparisons, 118 equal (including tag 19), six explicit unloaded-text stops
+at `0x478a47`, zero mismatches. Load-tail, between-frames, frame-1, paused-state and unchanged-code
+reproductions all pass. Report: `validacao/entrada-ordens-native.json`; existing replay bytes are unchanged.
+Reproduce with `python3 -B pesquisas-paralelas/ia-runtime/validar_entrada_ordens_ia.py` through
+`/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py`.
+
+Leased `python3 -B scripts/check.py --domain ai-runtime`: 124 tests, 116 executed successfully, eight
+explicit native skips, no failures/errors; documentation links pass. Strict P6 and the S1 frame-2547
+investigation follow after this refresh is committed and pushed. No main integration or acceptance is
+performed here.
+
+## Strict P6 proof (2026-10-30, source `01c4319`)
+
+Fresh clean-tree strict run (no planning flag), all three parts: **4,544/4,544 phases equal**, frames
+129–2400, zero crossings/provider stops, no differences and no aggregation problems. Checkpoint continuity,
+scripted answers, order fields, original reference integrity, registers, both RNGs and all state under the
+published cumulative mask pass. `validacao/m3-1-prova-p6.json` records source, hashes and reproduction commands.
+No implementation, API, mutation order, original identity or supported domain changed for this stage.
+
+| Part | Frames | Equal phases | Phase chain SHA-256 |
+|---|---|---:|---|
+| 0 | [129, 1128] | 2000 | `a3f35dfc7701065f135f5b50046f1ce9d416f7190d2a0d1e65186cda3086df98` |
+| 1 | [1129, 2128] | 2000 | `5da71fab9ac33cb3ed067a9c962bea9e6612a7a57ee1fdfe01b99b34122924f6` |
+| 2 | [2129, 2400] | 544 | `c557167f801fbdc01f4b733880f016cf65d42e59df5b66c5fc58d2abe2c10f0c` |
+
+Reproduce from source `01c4319` (or a descendant with the same implementation):
+
+```sh
+python3 -B pesquisas-paralelas/ia-runtime/provar_entrada_janelas_ia.py tudo --janelas P6 --lease '/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py' --saida pesquisas-paralelas/ia-runtime/validacao/m3-1-prova-p6.json
+```
+
+The proof writer refuses an existing output; use a fresh output path for reruns. Second-machine reproduction:
+`provar_entrada_janelas_ia.py reproduzir pesquisas-paralelas/ia-runtime/validacao/m3-1-prova-p6.json --janela P6 --lease <heavy_lease.py>`.
+That reproduction and coordinator acceptance remain pending. The preceding domain gate passed 124 tests
+with eight explicit skips. The next and only remaining assigned task is the S1 frame-2547 investigation.
+
+## S1 frame-2547 production investigation (2026-10-30)
+
+[Full finding, owner requests and reproduction](S1_2547_PRODUCTION.md). Native structure 0's +5 byte
+`0x49a0cd` changes 4 → 5 through Economy's `SortieTroupe` writer `0x4211c1` (`c6 42 05 05`), before
+unit/city messages at `0x4211d3`/`0x4211e5`. Economy's full body already implements it. AI/runtime's input
+composition instead called the preparation-only producer and silently discarded its pending result
+(unit 4, requested type 7, direction 4, first dependency CalculPosition). A clean-source planning rerun
+on `5568c00` reproduced this exact difference.
+
+Fixed the AI/runtime route: `DonosM3.calcular_tropa_entrada(u16 structure)` calls Economy's full
+`CalculTroupe` provider at `0x426983` for types 1/2; `ComposicaoEntrada` keeps the inhabited predicate and
+single advance, original callback/store order, live shared memory, discarded exit registers and prior
+mutations on errors. Other production types now reject an unfinished preparation handoff explicitly.
+No original bytes, masks, snapshots or foreign research code changed.
+
+Fresh corrected S1 planning diagnostic: 2,418 indicator frames equal (129–2546); no first difference;
+`frame2547` stops on `EnginSetType` CALL `0x420f69` (Core callback unbound). This fixes the silent lost
+continuation, not the whole S1 recruitment path. Native prefix comparison: **6/6 equal**, three below
+threshold and three stopped before conversion, all touched bytes and supplied AX/DX/CL equal. Report
+`validacao/producao-entrada-prefixo-native.json`; missing BL is explicitly recorded, not guessed.
+
+Requested contracts: Economy must carry BL through its `EnginSetType` argument mask and forward
+CalculPosition's actual EBX (the current callback drops it); Core's conversion/healing/fatigue/experience/
+placement bodies need their raw-memory callback route; AI/runtime's city-message provider remains a
+later named gap. Exact names, CALL addresses, consumed widths, next callback order, native provenance
+and commands are in the linked finding. Original executable identity remains `6c556520…8543fb` above.
+Final leased domain gate: 124 tests, 116 successful executions and eight explicit native skips, no
+failures/errors; documentation links and diff whitespace pass. Second-machine P6 reproduction and S1
+pass-2 equality remain outside this delivery. The native prefix also reproduces the committed original
+store sequence and conversion arguments at each bounded stop; it does not execute a missing callback.
