@@ -33,6 +33,8 @@ import replay_caverna_recrutamento as rp  # noqa: E402
 from validar_caverna_recrutamento import CAPTURA  # noqa: E402
 
 RELATORIO = PASTA / 'validacao-caverna-recrutamento-emulada.json'
+ABANDONO = PASTA / 'evidencias/abandono-santuario/captura-abandono-santuario-exibicao.json.xz'
+RELATORIO_ABANDONO = PASTA / 'validacao-abandono-santuario-emulada.json'
 _CAP = {}
 
 
@@ -90,6 +92,44 @@ class Replay(unittest.TestCase):
         self.assertEqual(falhas, [], json.dumps(falhas[:5], indent=1))
         self.assertGreater(sum(c['match'] for c in contagem.values()), 0)
 
+    def test_core_exit_provider_composes(self):
+        """CalculPosition and RechercheDecalageSortie served by Core's ``provedor_saida`` (its exit registers checked
+        against the original's): every call still matches, and both routines are actually served."""
+        from validar_caverna_recrutamento import provedores_saida
+        servidas = {}
+        contagem, falhas = rp.replay(captura(), provedores=provedores_saida(), servidas=servidas)
+        self.assertEqual(falhas, [], json.dumps(falhas[:5], indent=1))
+        self.assertEqual(sum(c['match'] for c in contagem.values()), 342)
+        self.assertGreater(servidas.get('CalculPosition', 0), 0)
+        self.assertGreater(servidas.get('RechercheDecalageSortie', 0), 0)
+
+    def test_legacy_recruitment_with_core_exit_choice(self):
+        """``visao_grupos.escolher_saida(memoria)`` as ``Recrutamento.iniciar(escolher_saida=...)``: over the bytes
+        each accepted InitRecruteTroupe read, the legacy suffix stores the cell the original stored in +0x7c."""
+        from construcoes import EconomiaConstrucoes
+        from recrutamento import Recrutamento
+        from visao_grupos import escolher_saida
+        aceitos = [r for r in captura()['calls'] if r['routine'] == 'InitRecruteTroupe'
+                   and int(r['exit_registers']['EAX'], 16) & 0xff == 1]
+        self.assertTrue(aceitos)
+        for r in aceitos:
+            m = rp.MemoriaEsparsa(r['read_before_write'])
+            regs = {k: int(v, 16) for k, v in r['entry_registers'].items()}
+            tipo, jogador = regs['EAX'] & 0xff, regs['EDX'] & 0xff
+            s = m.u16(cr.SELECOES_ESTRUTURA + 2 * jogador)
+            e = cr.ESTRUTURAS + cr.PASSO * s
+            lojas = [int(x[4], 16) for x in r['stores'] if int(x[2], 16) == e + 0x7c and x[3] == 2]
+            self.assertTrue(lojas)
+            esperado = lojas[-1] & 0xffff
+            legado = Recrutamento(EconomiaConstrucoes(estruturas=bytes(1000 * 276)))
+            struct.pack_into('<H', legado.selecoes, 2 * jogador, s)
+            legado.mundo.estruturas[276 * s + 8] = m.u8(e + 8)
+            for recurso in (0, 1, 2):
+                legado.mundo.economia.atribuir(jogador, recurso, 1000)
+            self.assertTrue(legado.iniciar(tipo, jogador, escolher_saida=escolher_saida(m)))
+            self.assertEqual(struct.unpack_from('<H', legado.mundo.estruturas, 276 * s + 0x7c)[0], esperado,
+                             (r['frame'], r.get('action')))
+
     def test_mutations_are_detected(self):
         c = captura()
         alvos = {}
@@ -143,12 +183,58 @@ class Replay(unittest.TestCase):
         self.assertEqual((ctx.exception.rotina, ctx.exception.chamada), ('BagContient', 0x426b8d))
 
 
+class Abandono(unittest.TestCase):
+    """SortieTroupe's abandonment (0x42101d..0x42114e) over its own original-only capture: seven tag-33 releases,
+    a type-5 recruit, and the last colonist leaving at frame 455 (owner 0xc8)."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.c = json.loads(lzma.decompress(ABANDONO.read_bytes()))
+
+    def test_capture_facts(self):
+        c = self.c
+        self.assertFalse(c['translation_executed'])
+        self.assertEqual(c['reproduction'], dict(load_tail=True, between_frames=True, frame1=True, code_unchanged=True))
+        self.assertEqual((len(c['released']), c['recruit_frame'], c['abandoned_frame']), (7, 9, 455))
+        s0 = cr.ESTRUTURAS + 4
+        abandono = [r for r in c['calls'] if r['routine'] == 'SortieTroupe'
+                    and any(int(a, 16) == s0 and novo == 0xc8 for a, _v, novo in r['changed_bytes'])]
+        self.assertEqual([r['frame'] for r in abandono], [455])
+        self.assertIn('EteintTerrain', [x[1] for x in abandono[0]['calls']])
+
+    def test_every_call_replays_with_core_exit_provider(self):
+        from validar_caverna_recrutamento import provedores_saida
+        for provedores in (None, provedores_saida()):
+            contagem, falhas = rp.replay(self.c, provedores=provedores)
+            self.assertEqual(falhas, [], json.dumps(falhas[:5], indent=1))
+            self.assertEqual(sum(x['match'] for x in contagem.values()), 81)
+
+    def test_abandonment_dependencies_raise(self):
+        r = next(r for r in self.c['calls'] if r['routine'] == 'SortieTroupe' and r['frame'] == 455)
+        m = rp.MemoriaEsparsa(r['read_before_write'])
+        regs = {k: int(v, 16) for k, v in r['entry_registers'].items()}
+        from validar_caverna_recrutamento import Replay
+        rep = Replay(r, cr.ROTINAS.keys() | set(cr.INTERNAS))
+        servido = rep(m)
+
+        def externo(nome, chamada, regs_):
+            if nome == 'EteintTerrain':
+                raise cr.DependenciaCavernaRecrutamento(nome, chamada)
+            return servido(nome, chamada, regs_)
+        with self.assertRaises(cr.DependenciaCavernaRecrutamento) as ctx:
+            cr.CavernaRecrutamento(m, externo=externo)._SortieTroupe(regs)
+        self.assertEqual(ctx.exception.chamada, 0x421116)
+
+
 class Relatorio(unittest.TestCase):
     def test_native_report_bound_to_translation(self):
-        rel = json.loads(RELATORIO.read_text())
-        self.assertEqual(rel['translation'], hashlib.sha256((PASTA / 'caverna_recrutamento.py').read_bytes()).hexdigest())
-        self.assertEqual((rel['mismatches'], rel['errors']), (0, 0))
-        self.assertTrue(rel['rerun_equals_capture'])
+        for caminho in (RELATORIO, RELATORIO_ABANDONO):
+            rel = json.loads(caminho.read_text())
+            self.assertEqual(rel['translation'],
+                             hashlib.sha256((PASTA / 'caverna_recrutamento.py').read_bytes()).hexdigest(), caminho.name)
+            self.assertEqual((rel['mismatches'], rel['errors']), (0, 0))
+            self.assertTrue(rel['rerun_equals_capture'])
+            self.assertIsNotNone(rel.get('core_exit_provider'))
 
     @unittest.skipUnless(os.environ.get('RISING_EMULAR') == '1', 'native differential (RISING_EMULAR=1)')
     def test_native_differential(self):

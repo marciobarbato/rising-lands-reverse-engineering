@@ -17,7 +17,8 @@ non-stack store with the nested call it happened in, every nested routine entry 
 exit registers, the bytes read before written, the frame-boundary events), its changed bytes are
 taken over the whole mapped state, an optional observer sees it (the translation validator), the
 entry state is restored, and the frame resumes and executes the routine as usual (Missions'
-``Isolamento`` method). A binding (declared I/O) inside a recorded call stops the run.
+``Isolamento`` method). A binding (declared I/O) inside a recorded call stops the run. ``pseudo`` adds inline bodies
+recorded the same way, from an entry address to an exit address reached with the entry ESP.
 
 Importing this module executes nothing.
 """
@@ -64,7 +65,8 @@ class Ciclo:
     ``gravar_acoes``: a declared call runs through the isolation-aware runner, so the recorded routines it
     enters (itself included) are recorded like the frame's own calls, each tagged with the action label."""
 
-    def __init__(self, rotinas, escolher, ordens, observador=None, amostra=None, ticks=60000, gravar_acoes=False):
+    def __init__(self, rotinas, escolher, ordens, observador=None, amostra=None, ticks=60000, gravar_acoes=False,
+                 pseudo=None):
         import percurso_quadro1  # noqa: F401  (puts Missions on sys.path)
         import cenarios_oraculo
         from oraculo_exibicao_missao import BancadaExibicaoOriginal
@@ -81,6 +83,9 @@ class Ciclo:
         self.registros, self.acoes, self.quadros = [], [], []
         self.reproducao = {}
         self.gravar_acoes, self.acao_atual = gravar_acoes, None
+        # Inline bodies recorded like calls: {entry address: (name, exit address)}. The body runs from its entry to
+        # the exit with ESP unchanged (e.g. a unit-state body of EnginNextEtape up to its common exit).
+        self.pseudo = dict(pseudo or {})
 
     # ------------------------------------------------------------ memory helpers
     def ler(self, endereco, n):
@@ -185,7 +190,10 @@ class Ciclo:
                 nome = self.entradas[entrada]
                 if not ciclo.escolher(nome, regs, ciclo):
                     return
-                retorno = struct.unpack('<I', b.cpu.mem_read(regs['ESP'], 4))[0]
+                if entrada in ciclo.pseudo:
+                    retorno, esp_saida = ciclo.pseudo[entrada][1], regs['ESP']
+                else:
+                    retorno, esp_saida = struct.unpack('<I', b.cpu.mem_read(regs['ESP'], 4))[0], regs['ESP'] + 4
                 contexto, blocos = self._salvar()
                 fase = b.fase
                 self.ativo = False   # the frame phase name stays: frame boundaries (PlaySnd_*) are declared there
@@ -205,7 +213,7 @@ class Ciclo:
                         for g in ganchos:
                             b.cpu.hook_del(g)
                         b.cpu.ctl_flush_tb()
-                    if saida['EIP'] != retorno or saida['ESP'] != regs['ESP'] + 4:
+                    if saida['EIP'] != retorno or saida['ESP'] != esp_saida:
                         raise RuntimeError(f'Recorded call {nome} did not reach its return')
                     if len(b.vinculos_declarados.eventos) != eventos:
                         raise RuntimeError(f'Binding inside the recorded call {nome}')
@@ -233,7 +241,10 @@ class Ciclo:
                     b.fase = fase
                     self.ativo = True
 
-        return IsolamentoCiclo(self.b, self.rotinas)
+        iso = IsolamentoCiclo(self.b, self.rotinas)
+        for entrada, (nome, _saida) in self.pseudo.items():
+            iso.entradas[entrada] = nome
+        return iso
 
     # ------------------------------------------------------------ run
     def executar(self, ate, progresso=None):

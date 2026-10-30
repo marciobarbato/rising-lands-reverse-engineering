@@ -8,8 +8,8 @@
   },
   "BatimentLogeEngin": {
    "error": 0,
-   "match": 1,
-   "mismatch": 1,
+   "match": 2,
+   "mismatch": 0,
    "uncertain_register": 0
   },
   "CalculWorkEngin": {
@@ -44,38 +44,6 @@
   }
  },
  "failures": [
-  {
-   "arg": "0x1",
-   "bytes": [
-    "0x47933a26",
-    "0x47933a27",
-    "0x47933a28",
-    "0x47933a29",
-    "0x47933a2a",
-    "0x47933a2b",
-    "0x47933a2c",
-    "0x47933a2d",
-    "0x47933a2e",
-    "0x47933a2f",
-    "0x47933aa6",
-    "0x47933aa7",
-    "0x47933aa8",
-    "0x47933aa9",
-    "0x47933aaa",
-    "0x47933aab",
-    "0x47933aac",
-    "0x47933aad",
-    "0x47933aae",
-    "0x47933aaf"
-   ],
-   "frame": 125,
-   "n_bytes": 196,
-   "outcome": "mismatch",
-   "registers": {},
-   "replay": [],
-   "routine": "BatimentLogeEngin",
-   "unconsumed": 0
-  },
   {
    "arg": "0xe",
    "frame": 214,
@@ -141,7 +109,7 @@
   "load_tail": true
  },
  "schema": "rising-lands/economy-work-cycle-composition-native/1",
- "seconds": 741.884,
+ "seconds": 756.356,
  "served_by_translation": {
   "AnimWorkEngin": 27,
   "BagContient": 8,
