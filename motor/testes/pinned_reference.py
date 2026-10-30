@@ -20,6 +20,10 @@ import tarfile
 REPO = Path(__file__).resolve().parents[2]
 LOGIC_REVISION = '7ceeff909b52b7d4f59723f35dfe43a9deda41ff'
 INPUT_REVISION = 'a7f5d4939e7826e02a8b348995edb9c793657f4c'
+CHAIN_REVISION = '54d148d931cc3420fe256e6fec71462087597293'
+CHAIN8_REVISION = '92fab50ccfa14271f6657fc0f6032b6b4b68dd4b'
+CHAIN7_REVISION = '89575fad00ad3ee506879b275bdceb8f63423baf'
+CHAIN6_GRAPHICS_REVISION = '24f0ec85714dbbfa4645212ca81f8f4145a76143'
 GRAPHICS_REVISION = 'ce441852bcada750a8f91da8ed3302f1668c4405'
 ROOTS = ('ferramentas', 'integracao', 'pesquisas-paralelas', 'evidencias', 'relatorios')
 GRAPHICS = 'pesquisas-paralelas/graficos-animacao'
@@ -73,16 +77,17 @@ def link_missing(path, target):
 @functools.lru_cache(maxsize=1)
 def source_root():
     profile = os.environ.get("RL_REFERENCE_PROFILE", "logic")
-    if profile not in ("logic", "input"): raise ValueError("Unknown engine reference profile")
-    logic_revision = INPUT_REVISION if profile == "input" else LOGIC_REVISION
-    for revision in (logic_revision, GRAPHICS_REVISION):
+    if profile not in ("logic", "input", "chain5", "chain6", "chain7", "chain8"): raise ValueError("Unknown engine reference profile")
+    logic_revision = CHAIN8_REVISION if profile=="chain8" else CHAIN7_REVISION if profile == "chain7" else CHAIN_REVISION if profile in ("chain5", "chain6") else INPUT_REVISION if profile == "input" else LOGIC_REVISION
+    graphics_revision = CHAIN8_REVISION if profile=="chain8" else CHAIN6_GRAPHICS_REVISION if profile in ("chain6", "chain7", "chain8") else CHAIN_REVISION if profile == "chain5" else GRAPHICS_REVISION
+    for revision in (logic_revision, graphics_revision):
         try:
             git('cat-file', '-e', revision + '^{commit}')
         except subprocess.CalledProcessError as error:
             raise RuntimeError('Pinned reference commit unavailable; fetch ' + revision) from error
     expected = entries(logic_revision, ROOTS)
     expected = {p: v for p, v in expected.items() if not p.startswith(GRAPHICS + '/')}
-    expected.update(entries(GRAPHICS_REVISION, (GRAPHICS,)))
+    expected.update(entries(graphics_revision, (GRAPHICS,)))
     identity = hashlib.sha256(json.dumps(expected, sort_keys=True).encode()).hexdigest()
     parent = REPO / '.local/pinned-engine-references' / identity
     parent.mkdir(parents=True, exist_ok=True)
@@ -95,9 +100,9 @@ def source_root():
             target.mkdir()
             archive(logic_revision, ROOTS, target)
             shutil.rmtree(target / GRAPHICS)
-            archive(GRAPHICS_REVISION, (GRAPHICS,), target)
-            ready.write_text(json.dumps(dict(logic=logic_revision, graphics=GRAPHICS_REVISION, tree_manifest_sha256=identity)) + '\n')
-        if json.loads(ready.read_text()) != dict(logic=logic_revision, graphics=GRAPHICS_REVISION, tree_manifest_sha256=identity):
+            archive(graphics_revision, (GRAPHICS,), target)
+            ready.write_text(json.dumps(dict(logic=logic_revision, graphics=graphics_revision, tree_manifest_sha256=identity)) + '\n')
+        if json.loads(ready.read_text()) != dict(logic=logic_revision, graphics=graphics_revision, tree_manifest_sha256=identity):
             raise ValueError('Pinned reference cache identity changed')
         # Validate actual cached bytes against the immutable Git tree, including
         # transitive modules and fixtures. A corrupt cache is a hard error.

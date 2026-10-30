@@ -1,0 +1,16 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "motor/testes/frame_differential.py",
+    "--m22",
+    "--frames",
+    "128",
+    "--library",
+    "motor/target/release/librising_engine.dylib",
+    "--output",
+    ".local/chain5/m22-9.json"
+  ],
+  "seconds": 43.644466417000004,
+  "returncode": 0
+}

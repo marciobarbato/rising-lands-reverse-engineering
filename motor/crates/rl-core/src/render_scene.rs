@@ -562,7 +562,7 @@ impl Context<'_> {
                 let gauge = r[4] as u32 == self.camera
                     && (self.u16(0x496ac4)? == index || selected == index);
                 if frame || gauge {
-                    if r[8] == 2 && tile != 0x2ed {
+                    if matches!(r[8], 2 | 3) && tile != if r[8] == 2 { 0x2ed } else { 0x30d } {
                         return Ok(());
                     }
                     self.structure_overlay(&r, cell, frame, gauge)?;

@@ -7,9 +7,19 @@ accepted M2 window (frames 0–9,200, ABI 1.1–1.2), stage 3 the native rendere
 ([ABI 1.5](#stage-4--declared-input-abi-15)) and the persistent play execution
 ([ABI 1.6](#sustained-play-execution--abi-16)). In play mode, logic averages
 **0.26 ms/frame** and logic plus render **0.65 ms/frame** over 9,200 frames, with
-terminal hashes unchanged. Simulation coverage under input currently ends at the
-named original-address stops recorded in the stage sections (for example the
-CAVE body at frame 220 in the cave probes). Swift owns the macOS shell, C only
+terminal hashes unchanged. On feature `feat/codex-rust-engine`, later-chain providers now advance beyond
+frame220: structure entry/cave habitation and recruitment, work state5, hunger
+state19/restoration, vision/groups/minimap/search and turret orders. The
+[continuation contract](../motor/research/CHAIN8_CONTRACT.md) records the exact
+inputs, original addresses, mutation order and remaining addressed stops.
+The [final continuation report](../motor/validation/chain8/piece7/summary.json)
+proves P3 through3129, P6 through2400 and P7 through3700, with all3,001/2,272/3,572
+advancing surfaces exact against original and pinned Python. P3/P7 state checks
+cover published indicators, inputs and orders; P6 also passes4,544/4,544 whole-state
+phases under the unchanged published mask and4,544 paired play/audit phases.
+No stop occurs inside these windows. Exclusive play logic averages0.283–0.285ms/frame
+(maximum0.518ms), with the earlier9,200-frame terminal state/surface hashes exact.
+The handoff records remaining S1/D1 boundaries and the qualified text contract. Swift owns the macOS shell, C only
 small tooling, and Python remains the original-validated reference and test
 harness. Rust is validated against the original evidence and the Python
 reference; `sh motor/validate.sh` runs on every integration. The workstream owns
@@ -721,3 +731,35 @@ emulation or later functional port is claimed. The macOS consumer must accept AB
 1.6 and select `RL_EXECUCAO_JOGO` before its live loop to obtain this play path.
 [The report package](../motor/validation/play60/summary.json) and
 [handoff](../motor/HANDOFF.md) record exact timings, hashes, masks, commands and gaps.
+
+## Input-chain continuation reference
+
+The service-recovery continuation adds a third immutable `chain5` test profile
+without changing the prior `logic` and `input` profiles. Its initial commit is
+`54d148d931cc3420fe256e6fec71462087597293`; transitive source/fixture bytes are
+verified against Git objects, with additional explicit cave/vision evidence
+pins. This lets the native cave body and Core structure-vision providers advance
+the carried input world through frame 220 under the original whole-state policy.
+The original-address guards still stop unsupported display and economic paths.
+ABI 1.6 and persistent play execution are unchanged. Exact validation scope,
+remaining boundaries and subsequent profile extensions are recorded in the
+[engine handoff](../motor/HANDOFF.md).
+
+The second continuation uses the separate `chain6` profile, retaining logic
+`54d148d` and overlaying Graphics `24f0ec8`. The native renderer's additive
+contract identifier is1.9, independently of the unchanged C ABI1.6. It covers
+the pinned inhabited CAVE/work/selection layers and exact additional AffGame
+origins while preserving the production AffText boundary. Core group and
+minimap/exit queries consume the same live memory. AX-only exit-position callers
+do not receive fabricated upper-register bits; full-register fixtures require
+the actual original stack residue. Detailed scope and measured delivery remain
+in the [handoff](../motor/HANDOFF.md).
+
+This continuation now includes construction's BatimentModifyMap effect call and
+its timer/sound continuation. The final second-piece package proves P3's full
+3,001-frame original indicator window through3129; K1's501 state/surface frames
+through629;200-frame P6/P7 prefixes through328, including400 P6 whole-state
+phases; and the stronger carried-cache/effect surface gates. Final play logic
+averages0.2591ms/frame over9,200 frames under a shared lease, with terminal hashes
+unchanged. Full contracts, qualifications, reports and remaining S1/D1 work are
+in the [handoff](../motor/HANDOFF.md#second-continuation-piece--measured-delivery).

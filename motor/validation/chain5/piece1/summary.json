@@ -1,0 +1,85 @@
+{
+  "P6": {
+    "frames": [
+      129,
+      220
+    ],
+    "frames_equal": 92,
+    "play_audit_attempts_equal": 185,
+    "stop": {
+      "address": "0x407dd3",
+      "frame": 221,
+      "name": "AffGame",
+      "phase": 2
+    },
+    "whole_state_phases": 184
+  },
+  "abi": "1.6 unchanged",
+  "files_sha256": {
+    "P6-final9-run.json": "675ffd9eb5d5000ea263e79ea419353244b316b899a0e03b10380036dc335879",
+    "P6-final9.json.xz": "7bb2da3ef69ef706e969318ffd4eca540700eba289378665b5a40a9017925cbe",
+    "P6-final9.log.gz": "03827a6d569fa2a569a847cea5ee7d96332de963a3e59daa3c179380d4b20421",
+    "build9-run.json": "7ebdf5643a5efffaf04df8eb2e3d50ffa1392d06d50fddd3ef4d305e09f8535f",
+    "build9.log.gz": "c07e8bdff6b6b24df83df91772e56e72da02715a685757ad8351ef3ef8b56b81",
+    "cave9-run.json": "0fffdc07da92e7145fbe37a36bfb879c8885552ebf4b5d8558c11295677c0752",
+    "cave9.json.xz": "22d0ccf5190e148b8dfe3e281e8ea9501bd8f145c299d1e19510dc44c7df289a",
+    "cave9.log.gz": "6b1961d87a17d5b257325e5d6d7fdc718eb8bd0eba91f5defa7cb503b4a2253e",
+    "m22-9-run.json": "1d9a6dbe06821c241f3e459e2a1a677da6b040e719959485d5e5674977e6feb5",
+    "m22-9.json.xz": "f79d23f6f50f5f566a33e8a2e93d5aa386a7a1afcc55e89fa60d46db65cb30a0",
+    "m22-9.log.gz": "5a46231d32133194815e795c55c041d7d80e53289b294f52a29e37af07e84b95",
+    "surface-debug7.json.xz": "b688918229ec0a2c5775ffb53409098f64f61b6962b8929030cfc622c715d62e",
+    "surface-debug8.json.xz": "6a02d896df335cc53c3f64f61456845f8f7bc28276256ed7ac12079ed93eae4b",
+    "surface3.log.gz": "06c4caa449be568dd1ea801c8fc7f16940c718872528ede68b8af9103c6496a8",
+    "surface4.log.gz": "8d9f5773f5b99a75eeabb463abb356a413d485526036df889e8d045727d1c2ef",
+    "surface5.log.gz": "c3b737760258a8d9b13c29b50148c16614c0a0cb971b081c14e002089905a5f6",
+    "surface6.log.gz": "ed956a5b69e89963aad9deb250865d6cd4d53e92d0c49e883d99ca64ea070f19",
+    "surface9-run.json": "2c989b5f6720940708737b615de797dc022b7705143361f9b4741297e685dc0e",
+    "surface9.json.xz": "b21fa0082a315b548d94c6a893252c0e12f042ff7e715af721924b18f0be6301",
+    "surface9.log.gz": "d282ed020b4159b854b7b1ad7b5343aed622e3992d88cd06c50bf2f78621af46",
+    "validate9-run.json": "102fd5f14fb9c5b0d72ab086af2771b632313b62518014affaea61f4f61fc0b1",
+    "validate9.log.gz": "d4892c4d00a86998f918440df956061bb77c1e2cc12ac6b3659ffe733931d63f",
+    "vision9-run.json": "88ba90b5cc75b01a21ec0ccedbf3fa7a3cd2ebde847954c510982150d5ac89d3",
+    "vision9.json.xz": "ed935fbd8a8b7e188326782046c05d4464c05e503a082d4bcaec64842b3cd926",
+    "vision9.log.gz": "25a13649da4072887af728a74fcbe583f9bbf6164eb69e543a6c99cfb34f82fc"
+  },
+  "gate": {
+    "passed": true,
+    "pilot_captures": 75,
+    "python_tests": 63,
+    "rust_tests": 30,
+    "seconds": 276.504
+  },
+  "leaf_original_cases": {
+    "cave": 117,
+    "equal": 281,
+    "mismatches": 0,
+    "vision": 164
+  },
+  "m22": {
+    "phases_equal": 257,
+    "phases_requested": 257
+  },
+  "merge": "83c830e",
+  "merged_main": "51715e2",
+  "not_claimed": [
+    "P6 after frame220",
+    "Graphics 1.8/1.9",
+    "later Economy/Core/Combat ports",
+    "S1 or D1 endpoints",
+    "fresh x86 execution",
+    "main integration"
+  ],
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "own_world_surfaces": {
+    "equal": 93,
+    "frames": [
+      129,
+      221
+    ],
+    "original_raster_call_sequences_equal": 93,
+    "python_pixels_and_cache_equal": 93,
+    "text": "exact original attested non-execution, production AffText stop unchanged"
+  },
+  "reference_revision": "54d148d931cc3420fe256e6fec71462087597293",
+  "schema": "rising-lands/chain-continuation-piece/1"
+}
