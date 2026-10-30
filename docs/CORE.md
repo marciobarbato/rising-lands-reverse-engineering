@@ -130,7 +130,12 @@ The S1 coverage survey's work-cycle searches/blocking tests and first-fight Core
 
 ## Current state (2026-10-30 07:15)
 
-Main `3874fcc` contains every Core delivery above; `feat/re-core` has no unintegrated Core code and Core has no parked `wip/*` branch. M3.1's P1/P2 part was accepted at `c9c85eb` with these providers in the chain. The original oracle is the intact executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`. Core's own gate (`python3 -B scripts/check.py --domain core`) passes 598 tests with 215 optional skips (skips are native corpora or foreign captures that are absent locally).
+At the 07:15 baseline, main `3874fcc` contained every preceding Core delivery and Core had no parked `wip/*` branch. M3.1's P1/P2 part was accepted at `c9c85eb` with these providers in the chain. The original oracle is the intact executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`. Core's own gate (`python3 -B scripts/check.py --domain core`) passes 598 tests with 215 optional skips (skips are native corpora or foreign captures that are absent locally).
+
+Recruitment delivery on `feat/re-core` (2026-10-30): **277 native comparisons,
+zero mismatches**, captured at the real SortieTroupe sites and declared leaves.
+The final Core gate passes **608 tests, 215 optional skips**, with documentation
+links clean. This is a feature-only delivery for coordinator review.
 
 ### Provider index for consumers
 
@@ -148,11 +153,19 @@ All of these run over live flat memory, return every register EAX..EBP as the or
 | `provedor_fadiga` (`fadiga_vegetacao`) | EnginSetFatigue, ChercheVegetLibre, ChercheTypeBatimentProximite, EteintTerrain | 444 | Economy hunger/abandonment/restore, AI/runtime |
 | `provedor_buscas` (`buscas_bloqueios`), `ConsultasLuta` | S1 work-cycle searches, path-search blocking, first-fight queries | 1,410 (windows a 638, b 120, c 652) | AI/runtime (`DonosM3.externo`, on `feat/re-ai-runtime`) |
 | `provedor_consultas_estado` (`consultas_estado_core`) | EnginEstVivant, BatimentGetDecalageConstruction | 546 (also 546/546 CPU-free) | same |
+| `provedor_recrutamento` (`recrutamento_core`), `bonus_recrutamento` | EnginSetType, EnginAddVie, EnginResetFatigue, EnginSetExperimente, SetSortEngin at SortieTroupe call sites | [Recruitment adapter contract](core/RECRUITMENT_ADAPTERS.md); 277 comparisons, 0 mismatches | AI/runtime DonosM3 binding owed; Economy must forward BL for conversion and DX for placement |
 | `provedor_lacunas_s1` (`provedores_lacunas_core`) | all 16 S1 survey names plus the two queries; forwards Economy restore and Combat refuge | routes the evidence above; owner proofs stay with owners (restore 58/0, refuge 2/0) | same |
 
 The [S1 coverage survey](core/S1_COVERAGE.md) listed 16 Core gaps; all 16 now have a validated Core body or a committed owner provider.
 
 ### Open stops and owners
+
+The named S1 frame-2547 recruitment stop now has the raw-memory
+[recruitment owner adapters](core/RECRUITMENT_ADAPTERS.md). The original-only
+277-call capture is committed as `8e5e2a5`; the fresh native comparison reproduces
+all 277 cases with zero mismatches (57/83/11/103/23 in the five-routine order).
+Consumer wiring, Economy’s missing BL/DX arguments and AI/runtime’s city message
+remain separate owner contracts.
 
 | Stop | Owner |
 |---|---|

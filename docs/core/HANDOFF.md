@@ -796,3 +796,60 @@ Contract and counts: [WORK_CYCLE_QUERIES](WORK_CYCLE_QUERIES.md).
 - Validated this round, all 0 mismatches: S1 windows a 638 / b 120 / c 652 and the register queries 546 (1,956 fresh native comparisons); frame-125 minimap 7; hunger path 444; work-cycle queries 32. The 16 S1 survey gaps are closed by Core bodies or owner providers (Economy restore, Combat refuge).
 - Consumers: Economy now passes EDX=1 at `0x41fa88` and ECX for ChercheVegetLibre, and routes `provedor_fadiga`/`provedor_saida`. AI/runtime routes `provedor_buscas`, `provedor_consultas_estado` and `provedor_lacunas_s1` through `DonosM3.externo` on `feat/re-ai-runtime` (`d2777b1`, not on main); its fresh strict P6/P3/P7 and S1/P4 runs are pending.
 - [CORE.md](../CORE.md#current-state-2026-10-30-0715) now holds the provider index, open stops with owners and next steps; REMAINING, S1_GAPS, S1_COVERAGE and STATE_QUERIES point to it. Next Core work starts only from a named stop (AI/runtime's S1/P6 strict chain, Combat's D1 fatal windows), original-first as before.
+
+### S1 frame 2547: raw-memory recruitment owner adapters (2026-10-30)
+
+Task authorization is Core-owned changes, merge origin/main into feat/re-core,
+commit and push the feature branch only. Main was fast-forwarded into this
+worktree at `92fab50` before work; no main integration or acceptance is made.
+
+- Original-first capture: `8e5e2a5`,
+  `evidencias/recrutamento-core/original.json.xz`, **277 original calls**:
+  EnginSetType 57, EnginAddVie 83, EnginResetFatigue 11,
+  EnginSetExperimente 103, SetSortEngin 23. Each routine has three exact
+  Economy CalculTroupe fixture calls (297/869/1363), one real S1 call at frame
+  2547, and declared leaf variants. S1 snapshot 2500 through 2547 reproduces
+  **48/48 whole-state records**; variants restore the original trajectory.
+- API: `recrutamento_core.RecrutamentoCore(memory, bonus=callback).chamar(name, regs)`;
+  `provedor_recrutamento(owner, outros=None)` returns
+  `externo(name, call_address, regs)`; `bonus_recrutamento(memory)` binds
+  Economy's live `BonusUnidades` buffers. Direct calls require all seven
+  registers. Partial callbacks require AX/DX/BL/CL for conversion, AX/DX for
+  healing, AX for fatigue, AX/DX for experience (the preserved continuation
+  cell), and AX/DX for placement. Missing required registers or unknown
+  significant bits raise `ArgumentoNaoPassado` before memory access. Every
+  callback returns EAX/EBX/ECX/EDX/ESI/EDI/EBP and explicit `_incertos` for
+  unknown preserved bits; known outputs clear masks by ABI, not value equality.
+- The original addresses, full executable hash, protected domains, exact exit
+  registers, memory requirements and mutation/callback order are in
+  [RECRUITMENT_ADAPTERS](RECRUITMENT_ADAPTERS.md). Conversion uses Combat's same
+  committed body on a live record, so bonus failures retain prior stores;
+  healing/fatigue/experience and physical placement adapt the existing Core
+  rules and collision/discovery/light/minimap bodies. No callbacks are empty,
+  no query exception is suppressed, no initialization or retry is invented.
+- Consumer contract owed by Economy: include EBX/BL in EnginSetType at
+  `0x420f69`, and include EDX/DX in SetSortEngin at `0x420f8c`. The latter is
+  directly established by the captured native entry; the existing consumer
+  passes only AX even though the routine needs the preserved exit cell.
+  AI/runtime should route all five names in DonosM3 through this owner callback;
+  its `iagVilleSendMessage` at `0x4211e5` remains a separate named dependency.
+- Fresh leased native differential: **277/277, zero mismatches**, 154.25 s;
+  EnginSetType **57/0**, EnginAddVie **83/0**, EnginResetFatigue **11/0**,
+  EnginSetExperimente **103/0**, SetSortEngin **23/0** (cases/mismatches).
+  Exact capture reproduction, all seven registers/ESP and every changed byte
+  agree; complete/partial provider routes agree on known bits. No native faults,
+  instruction limits, skips, boundary requests or dependency stops. The first differential
+  reproduced all 277 native records but recorded 15 Python bootstrap errors
+  during the Economy phase (`integracao` absent from sys.path). That diagnostic
+  is `.local/recrutamento-core-falha-bootstrap.json`; the driver now bootstraps
+  the repository before those comparisons. The read-only Economy fixture is
+  replayed unchanged; no other front's source hash is pinned in tests.
+
+- Final `python3 -B scripts/check.py --domain core`: **608 discovered tests,
+  215 optional skips, zero failures**, 32.396 s; documentation links passed.
+  Ten new focused checks cover the strict/partial ABI, live bonus reads,
+  retained callback/characteristic-failure effects and protected placement stop.
+  New module basenames are unique across Core/research/app; `git diff --check`
+  passes. No historical optional native corpus was rerun. The capture and
+  implementation are published only on `feat/re-core`; the consumer and S1
+  whole-chain work remain with their owners.

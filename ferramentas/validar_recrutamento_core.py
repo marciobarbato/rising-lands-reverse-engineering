@@ -15,6 +15,7 @@ import sys
 import time
 
 RAIZ = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(RAIZ))
 sys.path.insert(0, str(RAIZ / 'ferramentas'))
 import bancada_s1 as bs
 
@@ -24,7 +25,10 @@ ROTINAS = {'EnginSetType': (0x457b87, 0x420f69), 'EnginAddVie': (0x457122, 0x420
 CAPTURA = RAIZ / 'evidencias/recrutamento-core/original.json.xz'
 RELATORIO = RAIZ / 'relatorios/recrutamento-core-emulada.json'
 ECONOMY = 'pesquisas-paralelas/economia/evidencias/caverna-recrutamento/captura-caverna-recrutamento-exibicao.json.xz'
-FONTES = ('ferramentas/recrutamento_core.py', 'ferramentas/validar_recrutamento_core.py')
+FONTES = tuple('ferramentas/' + n + '.py' for n in (
+    'recrutamento_core', 'validar_recrutamento_core', 'bancada_s1', 'incursao_core',
+    'chamadas_quadro_core', 'conversao_unidades', 'unidades', 'experiencia_unidades',
+    'mundo_vivo', 'visao_grupos', 'visao_movimento', 'memoria_quadro_core', 'insercao_unidades'))
 REG7 = bs.REGISTROS
 
 
@@ -133,6 +137,10 @@ def executar(traduzir=False):
                       if lo != PILHA}
             r = dict(out)
             out = b.retomar(entry, [(0x401000, 0x494000)], parada=call+5, limite_instrucoes=1000000)
+            if out['EIP'] != call+5 or out['ESP'] != r['ESP']+4:
+                raise RuntimeError('Owner routine did not return')
+            if any(out[k] != int(ref[5][k], 16) for k in REG7):
+                raise RuntimeError('Owner exit differs from committed Economy capture')
             from validar_selecao_ordens import mudancas
             after = {n: (a, bytes(uc.mem_read(a, len(h)))) for n, (a, h) in before.items()}
             c = dict(routine=nome, kind='economy_fixture', frame=f['frame'], caller_return=hex(call+5),
