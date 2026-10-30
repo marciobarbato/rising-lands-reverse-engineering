@@ -557,6 +557,17 @@ class DonosM3:
         return self._fome('EnginNextEtape:19', 0x4554db, dict(
             zero, ESI=(self.m.u32(POOL) + (unidade & 0xffff) * PASSO) & M32, EDI=unidade & 0xffff, ESP=0))
 
+    def calcular_tropa_entrada(self, estrutura):
+        """CalculTroupe at BatimentNextEtape's CALL 0x426983, types 1/2 only.
+
+        Economy advances once and executes SortieTroupe over the live memory, calling
+        the real owner routes. Missing callees stop in place; a preparation handoff
+        is never discarded. Only AX is consumed at entry; the structure dispatcher
+        discards the exit registers (0x426988 -> 0x4281c0).
+        """
+        return self._caverna('CalculTroupe', 0x426983, dict.fromkeys(REG7, 0) |
+                             dict(EAX=estrutura & 0xffff))
+
     def ordens(self):
         """Economy's ``ordens_economia.OrdensEconomia`` over the live memory (its Core callees through
         ``selecao_ordens``), built once."""

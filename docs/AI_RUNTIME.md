@@ -6,11 +6,11 @@ Every address applies to the intact executable SHA-256 `6c556520c084b9300d9ac019
 
 **Current scope:** Stage 1 established the original-byte contract and Stage 2 the AI table providers (`IaReset`, `IaAlloc`, `IAResetAttaque`). M2 composed the whole frame (CalculGame, both dispatchers, the AI kernels reached by MONDE01) and proved it whole-state against the original through the first raid (M2.2, M2.3). M3.1 adds the input path (InputGame → SetPlayerOrdre → ProcessInputGame → setters) and the per-window input chain; its P1/P2 part is accepted. The current state, API and open stops are summarized in the next section; the later sections are the historical record, stage by stage.
 
-## Current state (2026-10-30 07:15)
+## Current state (2026-10-30, resumed front)
 
 **Milestones.** M2.2 (257/257 phases) and M2.3 (18,401/18,401 phases, frames 0–9,200 through the first raid) are accepted. **M3.1 P1/P2 is accepted at main `c9c85eb`**: P1 1,002/1,002 and P2 1,202/1,202 phases whole-state, zero crossings, reproduced on the MacBook and the Mac mini with identical chain hashes ([M3_1_PROVA_P1_P2.md](../pesquisas-paralelas/ia-runtime/M3_1_PROVA_P1_P2.md), `validacao/m3-1-prova-p1-p2.json`). The strict P6 proof is now recorded (4,544/4,544 phases, zero crossings, clean source `01c4319`); second-machine reproduction and coordinator acceptance remain pending. S1 windows are open.
 
-**What is on main and what is on the branch.** Everything through the Core/Combat/Economy provider wiring of the hunger, restoration and turret paths is on main (last AI/runtime merge `e70fda3`). `feat/re-ai-runtime` carries two commits awaiting integration: `946685b` (fresh native leaf regressions on integrated main) and `d2777b1` (Core's S1 providers wired into `DonosM3`, with four consumer tests). There is no AI/runtime `wip/*` branch; the stopped Codex session `ai-runtime-s1-proof` left the worktree clean.
+**Resumed delivery.** Starting source `f8bb719` includes current main `00afd4b`; the native tag-19 replay refresh is pushed at `01c4319`, and the strict P6 proof at `5568c00`. The S1 frame-2547 finding and bounded production-route fix are described below. Codex pushes only the feature branch; main integration and acceptance remain coordinator-owned.
 
 **API (input chain).**
 - `provedores_entrada_ia.DonosM3(m, *, som, bonus=None, mensagem_unidade=None)`: one instance of each owner provider over one live memory (Core `entrada_estruturas`, `visao_grupos`, `buscas_bloqueios.provedor_buscas`, `consultas_estado_core.provedor_consultas_estado`, `provedores_lacunas_core.provedor_lacunas_s1`; Economy `caverna_recrutamento`, `ciclo_trabalho`, `alimentacao.estado_fome`, the restoration provider; Combat's turret providers and `refugio_registradores`). `externo(nome, chamada, regs)` routes every named dependency to its owner with the full register file; `rotina_core(nome)`, `.fome`, `.fadiga`, `.ordens()`, `registros(nome)`. Core's `_incertos` registers are carried, never invented; strict calls refuse an absent or nominal ESP.
@@ -35,10 +35,10 @@ Input orders were freshly rerun on `f8bb719` (containing main `00afd4b`): tag 19
 - P6 reproduction (Mac mini/coordinator): strict proof [m3-1-prova-p6.json](../pesquisas-paralelas/ia-runtime/validacao/m3-1-prova-p6.json) is equal in all three parts (2,000 + 2,000 + 544 phases, frames 129–2400), with zero crossings and matching checkpoints; reproduce its three part chains on the mini before acceptance.
 - S1 windows (Missions → AI/runtime): wait for the pass-2 S1 capture from the Mac mini, then `fixar S1 --ref origin/feat/re-missions`, commit the pin, and run `tudo --janelas S1` in strict and planning modes.
 - Graphics: AffGame vegetation/terrain handlers proved only on sampled view origins (`0x415b77`); `feat/re-graphics` carries the finite-origin validation not yet on main.
-- Unassigned: S1 `objective.structures` difference at frame 2547 (planning, pass-1 indicators); confirm on pass 2 before assigning.
+- S1 frame 2547: [production finding](../pesquisas-paralelas/ia-runtime/S1_2547_PRODUCTION.md). AI/runtime silently discarded a recruit-preparation handoff; the input composition now calls Economy's full type-1/2 producer. Planning indicators remain equal through 2546, then stop before Core's unbound `EnginSetType` at CALL `0x420f69`. Economy must also carry the missing BL direction in that callback. Six bounded native prefixes match; this is not completed S1 recruitment or pass-2 equality.
 - Core/Economy/Combat leaf stops listed above.
 
-**Next steps.** Integrate `946685b`/`d2777b1`; finish the strict P6 proof and reproduce it; run S1 when pass 2 lands; refresh the three leaf differentials and the P7/S1 indicators once Graphics' view-origin work reaches main; then M3.1 S1 acceptance and the D1 defeat window with Combat's fatal-window evidence.
+**Next dependencies.** Coordinator review/integration and second-machine P6 reproduction; Economy's BL callback fix, Core's production callbacks and AI/runtime's city-message provider as documented in the finding. S1 whole-state validation still needs the pass-2 capture. No later task was started in this delivery.
 
 ## Evidence
 

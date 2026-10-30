@@ -690,3 +690,34 @@ The proof writer refuses an existing output; use a fresh output path for reruns.
 `provar_entrada_janelas_ia.py reproduzir pesquisas-paralelas/ia-runtime/validacao/m3-1-prova-p6.json --janela P6 --lease <heavy_lease.py>`.
 That reproduction and coordinator acceptance remain pending. The preceding domain gate passed 124 tests
 with eight explicit skips. The next and only remaining assigned task is the S1 frame-2547 investigation.
+
+## S1 frame-2547 production investigation (2026-10-30)
+
+[Full finding, owner requests and reproduction](S1_2547_PRODUCTION.md). Native structure 0's +5 byte
+`0x49a0cd` changes 4 → 5 through Economy's `SortieTroupe` writer `0x4211c1` (`c6 42 05 05`), before
+unit/city messages at `0x4211d3`/`0x4211e5`. Economy's full body already implements it. AI/runtime's input
+composition instead called the preparation-only producer and silently discarded its pending result
+(unit 4, requested type 7, direction 4, first dependency CalculPosition). A clean-source planning rerun
+on `5568c00` reproduced this exact difference.
+
+Fixed the AI/runtime route: `DonosM3.calcular_tropa_entrada(u16 structure)` calls Economy's full
+`CalculTroupe` provider at `0x426983` for types 1/2; `ComposicaoEntrada` keeps the inhabited predicate and
+single advance, original callback/store order, live shared memory, discarded exit registers and prior
+mutations on errors. Other production types now reject an unfinished preparation handoff explicitly.
+No original bytes, masks, snapshots or foreign research code changed.
+
+Fresh corrected S1 planning diagnostic: 2,418 indicator frames equal (129–2546); no first difference;
+`frame2547` stops on `EnginSetType` CALL `0x420f69` (Core callback unbound). This fixes the silent lost
+continuation, not the whole S1 recruitment path. Native prefix comparison: **6/6 equal**, three below
+threshold and three stopped before conversion, all touched bytes and supplied AX/DX/CL equal. Report
+`validacao/producao-entrada-prefixo-native.json`; missing BL is explicitly recorded, not guessed.
+
+Requested contracts: Economy must carry BL through its `EnginSetType` argument mask and forward
+CalculPosition's actual EBX (the current callback drops it); Core's conversion/healing/fatigue/experience/
+placement bodies need their raw-memory callback route; AI/runtime's city-message provider remains a
+later named gap. Exact names, CALL addresses, consumed widths, next callback order, native provenance
+and commands are in the linked finding. Original executable identity remains `6c556520…8543fb` above.
+Final leased domain gate: 124 tests, 116 successful executions and eight explicit native skips, no
+failures/errors; documentation links and diff whitespace pass. Second-machine P6 reproduction and S1
+pass-2 equality remain outside this delivery. The native prefix also reproduces the committed original
+store sequence and conversion arguments at each bounded stop; it does not execute a missing callback.
