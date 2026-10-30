@@ -974,3 +974,41 @@ Stage-0 leased gate: `python3 -B scripts/check.py --domain graphics`, **270 test
 (`validacao/cave-logica-tests.log`). Its saved 128-frame HUD regression remains **128/128**; this stage changes no
 pixel code and does not rerun native loading. All corrected native invocations and the 29.574s pair matrix use the
 heavy lease and remain under 20 minutes each. The next tasks are independent text/origin proofs and S1 late screens.
+
+## Declared text boundary at P4 frame 484
+
+`68aadc1` records a fresh original-only replay of P4 frames 129–484: **356/356** full phase surfaces and whole-state
+hashes match the published probe. At frame 484, AffText `0x459454` returns without executing any body instruction,
+retains EAX `0x24B`, consumes its declared stack arguments and leaves the entire surface unchanged. TextGetMessage
+also executes no body instruction, returns EAX 0 and leaves the surface unchanged. No load starts at `0x5099A4`;
+the overlapping four-byte read at `0x5099A6` is the established mouse-position copy at `0x417CE2`.
+
+This resolves the **probe-boundary** question: the recorded P4 surface needs the already explicit, argument- and
+pre-surface-attested AffText boundary, not a glyph provider. It does not prove glyph-enabled original text rendering.
+The default renderer therefore retains its `0x459454` dependency, and no universal no-op text callback is introduced.
+The failed initial opening is preserved separately; the accepted frame-128 start uses the original harness's start
+path, while later scripted snapshots use its resume path. See `evidencias/p4-texto-484-auditoria.json` and its native
+producer for exact registers, return addresses, hashes and pointer-read observations.
+
+S1 late-screen capture is prepared separately in [S1_SCREEN_CAPTURE.md](S1_SCREEN_CAPTURE.md). Its native execution
+requires the real frame-17000 checkpoint; no victory or menu-mode write creates a substitute case. This is a gap,
+not an accepted screen translation or a claim of full S1 surface equality.
+
+## Construction projectile logic-effect follow-up
+
+The separate first push `fabbabf` fixes the requested CAVE structure guard. Subsequent original evidence `27b24fa`
+and `367c1ee` closes its next independent stop: AffProjectile type 15 at P3 frame 245. Two native replays observe
+the actual complete lifetime at frames 245–260, phases 0..15, slot 0 / active state 1. Every phase/end-state hash
+matches the published probe, both passes agree, and AffProjectile writes no DGROUP, CRT or arena byte. There are
+therefore no changed bytes needing an outside-display reader exemption. Native loop times are 17.298/20.443s.
+
+The AffGame logic-effect guard accepts exactly this additional type-15 slot/state/phase domain, with the existing
+at-most-one-active-projectile restriction. Other types/states/slots/phases still raise at `0x46FF70`. RestoreAll's
+projectile domain is unchanged. No render layer, asset, caller write, callback or output layout changes.
+
+The subsequent leased domain gate passes **273 tests, zero skips**, 149.259s (`validacao/projetil15-texto-tests.log`).
+A fresh native `--quadros 128 --hud` replay passes **128/128**, no stops/differences; all complete indexed surface
+hashes equal the frozen 1.4/1.5/1.7/1.8/1.9 results. The construction-type15 cycle and text-boundary changes are pushed
+separately from the view-grid translation. The current raw structure report retains the independently identified
+next full-provider stop at P3 frame 309, construction projectile type16; that type is not silently admitted by the
+type15 guard. Its original cycle is captured separately before any further guard change.

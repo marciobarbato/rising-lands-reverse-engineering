@@ -1030,3 +1030,15 @@ Structure-domain comparison passes P3 **3001/3001**, P6 **2272/2272**, P7 **3572
 not a new full-chain equality claim: the next independent logic-effect stop is projectile type 15 at P3 frame 245.
 The reported origin guards K1 141 `(1,0)`, P4 422 `(10,16)`, P5 572 `(31,0)` already pass in 1.9. Pixel results and
 `VERSAO_RENDER_QUADRO = (1,9)` are unchanged.
+
+### P4 frame 484: text-boundary verdict
+
+The [native boundary audit](../pesquisas-paralelas/graficos-animacao/evidencias/p4-texto-484-auditoria.json) replays
+P4 129–484 with **356/356** original phase surfaces and whole states equal. AffText `0x459454` and TextGetMessage
+execute no body instructions and change no pixels; AffText retains EAX, TextGetMessage returns zero, and no text
+pointer load starts at `0x5099A4`. The read at `0x5099A6` belongs to the recorded mouse-position copy.
+
+The declared probe boundary therefore needs no glyph provider. The strict recorded adapter remains explicit and
+checks arguments and the complete incoming surface. Glyph-enabled execution remains unsupported; default rendering
+still reports `0x459454`. No blanket text bypass is added. [S1 end-screen capture preparation](../pesquisas-paralelas/graficos-animacao/S1_SCREEN_CAPTURE.md)
+requires a real late native checkpoint and has not yet produced result/objectives screen evidence.

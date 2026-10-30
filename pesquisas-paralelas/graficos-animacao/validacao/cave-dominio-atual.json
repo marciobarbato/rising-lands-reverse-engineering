@@ -8,19 +8,19 @@
  "mismatches": 0,
  "next_unrelated_stops": {
   "P3": {
-   "frame": 245,
+   "frame": 309,
    "address": "0x46ff70",
-   "reason": "projectile slots [0]: captured only one raid effect projectile of type [31, 32]"
+   "reason": "projectile slots [0]: captured only one raid effect projectile of type [31, 32] or the native AffGame type15 cycle"
   },
   "P6": {
-   "frame": 245,
+   "frame": 309,
    "address": "0x46ff70",
-   "reason": "projectile slots [0]: captured only one raid effect projectile of type [31, 32]"
+   "reason": "projectile slots [0]: captured only one raid effect projectile of type [31, 32] or the native AffGame type15 cycle"
   },
   "P7": {
-   "frame": 245,
+   "frame": 309,
    "address": "0x46ff70",
-   "reason": "projectile slots [0]: captured only one raid effect projectile of type [31, 32]"
+   "reason": "projectile slots [0]: captured only one raid effect projectile of type [31, 32] or the native AffGame type15 cycle"
   }
  },
  "origins": [
@@ -121,5 +121,5 @@
   "janela-P7-2851-3275-api18.json.xz": "649c113bf7e118224e9664f73dd1bc919ea3695692f7c98a55b731bde8205cdb",
   "janela-P7-3276-3700-api18.json.xz": "2a1faa4006d8d8bb4691e6a9089f496b257985d2b5749159b9339ad398f29868"
  },
- "provider_sha256": "815e505dd99aa3001eb5c5c0930a57682d8ce30ee11ab7bbd1c8f4c81fe7102d"
+ "provider_sha256": "7c46915531fad563a6ee83bc00b7581581f30ad435890fa87e0b22511f5f6a37"
 }

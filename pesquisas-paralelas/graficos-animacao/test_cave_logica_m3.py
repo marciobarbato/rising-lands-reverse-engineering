@@ -34,3 +34,39 @@ class CaveLogicaM3(unittest.TestCase):
             memory=EntradaEfeitos(cap,row);dg=bytearray(memory.dg);address=0x49a0c8+276+offset;dg[address-0x494000:address-0x494000+len(value)]=value;memory.dg=bytes(dg)
             with self.assertRaises(DependenciaExibicao):desenhar_jogo(memory)
         with self.assertRaises(DependenciaExibicao):restaurar_tudo(good)
+
+    def test_p4_484_original_text_boundary_has_no_glyph_execution(self):
+        d=json.loads((AQUI/'evidencias/p4-texto-484-auditoria.json').read_text())
+        self.assertEqual(len(d['checks']),356)
+        self.assertTrue(all(r['surface_equal'] and r['state_equal'] for r in d['checks']))
+        self.assertEqual([r['routine'] for r in d['calls']],['AffText','TextGetMessage'])
+        self.assertEqual(d['calls'][0]['entry_eax'],d['calls'][0]['return_eax'])
+        self.assertEqual(d['calls'][1]['return_eax'],'0x0')
+        self.assertEqual(d['body_instructions'],[])
+        self.assertTrue(all(r['surface_before']==r['surface_after'] for r in d['calls']))
+        self.assertFalse(any(r['address']=='0x5099a4' for r in d['pointer_overlap_reads']))
+
+    def test_original_complete_projectile15_cycle_and_guard(self):
+        path=AQUI/'evidencias/projetil15-escritas-ciclo-p3.json.xz';d=json.loads(lzma.decompress(path.read_bytes()))
+        self.assertTrue(d['passes_equal']);self.assertEqual(d['passes'][0]['checks'],d['passes'][1]['checks'])
+        for p in d['passes']:
+            self.assertEqual(p['observation']['changing_bytes'],{})
+            self.assertEqual(p['observation']['outside_display_readers'],[])
+            self.assertEqual([(r['index'],r['kind'],r['state'],r['phase']) for r in p['observation']['projectile_calls']],
+                [(0,15,1,phase) for phase in range(16)])
+        cap=CapturaLimitada(AQUI/'evidencias/sonda-render-P3-api17.json.xz');row=next(r for r in cap.d['rows'] if r['frame']==245)
+        good=EntradaEfeitos(cap,row);self.assertEqual(desenhar_jogo(good).escritas,())
+        for offset,value in ((0x18,16),(2,2)):
+            m=EntradaEfeitos(cap,row);raw=bytearray(m.proj);raw[offset]=value;m.proj=bytes(raw)
+            with self.assertRaises(DependenciaExibicao):desenhar_jogo(m)
+
+    def test_fresh_native_128_hud_retains_every_prior_hash(self):
+        d=json.loads((AQUI/'validacao/regressao-hud-cadeia-atual-128.json').read_text())
+        self.assertEqual((d['frames'],d['chained_equals_recorded_count']),(128,128))
+        self.assertIsNone(d['first_stop']);self.assertIsNone(d['first_chained_difference_frame'])
+        hashes=[r['chained']['sha256'] for r in d['rows']]
+        for name in ('verificacao-cadeia-m22-v2-api14-128.json','verificacao-cadeia-m22-v2-api15-128.json',
+                     'verificacao-cadeia-m22-v2-api17-128.json','verificacao-cadeia-m22-v2-api18-128.json',
+                     'verificacao-cadeia-m22-v2-api19-128.json'):
+            old=json.loads((AQUI/'evidencias'/name).read_text())
+            self.assertEqual(hashes,[r['chained']['sha256'] for r in old['rows']],name)
