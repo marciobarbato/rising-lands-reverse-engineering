@@ -1,0 +1,17 @@
+{
+  "schema": "rising-lands/graphics-p4-text-boundary-verdict/1",
+  "native_frames": 356,
+  "native_equal": 356,
+  "frame": 484,
+  "audit_sha256": "a747424a9e2b179b81ea6b275fa02b5745d9c063cd9a05f76d168ea69d96bdfb",
+  "default_stop": {
+    "endereco": "0x00459454",
+    "detalhe": "AffText glyph renderer is not supplied (probes declare this boundary non-executed)"
+  },
+  "explicit_boundary_stop": null,
+  "explicit_boundary_surfaces_equal": 1,
+  "raster_calls_equal": 55,
+  "text_boundaries_checked": 1,
+  "verdict": "Inside the declared non-executed AffText/TextGetMessage boundary; no glyph provider is needed for this probe.",
+  "glyph_enabled_scope": "Use the separately native-validated TextoAffTextBitmap explicitly; this probe is not glyph-enabled evidence."
+}

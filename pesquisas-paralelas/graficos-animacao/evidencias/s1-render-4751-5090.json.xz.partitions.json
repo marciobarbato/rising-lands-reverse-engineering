@@ -1,0 +1,62 @@
+{
+  "schema": "rising-lands/graphics-s1-native-lossless-partition/1",
+  "native_capture_sha256": "423f574c9e2316250c19e0addaa58f8314bc56f659f09cab525dd3d3c5fe227d",
+  "native_manifest": {
+    "schema": "rising-lands/m3-probe-render-native/1",
+    "probe": "S1",
+    "probe_ref": "82ec5eaa98d4f212b650c2c8ce2b293a30fb50ef",
+    "frames": [
+      4751,
+      5090
+    ],
+    "requested_stop": 5090,
+    "status": "complete",
+    "original_opening_state_sha256": "20377999d50b8be72b72b0f86415c768b01d8960c4e970eb208fe0264715c9a0",
+    "opening_checkpoint_sha256": "9a1ba73067cf3aa7834f26643640d89bbefd2ff479fa8fab26a6dab151820b13",
+    "executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+    "code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+    "source_sha256": "13b93b10829de4d36f0b58237cf2a977bc8b1ce241a2a82d836ddbae2e99e0b5",
+    "recording_helper_sha256": "93cc53512affcca833967067b2b94bacd03b9a8d1dccc47aa78e1c229ee51d11",
+    "producing_revision": "589dcacf782f73529bf02869d6411c1003a430fd",
+    "snapshot": {
+      "path": ".local/graficos-api17-start/S1-render-05090.pickle",
+      "sha256": "54b31195b911074d06253c957b2903d3912d6c9d493e1f513b7f3091df9fef8d"
+    },
+    "boundary_contract": "Original Missions display-v2: AffText/TextGetMessage declared non-execution; no glyph substitution.",
+    "elapsed_seconds": 190.19,
+    "raw_sha256": "39bbd372027975fa3a3eb71ce01f73aeeac5ae4858618aa4953697355b870379",
+    "compressed_sha256": "423f574c9e2316250c19e0addaa58f8314bc56f659f09cab525dd3d3c5fe227d",
+    "invocation_seconds": 210.308
+  },
+  "parts": [
+    {
+      "path": "s1-render-part-4751-4878.json.xz",
+      "frames": [
+        4751,
+        4878
+      ],
+      "sha256": "7c68bccf19c8b31d999d30c22da91a447df81bdcd072cfdc6ca0774f31205082",
+      "bytes": 25629620
+    },
+    {
+      "path": "s1-render-part-4879-5006.json.xz",
+      "frames": [
+        4879,
+        5006
+      ],
+      "sha256": "f1f233aecc0dc591fa89d5140694129af2edf5da8062e63b3aa579c5d235aa8e",
+      "bytes": 42816336
+    },
+    {
+      "path": "s1-render-part-5007-5090.json.xz",
+      "frames": [
+        5007,
+        5090
+      ],
+      "sha256": "4722e4a07c99f64a68effb975ed38b90d7764257596b022251f649ecee484ad2",
+      "bytes": 31532584
+    }
+  ],
+  "complete_native_rows_equal": true,
+  "encoded_payloads_unchanged": true
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "rising-lands/graphics-native-s1-reproduction/1",
+  "isolated_calls": 20,
+  "equal_calls": 20,
+  "whole_states": 50,
+  "equal_surfaces": 100,
+  "mismatches": 0,
+  "elapsed_seconds": 72.723957166,
+  "captures": {
+    "evidencias/s1-dependencias-nativas.json.xz": "e058d22320e8eed870683ebeafd4c8d6834704a287d5b7751321c8e8daa70880",
+    "evidencias/s1-dependencias-recovery-20261030.json.xz": "d726864e27b9ebc51873bdfc5220a76d4ec9dda84ee054885d3fdacef3c30445"
+  },
+  "all_isolated_rows_phases_and_blobs_identical": true,
+  "published_s1_states_and_both_phase_surfaces_equal": true,
+  "menuinit_surfaces_equal": 2,
+  "scope": "Fresh original-only 20 isolated calls and 50 frames. Published S1 verification performed here on the saved checks; no native routine or boundary changed."
+}

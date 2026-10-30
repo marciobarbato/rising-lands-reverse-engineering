@@ -335,10 +335,12 @@ class _Composicao:
         if not (w4 == w76 and vida < 100): return
         if (vida//5) % 2: return
         if r[1] > 25 or not SE_FATIGUE[r[1]]: return
-        if (dx or dy) and not (r[1]==9 and r[2] in (2,7,13)):
+        # S1 native2549/4100: newly recruited builder/farmer, state2.
+        # The common 0x4135FA tail uses the shifted cell origin for both.
+        if (dx or dy) and not (r[1]==9 and r[2] in (2,7,13) or r[1] in (5,7) and r[2]==2):
             self.parar(0x4135FA, 'tired icon with a nonzero body shift (+0x86/+0x87): origin not verified')
         self.chamadas.append(['EngineIconeFadiga', indice])
-        q = self.catalogo.quadro(localizar(w4+ICONE_FADIGA)['id_motor'])   # drawn at the cell origin - (8, 11): native args of 0x41362E/0x413650
+        q = self.catalogo.quadro(localizar(w4+ICONE_FADIGA)['id_motor'])   # shifted cell origin - (8, 11): 0x41362E/0x413650
         if r[0] != 0xc8: q = Quadro(q.largura, q.altura, q.pixels.translate(self.tabelas_jogador[r[0]] if r[0] < 5 else self.parar(0x413650, f'owner {r[0]} has no player table')), q.opacidade, 0, b'')
         self.saida = compor_indices(self.saida, self.largura, self.altura, q, x+dx-8, y+dy-11, self.recorte())
 

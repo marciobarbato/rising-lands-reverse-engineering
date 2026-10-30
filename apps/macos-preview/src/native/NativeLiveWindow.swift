@@ -236,6 +236,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
     var nextGameTime=0.0
     var runID:UInt64=0
     var presenter:NativePlayPresenter?
+    var audio:NativeAudioPlayback?
     let modeControl=NSSegmentedControl(labels:["Jogar","Validar"],trackingMode:.selectOne,target:nil,action:nil)
     let rateControl=NSPopUpButton(frame:.zero,pullsDown:false)
     let metal:NativeMetalGameView
@@ -329,6 +330,10 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         let candidate=macos_live_create(root.appendingPathComponent("librising_engine.dylib").path,directory.path,&error,512)
         guard let candidate=candidate else { throw NSError(domain:"NativeInitialization",code:1,userInfo:[NSLocalizedDescriptionKey:String(cString:error)]) }
         guard macos_live_validation(candidate,validationMode ? 1:0)==0 else{macos_live_free(candidate);throw NSError(domain:"NativeValidationModeRejected",code:1)}
+        // Sound is a play-mode consumer only; validation never enables the transport.
+        if !validationMode && audio==nil{audio=NativeAudioPlayback(directory:root.appendingPathComponent("audio"))}
+        audio?.reset()
+        if !validationMode,audio?.enabled==true,macos_live_sound_capture(candidate,1) != 0{macos_live_free(candidate);throw NSError(domain:"NativeSoundTransportRejected",code:1)}
         let previous=driver;driver=candidate;if let previous=previous{macos_live_free(previous)}
     }
     func status()->MacOSLiveStatus { var value=MacOSLiveStatus();macos_live_status(driver,&value);return value }
@@ -343,6 +348,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         timing["gameFPS"]=validationMode ? 0:gameFPS;timing["executionMode"]=validationMode ? "test":"play"
         let end=running ? ProcessInfo.processInfo.systemUptime:playEnded
         if !validationMode,let presenter=presenter{timing.merge(presenter.metrics(start:playStarted,end:end,detailed:!running)){_,new in new}}
+        if !validationMode,let audio=audio{timing.merge(audio.metrics()){_,new in new}}
         else{timing.merge(metal.testMetrics(start:playStarted,end:end,detailed:!running)){_,new in new}}
         let stop:Any = s.stopped != 0 || stoppedReason != nil ? ["type":"NativeStop","phase":"frame\(s.frames+1)","detail":stoppedReason ?? message(s)]:NSNull()
         let equal:Any = s.stopped==0 && stoppedReason==nil && s.frames>0 && s.frames<=9200 && s.surfaces_equal>=s.frames ? true:NSNull()
@@ -359,7 +365,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
     }
     func deliver(_ completion:(([String:Any])->Void)?=nil){
         let value=snapshot(),s=status(),isRunning=running
-        let caption="\(validationMode ? "Validar":"Jogar · \(gameFPS==0 ? "sem limite":String(format:"%.0f q/s",gameFPS))") · Quadro \(s.frames) · \(running ? "executando":"pausado")" + (stoppedReason != nil || s.stopped != 0 ? " · Parada: \(stoppedReason ?? message(s))":validationMode ? " · sem entrada aplicada":" · ordens após q128 · áudio/texto: limites declarados")
+        let caption="\(validationMode ? "Validar":"Jogar · \(gameFPS==0 ? "sem limite":String(format:"%.0f q/s",gameFPS))") · Quadro \(s.frames) · \(running ? "executando":"pausado")" + (stoppedReason != nil || s.stopped != 0 ? " · Parada: \(stoppedReason ?? message(s))":validationMode ? " · sem entrada aplicada":" · ordens após q128 · som: \(audio?.availability ?? "—") · texto: limite declarado")
         DispatchQueue.main.async { [weak self] in
             guard let self=self else{return};var value=value;value["native_window_visible"]=self.window.isVisible
             self.button.title=isRunning ? "Pausar":"Executar"
@@ -370,6 +376,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
     }
     func advance(){
         let code=macos_live_advance(driver,nil,nil),s=status()
+        if !validationMode{audio?.pump(driver)}
         if benchmarkInput && code==0 && s.frames>128 {
             let count=macos_live_order_tags(driver,&orderBuffer,32)
             if count==UInt32.max{stoppedReason="Diagnóstico de entrada: \(message(status()))";running=false}

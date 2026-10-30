@@ -22,7 +22,7 @@ from graficos import RAIZ
 import json
 
 # Contract version: major for breaking changes; minor for optional inputs and newly evidenced branches.
-VERSAO_RENDER_QUADRO = (1, 9)
+VERSAO_RENDER_QUADRO = (1, 10)
 LARGURA, ALTURA = 800, 600
 DGROUP, DGROUP_FIM = 0x494000, 0x523000
 ESTRUTURAS, PASSO_ESTRUTURA = 0x49a0c8, 276
@@ -169,7 +169,7 @@ def renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=Non
             for nome, endereco, largura in GLOBAIS_QUADRO:
                 for i, v in enumerate(tela.bruto(nome)): sobrepostos[endereco+i] = v
             try:
-                h = compor_hud(LeituraHud(memoria, sobrepostos), pixels, catalogo=catalogo, evento=q['evento'], texto=texto)
+                h = compor_hud(LeituraHud(memoria, sobrepostos), pixels, catalogo=catalogo, evento=q['evento'], texto=texto, tabela_sombra=sombra, habitado=habitado)
             except DependenciaQuadro as e:
                 e.chamadas, e.efeitos = list(chamadas)+e.chamadas, list(efeitos)+e.efeitos
                 raise
