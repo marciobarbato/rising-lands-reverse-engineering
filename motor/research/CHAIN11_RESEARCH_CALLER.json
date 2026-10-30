@@ -1,0 +1,57 @@
+{
+  "call": "0x47132c",
+  "callee": "InventionSetEffet 0x470f98",
+  "caller": "RechercheCalcul",
+  "conclusion": "Caller zeroes EAX, EBX and EDX before loading player, branch and item bytes. ECX=1 at0x471311. The effects-only Rust caller therefore supplies the original zero-extended semantic inputs; preserved scratch GPRs are outside that typed API.",
+  "instructions": [
+    {
+      "address": "0x471311",
+      "bytes": "b901000000",
+      "instruction": "mov ecx, 1"
+    },
+    {
+      "address": "0x471316",
+      "bytes": "889a1c875000",
+      "instruction": "mov byte ptr [edx + 0x50871c], bl"
+    },
+    {
+      "address": "0x47131c",
+      "bytes": "31db",
+      "instruction": "xor ebx, ebx"
+    },
+    {
+      "address": "0x47131e",
+      "bytes": "31c0",
+      "instruction": "xor eax, eax"
+    },
+    {
+      "address": "0x471320",
+      "bytes": "8a5e04",
+      "instruction": "mov bl, byte ptr [esi + 4]"
+    },
+    {
+      "address": "0x471323",
+      "bytes": "31d2",
+      "instruction": "xor edx, edx"
+    },
+    {
+      "address": "0x471325",
+      "bytes": "8a442414",
+      "instruction": "mov al, byte ptr [esp + 0x14]"
+    },
+    {
+      "address": "0x471329",
+      "bytes": "8a141e",
+      "instruction": "mov dl, byte ptr [esi + ebx]"
+    },
+    {
+      "address": "0x47132c",
+      "bytes": "e867fcffff",
+      "instruction": "call 0x470f98"
+    }
+  ],
+  "not_claimed": "No new whole-state or flags/x87 execution proof.",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "schema": "rising-lands/chain11-research-caller-review/1",
+  "scope": "Static intact executable review only; not an additional native execution comparison."
+}

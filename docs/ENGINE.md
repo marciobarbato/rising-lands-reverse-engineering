@@ -792,3 +792,39 @@ logic+render0.6753ms. Prior P3/P6/P7 full terminal projections and M2 terminal
 state/surface hashes, generation and clock remain exact. These are explicit
 play-mode C ABI measurements, excluding initialization, proof work and app
 presentation. The bounded S1 renderer/Python dependencies above remain open.
+
+## S1 Economy and AI owners — chain11
+
+The engine feature merges main at `3e2ed771b78dd3e130ae86e08e081045bc3dc242`
+and adds `RL_REFERENCE_PROFILE=chain11`: that logic revision plus the unchanged
+Graphics1.9 pin `92fab50`. Earlier profiles and original evidence stay unchanged;
+the public C ABI remains1.6. The query piece is `d2bacee`, and the technology
+piece is `7448d14` on `feat/codex-rust-engine`, for coordinator review.
+
+Live Rust now supplies SacGetCapacite, TuyauEstSortie, MineGetCapacite and the
+proved iagVilleSendMessage prefix, together with the17 research/technology
+routines listed in the [handoff](../motor/HANDOFF.md#s1-technology-owners--chain11).
+The original-first query corpus passes675/675, including four expected AI-city
+stops. Technology passes520/520, including20,304 ordered stores,342 real foreign
+query calls and9 exact x87 value pushes. Tracing exists only in a separate
+validation build; play executes native Rust without Python or per-frame audits.
+Named limits retain unsupported notifications, effect kinds, special recruitment
+and AI catch-up paths. This does not add a general x87 interpreter.
+
+Advancing Rust S1 now matches the original indicators, inputs and orders for
+**10,672/10,672 frames,129–10800**. The next stop is between-frame10801:
+`Display monster count` at`0x41591f` (the display guard for more than one monster).
+This is an indicator proof, not a whole-state S1 claim. The advancing surface
+proof remains **1,885/1,885 exact frames,129–2013** against the original and pinned
+Graphics. Both renderers stop at2014,`0x4022c8`, structure selection outside the
+proved domain; its incomplete surface is not claimed equal to the original.
+Rust/Python partial pixels, cache, calls and effects agree at that stop. The
+original-attested AffText non-execution qualification is unchanged.
+
+The pinned Python S1 consumer reaches3850: **3,722/3,722** frames compare exactly
+with Rust and the original. Its next phase stops at3851, SacGetCapacite
+CALL`0x4299da`, because that new owner is not wired into this pinned consumer.
+Rust's additional frames through10800 are compared against the original.
+[Per-frame results and first-stop contracts](../motor/validation/chain11/piece3/summary.json)
+also record the passing exact-source `validate.sh` rerun. Prior-window and
+exclusive timing results are appended after their completion.

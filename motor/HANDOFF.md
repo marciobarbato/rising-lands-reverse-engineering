@@ -1841,3 +1841,36 @@ Metal render smoke. The feature build separately passes strict Clippy and its
 Rust tests. The owner corpus, feature-build log and full native gate are in
 `validation/chain11/piece2/`. Frame continuation and final performance/regression
 reports are recorded separately below, after the bounded runs finish.
+
+A [static intact-caller review](research/CHAIN11_RESEARCH_CALLER.json) also checks
+RechercheCalcul CALL0x47132c: EAX/EBX/EDX are explicitly zeroed before the player,
+branch and item byte loads, with ECX=1. The effects-only production adapter's
+zero-extended inputs therefore match the caller. Preserved scratch GPRs are
+outside that typed interface; the exact-register owner entry is proved separately.
+
+## S1 advancing continuation — chain11
+
+On the frozen native/harness sources, Rust passes **10,672/10,672** original
+indicator/input/order frames129–10800. First stop: between-frame10801,
+`Display monster count` at0x41591f, the guard for more than one monster. No
+indicator mismatch precedes it. This does not claim whole-state S1 equality.
+The pinned Python consumer passes the complete **3,722/3,722** frame129–3850
+comparison against Rust and the original, then stops in frame3851 phase3 at
+SacGetCapacite CALL0x4299da: the new owner is present but not wired there.
+The optional `--reference-continuation` records that Python-only next-frame
+stop; no Rust equality is asserted for an incomplete Python frame. All original
+exceptions remain explicit, with their callee/address and retained-effect scope.
+
+Advancing Rust S1 surfaces pass **1,885/1,885**, frames129–2013, against both
+original and pinned Graphics1.9. At2014 both renderers stop at0x4022c8,
+structure selection outside the proved domain. Rust/Python partial pixels,
+cache, calls and effects agree; the original completed surface is not equal
+and is not counted. Original-attested AffText non-execution stays qualified.
+
+The first-stop contracts and per-frame results, final source/library hashes,
+and the exact-source `validate.sh` rerun are in `validation/chain11/piece3/`.
+The gate passes31 Rust tests,63 Python tests,666 original input leaves,75 pilot
+entries, C layout, actual Swift ABI1.6 and Metal render smoke. Native and harness
+hashes remain stable throughout every completed run. No foreign source/evidence
+was changed and no main integration or acceptance was performed. Prior-window
+regressions and exclusive play timing follow below after those runs complete.

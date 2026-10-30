@@ -1,0 +1,62 @@
+{
+  "logic": {
+    "first_stop": {
+      "equal": null,
+      "frame": 10801,
+      "inputs_before_stop": [],
+      "orders_before_stop": [],
+      "phase": 2,
+      "python": null,
+      "rust": "Display monster count at 0x0041591f"
+    },
+    "frames": [
+      129,
+      10800
+    ],
+    "original_indicators_equal": 10672
+  },
+  "python": {
+    "first_stop": {
+      "address": 4364762,
+      "callee": "SacGetCapacite",
+      "dependency": "SacGetCapacite required at 0x004299da; earlier stores retained",
+      "frame": 3851,
+      "phase": 3,
+      "scope": "Python-only continuation; no Rust equality claimed for this incomplete frame",
+      "type": "DependenciaIA"
+    },
+    "frames": [
+      129,
+      3850
+    ],
+    "indicators_equal": 3722
+  },
+  "release_sha256": "0783fa8d399351b5c2e05a5a23cdb2481b9c6d774e8644d984f8f0abbb1d97d5",
+  "reports_sha256": {
+    "S1-native-v2.log.xz": "bd43c0fc8d78de5a8376211afc65132a285cd02dcee8b2401a95cea9227de004",
+    "S1-native.json.xz": "3bf91786da8408d1669776797e6e16da14d50e786bdd0ab94638599320a348a5",
+    "S1-python-v2.json.xz": "e6a5063107e742082e329b90405b5ec409380705731119d693353d99c040bb5f",
+    "S1-python-v2.log.xz": "f0318f639cfe91819abffd72fb4b9473e05853a0cf8a99682c4836f10d1a6d66",
+    "S1-surface-v2.log.xz": "6721be9af58d1c7880eb0e929a966942685ee776e5b633fd33091d599e2d10d8",
+    "S1-surface.json.xz": "d5497ad6b481406f417dca75a21daf0cd8eaf284f1062e85cde1064a71ecc7d0",
+    "final-inputs.json.xz": "070d59be656494b641b9967e84c50e0680c6296b1a00465b01cec25f2c9d6e0a",
+    "gate-final.log.xz": "e373d6d4b9c8f96bbc8494e3e280783980724445008ce08ebe3994ce6ff37739"
+  },
+  "schema": "rising-lands/chain11-s1-continuation-delivery/1",
+  "surfaces": {
+    "equal": 1885,
+    "first_stop": {
+      "address": "0x4022c8",
+      "frame": 2014,
+      "name": "structure selection outside captured API-1.8 domain",
+      "original_completed_surface_equal": false,
+      "rust_python_partial_equal": true
+    },
+    "frames": [
+      129,
+      2013
+    ],
+    "qualified_original_afftext_nonexecution": true
+  },
+  "validate": "passed: fmt, strict Clippy,31 Rust tests,63 Python tests,666 input leaves,75 pilot,C/Swift/Metal"
+}
