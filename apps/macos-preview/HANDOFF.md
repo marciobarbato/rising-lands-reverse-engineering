@@ -1521,3 +1521,103 @@ input path; full execution/visual continuation still needs CAVE body, viewport,
 fatigue and glyph ports. The original timing probe, broader workload performance,
 continuous drag and human Test B remain gaps. Only the feature branch is pushed;
 no main merge or milestone acceptance is recorded.
+
+## ABI 1.6 consumer and original pacing audit
+
+Fetched main `240ea87` contains the persistent ABI 1.6 contract; the feature
+fast-forward adopts it without modifying `motor/`. The C consumer requires major
+1/minor >=6, loads complete S0 once, and selects `rl_execucao_definir(world,1)`
+when Jogar is selected before phase 1. Validar retains execution policy 0 and
+its unchanged projection/hash/observer path. Mode changes after phase 1 remain
+rejected. Failure of policy selection is a named stop, never a silent fallback.
+The engine selector takes an opaque uint64 world and uint32 mode 0/1/2 and
+returns int32 status; it does not advance generation or virtual ticks.
+`macos_live_validation` accepts uint32 0/1 only before phase 1. Complete MONDE01
+S0 and the committed renderer/input domains remain the supported domain.
+Order is S0 load → policy selection → phase 1 → repeated render → phase 2 →
+phase 3, with proof observers after successful phases only in validation.
+Caller buffers, carried cache and error atomicity remain unchanged. Test A state proofs
+select persistent audited policy 2 explicitly to preserve consumed-poll records.
+Production play policy 1 retains real order/text/sound requests.
+
+The read-only [pacing audit](validation/m3-abi16-original-pacing.json) and
+[original instructions](validation/m3-abi16-original-pacing.asm) identify intact
+RISING.EXE SHA256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+`WinMain 0x460205..0x46021b` calls `0x47500e` when active and the message queue
+is empty; inactive uses WaitMessage. `0x47505e` calls CalculGame, then
+`0x475063` calls rendering. `GameNextFrame 0x45d015` just increments the counter.
+`CalculFrame 0x43f710` calls GetTickCount to count frames per >=1,000 ms and
+formats a two-digit display, without throttling simulation. The render divisor
+at `0x417909` runs after simulation. `DDFlipPage 0x43f220..0x43f26b` calls
+BltFast with DDBLTFAST_WAIT and retries still-drawing; this is blitter readiness,
+not a fixed game timer or a WaitForVerticalBlank cadence.
+
+All executable-section timer-import and thunk references are recorded. The other
+timeGetTime references are FLI playback elapsed time, network input, CD audio
+deadlines and RNG seeding; WaitForSingleObject references are CRT semaphore/join
+paths. No fixed-Hz active-loop timer gate or named WaitFrame is established.
+The default now follows the original's uncapped idle-loop policy, with optional
+15/20/30/60 host caps. TickClock remains at its audited nominal 20 and recorded
+frame numbers are unchanged. This reproduces scheduling policy, not the speed
+of a particular historical computer. Historical Windows CPU/driver/refresh FPS
+is unmeasured. A historical elapsed-speed calibration, if wanted, requires the
+AI/runtime/coordinator owner to publish a real Windows hardware/session timing
+contract; no single fixed FPS can be inferred from this executable path.
+Requested calibration contract: intact hash above; original Windows CPU/OS,
+DirectDraw driver and refresh; active/unoccluded MONDE01; default draw divisor
+byte `0x497284 = 1`; >=65 seconds of real native GetTickCount start/end uint32
+values paired with game counter `0x496d40` start/end uint32 values and declared
+pause/input policy. Distinguish counter wraps, simulation iterations and actual
+presentations. Emulator execution time or a stubbed timer cannot supply the
+historical elapsed-speed measurement.
+
+Benchmark orders are real AppKit selection/movement clicks after the real
+128-frame prefix, followed by a real right-click on empty ground to deselect,
+then a pointer move to empty ground. Input remains enabled every frame. This is
+a declared narrower workload than keeping a fatigued actor selected. It changes
+no world bytes, renderer domain or stop handling. The production selected-actor
+fatigue stop at `0x410be4` remains. Gestures are anchored to observed game frames
+rather than an eight-second timer, allowing uncapped play to receive orders
+before the first-raid dependency horizon. Failed sustained runs retain every
+second, the named stop and the separate first-stop active-window snapshot.
+
+The frozen runtime/build is **b44fe804a696413f79904b9d36b01f30138cfac5**.
+[APP_BUILD](validation/m3-abi16-delivery-app-build.log) passes **112 consumer
+tests / zero skips**, **27 native exercise checks** and **20 inspection checks**;
+ARM64, relocated runtime/source/assets and strict deep signing pass. The app
+uses its immutable archive's integrated motor with static ABI 1.6 binding.
+No external engine override is used. [Engine validation](validation/m3-abi16-engine-gate.log)
+passes **30 Rust tests, 63 Python tests plus 10 renderer child tests, 75
+original-x86 comparisons / zero mismatches / zero skips**, C layouts, Swift
+ABI 1.6 and 128/128 Swift/Metal surfaces. Its debug timings are not UI throughput.
+
+Fresh [prefix](validation/m3-abi16-live-prefix.json) and
+[uninterrupted long proof](validation/m3-abi16-live-long.json) retain
+**257/257 states, 11 checkpoints, 128/128 original and Python surfaces**, and
+**18,401/18,401 states / 9,200/9,200 original surfaces**, respectively. There is
+no stop or observer failure in the 9,200-frame window. All prior prefix hashes
+match. All [21 prepared native binary inputs](validation/m3-abi16-input-regression.json)
+remain byte-identical to the ABI 1.5 build, including S0, masks, original expected
+state/surface hashes, assets and initial cache.
+
+Fresh [Test A answers](validation/m3-abi16-answers.json) retain **155,597/155,597**
+and six canonical byte round trips. All prior input, canonical, native log,
+expected-answer and actual-answer hashes are [unchanged](validation/m3-abi16-answer-regression.json).
+The six [state probes](validation/m3-abi16-correctness.json) also retain every
+prior frame hash: P1 501 frames / 1,002 whole-state phases; P2 601 / 1,202;
+P6 91 / 183; P3/P7 91 indicator-hash frames each; K1 12. P3/P6/P7 retain
+frame 220 phase 3 CAVE `0x426aff`; K1 retains frame 141 phase 2 viewport
+`0x415b77`. No requested phase beyond those stops is claimed.
+
+[Common checks](validation/m3-abi16-common.log.gz) pass **2,039 tests, 624
+optional skips, zero failures/errors**. `check.py` does not offer a macos domain
+selector; APP_BUILD supplies the consumer gate and the supported complete common
+suite was run. Only own queued correctness jobs were requeued before grant with
+50 ms polling to avoid starvation, using the unchanged shared helper/locks/slot
+limits; the [restart record](validation/m3-abi16-lease-poll-restart.json) preserves
+that distinction. Every executed macOS job remains below 20 minutes after grant.
+No original capture, pin or mask is changed. No main merge/push or acceptance.
+
+The three 75-second ordered UI runs are still queued for the unmodified exclusive
+heavy lease. This duration allows >=65 seconds with input enabled after the real
+128-frame prefix at nominal 20 Hz. No sustained UI result is claimed yet.

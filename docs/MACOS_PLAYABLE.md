@@ -400,15 +400,19 @@ and retains the original audited frame driver: 257 prefix states, 11 checkpoints
 and every reached reference surface. APP_BUILD's native smoke explicitly selects
 Validar. The proof tools still default to validation, including observer callbacks.
 Switching modes resets the world; it cannot disable validation halfway through a
-proof. Memory inspection is available only in Validar. Orders remain record-only.
+proof. Memory inspection is available only in Validar. Jogar applies orders through
+the ABI 1.6 input path after frame 128; the recorder observes the same events.
 
 Jogar calls the same Rust phase1/render/phase2/phase3 sequence, with no projection,
 state/surface hashing, equality counters or observer callbacks. Contract checks,
-partial render results and named engine stops remain active. Game speed selects
-15, 20, 30, 60 game frames/s or unlimited. The default **20 frames/s** is the
-engine's published nominal TickClock rate, not a claim that the original's real
-machine-dependent pacing has been measured. That original timing probe remains
-an external dependency. Host scheduling never changes the engine's virtual clock,
+partial render results and named engine stops remain active. ABI 1.6 play policy 1
+is selected after loading S0 and before phase 1. Validar retains policy 0; input
+proofs may explicitly use persistent audited policy 2 to retain poll records.
+Game speed selects 15, 20, 30, 60 game frames/s or unlimited. The default now
+follows the original's **uncapped active idle-loop policy**. This is a scheduling
+policy match; historical hardware elapsed speed is not established. The static
+pacing audit below replaces the earlier assumption that nominal TickClock 20
+was an original host-frame limit. Host scheduling never changes the engine's virtual clock,
 frame arithmetic, frame-indexed recording or order. Slow frames catch up without
 skipping simulation steps; pause and resume reset the host deadline.
 
@@ -592,3 +596,52 @@ over **8.712 seconds**, including startup audits. The optional new 65-second
 validation timing repeat was cancelled before execution; validation UI tests and
 9,200-frame equality passed. Common checks pass **2,009 tests / 622 optional
 skips**, with zero failures/errors. No milestone acceptance is made.
+
+## ABI 1.6 and original pacing
+
+Fetched main **240ea87** supplies ABI 1.6. Jogar explicitly selects
+`rl_execucao_definir(world,1)` after complete S0 loading, before phase 1.
+Validar keeps policy 0 and all existing equality/observer work. The native
+consumer accepts major 1, minor >=6; Graphics remains 1.7. The input-state proof
+uses persistent audited policy 2 so actual poll answers remain observable.
+Switching the UI mode recreates the world; a mode change after phase 1 is refused.
+
+The [static pacing report](../apps/macos-preview/validation/m3-abi16-original-pacing.json)
+and [instruction listing](../apps/macos-preview/validation/m3-abi16-original-pacing.asm)
+are derived read-only from intact RISING.EXE SHA256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+They preserve original byte identities and record every executable-section
+reference to timer imports and their thunks. Reproduce with existing repository
+pefile/capstone dependencies on PYTHONPATH:
+
+```sh
+python3 -B apps/macos-preview/scripts/macos_original_pacing.py \
+  --exe /absolute/path/to/source/cd/INSTALHD/RISING.EXE \
+  --output .local/original-pacing-recheck.json
+```
+
+The active `WinMain` path at `0x460205..0x46021b` advances whenever the message
+queue is empty. The iteration calls `CalculGame` at `0x47505e`, then rendering
+at `0x475063`; `GameNextFrame 0x45d015` increments a counter. The single
+GetTickCount call, in `CalculFrame 0x43f710`, measures iterations over >=1,000 ms
+for the two-digit FPS display. It does not wait for a deadline. A separate
+[timestamp dataflow scan](../apps/macos-preview/validation/m3-abi16-pacing-dataflow.json)
+finds all eight decoded direct references to its counter/timestamp globals inside
+CalculFrame, including no reader of the stored last-tick value at `0x4e17b4`. The draw divisor
+at `0x417909` is applied after simulation. `DDFlipPage` uses surface vtable
+`+0x1c` (BltFast), flags `0x10` (DDBLTFAST_WAIT), and retries a busy blitter;
+the [Microsoft BltFast contract](https://learn.microsoft.com/en-us/windows/win32/api/ddraw/nf-ddraw-idirectdrawsurface7-bltfast)
+describes waiting until a blit can be submitted. The [Microsoft DirectDraw header](https://raw.githubusercontent.com/microsoft/win32metadata/main/generation/WinSDK/RecompiledIdlHeaders/um/ddraw.h)
+identifies flag 0x10 and vtable slot 7. This is not a fixed simulation timer or a
+vertical-blank wait. The inactive
+window path uses WaitMessage. Other timeGetTime sites concern FLI playback,
+network input, CD audio deadlines and RNG seeding; WaitForSingleObject sites
+are CRT semaphore/join paths. No active-loop fixed-Hz gate is established.
+
+The native window therefore defaults to **Original (sem limite)**, reproducing
+that uncapped scheduling policy. The 15/20/30/60 caps remain explicit alternatives.
+A particular historical computer's elapsed game speed remains **unmeasured**:
+CPU, driver, blitter and message workload affect it, and native Apple Silicon
+throughput is not a historical calibration. The engine's 20 Hz virtual TickClock
+is unchanged to retain all state/frame/clock equalities. No original capture,
+mask, reference pin, engine source or graphics fallback is changed.

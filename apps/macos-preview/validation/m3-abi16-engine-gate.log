@@ -1,0 +1,357 @@
+[lease] macos-abi16-engine-gate waiting
+[lease] macos-abi16-engine-gate granted slots [0]
+    Checking rl-core v0.1.0 (/Users/marcio/git/Rising Lands/worktrees/macos-playable/motor/crates/rl-core)
+    Checking rl-ffi v0.1.0 (/Users/marcio/git/Rising Lands/worktrees/macos-playable/motor/crates/rl-ffi)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.62s
+   Compiling rl-core v0.1.0 (/Users/marcio/git/Rising Lands/worktrees/macos-playable/motor/crates/rl-core)
+   Compiling rl-ffi v0.1.0 (/Users/marcio/git/Rising Lands/worktrees/macos-playable/motor/crates/rl-ffi)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.85s
+     Running unittests src/lib.rs (target/debug/deps/rl_core-131da78e3fabebbf)
+
+running 4 tests
+test render::tests::opaque_zero_skips_signed_clipping_and_destination_shadow ... ok
+test memory::transactions::declarations_removals_and_reused_addresses_restore_exact_layout ... ok
+test memory::transactions::overlapping_inline_and_large_writes_roll_back_in_reverse_order ... ok
+test render_assets::tests::fips_sha256_vectors ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/player_fixtures.rs (target/debug/deps/player_fixtures-79174640b5ae00a8)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/render_fixtures.rs (target/debug/deps/render_fixtures-7c04b3666cd5faf2)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/render_probe_stream.rs (target/debug/deps/render_probe_stream-c07d9ab1b0d1eaed)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/frame_runtime_state.rs (target/debug/deps/frame_runtime_state-203f2159b21cc67b)
+
+running 4 tests
+test runtime_semantic_projection_is_identity_for_all_declared_bytes ... ok
+test unknown_task_and_group_fields_remain_opaque ... ok
+test task_group_and_runtime_mutations_use_the_original_fields ... ok
+test sparse_cardinality_and_list_binding_invariants_are_explicit ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/frame_state.rs (target/debug/deps/frame_state-37930e27b0a28efb)
+
+running 5 tests
+test sparse_captures_never_gain_synthetic_frame_state ... ok
+test canonical_state_requires_bound_frame_presence_and_projects_semantic_mutation ... ok
+test changed_pool_binding_or_cardinality_is_rejected_before_writing ... ok
+test semantic_frame_projection_preserves_every_opaque_byte ... ok
+test semantic_mutations_project_at_original_widths_and_reload ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/pilot.rs (target/debug/deps/pilot-8de51d4903c8a714)
+
+running 16 tests
+test bcd_aliasing_reads_zeroed_and_updated_destination ... ok
+test projection_refuses_removed_or_unbound_semantic_fields ... ok
+test bcd_aliasing_an_rng_refreshes_semantic_state ... ok
+test missing_rng_and_unsupported_getter_are_named_atomic_errors ... ok
+test missing_bcd_byte_failure_is_atomic ... ok
+test bcd_load_project_and_unusual_digits ... ok
+test crt_wrapped_null_seed_pointer_has_no_store ... ok
+test regions_reject_overlap_empty_and_overflow_without_mutation ... ok
+test deterministic_ticks_and_virtual_clock_wrap ... ok
+test typed_state_round_trip_retains_every_opaque_byte ... ok
+test partially_captured_semantic_field_is_not_absent ... ok
+test rng_wrapping_edges_are_explicit_in_debug_builds ... ok
+test memory_widths_and_order ... ok
+test undeclared_and_cross_block_access_never_zero_fill ... ok
+test clock_pacing_never_changes_rng_results_or_routine_tick_count ... ok
+test all_u16_values_have_unclamped_bcd_round_trip ... ok
+
+test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/lib.rs (target/debug/deps/rising_engine-980a8571ffdeda0f)
+
+running 1 test
+test render_abi::tests::saved_background_query_copies_only_after_capacity_and_reset_is_explicit ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests rl_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests rising_engine
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+test_active_task_is_named_atomic_dependency_stop (test_frame_ai_units.FrameAiUnitTests) ... ok
+test_frozen_original_inactive_ai_and_message_calls (test_frame_ai_units.FrameAiUnitTests) ... ok
+test_message_timer_and_no_command_perturbations_against_python (test_frame_ai_units.FrameAiUnitTests) ... ok
+test_monster_initialization_and_action_timers_against_python (test_frame_ai_units.FrameAiUnitTests) ... ok
+test_target_scan_and_occupancy_perturbations_against_python (test_frame_ai_units.FrameAiUnitTests) ... ok
+test_original_raid_projectile_init_set_and_calcul (test_frame_combat.RaidCombat) ... ok
+test_periodic_weather_and_sympathy_perturbations (test_frame_combat.RaidCombat) ... ok
+test_perturbed_projectile_set_all_callback_free_types (test_frame_combat.RaidCombat) ... ok
+test_unported_projectile_callbacks_are_named_and_atomic (test_frame_combat.RaidCombat) ... ok
+test_additive_creation_and_invalid_phase (test_frame_contract.FrameContract) ... ok
+test_bulk_snapshot_size_errors_copy_no_prefix (test_frame_contract.FrameContract) ... ok
+test_failed_phase_preserves_world_clock_input_and_events (test_frame_contract.FrameContract) ... ok
+test_original_core_capture_replay (test_frame_core_economy.FrameProviders) ... ok
+test_original_economy_capture_replay (test_frame_core_economy.FrameProviders) ... ok
+test_perturbed_animation_and_resource_values (test_frame_core_economy.FrameProviders) ... ok
+test_perturbed_field_growth (test_frame_core_economy.FrameProviders) ... ok
+test_actual_compared_byte_corruption_detected (test_frame_evidence.FrameHarnessTests) ... ok
+test_bulk_snapshot_strict (test_frame_evidence.FrameHarnessTests) ... ok
+test_copied_comparison_definitions_unchanged (test_frame_evidence.FrameHarnessTests) ... ok
+test_exact_frozen_reference_pins (test_frame_evidence.FrameHarnessTests) ... ok
+test_frame_abi_layout (test_frame_evidence.FrameHarnessTests) ... ok
+test_unknown_event_rejected (test_frame_evidence.FrameHarnessTests) ... ok
+test_original_input_captured_writes (test_frame_input_missions.InputMissionsProviders) ... ok
+test_original_mission_isolated_captures (test_frame_input_missions.InputMissionsProviders) ... ok
+test_randomized_affgame_effects_and_inactive_projectile_animation (test_frame_input_missions.InputMissionsProviders) ... ok
+test_randomized_mission_conditions_resources_and_latch (test_frame_input_missions.InputMissionsProviders) ... ok
+test_randomized_rain_scroll_and_input_help_timer (test_frame_input_missions.InputMissionsProviders) ... ok
+test_actual_serial_state_roundtrip_is_complete (test_frame_long.FrameLongTests) ... ok
+test_allocator_checkpoint_contract_rejects_hidden_activity (test_frame_long.FrameLongTests) ... ok
+test_opening_three_hashes_are_required (test_frame_long.FrameLongTests) ... ok
+test_partial_or_dirty_shards_cannot_aggregate (test_frame_long.FrameLongTests) ... ok
+test_phase_order_and_checkpoint_indices (test_frame_long.FrameLongTests) ... ok
+test_published_manifest_exact_domain_and_pins (test_frame_long.FrameLongTests) ... ok
+test_serial_aggregate_requires_actual_checkpoint_chain (test_frame_long.FrameLongTests) ... ok
+test_native_raid_and_movement_calls (test_frame_movement.MovementProviders) ... ok
+test_perturbed_live_movement_and_grid_aliases (test_frame_movement.MovementProviders) ... ok
+test_perturbed_path_search_scratch_and_routes (test_frame_movement.MovementProviders) ... ok
+test_group_allocation_members_and_iterator_against_python (test_frame_raid.RaidTests) ... ok
+test_task_vm_arithmetic_waits_children_and_lists_against_python (test_frame_raid.RaidTests) ... ok
+test_twenty_five_frozen_original_rules_without_callback_replay (test_frame_raid.RaidTests) ... ok
+test_all_committed_calls_match_original_and_python (test_pilot.CaptureHarnessTests) ... ok
+test_bcd_alias_and_width_edges_match_unchanged_python (test_pilot.CaptureHarnessTests) ... ok
+test_harness_detects_a_real_rust_projected_byte_mutation (test_pilot.CaptureHarnessTests) ... ok
+test_harness_detects_a_real_rust_return_register_mutation (test_pilot.CaptureHarnessTests) ... ok
+test_sparse_input_refuses_unknown_conflicting_bytes (test_pilot.CaptureHarnessTests) ... ok
+test_tampered_reference_identity_is_refused (test_pilot.CaptureHarnessTests) ... ok
+test_clock_ticks_and_memory_load_are_separate (test_pilot.PilotAbiTests) ... ok
+test_error_message_query_is_repeatable_and_thread_local (test_pilot.PilotAbiTests) ... ok
+test_failed_bcd_writes_do_not_publish_prefix (test_pilot.PilotAbiTests) ... ok
+test_independent_worlds_repeat_under_concurrent_callers (test_pilot.PilotAbiTests) ... ok
+test_load_and_project_copy_sorted_owned_bytes (test_pilot.PilotAbiTests) ... ok
+test_malformed_load_is_atomic_with_named_errors (test_pilot.PilotAbiTests) ... ok
+test_projection_capacity_query_preserves_output_buffer (test_pilot.PilotAbiTests) ... ok
+test_stale_handles_double_free_and_nonreused_identity (test_pilot.PilotAbiTests) ... ok
+test_unknown_missing_and_unsupported_steps_preserve_registers_and_state (test_pilot.PilotAbiTests) ... ok
+test_version_rate_and_null_output_refuse_creation (test_pilot.PilotAbiTests) ... ok
+test_original_evidence_corruption_still_fails_exact_pin (test_pinned_reference.PinnedReferenceTests) ... ok
+test_reference_imports_share_the_pinned_root (test_pinned_reference.PinnedReferenceTests) ... ok
+test_snapshot_source_corruption_is_not_accepted (test_pinned_reference.PinnedReferenceTests) ... ok
+test_source_bytes_are_revision_backed_even_if_working_source_changes (test_pinned_reference.PinnedReferenceTests) ... ok
+test_declared_input_contracts (test_player.PlayerChecks) ... ok
+test_original_input_routine_effects (test_player.PlayerChecks) ... ok
+test_graphics_15_contract_original_pixels_and_explicit_stops (test_render.NativeRendererTests) ... test_asset_identity_and_invalid_creation_are_atomic (__main__.RenderTests) ... ok
+test_copied_buffers_generation_query_reset_and_lifetimes (__main__.RenderTests) ... ok
+test_graphics17_original_all_health_facade_matrix (__main__.RenderTests) ... ok
+test_graphics17_production_glyph_prefixes_and_saved_background (__main__.RenderTests) ... P2 50 178 equal
+ok
+test_original_input_time_full_surfaces_and_named_fire_stop (__main__.RenderTests) ... 0 0 None
+1 0 None
+2 0 None
+3 0 None
+4 0 None
+5 0 None
+6 0 None
+7 0 None
+8 0 None
+9 0 None
+10 0 None
+11 0 None
+12 0 None
+13 0 None
+14 0 None
+15 0 None
+16 0 None
+17 0 None
+18 0 None
+19 0 None
+20 0 None
+21 0 None
+22 0 None
+23 0 None
+24 0 None
+25 0 None
+26 0 None
+27 0 None
+28 0 None
+29 0 None
+30 0 None
+31 0 None
+32 0 None
+33 0 None
+34 0 None
+35 0 None
+36 0 None
+37 0 None
+38 0 None
+39 0 None
+40 0 None
+41 0 None
+42 0 None
+43 0 None
+44 0 None
+45 0 None
+46 0 None
+47 0 None
+48 0 None
+49 0 None
+50 0 None
+51 0 None
+52 0 None
+53 0 None
+54 0 None
+55 0 None
+56 0 None
+57 0 None
+58 0 None
+59 0 None
+60 0 None
+61 0 None
+62 0 None
+63 0 None
+64 0 None
+65 0 None
+66 0 None
+67 0 None
+68 0 None
+69 0 None
+70 0 None
+71 0 None
+72 0 None
+73 0 None
+74 0 None
+75 0 None
+76 0 None
+77 0 None
+78 0 None
+79 0 None
+80 0 None
+81 0 None
+82 0 None
+83 0 None
+84 0 None
+85 0 None
+86 0 None
+87 0 None
+88 0 None
+89 0 None
+90 0 None
+91 0 None
+92 0 None
+93 0 None
+94 0 None
+95 0 None
+96 0 None
+97 0 None
+98 0 None
+99 0 None
+100 0 None
+101 0 None
+102 0 None
+103 0 None
+104 0 None
+105 0 None
+106 0 None
+107 0 None
+108 0 None
+109 0 None
+110 0 None
+111 2 Some((4228555, "sanctuary damage/fire (+0x06 nonzero)"))
+112 0 None
+113 0 None
+
+ok
+test_own_world_first_frame_surface_cache_effects_and_read_only (__main__.RenderTests) ... 1 {'frame': 1, 'generation': 2, 'phase': 1, 'counter': 0, 'disposition': 0, 'stop': None, 'sha256': '92d06bceea820927f4cc613e587ad0316bdad518ff83987a12c7b972c44e30d0', 'original_equal': True, 'python_equal': True, 'cache_equal': True, 'stop_equal': True, 'world_read_only': True, 'palette_equal': True, 'effects_equal': True}
+ok
+test_perturbed_stops_and_actual_partial_prefixes (__main__.RenderTests) ... 0 2 Some((4270371, "selected unit order marker outside captured cell-target mode 1"))
+1 2 Some((4262444, "AffContenanceEngin bag capacity outside captured 0/1"))
+2 2 Some((4262884, "unit health outside captured 0..100 / max 100"))
+3 2 Some((4262884, "fatigue words outside captured +4 = +0x76 = 4"))
+4 2 Some((4282655, "input overlay outside captured owner-0 normal field-unit domain"))
+5 2 Some((4282655, "input overlay outside captured owner-0 normal field-unit domain"))
+6 2 Some((4282655, "AffEngin unit 12 type 7 state 7 outside validated body domain"))
+7 2 Some((4282655, "AffEngin unit 12 type 7 state 7 outside validated body domain"))
+8 2 Some((4273814, "experience icon for a non-builder is not captured"))
+9 2 Some((4288646, "AffZoneIconeAction slot kind outside 1.5"))
+10 2 Some((4288646, "AffZoneIconeAction percent outside 0..100"))
+11 2 Some((4288646, "AffZoneIconeAction counter outside 0..999"))
+12 2 Some((4292462, "AffCompteurMatiere counter value above 9999"))
+13 2 Some((4289179, "placement outside captured type-3 CAVE"))
+14 2 Some((4291490, "target marker outside captured animation IDs 0x1e03..0x1e09"))
+15 2 Some((4614055, "AffMarche market state 1..4"))
+16 2 Some((4630284, "AffMiniMap outside captured geometry"))
+17 2 Some((4201752, "AffChrono selected structure outside no-recruitment sanctuary domain"))
+18 2 Some((4257659, "AffZoneInfo cost counter exceeds 9999"))
+19 2 Some((4257984, "tooltip pointer outside captured DGROUP strings"))
+20 2 Some((4291711, "AffDebug enabled"))
+21 2 Some((4291722, "EvenementAffiche event in progress"))
+22 2 Some((4627551, "MessageBoxAffiche queue not empty"))
+23 2 Some((4290052, "AffDrapeauAlliance allied player flag"))
+24 2 Some((4290034, "AffDrapeauAlliance contacting player"))
+25 2 Some((4291836, "second cursor count outside 0..16"))
+
+ok
+test_recorded_text_adapter_rejects_wrong_pixels_and_arguments (__main__.RenderTests) ... Fixture render error: Invalid("AffText probe request/pre-text surface mismatch")
+Fixture render error: Invalid("AffText probe request/pre-text surface mismatch")
+ok
+test_reference_identity_is_pinned_graphics_17 (__main__.RenderTests) ... ok
+test_undrawn_preserves_surface_and_complete_cache (__main__.RenderTests) ... 0 1 None
+
+ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 61.198s
+
+OK
+ok
+
+----------------------------------------------------------------------
+Ran 63 tests in 250.505s
+
+OK
+{
+  "passed": true,
+  "comparisons": 75,
+  "by_routine": {
+    "Random": 24,
+    "LongRand": 12,
+    "rand": 12,
+    "IntToBCD": 19,
+    "BCDToInt": 8
+  },
+  "mismatches": 0,
+  "skipped": 0
+}
+Swift C ABI1.6 passed: RNG, projection, frame phase, events, clock
+target/render-smoke.fgHmgF/input.bin
+{
+  "abi" : "1.6",
+  "engine_render_metal_fps" : 8.0181768730615008,
+  "frames_equal" : 128,
+  "logic_seconds" : 10.245115399360657,
+  "metal_device" : "Apple M4 Pro",
+  "metal_upload_conversion_seconds" : 0.12493276596069336,
+  "pipeline_seconds" : 15.963728666305542,
+  "render_fps" : 22.884878667445623,
+  "render_seconds" : 5.5932129621505737,
+  "scope" : "Swift C ABI engine+render+generation+reused output buffers+Metal upload and RGBA conversion; excludes proof hashing\/readback, initialization and app display pacing"
+}

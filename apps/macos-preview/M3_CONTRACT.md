@@ -429,3 +429,19 @@ boundaries, matching its probes. This does not establish glyph rendering or audi
 playback. Engine failures retain atomic world/context semantics and publish the
 named stop. Rust renderer partial results also stop the UI with their actual
 surface; neither a skipped draw nor substitute pixels hide a dependency.
+
+## Current consumer — ABI 1.6 persistent execution
+
+The ABI 1.5 input descriptors and Graphics 1.7 renderer contracts above remain
+unchanged. Native execution now requires major 1/minor >=6. Complete S0 loads
+before the caller chooses play policy 1 through `macos_live_validation(driver,0)`;
+this selection occurs before phase 1 and propagates any ABI failure. Default
+proof drivers/Validar retain policy 0. The Test A state proof explicitly chooses
+policy 2, which runs the same persistent backend while retaining consumed input
+observations. Production play uses policy 1, without input/frame/render audit
+records; real orders/text/sound events and named stops remain available.
+
+Host pacing defaults to the intact original's uncapped active idle-loop policy,
+with optional fixed host caps. The virtual engine clock remains 20. The original
+pacing evidence and historical elapsed-time calibration boundary are documented
+in the [manual](../../docs/MACOS_PLAYABLE.md#abi-16-and-original-pacing).
