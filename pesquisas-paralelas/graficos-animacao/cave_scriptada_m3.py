@@ -26,13 +26,13 @@ def facade(c,x,y,cell,index,*,habitacao=None):
     r=c._estrutura(index,0x4085cb);kind,mode=r[8],r[5]
     if kind not in (2,3) or mode>7:c.parar(0x40f23b,'facade outside types 2/3 modes 0..7')
     if c.mundo.palavra('terreno',cell)!={2:0x2ed,3:0x30d}[kind]:c.parar(0x40f23b,'facade trigger and structure type disagree')
-    if word(r,6):c.parar(0x4085cb,'structure damage/fire (+0x06 nonzero)')
     inhabited=c._consulta_habitada(index,0x4087aa) if habitacao is None else habitacao
     if inhabited:
         if kind==3:
             from camadas_exibicao_m3 import cave
             cave(c,r,x,y,cell);return
         c.parar(0x408ac8,'construction facade outside captured uninhabited domain')
+    if word(r,6):c.parar(0x4085cb,'uninhabited structure damage/fire (+0x06 nonzero)')
     m=c.leitura_entrada
     if m is None:c.parar(0x408ac8,'construction facade requires the live type-table read view')
     maximum=m.u16(0x495d90+52*kind)

@@ -22,7 +22,7 @@ from maquina_projeteis import MaquinaProjeteis
 from proximidade_ataque import ConsultaProximidadeAtaque
 from bonus_unidades import BonusUnidades
 from chamadas_quadro_core import terreno_esta_descoberto, caso_estrutura, aleatorio_mundo_memoria
-from selecao_ordens import SelecaoOrdens
+from selecao_ordens import SelecaoOrdens, chamar_som
 from mundo_vivo import mundo_vivo
 from solucionador_vivo import SolucionadorCaminhosVivo
 
@@ -107,9 +107,9 @@ class CombateRaidVivo:
             raio_magia=lambda *a:self._query('SortilegeGetRayonEffet', a))
         self.maquina = _MaquinaRaid(memoria, self.pool, lambda marcador:self._query('Random', (marcador,)),
                                    lambda *a:self._query('SortilegeGetTempsFin', a))
-        self.dano_estrutura = DanoEstruturaRaid(memoria, self._query, self._efeito)
+        self.dano_estrutura = DanoEstruturaRaid(memoria, self._query, self._emissor(0x41a331))
         self.grade = _GradeRaid(memoria)
-        self.consumidor = _ConsumidorRaid(memoria, self.unidades, self.danos, self._query, self._efeito,
+        self.consumidor = _ConsumidorRaid(memoria, self.unidades, self.danos, self._query, self._emissor(0x45063f),
                                         MorteDanoUnidade(self.unidades, self.pool, self._efeito))
 
     def _externa(self, name, args):
@@ -166,7 +166,11 @@ class CombateRaidVivo:
             return aleatorio_mundo_memoria(m)['EAX']
         return self._externa(name, args)
 
-    def _efeito(self, name, args):
+    def _emissor(self, chamada):
+        """Bind the single PostSound CALL of this emitter; nested effects keep their own origin."""
+        return lambda name, args: self._efeito(name, args, chamada=chamada)
+
+    def _efeito(self, name, args, *, chamada=None):
         if name == 'EnginGetVolume':
             return self._query(name, args)
         if name == 'PlaySnd_PostSound':
@@ -176,7 +180,10 @@ class CombateRaidVivo:
             elif reference == '0x496ac8':
                 reference = 0x496ac8
             if self.som is not None:
-                return self.som(name, dict(EAX=selector, EDX=code, EBX=reference, ECX=flags), [volume])
+                if chamada is None:
+                    raise ValueError('Original PostSound call site required')
+                return chamar_som(self.som, name,
+                    dict(EAX=selector, EDX=code, EBX=reference, ECX=flags), [volume], chamada)
             return self._externo(name, (selector, code, flags, volume, reference))
         if name == 'ResetOrdre':
             return self.mundo.redefinir_ordem(*args)
@@ -230,7 +237,7 @@ class CombateRaidVivo:
             celula_construcao_adjacente=lambda *a: self._query('BatimentGetCaseAdjacent', a),
             adjacente_construcao=lambda *a: self._query('BatimentAdjacent', a),
             alcance_magia=lambda *a: self._query('SortilegeGetPortee', a),
-            descoberto=lambda cell: self._query('TerrainEstDecouvert', (cell,)), efeito_externo=self._efeito)
+            descoberto=lambda cell: self._query('TerrainEstDecouvert', (cell,)), efeito_externo=self._emissor(0x4525a1))
 
     def calcular_ataque(self, indice):
         indice &= 65535
@@ -266,7 +273,7 @@ class CombateRaidVivo:
             if building != 65535:
                 return self._infligir_batiment(celula, building, modo, atacante, direcao)
         impact = _ImpactoRaid(self.m, self.unidades, self.pool, self.infligir_unidade,
-            lambda name, args: 65535 if name == 'ChercheIndiceBatiment' else self._query(name, args), self._efeito)
+            lambda name, args: 65535 if name == 'ChercheIndiceBatiment' else self._query(name, args), self._emissor(0x4510b1))
         return impact.infligir(celula, modo, atacante, direcao, flag)
 
     def _infligir_batiment(self, celula, alvo, modo, fonte, direcao):

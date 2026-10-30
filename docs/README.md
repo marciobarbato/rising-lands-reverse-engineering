@@ -2,7 +2,7 @@
 
 The maintained manuals below replace the scattered research handoffs. Historical wording, complete prior notes, frozen deliveries, and their hashes remain recoverable as described in [migration](MIGRATION.md). Read current status before using an old report as a statement about today's runtime.
 
-**Start here:** the latest [coordinator handover (2026-10-30 07:00)](HANDOVER_CLAUDE_20261030_0700.md), then the top of [consolidated progress](PROGRESS.md) and [status](STATUS.md).
+**Start here:** the latest [coordinator handover (2026-10-30 19:10)](HANDOVER_CLAUDE_20261030_1910.md), then the top of [consolidated progress](PROGRESS.md) and [status](STATUS.md).
 
 ## Milestones at a glance (2026-10-30 07:00)
 
@@ -18,7 +18,8 @@ The maintained manuals below replace the scattered research handoffs. Historical
 
 | Document | Contents |
 |---|---|
-| [Coordinator handover 2026-10-30 07:00](HANDOVER_CLAUDE_20261030_0700.md) | Latest: overnight results, runs in flight at the MacBook pause, preserved `wip/*` branches, next steps, rules learned |
+| [Coordinator handover 2026-10-30 19:10](HANDOVER_CLAUDE_20261030_1910.md) | Latest: state at the pause for the Codex quota reset, unintegrated branches, next steps, user decisions, lessons |
+| [Coordinator handover 2026-10-30 07:00](HANDOVER_CLAUDE_20261030_0700.md) | overnight results, runs in flight at the MacBook pause, preserved `wip/*` branches, next steps, rules learned |
 | [Coordinator handover 2026-10-30](HANDOVER_CLAUDE_20261030.md) | State at the M3R1 checkpoint, Codex/Mac mini sessions, key M3 facts from the probes |
 | [Coordinator handover 2026-10-29](HANDOVER_CLAUDE_20261029.md) | State at M2.3 closure, machines, leases, working mode, Codex workstreams, architecture decisions |
 | [Claude handover 2026-10-28](HANDOVER_CLAUDE_20261028.md) | Historical: the 2026-10-28 freeze, preserved writers/worktrees |

@@ -87,7 +87,7 @@ class JanelasAPI18(unittest.TestCase):
 
     def test_uncaptured_cave_flags_and_worker_tasks_stay_stops(self):
         for filename,frame,address,value,stop in (
-            ('janela-P6-2001-2400-api18.json.xz',2179,0x4dfb30,b'\1','0x0040958e'),
+            ('janela-P6-2001-2400-api18.json.xz',2179,0x4dfb30,b'\x08','0x0040958e'),
             ('janela-P7-2401-2850-api18.json.xz',2850,None,b'\x0c','0x00414a8a')):
             cap=CapturaLimitada(AQUI/'evidencias'/filename);row=next(r for r in cap.d['rows'] if r['frame']==frame);m=cap.memory(row)
             address=address if address is not None else m.u32(0x4e19a0)+13*276+0x89
