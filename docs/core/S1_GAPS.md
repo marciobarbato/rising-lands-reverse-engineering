@@ -4,9 +4,9 @@
 
 **Status (resumed under Codex, 2026-10-30):**
 - Captures `a` and `b` are committed.
-- Capture `c` is NOT RUN.
+- Capture `c` is complete: **652 original-only cases**, 1,251 S1 frame states reproduced, original code unchanged. Its native differential is pending.
 - Window `a` is natively validated: **638 comparisons, 0 mismatches**, all seven registers, ESP, changed bytes and boundary requests; 951 S1 frame states reproduced, original code unchanged. Report: `relatorios/lacunas-s1-a-emulada.json`.
-- Window `b` is natively validated: **120 comparisons, 0 mismatches**; 1,201 S1 frame states reproduced, original code unchanged. Report: `relatorios/lacunas-s1-b-emulada.json`. `consultas_luta` is still awaiting the original-only `c` capture and its native differential.
+- Window `b` is natively validated: **120 comparisons, 0 mismatches**; 1,201 S1 frame states reproduced, original code unchanged. Report: `relatorios/lacunas-s1-b-emulada.json`. `consultas_luta` is awaiting its native differential against the committed original-only `c` capture.
 - The next steps are in "Resume".
 
 ## Bench: S1 resumed from its own snapshots
