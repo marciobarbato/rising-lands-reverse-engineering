@@ -276,8 +276,18 @@ def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None, estrutura
         pass
     else:
         # Combat's turret providers (BatimentPeutAttaquer, the whole routine, and BatimentInitAttaqueSelect for
-        # tag 14), over the live memory with Economy's live BonusUnidades (Combat's default).
-        funcoes.update(OrdensTorresCombate(m).provedores())
+        # tag 14), over the live memory with Economy's live BonusUnidades (Combat's default), built at first use
+        # (its constructor reads the bonus table).
+        torres = {}
+
+        def combate(nome):
+            def chamar(regs):
+                if 'o' not in torres:
+                    torres['o'] = OrdensTorresCombate(m)
+                return torres['o'].provedores()[nome](regs)
+            return chamar
+        funcoes.update(BatimentPeutAttaquer=combate('BatimentPeutAttaquer'),
+                       BatimentInitAttaqueSelect=combate('BatimentInitAttaqueSelect'))
     funcoes['GetStatusRecrute'] = lambda tipo, jogador: recrutamento().status(tipo, jogador)
     if donos is not None:
         # The M3 owners (``DonosM3``): group selection and view (tags 0xb/0xc, the group key), the minimap
@@ -326,7 +336,8 @@ class DonosM3:
       SetEnginConstruitBatiment (``selecao_ordens``), SetDeplaceEngin, BatimentGetCase, SetEnginRentreBatiment;
       not provided: BatimentGetDecalageConstruction, EnginEstVivant (Core), SetAttaqueEngin (Combat);
     - Core ``incursao_core``: SetMiniMap (``definir_minimapa``; CalculWorkEngin's mode 4 at 0x44c437) and, once
-      published, TerrainEstGc (``terreno_esta_gc``, CalculWorkEngin 0x44d8cd);
+      published, TerrainEstGc (``terreno_esta_gc``, CalculWorkEngin 0x44d8cd); ``chamadas_quadro_core``: Random
+      (CalculWorkEngin 0x44db44/0x44db54);
     - Core ``fadiga_vegetacao.FadigaVegetacao`` (``fadiga``, when importable): EnginSetFatigue, ChercheVegetLibre,
       ChercheTypeBatimentProximite, EteintTerrain (Economy's SortieTroupe abandonment), TestRessource through
       ``externo``.
@@ -427,6 +438,12 @@ class DonosM3:
             # CalculWorkEngin passes at 0x44c437): EAX rows, EBX pixel cursor, EDX; other registers kept.
             import incursao_core
             saida = incursao_core.definir_minimapa(self.m, regs['EAX'] & M32, regs['EDX'] & M32, regs['EBX'] & M32)
+            return {k: v & M32 for k, v in saida.items() if k in REG7}
+        if nome == 'Random':
+            # Core's Random 0x4704dc (``chamadas_quadro_core.ROTINAS``): the world seed 0x497164 advanced, EAX = it;
+            # no other register changes.
+            from chamadas_quadro_core import ROTINAS as ROTINAS_QUADRO
+            saida = ROTINAS_QUADRO['Random'][1](self.m, {k: regs.get(k, 0) & M32 for k in REG7}, None, None)
             return {k: v & M32 for k, v in saida.items() if k in REG7}
         if nome == 'TerrainEstGc':
             import incursao_core
