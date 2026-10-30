@@ -1,0 +1,633 @@
+{
+ "schema": "rising-lands/probe-origin-isolation/1",
+ "method": "Original AffGame leaf calls at the first actual probe entry of each previously unproved view origin.\n\nNo writes are applied. Save CPU/state/stack, declared host state and DirectDraw surfaces, execute the intact call\nto its native caller return, record every DGROUP/CRT/heap difference, then restore the exact entry before replay.\nThe normal phase must still reproduce the published whole-state and full-surface hashes.\n",
+ "probe": "P7",
+ "probe_ref": "fd56f69",
+ "executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "source_sha256": "01bd4d1329d77f1aacf9b8de3431f9c08e66a19c79164d6b8947695a3710d9c2",
+ "baseline_provider_sha256": "d15eb06b4c2c97374771083f28bc7c4fa630db0397d14f3fe0fcdc8c3d3132bc",
+ "targets": [
+  [
+   10,
+   10
+  ],
+  [
+   10,
+   11
+  ],
+  [
+   10,
+   12
+  ],
+  [
+   10,
+   13
+  ],
+  [
+   10,
+   14
+  ],
+  [
+   10,
+   15
+  ],
+  [
+   10,
+   16
+  ]
+ ],
+ "records": [
+  {
+   "probe": "P7",
+   "frame": 2851,
+   "origin": [
+    10,
+    16
+   ],
+   "routine": "AffGame",
+   "entry": "0x417698",
+   "caller_return": "0x475068",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x3",
+    "ECX": "0x2100230",
+    "EDX": "0x2007fe8",
+    "ESI": "0x0",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fe4",
+    "EIP": "0x417698"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBX": "0x3",
+    "ECX": "0x2100230",
+    "EDX": "0x2007fe8",
+    "ESI": "0x0",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fe8",
+    "EIP": "0x475068"
+   },
+   "declared_writes": [],
+   "returned": true,
+   "changed": {
+    "dgroup": [
+     [
+      "0x4e05a2",
+      0,
+      1
+     ],
+     [
+      "0x4e17ae",
+      24,
+      0
+     ],
+     [
+      "0x4e17b0",
+      230,
+      206
+     ],
+     [
+      "0x4e17b1",
+      237,
+      241
+     ],
+     [
+      "0x4e17b4",
+      166,
+      206
+     ]
+    ],
+    "alloc00002": {
+     "bytes": 25,
+     "first": "0x41401009",
+     "before_sha256": "62f643b622991d5134990d25dc8d7714d6183b1d9d51ca4a34a686568f24c939",
+     "after_sha256": "dbbe3bee80d183a7f32b2a4c4349d9e1f1b98223f7c696a48ed11852ee7bf0e3"
+    }
+   },
+   "entry_state_sha256": "9641ea47fdafefd35f0395264d5d1bcaf90b5b614abd9a264aa981cf590a1928",
+   "surface_sha256": "9d201bef02e3b1dc3532c47288873dd7884c4b1f4b38769e4f1f585a4754ca4d",
+   "published_phase_sha256": "9d201bef02e3b1dc3532c47288873dd7884c4b1f4b38769e4f1f585a4754ca4d",
+   "original_code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4"
+  },
+  {
+   "probe": "P7",
+   "frame": 3217,
+   "origin": [
+    10,
+    15
+   ],
+   "routine": "AffGame",
+   "entry": "0x417698",
+   "caller_return": "0x475068",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x3",
+    "ECX": "0x1480001",
+    "EDX": "0x2007fe8",
+    "ESI": "0x0",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fe4",
+    "EIP": "0x417698"
+   },
+   "exit_registers": {
+    "EAX": "0x200",
+    "EBX": "0x3",
+    "ECX": "0x1480001",
+    "EDX": "0x2007fe8",
+    "ESI": "0x0",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fe8",
+    "EIP": "0x475068"
+   },
+   "declared_writes": [],
+   "returned": true,
+   "changed": {
+    "dgroup": [
+     [
+      "0x49a04e",
+      76,
+      80
+     ],
+     [
+      "0x4e05a2",
+      1,
+      0
+     ],
+     [
+      "0x4e17ae",
+      15,
+      16
+     ],
+     [
+      "0x4e17b4",
+      214,
+      254
+     ]
+    ],
+    "alloc02348": {
+     "bytes": 932,
+     "first": "0x41d37001",
+     "before_sha256": "67d74914f92530daa704f24502a8fdc851f57cfc3bc3be7be584b0fc99666bdc",
+     "after_sha256": "53116eee14aa2eafac97d77849808d426d661eceb9575a400be655485e76fddb"
+    },
+    "alloc02350": {
+     "bytes": 816,
+     "first": "0x41d39001",
+     "before_sha256": "d1802b2199e2aaee2ac76f03b2b07987a9f0c68e33826b2cc58ee78386c35003",
+     "after_sha256": "3cd035bb1bb7c3dc48514ca00f4562fcce5471bb9eb29ba3122bf88b267abb9a"
+    },
+    "alloc02352": {
+     "bytes": 1020,
+     "first": "0x41d3b001",
+     "before_sha256": "33942d12152fa072dc92bbf8dca171f18c0a10a38ad4b713b5f54bb403f3aed3",
+     "after_sha256": "ac10e8760a6ab8cb3fed3e1036d3946545cfece7e3953db25c9b803ac5e82518"
+    },
+    "alloc02354": {
+     "bytes": 1024,
+     "first": "0x41d3d001",
+     "before_sha256": "ece75aa04eebadd49f05f9534c37627f3a13ef62549f459def0a451cdbbc2d39",
+     "after_sha256": "736dde3334da22b5d0d4f37957f516c84c3086ee9c4179e8a28ff13bc2e2ce47"
+    },
+    "alloc24329": {
+     "bytes": 8,
+     "first": "0x474a7130",
+     "before_sha256": "59aac0f7cfe137e7d3bc05154a151ab3726aaa2e44da6782688dc79cd8f93363",
+     "after_sha256": "6a866f146864e631db72a4ef90e3c80783de55a443f403332c8afb46db8f9cbe"
+    }
+   },
+   "entry_state_sha256": "2f9ab2de0a03d272405e516860281f4ca7ca3265c30d04b5900a998e11b3c109",
+   "surface_sha256": "5df1b6afd5cf72aa85e84006d779b3ac4ad6d7214aad8d62b0838cbfeb1bdfa1",
+   "published_phase_sha256": "5df1b6afd5cf72aa85e84006d779b3ac4ad6d7214aad8d62b0838cbfeb1bdfa1",
+   "original_code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4"
+  },
+  {
+   "probe": "P7",
+   "frame": 3218,
+   "origin": [
+    10,
+    14
+   ],
+   "routine": "AffGame",
+   "entry": "0x417698",
+   "caller_return": "0x475068",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x3",
+    "ECX": "0x1480001",
+    "EDX": "0x2007fe8",
+    "ESI": "0x0",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fe4",
+    "EIP": "0x417698"
+   },
+   "exit_registers": {
+    "EAX": "0x200",
+    "EBX": "0x3",
+    "ECX": "0x1480001",
+    "EDX": "0x2007fe8",
+    "ESI": "0x0",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fe8",
+    "EIP": "0x475068"
+   },
+   "declared_writes": [],
+   "returned": true,
+   "changed": {
+    "dgroup": [
+     [
+      "0x49a04e",
+      80,
+      82
+     ],
+     [
+      "0x4e17ae",
+      16,
+      17
+     ],
+     [
+      "0x4e17b4",
+      254,
+      38
+     ],
+     [
+      "0x4e17b5",
+      42,
+      43
+     ]
+    ],
+    "alloc02356": {
+     "bytes": 913,
+     "first": "0x41d3f001",
+     "before_sha256": "770c1ad67cc4b887c64cd00fae9325b5c729a9d2179d9cf5f62bfc2400527886",
+     "after_sha256": "7643d6e600b3b3b5c54343c2fc06c72c640da946d95f4bde0874bfabd8a3c8d8"
+    },
+    "alloc02358": {
+     "bytes": 1022,
+     "first": "0x41d41001",
+     "before_sha256": "68b8e9415bf55a79e53757f117f80d0899b356a8d3b934ac8e2ebe5df1c3b702",
+     "after_sha256": "618ac8db58fc133eff2280fcfcdc8b16c8ab2c81bce4e504dbfbc9b024c500a3"
+    },
+    "alloc24329": {
+     "bytes": 5,
+     "first": "0x474a7140",
+     "before_sha256": "6a866f146864e631db72a4ef90e3c80783de55a443f403332c8afb46db8f9cbe",
+     "after_sha256": "a1663ec0c94c4b2d73e10ca733b8633e5684297fff25bf501ef7fc65e1fe476d"
+    }
+   },
+   "entry_state_sha256": "4e75ab1a2d569e9f4f6227df29db30934a69bca37331e80013002476a0d8fdc0",
+   "surface_sha256": "466692c6109b663737a524d1e97171ddf364432515214305531cec4f3944d9ed",
+   "published_phase_sha256": "466692c6109b663737a524d1e97171ddf364432515214305531cec4f3944d9ed",
+   "original_code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4"
+  },
+  {
+   "probe": "P7",
+   "frame": 3219,
+   "origin": [
+    10,
+    13
+   ],
+   "routine": "AffGame",
+   "entry": "0x417698",
+   "caller_return": "0x475068",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x3",
+    "ECX": "0x1480001",
+    "EDX": "0x2007fe8",
+    "ESI": "0x0",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fe4",
+    "EIP": "0x417698"
+   },
+   "exit_registers": {
+    "EAX": "0x200",
+    "EBX": "0x3",
+    "ECX": "0x1480001",
+    "EDX": "0x2007fe8",
+    "ESI": "0x0",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fe8",
+    "EIP": "0x475068"
+   },
+   "declared_writes": [],
+   "returned": true,
+   "changed": {
+    "dgroup": [
+     [
+      "0x49a04e",
+      82,
+      85
+     ],
+     [
+      "0x4e17ae",
+      17,
+      18
+     ],
+     [
+      "0x4e17b4",
+      38,
+      78
+     ]
+    ],
+    "alloc02360": {
+     "bytes": 857,
+     "first": "0x41d43002",
+     "before_sha256": "b9c823d967d904ce3c202e28efea822576c7b82ef20a8eb5c6fec7eabe8bf092",
+     "after_sha256": "c43c3110a9987ea8b84c22467ce49c403673a6b2d0d9438c020c39629c2e63ad"
+    },
+    "alloc02362": {
+     "bytes": 1024,
+     "first": "0x41d45001",
+     "before_sha256": "573f0e62f93f78b7236d276d34d2a31ee3135aea0ea24cb3e01bf639de227475",
+     "after_sha256": "2f3afa657ac110464d222219cc443389564048c404473eabb54d6a86784a6e5c"
+    },
+    "alloc02364": {
+     "bytes": 1024,
+     "first": "0x41d47001",
+     "before_sha256": "0940e03d9cd6361e282ec1b20d1942dd29de9da9ca55fe514d8dfceca2da8dd0",
+     "after_sha256": "ee177704ef8735053e99f674bcb357bec7ada0c6ca1fb8c2387ebc79b0b5764a"
+    },
+    "alloc24329": {
+     "bytes": 6,
+     "first": "0x474a7148",
+     "before_sha256": "a1663ec0c94c4b2d73e10ca733b8633e5684297fff25bf501ef7fc65e1fe476d",
+     "after_sha256": "319f5fc4210420561b7712ce7a41cdf7525122f75a8145f3f64efaf09d9f84c1"
+    }
+   },
+   "entry_state_sha256": "c4d98a7c1000fe4e0863905ff8a438b44714945f6313c79741ea335b19263bdb",
+   "surface_sha256": "cc3f497e112bd9c237708285c965323a6d8e140da065fedb55e16f6cfd920f79",
+   "published_phase_sha256": "cc3f497e112bd9c237708285c965323a6d8e140da065fedb55e16f6cfd920f79",
+   "original_code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4"
+  },
+  {
+   "probe": "P7",
+   "frame": 3220,
+   "origin": [
+    10,
+    12
+   ],
+   "routine": "AffGame",
+   "entry": "0x417698",
+   "caller_return": "0x475068",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x3",
+    "ECX": "0x1480001",
+    "EDX": "0x2007fe8",
+    "ESI": "0x0",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fe4",
+    "EIP": "0x417698"
+   },
+   "exit_registers": {
+    "EAX": "0x200",
+    "EBX": "0x3",
+    "ECX": "0x1480001",
+    "EDX": "0x2007fe8",
+    "ESI": "0x0",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fe8",
+    "EIP": "0x475068"
+   },
+   "declared_writes": [],
+   "returned": true,
+   "changed": {
+    "dgroup": [
+     [
+      "0x49a04e",
+      85,
+      90
+     ],
+     [
+      "0x4e17ae",
+      18,
+      19
+     ],
+     [
+      "0x4e17b4",
+      78,
+      118
+     ]
+    ],
+    "alloc02366": {
+     "bytes": 861,
+     "first": "0x41d49001",
+     "before_sha256": "0a4dce7e062c06d195bf56ef43d645111d5963f7b8c9a6dec69710711035f7b3",
+     "after_sha256": "23859bb99780d642584db60829f8e3aa4fae5185843d3c27fef038feb381a125"
+    },
+    "alloc02368": {
+     "bytes": 804,
+     "first": "0x41d4b002",
+     "before_sha256": "3c3e27eeda94e6fd085883b1772dd9d20afe72f1672f38df62d38a3692ba678a",
+     "after_sha256": "1e195dc239de78bd4fbdb2b135d1284cc482e7260b4619dfb27357bd9171f143"
+    },
+    "alloc02370": {
+     "bytes": 853,
+     "first": "0x41d4d002",
+     "before_sha256": "e7c882d0906c2efde8263a55a41603c640abc20c2c099b0a968195bc6c704460",
+     "after_sha256": "faa9079035dfaaa0263c793761bd266ae76fec1e532b2c994609a15fdaae012f"
+    },
+    "alloc02372": {
+     "bytes": 984,
+     "first": "0x41d4f001",
+     "before_sha256": "4553b8f59a832f41a6afda86f302010635c7851020ee275a81131c1e9577cf6c",
+     "after_sha256": "f561293b5908eed77887053f903b0a9c998765e3814e289eed2a92d7e29211e4"
+    },
+    "alloc02374": {
+     "bytes": 1024,
+     "first": "0x41d51001",
+     "before_sha256": "e648466f5ed024be5edf99759e6354b5d0dcd9e2b24bdfe4e81e59e0adba20c7",
+     "after_sha256": "0a4dce7e062c06d195bf56ef43d645111d5963f7b8c9a6dec69710711035f7b3"
+    },
+    "alloc24329": {
+     "bytes": 12,
+     "first": "0x474a7154",
+     "before_sha256": "319f5fc4210420561b7712ce7a41cdf7525122f75a8145f3f64efaf09d9f84c1",
+     "after_sha256": "c47dd328288747f10f27570565c0f3d6f44969401913610839647ad6da06b16c"
+    }
+   },
+   "entry_state_sha256": "884c3556c371a2302616173501326cf0d5f784b5872e393dc0010e5cb8bb6105",
+   "surface_sha256": "f362c29bbcfb2cd80e9ee793a3a6847df8f8325efb77ddd3274fb0815bca316f",
+   "published_phase_sha256": "f362c29bbcfb2cd80e9ee793a3a6847df8f8325efb77ddd3274fb0815bca316f",
+   "original_code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4"
+  },
+  {
+   "probe": "P7",
+   "frame": 3221,
+   "origin": [
+    10,
+    11
+   ],
+   "routine": "AffGame",
+   "entry": "0x417698",
+   "caller_return": "0x475068",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x3",
+    "ECX": "0x1480001",
+    "EDX": "0x2007fe8",
+    "ESI": "0x0",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fe4",
+    "EIP": "0x417698"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBX": "0x3",
+    "ECX": "0x1480001",
+    "EDX": "0x2007fe8",
+    "ESI": "0x0",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fe8",
+    "EIP": "0x475068"
+   },
+   "declared_writes": [],
+   "returned": true,
+   "changed": {
+    "dgroup": [
+     [
+      "0x49a04e",
+      90,
+      92
+     ],
+     [
+      "0x4e05a2",
+      0,
+      1
+     ],
+     [
+      "0x4e17ae",
+      19,
+      20
+     ],
+     [
+      "0x4e17b4",
+      118,
+      158
+     ]
+    ],
+    "alloc00002": {
+     "bytes": 25,
+     "first": "0x41401009",
+     "before_sha256": "df973cd6d26e3289952a7ba7e42f7157c46ff4d4554acc267ca7831c24a8258a",
+     "after_sha256": "cbcc7f1b318eeff69ffff93e4143d91e2369eae7e33b02a79955e2642276d953"
+    },
+    "alloc02376": {
+     "bytes": 991,
+     "first": "0x41d53001",
+     "before_sha256": "ce5d63b8deed79a8c42abf1917a5133605c959491925aa9209cd9c4754142f13",
+     "after_sha256": "ea74e4a2c3cd3a0a1fe4fa9f3dcb59df79de8e1c18e3fd37b531d098c2184a29"
+    },
+    "alloc02378": {
+     "bytes": 1024,
+     "first": "0x41d55001",
+     "before_sha256": "c3794b5e5a8ac4623240c2eaa6da393cf003a73403936ce1ca1f10e3b7069c29",
+     "after_sha256": "e4d1e79abb357cea0e17222329cc93085613fb14e268c97d4fe8f59e4450c77f"
+    },
+    "alloc24329": {
+     "bytes": 4,
+     "first": "0x474a7168",
+     "before_sha256": "c47dd328288747f10f27570565c0f3d6f44969401913610839647ad6da06b16c",
+     "after_sha256": "493b2aa90d608d200e6a9d655666a3ab8774472c47c1448fdb6898180b7f6bc8"
+    }
+   },
+   "entry_state_sha256": "b4f24f294cfb3dd93ac161ae4f2ef44d5a5ac9a787c9f8865fbbc098834df324",
+   "surface_sha256": "a5551ba20a381f1bf37307fa027cf3944843939d28b8254f16edfde8458e1665",
+   "published_phase_sha256": "a5551ba20a381f1bf37307fa027cf3944843939d28b8254f16edfde8458e1665",
+   "original_code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4"
+  },
+  {
+   "probe": "P7",
+   "frame": 3222,
+   "origin": [
+    10,
+    10
+   ],
+   "routine": "AffGame",
+   "entry": "0x417698",
+   "caller_return": "0x475068",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x3",
+    "ECX": "0x1480001",
+    "EDX": "0x2007fe8",
+    "ESI": "0x0",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fe4",
+    "EIP": "0x417698"
+   },
+   "exit_registers": {
+    "EAX": "0x200",
+    "EBX": "0x3",
+    "ECX": "0x1480001",
+    "EDX": "0x2007fe8",
+    "ESI": "0x0",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fe8",
+    "EIP": "0x475068"
+   },
+   "declared_writes": [],
+   "returned": true,
+   "changed": {
+    "dgroup": [
+     [
+      "0x49a04e",
+      92,
+      94
+     ],
+     [
+      "0x4e05a2",
+      1,
+      0
+     ],
+     [
+      "0x4e17ae",
+      20,
+      21
+     ],
+     [
+      "0x4e17b4",
+      158,
+      198
+     ]
+    ],
+    "alloc02380": {
+     "bytes": 1024,
+     "first": "0x41d57001",
+     "before_sha256": "b06a7b7718ae89932e6b6ea087823e5e5984edc0b93fe4ff9057dffade6992a9",
+     "after_sha256": "80981e1f36fb75c474fc3034206865357b618ce9a28e3cfdf8df63235ba86713"
+    },
+    "alloc02382": {
+     "bytes": 1024,
+     "first": "0x41d59001",
+     "before_sha256": "ff4665ca447819483e94d8b1e09d89bb2cca8b65d62bf5ade6d4bedf923ec60a",
+     "after_sha256": "46dd45ee81d5205f242d75895f6544b43b91283485b8b70dfd0c65f02c827515"
+    },
+    "alloc24329": {
+     "bytes": 5,
+     "first": "0x474a7170",
+     "before_sha256": "493b2aa90d608d200e6a9d655666a3ab8774472c47c1448fdb6898180b7f6bc8",
+     "after_sha256": "465b8d1cc076684d3ce29fa3b5b39793f464d8611fe53ca81dde03f7f027828a"
+    }
+   },
+   "entry_state_sha256": "1cdf6d871f85ce0dbc195bc9281861b2356b8979c27a2d413db153d52b983a97",
+   "surface_sha256": "61ab3d2c46c9ca422b475bfaca637b58c608aec968a67c247f4c0eb01ea7d430",
+   "published_phase_sha256": "61ab3d2c46c9ca422b475bfaca637b58c608aec968a67c247f4c0eb01ea7d430",
+   "original_code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4"
+  }
+ ]
+}

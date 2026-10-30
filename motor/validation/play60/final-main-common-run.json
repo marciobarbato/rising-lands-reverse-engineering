@@ -1,0 +1,10 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "scripts/check.py"
+  ],
+  "seconds": 447.552884083,
+  "returncode": 0,
+  "lease": "engine-perf-final-main-gates"
+}

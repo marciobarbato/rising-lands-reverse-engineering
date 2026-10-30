@@ -175,7 +175,7 @@ fn bcd_aliasing_an_rng_refreshes_semantic_state() {
         },
     )
     .unwrap();
-    assert_eq!(w.state.world_rng.unwrap().seed, 0x01020304);
+    assert_eq!(w.state().world_rng.unwrap().seed, 0x01020304);
     assert_eq!(w.project().unwrap().u32(WORLD_SEED).unwrap(), 0x01020304);
 }
 #[test]

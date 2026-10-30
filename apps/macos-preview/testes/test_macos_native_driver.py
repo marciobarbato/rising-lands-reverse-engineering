@@ -1,4 +1,4 @@
-"""The native UI frame driver uses real ABI1.4 worlds; no replayed future states."""
+"""The native UI frame driver uses real ABI1.5 worlds; no replayed future states."""
 import ctypes as C
 import os
 from pathlib import Path
@@ -11,14 +11,14 @@ from macos_native_driver import NativeDriver,NativeStatus
 class NativeDriverTests(unittest.TestCase):
     def paths(self):
         driver=Path(os.environ.get('RL_MACOS_NATIVE_LIBRARY',ROOT/'apps/macos-preview/build/librising_macos_live.dylib'))
-        engine=Path(os.environ.get('RL_MACOS_ENGINE_LIBRARY',ROOT/'apps/macos-preview/build/abi14-target/release/librising_engine.dylib'))
+        engine=Path(os.environ.get('RL_MACOS_ENGINE_LIBRARY',ROOT/'apps/macos-preview/build/abi15-target/release/librising_engine.dylib'))
         inputs=Path(os.environ.get('RL_MACOS_NATIVE_INPUTS',ROOT/'apps/macos-preview/build/native-inputs-v2'))
-        if not all(p.exists() for p in (driver,engine,inputs)):self.skipTest('Explicit ABI1.4/native input build unavailable')
+        if not all(p.exists() for p in (driver,engine,inputs)):self.skipTest('Explicit ABI1.5/native input build unavailable')
         return driver,engine,inputs
     def test_real_phase_order_surface_proof_and_recreate_identity(self):
         d,e,i=self.paths();native=NativeDriver(d,e,i);self.addCleanup(native.close)
         engine=C.CDLL(str(e));engine.rl_versao.restype=C.c_uint32;engine.rl_render_contrato.restype=C.c_uint32
-        self.assertEqual(engine.rl_versao(),0x10004);self.assertEqual(engine.rl_render_contrato(),0x10007)
+        self.assertEqual(engine.rl_versao(),0x10005);self.assertEqual(engine.rl_render_contrato(),0x10007)
         observed=[]
         callback=lambda ctx,world,index,phase:(observed.append((index,phase)) or 0)
         self.assertEqual(native.advance(callback),0);self.assertEqual(native.status().phases_equal,1)
@@ -63,3 +63,34 @@ class NativeDriverTests(unittest.TestCase):
             self.assertEqual(f.lib.rl_projetar_tudo(world,out,n.value,C.byref(n)),0)
             return hashlib.sha256(bytes(out)).hexdigest()
         self.assertEqual(projection(s.world),projection(proof.status().world))
+
+    def test_native_human_mapper_matches_script_mapper_on_every_phase(self):
+        from macos_scripted_input import MacOSSessionRecorder,FrameAnswerMapper
+        from macos_rust_abi import Frames
+        d,e,i=self.paths();human=NativeDriver(d,e,i);scripted=NativeDriver(d,e,i)
+        self.addCleanup(human.close);self.addCleanup(scripted.close)
+        for driver in (human,scripted):
+            self.assertEqual(driver.lib.macos_live_validation(driver.handle,0),0)
+            for _ in range(129):self.assertEqual(driver.advance(),0)
+        events=[(130,dict(kind='mouse',msg=0x201,x=560,y=528,wParam=0)),
+                (131,dict(kind='mouse',msg=0x202,x=560,y=528,wParam=0)),
+                (134,dict(kind='mouse',msg=0x200,x=400,y=272,wParam=0)),
+                (136,dict(kind='key',vkey=17,down=True)),(138,dict(kind='key',vkey=17,down=False))]
+        recorder=MacOSSessionRecorder(ROOT)
+        for frame,event in events:recorder.event(frame,event)
+        mapper=FrameAnswerMapper(recorder.export_script(stop_frame=140),hwnd=0)
+        f=Frames(e)
+        for frame in range(129,141):
+            for stamp,event in events:
+                if stamp==frame:self.assertEqual(human.event(event),0)
+            # This independent mapper supplies exactly the recorded descriptor.
+            # Poll draining below concerns only the schedule, not expected answers.
+            mapper.begin_frame(frame);answers=mapper.declared_answers()
+            for phase in (2,3):
+                self.assertEqual(human.lib.macos_live_human_phase(human.handle,phase),0)
+                self.assertEqual(scripted.input_phase(phase,answers),0)
+                self.assertEqual(f.snapshot(human.status().world),f.snapshot(scripted.status().world))
+                self.assertEqual(bytes(human.context()),bytes(scripted.context()))
+            mapper.queue.clear()  # This test compares complete states; Test A compares actual polls.
+        self.assertEqual(human.status().frames,140)
+        self.assertEqual(human.status().proof_ns,0)

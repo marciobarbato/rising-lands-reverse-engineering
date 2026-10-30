@@ -1,7 +1,7 @@
 //! No-key InputGame/MenuInit and published display logic effects, translated
 //! from entrada_quadro_ia.py and efeitos_logicos_exibicao.py. Pixels omitted.
 use crate::{
-    frame::{binding, boundary, stop, FrameEvent, FrameInput},
+    frame::{binding, boundary, stop, EventLog, FrameInput},
     frame_core, MemoriaJogo, Result,
 };
 fn guard(m: &MemoriaJogo, a: u32, site: u32, name: &'static str) -> Result<()> {
@@ -151,7 +151,7 @@ fn hover(m: &mut MemoriaJogo, player: u8) -> Result<()> {
     }
     Ok(())
 }
-pub fn input(m: &mut MemoriaJogo, player: u8, events: &mut Vec<FrameEvent>) -> Result<()> {
+pub fn input(m: &mut MemoriaJogo, player: u8, events: &mut EventLog) -> Result<()> {
     m.set_u16(0x49a010, 0x1dd8)?;
     m.set_u16(0x4e0612, 0)?;
     m.set_u16(0x4e0614, 0)?;
@@ -261,8 +261,8 @@ fn cstring(m: &MemoriaJogo, a: u32) -> Result<Vec<u8>> {
 pub fn menu(
     m: &mut MemoriaJogo,
     input: &FrameInput,
-    events: &mut Vec<FrameEvent>,
-    mut delete: impl FnMut(&mut MemoriaJogo, &mut Vec<FrameEvent>, u32) -> Result<()>,
+    events: &mut EventLog,
+    mut delete: impl FnMut(&mut MemoriaJogo, &mut EventLog, u32) -> Result<()>,
 ) -> Result<()> {
     let current = m.u8(0x4e2f78)?;
     if current == 0x12 {

@@ -1,0 +1,11 @@
+[lease] graphics-native-p4-text waiting
+[lease] graphics-native-p4-text granted slots [1]
+Traceback (most recent call last):
+  File "/Users/marcio/git/Rising Lands/worktrees/re-graphics/pesquisas-paralelas/graficos-animacao/capturar_texto_p4_484.py", line 50, in <module>
+    p=argparse.ArgumentParser();p.add_argument('--start',required=True);p.add_argument('--snapshot',required=True);p.add_argument('--output',required=True);main(p.parse_args())
+  File "/Users/marcio/git/Rising Lands/worktrees/re-graphics/pesquisas-paralelas/graficos-animacao/capturar_texto_p4_484.py", line 7, in main
+    original.REF=REF;m=original.modulo_entrada();b,_,start=m.abrir(a.start,Path(a.snapshot));assert start==128
+  File "git:fd56f69:pesquisas-paralelas/missoes/m3/entrada_roteirizada.py", line 337, in abrir
+  File "/Users/marcio/git/Rising Lands/worktrees/re-graphics/pesquisas-paralelas/missoes/segmentos_quadros_missao.py", line 119, in restaurar
+    raise RuntimeError('The fresh bench declares other bindings than the snapshot')
+RuntimeError: The fresh bench declares other bindings than the snapshot
