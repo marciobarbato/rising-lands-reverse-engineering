@@ -1,0 +1,13 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "motor/testes/chain_surface_proof.py",
+    "--frames",
+    "93",
+    "--output",
+    ".local/chain5/surface9.json"
+  ],
+  "seconds": 30.042947958,
+  "returncode": 0
+}

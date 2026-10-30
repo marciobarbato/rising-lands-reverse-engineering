@@ -466,12 +466,26 @@ pub fn display_effects(m: &mut MemoriaJogo, flips: u32) -> Result<()> {
         let r = 0x49a0c8 + 276 * i;
         let state = m.u8(r + 5)?;
         if state > 7 {
-            return stop("Display structure state", 0x407dd3);
+            return stop(
+                if m.player.is_some() {
+                    "AffGame"
+                } else {
+                    "Display structure state"
+                },
+                0x407dd3,
+            );
         }
         if state != 0 {
             occupied += 1;
             if occupied > 1 || m.u8(r + 8)? != 2 {
-                return stop("Display structure domain", 0x407dd3);
+                return stop(
+                    if m.player.is_some() {
+                        "AffGame"
+                    } else {
+                        "Display structure domain"
+                    },
+                    0x407dd3,
+                );
             }
             if state == 3 {
                 return stop("BatimentEstHabiter display mode3", 0x40863e);
@@ -524,6 +538,25 @@ pub fn affgame(m: &mut MemoriaJogo) -> Result<u32> {
         return stop("AffGame marker animation", 0x417ba2);
     }
     display_effects(m, u32::from(m.u8(0x49a05b)?) + 1)?;
+    if m.player.is_some() {
+        // AffGame's post-flip cursor handoff, 0x417db2..0x417e78.
+        // The software cursor uses this flag on the *following* draw. ShowCursor
+        // itself belongs to host presentation; no OS callback runs in the engine.
+        let margin = i32::from(m.u8(0x508f90)? as i8) * 32;
+        let x = i32::from(m.u16(0x5099a8)?);
+        let y = i32::from(m.u16(0x5099aa)?);
+        let right = i32::from(m.u16(0x508724)?) * 32 - margin;
+        let bottom = i32::from(m.u16(0x508726)?) * 32 - margin;
+        match m.u8(0x49a054)? {
+            0 if x < margin || x > right || y < margin || y > bottom => {
+                m.set_u8(0x49a054, 1)?;
+            }
+            1 if x > margin && x < right && y > margin && y < bottom => {
+                m.set_u8(0x49a054, 0)?;
+            }
+            _ => {}
+        }
+    }
     m.set_u8(0x4e05a2, 0)?;
     let eax = if counter % 5 == 0 {
         if m.u32(0x4e179c)? == 0 {

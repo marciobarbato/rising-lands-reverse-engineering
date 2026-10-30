@@ -1053,3 +1053,104 @@ merged tree reruns both gates and rebuilds the identical native library.
 
 [The hashed report package](validation/play60/summary.json) records phase
 coverage, stops, identities, timings, reproduction commands and validation logs.
+
+## Chain continuation — recovered cave and structure vision
+
+The service-interrupted work on `60c201d` was recovered without discarding its
+uncommitted files. Fetched main `51715e2` is merged as `83c830e`; only engine-owned
+paths are changed. This branch is pushed for coordinator review, never merged
+into main by this workstream.
+
+The additional `chain5` Python profile pins logic and Graphics independently of
+all earlier profiles, initially to `54d148d931cc3420fe256e6fec71462087597293`.
+The previous no-input/input/Graphics 1.7 references and evidence digests are
+unchanged. New original sources/capture footprints are listed in
+`testes/chain5-reference-pins.json`, and the complete transitive snapshot is
+verified against Git blobs. The new fixture transport is a separate Rust binary;
+it is not a production callback or C ABI extension. ABI remains additive 1.6,
+with every previous signature, layout and execution-policy meaning preserved.
+
+The cave body at `0x426aff` executes inside the existing structure dispatcher:
+BagContient's capacity scan for tag-1 type-9 units, animation gate, then the
+bounded counter `+0x76` increment/decrement controlled by `+0x75`. Its caller
+restores all registers other than EAX; the frame ignores EAX. Core's
+BatimentIllumine `0x419233`, BatimentDecouvre `0x419d54`, IllumineCase `0x476968`,
+EteintCase `0x476adc` and DecouvreCase `0x47670a` now run against the same live
+memory. Inputs are the original AX structure/cell, DL player and BL light flag;
+all other registers are preserved according to the individual original entry.
+Players 0–3 are supported, plus BatimentDecouvre's explicit early return for
+player `0xc8`. Footprint rows precede columns, followed by neighbor border writes,
+the cell flag and minimap update, then the light count. Cell routines return the
+original leftover EAX/EDX; structure routines preserve their original saved
+registers. Address arithmetic and aliasing remain the original flat-memory
+contract. Unsupported owners retain a named stop; no synthetic grid is supplied.
+
+SetMiniMap's existing modes 1–7 now read grids and layers only when their
+original branch uses them. This is required by original read-before-write leaf
+footprints; it introduces no default for missing bytes. The structure dispatcher
+calls vision after the cave body and in the existing per-player order.
+
+Original executable identity remains
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+The new comparisons consume the owner's committed intact-original captures;
+no fresh x86 execution, reference modification, evidence rehashing or oracle
+state reload is used. Reproduction uses the existing heavy-lease helper and
+`cargo build --manifest-path motor/Cargo.toml --workspace --locked --release`,
+then `motor/testes/chain_leaf_proof.py`, `chain_surface_proof.py` and the existing
+`player_proof.py` with `RL_REFERENCE_PROFILE=chain5`, policy 2 and paired policy 1.
+
+Preliminary results: cave **117/117** and vision **164/164** original cases match
+all supplied bytes and eight exit registers. P6 completes frames 129–220:
+**92 frames**, **184 whole-state phases**, zero differences; policy 1 matches
+policy 2 in all **185 attempted phases**, including the atomic stopped attempt.
+Both Rust and pinned Python stop in `between_frames221`, AffGame `0x407dd3`,
+outside this profile's single-sanctuary display-effects domain. This does not
+claim later work/recruitment/hunger or Graphics 1.8/1.9 continuation.
+
+The own-world surface proof keeps simulation and Graphics imports in separate
+processes because the historical reference profiles contain two different
+`construcoes` modules. It carries Rust state, pixels/cache and saved background;
+only the initial surface/cache and exactly attested non-executed AffText inputs
+come from the capture. It compares original pixels separately from raster-call
+order: display-only state in the logic mask can differ in an own-world run even
+when surfaces are identical. `original_calls_equal` is retained per frame and
+must not be described as a passing original-call equality when false. The
+independent prior captured-entry renderer proofs retain their stricter call
+contract. Final gate and measured timing results follow after execution.
+
+The advancing-world surface check additionally exposed two display-state gaps
+that captured-entry renderer fixtures could not expose. The renderer now carries
+its own tooltip restore byte `0x49a041` and rectangle words `0x49a046..0x49a04d`
+with the saved pixels, copies them with the atomic render transaction and clears
+them on explicit reset. It does not copy any later oracle state or publish those
+fields to game logic. Other world fields remain authoritative inputs.
+
+The declared-input AffGame logic provider now models the post-flip cursor handoff
+`0x417db2..0x417e78`. Flag `0x49a054` becomes 1 outside the inclusive viewport
+minus signed-byte margin; a flag of 1 becomes 0 only strictly inside it. This
+happens after flips and before the existing redraw-flag/palette tail. The next
+draw consumes that flag. The native Graphics capture's subsequent entries and
+surfaces are the independent check; no captured flag is loaded into Rust. The
+underlying ShowCursor OS presentation effect remains outside this C ABI, which
+has no OS callback. Its unused return is not fabricated. The static instructions
+were read directly from the intact original with Capstone before translation,
+consistent with Graphics' committed `ESCRITAS_AFFGAME_ENTRE_QUADROS.md` and its
+original static closure. Earlier no-input behavior and the display mask remain
+unchanged. The initial failed own-world surface runs are retained in the new
+stage report package; neither their expected pixels nor AffText hashes changed.
+
+### First continuation piece — passing gate
+
+[Report package](validation/chain5/piece1/summary.json): cave 117/117 and vision
+164/164 original cases, P6 92 frames / 184 whole-state phases / 185 paired
+play-audit attempts, and **93/93 own-world surfaces through frame221**. All93
+original raster-call sequences and Python pixels/cache agree after the two
+display-state fixes; the initial discrepancies are resolved, not exempted.
+The engine and Python still stop equally at AffGame `0x407dd3` in phase2 of221.
+Fresh M2.2 is **257/257** equal in paired audit/play modes. `sh motor/validate.sh`
+passes **30 Rust /63 Python tests**, fmt, strict Clippy,75 pilot captures and
+C/Swift/Metal checks in276.504s after lease grant. All jobs use the heavy lease.
+The exclusive 9,200-frame release timing is queued separately. No later stage or
+fresh M2.3 rerun is claimed in this first piece; earlier pinned proofs remain
+historical and unchanged. Later continuation must extend a separately pinned
+Graphics contract before crossing this display stop.

@@ -4,7 +4,7 @@ The indicator comparison is precisely provar_entrada_ia's domain, not an
 implicit whole-state claim. No later captured state is loaded into Rust.
 """
 import os
-os.environ['RL_REFERENCE_PROFILE']='input'
+os.environ.setdefault('RL_REFERENCE_PROFILE','input')
 import argparse,bisect,ctypes as C,hashlib,json,lzma,subprocess,time,re,signal
 from pathlib import Path
 from pinned_reference import activate,provenance,REPO,INPUT_REVISION

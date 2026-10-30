@@ -347,6 +347,10 @@ fn next_structure(m: &mut MemoriaJogo, structure: u16) -> Result<u32> {
         return Ok(0);
     }
     let target = m.u32(0x426880 + 4 * u32::from(index))?;
+    if target == 0x426aff && m.player.is_some() {
+        crate::player_cave::body(m, u32::from(structure))?;
+        return Ok(0);
+    }
     if target != 0x426918 {
         return Err(stop(
             if kind == 3 {

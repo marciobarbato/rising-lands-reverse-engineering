@@ -708,3 +708,16 @@ emulation or later functional port is claimed. The macOS consumer must accept AB
 1.6 and select `RL_EXECUCAO_JOGO` before its live loop to obtain this play path.
 [The report package](../motor/validation/play60/summary.json) and
 [handoff](../motor/HANDOFF.md) record exact timings, hashes, masks, commands and gaps.
+
+## Input-chain continuation reference
+
+The service-recovery continuation adds a third immutable `chain5` test profile
+without changing the prior `logic` and `input` profiles. Its initial commit is
+`54d148d931cc3420fe256e6fec71462087597293`; transitive source/fixture bytes are
+verified against Git objects, with additional explicit cave/vision evidence
+pins. This lets the native cave body and Core structure-vision providers advance
+the carried input world through frame 220 under the original whole-state policy.
+The original-address guards still stop unsupported display and economic paths.
+ABI 1.6 and persistent play execution are unchanged. Exact validation scope,
+remaining boundaries and subsequent profile extensions are recorded in the
+[engine handoff](../motor/HANDOFF.md).

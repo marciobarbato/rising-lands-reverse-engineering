@@ -1,0 +1,11 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "motor/testes/chain_leaf_proof.py",
+    "--output",
+    ".local/chain5/cave9.json"
+  ],
+  "seconds": 2.509610833,
+  "returncode": 0
+}
