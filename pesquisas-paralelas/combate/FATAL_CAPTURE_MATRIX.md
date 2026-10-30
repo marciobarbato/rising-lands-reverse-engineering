@@ -56,3 +56,24 @@ continuation snapshot. Its Mac-mini runs remain a separate request.
 
 At this evidence-first commit no translation comparison has been made for
 these new inputs. Original evidence and later validation reports stay separate.
+
+## Civil and late count-phase supplements
+
+`capturar_civil_fatal_combate.py`: **16/16 native returns**, zero faults or
+limits. Twelve unit impacts vary type0/5, entry state5/7/18, and life100/1 at
+the original contact geometry. Two original refuge searches return a real
+sanctuary; two count cases isolate all-inactive versus corpse-only slots.
+The refuge search has no maximum distance: it prefers any nearest own CAVE,
+then the nearest own sanctuary. Supplying FFFF as a default would be wrong.
+
+`capturar_fase_contagem_fatal_combate.py`: **82/82 native full unit-loop
+returns**, zero faults. Two sequential 41-phase windows set victim0 life1
+and raider16 lifeFFFF (explicit durability variation), keeping every original
+unit body active and every position/occupancy unchanged. The second window
+declares victim0 type5/state7 to exercise the civilian reaction. In both,
+the original kills victim0 in the later slot16 body on phase40. Local
+population is still16 at that phase's return, then15 after phase41. The
+type-specific counter similarly changes3 to2 only in the following phase.
+The type5 unit is excluded from the military counter even before death.
+These are direct native observations of the phase order at0x456dbd onward,
+not a manual count decrement or a D1 defeat claim.
