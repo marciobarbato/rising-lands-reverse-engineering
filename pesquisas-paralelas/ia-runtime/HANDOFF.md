@@ -541,3 +541,12 @@ Branch `feat/re-ai-runtime`, pushed at `9409355`. Not integrated. Details are in
 - Validated against the original: the leaf differential (0 mismatches).
 - Integrated: no.
 - Tested in a real mission: no.
+
+## M3.1 — P1/P2 whole-state proof (2026-10-29)
+
+Merged main `ef52cb0`. The report is [M3_1_PROVA_P1_P2.md](M3_1_PROVA_P1_P2.md); the data is in `validacao/m3-1-prova-p1-p2.json` (Python only, clean revision `21bbb37`, one command under the heavy lease).
+
+- **Result:** P1 1,002/1,002 and P2 1,202/1,202 phases equal under each window's cumulative mask, zero crossings, by the M2.3 method, plus the consumed scripted inputs, WndProc flag bytes, SetPlayerOrdre/ProcessInputGame records and the M3.1 fields (packets `[0x4e2458+4p]`, selection areas `0x508728+512p`, unit order fields of all 800 slots; none masked).
+- **Tool:** `provar_entrada_janelas_ia.py` — `janela <P>`, `agregar --janelas ...`, `tudo --janelas ... --lease <heavy_lease.py>`.
+- **Chain fixes** (`21bbb37`): GetAsyncKeyState binding, the PeekMessageA MSG write, the PlaySnd boundary's call site and pushed words.
+- **Requested:** Core — pass the call address to `som` (today read from `_fronteira`'s `endereco` argument). Missions — the window harness records `top_callee = null` on every boundary (not compared; counted).
