@@ -50,6 +50,45 @@ The frame-125 minimap divergence in that composition was Economy's: BatimentModi
 2. Refresh the native hunger and restore reports after the changed `alimentacao.py`, then run the domain gate and push `feat/re-economy`.
 3. Support AI/runtime's strict S1 proof and Missions' S1 windows with any Economy stop they report; then the research/technology routines at the S1 result screen.
 
+## S1 sack-capacity query (2026-10-30)
+
+`lacunas_economia_s1.LacunasEconomiaS1` and
+`provedor_lacunas_economia_s1` serve **SacGetCapacite 0x475736**, called by
+InputGame at **0x4299da** (the call address is not the routine entry).
+`chamar(name, regs)` consumes EAX..EBP and optional ESP; the external provider
+requires all seven general registers (`ArgumentoNaoPassado` before any read)
+and returns all seven exact exit registers. AX is the cell index. The object
+and quantity grids are read through their live pointers at 0x507d74 and
+0x507dac. Object types 0x42..0x44 return the quantity byte in AX while keeping
+the quantity pointer's upper EAX half; other object bytes return EAX=0. Every
+other general register is preserved. Optional ESP advances by four. No
+stores, callbacks, flags, or x87 results occur in this routine.
+
+Original first: capture `b00175f` precedes the translation. Its sparse reads
+missed the object-byte load; it is retained as historical evidence and is
+superseded for replay by the additive `captura-sac-v2.json.xz` (`d1f112b`),
+whose memory read hook is armed before native execution. The native outputs
+of both captures agree. The corrected capture has **274 cases**: the actual
+S1 InputGame call at frame **3851**, all 256 object bytes, quantity boundaries
+for all three sack types, cells 0/65535, and register sentinels. Every frame
+3750–3854 equals Missions' replay-checked S1 record, with unchanged code.
+The second S1 call at frame 4210 is outside this bounded capture.
+
+The [native report](../pesquisas-paralelas/economia/validacao-lacunas-s1-sac-emulada.json)
+records **274 fresh comparisons, 0 mismatches** (123.347 s under the lease),
+all equal to the immutable capture and the translation,
+including all seven registers, ESP, unchanged whole memory, sparse-memory
+replay and the external provider. Run under the heavy lease:
+
+```sh
+python3 '/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py' economy-s1-sac -- \
+  python3 -B pesquisas-paralelas/economia/sondar_lacunas_economia_s1.py --grupo sac
+```
+
+Gate: **552 tests, 209 optional skips, 0 failures**, documentation links OK.
+Transport WIP remains parked. The consumer-owned AI/runtime and Rust dispatchers
+must wire this provider; no consumer files are changed by this delivery.
+
 ## Recruitment placement DX correction (2026-10-30, feature delivery)
 
 Base: `origin/main` `e41cc77`, merged into `feat/re-economy`. At SortieTroupe CALL `0x420f8c`

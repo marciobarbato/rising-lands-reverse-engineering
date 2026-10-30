@@ -2,6 +2,39 @@
 
 Chat: `01a18262-c6d5-7cd3-80fa-8431bf5f2657` (Economy and Production). Worktree: `/Users/marcio/git/Rising Lands/worktrees/re-economy`. Branch: `feat/re-economy`. Organization base: `6634be3af2d255846a847d8aa21ad4edf1cdb589`. Implementation commit: `f5a5e9b` (`Reconstruct troop completion preparation and cargo credits`); the following handoff commit and serialized integration result are identified in the completion chat. Only economy-owned paths changed.
 
+## S1 SacGetCapacite delivery (2026-10-30)
+
+Merged `origin/main` `84e4fe7` into the clean feature branch before work.
+No transport WIP was resumed. All edits are Economy-owned; do not integrate
+this branch automatically: the coordinator reviews and merges it.
+
+- API: `lacunas_economia_s1.LacunasEconomiaS1(m).chamar(name, regs)`;
+  `provedor_lacunas_economia_s1(instance, outros=None)` is the seven-register
+  `externo(name, call_address, regs)` adapter. Missing EAX..EBP raises
+  `ArgumentoNaoPassado` before reads. Optional ESP is control state, RET +4.
+- Supported domain: all u16 cells and all object/quantity bytes in the live
+  65,536-cell grids `[0x507d74]` and `[0x507dac]`. No stores or callbacks;
+  EDX/EBX/ECX/ESI/EDI/EBP are preserved. For a sack, EAX keeps the quantity
+  pointer's upper half and replaces AX with its quantity byte. Other types
+  return EAX=0. No artificial capacity or default register is supplied.
+- Identity: intact RISING.EXE SHA-256
+  `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`;
+  entry `0x475736`, end exclusive `0x475763`; InputGame CALL `0x4299da`.
+- Original first: `b00175f`; corrected sparse read capture `d1f112b` keeps
+  the predecessor untouched. `captura-sac-v2.json.xz` is the replay input.
+  Both have equal native outputs; the predecessor missed one memory read.
+- Validation: 274/274 sparse replays; fresh native differential and the
+  Economy gate are recorded in the report and the completion note below.
+- Gaps: only the frame-3851 S1 call is in this segment, not the second call
+  at 4210. No full-chain acceptance is claimed. AI/runtime and the Rust
+  engine own dispatch wiring; the exact register provider is ready for it.
+
+Completion of the sack group: **274 fresh native comparisons, 0 mismatches**,
+all native cases equal to the corrected original-only capture (123.347 s,
+heavy lease). `scripts/check.py --domain economy`: **552 tests, 209 optional
+skips, 0 failures**, documentation links OK (51.906 s). Other native suites
+were not opted into. Transport remains parked.
+
 ## Recruitment placement DX delivery (2026-10-30)
 
 Base: `origin/main` `e41cc77`, merged into `feat/re-economy`. Only Economy-owned paths changed.
