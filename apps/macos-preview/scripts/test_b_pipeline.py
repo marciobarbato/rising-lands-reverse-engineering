@@ -8,6 +8,7 @@ Test A, audited execution policy 2, without rendering after frame 128.
 import argparse
 import ctypes as C
 import json
+import importlib.util
 import os
 from pathlib import Path
 import runpy
@@ -103,7 +104,11 @@ def app(a, script):
 def original(a, script):
     if a.minutes: signal.alarm(int(a.minutes*60))
     owner = a.root/'pesquisas-paralelas/missoes/m3/entrada_roteirizada.py'
-    ns = runpy.run_path(str(owner), run_name='macos_test_b_original')
+    spec = importlib.util.spec_from_file_location('entrada_roteirizada', owner)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    ns = vars(module)
     # The complete owner module validates the exact exported file unchanged.
     ns['carregar_entrada'](json.loads(a.input.read_bytes()))
     contract = HashContract(a.root)
