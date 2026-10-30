@@ -1,0 +1,788 @@
+{
+ "capture": "pesquisas-paralelas/economia/evidencias/abandono-santuario/captura-abandono-santuario-exibicao.json.xz",
+ "capture_raw_sha256": "a9d0b8c75e43373f86dabe864e3dcf9fea836ad5e189a48ef57fcd614f3884d8",
+ "compared": 81,
+ "core_exit_provider": "d47c782fb100e4dc302e35765317fdd47d0986aa21f0b96c7d75628791bbed61",
+ "counts": {
+  "CalculTroupe": {
+   "error": 0,
+   "match": 43,
+   "mismatch": 0,
+   "outside_domain": 0
+  },
+  "InitRecruteTroupe": {
+   "error": 0,
+   "match": 1,
+   "mismatch": 0,
+   "outside_domain": 0
+  },
+  "SortieTroupe": {
+   "error": 0,
+   "match": 37,
+   "mismatch": 0,
+   "outside_domain": 0
+  }
+ },
+ "errors": 0,
+ "mismatches": 0,
+ "outside_domain": 0,
+ "recorded_calls": 81,
+ "reproduction": {
+  "between_frames": true,
+  "code_unchanged": true,
+  "frame1": true,
+  "load_tail": true
+ },
+ "rerun_equals_capture": true,
+ "results": [
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 2,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 3,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 4,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 5,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 6,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 7,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 8,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": "tag 17 slot 0: InitRecruteTroupe(type 5, player 0)",
+   "arg": "0x5",
+   "changed_bytes": 7,
+   "foreign_calls": 1,
+   "frame": 9,
+   "outcome": "match",
+   "routine": "InitRecruteTroupe",
+   "served_by_translation": {
+    "RechercheDecalageSortie": 1
+   },
+   "uncertain": {
+    "EAX": "0xffff0000",
+    "EDX": "0xffffffff"
+   }
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 9,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 9,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 20,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 20,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 40,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 40,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 60,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 60,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 80,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 80,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 100,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 100,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 120,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 120,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 140,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 140,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 160,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 160,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 180,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 180,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 200,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 200,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 220,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 220,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 240,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 240,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 260,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 260,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 280,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 280,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 300,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 300,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 320,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 320,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 340,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 340,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 360,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 360,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 380,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 380,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 400,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 400,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 420,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 420,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 440,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 440,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 442,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 443,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 443,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 444,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 444,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 445,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 445,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 446,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 446,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 447,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 447,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 448,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 448,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 449,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 449,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 450,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 450,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 451,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 451,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 452,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 452,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 453,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 453,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 454,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 454,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1121,
+   "foreign_calls": 21,
+   "frame": 455,
+   "outcome": "match",
+   "routine": "CalculTroupe",
+   "served_by_translation": {
+    "CalculPosition": 1
+   }
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1121,
+   "foreign_calls": 19,
+   "frame": 455,
+   "outcome": "match",
+   "routine": "SortieTroupe",
+   "served_by_translation": {
+    "CalculPosition": 1
+   }
+  }
+ ],
+ "schema": "rising-lands/economy-cave-recruitment-validation/1",
+ "seconds": 342.748,
+ "served_by_translation": {
+  "CalculPosition": 2,
+  "RechercheDecalageSortie": 1
+ },
+ "translation": "9d735d40292e4bce247fe4dffb46297a7d923c738cdad0b5e1b0aef3ce0145ba"
+}

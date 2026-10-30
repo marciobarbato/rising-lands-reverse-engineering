@@ -5,8 +5,9 @@
 - Core: ``entrada_estruturas.provedor_entrada`` (Bag primitives, PlaceLibre, BatimentAdjacent, GetCaseCentrale,
   RetireEngin, AnimWorkEngin, DeplaceEngin through ``construcao_core``, the world effects, ...), with Economy's
   live ``BonusUnidades`` for DeplaceEngin's CalculFatigue;
-- Economy: ``caverna_recrutamento.provedor_caverna`` (BatimentHabitable, InitBatimentPlayer) and the live
-  ``BonusUnidades`` (BonusGetValEngin);
+- Economy: ``caverna_recrutamento.provedor_caverna`` (BatimentHabitable, InitBatimentPlayer; its own Core callees
+  through ``visao_grupos.provedor_saida`` for CalculPosition/RechercheDecalageSortie, else ``provedor_entrada``)
+  and the live ``BonusUnidades`` (BonusGetValEngin);
 - every other callee (terrain search, Random, SetMiniMap, PlaySnd_PostSound, MineGetCapacite, TerrainDeposeSac)
   stays the original's own nested call replayed, and is counted as such.
 A provided callee is checked against the original's nested call: its name and argument bits, then its exit
@@ -209,6 +210,7 @@ def provedores(m):
     from bonus_unidades import BonusUnidades
     from caverna_recrutamento import CavernaRecrutamento, provedor_caverna
     from entrada_estruturas import EntradaEstruturas, ROTINAS_ECONOMIA, provedor_entrada
+    from visao_grupos import VisaoGrupos, provedor_saida
     bonus = BonusUnidades.da_memoria(m)
 
     def sem_provedor(nome, chamada, regs):
@@ -217,7 +219,10 @@ def provedores(m):
     entrada = EntradaEstruturas(m, externo=sem_provedor, som=None,
                                 bonus=lambda jogador, tipo, seletor: bonus.consultar(jogador, tipo, seletor))
     core = provedor_entrada(entrada)
-    caverna = provedor_caverna(CavernaRecrutamento(m, externo=provedor_entrada(entrada)))
+    # The cave/recruitment routines reach Core's exit position (CalculPosition, RechercheDecalageSortie) through
+    # ``visao_grupos.provedor_saida`` and every other Core callee through ``provedor_entrada``.
+    caverna = provedor_caverna(CavernaRecrutamento(m, externo=provedor_saida(VisaoGrupos(m),
+                                                                             outros=provedor_entrada(entrada))))
 
     def bonus_get_val(nome, chamada, regs):
         return dict(EAX=bonus.consultar(regs['EAX'] & 0xff, regs['EBX'] & 0xff, regs['EDX'] & 0xff))

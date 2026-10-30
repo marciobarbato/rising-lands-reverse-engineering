@@ -66,7 +66,8 @@ def executar_traducao(m, caso, entrada, cursor, comandos):
     from construcao_entrada_ia import proxima_etapa_entrada
     from entrada_ordens_ia import Entrada
     from inventario_ia_runtime import OriginalImage
-    from provedores_entrada_ia import construcao_viva, provedores_vivos
+    from construcao_entrada_ia import instalar_donos
+    from provedores_entrada_ia import DonosM3, construcao_viva, provedores_vivos
     from proxima_etapa_quadro import proxima_etapa_estrutura, tabelas_imagem
     from validar_entrada_ordens_ia import Janelas
     pedidos = []
@@ -77,7 +78,15 @@ def executar_traducao(m, caso, entrada, cursor, comandos):
     bonus = BonusUnidades.da_memoria(m)
     construcao = construcao_viva(m, som=som, bonus=lambda j, t, s: bonus.consultar(j, t, s))
     janelas = Janelas(caso.get('keys', ()), cursor)
-    e = Entrada(m, provedores_vivos(m, janelas=janelas, som=som))
+    donos = DonosM3(m, som=som, bonus=lambda j, t, s: bonus.consultar(j, t, s))
+    e = Entrada(m, provedores_vivos(m, janelas=janelas, som=som, estruturas=donos.ee, donos=donos))
+
+    def etapa():
+        """The pinned providers with the M3 owners installed (``instalar_donos``), as the frame chain has them."""
+        p = provedores_etapa(m, construcao, som)
+        p['BatimentNextEtape'] = lambda sitio, estrutura: proxima_etapa_estrutura(m, p, estrutura, tabelas)
+        instalar_donos(m, p, donos, tabelas)
+        return p
     e.comandos = comandos
     r = dict(entrada)
     nome = caso['routine']
@@ -86,12 +95,12 @@ def executar_traducao(m, caso, entrada, cursor, comandos):
     elif nome == 'EnginNextEtape':
         tabelas = executar_traducao.tabelas = getattr(executar_traducao, 'tabelas', None) or tabelas_imagem(
             OriginalImage())
-        proxima_etapa_entrada(m, provedores_etapa(m, construcao, som), r['EAX'], tabelas, construcao)
+        proxima_etapa_entrada(m, etapa(), r['EAX'], tabelas, construcao)
         saida = dict(r, EAX=None)
     elif nome == 'BatimentNextEtape':
         tabelas = executar_traducao.tabelas = getattr(executar_traducao, 'tabelas', None) or tabelas_imagem(
             OriginalImage())
-        proxima_etapa_estrutura(m, provedores_etapa(m, construcao, som), r['EAX'], tabelas)
+        etapa()['BatimentNextEtape'](sitio=0x4282da, estrutura=r['EAX'])
         saida = dict(r, EAX=None)
     elif nome == 'InputGame':
         e.input_game(r['EAX'])

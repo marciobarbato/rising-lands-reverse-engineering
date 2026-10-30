@@ -1,0 +1,16 @@
+[lease] graphics-origins-P5-a waiting
+[lease] graphics-origins-P5-a granted slots [3]
+P5 150 native surface/state equal
+P5 200 native surface/state equal
+P5 250 native surface/state equal
+P5 300 native surface/state equal
+P5 350 native surface/state equal
+P5 400 native surface/state equal
+P5 450 native surface/state equal
+P5 500 native surface/state equal
+P5 550 native surface/state equal
+P5 572 isolated original origin (31, 0) returned
+P5 600 native surface/state equal
+P5 650 native surface/state equal
+P5 700 native surface/state equal
+{"probe": "P5", "frames": [129, 728], "status": "complete", "seconds": 334.501, "drawn": 600, "snapshot": {"path": ".local/graficos-api17-start/P5-00728.pickle", "sha256": "1538c62a7498fac451594d8b017189882399d5d8f80f295c611e98078749c734"}, "text_boundaries": 139, "text_pointer_reads": 600}

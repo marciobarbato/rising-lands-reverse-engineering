@@ -8,7 +8,7 @@ Translated from the intact bytes after the native capture
   branch), InitBatimentPlayer 0x41be88 and InitBatimentNeutre 0x41c017 (every type but the balloon 0x12, and
   the library 6 once its count reaches 0);
 - InitRecruteTroupe 0x4283e2 (tag 17), CalculTroupe 0x4259e6 for structure types 1 and 2 (the sanctuary), and
-  SortieTroupe 0x420e4c while the structure keeps a colonist;
+  SortieTroupe 0x420e4c, including the abandonment of the structure its last colonist leaves;
 - their economy leaves: EnginGetTimeRecrute 0x4410b7, EnginGetRessource 0x4410d2, TypeEnginEstRealisable
   0x44228e, BatimentGetColons 0x41a4c4, BatimentGetCapacite 0x41f3ed; TestRessource, EnleveMatiere,
   GetRessourceStock and BagInit run through ``ordens_economia`` (one implementation).
@@ -26,8 +26,8 @@ this module carries to its own exit registers when they flow there. Without a pr
 ``DependenciaCavernaRecrutamento`` at that call, after the stores the original made before it. A routine of this
 module listed in ``proprias`` runs here instead (default: all of them).
 - Core: BagContient, BagContientTroupe, BagRetire, BagPrend, EnginGetBag, BatimentGetCase, BatimentGetType,
-  DecouvreTerrain, IllumineTerrain, CalculPosition, RechercheDecalageSortie, EnginSetType, EnginAddVie,
-  EnginResetFatigue, EnginSetExperimente, SetSortEngin, SetDeplaceEngin, EnginAsk;
+  DecouvreTerrain, IllumineTerrain, EteintTerrain, BatimentModifyMap, CalculPosition, RechercheDecalageSortie,
+  EnginSetType, EnginAddVie, EnginResetFatigue, EnginSetExperimente, SetSortEngin, SetDeplaceEngin, EnginAsk;
 - Economy, other slices: BatimentAjouteMatiere (``ciclo_trabalho``), TerrainDeposeMatiere 0x41bb8a;
 - ai-runtime: iagUnitSendMessage, iagVilleSendMessage.
 
@@ -85,6 +85,7 @@ ARGUMENTOS = {
     'iagVilleSendMessage': {'EAX': 0xffff, 'EDX': 0xff, 'EBX': M32},
     'SortilegeResetRealisable': {'EAX': 0xff}, 'SortilegeSetTechnologie': {'EAX': 0xff},
     'BatimentAdjacent': {'EAX': 0xffff, 'EDX': 0xffff},
+    'EteintTerrain': {'EAX': 0xffff, 'EDX': 0xffff, 'EBX': 0xff}, 'BatimentModifyMap': {'EAX': 0xffff, 'EDX': 0xff},
 }
 PILHA_EXTERNA = {'TerrainDeposeMatiere': 1}     # one pushed word (0), popped by the callee
 
@@ -472,8 +473,8 @@ class CavernaRecrutamento:
         SetDeplaceEngin(unit, +0x7c); EnginAsk(unit, 6, 0) for the local player's structure. A structure that
         still holds a colonist (type 2: or a troop) then clears its request (+0x78 = 0xffff, +0x7b = 0xff, +0x7c =
         +0x7e = 0, +0x86 = 0xffff, +0x80 = +0x82 = 0 unless type 0x14, +0x74 = 0, +0x8c = 0, +5 = 5 unless 3) and
-        sends iagUnitSendMessage(unit, 0x46), iagVilleSendMessage(structure, 3). The emptied structure's
-        abandonment (0x42101d..0x42114e) is outside this translation. EDX is not restored by the epilogue."""
+        sends iagUnitSendMessage(unit, 0x46), iagVilleSendMessage(structure, 3); an emptied structure is first
+        abandoned (``_abandonar``, 0x42101d..0x42114e: owner 0xc8). EDX is not restored by the epilogue."""
         m = self.m
         s = regs['EAX'] & 0xffff
         direcao = regs['EDX'] & 0xff
@@ -508,7 +509,18 @@ class CavernaRecrutamento:
         if not habitada:
             habitada = bool(self._ext('BagContient', 0x421009, EAX=bag, EDX=1, EBX=9)['EAX'] & 0xffff)
         if not habitada:
-            raise ForaDoDominioCaverna('SortieTroupe', 0x42101d, 'the structure is left without a colonist')
+            self._abandonar(s, e)
+        self._limpar_pedido(e)
+        self._ext('iagUnitSendMessage', 0x4211d3, EAX=unidade, EDX=0x46, EBX=0)
+        r = self._ext('iagVilleSendMessage', 0x4211e5, EAX=s, EDX=3, EBX=0)
+        incertos = {k: v for k, v in self._ultimos_incertos.items() if k in ('EAX', 'EDX')} if self.externo else {}
+        return self._sair(regs, dict(regs, EAX=r['EAX'], EDX=r['EDX']), ('EBX', 'ECX', 'ESI', 'EDI', 'EBP'),
+                          incertos=incertos)
+
+    def _limpar_pedido(self, e):
+        """The request reset 0x42107d / 0x421153: +0x78 = 0xffff, +0x7b = 0xff, +0x7c = +0x7e = 0, +0x86 = 0xffff,
+        +0x80 = +0x82 = 0 unless type 0x14, +0x74 = 0, +0x8c = 0, +5 = 5 unless 3."""
+        m = self.m
         m.u16(e + 0x78, 0xffff)
         m.u8(e + 0x7b, 0xff)
         m.u16(e + 0x7c, 0)
@@ -521,11 +533,27 @@ class CavernaRecrutamento:
         m.u32(e + 0x8c, 0)
         if m.u8(e + 5) != 3:
             m.u8(e + 5, 5)
-        self._ext('iagUnitSendMessage', 0x4211d3, EAX=unidade, EDX=0x46, EBX=0)
-        r = self._ext('iagVilleSendMessage', 0x4211e5, EAX=s, EDX=3, EBX=0)
-        incertos = {k: v for k, v in self._ultimos_incertos.items() if k in ('EAX', 'EDX')} if self.externo else {}
-        return self._sair(regs, dict(regs, EAX=r['EAX'], EDX=r['EDX']), ('EBX', 'ECX', 'ESI', 'EDI', 'EBP'),
-                          incertos=incertos)
+
+    def _abandonar(self, s, e):
+        """SortieTroupe 0x42101d..0x42114e, the structure left with no colonist (nor, types 2/0x15, troop): types
+        1/2/5 reset the request first; unless type 9/0xc, BatimentGetCase(structure, DX = the type's radius
+        [table 0x420df4, BatimentHabitable's], BL = owner) and EteintTerrain(its cell, its EDX, its EBX) (Core);
+        the owner's structure selection u16 0x495be0 + 2 owner := 0xffff when it is this structure; owner +4 :=
+        0xc8; BatimentModifyMap(structure, DL 1) (Core). The caller then runs the common reset and messages."""
+        m = self.m
+        if m.u8(e + 8) in (1, 2, 5):
+            self._limpar_pedido(e)
+        tipo = m.u8(e + 8)
+        if tipo not in (9, 0xc):
+            if tipo > 0x15:
+                raise ForaDoDominioCaverna('SortieTroupe', 0x42123d, f'structure type {tipo} (uninitialized radius)')
+            g = self._ext('BatimentGetCase', 0x42110c, EAX=s, EDX=RAIOS[tipo], EBX=m.u8(e + 4))
+            self._ext('EteintTerrain', 0x421116, EAX=g['EAX'] & 0xffff, EDX=g['EDX'], EBX=g['EBX'])
+        dono = m.u8(e + 4)
+        if m.u16(SELECOES_ESTRUTURA + 2 * dono) == s & 0xffff:
+            m.u16(SELECOES_ESTRUTURA + 2 * dono, 0xffff)
+        m.u8(e + 4, 0xc8)
+        self._ext('BatimentModifyMap', 0x42114e, EAX=s, EDX=1)
 
     # ------------------------------------------------------------ entry point
     def chamar(self, nome, regs):

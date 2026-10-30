@@ -264,6 +264,15 @@ class DominioIsoladoTest(unittest.TestCase):
                     elif c['case'].startswith('visible') and c['case'].endswith('_state_5'):
                         p = c['case'].split('_')
                         vistos.add((int(p[1]), int(p[2])))
+        self.assertEqual(vistos | {(4, 6)}, set(e.ORIGENS_RESTOREALL_PROVADAS))
+        base=Path(__file__).resolve().parent/'evidencias'
+        for name in ('sonda-origens-K1-129-189.json.xz.origins.json',
+                     'sonda-colheita-P4-129-728.json.xz.origins.json',
+                     'sonda-colheita-P5-129-728.json.xz.origins.json'):
+            for case in json.loads((base/name).read_text())['records']:
+                self.assertTrue(case['returned']);self.assertEqual(case['declared_writes'],[])
+                self.assertEqual(case['surface_sha256'],case['published_phase_sha256'])
+                vistos.add(tuple(case['origin']))
         self.assertEqual(vistos | {(4, 6)}, set(e.ORIGENS_PROVADAS))
 
     def test_m22_origins_accepted(self):

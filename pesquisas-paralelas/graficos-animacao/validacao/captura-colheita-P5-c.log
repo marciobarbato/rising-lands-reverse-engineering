@@ -1,0 +1,16 @@
+[lease] graphics-harvest-P5-c waiting
+[lease] graphics-harvest-P5-c granted slots [4]
+P5 1329 isolated original origin (31, 0) returned
+P5 1350 native surface/state equal
+P5 1400 native surface/state equal
+P5 1450 native surface/state equal
+P5 1500 native surface/state equal
+P5 1550 native surface/state equal
+P5 1600 native surface/state equal
+P5 1650 native surface/state equal
+P5 1700 native surface/state equal
+P5 1750 native surface/state equal
+P5 1800 native surface/state equal
+P5 1850 native surface/state equal
+P5 1900 native surface/state equal
+{"probe": "P5", "frames": [1329, 1928], "status": "complete", "seconds": 320.071, "drawn": 600, "snapshot": {"path": ".local/graficos-api17-start/P5-01928.pickle", "sha256": "188d118aa278d9380ebb84c19b5a9d5acbd7ac5f0114e0f9511354d76f0773e8"}, "text_boundaries": 600, "text_pointer_reads": 600}
