@@ -1100,3 +1100,100 @@ input branches, Cyclage and the frame-10801 engine branch remain explicit gaps.
 Only the feature branch is pushed; main integration and acceptance are left
 to the coordinator. Final evidence/documentation commits change no executable
 code after the validated 869ffaa build.
+
+## M3.3 Test A — answer-stream half and native input recording
+
+Implementation **96303fc**, focus/responder correction **ebacca2** (full validated
+build `ebacca229f5fa72cdb3ab26d368e434c9c8e5979`), based on approved **1d29d81**.
+No merge was performed for this task. The [input API contract](M3_CONTRACT.md#m33-test-a--frame-input-interchange-and-answer-stream)
+specifies inputs, normalization, mutation/order and explicit failures.
+
+`ScriptedInput(root, dict_or_json)` imports the actual Missions schema through
+its unchanged pure validator and exports canonical JSON bytes.
+`FrameAnswerMapper(script, hwnd=...)` takes explicit frame/phase/poll-site
+requests and returns the declared cursor/key/message/translate/dispatch rows.
+`MacOSSessionRecorder(root).event(frame, event)` records monotonic game-frame
+mouse/key events; `export_script(stop_frame=...)` returns that validated script.
+No wall-clock timestamps, Rust input calls, game-memory writes or WndProc flag
+patches occur. Messages dispatch in order; cursor holds; keys reset per frame
+and repeat their literal signed answer at every poll. Human key transitions
+export held `-32768` values throughout Control/depot holds. Imported key/message
+values remain literal, including K1's digit-1 WndProc message and the native
+unlisted-vkey-0x45 zero polls. Legacy per-poll journals remain distinct.
+
+The [six-probe proof](validation/m3-test-a-answers.json) uses the unchanged
+original references for intact `RISING.EXE` SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+It records every source input/log hash and the owner module SHA-256
+`57cb30f1fd6f947107de38ccc2de09874bdd94c4b465af7ea84b2704dbddf609`.
+All 19 schema/input/summary/log Git blobs used here equal fetched main's blobs.
+
+| Probe | Frames after 128 | Declared answers | First difference | Canonical byte round trip |
+| --- | ---: | ---: | --- | --- |
+| P1 | 501 | 7,522 / 7,522 | none | equal |
+| P2 | 601 | 9,034 / 9,034 | none | equal |
+| P3 | 3,001 | 45,032 / 45,032 | none | equal |
+| P6 | 2,272 | 33,873 / 33,873 | none | equal |
+| P7 | 3,572 | 53,099 / 53,099 | none | equal |
+| K1 | 501 | 7,037 / 7,037 | none | equal |
+
+All **155,597** answers match per frame, phase and original poll return site.
+Native logs supply only requests, never expected answer bytes. HWND=0 is an
+explicit scenario declaration, checked against all native dispatch records.
+The sole omitted field is `wndproc_flags_after` (102 original-game outputs),
+which belongs to Test A's deferred state half. No game-state equivalence under
+orders is claimed. Each canonical export/import/export is byte-identical;
+original files are read-only. The CLI `scripts/validate_macos_input.py` refuses
+to overwrite its report and lists the first difference if any.
+
+Native NSEvents are stamped on the engine's serial queue for its next frame.
+Recording begins only after frame128. Starting recording focuses the Metal
+view, observes initially held modifiers and records focus-loss releases.
+**● Gravando entrada**, **Parar gravação** and **Exportar entrada** are visible
+in PT-BR. Reset is disabled during capture. Stop/export drains native work and
+the isolated worker chain. Errors latch visibly and prohibit successful export
+of incomplete data. **Ordens ao vivo indisponíveis** stays visible; host events
+never alter the no-input Rust structure. Fixed clicks use k/k+1/k+3, with cursor
+holding and deferred subsequent moves; continuous human drags remain outside
+this recorder's supported domain and are labeled unavailable.
+
+The [exact coordinator build](validation/m3-test-a-build.log), using the allowed
+read-only **363faa9 ABI 1.3** source override, passes **109 consumer tests, zero
+skips**, **27 native exercise checks** and **20 inspection/live checks**.
+Signatures, ARM64 architecture, asset/source binding, isolated portable runtime
+and relocation pass. The native smoke now sends constructed NSEvents through
+the actual AppKit window/responder chain, rather than calling view handlers
+directly. It proves the visible native indicator, key focus, Ctrl hold, click
+cadence and native atomic export. Rust remains on its no-input chain with
+257 states, 11 checkpoints and all 410 reached surfaces equal. Real UI rate
+is **39.097 fps**; no 9,200-frame engine rerun was needed for this input-only
+change. The prior full-window result above remains historical evidence.
+
+The [actual saved-file proof](validation/m3-test-a-native-export.json) imports
+the complete actual Missions harness and accepts the exported bytes unchanged.
+Move=407, down=408, up=410, Ctrl release=411; cursor=(400,272). SHA-256:
+`39e9e1cce2c0455d12a0c637f24ff77053f4967ecf64ded9e2ab072c3bef4820`.
+Its canonical byte round trip and all 283 input-schedule frames equal Missions'
+own scheduler. These are **input schedules**, not game-state hashes. Production
+uses NSSavePanel; automated smoke selects the explicit CLI evidence destination
+and tests the same atomic save action. Human destination selection is not
+automated. The earlier pre-focus build's passing artifacts are preserved.
+
+[Common checks](validation/m3-test-a-common-maintenance.log.gz) pass read-only
+from maintenance with `/usr/bin/python3 -B scripts/check.py` and its
+`.local/python`; observed revision `c203400a833f44593a66d5fd5546532e746a19c7`.
+Core 546/212 optional skips, Combat 279/153, Economy 513/208, Graphics 255/0,
+Missions 154/33, AI/runtime 109/7, Audio 79/4, workflow 9/0: **1,944 tests,
+617 optional skips, zero failures/errors**. An initial targeted worker test
+failed before asset loading because RISING_INPUTS_ROOT was unset; the declared-
+input rerun and both complete builds pass. The failed setup log is preserved.
+
+The [delivery manifest](validation/m3-test-a-delivery.json) pins library,
+artifact and source hashes. Main advanced to **d1ff3e0 / ABI 1.4** while this
+task ran; this delivery deliberately keeps testing the explicitly authorized
+363faa9 library, with no new ABI acceptance or main merge. Adopting ABI 1.4
+remains separate. Test A's WndProc effects/whole-state half requires engine
+order support; no orders were injected. Test B's 3,000-frame human original
+replay and new original-x86 captures were not run. No M3 acceptance is recorded.
+Final evidence/documentation commits change no executable code after ebacca2;
+only `feat/macos-playable` is pushed non-forcibly.
