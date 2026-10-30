@@ -392,3 +392,111 @@ all six export/import/export byte round trips match. Native WndProc flag stores
 and whole-state hashes belong to Test A's deferred state half. It requires
 engine order support. The 3,000-frame human original replay (Test B) is also
 pending; no M3 acceptance is claimed.
+
+## Native play mode and independent clocks
+
+The native window defaults to **Jogar**. **Validar** resets to the accepted S0
+and retains the original audited frame driver: 257 prefix states, 11 checkpoints
+and every reached reference surface. APP_BUILD's native smoke explicitly selects
+Validar. The proof tools still default to validation, including observer callbacks.
+Switching modes resets the world; it cannot disable validation halfway through a
+proof. Memory inspection is available only in Validar. Orders remain record-only.
+
+Jogar calls the same Rust phase1/render/phase2/phase3 sequence, with no projection,
+state/surface hashing, equality counters or observer callbacks. Contract checks,
+partial render results and named engine stops remain active. Game speed selects
+15, 20, 30, 60 game frames/s or unlimited. The default **20 frames/s** is the
+engine's published nominal TickClock rate, not a claim that the original's real
+machine-dependent pacing has been measured. That original timing probe remains
+an external dependency. Host scheduling never changes the engine's virtual clock,
+frame arithmetic, frame-indexed recording or order. Slow frames catch up without
+skipping simulation steps; pause and resume reset the host deadline.
+
+Engine work and initialization run on a serial worker. A separate display queue
+presents the latest complete indexed frame at up to 120 Hz, with no interpolation.
+A 20 Hz game frame can therefore be displayed several times; display fps and
+completed game frames/s are reported separately. Three persistent shared Metal
+textures and palette buffers prevent CPU writes from racing GPU readers. The
+producer copies directly from the Rust caller buffer to a free texture slot;
+there is no Swift pixel array, PNG, RGBA conversion or allocation of new pixel
+storage per frame. GPU completion releases slots asynchronously. The display
+queue owns drawable acquisition and command submission; steady play has no
+main-thread synchronization or GPU wait. Pause/reset/evidence capture drain the
+queue. Validation keeps its synchronous presentation/readback checks.
+
+For an actual visible-window measurement of at least 60 seconds, run the owned
+`apps/macos-preview/scripts/benchmark_native_macos.py` through the exclusive heavy
+lease, specifying `--app`, a new `--output`, `--mode play|test`, `--seconds 65`
+and `--game-fps 20|60|0`. The app counts actual CAMetalDrawable presentation
+timestamps, emits complete one-second bins and their minimum, and separates Rust
+logic, rendering, proof, upload, submission and GPU timings. Each run ends with
+GPU readback against the latest real Rust surface. It never claims repeated
+presentations are distinct simulated frames. See the sustained measurements below.
+
+### Sustained play measurements
+
+Validated implementation/build **55cddc571ec75bf6b305aabd75c33d5697fa7471**,
+based on main **8138e6e**. All four runs used the actual unoccluded native window
+on this MacBook's 120 Hz screen for at least **65 seconds**, under an exclusive
+heavy lease. Actual presentation timestamps include the first second; none of the
+startup or slow bins below is removed. Each final readback matches all **1,920,000
+pixels**. Play readbacks use the asynchronous slot texture/upload/shader path.
+
+| Mode | Game frames/s, observed | Display fps, average | Display fps, minimum full 1 s |
+|---|---:|---:|---:|
+| Jogar, nominal 20 | 20.010 | 119.920 | 117 |
+| Jogar, requested 60 | 60.001 | 119.878 | 117 |
+| Jogar, unlimited | 69.226 | 119.919 | 117 |
+| Validar, unlimited | 63.241 | 63.210 | 25 |
+
+Evidence: [nominal play](../apps/macos-preview/validation/m3-play-play20.json),
+[60 game frames/s](../apps/macos-preview/validation/m3-play-play60.json),
+[uncapped play](../apps/macos-preview/validation/m3-play-play-unlimited.json),
+[validation](../apps/macos-preview/validation/m3-play-test.json).
+The minimum play display rate is 95% above 60 Hz; uncapped average game throughput
+is about 15% above 60 game frames/s **in this no-input window**. Displaying an
+unchanged game frame several times is deliberate; these are actual presentations,
+not interpolated or invented simulation states. All play runs have zero proof
+seconds, equality counts and publication drops. Main-thread 50 ms timer maximum
+excess delay is 1.92, 1.98 and 1.94 ms respectively.
+
+The previous **41.386 fps** number was a roughly 10-second audited run including
+the expensive 257-state startup prefix. The same short APP_BUILD smoke now gives
+**44.252 displayed / 44.362 game fps**, still with startup proofs. The 65-second
+Validar run retains those proofs: the first five one-second bins are
+**25, 27, 25, 26, 26**, then 63–70 presentations/s. Its **257 states, 11 checkpoints
+and all 4,117 reached full surfaces** equal the accepted evidence. The sustained
+average must not be interpreted as removal of test-mode proof costs.
+
+| Stage | Nominal play | Play at 60 | Uncapped play |
+|---|---:|---:|---:|
+| Rust frame logic, ms/game frame | 10.659 | 10.426 | 10.313 |
+| Rust rendering, ms/game frame | 4.360 | 4.201 | 4.059 |
+| Texture upload, ms/game frame | 0.061 | 0.058 | 0.059 |
+| CPU command encoding, ms/display | 0.022 | 0.030 | 0.030 |
+| GPU draw, ms/display | 0.132 | 0.176 | 0.141 |
+
+Asynchronous stages overlap; their totals cannot be added to wall time. Drawable
+wait is reported separately from CPU encoding. Rust logic is about 72% of the
+uncapped logic+render cost; app upload and encoding are small. This instrumentation
+measures whole engine calls, not individual Rust routines. Repeated state loading
+in `frame_state.rs` / `frame_runtime_state.rs` remains a candidate for the engine
+owner to profile; no per-routine reload timing or engine optimization is claimed.
+The current backend still provides only modest game-throughput headroom beyond
+60, so broader/raid workloads need engine-side measurement and optimization.
+
+Fresh [prefix proof](../apps/macos-preview/validation/m3-play-live-prefix.json):
+**257/257 states, 11/11 checkpoints, 128/128 original surfaces and 128/128 Python
+oracle surfaces**, zero observer failures. Fresh [Test A answer proof](../apps/macos-preview/validation/m3-play-test-a-answers.json):
+**155,597/155,597**, all six canonical byte round trips equal. APP_BUILD passes
+**110 consumer tests, 27 native exercise checks and 20 inspection/live checks**;
+`sh motor/validate.sh` passes unchanged. Engine/order support, the original timing
+probe and the state-hash half of Test A remain dependencies. No 9,200-frame
+performance/first-stop horizon was rerun for this change.
+
+[Common checks](../apps/macos-preview/validation/m3-play-common.log.gz) pass from
+this feature worktree with `/usr/bin/python3 -B scripts/check.py` and `.local/python`:
+**1,976 tests, 620 optional skips, zero failures/errors**. The
+[delivery manifest](../apps/macos-preview/validation/m3-play-delivery.json) pins
+all evidence and the tested static/shared libraries. Final evidence/documentation
+commits do not change the validated executable source.
