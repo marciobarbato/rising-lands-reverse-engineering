@@ -4,7 +4,7 @@ import struct
 
 from pilot_abi import Pilot
 
-FRAME_VERSION = 0x00010004
+FRAME_VERSION = 0x00010005
 REGISTERS = ('eax', 'ebx', 'ecx', 'edx', 'esi', 'edi', 'ebp', 'esp')
 
 
