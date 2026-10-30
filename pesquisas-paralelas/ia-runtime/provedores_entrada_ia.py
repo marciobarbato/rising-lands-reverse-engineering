@@ -177,7 +177,14 @@ def construcao_viva(m, *, som, bonus, provedores_nucleo=None):
                                                     list(r['pilha']))),
     }
 
+    import inspect
+    som_sitio = 'chamada' in inspect.signature(som).parameters
+
     def externo(nome, sitio, regs):
+        if nome == 'PlaySnd_PostSound' and som_sitio:
+            # The boundary with its declared call address (``sitio``) and pushed words.
+            return dict(EAX=som('PlaySnd_PostSound', {k: regs[k] & M32 for k in ('EAX', 'EDX', 'EBX', 'ECX')},
+                                list(regs['pilha']), chamada=sitio))
         f = funcoes.get(nome)
         if f is None:
             raise DependenciaIA(nome, sitio)
@@ -189,7 +196,7 @@ def construcao_viva(m, *, som, bonus, provedores_nucleo=None):
     return ConstrucaoEntrada(m, externo, calcul)
 
 
-def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None, estruturas=None):
+def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None, estruturas=None, donos=None):
     """``Provedores`` for ``entrada_ordens_ia.Entrada`` over ``m``.
 
     ``janelas.tecla(vk, sitio) -> u16 answer`` (``sitio``: the poll's return address) and ``janelas.cursor() -> (x, y)`` are the declared input answers;
@@ -249,6 +256,102 @@ def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None, estrutura
     if ee is not None:
         funcoes['EnginSelectPeutEntrer'] = lambda regs: ee.chamar(
             'EnginSelectPeutEntrer', {k: regs.get(k, 0) & M32 for k in REG7})
+    def recrutamento():
+        """Economy's ``recrutamento.Recrutamento`` over snapshots of the bytes its queries read (selection
+        0x495be0, unit types 0x4965ae, spell types 0x497174, the unit pool, the structure pool): read-only."""
+        modulo = _modulo_economia('recrutamento')
+        mundo = modulo.EconomiaConstrucoes(estruturas=bytes(m.vista(0x49a0c8, 276000)))
+        return modulo.Recrutamento(mundo, selecoes=bytes(m.vista(0x495be0, 8)), tipos_unidades=bytes(m.vista(0x4965ae, 1300)),
+                            tipos_sortilegios=bytes(m.vista(0x497174, 230)),
+                            unidades=bytes(m.vista(m.u32(POOL), 220800)))
+    from entrada_ordens_ia import batiment_peut_attaquer_prefixo
+    funcoes['BatimentPeutAttaquer'] = lambda regs: batiment_peut_attaquer_prefixo(
+        m, {k: regs.get(k, 0) & M32 for k in REG7})
+    funcoes['GetStatusRecrute'] = lambda tipo, jogador: recrutamento().status(tipo, jogador)
+    if donos is not None:
+        # The M3 owners (``DonosM3``): group selection and view (tags 0xb/0xc, the group key), the minimap
+        # press, entry into a structure (tag 0x10 sub 3) and the colonist release (tag 0x21).
+        for nome in ('SauveSelectionGroupe', 'RestaureSelectionGroupe', 'EnginGetCentreGroupe',
+                     'SetEnginSelectRentreBatiment', 'BatimentRetireColon'):
+            funcoes[nome] = donos.registros(nome)
+        funcoes['EnginSelectPeutEntrer'] = donos.registros('EnginSelectPeutEntrer')
+        # Tag 17 (0x45f1a9): Economy's InitRecruteTroupe (AL unit type, DL player), its callees through DonosM3.
+        funcoes['InitRecruteTroupe'] = lambda regs: {k: v for k, v in donos.caverna.chamar(
+            'InitRecruteTroupe', dict({k: regs.get(k, 0) & M32 for k in REG7}, ESP=0)).items() if k != 'ESP'}
+        funcoes['MiniMapSetPos'] = lambda x, y: donos.visao.chamar(
+            'MiniMapSetPos', dict(dict.fromkeys(REG7, 0), EAX=x & M32, EDX=y & M32, EBX=0, ECX=1))
     if alocar is not None:
         funcoes['GlobalAlloc'] = lambda flags, tamanho: alocar(flags, tamanho)
     return Provedores(funcoes)
+
+
+class DonosM3:
+    """The committed M3 owners past frame 220 over one live memory, wired to each other (one instance each):
+
+    - Core ``entrada_estruturas.EntradaEstruturas`` (``ee``): Bag primitives, structure entry and lodging, unit
+      state 13's body, SetEnginSelectRentreBatiment, BatimentRetireColon, and the Core routines Economy calls
+      (``ROTINAS_ECONOMIA`` through ``provedor_entrada``);
+    - Economy ``caverna_recrutamento.CavernaRecrutamento`` (``caverna``): the type-3 body, BatimentHabitable,
+      InitBatimentPlayer/InitBatimentNeutre, ...;
+    - Economy ``ciclo_trabalho.CicloTrabalho`` (``ciclo``): CalculWorkEngin (unit state 5), BatimentLogeEngin,
+      BatimentAjouteMatiere, the mine/field leaves;
+    - Core ``visao_grupos.VisaoGrupos`` (``visao``): BatimentIllumine/BatimentDecouvre, the group selection,
+      MiniMapSetPos/MiniMapRecentre, CalculPosition and RechercheDecalageSortie.
+
+    Every named dependency one of them raises goes through ``externo(nome, chamada, regs)``: the routine of the
+    module that owns it, ``bonus(jogador, tipo, seletor)`` for BonusGetValEngin, ``mensagem_unidade(regs,
+    chamada) -> regs`` (this front's iagUnitSendMessage) when given; any other name raises
+    ``DependenciaIA`` at its original call (never defaulted)."""
+
+    def __init__(self, m, *, som, bonus=None, mensagem_unidade=None):
+        from entrada_estruturas import EntradaEstruturas, ROTINAS_ECONOMIA, provedor_entrada
+        from visao_grupos import VisaoGrupos, provedor_saida
+        caverna_recrutamento = _modulo_economia('caverna_recrutamento')
+        ciclo_trabalho = _modulo_economia('ciclo_trabalho')
+        self.m, self.bonus, self.mensagem_unidade, self.som = m, bonus, mensagem_unidade, som
+        self.ee = EntradaEstruturas(m, externo=self.externo, som=som, bonus=bonus)
+        # (bonus None: BonusGetValEngin stays a named dependency)
+        self.visao = VisaoGrupos(m, som=som)
+        self.caverna = caverna_recrutamento.CavernaRecrutamento(m, externo=self.externo)
+        self.ciclo = ciclo_trabalho.CicloTrabalho(m, externo=self.externo)
+        self._core = provedor_entrada(self.ee)
+        self._saida = provedor_saida(self.visao)
+        self._caverna = caverna_recrutamento.provedor_caverna(self.caverna)
+        self.nomes_core = frozenset(ROTINAS_ECONOMIA)
+        self.nomes_caverna = frozenset(caverna_recrutamento.ROTINAS)
+        self.nomes_ciclo = frozenset(ciclo_trabalho.ROTINAS)
+        self.chamadas = []                       # (name, original call) of every cross-module call, in order
+
+    def externo(self, nome, chamada, regs):
+        from reinicio_ia import DependenciaIA
+        self.chamadas.append((nome, chamada))
+        if nome in self.nomes_core:
+            return self._core(nome, chamada, regs)
+        if nome in ('CalculPosition', 'RechercheDecalageSortie'):
+            return self._saida(nome, chamada, regs)
+        if nome in self.nomes_caverna:
+            return self._caverna(nome, chamada, regs)
+        if nome in self.nomes_ciclo:
+            entrada = {k: regs.get(k, 0) & M32 for k in REG7}
+            entrada['ESP'] = 0
+            saida = getattr(self.ciclo, '_' + nome)(entrada)
+            return {k: v for k, v in saida.items() if k != 'ESP'}
+        if nome == 'BonusGetValEngin' and self.bonus is not None:
+            return dict(EAX=self.bonus(regs['EAX'] & 0xff, regs['EBX'] & 0xff, regs['EDX'] & 0xff))
+        if nome in ('PlaySnd_PostSound', 'PlaySnd_StopSound') and self.som is not None:
+            # The sound-library boundary, with the caller's declared call address and pushed words.
+            pilha = list(regs.get('_pilha') or ())
+            import inspect
+            argumentos = {'chamada': chamada} if 'chamada' in inspect.signature(self.som).parameters else {}
+            return dict(EAX=self.som(nome, {k: regs.get(k, 0) & M32 for k in ('EAX', 'EDX', 'EBX', 'ECX')}, pilha,
+                                     **argumentos) & M32)
+        if nome == 'iagUnitSendMessage' and self.mensagem_unidade is not None:
+            return self.mensagem_unidade(regs, chamada)
+        raise DependenciaIA(nome, chamada)
+
+    def registros(self, nome):
+        """``f(regs) -> regs`` running Core's/visao's routine ``nome`` (the ``Provedores`` register shape)."""
+        alvo = self.visao if nome in ('SauveSelectionGroupe', 'RestaureSelectionGroupe', 'EnginGetCentreGroupe',
+                                      'MiniMapSetPos', 'MiniMapRecentre', 'BatimentIllumine',
+                                      'BatimentDecouvre') else self.ee
+        return lambda regs: alvo.chamar(nome, {k: regs.get(k, 0) & M32 for k in REG7})

@@ -48,6 +48,7 @@ TIPOS_ESTRUTURA = 0x495d8c                 # stride 52; u16 +4 = construction li
 LOCAL = 0x508041
 BUSCA_UNIDADE, BUSCA_OCUPADA, BUSCA_SUCESSO, BUSCA_ROTA = 0x496304, 0x4e0f36, 0x4e0f37, 0x4e0f3c
 ESTADO_11, ESTADO_13, SAIDA = 0x4564ef, 0x4558e4, 0x454ccd
+ESTADO_5 = 0x456600                     # EnginNextEtape's switch target for state 5 (work)
 PROGRESSO = 0x44b1c1
 
 
@@ -303,4 +304,79 @@ def proxima_etapa_entrada(m, p, unidade, tabelas, construcao, etapa=None):
                 and 'EnginNextEtape:state13' in p:
             p['EnginNextEtape:state13'](sitio=ESTADO_13, unidade=unidade & 0xffff)
             return SAIDA
+        if erro.rotina == 'EnginNextEtape state 5' and erro.sitio == ESTADO_5 == tabelas['estados'][5] \
+                and 'EnginNextEtape:state5' in p:
+            p['EnginNextEtape:state5'](sitio=ESTADO_5, unidade=unidade & 0xffff)
+            return SAIDA
         raise
+
+
+def estado_trabalho(m, chamar, unidade):
+    """EnginNextEtape's state-5 body 0x456600..0x456736 (ESI = the record, DI = the unit), from the intact bytes:
+
+    - u8 +0x82 == 2 (the unit's work target is a structure, +0x80): BatimentEnDestruction(AX = +0x80) at
+      0x45661a; when it returns 0, BatimentGetPlayer(AX = +0x80) at 0x45662c compared with the unit's owner
+      byte +0. A destroyed or foreign structure takes the release branch 0x456639 (SetEnginCollision, discovery,
+      0x4550a2), outside this translation: ``DependenciaIA`` at 0x456639 before any store.
+    - otherwise (or an intact own structure): CalculWorkEngin(AX = unit, zero-extended) at 0x456731, then the
+      exit 0x454ccd.
+
+    ``chamar(nome, chamada, **regs) -> regs`` runs the owners' routines (Core's BatimentEnDestruction and
+    BatimentGetPlayer, Economy's CalculWorkEngin); registers not given enter as 0 (none of them reads another)."""
+    from entrada_ordens_ia import M32, PASSO, POOL
+    unidade &= 0xffff
+    rec = (m.u32(POOL) + unidade * PASSO) & M32
+    if m.u8(rec + 0x82) == 2:
+        s = m.u16(rec + 0x80)
+        if chamar('BatimentEnDestruction', 0x45661a, EAX=s)['EAX'] & 0xff or \
+                chamar('BatimentGetPlayer', 0x45662c, EAX=s)['EAX'] & 0xff != m.u8(rec):
+            raise DependenciaIA('EnginNextEtape state 5: work structure destroyed or foreign (0x456639)', 0x456639)
+    chamar('CalculWorkEngin', 0x456731, EAX=unidade)
+    return SAIDA
+
+
+CORPO_CAVERNA = 0x426aff               # BatimentNextEtape's type-3 switch target (Economy's corpo_caverna)
+
+
+def instalar_donos(m, p, donos, tabelas):
+    """Install in the keyword provider dict ``p`` the providers past frame 220 from ``donos``
+    (``provedores_entrada_ia.DonosM3``):
+    - ``BatimentNextEtape`` wraps ``p``'s pinned one: its type-3 target 0x426aff (the pinned switch stops there
+      before any store) runs ``BatimentNextEtape:cave`` = Economy's ``corpo_caverna(structure)``;
+    - ``BatimentIllumine(sitio, estrutura, jogador, ebx)`` and ``BatimentDecouvre(sitio, estrutura, jogador)``:
+      Core's ``visao_grupos`` (EAX structure, EDX player, EBX light flag; other registers 0, which they do not read);
+    - ``EnginNextEtape:state13``: Core's ``estado_entrada`` with ESI = the unit record, EDI = the unit;
+    - ``EnginNextEtape:state5``: ``estado_trabalho`` with Core's BatimentEnDestruction/BatimentGetPlayer and
+      Economy's CalculWorkEngin.
+    ``proxima_etapa_entrada`` dispatches states 5/13 to the last two."""
+    from reinicio_ia import DependenciaIA
+    estrutura_pinada = p['BatimentNextEtape']
+
+    def batiment_next_etape(sitio, estrutura):
+        try:
+            return estrutura_pinada(sitio=sitio, estrutura=estrutura)
+        except DependenciaIA as erro:
+            if erro.rotina == 'BatimentNextEtape type 3' and erro.sitio == CORPO_CAVERNA == \
+                    tabelas['tipos_estrutura'][2]:
+                p['BatimentNextEtape:cave'](sitio=CORPO_CAVERNA, estrutura=estrutura & 0xffff)
+                return None
+            raise
+    zero = dict.fromkeys(('EAX', 'EBX', 'ECX', 'EDX', 'ESI', 'EDI', 'EBP'), 0)
+    for nome in ('BatimentIllumine', 'BatimentDecouvre'):
+        if nome in p:
+            raise RuntimeError(f'{nome} already has a provider')
+    p['BatimentNextEtape'] = batiment_next_etape
+    p['BatimentNextEtape:cave'] = lambda sitio, estrutura: donos.caverna.corpo_caverna(estrutura)
+    p['BatimentIllumine'] = lambda sitio, estrutura, jogador, ebx: donos.visao.chamar(
+        'BatimentIllumine', dict(zero, EAX=estrutura, EDX=jogador, EBX=ebx))
+    p['BatimentDecouvre'] = lambda sitio, estrutura, jogador: donos.visao.chamar(
+        'BatimentDecouvre', dict(zero, EAX=estrutura, EDX=jogador))
+    p['EnginNextEtape:state13'] = lambda sitio, unidade: donos.ee.chamar('EnginNextEtape:state13', dict(
+        zero, ESI=(m.u32(0x4e19a0) + unidade * 276) & 0xffffffff, EDI=unidade))
+
+    def chamar(nome, chamada, **r):
+        regs = dict(zero, **r)
+        if nome == 'CalculWorkEngin':
+            return donos.ciclo.calcul_work_engin(dict(regs, ESP=0))
+        return donos.ee.chamar(nome, regs)
+    p['EnginNextEtape:state5'] = lambda sitio, unidade: estado_trabalho(m, chamar, unidade)
