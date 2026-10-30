@@ -133,8 +133,8 @@ final class NativeMetalGameView: NSView {
     override func rightMouseDown(with event:NSEvent){mouse(event,event.buttonNumber==0 ? 0x201:0x204)}
     override func rightMouseUp(with event:NSEvent){mouse(event,event.buttonNumber==0 ? 0x202:0x205)}
     func key(_ key:Int,_ down:Bool){if down{heldKeys.insert(key)}else{heldKeys.remove(key)};inputEvent?(["kind":"key","vkey":key,"down":down])}
-    override func keyDown(with event:NSEvent){if let k=[36:13,76:13,53:27,49:32,123:37,126:38,124:39,125:40,117:46,7:88][Int(event.keyCode)]{key(k,true)}}
-    override func keyUp(with event:NSEvent){if let k=[36:13,76:13,53:27,49:32,123:37,126:38,124:39,125:40,117:46,7:88][Int(event.keyCode)]{key(k,false)}}
+    override func keyDown(with event:NSEvent){if let k=[36:13,76:13,53:27,49:32,123:37,126:38,124:39,125:40,117:46,7:88,29:48,18:49,19:50,20:51,21:52,23:53,22:54,26:55,28:56,25:57][Int(event.keyCode)]{key(k,true)}}
+    override func keyUp(with event:NSEvent){if let k=[36:13,76:13,53:27,49:32,123:37,126:38,124:39,125:40,117:46,7:88,29:48,18:49,19:50,20:51,21:52,23:53,22:54,26:55,28:56,25:57][Int(event.keyCode)]{key(k,false)}}
     func synchronizeModifiers(_ flags:NSEvent.ModifierFlags){for (flag,k) in [(NSEvent.ModifierFlags.shift,16),(.control,17),(.option,18)]{let down=flags.contains(flag);if down != heldKeys.contains(k){key(k,down)}}}
     override func flagsChanged(with event:NSEvent){synchronizeModifiers(event.modifierFlags)}
     func releaseKeys(){for k in heldKeys.sorted(){key(k,false)}}

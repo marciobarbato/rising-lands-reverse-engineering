@@ -129,8 +129,8 @@ int32_t macos_live_event(MacOSLiveDriver*d,uint32_t kind,uint32_t msg,int32_t x,
    d->pending[d->pending_count++]=(QueuedInput){frame+3,x,y,{right?0x205:0x202,wp&~3u,lp},0};d->mouse_until=frame+3;
   }
  }else if(kind==2){
-  const uint32_t keys[]={13,16,17,18,27,32,37,38,39,40,46,88},scans[]={0x1c,0x2a,0x1d,0x38,1,0x39,0x4b,0x48,0x4d,0x50,0x53,0x2d};
-  unsigned i=0;for(;i<12&&keys[i]!=vk;i++);if(i==12||down>1)return input_error(d,"UnsupportedMacVirtualKey");
+  const uint32_t keys[]={13,16,17,18,27,32,37,38,39,40,46,88,48,49,50,51,52,53,54,55,56,57},scans[]={0x1c,0x2a,0x1d,0x38,1,0x39,0x4b,0x48,0x4d,0x50,0x53,0x2d,0x0b,2,3,4,5,6,7,8,9,10};
+  unsigned i=0;for(;i<22&&keys[i]!=vk;i++){}if(i==22||down>1)return input_error(d,"UnsupportedMacVirtualKey");
   if(d->pending_count==4096)return input_error(d,"MacInputQueueCapacityExceeded");
   uint32_t lp=1|(scans[i]<<16)|((uint32_t)(vk==37||vk==38||vk==39||vk==40||vk==46)<<24)|((uint32_t)(d->held[18]!=0)<<29)|((uint32_t)(d->held[vk]!=0)<<30)|((uint32_t)!down<<31);
   d->pending[d->pending_count++]=(QueuedInput){frame,0,0,{down?0x100:0x101,vk,lp},0};d->held[vk]=down?-32768:0;
@@ -165,7 +165,7 @@ int32_t macos_live_human_phase(MacOSLiveDriver*d,uint32_t phase){
   QueuedInput q=d->pending[i];if(q.frame<=frame){if(q.cursor){d->cursor_x=q.x;d->cursor_y=q.y;flags|=1;}messages[count++]=q.message;}else d->pending[keep++]=q;
  }
  d->pending_count=keep;
- for(uint32_t vk=0;vk<256;vk++)if(d->held[vk])keys[nkeys++]=(MacOSInputKey){vk,d->held[vk]};
+ for(uint32_t vk=0;vk<256;vk++)if(d->held[vk]&&(vk<48||vk>57))keys[nkeys++]=(MacOSInputKey){vk,d->held[vk]};
  d->frame_input=(MacOSDeclaredInput){sizeof(d->frame_input),flags,d->cursor_x,d->cursor_y,messages,count,keys,nkeys};
  return macos_live_input_phase(d,2,&d->frame_input);
 }

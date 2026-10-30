@@ -56,7 +56,7 @@ class ScriptedInputTests(unittest.TestCase):
         r.event(170,dict(kind='mouse',msg=0x204,x=10,y=20));r.event(171,dict(kind='mouse',msg=0x203,x=30,y=40))
         s=r.export_script();msgs={m[0] for _,rows,_ in s.frames.values() for m in rows}
         self.assertTrue({0x100,0x101,0x200,0x203,0x204,0x205}.issubset(msgs));before=copy.deepcopy(r.journal())
-        for frame,event in [(128,dict(kind='key',vkey=17,down=True)),(180,dict(kind='key',vkey=49,down=True)),(180,dict(kind='mouse',msg=0x201,x=800,y=1))]:
+        for frame,event in [(128,dict(kind='key',vkey=17,down=True)),(180,dict(kind='key',vkey=65,down=True)),(180,dict(kind='mouse',msg=0x201,x=800,y=1))]:
             with self.assertRaises(ValueError):r.event(frame,event)
             self.assertEqual(r.journal(),before)
         with self.assertRaisesRegex(ValueError,'truncates'):r.export_script(stop_frame=171)
@@ -76,3 +76,9 @@ class ScriptedInputTests(unittest.TestCase):
             code="import runpy,json,sys; owner=runpy.run_path(sys.argv[1],run_name='macos_owner_validator'); rows,end=owner['carregar_entrada'](json.load(open(sys.argv[2]))); assert end==132 and len(rows)==3"
             result=subprocess.run([sys.executable,'-I','-B','-c',code,str(ROOT/'pesquisas-paralelas/missoes/m3/entrada_roteirizada.py'),str(p)],capture_output=True,text=True)
             self.assertEqual(result.returncode,0,result.stderr);self.assertEqual(p.read_bytes(),raw)
+
+    def test_digit_hotkey_is_wndproc_only_and_does_not_expand_async_key_domain(self):
+        r=MacOSSessionRecorder(ROOT);r.event(129,dict(kind='key',vkey=49,down=True));r.event(132,dict(kind='key',vkey=49,down=False))
+        s=r.export_script();self.assertEqual(s.frames[129][1][0],[0x100,49,1|(2<<16)])
+        self.assertEqual(s.frames[132][1][0],[0x101,49,1|(2<<16)|(1<<30)|(1<<31)])
+        self.assertTrue(all(49 not in keys for _,_,keys in s.frames.values()))
