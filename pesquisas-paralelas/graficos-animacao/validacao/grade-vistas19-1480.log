@@ -1,0 +1,15 @@
+[lease] graphics-view-restart-1480 waiting
+[lease] graphics-view-restart-1480 granted slots [0]
+native calls 40 last origin (19, 37)
+native calls 80 last origin (39, 37)
+native calls 120 last origin (19, 38)
+native calls 160 last origin (39, 38)
+native calls 200 last origin (19, 39)
+native calls 240 last origin (39, 39)
+native calls 280 last origin (19, 40)
+native calls 320 last origin (39, 40)
+native calls 360 last origin (19, 41)
+native calls 400 last origin (39, 41)
+native calls 440 last origin (19, 42)
+native calls 480 last origin (39, 42)
+completed 480

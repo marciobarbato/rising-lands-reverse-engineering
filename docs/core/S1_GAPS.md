@@ -8,7 +8,7 @@
 - Window `a` is natively validated: **638 comparisons, 0 mismatches**, all seven registers, ESP, changed bytes and boundary requests; 951 S1 frame states reproduced, original code unchanged. Report: `relatorios/lacunas-s1-a-emulada.json`.
 - Window `b` is natively validated: **120 comparisons, 0 mismatches**; 1,201 S1 frame states reproduced, original code unchanged. Report: `relatorios/lacunas-s1-b-emulada.json`.
 - All three windows total **1,410 comparisons, 0 mismatches**. The strict S1 routing provider and two requested query wrappers add **546 fresh native comparisons, 0 mismatches** (EnginEstVivant 268, BatimentGetDecalageConstruction 278), also replayed without a CPU. Total fresh comparisons: **1,956**. See [STATE_QUERIES](STATE_QUERIES.md).
-- The next steps are in "Resume".
+- Integrated on main at `71335aa` (Core `3f3913f`). AI/runtime's consumer wiring (`d2777b1`) is on `feat/re-ai-runtime`. "Resume" below now only reproduces the windows; open stops and next steps are in [CORE.md](../CORE.md#current-state-2026-10-30-0715).
 
 ## Bench: S1 resumed from its own snapshots
 

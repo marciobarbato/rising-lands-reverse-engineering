@@ -2,6 +2,83 @@
 
 Owner: graphics. Active implementation, synthetic/reference tests, indexed-buffer artifacts, and original-byte extracts live in `pesquisas-paralelas/graficos-animacao/`. Historical frozen releases are immutable records in the workspace archive and in the pre-organization Git history. Never edit a frozen release's text or inputs to modernize it: its manifest hashes identify the exact original record.
 
+## Current state — 2026-10-30 07:15
+
+This section is the summary; the sections after it are the cumulative contract history, kept as written.
+Exact inputs, ordering and hashes for every provider are in the [handoff](../pesquisas-paralelas/graficos-animacao/HANDOFF.md),
+whose final section "State at 2026-10-30 07:15" mirrors this one. Executable oracle: `RISING.EXE` SHA-256
+`6c556520…8543fb`, native code hash `02985de5…098518af4`.
+
+**Where the work is.** Three tiers, each with a different status:
+
+| Tier | Ref | Content |
+|---|---|---|
+| On `main` | up to `ad0a4a9` (merge of `24f0ec8`) | Render API **1.9**; CAVE structure guard; construction projectile types 15/16; P4 frame-484 text-boundary verdict; real S1 end-screen native capture; P6 guard fixes |
+| On `feat/re-graphics`, awaiting integration | `b1f07bf..bae1b18` (9 commits, pushed) | Finite 1,920-origin AffGame/RestoreAll view domain; recovered RestoreAll CAVE pair guard; S1 objectives compositor and native font-1 glyphs; S1 result/objectives AffGame phases; fresh RestoreAll reproduction; native AffText glyph matrix and S1 dependency captures (evidence only) |
+| Parked, **unvalidated** | `wip/re-graphics-*` (see below) | Codex work stopped at the 07:00 and 07:15 pauses |
+
+**Public API and providers.**
+
+| Module | Entry points | Status |
+|---|---|---|
+| `render_quadro.py` | `renderizar_quadro(memoria, *, superficie_anterior, catalogo, paleta, habitado, relogio, cache, hud, texto)`, `regioes_necessarias`, `carregar_superficie_inicial`, `carregar_cache_inicial`; `VERSAO_RENDER_QUADRO = (1,9)` | main. Contract below; consumed by the macOS app (Python 1.9 pin). The Rust engine still renders its own Graphics **1.7** domain (`rl_render_contrato() = 0x00010007`) |
+| `efeitos_logicos_exibicao.py` | `desenhar_jogo(memoria, habitado)` (AffGame `0x417698`), `restaurar_tudo(memoria, habitado)` (RestoreAll `0x474B08`), DirectDraw/bank helpers | main: 143/108 origins, sanctuary/CAVE pair, projectiles 15/16. Branch: both origin sets become the finite 1,920-origin matrix (`origens_efeitos_monde01.json`, new origins require map 64×64, camera 0, mode `0x12`); RestoreAll admits the same sanctuary/CAVE pair |
+| `colheita_exibicao_m3.py`, `camadas_colheita_m3.json` | builder type 7 harvest layers, added view origins | main (1.9) |
+| `telas_objetivos_s1.py` | `compor_objetivos_s1(memoria, superficie, *, catalogo)` → pixels, raster calls, clip effects (AffObjectif `0x47C6D3`) | branch |
+| `texto_bitmap_nativo.py` | font-1 line compositor and width query (AffString `0x4591C8`) | branch |
+| `telas_fluxo_s1.py` | `compor_affgame_s1(memoria, superficie, *, catalogo, catalogo_menu, ramo_pesquisa_u16)`: mode `0x13` immediate return, mode `0x11` objectives with INVENTE.CMP animation | branch |
+
+All providers read immutable `u8/u16/u32` memory, return new bytes plus ordered calls/effects, install no callbacks
+and raise the original address for any state outside the captured domain. No default text, background or map fallback.
+
+**Validated coverage (0 mismatches in every row).**
+
+| Proof | Result | Where |
+|---|---|---|
+| Render 1.9 full-surface chain, strict recorded AffText boundary | K1 **501/501**, P4 **3,001/3,001**, P5 **3,001/3,001**; 6,503 surfaces, 346,644 raster calls | main |
+| 1.9 added origins, isolated native calls | **43/43** calls, 35 origins | main |
+| HUD regression `--quadros 128 --hud` | **128/128** | main |
+| CAVE structure-domain scan | P3 **3,001/3,001**, P6 **2,272/2,272**, P7 **3,572/3,572** | main; regenerated on branch with no logic-provider stop |
+| P4 text boundary, original replay 129–484 | **356/356** | main |
+| Construction projectiles 15/16, native lifetimes | 16 + 16 phases, no DGROUP/CRT/arena writes | main |
+| S1 end screens, original frames 17001–17050 | **100/100** surfaces, **50/50** whole states; isolated MenuInit/PartieGetResultat **12/12**, AffObjectif **8/8** | main (`24f0ec8`) |
+| Finite view matrix, current provider | **3,840/3,840** native calls; P7 isolated origins **7/7** | branch |
+| RestoreAll CAVE pairs | **24/24**; fresh leased rerun byte-identical (28.0 s) | branch |
+| S1 objectives compositor | **7/7** surfaces, **1,519/1,519** raster calls, 7/7 DGROUP projections | branch |
+| S1 AffGame flow | result **11/11**, objectives **7/7** surfaces and raster traces | branch |
+| Domain gate `scripts/check.py --domain graphics` | **287 tests, PASS**, 165.6 s, at the branch tip merged with main (`889cd39`); replays committed captures only, no native run | branch |
+
+Native evidence captured on the branch but **not yet translated or compared**: AffText glyph matrix, 270 calls over
+six fonts (`evidencias/glifos-afftext-nativos.json.xz`), and 20 isolated S1 MenuInit/PartieGetResultat/AffObjectif
+dependency calls (`evidencias/s1-dependencias-nativas.json.xz`); manifest `validacao/native-glyph-s1-recovery-manifest.json`.
+
+**Open stops and owners.**
+
+| Stop | Meaning | Owner |
+|---|---|---|
+| `0x459454` | glyph-enabled AffText; production renders still stop here (the recorded boundary is validation-only) | Graphics: translate against the 270-call capture |
+| `0x4176A8` | game modes other than `0x12` in the gameplay renderer; MenuInit/LoadPie `0x4799C4` and opaque victory text for the S1 transition | Graphics; mission advance stays with Missions |
+| P3/P6/P7 chained pixel replay at the branch tip | queued under the lease, not completed on the branch | Graphics |
+| `0x415B77` | origins outside the finite MONDE01 matrix, other maps | Graphics |
+| `0x414A8A`, `0x41591F`, `0x408AC8`, `0x40863E`, other named stops | builder tasks, unit/structure states and RNG paths outside captured domains (full list in the contract below) | Graphics |
+| Rust render 1.7 → 1.9+ | port of the 1.8/1.9 tables, finite origins and S1 screens | Engine (Rust) workstream |
+| Integration of `b1f07bf..bae1b18` | merge into main after review | Coordinator |
+
+**Next steps.** (1) Coordinator reviews and integrates the nine branch commits. (2) Translate the AffText glyph
+provider against the 270-call capture and the S1 MenuInit screens against the 20 dependency calls, evidence first.
+(3) Run the current-source P3/P6/P7 chained pixel replay under the lease. (4) Hand the 1.9 data and the
+finite origin set to the Rust engine port.
+
+**Parked unvalidated WIP.** These branches are preserved, not reviewed and not validated; nothing in them counts as
+coverage until it is replayed and committed on `feat/re-graphics`:
+
+- `origin/wip/re-graphics-codex-0430` (`2add6fc`): glyph capture script, CAVE domain, P7 origins. Its native view
+  batches and guard work were already recovered into the branch commits above.
+- `origin/wip/re-graphics-codex-0700` (`e76b5f1`) and `origin/wip/re-graphics-0715` (`0c007c2`, a superset that adds
+  tests): both sit on `bae1b18`. They add a bitmap AffText provider (`texto_afftext_bitmap.py`), an S1 MenuInit screen
+  compositor (`telas_inicializacao_s1.py`) and a current P3/P6/P7 chain report. Their own logs claim AffText 270/270,
+  MenuInit 2/2 and P3/P6/P7 3,001/2,272/3,572 with a 287-test gate, but the final gate never ran.
+
 ## Banks, pixels, and palette
 
 The concatenated bank order is `BLOCS`, `TROOPS`, `VEHICULE`, `CREATURE`, `BUILDING`, `OTHERS`, with counts 1,345 / 2,848 / 915 / 1,920 / 611 / 4,517. Engine graphic IDs start at **1**; local/global API indices start at **0**. `INVENTE` and `MENU` are separate banks. Use `localizar`, not a guessed equality between an engine ID and a file index.
@@ -624,7 +701,7 @@ See `pesquisas-paralelas/graficos-animacao/FRONTEIRAS_EXIBICAO.md`: `fronteiras_
 **Render API, contract version 1.9** ([render_quadro.py](../pesquisas-paralelas/graficos-animacao/render_quadro.py)). This is the contract the macOS integration layer consumes. A change of any input, output field, format or stop semantics bumps `VERSAO_RENDER_QUADRO` (major for breaking changes, minor for additions); the version is returned in every result.
 
 The 1.7, 1.8 and 1.9 changelogs and scripted-probe boundary qualification are below. The earlier dispatch's heading/report
-said 1.6; published 1.7 is retained. The macOS consumer must update its explicit pin separately.
+said 1.6; published 1.7 is retained. The macOS consumer now pins Python Graphics 1.9 explicitly.
 
 ```python
 VERSAO_RENDER_QUADRO = (1, 9)
@@ -1040,5 +1117,63 @@ pointer load starts at `0x5099A4`. The read at `0x5099A6` belongs to the recorde
 
 The declared probe boundary therefore needs no glyph provider. The strict recorded adapter remains explicit and
 checks arguments and the complete incoming surface. Glyph-enabled execution remains unsupported; default rendering
-still reports `0x459454`. No blanket text bypass is added. [S1 end-screen capture preparation](../pesquisas-paralelas/graficos-animacao/S1_SCREEN_CAPTURE.md)
-requires a real late native checkpoint and has not yet produced result/objectives screen evidence.
+still reports `0x459454`. No blanket text bypass is added. [S1 end-screen capture](../pesquisas-paralelas/graficos-animacao/S1_SCREEN_CAPTURE.md)
+later found the real frame-17000 checkpoint and committed the native result/objectives evidence (`24f0ec8`, on main).
+
+### Interrupted-session recovery: published logic guards
+
+The current `efeitos_logicos_exibicao.py` retains AffGame's exact sanctuary/CAVE pair, construction projectile
+types15/16 at slot0/state1/phases0..15, and the pre-existing at-most-one raid-effect type31/32 domain. Native P6
+entries at between_frames221,245,1141 are checked directly against the current provider; the latter two use P6's
+verified native P3 prefix. The declared memory input, empty logic-write output and callback order are unchanged.
+
+RestoreAll now accepts the same sanctuary/CAVE pair, backed by the separately committed24-call original matrix
+(`cave-restoreall-pares-matriz.json.xz`):24/24 returns, no DGROUP/CRT/allocation change, no AffBatiments call.
+Its origin and projectile restrictions remain independent. AffGame's owned-empty CAVE matrix is8/8; this does not
+broaden sanctuary modes beyond4/5 in a pair. The executable identity remains `6c556520…8543fb`; original entries
+are AffGame0x417698, RestoreAll0x474B08, AffBatiments0x407DD3 and projectile guard0x46FF70. Gameplay pixels and
+render version1.9 are unchanged. Glyph0x459454, unproved origins and menu0x4176A8 remain explicit dependencies.
+
+### Complete finite view-effect matrix (1.9 follow-up)
+
+The [recovery ledger](../pesquisas-paralelas/graficos-animacao/RECOVERY_GRAPHICS_20261030.md) records all
+**3840/3840** original calls before translation: AffGame and RestoreAll at each of1920 exact origins
+(x0..39,y0..47), map64×64, viewport25×17, camera0, mode0x12. Both origin sets now enumerate that finite
+domain through `origens_efeitos_monde01.json`. New origins require the captured map/camera/mode; existing
+origin contracts retain their previous conditions. Other origins still stop at0x415B77. Structure,
+habitation, projectile and shake guards are unchanged, and no map-bounds fallback is added.
+
+The current provider matches all3840 calls with no additional logic/CRT write or RNG writer hit. Seven
+actual P7 origin calls pass7/7 with exact ordinary phase/state/surface hashes and separate AI flag/EAX
+checks. The P3/P6/P7 current-provider input scan has no remaining logic-effect stop in its captured
+windows; this is guard coverage rather than a new pixel-chain claim. See the
+[handoff](../pesquisas-paralelas/graficos-animacao/HANDOFF.md#finite-affgame-and-restoreall-view-domain)
+for input widths, verification order and reports. Render version remains1.9. The P3/P6/P7 chained
+pixel replay at the current source is still open (see "Current state" above).
+
+### S1 objectives glyph composition outside AffText
+
+[telas_objetivos_s1.py](../pesquisas-paralelas/graficos-animacao/telas_objetivos_s1.py) reconstructs the real
+S1 next-objectives page through AffObjectif0x47C6D3. All **7/7** complete surfaces, **1519/1519** raster calls
+and full DGROUP effects match the committed native frame17044–17050 captures. The1512 native glyph copies
+execute AffString0x4591C8; they are independent of the deliberately skipped AffText boundary.
+
+The pure API consumes read-only memory, an800×600 indexed surface and a catalog; it returns pixels, raster
+calls and ordered clip effects. It preserves the actual PT-BR bytes. Supported inputs are the captured first
+page(offset0,last-line36), font1, language/multibyte0/0 and original15-pixel line spacing. Clip save → temporary
+rectangle/fill →18 measured glyph lines → clip restore preserves original order. Unknown font/page/language
+and unreadable text remain dependencies. The
+[handoff](../pesquisas-paralelas/graficos-animacao/HANDOFF.md#s1-objectives-and-native-font1-glyphs-outside-afftext)
+records the exact input contract and original hashes. Full MenuInit/result transitions and integration in the
+gameplay frame API remain separate; its version is still1.9.
+
+The separate [S1 drawing-flow compositor](../pesquisas-paralelas/graficos-animacao/telas_fluxo_s1.py) also matches
+the complete AffGame phases: **11/11** result surfaces and **7/7** objectives surfaces/raster traces. The result
+mode0x13 follows the original immediate return. Objectives mode0x11 requires an explicit menu bank and research
+branch result0, draws the original INVENTE.CMP animation bob2/3/4, then restores the normal STRAT glyph source
+for AffObjectif. All three compressed menu payloads equal the captured native allocation hashes and sizes.
+Missing menu data and other branches/phases raise named dependencies. No callbacks or gameplay state mutate.
+This is a separate pixel API; the gameplay renderer still reports unsupported menu modes. Initial MenuInit,
+LoadPie backgrounds and opaque victory text remain separate transition dependencies. The
+[reference surface](../pesquisas-paralelas/graficos-animacao/artefatos/s1-objetivos-prova.png) retains the benchmark's
+declared LoadPie non-execution; it is not a newly captured background-enabled screen.

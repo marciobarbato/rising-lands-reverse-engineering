@@ -6,13 +6,7 @@
   "P7": 3572
  },
  "mismatches": 0,
- "next_unrelated_stops": {
-  "P7": {
-   "frame": 3217,
-   "address": "0x415b77",
-   "reason": "view origin (10, 15): vegetation/terrain handlers (0x411147, 0x412392, 0x415b77/0x415c19) only proved native on the sampled origins"
-  }
- },
+ "next_unrelated_stops": {},
  "origins": [
   {
    "probe": "K1",
@@ -111,5 +105,5 @@
   "janela-P7-2851-3275-api18.json.xz": "649c113bf7e118224e9664f73dd1bc919ea3695692f7c98a55b731bde8205cdb",
   "janela-P7-3276-3700-api18.json.xz": "2a1faa4006d8d8bb4691e6a9089f496b257985d2b5749159b9339ad398f29868"
  },
- "provider_sha256": "1a99b2620bb161af04d1a4b024ae3235c81c6d004becdcd1cf0948ec715eaa80"
+ "provider_sha256": "2006e1fba23d01ca77c21200edb0179813c5c10a1570b0162dd66e8709d31573"
 }
