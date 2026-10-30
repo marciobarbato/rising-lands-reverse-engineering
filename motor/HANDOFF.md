@@ -1414,3 +1414,29 @@ This commit delivers the bounded native providers and regression evidence.
 Final-source advancing P3/P6/P7 state/surface windows and P6 whole-state4544-phase
 proof are the following verification piece of this same task. No S1/D1 mission
 completion or coverage beyond those published windows is claimed.
+
+## Fifth continuation piece — shifted colonist fatigue icon
+
+The first own-world P6/P7 surface attempts each passed1,903 surfaces, then
+stopped at frame2032,0x4135fa. This exposed a renderer omission: pinned
+Graphics1.9 already permits shifted tired icons for type9 states2/7/13 and draws
+at `x+dx-8,y+dy-11`. Rust kept the old blanket shifted-icon stop and unshifted
+coordinates. The correction matches that exact domain; other guards remain.
+Original0x4135fa loads the saved origin locals before the draw calls0x41362e/
+0x413650. No ABI or render-contract version changes.
+
+[Piece5 report](validation/chain8/piece5/summary.json) preserves both failed
+advancing attempts and the interrupted P6 whole-state log. That run was canceled
+before source mutation after its logged frame1750 milestone; no completed proof
+is claimed for it. The corrected renderer passes **8/8** immutable original
+P6 snapshots2031–2038: exact pixels, original/Python raster calls, Python effects
+and cache. This is an isolated snapshot regression, not the final advancing run.
+
+The full gate passes again:30 Rust/63 Python tests,666/666 input cases,75/75 pilot
+comparisons,C/Swift/Metal. Exclusive full-window scripted play benchmarks and
+the9,200-frame M2 benchmark pass; M2 terminal state/surface hashes, generation
+and clock are unchanged. Exact timing/provenance are retained in piece5.
+Fresh final-byte S1 snapshot variants also pass484/484,120/120,121/121 (10 declared
+voice skips), with their full records reserved for the final verification report.
+Final advancing state/surface runs now use this corrected, separately committed
+implementation. Main remains untouched.

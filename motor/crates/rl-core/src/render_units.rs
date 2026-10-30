@@ -172,7 +172,7 @@ impl Context<'_> {
             let life = w(r, 0x74);
             let tired = w(r, 4) == w(r, 0x76) && life < 100;
             if tired && (life / 5).is_multiple_of(2) && (kind <= 10 || kind == 25) {
-                if dx != 0 || dy != 0 {
+                if (dx != 0 || dy != 0) && !(kind == 9 && matches!(r[2], 2 | 7 | 13)) {
                     return self.stop(
                         0x4135fa,
                         "tired icon with nonzero body shift: origin not verified",
@@ -185,7 +185,7 @@ impl Context<'_> {
                 } else {
                     return self.stop(0x413650, "owner has no player table");
                 };
-                self.bob(x - 8, y - 11, w(r, 4) + 0x1e2b, true, owner)?;
+                self.bob(px - 8, py - 11, w(r, 4) + 0x1e2b, true, owner)?;
             }
             if overlay {
                 self.experience(r, px, py - 9, false)?;
