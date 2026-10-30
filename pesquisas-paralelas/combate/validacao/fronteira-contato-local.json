@@ -1,0 +1,43 @@
+{
+ "schema": "rising-lands/combat-contact-boundary-differential/1",
+ "summary": {
+  "cases": 2,
+  "mismatches": 0
+ },
+ "capture_sha256": "8d2f5f31a32e154fae0012e4fc34cc303023f0e0ffc1d260b34543c9f584e14f",
+ "cases": [
+  {
+   "routine": "CalculAttaqueEngin",
+   "counter": 10608,
+   "whole_state_equal": true,
+   "registers_compared": [
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "register_differences": {},
+   "dependency": null,
+   "dependency_equal": true
+  },
+  {
+   "routine": "InfligeDegat",
+   "counter": 10683,
+   "whole_state_equal": true,
+   "registers_compared": [],
+   "register_differences": {},
+   "dependency": {
+    "name": "iagUnitSendMessage",
+    "address": 4729288,
+    "arguments": [
+     0,
+     72,
+     16
+    ]
+   },
+   "dependency_equal": true
+  }
+ ]
+}
