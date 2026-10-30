@@ -92,12 +92,17 @@ def main(a):
     if not (16933<=start<17032 and 17044<=a.to<=17050):
         raise ValueError('Requires real S1 checkpoint16933..17031; stop17044..17050 to include both transitions')
     raw=original.remoto(original.PROBE_ROOT+'entradas/S1.json');b.roteiro.quadros=m.carregar_entrada(json.loads(raw))[0]
+    metadata_path=Path(a.snapshot).parent/'passo-a.json';checkpoint_metadata=None
+    if metadata_path.exists():
+        metadata=json.loads(metadata_path.read_text());assert metadata['probe']=='S1' and metadata['input_sha256']==sha(raw)
+        checkpoint_metadata=dict(path=str(metadata_path),sha256=sha(metadata_path.read_bytes()))
     iso=TelasS1(b);iso.instalar();checks=[];phases=[];t=time.monotonic()
     phasecap=object.__new__(CapturaTextoTela);phasecap.b=b;phasecap.blobs=iso.cap.blobs;phasecap.current=None
     iso.phasecap=phasecap
     refs={}
     if a.probe_records:
         refs={r['frame']:r for r in map(json.loads,lzma.decompress(Path(a.probe_records).read_bytes()).splitlines())}
+        assert b.resumo_imagem(b.imagem())['sha256']==refs[start]['state_sha256'],('S1 opening checkpoint differs',start)
     def blit(c,pc,size,user):
         if iso.ativo:phasecap.blit(c,pc,size,user)
     def text(c,pc,size,user):
@@ -131,6 +136,7 @@ def main(a):
     result=dict(schema='rising-lands/s1-native-isolated-screens/1',method=__doc__,probe_ref=a.ref,frames=[start+1,a.to],
         executable_sha256=__import__('emulador').HASH_ORIGINAL,code_sha256=b.sha256_codigo(),
         source_sha256=sha(Path(__file__).read_bytes()),snapshot_sha256=sha(Path(a.snapshot).read_bytes()),input_sha256=sha(raw),
+        checkpoint_metadata=checkpoint_metadata,probe_records_sha256=sha(Path(a.probe_records).read_bytes()) if a.probe_records else None,
         rows=iso.registros,phases=phases,blobs=iso.cap.blobs,checks=checks,elapsed_seconds=time.monotonic()-t)
     Path(a.output).write_bytes(lzma.compress(json.dumps(result).encode()));print('native isolated screens',len(iso.registros),flush=True)
 
