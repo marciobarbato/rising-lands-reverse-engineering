@@ -2,6 +2,112 @@
 
 Owner: combat. Source and tests live in `pesquisas-paralelas/combate/`. Shared damage, reload, movement, and task primitives remain in `ferramentas/`; changes there belong to core and require a contract handoff.
 
+## M3 turret input providers (2026-10-30)
+
+`ordens_torres_combate.OrdensTorresCombate(memoria, *, bonus=None)` binds live
+Core `MemoriaQuadro`-compatible buffers, initializes no bytes, and reads
+selection, target cells, owners, types and bonuses at each call. Bootstrap
+through `ambiente_combate_raid`. The default bonus is Economy's
+`BonusUnidades.da_memoria(memoria)`; an explicit replacement implements
+`consultar(owner, type, selector, *, ecx) -> u32`. Core's
+`chamadas_quadro_core.caso_estrutura` supplies the masked structure centre.
+
+| Provider / method | Original entry and inputs | Exact result |
+|---|---|---|
+| `BatimentPeutAttaquer` / `batiment_peut_attaquer(regs)` | `0x42436c`: AX source structure, DL mode, BX reference; callers `0x42a4dc`, `0x42a9ed`, `0x42b2a3` | EAX, EBX, EDX reconstructed; ECX, ESI, EDI, EBP preserved. Only **AL** is boolean. Query writes no game bytes. |
+| `BatimentInitAttaqueSelect` / `batiment_init_attaque_select(regs)` | `0x4242cc`: AL player, DL mode, BX reference; tag-14 caller `0x45f13f` | EAX selected record pointer, EBX zero-extended mode, EDX twice player; ECX, ESI, EDI, EBP preserved. |
+
+Pass every register in `EAX, EBX, ECX, EDX, ESI, EDI, EBP`; every result has all
+seven, including dirty preserved upper halves. No register has an unknown or
+`None` placeholder. Optional input `ESP` returns `ESP+4` (plain RET). Optional
+`EFLAGS` returns exact arithmetic flags; the query requires actual entry ESP
+because its shared `ADD ESP,14h` epilogue determines them. Setter flags come
+from its final 32-bit mode comparison or 16-bit self-target comparison.
+`chamar(name, regs, retorno=address)` or either method's `retorno` keyword also
+returns that explicit caller return address as EIP. Entry EIP is not an output
+return address. The native matrix compares all ten fields, including ESP,
+EIP and EFLAGS, using the declared native leaf stack.
+
+AI/runtime installs both callables over its existing non-turret prefix:
+
+```python
+from ambiente_combate_raid import ROOT
+from ordens_torres_combate import OrdensTorresCombate
+
+combat_orders = OrdensTorresCombate(m)
+input_providers.funcoes.update(combat_orders.provedores())
+```
+
+`provedores()` returns the two named register callables; `chamar(name, regs)`
+is the equivalent dispatcher. Rust consumes the same widths, register
+results and memory order; no Rust or AI-owned file is changed here.
+
+Protected source/selected IDs are 0..999 after u16 truncation; selected player
+is 0..3 after u8 truncation. The query accepts every mode for non-turrets,
+which return AL=0 before reading targets. Turrets are types 10/11 and support
+initialized modes 1 (unit 0..799), 3 (structure 0..999), and 5 (returns false
+without dereferencing the reference). Other turret modes reach uninitialized
+native stack locals at `0x424590` and raise explicitly. Target structure
+geometry uses Core's supported type 0..21 domain. Economy supports owners
+0..3 and the native 4/200 early-zero cases. Invalid protected inputs fail;
+there is no invented neutral target, bonus or empty callback.
+
+The original query rejects owner-200 targets and flying units for type 10;
+it adds no active-state, alliance or target-liveness gate. Source range uses
+the serialized **origin** `+2`, while structure targets use the masked centre.
+Both turrets use base range 7 plus `BonusGetValEngin(owner, 11, 4) 0x428cc0`,
+with low-u16 effective radius and an inclusive squared-distance comparison.
+Unit targets read `+0x7c`, not `+8`. Repeated target getters retain original
+order. EAX keeps the distance's upper bytes on both true and false returns;
+EBX/EDX retain Distance2d's asymmetric branch results. Mode-5 bonus clobbers
+and early-rejection registers are reconstructed too.
+
+The setter stores the u16 reference at selected record `+0x86` **before** the
+mode byte at `+0x7b`. Mode 3 targeting that same selected structure returns
+without stores. It has no type, liveness or active-state gate and accepts
+every mode/reference byte/word, including FFFF. Neither leaf calls audio,
+allocates, advances frames, or applies damage.
+
+Original-first evidence commit `40e05dc` contains 148 query and 40 setter
+cases on pinned Missions P1/frame250 and P6/frame2020. All native calls return,
+with zero faults, limits or outside-state writes. Fresh native differential:
+**188 cases, 0 mismatches**, all ten registers and every checkpoint byte.
+Store order is checked against original stores by the regression suite.
+Type/owner/bonus/step-cell/selection changes are explicit leaf variations;
+no physical turret construction is claimed. See the
+[case matrix](../pesquisas-paralelas/combate/TURRET_CAPTURE_MATRIX.md) and
+[native report](../pesquisas-paralelas/combate/validacao/ordens-torres-native.json).
+
+## M4 raid target contact boundary (2026-10-30)
+
+A bounded native unit window from real frame9000 moves soldiers 0..2 toward
+`0x2e03` through original movement, then resumes raid unit 16. Unit 2 stands
+on that cell; units 0/1 settle beside it. Native auto-targeting enters
+`CalculAttaqueEngin` at counter10608. At counter10671, distance squared 4,
+the driver issues reciprocal native attack orders; the first captured
+`InfligeDegat` is at counter10683. No positions/life/occupancy are patched.
+
+The existing live Combat implementation matches the two isolated original
+entries with **0 mismatches**: whole memory plus the six preserved registers
+for the void attack API, and whole memory plus exact callback arguments for
+damage up to `iagUnitSendMessage(0, 0x48, 16) 0x4829c8`. Supplemental original
+evidence is committed as `aa82d33`; the
+[boundary report](../pesquisas-paralelas/combate/validacao/fronteira-contato-local.json)
+states the compared register scope. No new missing Combat body was identified
+before this AI-owned boundary. The first unrestricted isolated damage attempt
+continued into diplomacy/MessageBoxSet and faulted at unresolved
+`KERNEL32!GetPrivateProfileStringA` (IAT `0x5231b0`, target `0x1235f0`); its
+unchanged partial capture is preserved, not counted as a pass.
+
+AI damage message 0x48, diplomacy (`MAJSympathie`, `PlayerResetAllie`),
+presentation/import handling and Core lifecycle/level effects remain named
+dependencies of the fight chain. This window did not reach death/removal and
+does not establish a complete D1 defeat. Full S1 snapshots were not present in
+this checkout; the available committed Missions probe states were used.
+The all-16-unit D1 search and full scripted-input fight/death captures remain
+with the coordinator/Mac mini. No multi-hour native command is required for
+these two completed leaves.
+
 ## Real M2.3 raid memory API (2026-10-29)
 
 `combate_raid_vivo.CombateRaidVivo(memoria, *, consulta=None, efeito=None, mundo=None, som=None)`

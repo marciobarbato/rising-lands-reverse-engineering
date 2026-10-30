@@ -1,0 +1,3 @@
+[lease] combat-turret-orders-original waiting
+[lease] combat-turret-orders-original granted slots [0]
+{"cases": {"BatimentPeutAttaquer": 148, "BatimentInitAttaqueSelect": 40}, "returns": 188, "faults": 0, "limits": 0, "outside_writes": 0}
