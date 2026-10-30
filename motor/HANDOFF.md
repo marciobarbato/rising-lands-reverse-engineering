@@ -754,3 +754,206 @@ The probe proof CLI is an offline fixture tool: its default scope is the
 explicit qualified non-execution contract; `--strict` checks production glyph
 stops. That default never changes the production renderer. Full P3 after frame
 300 and P4–P7 require their separate later-version evidence/port.
+
+## Stage 4 — declared player input, implementation contract
+
+The feature branch merges main `ef52cb0`, including Core vision/groups, Missions'
+P1/P2 pass-2 evidence, Economy's CAVE routines and Graphics 1.8. The input
+reference profile is pinned to the contained AI/runtime merge `a7f5d49`; the previous no-input logic and Graphics profiles remain at their
+reviewed revisions. All transitive source/fixture bytes still come from Git
+objects. `player-reference-pins.json` additionally checks immutable input files,
+probe records, masks, policies and captures in both the snapshot and checkout.
+No source/evidence owned by another front is edited.
+
+ABI **1.5** adds `rl_passo_quadro_entrada` and `rl_eventos_entrada`. Older ABI
+creation versions and every existing signature/layout remain supported. The
+phase entry takes the unchanged 72-byte frame context plus a copied 48-byte
+`RlDeclaredInput`: optional held cursor, ordered `(message,wParam,lParam)` array
+and a per-phase signed key table (omitted keys answer zero, as the schema says).
+Phase 2 pumps the messages and cursor; phase 3 takes the frame's key answers
+with no messages. Cursor hold is independent of the game's temporary cursor
+stores. Loading a world resets the held cursor; subsequent routine mutations
+preserve it. The caller owns frame scheduling and passes each schema frame's
+answers at these two entries. The library retains no foreign pointer.
+
+The copied 64-byte event records expose every consumed input, the complete
+SetPlayerOrdre/ProcessInputGame packets and exact jump target, plus text/sound
+requests. Size queries preserve the log. Failed phases leave game state,
+clock, generation, previous frame events and the frame input unchanged; their
+actual attempted input/order prefix remains available separately. Copy the
+thread-local error before other successful ABI queries, as in the older ABI.
+Neither a failure nor a diagnostic log supplies a resumable partial game state.
+
+Flags 2 and 4 explicitly declare Missions' non-executed TextGetMessage and
+sound roots. They reproduce the published probe contract. Without flag 2 a
+null text table stops by name at `0x478a47`; a loaded table is read normally.
+Without flag 4 sound uses Audio's exact unopened private image, free-handle
+checks and real PostSound/StopSound returns (zero), and Manage clears its dirty
+word and returns one. Initialized audio stops; unchanged-EAX is confined to
+the explicit Missions non-execution declaration. Production rendering still
+has its separate `AffText 0x459454` glyph boundary.
+
+The native input path includes WndProc's key/mouse domain, InputGame's declared
+keys, zones, drag selection, minimap/scroll and HUD construction page; packet
+production and the reference's ProcessInputGame target dispatch; selection,
+movement/attack/construction/harvest/mine/depot setters; action Bags/icons and
+resource gates/debits; terrain placement, shared region/color/fill scratch;
+builder state 11 and construction progression; normal-owner movement sight,
+light reference counts and minimap layers. Existing native movement, AI,
+projectile and frame providers remain shared. Unknown/unbound branches fail by
+original name/address. The current composition's CAVE body, recruitment,
+unload, groups and remaining Core/provider wiring still delimit its domain;
+this is not a complete Economy work-cycle or general combat migration.
+
+`player_proof.py` starts one native world at the verified M2.2 frame-128 state
+and chains actual native phases. It compares exactly the indicator set of
+`provar_entrada_ia`, every consumed input and every order against pinned Python
+and immutable Mac mini records. Stopping-phase input/order prefixes and the
+named dependency/address are compared separately. P1/P2 optionally add the
+published pass-2 whole-state masks; every complete delta, opening/checkpoint
+summary and masked hash is independently verified, and each native phase is
+compared without importing a later original state. Between-frame registers
+are checked; CalculGame's discarded leftover EAX is explicitly unmodeled.
+The virtual clock starts at tick 129, the prior load-tail plus 128 frame bodies.
+
+The leaf runner compares captured reads/changed bytes and explicit fixture
+padding, with defined scalar returns checked separately. Core's sparse native
+movement footprints omit transitive live-view inputs; those additional fixture
+inputs come explicitly from the verified original MONDE01 checkpoint, including
+its 64×64 dimensions and terrain/bonus views. They are not inferred game
+behavior or original claims for padding. The two out-of-frame cases are a
+changing KeyTestRelease stream and InitInputPlayer's allocator: neither is a
+per-frame fixed-key-table operation from the already loaded checkpoint.
+No new original emulation or asset payload is included. Completed committed-run
+results, regression logs and remaining boundaries follow in the delivery record.
+
+### Input round 3 resync
+
+`player_pages.rs` mechanically follows the input reference at `a7f5d49`:
+Ctrl deposit mode, pages 9/0xc/0xb/2/7, field/mine/cave deposit staging,
+structure targeting with troops, and thirteen selection/structure predicates.
+It produces tags 0x10/0x14/0x15/0xe/0x22/0x24 and the four deposit-table
+packets through the same packet writer. It includes the upstream army-type
+correction. Core's newly bound `EnginSelectPeutEntrer` mode-3 boolean projection
+is shared by those hover branches; this does not wire state-13 execution.
+
+The 203 new original leaf captures are pinned exactly. The offline adapter
+supplies a zero-return text boundary only where the original case explicitly
+records that non-execution contract. It compares the consumed text message,
+call site and return in order. This also completes six earlier leaf cases
+whose captures declare the same boundary. Every remaining leaf stop must match
+the pinned Python report by name and original address; unknown stops fail the
+proof. Production ABI text/sound flags remain explicit. No original x86 run,
+reference edit, glyph reconstruction or Graphics 1.8 renderer port is implied.
+
+### Published segmented P6 state evidence
+
+Main `16b63ac` publishes P6's three-part, 4,544-phase window. The input source
+profile stays at `a7f5d49`; `player-window-pins.json` independently pins the
+immutable P6 artifacts at `16b63ac`. The reader verifies the Git blob, checkout
+and cache identities, compressed parts, decoded openings and deltas. A later
+original opening must equal the preceding replayed end before comparison can
+continue. The native world is never reloaded at a segment boundary. Reports
+identify which raw parts were actually verified; the frame-220 composition stop
+prevents a claim for the entire window.
+
+This reader extension changes no Rust code, ABI, compiled library, no-input
+comparer or renderer. The full post-restart runtime regressions were run from
+clean implementation `e41d755`; final reader/probe and integration checks use
+the subsequent reader commit, with the identical release library SHA-256.
+
+## Stage 4 delivery — 2026-10-30
+
+Native implementation: `e41d755`; independently pinned segmented reader:
+`8d60b00`. Main snapshot `13dd534` is merged as `7b3f58d`. The release library
+SHA-256 is `7070b80561c84bc36cb3b4543f2a25d2e20bc8c6dc4318b754f1a73e159c38b2`.
+Every native source and both the library and fixture executable still match
+their respective completed proofs. The [report manifest](validation/stage4/manifest.json)
+checks every packaged artifact; [summary](validation/stage4/summary.json) records
+all scopes, counts, timings, pins, stops and reproduction commands.
+
+ABI **1.5** remains additive: `rl_passo_quadro_entrada` and `rl_eventos_entrada`;
+the older creation versions, existing signatures and layouts are unchanged.
+
+The full original leaf battery exercised **666** cases: **659 completed equal**,
+**zero mismatches**, **seven exact named stops**, **13 text requests equal** and
+two explicit skips. Round 3 alone is **203 cases: 201 completed equal and two
+matching Combat stops**. Its completed native/preparation/comparison run took
+159.644 seconds, excluding module-import/reference-cache setup.
+
+| Probe | Complete frames equal | Whole-state phases equal | Compared bytes per phase | Proof seconds | First stop |
+|---|---:|---:|---:|---:|---|
+| P1 | 501/501 | 1,002/1,002 | 16,019,748 | 233.435 | none |
+| P2 | 601/601 | 1,202/1,202 | 16,014,614 | 239.677 | none |
+| P3 | 91 (129–219) | indicator proof | — | 37.019 | frame 220, phase 3, `BatimentNextEtape type 3 0x426aff` |
+| P6 | 91 (129–219) | 183-phase reachable prefix of 4,544 | 16,002,289 | 74.605 | frame 220, phase 3, `BatimentNextEtape type 3 0x426aff` |
+| P7 | 91 (129–219) | indicator proof | — | 39.852 | frame 220, phase 3, `BatimentNextEtape type 3 0x426aff` |
+| K1 | 12 (129–140) | indicator proof | — | 26.941 | frame 141, phase 2, `AffGame 0x415b77` |
+
+All six compare pinned Python and original indicators, consumed inputs and order
+packets. Stopping-phase names, addresses and input/order prefixes agree. Whole
+state uses each published mask exactly: P1 155,587 bytes, P2 160,721 bytes and
+P6 173,046 bytes. The original opening equals accepted frame 128. Every compared
+phase and modeled register agrees, with no allocation/free delta or extra block.
+CalculGame's discarded EAX and CPU flags are not claimed. P6 includes the equal
+`between_frames220`; its unsupported CalculGame phase is not compared as a full
+state. Later P6 parts are pinned but not replayed beyond that stop.
+
+No-input regressions remain equal: **M2.2 257/257 phases** (39.180 seconds for
+proof/comparison, 1.322520 seconds inside the phase API) and **M2.3
+18,401/18,401 phases**, from ten declared original openings. M2.3 checks full
+allocation records, RNGs, bindings, boundaries, immutable tables and modeled
+registers under the published policy, with zero compared-byte differences.
+Its 9,200 frames took 110.550740 seconds inside the C ABI: **83.22 frames/s**.
+Each segment is separately leased and bounded; the actual executed commands,
+part reports and original opening/end hash chain are packaged.
+
+Renderer regressions are **128/128** against Python and original, and
+**9,200/9,200** original full surfaces in one uninterrupted native engine/cache
+chain. The qualified Graphics 1.7 probe proofs remain **P1 501/501, P2 601/601,
+P3 172/172** under their recorded AffText non-execution contract. They are not
+production glyph reconstruction or input simulation beyond its stops.
+The shared-MacBook release run measured **195.80 renders/s** and **56.44 frames/s
+for engine + render + caller copies** over 9,200 surfaces (engine 116.028413 s;
+render 46.985778 s). Initialization, proof work, exports and app presentation
+are excluded. Debug Swift/Metal timing is a correctness smoke, not this benchmark.
+
+`sh motor/validate.sh` passes on merged snapshot `13dd534`: fmt, strict Clippy,
+28 Rust tests, 63 discovered Python tests (plus the isolated renderer/input
+checks), 75/75 pilot records, C layouts, Swift ABI 1.5 and 128 Metal surfaces.
+Execution after lease grant: **289.931 seconds**. `python3 -B scripts/check.py`
+also passes: **1,982 tests, 621 documented optional skips**, **414.860 seconds**
+after grant. The lease journal separates queue time from execution; no completed
+job in this battery reached nine minutes after grant. The corrected full M2.2
+command explicitly uses `--frames 128 --m22`; the initial one-frame runner smoke
+is not the basis of the 257-phase claim.
+
+Seven remaining leaf stops are `BatimentInitAttaqueSelect 0x45f13f`,
+`InitRecruteTroupe 0x45f1a9`, `SetDechargeCaveEnginSelect 0x45f085`,
+`CalculIconeAction structure selected 0x45e9bf`, `MiniMapSetPos 0x42bb5d`, and
+`BatimentPeutAttaquer` at `0x42b2a3`/`0x42a4dc`. The two leaf skips are the
+changing KeyTestRelease stream and InitInputPlayer's allocator, outside the
+fixed-key-table/already-loaded-frame contract. No original x86 captures were
+regenerated. The 9,200-frame renderer regression used original hashes; Python
+rendering was rerun for 128 frames and the qualified probe windows. Remaining
+state-13/work-cycle/recruitment/combat wiring, initialized audio, production
+glyphs, Graphics 1.8+, later probe phases and macOS input consumption remain
+separate work. No main integration or acceptance is recorded here.
+
+Reproduce individual native jobs through the heavy lease (at most 1,140 seconds
+after grant), using fresh output paths. In particular:
+
+```sh
+python3 "$lease" engine-input-P6 -- python3 -B motor/testes/player_proof.py \
+  --probe P6 --python --whole-state \
+  --library motor/target/release/librising_engine.dylib --output .local/recheck-P6.json
+python3 "$lease" engine-m22 -- python3 -B motor/testes/frame_differential.py \
+  --frames 128 --m22 --library motor/target/release/librising_engine.dylib \
+  --output .local/recheck-m22.json
+```
+
+Set `lease` to the coordination helper path from the machine rules. Build release
+with the same workspace/lockfile first. The complete command descriptions and
+source revisions are in `validation/stage4/commands.json`; M2.3 parts must be
+separate leased invocations before aggregation. No native runtime or original
+reference file changes are needed to reproduce these results.

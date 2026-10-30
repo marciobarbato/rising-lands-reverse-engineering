@@ -672,3 +672,31 @@ Contract and counts: [VISION_GROUPS](VISION_GROUPS.md). Commits: `f708b15` (case
   1. ai-runtime wires `provedores_visao` into `composicao_encadeada_ia` (BatimentIllumine/BatimentDecouvre) and `provedores_entrada_ia` (Sauve/Restaure/EnginGetCentreGroupe/MiniMapSetPos/MiniMapRecentre through `VisaoGrupos.chamar`), then reruns P3/P6/P7/K1 past frames 200/220.
   2. Economy replaces its pending `SaidaRecrutamentoPendente` with `escolher_saida(m)` and resumes SortieTroupe through `provedor_saida`; Core replays their capture once on main.
   3. Mac mini: the scripted-input probes past these stops are the ground truth for the frame-level chain (no new Core capture is needed for these routines).
+
+### Economy's frame-125 minimap divergence on `feat/re-core`
+
+Contract: [MINIMAP_FRAME125](MINIMAP_FRAME125.md). Capture `cce7511` (original only, before any change).
+- **Answer**: not a Core translation bug. The 196 bytes from 0x47933a26 (32 → 162) are BatimentModifyMap's SetMiniMap mode 6 (cave footprint), not DecouvreTerrain. Economy's `ciclo_trabalho` calls BatimentModifyMap at 0x41fa88 without EDX (`ARGUMENTOS` = EAX only). The original has DL = 1 there (0x41fa7c `mov edx, 1`, preserved by BatimentHabitable). `provedor_entrada` entered 0, so mode 7 ran. Natively, DL = 0 differs from the in-situ DL = 1 in exactly those 196 bytes.
+- **Validated natively at the exact frame-125 state** (Economy's bench rerun; the call equals Economy's committed record): 7 cases (DecouvreTerrain, IllumineTerrain and BatimentModifyMap in situ; BatimentModifyMap DL 0/1, also before the light; DecouvreTerrain radius 3). Result: 0 mismatches, and the provider shapes checked.
+- **Core change**: `provedor_entrada` raises `ArgumentoNaoPassado` when a behaviour argument register is omitted (`ARGUMENTOS_EXIGIDOS`: DecouvreTerrain/IllumineTerrain AX/DX/BL, BatimentModifyMap AX/DL, TerrainEstDecouvert AX/DL). STRUCTURE_ENTRY was revalidated natively because `entrada_estruturas.py` changed.
+- **Owed by Economy**: `ARGUMENTOS['BatimentModifyMap'] = {'EAX': 0xffff, 'EDX': 0xff}` and `EDX=1` at 0x41fa88, then rerun both compositions. Frame 125 then matches; this was checked CPU-free with and without `--base`.
+
+### S1 hunger path: EnginSetFatigue, ChercheVegetLibre, ChercheTypeBatimentProximite, EteintTerrain on `feat/re-core`
+
+Contract and counts: [HUNGER_SEARCH_LIGHT](HUNGER_SEARCH_LIGHT.md).
+- **Why.** Economy's state-19 body and SortieTroupe's abandonment (feat/re-economy `bfef1ce`) name these routines. S1 enters EnginSetFatigue and its ChercheVegetLibre at frame 7958.
+- **Captured first** (`validar_fadiga_vegetacao.py --capturar`, original only), on Economy's hunger scenario (frame 1200) and abandonment scenario (frame 470). In-situ calls, nested snapshots and declared leaf variants. Paths reproduced, code unchanged.
+- **Translated** (`fadiga_vegetacao.FadigaVegetacao`, every register):
+  - EnginSetFatigue, with TestRessource (Economy) and PlaySnd_PostSound (Audio) as named dependencies;
+  - ChercheVegetLibre, with EnginPeutPasser inline for types 0..2/4..10 and stack-residue EAX exact given ESP;
+  - ChercheTypeBatimentProximite;
+  - EteintTerrain (`apagar_area` plus exact exit registers).
+- **Native differential:** 444 comparisons, 0 mismatches (fome 399, abandono 45). The first run's 8 mismatches are preserved and explained in the contract.
+- **Provider:** `provedor_fadiga(fadiga, outros=None)`. Required registers raise `ArgumentoNaoPassado`, and ChercheVegetLibre also requires `_pilha` = [unit]. `ESP` is optional.
+- **Owed by Economy:**
+  - `alimentacao.ARGUMENTOS['ChercheVegetLibre']` must include ECX (0x43); today `_ext` drops it, so the provider refuses the call;
+  - route `EteintTerrain` (`_abandonar`) and `ChercheVegetLibre` through `provedor_fadiga`.
+- **Gate fix done first:** see [MINIMAP_FRAME125](MINIMAP_FRAME125.md#binding-to-economys-bench-gate-fix). The frame-125 report no longer pins Economy's bench; commit `aea3999`.
+- **Next (coordinator):**
+  - AI/runtime's stops: SetMiniMap from CalculWorkEngin `0x44c437` (P5 760) and TerrainEstGc for objects ≥ 0x1d (P7 2801, P4 460);
+  - the call address passed to `som`.

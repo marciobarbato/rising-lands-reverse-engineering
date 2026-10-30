@@ -35,7 +35,7 @@ class PlaybackServiceTests(unittest.TestCase):
         self.assertEqual(result['render']['status'], 'undrawn')
         self.assertIsNone(result['render']['stop'])
         self.assertNotIn('inherited_stop', result['render'])
-        self.assertEqual(result['render']['version'], [1, 5])
+        self.assertEqual(result['render']['version'], [1, 8])
         self.assertIn('image', result['render'])
         self.assertTrue(result['render']['hud'])
         self.assertTrue(result['render']['equals_native_phase_end'])
@@ -52,6 +52,17 @@ class PlaybackServiceTests(unittest.TestCase):
         self.assertFalse(client.request(dict(id=5, operation='phase', phase='unknown'))['ok'])
         self.assertEqual(client.request(dict(id=6, operation='phase', phase='frame1'))['playback']['summary_sha256'], result['summary_sha256'])
         self.assertEqual(client.request(dict(id=7, operation='reset'))['playback']['summary_sha256'], initial['summary_sha256'])
+        self.assertFalse(client.request(dict(id=80,operation='record-event',frame=129,event=dict(kind='key',vkey=17,down=True)))['ok'])
+        self.assertTrue(client.request(dict(id=81,operation='record-start'))['playback']['recording'])
+        for i,event in enumerate([dict(kind='key',vkey=17,down=True),dict(kind='mouse',msg=0x201,x=400,y=272)]):
+            self.assertTrue(client.request(dict(id=82+i,operation='record-event',frame=129,event=event))['ok'])
+        exported=client.request(dict(id=85,operation='export-input',stop_frame=150))['playback']
+        from macos_scripted_input import ScriptedInput
+        imported=ScriptedInput(ROOT,exported['script_text'])
+        self.assertEqual(imported.export_bytes().decode(),exported['script_text']);self.assertEqual(imported.stop_frame,150)
+        self.assertEqual(imported.frames[149][2],{17:-32768})
+        self.assertFalse(client.request(dict(id=86,operation='live-step'))['ok'])
+        self.assertFalse(client.request(dict(id=87,operation='record-stop'))['playback']['recording'])
         process = client.process
         client.close()
         self.assertIsNotNone(process.poll())
@@ -67,4 +78,4 @@ class PlaybackServiceTests(unittest.TestCase):
             self.assertFalse(response['ok'])
             self.assertNotIn('playback',response)
             self.assertEqual(response['error_type'],'GraphicsVersionError')
-            self.assertIn('expected (1, 5)',response['error'])
+            self.assertIn('expected (1, 8)',response['error'])

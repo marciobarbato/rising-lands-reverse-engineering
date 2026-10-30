@@ -1,0 +1,284 @@
+{
+ "schema": "rising-lands/harvest-probe-graphics-provenance/1",
+ "source_ref": "ef52cb027ad202c9d4b9568dd13bbfb15d6c9c63",
+ "executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "baseline_provider_sha256": "ba95194a67c700528e27ad87640cf5c95de92e9c9d9e8feb054002edf71d2f93",
+ "cases": {
+  "K1": {
+   "range": [
+    129,
+    629
+   ],
+   "records_sha256": "2680b6b8b6fe8ac1b91edfd0c656f2f5f624a25d3699d9a3d0b9331408ed84da",
+   "new_origins": [
+    {
+     "origin": [
+      1,
+      0
+     ],
+     "first_end_frame": 140
+    },
+    {
+     "origin": [
+      2,
+      0
+     ],
+     "first_end_frame": 141
+    },
+    {
+     "origin": [
+      3,
+      0
+     ],
+     "first_end_frame": 142
+    },
+    {
+     "origin": [
+      4,
+      0
+     ],
+     "first_end_frame": 143
+    },
+    {
+     "origin": [
+      5,
+      0
+     ],
+     "first_end_frame": 144
+    },
+    {
+     "origin": [
+      7,
+      0
+     ],
+     "first_end_frame": 146
+    },
+    {
+     "origin": [
+      9,
+      0
+     ],
+     "first_end_frame": 148
+    },
+    {
+     "origin": [
+      10,
+      0
+     ],
+     "first_end_frame": 149
+    },
+    {
+     "origin": [
+      11,
+      0
+     ],
+     "first_end_frame": 150
+    },
+    {
+     "origin": [
+      13,
+      0
+     ],
+     "first_end_frame": 152
+    },
+    {
+     "origin": [
+      14,
+      0
+     ],
+     "first_end_frame": 153
+    },
+    {
+     "origin": [
+      15,
+      0
+     ],
+     "first_end_frame": 154
+    },
+    {
+     "origin": [
+      17,
+      0
+     ],
+     "first_end_frame": 156
+    },
+    {
+     "origin": [
+      19,
+      0
+     ],
+     "first_end_frame": 158
+    },
+    {
+     "origin": [
+      19,
+      1
+     ],
+     "first_end_frame": 170
+    },
+    {
+     "origin": [
+      19,
+      2
+     ],
+     "first_end_frame": 171
+    },
+    {
+     "origin": [
+      19,
+      3
+     ],
+     "first_end_frame": 172
+    },
+    {
+     "origin": [
+      19,
+      4
+     ],
+     "first_end_frame": 173
+    },
+    {
+     "origin": [
+      19,
+      5
+     ],
+     "first_end_frame": 174
+    },
+    {
+     "origin": [
+      19,
+      6
+     ],
+     "first_end_frame": 175
+    },
+    {
+     "origin": [
+      19,
+      7
+     ],
+     "first_end_frame": 176
+    },
+    {
+     "origin": [
+      19,
+      8
+     ],
+     "first_end_frame": 177
+    },
+    {
+     "origin": [
+      19,
+      9
+     ],
+     "first_end_frame": 178
+    },
+    {
+     "origin": [
+      19,
+      10
+     ],
+     "first_end_frame": 179
+    },
+    {
+     "origin": [
+      19,
+      11
+     ],
+     "first_end_frame": 180
+    },
+    {
+     "origin": [
+      19,
+      12
+     ],
+     "first_end_frame": 181
+    },
+    {
+     "origin": [
+      19,
+      13
+     ],
+     "first_end_frame": 182
+    },
+    {
+     "origin": [
+      19,
+      14
+     ],
+     "first_end_frame": 183
+    },
+    {
+     "origin": [
+      19,
+      15
+     ],
+     "first_end_frame": 184
+    },
+    {
+     "origin": [
+      19,
+      16
+     ],
+     "first_end_frame": 185
+    },
+    {
+     "origin": [
+      19,
+      17
+     ],
+     "first_end_frame": 186
+    },
+    {
+     "origin": [
+      19,
+      18
+     ],
+     "first_end_frame": 187
+    },
+    {
+     "origin": [
+      19,
+      19
+     ],
+     "first_end_frame": 188
+    }
+   ],
+   "input_sha256": "92a69cdd087cdc644ef3b8d7abdbf3cfa176d7f564a914b17b2dfc901e4a0600"
+  },
+  "P4": {
+   "range": [
+    129,
+    3129
+   ],
+   "records_sha256": "44b9540f290fe8ddfce0d1b115c379b2b25a98f1b4f15e4a0120152a7d65fb1f",
+   "new_origins": [
+    {
+     "origin": [
+      10,
+      16
+     ],
+     "first_end_frame": 421
+    }
+   ],
+   "input_sha256": "779b00c1918d38c2018402bd398b995a970369326ede48fb2907553f12315157"
+  },
+  "P5": {
+   "range": [
+    129,
+    3129
+   ],
+   "records_sha256": "19082bbd2a12a34d6ddbee8bcd9505a002c5bd3b0621d1aa1fc6d711953d7903",
+   "new_origins": [
+    {
+     "origin": [
+      31,
+      0
+     ],
+     "first_end_frame": 571
+    }
+   ],
+   "input_sha256": "647f6d1207d4eb29e022be6049a96b1ea1fd5bfa3cd8828b89139f96e16e2b7b"
+  }
+ },
+ "method": "Original input replay; at each first actual AffGame entry of a new origin, isolate an unmodified native call and restore all CPU/memory/declared-host/surface state, then require published phase surface and whole-state equality."
+}

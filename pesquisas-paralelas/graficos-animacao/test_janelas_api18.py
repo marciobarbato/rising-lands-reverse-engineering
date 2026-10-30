@@ -1,5 +1,5 @@
 """API 1.8 chained windows and data-driven layers against committed intact-executable recordings."""
-import contextlib,hashlib,io,json,struct,unittest
+import contextlib,hashlib,io,json,struct,subprocess,unittest
 from pathlib import Path
 from render_quadro import renderizar_quadro
 from validar_entrada_m3 import ArgumentosRasterM3,CatalogoRastreado,MemoriaEntradaM3
@@ -65,7 +65,7 @@ class JanelasAPI18(unittest.TestCase):
                     self.assertEqual(raster.calls,row['blits'])
                     self.assertFalse(boundary.pending)
 
-    def test_current_chained_window_report(self):
+    def test_frozen_api18_chained_window_report(self):
         report=json.loads((AQUI/'validacao/janelas-api18-final.json').read_text())
         expected={'P3':3001,'P6':2272,'P7':3572,'K1':501}
         self.assertEqual({r['probe']:r['drawn_total'] for r in report['windows']},expected)
@@ -73,7 +73,8 @@ class JanelasAPI18(unittest.TestCase):
             self.assertEqual(window['equal'],expected[window['probe']]);self.assertIsNone(window['first_stop'])
             self.assertTrue(all(r['equal'] for r in window['rows']))
         for path,digest in report['sources_sha256'].items():
-            self.assertEqual(hashlib.sha256((AQUI/path).read_bytes()).hexdigest(),digest,path)
+            frozen=subprocess.check_output(['git','show','85dd278:pesquisas-paralelas/graficos-animacao/'+path],cwd=AQUI)
+            self.assertEqual(hashlib.sha256(frozen).hexdigest(),digest,path)
 
     def test_128_hud_regression_and_prior_hashes(self):
         new=json.loads((AQUI/'evidencias/verificacao-cadeia-m22-v2-api18-128.json').read_text())

@@ -1,0 +1,699 @@
+{
+ "equal": true,
+ "orders_injected": false,
+ "owner_contract_sha256": "57cb30f1fd6f947107de38ccc2de09874bdd94c4b465af7ea84b2704dbddf609",
+ "rows": [
+  {
+   "actual_answers_sha256": "baf48599b8a0174fc9ba177a56ef9e8423711756f96dbf003f079ada7adab105",
+   "answers": 7522,
+   "equal": true,
+   "expected_answers_sha256": "baf48599b8a0174fc9ba177a56ef9e8423711756f96dbf003f079ada7adab105",
+   "export_sha256": "28f71d2cf55a9715214da06e42212d3e04bdb1919cd003754c1a290e26d1a20a",
+   "first_difference": null,
+   "frames": 501,
+   "input_sha256": "28f71d2cf55a9715214da06e42212d3e04bdb1919cd003754c1a290e26d1a20a",
+   "kinds": {
+    "cursor": 501,
+    "dispatch_message": 3,
+    "get_message": 3,
+    "key": 6508,
+    "peek_message": 504,
+    "translate_message": 3
+   },
+   "native_log_sha256": "b114b35d127926692f493971b177a7e92d4ca22091e9b042dec4cfbce35f18f9",
+   "poll_sites": [
+    {
+     "count": 501,
+     "kind": "cursor",
+     "site": "0x47504b"
+    },
+    {
+     "count": 3,
+     "kind": "dispatch_message",
+     "site": "0x460203"
+    },
+    {
+     "count": 3,
+     "kind": "get_message",
+     "site": "0x4601eb"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x429300"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x429556"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x4295fc"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x42967e"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x4296ad"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x4296dc"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x4296f1"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x42970b"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x429732"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x42974c"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x429773"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x429781"
+    },
+    {
+     "count": 496,
+     "kind": "key",
+     "site": "0x42a76b"
+    },
+    {
+     "count": 504,
+     "kind": "peek_message",
+     "site": "0x4601d8"
+    },
+    {
+     "count": 3,
+     "kind": "translate_message",
+     "site": "0x4601f9"
+    }
+   ],
+   "probe": "P1",
+   "roundtrip_equal": true,
+   "wndproc_state_records_deferred": 3
+  },
+  {
+   "actual_answers_sha256": "8c3c98a7b12aec3fc31b34c19fb9e00aa1fa2857488700620ad2ebc35e521c76",
+   "answers": 9034,
+   "equal": true,
+   "expected_answers_sha256": "8c3c98a7b12aec3fc31b34c19fb9e00aa1fa2857488700620ad2ebc35e521c76",
+   "export_sha256": "027a08ce9126e22cc1ce9421970f634141f2e1b706c2f19bab7926739d1d934e",
+   "first_difference": null,
+   "frames": 601,
+   "input_sha256": "027a08ce9126e22cc1ce9421970f634141f2e1b706c2f19bab7926739d1d934e",
+   "kinds": {
+    "cursor": 601,
+    "dispatch_message": 6,
+    "get_message": 6,
+    "key": 7808,
+    "peek_message": 607,
+    "translate_message": 6
+   },
+   "native_log_sha256": "d6f7b81f11f15bf0d8fe1e7e90a3afc4c317e013c282385179dcd11023dd0d61",
+   "poll_sites": [
+    {
+     "count": 601,
+     "kind": "cursor",
+     "site": "0x47504b"
+    },
+    {
+     "count": 6,
+     "kind": "dispatch_message",
+     "site": "0x460203"
+    },
+    {
+     "count": 6,
+     "kind": "get_message",
+     "site": "0x4601eb"
+    },
+    {
+     "count": 601,
+     "kind": "key",
+     "site": "0x429300"
+    },
+    {
+     "count": 601,
+     "kind": "key",
+     "site": "0x429556"
+    },
+    {
+     "count": 601,
+     "kind": "key",
+     "site": "0x4295fc"
+    },
+    {
+     "count": 601,
+     "kind": "key",
+     "site": "0x42967e"
+    },
+    {
+     "count": 601,
+     "kind": "key",
+     "site": "0x4296ad"
+    },
+    {
+     "count": 601,
+     "kind": "key",
+     "site": "0x4296dc"
+    },
+    {
+     "count": 601,
+     "kind": "key",
+     "site": "0x4296f1"
+    },
+    {
+     "count": 601,
+     "kind": "key",
+     "site": "0x42970b"
+    },
+    {
+     "count": 601,
+     "kind": "key",
+     "site": "0x429732"
+    },
+    {
+     "count": 601,
+     "kind": "key",
+     "site": "0x42974c"
+    },
+    {
+     "count": 601,
+     "kind": "key",
+     "site": "0x429773"
+    },
+    {
+     "count": 601,
+     "kind": "key",
+     "site": "0x429781"
+    },
+    {
+     "count": 596,
+     "kind": "key",
+     "site": "0x42a76b"
+    },
+    {
+     "count": 607,
+     "kind": "peek_message",
+     "site": "0x4601d8"
+    },
+    {
+     "count": 6,
+     "kind": "translate_message",
+     "site": "0x4601f9"
+    }
+   ],
+   "probe": "P2",
+   "roundtrip_equal": true,
+   "wndproc_state_records_deferred": 6
+  },
+  {
+   "actual_answers_sha256": "6a59b0cc9d0739a0558e599ded94ca233d324dc8bf99aa38d26e784c90d0bb0c",
+   "answers": 45032,
+   "equal": true,
+   "expected_answers_sha256": "6a59b0cc9d0739a0558e599ded94ca233d324dc8bf99aa38d26e784c90d0bb0c",
+   "export_sha256": "11d2907b3915368b868c988c9ead24aa493efe2cecc81bd99c9bc072370b986f",
+   "first_difference": null,
+   "frames": 3001,
+   "input_sha256": "11d2907b3915368b868c988c9ead24aa493efe2cecc81bd99c9bc072370b986f",
+   "kinds": {
+    "cursor": 3001,
+    "dispatch_message": 9,
+    "get_message": 9,
+    "key": 38994,
+    "peek_message": 3010,
+    "translate_message": 9
+   },
+   "native_log_sha256": "652c8af3e1f3932ed39652460d192e1456319d8bf4bfa4b53b7cddfaf2babec4",
+   "poll_sites": [
+    {
+     "count": 3001,
+     "kind": "cursor",
+     "site": "0x47504b"
+    },
+    {
+     "count": 9,
+     "kind": "dispatch_message",
+     "site": "0x460203"
+    },
+    {
+     "count": 9,
+     "kind": "get_message",
+     "site": "0x4601eb"
+    },
+    {
+     "count": 3001,
+     "kind": "key",
+     "site": "0x429300"
+    },
+    {
+     "count": 3001,
+     "kind": "key",
+     "site": "0x429556"
+    },
+    {
+     "count": 3001,
+     "kind": "key",
+     "site": "0x4295fc"
+    },
+    {
+     "count": 3001,
+     "kind": "key",
+     "site": "0x42967e"
+    },
+    {
+     "count": 3001,
+     "kind": "key",
+     "site": "0x4296ad"
+    },
+    {
+     "count": 3001,
+     "kind": "key",
+     "site": "0x4296dc"
+    },
+    {
+     "count": 3001,
+     "kind": "key",
+     "site": "0x4296f1"
+    },
+    {
+     "count": 3001,
+     "kind": "key",
+     "site": "0x42970b"
+    },
+    {
+     "count": 3001,
+     "kind": "key",
+     "site": "0x429732"
+    },
+    {
+     "count": 3001,
+     "kind": "key",
+     "site": "0x42974c"
+    },
+    {
+     "count": 3001,
+     "kind": "key",
+     "site": "0x429773"
+    },
+    {
+     "count": 3001,
+     "kind": "key",
+     "site": "0x429781"
+    },
+    {
+     "count": 2982,
+     "kind": "key",
+     "site": "0x42a76b"
+    },
+    {
+     "count": 3010,
+     "kind": "peek_message",
+     "site": "0x4601d8"
+    },
+    {
+     "count": 9,
+     "kind": "translate_message",
+     "site": "0x4601f9"
+    }
+   ],
+   "probe": "P3",
+   "roundtrip_equal": true,
+   "wndproc_state_records_deferred": 9
+  },
+  {
+   "actual_answers_sha256": "ce6f755e0bbf2bab6185e4f5ca00dd8e65ef8cfdaf025822df752a6150ab28e5",
+   "answers": 33873,
+   "equal": true,
+   "expected_answers_sha256": "ce6f755e0bbf2bab6185e4f5ca00dd8e65ef8cfdaf025822df752a6150ab28e5",
+   "export_sha256": "914043ef277ec9c6507e155c61b450ef07c0fc9bd27a972da8489ca97af9195b",
+   "first_difference": null,
+   "frames": 2272,
+   "input_sha256": "914043ef277ec9c6507e155c61b450ef07c0fc9bd27a972da8489ca97af9195b",
+   "kinds": {
+    "cursor": 2272,
+    "dispatch_message": 23,
+    "get_message": 23,
+    "key": 29237,
+    "peek_message": 2295,
+    "translate_message": 23
+   },
+   "native_log_sha256": "a9de5b5771a869d404ae25b51e6784dc146345f4cc6ba8e08226efe7ef268e0b",
+   "poll_sites": [
+    {
+     "count": 2272,
+     "kind": "cursor",
+     "site": "0x47504b"
+    },
+    {
+     "count": 23,
+     "kind": "dispatch_message",
+     "site": "0x460203"
+    },
+    {
+     "count": 23,
+     "kind": "get_message",
+     "site": "0x4601eb"
+    },
+    {
+     "count": 2272,
+     "kind": "key",
+     "site": "0x429300"
+    },
+    {
+     "count": 2272,
+     "kind": "key",
+     "site": "0x429556"
+    },
+    {
+     "count": 2272,
+     "kind": "key",
+     "site": "0x4295fc"
+    },
+    {
+     "count": 2272,
+     "kind": "key",
+     "site": "0x42967e"
+    },
+    {
+     "count": 2272,
+     "kind": "key",
+     "site": "0x4296ad"
+    },
+    {
+     "count": 2272,
+     "kind": "key",
+     "site": "0x4296dc"
+    },
+    {
+     "count": 2272,
+     "kind": "key",
+     "site": "0x4296f1"
+    },
+    {
+     "count": 2272,
+     "kind": "key",
+     "site": "0x42970b"
+    },
+    {
+     "count": 2272,
+     "kind": "key",
+     "site": "0x429732"
+    },
+    {
+     "count": 2272,
+     "kind": "key",
+     "site": "0x42974c"
+    },
+    {
+     "count": 2272,
+     "kind": "key",
+     "site": "0x429773"
+    },
+    {
+     "count": 2272,
+     "kind": "key",
+     "site": "0x429781"
+    },
+    {
+     "count": 1973,
+     "kind": "key",
+     "site": "0x42a76b"
+    },
+    {
+     "count": 2295,
+     "kind": "peek_message",
+     "site": "0x4601d8"
+    },
+    {
+     "count": 23,
+     "kind": "translate_message",
+     "site": "0x4601f9"
+    }
+   ],
+   "probe": "P6",
+   "roundtrip_equal": true,
+   "wndproc_state_records_deferred": 23
+  },
+  {
+   "actual_answers_sha256": "147d72bc058e4ca87bc501d5abdfff05852a8941bcfde6c9e46fb356e88888be",
+   "answers": 53099,
+   "equal": true,
+   "expected_answers_sha256": "147d72bc058e4ca87bc501d5abdfff05852a8941bcfde6c9e46fb356e88888be",
+   "export_sha256": "914758b0446d561ec590bc5ab854adb95692e58626709ed2d56ac6107aa51590",
+   "first_difference": null,
+   "frames": 3572,
+   "input_sha256": "914758b0446d561ec590bc5ab854adb95692e58626709ed2d56ac6107aa51590",
+   "kinds": {
+    "cursor": 3572,
+    "dispatch_message": 51,
+    "get_message": 51,
+    "key": 45751,
+    "peek_message": 3623,
+    "translate_message": 51
+   },
+   "native_log_sha256": "9a98d7c038e1ee4287d22409e89c411e820f3d42d501274622b4404f798794da",
+   "poll_sites": [
+    {
+     "count": 3572,
+     "kind": "cursor",
+     "site": "0x47504b"
+    },
+    {
+     "count": 51,
+     "kind": "dispatch_message",
+     "site": "0x460203"
+    },
+    {
+     "count": 51,
+     "kind": "get_message",
+     "site": "0x4601eb"
+    },
+    {
+     "count": 3572,
+     "kind": "key",
+     "site": "0x429300"
+    },
+    {
+     "count": 3572,
+     "kind": "key",
+     "site": "0x429556"
+    },
+    {
+     "count": 3572,
+     "kind": "key",
+     "site": "0x4295fc"
+    },
+    {
+     "count": 3572,
+     "kind": "key",
+     "site": "0x42967e"
+    },
+    {
+     "count": 3572,
+     "kind": "key",
+     "site": "0x4296ad"
+    },
+    {
+     "count": 3572,
+     "kind": "key",
+     "site": "0x4296dc"
+    },
+    {
+     "count": 3572,
+     "kind": "key",
+     "site": "0x4296f1"
+    },
+    {
+     "count": 3566,
+     "kind": "key",
+     "site": "0x42970b"
+    },
+    {
+     "count": 3572,
+     "kind": "key",
+     "site": "0x429732"
+    },
+    {
+     "count": 3572,
+     "kind": "key",
+     "site": "0x42974c"
+    },
+    {
+     "count": 3572,
+     "kind": "key",
+     "site": "0x429773"
+    },
+    {
+     "count": 3572,
+     "kind": "key",
+     "site": "0x429781"
+    },
+    {
+     "count": 2893,
+     "kind": "key",
+     "site": "0x42a76b"
+    },
+    {
+     "count": 3623,
+     "kind": "peek_message",
+     "site": "0x4601d8"
+    },
+    {
+     "count": 51,
+     "kind": "translate_message",
+     "site": "0x4601f9"
+    }
+   ],
+   "probe": "P7",
+   "roundtrip_equal": true,
+   "wndproc_state_records_deferred": 51
+  },
+  {
+   "actual_answers_sha256": "162a3dcc538e5e2c2d8d8e9f8071136be361a81512e23ddddc0bf1a7b4439d79",
+   "answers": 7037,
+   "equal": true,
+   "expected_answers_sha256": "162a3dcc538e5e2c2d8d8e9f8071136be361a81512e23ddddc0bf1a7b4439d79",
+   "export_sha256": "92a69cdd087cdc644ef3b8d7abdbf3cfa176d7f564a914b17b2dfc901e4a0600",
+   "first_difference": null,
+   "frames": 501,
+   "input_sha256": "92a69cdd087cdc644ef3b8d7abdbf3cfa176d7f564a914b17b2dfc901e4a0600",
+   "kinds": {
+    "cursor": 501,
+    "dispatch_message": 10,
+    "get_message": 10,
+    "key": 5995,
+    "peek_message": 511,
+    "translate_message": 10
+   },
+   "native_log_sha256": "8f22f25d6307b7b9a9d7b6b9733a8ebe8802e6a902e5503845fed317aad7891b",
+   "poll_sites": [
+    {
+     "count": 501,
+     "kind": "cursor",
+     "site": "0x47504b"
+    },
+    {
+     "count": 10,
+     "kind": "dispatch_message",
+     "site": "0x460203"
+    },
+    {
+     "count": 10,
+     "kind": "get_message",
+     "site": "0x4601eb"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x429300"
+    },
+    {
+     "count": 1,
+     "kind": "key",
+     "site": "0x4293e9"
+    },
+    {
+     "count": 1,
+     "kind": "key",
+     "site": "0x429403"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x429556"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x4295fc"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x42967e"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x4296ad"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x4296dc"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x4296f1"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x42970b"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x429732"
+    },
+    {
+     "count": 482,
+     "kind": "key",
+     "site": "0x42974c"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x429773"
+    },
+    {
+     "count": 501,
+     "kind": "key",
+     "site": "0x429781"
+    },
+    {
+     "count": 511,
+     "kind": "peek_message",
+     "site": "0x4601d8"
+    },
+    {
+     "count": 10,
+     "kind": "translate_message",
+     "site": "0x4601f9"
+    }
+   ],
+   "probe": "K1",
+   "roundtrip_equal": true,
+   "wndproc_state_records_deferred": 10
+  }
+ ],
+ "schema": "rising-lands/macos-test-a-answers/1",
+ "scope": "Declared answers on native-recorded requests; reference answers and WndProc flag stores never feed the mapper",
+ "state_hash_half": "Dependency stop: Rust orders are unsupported; WndProc flags and whole-state hashes are not claimed"
+}

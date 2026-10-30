@@ -1,0 +1,1177 @@
+{
+ "schema": "rising-lands/probe-origin-effects-comparison/1",
+ "cases": 43,
+ "unique_origins": [
+  [
+   1,
+   0
+  ],
+  [
+   2,
+   0
+  ],
+  [
+   3,
+   0
+  ],
+  [
+   4,
+   0
+  ],
+  [
+   5,
+   0
+  ],
+  [
+   7,
+   0
+  ],
+  [
+   9,
+   0
+  ],
+  [
+   10,
+   0
+  ],
+  [
+   10,
+   16
+  ],
+  [
+   11,
+   0
+  ],
+  [
+   13,
+   0
+  ],
+  [
+   14,
+   0
+  ],
+  [
+   15,
+   0
+  ],
+  [
+   17,
+   0
+  ],
+  [
+   19,
+   0
+  ],
+  [
+   19,
+   1
+  ],
+  [
+   19,
+   2
+  ],
+  [
+   19,
+   3
+  ],
+  [
+   19,
+   4
+  ],
+  [
+   19,
+   5
+  ],
+  [
+   19,
+   6
+  ],
+  [
+   19,
+   7
+  ],
+  [
+   19,
+   8
+  ],
+  [
+   19,
+   9
+  ],
+  [
+   19,
+   10
+  ],
+  [
+   19,
+   11
+  ],
+  [
+   19,
+   12
+  ],
+  [
+   19,
+   13
+  ],
+  [
+   19,
+   14
+  ],
+  [
+   19,
+   15
+  ],
+  [
+   19,
+   16
+  ],
+  [
+   19,
+   17
+  ],
+  [
+   19,
+   18
+  ],
+  [
+   19,
+   19
+  ],
+  [
+   31,
+   0
+  ]
+ ],
+ "mismatches": 0,
+ "recording_pins": {
+  "sonda-origens-K1-129-189.json.xz.origins.json": "bec215bfa32bf50af80566570ecada31dc750c152d7ff55a83f795e204251a3b",
+  "sonda-colheita-P4-129-728.json.xz.origins.json": "47ef10783e15e5eeed2242e3ae64caa397936258b476b017d14f97fa965752af",
+  "sonda-colheita-P4-1329-1928.json.xz.origins.json": "94baa6615cd7a56cdb7e4e820f2cb64dce167751d02ca7d5c30c4f40eae71d9d",
+  "sonda-colheita-P4-1929-2528.json.xz.origins.json": "bfb74edf4bf04d645694eb48ced3b3558f7bd89c7ed2331d91c6265f87703e71",
+  "sonda-colheita-P4-2529-3129.json.xz.origins.json": "38ad25040129c2b88f8c45561b548771da8f73429e72bc64a3ea3ed5981dc3c2",
+  "sonda-colheita-P4-729-1328.json.xz.origins.json": "755116f938fcd977d28dedf202220c2423ae505cf2e6c2a00f80595bdb74a02b",
+  "sonda-colheita-P5-129-728.json.xz.origins.json": "5896b6f43b514b184ac69d8ae0d42a572c3c0cd71dab4410654e85bd836aa33c",
+  "sonda-colheita-P5-1329-1928.json.xz.origins.json": "7a584773f4a9ec24fab7fb5bb576c15bfa9ed00e8ec6df56323b4e0f2a2a402d",
+  "sonda-colheita-P5-1929-2528.json.xz.origins.json": "8021130deffd9dbb5e862374652646dbc430030ef225f7e931fe579ec6bddff2",
+  "sonda-colheita-P5-2529-3129.json.xz.origins.json": "a8aaf45c90f4a92725080dc934bbe5e0d4101d693b52a8afac931572758eaaa9",
+  "sonda-colheita-P5-729-1328.json.xz.origins.json": "b5346c2f7122e38a1c71d167a6ff1c44889fe28103f905cf5f5807175ad228c0"
+ },
+ "policy_sha256": "384f985bea05137197ea22b3439f96db2f1e6b9a6d8b1a6c986f4955697fc21e",
+ "ai_provider_sha256": "afdb24dacf4c58646b81e16e6826a106065a2e8b200e3013ed3f89bdb9332708",
+ "graphics_provider_sha256": "d15eb06b4c2c97374771083f28bc7c4fa630db0397d14f3fe0fcdc8c3d3132bc",
+ "layer_data_sha256": "8bc35997dee591149b8bf4fc661e3cdc09c10ee5edf894ac14f76afbf079ef62",
+ "comparison_source_sha256": "0837e1a855ae5a2a2f4f2566c5330dc21c05179ea28b3413262cb9acb78e80eb",
+ "rows": [
+  {
+   "probe": "K1",
+   "frame": 141,
+   "origin": [
+    1,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 1,
+   "ai_eax": 0,
+   "display_heap_blocks": [
+    "alloc00002"
+   ]
+  },
+  {
+   "probe": "K1",
+   "frame": 142,
+   "origin": [
+    2,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 143,
+   "origin": [
+    3,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 144,
+   "origin": [
+    4,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 145,
+   "origin": [
+    5,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 147,
+   "origin": [
+    7,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 149,
+   "origin": [
+    9,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 150,
+   "origin": [
+    10,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 151,
+   "origin": [
+    11,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 1,
+   "ai_eax": 0,
+   "display_heap_blocks": [
+    "alloc00002"
+   ]
+  },
+  {
+   "probe": "K1",
+   "frame": 153,
+   "origin": [
+    13,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 154,
+   "origin": [
+    14,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 155,
+   "origin": [
+    15,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 157,
+   "origin": [
+    17,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 159,
+   "origin": [
+    19,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 171,
+   "origin": [
+    19,
+    1
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 1,
+   "ai_eax": 0,
+   "display_heap_blocks": [
+    "alloc00002"
+   ]
+  },
+  {
+   "probe": "K1",
+   "frame": 172,
+   "origin": [
+    19,
+    2
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 173,
+   "origin": [
+    19,
+    3
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 174,
+   "origin": [
+    19,
+    4
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 175,
+   "origin": [
+    19,
+    5
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 176,
+   "origin": [
+    19,
+    6
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 1,
+   "ai_eax": 0,
+   "display_heap_blocks": [
+    "alloc00002"
+   ]
+  },
+  {
+   "probe": "K1",
+   "frame": 177,
+   "origin": [
+    19,
+    7
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": [
+    "alloc02494",
+    "alloc02496",
+    "alloc24329"
+   ]
+  },
+  {
+   "probe": "K1",
+   "frame": 178,
+   "origin": [
+    19,
+    8
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": [
+    "alloc02498",
+    "alloc02500",
+    "alloc02502",
+    "alloc02504",
+    "alloc24329"
+   ]
+  },
+  {
+   "probe": "K1",
+   "frame": 179,
+   "origin": [
+    19,
+    9
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": [
+    "alloc02506",
+    "alloc02508",
+    "alloc02510",
+    "alloc24329"
+   ]
+  },
+  {
+   "probe": "K1",
+   "frame": 180,
+   "origin": [
+    19,
+    10
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": [
+    "alloc02512",
+    "alloc02514",
+    "alloc02516",
+    "alloc02518",
+    "alloc02520",
+    "alloc24329"
+   ]
+  },
+  {
+   "probe": "K1",
+   "frame": 181,
+   "origin": [
+    19,
+    11
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 1,
+   "ai_eax": 0,
+   "display_heap_blocks": [
+    "alloc00002",
+    "alloc02522",
+    "alloc02524",
+    "alloc02526",
+    "alloc02528",
+    "alloc02530",
+    "alloc24329"
+   ]
+  },
+  {
+   "probe": "K1",
+   "frame": 182,
+   "origin": [
+    19,
+    12
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": [
+    "alloc02532",
+    "alloc02534",
+    "alloc02536",
+    "alloc24329"
+   ]
+  },
+  {
+   "probe": "K1",
+   "frame": 183,
+   "origin": [
+    19,
+    13
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": [
+    "alloc02538",
+    "alloc02540",
+    "alloc02542",
+    "alloc24329"
+   ]
+  },
+  {
+   "probe": "K1",
+   "frame": 184,
+   "origin": [
+    19,
+    14
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": [
+    "alloc02544",
+    "alloc02546",
+    "alloc24329"
+   ]
+  },
+  {
+   "probe": "K1",
+   "frame": 185,
+   "origin": [
+    19,
+    15
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 186,
+   "origin": [
+    19,
+    16
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 1,
+   "ai_eax": 0,
+   "display_heap_blocks": [
+    "alloc00002"
+   ]
+  },
+  {
+   "probe": "K1",
+   "frame": 187,
+   "origin": [
+    19,
+    17
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 188,
+   "origin": [
+    19,
+    18
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "K1",
+   "frame": 189,
+   "origin": [
+    19,
+    19
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "P4",
+   "frame": 422,
+   "origin": [
+    10,
+    16
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": [
+    "alloc02196",
+    "alloc02198",
+    "alloc02200",
+    "alloc02202",
+    "alloc02204",
+    "alloc02206",
+    "alloc02208",
+    "alloc02210",
+    "alloc02212",
+    "alloc02214",
+    "alloc02216",
+    "alloc02218",
+    "alloc02220",
+    "alloc02222",
+    "alloc02224",
+    "alloc02226",
+    "alloc02228",
+    "alloc02230",
+    "alloc02232",
+    "alloc02234",
+    "alloc02236",
+    "alloc02494",
+    "alloc02496",
+    "alloc02498",
+    "alloc02500",
+    "alloc02502",
+    "alloc02504",
+    "alloc02506",
+    "alloc02508",
+    "alloc02510",
+    "alloc02512",
+    "alloc02514",
+    "alloc02516",
+    "alloc02518",
+    "alloc02520",
+    "alloc02522",
+    "alloc02524",
+    "alloc02526",
+    "alloc02528",
+    "alloc02530",
+    "alloc02532",
+    "alloc02534",
+    "alloc02536",
+    "alloc02538",
+    "alloc02540",
+    "alloc02542",
+    "alloc02544",
+    "alloc02546",
+    "alloc02548",
+    "alloc02550",
+    "alloc02552",
+    "alloc02554",
+    "alloc02556",
+    "alloc02558",
+    "alloc02560",
+    "alloc02562",
+    "alloc02564",
+    "alloc02566",
+    "alloc02568",
+    "alloc02570",
+    "alloc02572",
+    "alloc02574",
+    "alloc02576",
+    "alloc02578",
+    "alloc02580",
+    "alloc02582",
+    "alloc02584",
+    "alloc02586",
+    "alloc02588",
+    "alloc02590",
+    "alloc02592",
+    "alloc02594",
+    "alloc02596",
+    "alloc02598",
+    "alloc02600",
+    "alloc02602",
+    "alloc02604",
+    "alloc02606",
+    "alloc02608",
+    "alloc02610",
+    "alloc02612",
+    "alloc02614",
+    "alloc02616",
+    "alloc02618",
+    "alloc02620",
+    "alloc02622",
+    "alloc02624",
+    "alloc02626",
+    "alloc02628",
+    "alloc02630",
+    "alloc02632",
+    "alloc02634",
+    "alloc02636",
+    "alloc02638",
+    "alloc02640",
+    "alloc02642",
+    "alloc02644",
+    "alloc02646",
+    "alloc02648",
+    "alloc02650",
+    "alloc02652",
+    "alloc02654",
+    "alloc02656",
+    "alloc02658",
+    "alloc02660",
+    "alloc02662",
+    "alloc02664",
+    "alloc02666",
+    "alloc02668",
+    "alloc02670",
+    "alloc02672",
+    "alloc02674",
+    "alloc02676",
+    "alloc02678",
+    "alloc02680",
+    "alloc02682",
+    "alloc02684",
+    "alloc02686",
+    "alloc02688",
+    "alloc02690",
+    "alloc02692",
+    "alloc02694",
+    "alloc02696",
+    "alloc02698",
+    "alloc02700",
+    "alloc02702",
+    "alloc02704",
+    "alloc02706",
+    "alloc24329"
+   ]
+  },
+  {
+   "probe": "P4",
+   "frame": 1329,
+   "origin": [
+    10,
+    16
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 256,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "P4",
+   "frame": 1929,
+   "origin": [
+    10,
+    16
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 256,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "P4",
+   "frame": 2529,
+   "origin": [
+    10,
+    16
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 256,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "P4",
+   "frame": 729,
+   "origin": [
+    10,
+    16
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "P5",
+   "frame": 572,
+   "origin": [
+    31,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": [
+    "alloc02196",
+    "alloc02198",
+    "alloc02200",
+    "alloc02202",
+    "alloc02204",
+    "alloc02206",
+    "alloc02208",
+    "alloc02210",
+    "alloc02212",
+    "alloc02214",
+    "alloc02216",
+    "alloc02218",
+    "alloc02220",
+    "alloc02222",
+    "alloc02224",
+    "alloc02226",
+    "alloc02228",
+    "alloc02230",
+    "alloc02232",
+    "alloc02234",
+    "alloc02236",
+    "alloc02238",
+    "alloc02240",
+    "alloc02242",
+    "alloc02244",
+    "alloc02246",
+    "alloc02248",
+    "alloc02250",
+    "alloc02252",
+    "alloc02254",
+    "alloc02256",
+    "alloc02258",
+    "alloc02260",
+    "alloc02262",
+    "alloc02264",
+    "alloc02266",
+    "alloc02268",
+    "alloc02270",
+    "alloc02272",
+    "alloc02274",
+    "alloc02276",
+    "alloc02278",
+    "alloc02280",
+    "alloc02282",
+    "alloc02284",
+    "alloc02286",
+    "alloc02288",
+    "alloc02290",
+    "alloc02292",
+    "alloc02294",
+    "alloc02296",
+    "alloc02298",
+    "alloc02300",
+    "alloc02302",
+    "alloc02304",
+    "alloc02306",
+    "alloc02308",
+    "alloc02310",
+    "alloc02312",
+    "alloc02314",
+    "alloc02316",
+    "alloc02318",
+    "alloc02320",
+    "alloc02322",
+    "alloc02324",
+    "alloc02326",
+    "alloc02328",
+    "alloc02330",
+    "alloc02332",
+    "alloc02334",
+    "alloc02336",
+    "alloc02338",
+    "alloc02340",
+    "alloc02342",
+    "alloc02344",
+    "alloc02346",
+    "alloc02348",
+    "alloc02350",
+    "alloc02352",
+    "alloc02354",
+    "alloc02356",
+    "alloc02358",
+    "alloc02360",
+    "alloc02362",
+    "alloc02364",
+    "alloc02366",
+    "alloc02368",
+    "alloc02370",
+    "alloc02372",
+    "alloc02374",
+    "alloc02376",
+    "alloc02378",
+    "alloc02380",
+    "alloc02382",
+    "alloc02384",
+    "alloc02386",
+    "alloc02388",
+    "alloc02390",
+    "alloc02392",
+    "alloc02394",
+    "alloc02396",
+    "alloc02398",
+    "alloc02400",
+    "alloc02402",
+    "alloc02404",
+    "alloc02406",
+    "alloc02408",
+    "alloc02410",
+    "alloc02412",
+    "alloc02568",
+    "alloc02570",
+    "alloc02572",
+    "alloc02574",
+    "alloc02576",
+    "alloc02578",
+    "alloc02580",
+    "alloc02582",
+    "alloc02584",
+    "alloc02586",
+    "alloc02588",
+    "alloc02590",
+    "alloc02592",
+    "alloc02594",
+    "alloc02596",
+    "alloc02598",
+    "alloc02600",
+    "alloc02602",
+    "alloc02604",
+    "alloc02606",
+    "alloc02608",
+    "alloc02610",
+    "alloc02612",
+    "alloc02614",
+    "alloc02616",
+    "alloc02618",
+    "alloc02620",
+    "alloc02622",
+    "alloc02624",
+    "alloc02626",
+    "alloc02628",
+    "alloc02630",
+    "alloc02632",
+    "alloc02634",
+    "alloc02636",
+    "alloc02638",
+    "alloc02640",
+    "alloc02642",
+    "alloc02644",
+    "alloc02646",
+    "alloc02648",
+    "alloc02650",
+    "alloc02652",
+    "alloc02654",
+    "alloc02656",
+    "alloc02658",
+    "alloc02660",
+    "alloc02662",
+    "alloc02664",
+    "alloc02666",
+    "alloc02668",
+    "alloc02670",
+    "alloc02672",
+    "alloc02674",
+    "alloc02676",
+    "alloc02678",
+    "alloc02680",
+    "alloc02682",
+    "alloc02684",
+    "alloc02686",
+    "alloc02688",
+    "alloc02690",
+    "alloc02692",
+    "alloc02694",
+    "alloc02696",
+    "alloc02698",
+    "alloc02700",
+    "alloc02702",
+    "alloc02704",
+    "alloc02706",
+    "alloc24329"
+   ]
+  },
+  {
+   "probe": "P5",
+   "frame": 1329,
+   "origin": [
+    31,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 256,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "P5",
+   "frame": 1929,
+   "origin": [
+    31,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 256,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "P5",
+   "frame": 2529,
+   "origin": [
+    31,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 256,
+   "display_heap_blocks": []
+  },
+  {
+   "probe": "P5",
+   "frame": 729,
+   "origin": [
+    31,
+    0
+   ],
+   "returned": true,
+   "surface_equal": true,
+   "additional_logic_writes": [],
+   "crt_changes": 0,
+   "ai_flag": 0,
+   "ai_eax": 0,
+   "display_heap_blocks": []
+  }
+ ]
+}

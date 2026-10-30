@@ -1,0 +1,11 @@
+[lease] combat-turret-native-tests waiting
+[lease] combat-turret-native-tests granted slots [0]
+test_every_original_case_whole_state_and_all_registers (test_ordens_torres_combate.TurretInputMatrix) ... ok
+test_live_selection_and_reference_before_mode_store (test_ordens_torres_combate.TurretInputMatrix) ... ok
+test_protected_uninitialized_mode_never_manufactures_a_target (test_ordens_torres_combate.TurretInputMatrix) ... ok
+test_all_native_returns_registers_stores_and_whole_state (test_ordens_torres_combate.TurretInputNative) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 96.631s
+
+OK

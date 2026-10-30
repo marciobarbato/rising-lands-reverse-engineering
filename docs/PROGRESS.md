@@ -1,8 +1,22 @@
 # Consolidated progress — MONDE01
 
-Round: **CXR-20261029-M2R7 (M2 round 7 — M2.3 first raid ACCEPTED; M2 ACCEPTED; M3 under way)**. Current fetched/ancestry-verified main: `ea62eb4` (later merges listed below). M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)); M2.1 accepted at `32bb391` ([record](../integracao/validacao/cxr-20261029-m2r5-m2-1-acceptance.json)); M2.2 accepted at `b9f4b5d` ([record](../integracao/validacao/cxr-20261029-m2r6-m2-2-acceptance.json)); **M2.3 and M2 accepted at `ea62eb4`** ([record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json)). [Roadmap](ROADMAP_MONDE01.md), [snapshots](progress/README.md).
+Round: **CXR-20261030-M3R2 (M3 round 2 — M3.1 P1/P2 part ACCEPTED at `c9c85eb`; S1 wins MONDE01 on the original)**. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)); M2.1 at `32bb391`; M2.2 at `b9f4b5d`; **M2.3 and M2 at `ea62eb4`** ([record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json)); **M3.1 P1/P2 part at `c9c85eb`** ([record](../integracao/validacao/cxr-20261030-m3r1-m3-1-p1-p2-acceptance.json)). Handover: [HANDOVER_CLAUDE_20261030](HANDOVER_CLAUDE_20261030.md). [Roadmap](ROADMAP_MONDE01.md), [M3 plan](M3_PLAN.md), [snapshots](progress/README.md).
 
 ## Resumo executivo
+
+**Rodada M3R2 (madrugada de 30/10).**
+- **S1 vence MONDE01 no executável original** (Mac mini, `0ebfe70`, na `main` em `16b63ac`). É uma rodada de desenvolvimento retomada no quadro 5300 e ainda não conferida por replay: pedra 50 no quadro 11.784, as duas incursões passam sem perdas, comida 50 no quadro 16.933 (AL = 1), tela de resultado no 17.032, MissionNext no 17.043 sem MissionLoad. As duas rodadas finais desde F0 e o passo 2 de estado completo (quadros 129–17.050) estão rodando no mini.
+- **M3.1, parte P1/P2, aceita** (main `c9c85eb`). A cadeia Python com entrada roteirizada é igual ao original em todas as fases: P1 1.002/1.002 e P2 1.202/1.202, cerca de 16 milhões de bytes comparados por fase, 0 cruzamentos. Os pacotes de ordem, as áreas de seleção e os campos de ordem das 800 unidades não têm nenhum byte mascarado. Reproduzida na `main` na MacBook e no Mac mini com hashes de cadeia idênticos. O M3.1 continua aberto: falta a P6 (a prova estrita para no quadro 221, numa trava de Gráficos sobre a caverna) e as janelas de ordens do S1.
+- **Motor Rust estágio 4 (ABI 1.5, main `2eadf69`):** ordens do jogador, 659 casos-folha iguais, P1/P2 de estado completo, M2.2 e M2.3 sem regressão; conferido pelo coordenador (P1 1.002/1.002, M2.2 257/257). Lógica a 83 quadros/s.
+- **App macOS (main `2e6bb27`):** ABI 1.4 e modo jogo sem auditoria: 60 quadros de jogo/s pedidos e mantidos, tela a ~120 fps; sem limite, 69 quadros/s. O gargalo é a lógica Rust (10,3 ms/quadro), em otimização.
+- **Também na `main`:** Gráficos 1.9 (K1 501/501, P4 e P5 3.001/3.001 telas iguais); Core (minimapa do quadro 125 explicado — era um registrador EDX não passado por Economia —, fadiga, busca de vegetação, apagar luz); Economia (saída de tropas, fome/estado 19, abandono do santuário, ciclo de trabalho 403 iguais / 0 divergências).
+- **Derrota (M4.2):** o gatilho está identificado no código (contagem de unidades do jogador em `0x4e1a3a` chega a 0; só a morte em combate reduz). Um grupo do jogador vence a incursão; a captura D1 com unidades espalhadas está em busca no mini.
+
+**M3 em andamento (rodada M3R1, 29/10 à noite).** Nenhum critério do M3 foi aceito ainda, mas todas as peças avançaram com validação contra o original:
+- **Capturas com entrada no original (Mac mini):** sondas P1 (seleção), P2 (movimento), P3 (ordem e construção da caverna, pronta no quadro 1812), P6 (colono entra na caverna no quadro 2178: dono 0xc8 → 0 e 1º objetivo marcado), P7 (entrega com Ctrl, 1º crédito no quadro 3604) e K1 (teclas), cada uma idêntica em duas execuções; capturas de estado completo (passo 2) de P1, P2 e P6. A vitória não cabe antes da incursão do quadro 9000; o roteiro S1-b (recrutar 2 construtores e 4 trabalhadores) está em execução, com vitória estimada perto do quadro 13–14 mil.
+- **Cadeia Python (M3.1):** o caminho clique → ordem (InputGame, SetPlayerOrdre, ProcessInputGame, construção, teclas, depósito com Ctrl) está traduzido com 0 divergências; P1 e P2 batem quadro a quadro em nível de indicadores (501/501 e 601/601). Falta a prova de estado completo e passar do quadro 220 nas sondas da caverna, cujas peças (corpo da caverna, visão/grupos, entrada em estruturas, ciclo de trabalho) já estão traduzidas.
+- **Telas (M3.2):** a renderização 1.8 bate tela a tela com o original em P3 (3.001/3.001), P6 (2.272/2.272), P7 (3.572/3.572) e K1 (501/501), com o texto como fronteira declarada.
+- **Motor Rust e app (M3.3/M3.5):** o motor reproduz o M2 inteiro (lógica e tela, ~100 quadros/s); o app macOS roda o motor e o renderizador Rust a ~41 quadros/s na interface real; o gravador de entrada reproduz 155.597/155.597 respostas das sondas (metade do Teste A). As ordens do jogador no motor Rust estavam em implementação no fechamento.
 
 **M2 aceito (rodada 7, main `ea62eb4`).** A composição Python dos quadros 0 a 9.200 de MONDE01 após o MissionLoad, 18.401 fases, é igual ao executável original em todas as fases. A janela inclui a primeira incursão inimiga: o grupo surge no quadro 9000 e faz a primeira busca de caminho nos quadros 9176 a 9179. Em cada fase foram comparados 16.022.275 bytes; os 153.060 bytes só de tela foram mascarados com prova de escritor e leitor, e nenhum byte mudou sem escritor observado. Também batem os RNGs, os 25.482 registros de alocação, 138.597 bindings e 27.603 fronteiras fora da tela, os registradores e a flag do HUD, sem nenhum cruzamento. A captura original (10 partes, 93 MB comprimidos) foi feita no Mac mini. A prova foi reproduzida na `main` nas duas máquinas, com os dez hashes de cadeia idênticos. Com M2.1 e M2.2, isso fecha o **M2**.
 
@@ -26,6 +40,20 @@ Nesta rodada a referência original foi integrada (`14c0122`) e a composição P
 **O que M1 não significa:** não há quadros da missão (M2), jogo interativo (M3) nem objetivo (M4). O app macOS continua no treino sintético. A estimativa global permanece em ~50% (40–60%): o carregamento era a menor incerteza, e o runtime de missão (eventos, IA em execução, despachantes, condições de fim) segue sendo o maior desconhecido.
 
 **Próximo resultado concreto (M2):** um oracle de quadros a partir do estado M1 aceito. São N quadros de `CalculGame 0x42c868` sem entrada humana, com comparação de estado completo por quadro. A mesma técnica do oracle de M1 deve servir aqui.
+
+## M3 status (live, checkpoint 2026-10-29 night)
+
+No M3 criterion is accepted. Evidence and deliverables by criterion (docs/M3_PLAN.md §1):
+
+| Criterion | Original capture | Implementation | Proof state |
+|---|---|---|---|
+| M3.1 input path | Probes P1, P2, P3, P6, P7, K1 (Missions `pesquisas-paralelas/missoes/m3/sondas/`), each replay-equal on two native runs; pass-2 whole-state windows P1 (129–629), P2 (129–729), P6 (129–2400) with published policies | AI/runtime `entrada_ordens_ia.py`, `construcao_entrada_ia.py`, `composicao_entrada_ia.py` (417 native leaf cases, 0 mismatches); Core selection/orders, construction, structure entry, vision/groups (1,117 cases, 0 mismatches); Economy setters, work cycle, cave body and recruitment (870 calls, 0 mismatches) | Indicator-level chain: P1 501/501, P2 601/601, P3/P6/P7 to frame 219, P4 to 421, P5 to 571, K1 to 140. Whole-state proof of P1/P2 is the next deliverable |
+| M3.2 live frames | Probe phase-end surfaces | Graphics render API 1.8 | Full surfaces equal: P1 501/501, P2 601/601, P3 3001/3001, P6 2272/2272, P7 3572/3572, K1 501/501 (AffText boundary); P4/P5 not run |
+| M3.3 app equivalence | — | macOS app on the Rust engine and renderer; event mapper and recorder | Test A answer-stream half 155,597/155,597; state-hash half waits for engine orders; Test B not run |
+| M3.4 end detection | P6 marks `0x4e1d88`=1 at frame 2178 | `fim_missao.py` | Not yet chained past frame 220 |
+| M3.5 rate | — | App 40.9 fps real UI (Rust logic 11 ms, render 4.5 ms) | Above the proposed 25 fps |
+
+Main-blocking divergence: Economy's work-cycle composition with Core's providers leaves 196 minimap bytes different at frame 125 (DecouvreTerrain → SetMiniMap); owner Core.
 
 ## M2 status (live)
 
@@ -189,7 +217,7 @@ An execution round closes when its scheduled bounded slice has reached a reporte
 
 ## Current milestone and acceptance
 
-**M1 — load original MONDE01 completely and match the original post-load state: ACCEPTED at `927c7e5` (see the [acceptance record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)). Current milestone: M3 — interactive original mission. M2 ACCEPTED at `ea62eb4` ([record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json)).**
+**M1 — load original MONDE01 completely and match the original post-load state: ACCEPTED at `927c7e5` (see the [acceptance record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)). M2 ACCEPTED at `ea62eb4` ([record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json)). Current milestone: M3 — interactive original mission (see "M3 status" above).**
 
 | Milestone | Acceptance criterion | Unmet criteria / current limit |
 |---|---|---|

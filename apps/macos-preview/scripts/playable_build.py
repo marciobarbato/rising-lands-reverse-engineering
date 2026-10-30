@@ -50,17 +50,41 @@ def main():
         sys.argv = original_argv
     from playable_assets import prepare_units, prepare_render_inputs
     prepare_units(args.source, args.workspace / 'source/cd', base / 'assets')
-    # Build the integrated engine into an ignored output, never in the source archive.
-    legacy.run(['cargo','build','--release','--locked','--manifest-path',args.source/'motor/Cargo.toml',
+    # Build the integrated engine from the same immutable app source archive.
+    engine_source=(args.source/'motor').resolve()
+    engine_revision=revision
+    if os.environ.get('RISING_MACOS_ENGINE_SOURCE'):
+        raise ValueError('ExternalEngineOverrideRetired: build uses integrated motor ABI1.4')
+    if '#define RL_ABI_VERSION 0x00010004u' not in (engine_source/'include/rising_engine.h').read_text():
+        raise RuntimeError('RustRendererABIVersionMismatch: app requires reviewed ABI1.4')
+    # Build into our ignored target; never mutate either engine source tree.
+    legacy.run(['cargo','build','--release','--locked','--manifest-path',engine_source/'Cargo.toml',
                 '--target-dir',base/'build/engine-target'], 'rust-engine-build.log')
     library = base/'build/engine-target/release/librising_engine.dylib'
+    legacy.run(['cargo','rustc','--release','--locked','-p','rl-ffi','--lib','--crate-type','staticlib',
+                '--manifest-path',engine_source/'Cargo.toml','--target-dir',base/'build/engine-target'], 'rust-static-build.log')
+    static_library=base/'build/engine-target/release/librising_engine.a'
+    static_driver=base/'build/macos-live-static.o'
+    static_codec=base/'build/macos-codec-static.o'
+    for source,target,extra in [('macos_live_driver.c',static_driver,['-DMACOS_STATIC_ENGINE','-I',engine_source/'include']),('macos_projection_codec.c',static_codec,[])]:
+        legacy.run(['xcrun','clang','-O3','-c','-arch','arm64','-mmacosx-version-min=13.0','-Wno-deprecated-declarations',
+                    *extra,app_source/'src/native'/source,'-o',target], 'native-static-'+source+'.log')
     projection_library=base/'build/librising_macos_projection.dylib'
     legacy.run(['xcrun','clang','-O3','-dynamiclib','-arch','arm64','-mmacosx-version-min=13.0',
                 '-Wno-deprecated-declarations',app_source/'src/native/macos_projection_codec.c',
                 '-o',projection_library], 'macos-projection-build.log')
+    native_library=base/'build/librising_macos_live.dylib'
+    legacy.run(['xcrun','clang','-O3','-dynamiclib','-arch','arm64','-mmacosx-version-min=13.0',
+                '-Wno-deprecated-declarations','-I',engine_source/'include',
+                app_source/'src/native/macos_projection_codec.c',app_source/'src/native/macos_live_driver.c',
+                '-install_name','@rpath/librising_macos_live.dylib','-o',native_library],'native-driver-build.log')
+    from prepare_native_macos import prepare
+    prepare(args.source,library,args.workspace/'source/cd/INSTALHD/RISING.EXE',base/'graphics-inputs',base/'native-inputs',projection_library)
     environment = {**os.environ, 'RISING_APP_ROOT': str(base), 'PYTHONDONTWRITEBYTECODE': '1',
                    'RL_MACOS_ENGINE_LIBRARY': str(library),
                    'RL_MACOS_PROJECTION_LIBRARY': str(projection_library),
+                   'RL_MACOS_NATIVE_LIBRARY': str(native_library),
+                   'RL_MACOS_NATIVE_INPUTS': str(base/'native-inputs'),
                    'RL_ORIGINAL_EXE': str(args.workspace/'source/cd/INSTALHD/RISING.EXE')}
     check = subprocess.run([str(runtime / 'bin/python3'), '-B', '-m', 'unittest', 'discover',
                             '-s', str(app_source / 'testes'), '-v'], env=environment,
@@ -81,6 +105,9 @@ def main():
     legacy.copy_preview_sources(app_source / 'src', payload)
     shutil.copytree(base / 'assets', payload / 'assets')
     prepare_render_inputs(args.source, args.workspace / 'source/cd', payload / 'graphics-inputs')
+    shutil.copytree(base/'native-inputs',payload/'native-inputs')
+    shutil.copy2(native_library,payload/'librising_macos_live.dylib')
+    legacy.run(['codesign','--force','--sign','-','--timestamp=none',payload/'librising_macos_live.dylib'],'sign-native-driver.log')
     shutil.copy2(library,payload/'librising_engine.dylib')
     shutil.copy2(projection_library,payload/'librising_macos_projection.dylib')
     legacy.run(['codesign','--force','--sign','-','--timestamp=none',payload/'librising_macos_projection.dylib'],'sign-projection.log')
@@ -102,7 +129,10 @@ def main():
     (contents / 'Info.plist').write_bytes(plistlib.dumps(plist))
     legacy.run(['xcrun', 'swiftc', '-swift-version', '5', '-O', '-target', 'arm64-apple-macosx13.0',
                 '-module-cache-path', base / 'build/module-cache', '-framework', 'AppKit', '-framework', 'WebKit',
-                app_source / 'src/native/SmokeReadiness.swift', app_source / 'src/native/main.swift', '-o', contents / 'MacOS/RisingLands-ptbr'], 'swift-build.log')
+                '-framework','Metal','-framework','QuartzCore',
+                '-import-objc-header',app_source/'src/native/MacOSLiveDriver.h',
+                static_driver,static_codec,static_library,
+                app_source/'src/native/NativeLiveWindow.swift',app_source / 'src/native/SmokeReadiness.swift', app_source / 'src/native/main.swift', '-o', contents / 'MacOS/RisingLands-ptbr'], 'swift-build.log')
     for path in sorted((resources / 'Python').rglob('*.so')):
         legacy.run(['codesign', '--force', '--sign', '-', '--timestamp=none', path])
     legacy.run(['codesign', '--force', '--sign', '-', '--timestamp=none', resources / 'Python/bin/python3'], 'sign-python.log')
@@ -137,7 +167,7 @@ def main():
                 raise SystemExit('Native UI smoke failed: ' + json.dumps(result, ensure_ascii=False))
     report = {'commit': revision, 'mode': mode, 'features': manifest['features'], 'bundle': str(final),
               'uiSmoke': not args.skip_ui_smoke, 'logs': str(base / 'build/logs'),
-              'inputsRoot': str(args.workspace), 'pythonRuntimeInput': os.environ.get('RISING_PYTHON_RUNTIME'),
+              'inputsRoot': str(args.workspace), 'engineSourceRevision':engine_revision, 'engineSourceRoot':str(engine_source), 'engineStaticArchiveSHA256':hashlib.sha256(static_library.read_bytes()).hexdigest(), 'nativeEngineBinding':'static-abi14', 'pythonRuntimeInput': os.environ.get('RISING_PYTHON_RUNTIME'),
               'inspectionSmoke': not args.skip_ui_smoke,
               'builtAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
               'files': [{'path': str(p.relative_to(final)), 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()}
