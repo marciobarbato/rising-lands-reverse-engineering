@@ -223,6 +223,39 @@ impl RuntimeState {
             list_bindings: Self::bindings(m)?,
         }))
     }
+    pub(crate) fn reload(&mut self, m: &MemoriaJogo) -> Result<()> {
+        if !Self::layout(m)? {
+            return Err(EngineError::ProjectionFieldMismatch { address: TASK_POOL });
+        }
+        for (i, value) in self.tasks.iter_mut().enumerate() {
+            *value = TaskState::load(m, TASK_POOL + 96 * i as u32)?;
+        }
+        for (i, value) in self.groups.iter_mut().enumerate() {
+            *value = GroupState::load(m, GROUP_POOL + 32 * i as u32)?;
+        }
+        self.free_tasks = TaskListHead::load(m, FREE)?;
+        for (i, value) in self.contexts.iter_mut().enumerate() {
+            *value = TaskListHead::load(m, CONTEXTS + 16 * i as u32)?;
+        }
+        self.active_tasks = m.u32(0x514904)?;
+        self.group_cursor = m.u32(0x51b660)?;
+        for (i, value) in self.group_heads.iter_mut().enumerate() {
+            *value = link(m.u32(0x51b664 + 4 * i as u32)?);
+        }
+        self.iterator_group = m.u32(0x51b844)?;
+        self.iterator_unit = match m.u16(0x51b848)? {
+            65535 => None,
+            v => Some(v),
+        };
+        self.action_count = m.u32(0x50ae80)?;
+        for (i, value) in self.pending_groups.iter_mut().enumerate() {
+            *value = link(m.u32(0x50b138 + 4 * i as u32)?);
+        }
+        self.pending_count = m.u8(0x50b134)?;
+        self.live_monsters = m.u32(0x50b178)?;
+        self.list_bindings = Self::bindings(m)?;
+        Ok(())
+    }
     pub fn project(&self, m: &mut MemoriaJogo) -> Result<()> {
         if self.tasks.len() != TASK_COUNT
             || self.groups.len() != GROUP_COUNT

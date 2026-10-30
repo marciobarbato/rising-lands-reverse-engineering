@@ -107,14 +107,30 @@ class EvidenciaOriginal(unittest.TestCase):
             self.assertEqual(hashlib.sha256(ler(a, z - a)).hexdigest(), t['sha256'], t['name'])
 
     def test_native_report_is_bound_to_the_current_sources(self):
-        r = json.loads(v.RELATORIO.read_bytes())
-        self.assertEqual(r['capture']['sha256'], hashlib.sha256(v.CAPTURA.read_bytes()).hexdigest())
-        for p, h in r['source_sha256'].items():
-            self.assertEqual(hashlib.sha256((RAIZ / p).read_bytes()).hexdigest(), h,
-                             f'{p} changed: rerun validar_ordens_economia.py')
-        self.assertEqual(r['comparisons'], 121)
-        self.assertEqual(r['mismatches'], [])
-        self.assertTrue(all(r['path_reproduction'].values()))
+        """Economy's own files are bound strictly in every committed native report. A file owned by another front
+        (Core's ``ferramentas/selecao_ordens.py``) may change legitimately: its current bytes must be the ones some
+        committed native run imported (``validacao-ordens-economia-emulada*.json``: the frozen run, plus a rerun per
+        accepted foreign version), and that run must pass in full."""
+        relatorios = sorted(PASTA.glob('validacao-ordens-economia-emulada*.json'))
+        self.assertIn(v.RELATORIO, relatorios)
+        aceitos = {}
+        for caminho in relatorios:
+            r = json.loads(caminho.read_bytes())
+            self.assertEqual(r['capture']['sha256'], hashlib.sha256(v.CAPTURA.read_bytes()).hexdigest(), caminho.name)
+            self.assertEqual(r['comparisons'], 121, caminho.name)
+            self.assertEqual(r['mismatches'], [], caminho.name)
+            self.assertTrue(all(r['path_reproduction'].values()), caminho.name)
+            for p, h in r['source_sha256'].items():
+                if p.startswith('pesquisas-paralelas/economia/'):
+                    self.assertEqual(hashlib.sha256((RAIZ / p).read_bytes()).hexdigest(), h,
+                                     f'{p} changed: rerun validar_ordens_economia.py ({caminho.name})')
+                else:
+                    aceitos.setdefault(p, set()).add(h)
+        self.assertIn('ferramentas/selecao_ordens.py', aceitos)
+        for p, hashes in aceitos.items():
+            self.assertIn(hashlib.sha256((RAIZ / p).read_bytes()).hexdigest(), hashes,
+                          f'{p} (another front\'s) has no committed native run: rerun validar_ordens_economia.py '
+                          f'with --saida validacao-ordens-economia-emulada-<file>-<sha8>.json')
 
 
 class ReplaySemCpu(unittest.TestCase):

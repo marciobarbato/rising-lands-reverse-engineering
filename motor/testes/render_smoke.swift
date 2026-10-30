@@ -113,6 +113,29 @@ for index in 0..<hashes.count {
         for p in 0..<480000 { let i=Int(pixels[p])*3; precondition(readback[p*4] == palette[i] && readback[p*4+1] == palette[i+1] && readback[p*4+2] == palette[i+2] && readback[p*4+3] == 255) }
     }
 }
-let report: [String:Any] = ["abi":"1.4","frames_equal":hashes.count,"render_seconds":renderElapsed,"logic_seconds":logicElapsed,"metal_upload_conversion_seconds":transferElapsed,"pipeline_seconds":elapsed,"render_fps":Double(hashes.count)/renderElapsed,"engine_render_metal_fps":Double(hashes.count)/elapsed,"metal_device":device.name,"scope":"Swift C ABI engine+render+generation+reused output buffers+Metal upload and RGBA conversion; excludes proof hashing/readback, initialization and app display pacing"]
+// The typed ABI1.6 input entry stops on Escape without publishing game state.
+var inputTick: UInt64 = 0, inputMilliseconds: UInt32 = 0
+check(rl_relogio(world, &inputTick, &inputMilliseconds))
+check(rl_render_geracao(world, &generation, &phase, &counter))
+let inputGeneration = generation
+var escape = RlInputKey(vk: 0x1b, value: -32768)
+withUnsafePointer(to: &escape) { key in
+    var declared = RlDeclaredInput(size: UInt32(MemoryLayout<RlDeclaredInput>.size), flags: 2,
+                                  cursor_x: 0, cursor_y: 0, messages: nil, message_count: 0,
+                                  keys: key, key_count: 1)
+    precondition(rl_passo_quadro_entrada(world, UInt32(RL_FRAME), &frame, &declared) == RL_UNSUPPORTED_PATH)
+}
+var afterTick: UInt64 = 0, afterMilliseconds: UInt32 = 0
+check(rl_relogio(world, &afterTick, &afterMilliseconds))
+precondition(inputTick == afterTick && inputMilliseconds == afterMilliseconds)
+check(rl_render_geracao(world, &generation, &phase, &counter))
+precondition(generation == inputGeneration)
+var inputRequired: UInt32 = 0
+precondition(rl_eventos_entrada(world, nil, 0, &inputRequired) == RL_BUFFER_TOO_SMALL)
+precondition(inputRequired == 1)
+var inputEvents = [RlPlayerInputEvent](repeating: RlPlayerInputEvent(), count: Int(inputRequired))
+inputEvents.withUnsafeMutableBufferPointer { check(rl_eventos_entrada(world, $0.baseAddress, UInt32($0.count), &inputRequired)) }
+precondition(inputEvents[0].kind == 6 && inputEvents[0].site == 0x429300)
+let report: [String:Any] = ["abi":"1.6","frames_equal":hashes.count,"render_seconds":renderElapsed,"logic_seconds":logicElapsed,"metal_upload_conversion_seconds":transferElapsed,"pipeline_seconds":elapsed,"render_fps":Double(hashes.count)/renderElapsed,"engine_render_metal_fps":Double(hashes.count)/elapsed,"metal_device":device.name,"scope":"Swift C ABI engine+render+generation+reused output buffers+Metal upload and RGBA conversion; excludes proof hashing/readback, initialization and app display pacing"]
 let json = try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys])
 print(String(data:json,encoding:.utf8)!)

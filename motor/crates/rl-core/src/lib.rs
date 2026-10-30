@@ -43,6 +43,9 @@ pub enum EngineError {
     InvalidTickRate,
     UnportedCallee { name: &'static str, address: u32 },
     InvalidFramePhase(u32),
+    InvalidExecutionMode(u32),
+    ExecutionReplayMismatch,
+    ExecutionProjectionMismatch,
 }
 pub type Result<T> = std::result::Result<T, EngineError>;
 impl std::fmt::Display for EngineError {
@@ -54,3 +57,13 @@ impl std::fmt::Display for EngineError {
     }
 }
 impl std::error::Error for EngineError {}
+
+pub mod player;
+mod player_audio;
+mod player_build;
+mod player_input;
+mod player_loop;
+mod player_orders;
+mod player_sight;
+
+mod play;

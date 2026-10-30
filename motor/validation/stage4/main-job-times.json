@@ -1,0 +1,15 @@
+{
+  "revision": "7b3f58dc52975b2514f3adac92bb8291c21dc985",
+  "jobs": [
+    {
+      "tag": "gate-merged-main",
+      "returncode": 0,
+      "seconds_including_lease_wait": 289.98046441699995
+    },
+    {
+      "tag": "common-merged-main",
+      "returncode": 0,
+      "seconds_including_lease_wait": 414.90893633400003
+    }
+  ]
+}

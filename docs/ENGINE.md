@@ -556,3 +556,155 @@ Prepared common validation passes **1,936 tests**, 614 optional skips. No
 renderer case is skipped. The [handoff](../motor/HANDOFF.md) records precise
 qualification, source/library hashes, reproduction commands and gaps. These
 results neither port Graphics 1.8 nor establish M3 simulation/app acceptance.
+
+## Stage 4 — declared input, ABI 1.5
+
+`rl_passo_quadro_entrada` adds the live scripted-input contract to phases 2/3:
+a copied cursor/message/key descriptor plus the existing frame context.
+`rl_eventos_entrada` copies consumed-input and order-packet events, including
+prefix diagnostics after an atomic failed phase. All old ABI versions remain
+accepted. Inputs/outputs are owned copies; no Python, OS polling or host callback
+runs inside a native frame. Cursor hold is explicit, keys reset per frame and
+WndProc messages retain their declared order.
+
+The input reference is a separate immutable profile pinned to the AI/runtime merge `a7f5d49` (contained in merged main
+`ef52cb0`).
+The no-input and Graphics reference revisions remain unchanged. Input source
+updates therefore cannot invalidate earlier proofs, and immutable original
+probe/capture/policy pins stay exact. The implementation covers the reference's
+input/selection/order/construction domain, shares the native physical/path/sight
+providers and preserves every remaining named dependency. Explicit flags select
+Missions' skipped text/sound roots; normal sound uses Audio's validated unopened
+state and real returns. It does not initialize playback or reconstruct glyphs.
+
+P1/P2 proof supports their newly published pass-2 state captures and exact
+window masks in addition to the Python/original indicator comparisons. A native
+world starts once at frame 128, carries its state through each phase and never
+loads a later oracle state. The [handoff](../motor/HANDOFF.md) defines call order,
+transactional behavior, proof scope, standalone fixture limitations and current
+provider boundaries. Final measured results are recorded separately below.
+
+Input round 3 adds Ctrl deposit mode, help pages 9/0xc/0xb/2/7 and
+structure targeting with troops, including tag-0x10 production and the upstream
+army-type correction. Its thirteen predicates and all declared text requests
+are checked against the 203 new original captures. Remaining stops are matched
+by name/address. The renderer keeps its independently pinned Graphics 1.7
+contract while the merged tree contains Graphics 1.8.
+
+The branch also merges Missions main `16b63ac`. P6 whole-state evidence is pinned
+independently at that revision, retaining the input source revision `a7f5d49`.
+The segmented reader validates original opening/end continuity without reloading
+the native world and reports the compared prefix separately from the full
+4,544-phase window. This evidence-reader addition changes no native code.
+
+### Stage 4 measured delivery
+
+Round 3 is complete against pinned `a7f5d49`: Ctrl deposit, help pages
+9/0xc/0xb/2/7, structure targeting/tag-0x10 production and thirteen predicates.
+Its 203 original cases give 201 completed equal and two exact Combat stops.
+The full input leaf battery gives **659 completed equal / 666 exercised**, seven
+exact stops, two explicit out-of-frame skips and zero mismatches; all 13 declared
+text requests agree.
+
+P1 and P2 match 501/501 and 601/601 frames and 1,002/1,002 and 1,202/1,202
+whole-state phases. P3/P6/P7 match frames 129–219 and stop at the same CAVE body
+`0x426aff` on frame 220. P6 additionally matches its 183-phase reachable
+whole-state prefix under the newly published policy, including
+`between_frames220`. K1 matches frames 129–140 and stops at the same AffGame
+view boundary `0x415b77` on frame 141. No later original state is loaded.
+
+The fresh no-input regressions are **257/257 M2.2 phases** and
+**18,401/18,401 M2.3 phases**. Renderer surfaces remain **128/128** against Python
+and original and **9,200/9,200** against original in a serial native chain;
+qualified Graphics 1.7 probes remain P1 501, P2 601 and P3 172 surfaces equal.
+The shared-MacBook release measurement is **83.22 logic frames/s**,
+**195.80 renders/s**, and **56.44 engine + render frames/s**, excluding app
+presentation and proof work.
+
+Native implementation `e41d755`, reader `8d60b00`; main snapshot `13dd534` is
+merged as `7b3f58d`. Native code and release library bytes are unchanged across
+the reader/main merges. The merged-tree engine gate passes, as does the common
+check (**1,982 tests, 621 optional skips**). The engine gate and common check
+execute in 289.931 and 414.860 seconds after lease grant, respectively.
+[The handoff](../motor/HANDOFF.md) and [hashed report package](../motor/validation/stage4/summary.json)
+record exact masks, timings, stops, original evidence pins, skipped work and
+reproduction commands. This remains ABI 1.5 and Graphics 1.7; it does not claim
+later construction/work/combat simulation, initialized audio, glyphs or app
+presentation beyond the declared domain.
+
+## Sustained play execution — ABI 1.6
+
+`rl_execucao_definir(world, RL_EXECUCAO_JOGO)` opts a fully loaded mission into
+persistent execution. Select it once before the app's render/phase-2/phase-3 loop;
+`rl_execucao_modo` queries the policy. The frame, declared-input and renderer
+signatures and layouts are unchanged. Creation accepts ABI 1.0 through 1.6.
+Consumers must accept major 1 and a minor at least their required version; the
+macOS driver's exact ABI 1.4 check needs updating before using this library.
+
+The play path retains the execution projection, journals writes for rollback,
+and refreshes only changed unit/structure records. It reuses runtime scratch and
+render transaction buffers. It removes full-world cloning, typed projection and
+reload from ordinary frames and drawing. Explicit exports still project and
+check that the typed state matches the execution view byte for byte. Rust callers
+read through `state()`; `state_mut()` invalidates persistent execution before
+allowing direct semantic edits. Complete C ABI reloads preserve the policy;
+sparse fixture loads restore the default policy.
+
+Policy 0 remains the default complete audit path. Policy 2 uses the same
+persistent backend with full audit traces for original comparisons. Policy 1
+suppresses frame bindings, freed-byte audit copies, consumed-input polling traces
+and renderer observations, retaining order packets and text/sound requests.
+A failed declared-input attempt still exposes its full diagnostics after rollback;
+its deterministic owned inputs are replayed under audit solely for that stopped
+attempt. Game bytes, registers, generation, cursor hold and clock remain atomic.
+No missing provider, named stop, bounds check, RNG draw or drawing operation is
+removed by choosing play execution.
+
+`motor/testes/play_benchmark.py` measures the release C ABI in app play order with
+HUD and reused caller buffers over at least 9,200 frames. Initialization, state
+exports, audit queries, proof comparisons and macOS presentation are outside its
+timers. `RL_EXECUTION_MODE=2 RL_COMPARE_PLAY=1` enables paired original-state
+proofs: policy 2 is checked against the unchanged evidence contract and policy 1
+is additionally checked against it for every byte, register, clock and retained
+order/request event. Reference revisions and immutable evidence masks are unchanged.
+
+Main's coordinator fix `1c1fade` verifies player-input evidence in the exact
+commit-backed snapshot that the proofs consume. The final merge adopts that
+scheme, retaining every `a7f5d49` evidence digest unchanged. In particular, the
+auxiliary leaf-read footprint remains `6bcc9de7…143fce` although a later campaign
+replaced its working-tree shared base at `7cc733e`. The regression rejects corrupt
+frozen captures and footprints while permitting independent later working-tree
+campaigns. M2 package/capture/policy immutability checks remain unchanged. The
+full phase proofs used the same frozen input bytes before the merge; native
+sources, header and release-library bytes are verified identical afterward.
+
+### Sustained play measured delivery
+
+Over 9,200 chained frames on the MacBook, the release ABI loop improves from
+**74.54 to 1,540.23 frames/s**. Phase 2 falls **4.616 → 0.014 ms**, CalculGame
+**5.007 → 0.246 ms**, and rendering **3.777 → 0.386 ms** per frame. Logic averages
+**0.260 ms**; logic + render averages **0.646 ms**, p99 **0.798 ms**, maximum
+**1.718 ms**. These meet the 4/8 ms targets throughout the measured window.
+Generation queries and caller-buffer copies bring the full ABI loop to **0.649 ms**.
+The scope excludes initialization, proof/export work and macOS presentation.
+The baseline and all optimized runs finish with identical full-state and surface
+hashes, generation and virtual clock. Full-audit policy 2 retains **0.652 ms**
+logic + render; sampling confirms full projection/reload is absent from the hot loop.
+
+Fresh regressions are **257/257 M2.2**, **18,401/18,401 M2.3**, renderer
+**128/128 Python + original** and **9,200/9,200 original**. All M2.3 phases also
+match play/audit modes for every projected byte, frame context and clock.
+P1/P2 retain **501/601 frames, 1,002/1,202 whole-state phases**; P6 retains its
+**183-phase whole-state prefix**. The leaf battery retains **659 completed equal**,
+seven exact stops, two declared skips and zero mismatches. Qualified Graphics 1.7
+probes retain **501/601/172** surfaces equal. All dependency and glyph stops remain.
+
+Implementation `98c40c6`; full proof revision `74a3fbe`; final main `54d148d`
+merged as `4bd1112`. Native source, header, evidence digests and measured release
+bytes are unchanged across that merge. The merged gate passes **30 Rust / 63 Python
+tests**, fmt/strict Clippy, **75/75** pilot differential and C/Swift/Metal checks;
+the common check passes **2,024 tests**, **623 optional skips**. No fresh original-x86
+emulation or later functional port is claimed. The macOS consumer must accept ABI
+1.6 and select `RL_EXECUCAO_JOGO` before its live loop to obtain this play path.
+[The report package](../motor/validation/play60/summary.json) and
+[handoff](../motor/HANDOFF.md) record exact timings, hashes, masks, commands and gaps.

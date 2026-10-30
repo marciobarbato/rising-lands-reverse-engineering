@@ -10,7 +10,7 @@ use std::{
     sync::{Mutex, OnceLock},
 };
 
-pub const ABI_VERSION: u32 = 0x00010004;
+pub const ABI_VERSION: u32 = 0x00010006;
 const MAX_BLOCKS: u32 = 65536;
 const MAX_BYTES: usize = 64 * 1024 * 1024;
 #[repr(C)]
@@ -73,9 +73,9 @@ impl From<EngineError> for AbiError {
             EngineError::UnsupportedThreadGetter { .. } | EngineError::UnportedCallee { .. } => {
                 Self::UnsupportedPath(e)
             }
-            EngineError::InvalidTickRate | EngineError::InvalidFramePhase(_) => {
-                Self::InvalidArgument
-            }
+            EngineError::InvalidTickRate
+            | EngineError::InvalidFramePhase(_)
+            | EngineError::InvalidExecutionMode(_) => Self::InvalidArgument,
             _ => Self::Memory(e),
         }
     }
@@ -125,7 +125,17 @@ pub unsafe extern "C" fn rl_criar_mundo(
     output: *mut u64,
 ) -> i32 {
     status(|| {
-        if ![ABI_VERSION, 0x00010000, 0x00010001, 0x00010002, 0x00010003].contains(&version) {
+        if ![
+            ABI_VERSION,
+            0x00010000,
+            0x00010001,
+            0x00010002,
+            0x00010003,
+            0x00010004,
+            0x00010005,
+        ]
+        .contains(&version)
+        {
             return Err(AbiError::VersionMismatch);
         }
         if output.is_null() {
@@ -196,6 +206,7 @@ pub unsafe extern "C" fn rl_carregar_blocos(
         }
         with_world(handle, |world| {
             world.replace_memory(memory)?;
+            world.player_cursor = (0, 0);
             Ok(())
         })
     })
@@ -504,6 +515,29 @@ pub unsafe extern "C" fn rl_executar_rotina_quadro(
             Ok(result)
         })?;
         unsafe { output.write(result) };
+        Ok(())
+    })
+}
+
+mod player_abi;
+
+/// ABI1.6 execution policy. Modes change audit work, never the game routine chain.
+#[no_mangle]
+pub extern "C" fn rl_execucao_definir(handle: u64, mode: u32) -> i32 {
+    status(|| with_world(handle, |world| Ok(world.set_execution_mode(mode)?)))
+}
+/// # Safety
+/// Output is a writable aligned u32. Queries do not change world generation.
+#[no_mangle]
+pub unsafe extern "C" fn rl_execucao_modo(handle: u64, output: *mut u32) -> i32 {
+    status(|| {
+        if output.is_null() {
+            return Err(AbiError::InvalidArgument);
+        }
+        let mode = with_world(handle, |world| Ok(world.execution_mode()))?;
+        unsafe {
+            output.write(mode);
+        }
         Ok(())
     })
 }

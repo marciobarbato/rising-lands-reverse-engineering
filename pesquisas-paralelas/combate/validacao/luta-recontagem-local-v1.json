@@ -1,0 +1,43 @@
+{
+ "schema": "rising-lands/combat-fatal-differential/1",
+ "native": false,
+ "capture_sha256": "bf65cb31312fea7d4a19030bffd8feb54818420d330dfb3e99768e37ea24c9a6",
+ "summary": {
+  "cases": 3,
+  "mismatches": 0,
+  "routines": {
+   "CalculEnginNextEtape": 3
+  },
+  "outside_protected_domain": 0
+ },
+ "outside_protected_domain": [],
+ "cases": [
+  {
+   "case": "corpse-u0-recount",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "corpse-u13-recount",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "corpse-u16-recount",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  }
+ ]
+}

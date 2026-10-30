@@ -124,12 +124,23 @@ pub struct GameState {
 /// Address bindings and opaque, declared bytes belong to projection, not logic.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Projection {
-    template: MemoriaJogo,
-    crt_seed_address: Option<u32>,
-    frame_bound: bool,
+    pub(crate) template: MemoriaJogo,
+    pub(crate) crt_seed_address: Option<u32>,
+    pub(crate) frame_bound: bool,
 }
 impl GameState {
     pub fn load(memory: MemoriaJogo) -> Result<(Self, Projection)> {
+        let (state, crt_seed_address, frame_bound) = Self::inspect(&memory)?;
+        Ok((
+            state,
+            Projection {
+                template: memory,
+                crt_seed_address,
+                frame_bound,
+            },
+        ))
+    }
+    pub(crate) fn inspect(memory: &MemoriaJogo) -> Result<(Self, Option<u32>, bool)> {
         let world_rng = memory
             .optional_u32(WORLD_SEED)?
             .map(|seed| WorldRng { seed });
@@ -146,7 +157,7 @@ impl GameState {
             Some(address) => memory.optional_u32(address)?.map(|seed| CrtRng { seed }),
             None => None,
         };
-        let frame = crate::FrameState::load(&memory)?;
+        let frame = crate::FrameState::load(memory)?;
         let frame_bound = frame.is_some();
         Ok((
             Self {
@@ -154,11 +165,8 @@ impl GameState {
                 crt_rng,
                 frame,
             },
-            Projection {
-                template: memory,
-                crt_seed_address,
-                frame_bound,
-            },
+            crt_seed_address,
+            frame_bound,
         ))
     }
     pub fn project(&self, layout: &Projection) -> Result<MemoriaJogo> {
@@ -204,11 +212,15 @@ impl GameState {
 pub struct World {
     pub generation: u64,
     pub frame_phase: u32,
-    pub state: GameState,
-    projection: Projection,
+    pub(crate) state: GameState,
+    pub(crate) projection: Projection,
+    pub(crate) execution_mode: u32,
+    pub(crate) delta: Option<crate::frame_state::FrameDelta>,
     pub clock: TickClock,
     pub frame_events: Vec<crate::FrameEvent>,
     pub frame_freed: MemoriaJogo,
+    pub player_events: Vec<crate::player::PlayerEvent>,
+    pub player_cursor: (i32, i32),
 }
 impl World {
     pub fn new(rate: u32, epoch: u32) -> Result<Self> {
@@ -221,18 +233,43 @@ impl World {
             frame_phase: 0,
             state,
             projection,
+            execution_mode: 0,
+            delta: None,
             clock,
             frame_events: Vec::new(),
             frame_freed: MemoriaJogo::default(),
+            player_events: Vec::new(),
+            player_cursor: (0, 0),
         })
     }
+    pub fn state(&self) -> &GameState {
+        &self.state
+    }
+    /// Explicit Rust edits invalidate the play view. C ABI mutations synchronize it automatically.
+    pub fn state_mut(&mut self) -> &mut GameState {
+        self.execution_mode = 0;
+        self.delta = None;
+        self.projection.template.audit = true;
+        &mut self.state
+    }
     pub fn project(&self) -> Result<MemoriaJogo> {
-        self.state.project(&self.projection)
+        let memory = self.state.project(&self.projection)?;
+        if self.execution_mode != 0 && memory != self.projection.template {
+            return Err(EngineError::ExecutionProjectionMismatch);
+        }
+        Ok(memory)
     }
     pub fn replace_memory(&mut self, memory: MemoriaJogo) -> Result<()> {
         let generation = self.generation.wrapping_add(1);
-        *self = Self::load(memory, self.clock.clone())?;
-        self.generation = generation;
+        let player_cursor = self.player_cursor;
+        let mode = self.execution_mode;
+        let mut next = Self::load(memory, self.clock.clone())?;
+        next.player_cursor = player_cursor;
+        next.generation = generation;
+        if mode != 0 && next.state.frame.is_some() {
+            next.set_execution_mode(mode)?;
+        }
+        *self = next;
         Ok(())
     }
     /// Each successful CalculGame body advances one deterministic tick. Display phases do not.
@@ -241,7 +278,11 @@ impl World {
         phase: u32,
         input: crate::FrameInput,
     ) -> Result<crate::FrameInput> {
+        if self.execution_mode != 0 && phase != 1 {
+            return self.play_phase(phase, input, None);
+        }
         let mut memory = self.project()?;
+        memory.audit = self.execution_mode != 1;
         let (output, events, freed) = crate::frame::phase(&mut memory, phase, input)?;
         self.replace_memory(memory)?;
         self.frame_phase = phase;
@@ -252,9 +293,45 @@ impl World {
         }
         Ok(output)
     }
+    /// Declared input phases are transactional. Failed attempts expose diagnostics
+    /// separately, while game bytes, clock, cursor hold and generation stay unchanged.
+    pub fn input_step(
+        &mut self,
+        phase: u32,
+        input: crate::FrameInput,
+        mut answers: crate::player::DeclaredInput,
+    ) -> Result<crate::FrameInput> {
+        if self.execution_mode != 0 {
+            return self.play_phase(phase, input, Some(answers));
+        }
+        let xy = answers.cursor.unwrap_or(self.player_cursor);
+        answers.cursor = Some(xy);
+        let mut memory = self.project()?;
+        let result = crate::player::phase(&mut memory, phase, input, answers);
+        match result {
+            Ok((output, events, consumed)) => {
+                self.replace_memory(memory)?;
+                self.frame_phase = phase;
+                self.frame_events = events;
+                self.player_events = consumed;
+                self.player_cursor = xy;
+                if phase == 3 {
+                    self.clock.advance(1);
+                }
+                Ok(output)
+            }
+            Err(error) => {
+                self.player_events = memory.player.take().map(|r| r.events).unwrap_or_default();
+                Err(error)
+            }
+        }
+    }
     /// An isolated routine call, NOT a game frame. Errors publish no state/register change.
     pub fn step(&mut self, routine: Routine, input: Registers) -> Result<Registers> {
         let mut next = self.clone();
+        let mode = next.execution_mode;
+        next.execution_mode = 0;
+        next.delta = None;
         let mut memory = next.project()?;
         let mut output = input;
         match routine {
@@ -307,6 +384,9 @@ impl World {
         }
         // Refresh bindings after writes: BCD buffers may alias an RNG/global.
         next.replace_memory(memory)?;
+        if mode != 0 && next.state.frame.is_some() {
+            next.set_execution_mode(mode)?;
+        }
         *self = next;
         Ok(output)
     }

@@ -1,6 +1,250 @@
-# Combat handoff — 2026-10-29
+# Combat handoff — 2026-10-30
 
-## Live raid attack, damage and lifecycle contract (current task)
+## M4 fight, death, removal and count phases (current delivery)
+
+Branch `feat/re-combat`, fast-forwarded to main `c7f86cd`. Original evidence
+first: `608ac91` (1,089 calls, including 990 sequential corpse steps) and
+`8e34403` (16 civilian/refuge/count cases plus 82 complete count phases).
+Only intact RISING.EXE
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`
+executes. Native game bodies are not replaced; the profile import uses the
+existing explicit Core transport and Missions original-media provider.
+All evidence remains immutable; no normalized PE or predecessor hash changes.
+
+### Published interface and mutation order
+
+`luta_fatal_viva_combate.LutaFatalViva(m, *, perfil, som, externo, etapa)` is the
+live composition. See the [M4 API](../../docs/COMBAT.md#m4-raid-fight-and-death-composition-2026-10-30)
+and [original matrix](FATAL_CAPTURE_MATRIX.md). Bootstrap through
+`ambiente_combate_raid`. Bind the caller's existing buffers; construction
+initializes nothing and allocation bases must remain stable while bound.
+
+`chamar(name, regs, *, pilha=None, chamada=None)` and `provedores()[name]`
+require and return EAX/EBX/ECX/EDX/ESI/EDI/EBP exactly. An omitted register or
+required stack input raises the shared `ArgumentoNaoPassado` before effects.
+No None/unknown register placeholder is published. Stack/control-flow/flags
+are not part of this seven-register protocol.
+
+- Messages: `iagUnitSendMessage` (human prefix and raid behaviour 9 messages
+  0x44/0x48/0x49/0x4a), including group unlink, damage-allocation release, task return
+  and target reacquisition. Unknown behaviour/indirect handlers raise at the
+  actual target. Loaded group/conflict/priority/damage/task tables remain live.
+- Diplomacy/profile: `MAJSympathie`, `PlayerResetAllie`, `PlayerAAttaqueSet`,
+  `MessageBoxSet`, `KERNEL32.GetPrivateProfileStringA` (six stack words).
+  The media-backed `PerfilTextoLuta(entradas_nomeadas)` is explicit; original
+  PT-BR event text and queue writes are preserved byte for byte.
+- Lifecycle: `EnginSetLevelExperience`, `SetDyingEngin`, `RetireEngin`,
+  `EnginNextEtape`/`EnginNextEtape:state4` (full entry restricted to 0/4).
+  `ciclo.corpo_estado4(unit)` is the typed branch after the owning AI prelude,
+  so the prelude need not be repeated at its state 4 dispatch.
+- Damage: `EnginInfligeDegat` and `InfligeDegat` have exact raw mode 1/unit
+  returns in the visible, free-handle, unopened-sound domain. Impact takes
+  `pilha=[flag]`. Other raw domains stop at entry; the prior typed API retains
+  its broader supported modes. Its legacy void attack API is unchanged.
+- `ChercheBatimentProximiteCaveOuSanctuaire` uses actual loaded structure
+  masks/centres: any own CAVE is preferred, otherwise the nearest sanctuary,
+  without a maximum distance. This closes the harvester's refuge reaction.
+- `CalculEnginNextEtape` (entry0x456db5, reset0x456dbd) reuses AI/runtime's
+  live count loop, with real per-unit bodies. Optional `etapa(unit)` supplies
+  the owner's non-dying body. The built-in bounded ordinary prelude supports
+  the captured fight/move/idle/hidden states and reload advance; work,
+  construction, transport and special/starvation bodies remain owner calls.
+
+Death sends message 0x44 and audio requests before state 4/search release, then
+animation/timer, selection and collision cleanup. Core performs physical
+removal/minimap/light effects at corpse expiry. The three actual original
+corpses last 330 unit steps. Neither life 0 nor state 4 subtracts unit counters.
+The live loop counts an active unit before its body; a later-slot kill leaves
+it counted until the next phase. Native phase 40 returns population 16 with the
+victim already state 4; phase 41 returns 15. The type counter changes 3 to 2 then.
+Type 5 is excluded from military count even while alive. Mission-end/latch
+0x4e1d84 remains Missions-owned and is not written by this composition.
+
+### Validation, dependencies and requested real windows
+
+All 1,186 supported original cases compare locally with **0 mismatches**.
+Fresh native differential: **1,186 cases, 0 mismatches** (1,088 primary
+plus 98 civilian/count supplements), all seven registers, every checkpoint
+byte, original native stores and profile answers.
+One negative original hit-message input (FFFF target) faults natively; it is
+outside the protected domain and is never counted as an equal return.
+The Python corpse/count chains retain their own buffers/providers across
+calls; original deltas are not copied back into a translated chain.
+
+
+| Routine | Supported cases | Mismatches |
+|---|---:|---:|
+| iagUnitSendMessage | 12 | 0 |
+| PlayerResetAllie / PlayerAAttaqueSet | 7 / 7 | 0 |
+| MAJSympathie / MessageBoxSet | 29 / 10 | 0 |
+| EnginSetLevelExperience / SetDyingEngin | 12 / 6 | 0 |
+| EnginNextEtape, ordinary corpse | 990 | 0 |
+| CalculEnginNextEtape, complete 800-slot phases | 87 | 0 |
+| EnginInfligeDegat / InfligeDegat | 9 / 15 | 0 |
+| ChercheBatimentProximiteCaveOuSanctuaire | 2 | 0 |
+| **Total** | **1,186** | **0** |
+
+Reports: [primary native](validacao/luta-fatal-native-v1.json),
+[civil local](validacao/luta-civil-local-v1.json),
+[late count-phase local](validacao/luta-fase-contagem-local-v1.json).
+The domain gate passes **291 tests, 155 optional native skips**. The focused
+family passes **7 tests, no skips**, with `RISING_EMULAR=1` under a lease,
+including fresh native reruns of all 98 supplement cases; actual output is in
+`test-luta-fatal-native-v1.log` (129.939 seconds). The unchanged historical
+optional native corpus was not rerun.
+
+Concrete dependencies used here: Core `EntradaEstruturas`, `SelecaoOrdens`,
+live navigation/collision, discovery/light and minimap; Economy loaded
+`BonusUnidades` and idle-unit body; AI/runtime's live count loop and existing
+group unlink; Missions' original-media/profile parser; Audio's admitted
+`SoundRequestProvider`. No owner file is modified. Named remaining domains
+include nonempty Bag `EnginRetire 0x443dfc`, vehicle/special death/corpses,
+active-handle `PlaySnd_PostVolume 0x48aacf`, other AI handlers, and the owning
+non-fight/starvation bodies. War structure adjacency remains an explicit Core
+provider request at 0x42381f when that unvalidated branch is reached.
+
+### Mac-mini runner follow-up (2026-10-30)
+
+Synced `origin/main` at `a174a78` before this runner-only change. The
+[mini runbook](FATAL_MAC_MINI_RUNS.md) replaces the obsolete D1 windows with
+11250–11750 and 15250–15700 (optional 12250–13750); D1 stops at 15700.
+The raider-17 kill previously cited belongs to a development chain, not
+D1.json. Actual D1 landmarks reported by the mini are documented there.
+
+Runner inputs are scenario S1/D1, optional alternate `--manifest`, trusted
+`--snapshot-root`, ordered nonoverlapping `--intervals START-END ...`, base
+frame-128 directory, output root and heavy-lease path. Every requested start
+must have a listed snapshot and a committed `quadros.jsonl.xz` record; every
+end must be within `last_frame`. The whole plan is checked before launching.
+Each separate lease captures at most 250 frames with the existing 1100s alarm.
+
+First snapshots are restored through Missions' existing native bench and
+accepted only when frame, DGROUP SHA and whole-state SHA equal the committed
+scenario record. This admits the mini's S1 pass-2 records serialization at
+11000 (`6570ff47…`) without requiring S1-a's pickle SHA (`42d60722…`).
+An alternate manifest cannot change that committed identity anchor. Actual
+pickle, record-file, manifest and input hashes are recorded; restored input
+prefix equality is still required. Later jobs use the preceding capture's
+exact end-file SHA. Sound-boundary changes and observational hooks occur only
+after opening verification; native entry/return callback and mutation order
+are unchanged. Missing records, hash/frame differences, restore failures,
+short segments and incomplete leaves stop explicitly. Original executable
+hash `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`
+and all routine addresses/evidence above remain unchanged.
+
+Validation: `python3 -B scripts/check.py --domain combat` passed **301 tests,
+155 optional native skips** in 156.208s (including the initial 10 runner
+checks), plus documentation links. The final focused suite passed **11 tests,
+0 skips** in 0.931s after adding the committed S1 identity check and streaming
+the record scan. It covers alternate file serializations, both hash/frame
+rejections, restore failures, missing/duplicate/malformed records, exact
+continuation SHA rejection, default/override splits, whole-plan preflight and
+incomplete-leaf chain stops. Logs are local
+`.local/check-fatal-runner-followup.log` and
+`.local/test-fatal-runner-followup.log`; both CLI help commands and
+`git diff --check` passed. No reconstructed game behavior changed;
+no fresh original-x86 S1/D1 window was run here (local frame-128 and scenario
+snapshots are absent). Long-window reproduction remains the mini's requested
+work, not M4 acceptance. Only the feature branch is to be pushed; no main
+integration is authorized for this follow-up.
+
+## M3 turret orders and M4 contact audit (previous delivery)
+
+Branch `feat/re-combat`, fast-forward sync to main `3e0de77`. Evidence first:
+`40e05dc` captures 188 original turret-order leaves plus the partial raid
+contact inventory; `aa82d33` adds two original contact leaves at a clean AI
+callback boundary. No main merge/push or milestone acceptance is authorized.
+Only intact RISING.EXE SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`
+executes. Original evidence, predecessor hashes and normalized PE are unchanged.
+
+The [turret matrix](TURRET_CAPTURE_MATRIX.md) records the original-only phase.
+Missions' existing readers restore P1/frame250 and P6/frame2020 with raw and
+compressed part hashes and whole-state summaries verified. The latter contains
+the genuinely selected sanctuary/completed cave. Declared type/owner/bonus,
+step-cell and selection variations exercise the leaves, without claiming
+physical turret placement. Original hooks only record or halt.
+
+### Consumer contract
+
+Use `ordens_torres_combate.OrdensTorresCombate(m, *, bonus=None)` after
+`ambiente_combate_raid`; `m` is the caller's live `MemoriaQuadro`-compatible
+address space. Construction initializes no bytes. The
+[complete API](../../docs/COMBAT.md#m3-turret-input-providers-2026-10-30)
+specifies widths, supported domains, registers and mutation order.
+
+- `batiment_peut_attaquer(regs)` / provider `BatimentPeutAttaquer 0x42436c`:
+  AX structure, DL mode, BX target. The source type prefix handles all bytes;
+  turrets 10/11 cover initialized modes 1/3/5. No game writes. AL alone is
+  boolean; full EAX/EBX/EDX clobbers and every saved register are returned.
+- `batiment_init_attaque_select(regs)` / provider
+  `BatimentInitAttaqueSelect 0x4242cc` (tag14 call at `0x45f13f`): AL player,
+  DL mode, BX reference. Read current selection; store reference u16 at +86
+  before mode byte at +7b; skip both for mode3 self-target. All mode/reference
+  byte/word values are accepted on valid selected records.
+- Both require and return EAX/EBX/ECX/EDX/ESI/EDI/EBP. Optional actual entry
+  ESP returns ESP+4; optional EFLAGS is reconstructed (query requires ESP).
+  Explicit `retorno=` also returns EIP. The proof compares all ten fields,
+  not only AL. `chamar(name, regs)` is the equivalent named dispatcher.
+- `input_providers.funcoes.update(live.provedores())` installs both named
+  methods for AI/runtime, replacing its non-turret prefix. Rust uses the same
+  byte offsets/widths/register results; integration belongs to those owners.
+
+Named read-only dependencies already on main are Economy's
+`BonusUnidades.da_memoria(m).consultar(owner, 11, 4, ecx=7)`
+(`BonusGetValEngin 0x428cc0`) and Core's masked-centre getter
+`caso_estrutura(m, id)` (`BatimentGetCase 0x41aee2`). No sound, navigation or
+foreign effect callback is needed for these two leaves. Protected input errors
+raise explicitly. Turret modes other than 1/3/5 read native uninitialized
+stack locals and are outside the supported domain.
+
+### Validation and remaining stops
+
+Fresh native differential: `BatimentPeutAttaquer` **148/148**, and
+`BatimentInitAttaqueSelect` **40/40**, **0 mismatches**, whole checkpoint and
+all ten register fields. The regression also checks the original store order.
+See [native report](validacao/ordens-torres-native.json).
+
+The bounded raid window restores real M2.3/frame9000 and uses only original
+movement/orders for soldiers0..2 and raid16 around target0x2e03. Its native
+contact occurs at10671; auto-target attack entered earlier at10608. Two
+isolated original contact entries compare with **0 mismatches**:
+CalculAttaqueEngin (whole memory/six preserved registers) and InfligeDegat
+(whole memory/exact named callback arguments before AI message0x48).
+The [report](validacao/fronteira-contato-local.json) records the precise scope.
+The first unrestricted damage attempt faults at KERNEL32!GetPrivateProfileStringA
+(IAT0x5231b0, target0x1235f0) after PlayerResetAllie/MessageBoxSet; the partial
+capture remains preserved in xz.
+The supplemental capture halts before `iagUnitSendMessage(0,0x48,16)` at
+`0x4829c8`, with no native fault or substituted game body.
+
+No new missing Combat body was identified before that AI-owned stop. Message
+0x48, diplomacy MAJSympathie/PlayerResetAllie, presentation/import bindings,
+and Core level/death/removal remain named dependencies for a complete fight.
+No death/removal entry was reached in this bounded window. It is not full
+CalculGame/D1: only four actors advance, with an explicit staging interval and
+reciprocal contact orders. S1 full snapshots were unavailable in this checkout;
+the committed Missions probes supplied the input states. The coordinator's
+Mac mini all-16-unit D1/full scripted-input death capture remains separate.
+
+Run the domain gate and optional focused original suite with:
+
+```sh
+python3 -B scripts/check.py --domain combat
+python3 "/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py" combat-turret-native-tests -- env RISING_EMULAR=1 python3 -B -m unittest discover -s pesquisas-paralelas/combate -p test_ordens_torres_combate.py -v
+```
+
+The unchanged historical native corpus is not rerun for this slice. Original
+captures/differentials are separately leased, bounded jobs; no multi-hour Mac
+mini run is needed to reproduce the completed turret leaves.
+
+Final local gate: **284 tests, 154 optional native skips**, passed. The skips
+include the focused native test, which is run separately under the lease with
+`RISING_EMULAR=1`: **4 tests passed, 0 skips**, 96.631 seconds after grant.
+See `check-turret-orders.log` and
+`test-turret-orders-native.log` for actual gate/test outputs.
+
+## Live raid attack, damage and lifecycle contract (2026-10-29 delivery)
 
 Branch `feat/re-combat`; initial sync `c08e1fb`. Evidence-first commits:
 `58c8516` (30 real-state probe leaves), `4d4e2f4` (2,024 original calls and

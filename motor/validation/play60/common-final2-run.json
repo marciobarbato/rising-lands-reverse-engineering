@@ -1,0 +1,9 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "scripts/check.py"
+  ],
+  "seconds": 467.806153833,
+  "returncode": 0
+}

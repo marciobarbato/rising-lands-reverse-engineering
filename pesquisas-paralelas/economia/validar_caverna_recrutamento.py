@@ -1,14 +1,16 @@
 """Native differential of ``caverna_recrutamento`` against the original cave body, habitation and recruitment calls.
 
-Reruns the committed capture natively (``capturar_caverna_recrutamento.executar``: same declared actions, same
-recorded calls). At every recorded call of a translated routine the translation runs over a copy of the exact
+Reruns the committed capture natively (``capturar_caverna_recrutamento.executar``, or
+``capturar_abandono_santuario.executar`` for the abandonment capture: same declared actions, same recorded calls). At every recorded call of a translated routine the translation runs over a copy of the exact
 entry state (every mapped block) and is compared with what the original did:
 - exit registers EAX..EBP and ESP (bits a provider marks uncertain excluded, listed per call);
 - every byte of every mapped block afterwards (the original's: entry state + its changed bytes);
 - in order, each call into another front, by name and by the argument bits the callee reads.
 A callee owned elsewhere is the original's own call replayed: its name and arguments are checked, then its stores
-are applied in order and its exit registers returned (validation scaffolding, not a translation). The rerun must
-also equal the committed capture call for call.
+are applied in order and its exit registers returned (validation scaffolding, not a translation). CalculPosition and
+RechercheDecalageSortie are served by Core's real translation (``visao_grupos.provedor_saida``), checked against the
+original's exit registers outside the bits it marks uncertain (``--sem-saida-core`` replays them instead). The rerun
+must also equal the committed capture call for call.
 
     python3 "…/heavy_lease.py" economy -- python3 -B pesquisas-paralelas/economia/validar_caverna_recrutamento.py \\
         --captura pesquisas-paralelas/economia/evidencias/caverna-recrutamento/captura-caverna-recrutamento-exibicao.json.xz \\
@@ -40,14 +42,17 @@ class Replay:
     """``externo`` serving another front's callee from the original's own nested call (``proprias``: the names
     computed by the translation itself, whose subtrees are not foreign calls)."""
 
-    def __init__(self, resultado, proprias, argumentos=cr.ARGUMENTOS, erro=cr.DependenciaCavernaRecrutamento):
+    def __init__(self, resultado, proprias, argumentos=cr.ARGUMENTOS, erro=cr.DependenciaCavernaRecrutamento,
+                 provedores=None):
         self.chamadas = resultado['calls']
         self.lojas = resultado['stores']
         self.proprias = set(proprias)
         self.argumentos, self.erro = argumentos, erro
+        self.provedores = provedores or {}
         self.sequencia = self._fronteira()
         self.i = 0
         self.erros = []
+        self.servidas = {}
 
     def _fronteira(self):
         saida, pilha = [], []
@@ -77,20 +82,54 @@ class Replay:
             if c[1] != nome:
                 self.erros.append(f'call {self.i}: translation {nome} at {chamada:#x}, original {c[1]} from {c[3]}')
                 raise self.erro(nome, chamada, 'differs from the original call sequence')
-            for k, v in regs.items():
-                if k.startswith('_'):
-                    continue
-                largura = self.argumentos[nome][k]
-                if (int(c[2][k], 16) & largura) != v:
-                    self.erros.append(f'{nome} at {chamada:#x}: {k} {v:#x} != original {int(c[2][k], 16) & largura:#x}')
+            # The argument bits the callee reads (``argumentos``) are compared; a caller passing the whole register
+            # file (every register, Core's provider contract) is compared on those bits only.
+            for k, largura in self.argumentos[nome].items():
+                if k in regs and (int(c[2][k], 16) & largura) != (regs[k] & largura):
+                    self.erros.append(f'{nome} at {chamada:#x}: {k} {regs[k] & largura:#x} != original '
+                                      f'{int(c[2][k], 16) & largura:#x}')
+            original = {k: int(c[5][k], 16) for k in REG7}
+            if nome in self.provedores:
+                # A real translation (Core's ``provedor_saida``): its registers are what the caller receives,
+                # checked against the original's exit registers outside the bits it marks uncertain.
+                self.servidas[nome] = self.servidas.get(nome, 0) + 1
+                saida = self.provedores[nome](m)(nome, chamada, regs)
+                incertos = saida.get('_incertos') or {}
+                for k in REG7:
+                    if k in saida and (saida[k] ^ original[k]) & 0xffffffff & ~incertos.get(k, 0):
+                        self.erros.append(f'{nome} at {chamada:#x}: provider exit {k} {saida[k]:#x} != original '
+                                          f'{original[k]:#x}')
+                return saida
             arvore = self._subarvore(j)
             for loja in self.lojas:
                 if loja[5] in arvore:
                     endereco, tamanho, valor = int(loja[2], 16), loja[3], int(loja[4], 16)
                     for b in range(tamanho):
                         m.u8(endereco + b, (valor >> (8 * b)) & 0xff)
-            return {k: int(c[5][k], 16) for k in REG7}
+            return original
         return externo
+
+
+def provedores_saida():
+    """Core's exit-position translations (``visao_grupos.provedor_saida``) by callee name, each a factory over the
+    call's memory: CalculPosition (SortieTroupe 0x420f5a) and RechercheDecalageSortie (InitRecruteTroupe
+    0x42863b)."""
+    from visao_grupos import VisaoGrupos, provedor_saida
+
+    def fabrica(m):
+        return provedor_saida(VisaoGrupos(m))
+    return {'CalculPosition': fabrica, 'RechercheDecalageSortie': fabrica}
+
+
+def provedores_core():
+    """``provedores_saida`` plus Core's ``fadiga_vegetacao.provedor_fadiga`` for EteintTerrain (SortieTroupe's
+    abandonment, 0x421116). Native differential only: the provider binds Core's live world, which reads bytes no
+    recorded call reads, so a CPU-free replay over the read-before-write bytes cannot host it."""
+    from fadiga_vegetacao import FadigaVegetacao, provedor_fadiga
+
+    def fadiga(m):
+        return provedor_fadiga(FadigaVegetacao(m))
+    return dict(provedores_saida(), EteintTerrain=fadiga)
 
 
 def proprias():
@@ -104,12 +143,12 @@ def comparar_saida(saida, resultado):
             if (saida[k] ^ v) & 0xffffffff & ~incertos.get(k, 0)}, incertos
 
 
-def comparar(nome, regs, antes, resultado):
+def comparar(nome, regs, antes, resultado, provedores=None):
     """(ok, detail) of the translation of one recorded call over a copy of its entry state."""
     from memoria_quadro_core import MemoriaQuadro
     buffers = {n: (base, bytearray(d)) for n, (base, d) in antes.items() if n != 'native_stack'}
     m = MemoriaQuadro([(base, buf) for base, buf in buffers.values()])
-    replay = Replay(resultado, proprias())
+    replay = Replay(resultado, proprias(), provedores=provedores)
     cav = cr.CavernaRecrutamento(m, externo=replay(m))
     entrada = {k: regs[k] & 0xffffffff for k in REG7 + ('ESP',)}
     detalhe = dict(routine=nome, frame=resultado['frame'], action=resultado.get('action'),
@@ -139,6 +178,8 @@ def comparar(nome, regs, antes, resultado):
     ok = not regs_dif and not bytes_dif and not replay.erros and sobras == 0
     detalhe.update(outcome='match' if ok else 'mismatch', changed_bytes=len(resultado['changed_bytes']),
                    foreign_calls=replay.i)
+    if replay.servidas:
+        detalhe['served_by_translation'] = dict(replay.servidas)
     if incertos:
         detalhe['uncertain'] = {k: hex(v) for k, v in incertos.items()}
     if not ok:
@@ -151,21 +192,34 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--captura', required=True)
     ap.add_argument('--saida', required=True)
+    ap.add_argument('--sem-saida-core', action='store_true',
+                    help="replay the original's CalculPosition/RechercheDecalageSortie/EteintTerrain instead of Core's providers")
     a = ap.parse_args()
     captura, sha = carregar(RAIZ / a.captura)
-    import capturar_caverna_recrutamento as ccr
+    # The capture's own scenario module reruns it (the sanctuary abandonment has its own declared actions).
+    if captura['schema'] == 'rising-lands/economy-sanctuary-abandonment-capture/1':
+        import capturar_abandono_santuario as ccr
+    else:
+        import capturar_caverna_recrutamento as ccr
+    provedores = None if a.sem_saida_core else provedores_core()
     relatorio = dict(schema='rising-lands/economy-cave-recruitment-validation/1', capture=a.captura,
                      capture_raw_sha256=sha,
                      translation=hashlib.sha256((PASTA / 'caverna_recrutamento.py').read_bytes()).hexdigest(),
-                     results=[], counts={})
+                     core_exit_provider=None if provedores is None else hashlib.sha256(
+                         (RAIZ / 'ferramentas/visao_grupos.py').read_bytes()).hexdigest(),
+                     core_fatigue_provider=None if provedores is None else hashlib.sha256(
+                         (RAIZ / 'ferramentas/fadiga_vegetacao.py').read_bytes()).hexdigest(),
+                     results=[], counts={}, served_by_translation={})
     gravadas = []
 
     def observador(nome, regs, antes, resultado):
         gravadas.append(resultado)
         if nome not in TRADUZIDAS:
             return
-        ok, detalhe = comparar(nome, regs, antes, resultado)
+        ok, detalhe = comparar(nome, regs, antes, resultado, provedores)
         relatorio['results'].append(detalhe)
+        for k, v in detalhe.get('served_by_translation', {}).items():
+            relatorio['served_by_translation'][k] = relatorio['served_by_translation'].get(k, 0) + v
         c = relatorio['counts'].setdefault(nome, dict(match=0, mismatch=0, outside_domain=0, error=0))
         c[detalhe['outcome']] += 1
 
@@ -181,7 +235,8 @@ def main():
                      outside_domain=sum(1 for r in relatorio['results'] if r['outcome'] == 'outside_domain'))
     Path(RAIZ / a.saida).write_text(json.dumps(relatorio, indent=1, sort_keys=True) + '\n')
     print(json.dumps({k: relatorio[k] for k in ('counts', 'compared', 'mismatches', 'errors', 'outside_domain',
-                                                'rerun_equals_capture', 'recorded_calls', 'seconds')}, indent=1),
+                                                'rerun_equals_capture', 'recorded_calls', 'served_by_translation',
+                                                'seconds')}, indent=1),
           flush=True)
     from encerramento_captura import encerrar_captura
     encerrar_captura(0 if relatorio['mismatches'] == relatorio['errors'] == 0 and iguais else 1, RAIZ / a.saida)

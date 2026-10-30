@@ -1,0 +1,9 @@
+{
+  "command": [
+    "sh",
+    "motor/validate.sh"
+  ],
+  "seconds": 259.788078209,
+  "returncode": 0,
+  "lease": "engine-perf-final-main-gates"
+}

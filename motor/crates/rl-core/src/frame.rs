@@ -38,10 +38,34 @@ pub struct FrameEvent {
     pub stack: [u32; 4],
     pub stack_mask: u32,
 }
+/// Explicit audit sink. Disabling it never skips the game call or its memory checks.
+pub struct EventLog {
+    enabled: bool,
+    records: Vec<FrameEvent>,
+}
+impl EventLog {
+    pub fn new(enabled: bool) -> Self {
+        Self {
+            enabled,
+            records: Vec::new(),
+        }
+    }
+    pub fn push(&mut self, event: FrameEvent) {
+        if self.enabled {
+            self.records.push(event);
+        }
+    }
+    pub fn into_vec(self) -> Vec<FrameEvent> {
+        self.records
+    }
+}
 pub fn stop<T>(name: &'static str, address: u32) -> Result<T> {
     Err(EngineError::UnportedCallee { name, address })
 }
-pub fn binding(events: &mut Vec<FrameEvent>, id: u32, site: u32, args: &[u32], result: u32) {
+pub fn binding(events: &mut EventLog, id: u32, site: u32, args: &[u32], result: u32) {
+    if !events.enabled {
+        return;
+    }
     let mut e = FrameEvent {
         kind: 1,
         id,
@@ -54,7 +78,7 @@ pub fn binding(events: &mut Vec<FrameEvent>, id: u32, site: u32, args: &[u32], r
 }
 pub fn boundary(
     m: &MemoriaJogo,
-    events: &mut Vec<FrameEvent>,
+    events: &mut EventLog,
     id: u32,
     site: u32,
     registers: [u32; 4],
@@ -77,12 +101,7 @@ pub fn boundary(
     events.push(e);
     Ok(())
 }
-fn free(
-    m: &mut MemoriaJogo,
-    events: &mut Vec<FrameEvent>,
-    freed: &mut MemoriaJogo,
-    p: u32,
-) -> Result<()> {
+fn free(m: &mut MemoriaJogo, events: &mut EventLog, freed: &mut MemoriaJogo, p: u32) -> Result<()> {
     // Adopted GMEM_FIXED buffers. The harness supplies/checks their allocation
     // and lock records; no host pointer or allocator participates in game logic.
     let bytes = m.remove(p)?;
@@ -97,11 +116,15 @@ fn free(
         result: size,
         ..FrameEvent::default()
     });
-    freed.declare(p, bytes)
+    if m.audit {
+        freed.declare(p, bytes)
+    } else {
+        Ok(())
+    }
 }
 fn delete_bank(
     m: &mut MemoriaJogo,
-    events: &mut Vec<FrameEvent>,
+    events: &mut EventLog,
     freed: &mut MemoriaJogo,
     p: u32,
 ) -> Result<()> {
@@ -135,7 +158,7 @@ pub fn call(m: &mut MemoriaJogo, name: &str, a: &[u32]) -> Result<u32> {
         }
         "MissionGetNum" => Ok(u32::from(m.u8(0x496fe4)?)),
         "InputGame" => {
-            frame_input::input(m, a[0] as u8, &mut Vec::new())?;
+            frame_input::input(m, a[0] as u8, &mut EventLog::new(m.audit))?;
             Ok(0)
         }
         "AffGame" => frame_input::affgame(m),
@@ -227,12 +250,7 @@ pub fn call(m: &mut MemoriaJogo, name: &str, a: &[u32]) -> Result<u32> {
         _ => frame_core::call(m, name, a),
     }
 }
-fn body(
-    m: &mut MemoriaJogo,
-    input: &FrameInput,
-    events: &mut Vec<FrameEvent>,
-    ebx: u32,
-) -> Result<()> {
+fn body(m: &mut MemoriaJogo, input: &FrameInput, events: &mut EventLog, ebx: u32) -> Result<()> {
     // PlayerAttaqueReset 0x46d628 is an original RET.
     if call(m, "EvenementEnCours", &[])? as u8 != 0 {
         return Ok(());
@@ -262,7 +280,11 @@ fn body(
         match call(m, "PlayerGetType", &[player])? as u8 {
             1 => {
                 if player == u32::from(local) {
-                    frame_input::input(m, local, events)?;
+                    if m.player.is_some() {
+                        crate::player_input::input(m, u32::from(local))?;
+                    } else {
+                        frame_input::input(m, local, events)?;
+                    }
                     call(m, "InputSend", &[player])?;
                 } else {
                     return stop("InputReceive", 0x45ed03);
@@ -272,7 +294,11 @@ fn body(
                 let mission = call(m, "MissionGetNum", &[])?;
                 call(m, "CalculNextReflect", &[player, mission])?;
                 if player == u32::from(local) {
-                    frame_input::input(m, local, events)?;
+                    if m.player.is_some() {
+                        crate::player_input::input(m, u32::from(local))?;
+                    } else {
+                        frame_input::input(m, local, events)?;
+                    }
                 }
             }
             _ => {}
@@ -280,7 +306,11 @@ fn body(
     }
     m.set_u8(0x4e2480, local)?;
     for player in 0..4 {
-        call(m, "ProcessInputGame", &[player])?;
+        if m.player.is_some() {
+            crate::player_orders::process(m, player)?;
+        } else {
+            call(m, "ProcessInputGame", &[player])?;
+        }
     }
     let state = m.u8(0x4e2f78)?;
     if state == 0x12 || (state == 0x10 && m.u8(0x4e0730)? != 0) {
@@ -297,7 +327,11 @@ fn body(
             "UpdateChamp",
             "CalculMatiere",
         ] {
-            call(m, name, &[])?;
+            if name == "CalculIconeAction" && m.player.is_some() {
+                crate::player_input::icons(m)?;
+            } else {
+                call(m, name, &[])?;
+            }
         }
         let p = u32::from(m.u8(0x508041)?);
         call(m, "CalculCompteurMarche", &[p])?;
@@ -336,7 +370,7 @@ pub fn phase(
     phase: u32,
     mut input: FrameInput,
 ) -> Result<(FrameInput, Vec<FrameEvent>, MemoriaJogo)> {
-    let mut events = Vec::new();
+    let mut events = EventLog::new(m.audit);
     let mut freed = MemoriaJogo::default();
     match phase {
         1 => {
@@ -354,6 +388,9 @@ pub fn phase(
             body(m, &input, &mut events, ebx)?;
         }
         2 => {
+            if m.player.is_some() {
+                return crate::player_loop::between(m, input);
+            }
             let eax = frame_input::affgame(m)?;
             if m.u8(0x5099af)? != 0 {
                 m.set_u8(0x5099af, 0)?;
@@ -435,7 +472,7 @@ pub fn phase(
         }
         _ => return Err(EngineError::InvalidFramePhase(phase)),
     }
-    Ok((input, events, freed))
+    Ok((input, events.into_vec(), freed))
 }
 
 /// Parent phase leaves exposed for bounded isolated comparisons.

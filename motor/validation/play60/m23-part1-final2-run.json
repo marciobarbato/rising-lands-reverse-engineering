@@ -1,0 +1,16 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "motor/testes/frame_long_differential.py",
+    "part",
+    "--part",
+    "1",
+    "--library",
+    "motor/target/release/librising_engine.dylib",
+    "--output",
+    ".local/performance-60fps/final2/m23-part1.json.xz"
+  ],
+  "seconds": 443.560221959,
+  "returncode": 0
+}

@@ -408,9 +408,11 @@ impl Context<'_> {
         let address = self.u32(0x49a03c)?;
         self.observe("GetBob", 0x45aec2, &[x, y, width, height, address as i32]);
         self.observe("saved_background_pixels", address, &[]);
-        let event = self.observations.last_mut().unwrap();
-        event.kind = 3;
-        event.count = saved.len() as u32;
+        if self.audit {
+            let event = self.observations.last_mut().unwrap();
+            event.kind = 3;
+            event.count = saved.len() as u32;
+        }
         *self.background = Some(SavedBackground {
             address,
             pixels: saved,
@@ -432,12 +434,14 @@ impl Context<'_> {
                 text.len() as i32,
             ],
         );
-        let event = self.observations.last_mut().unwrap();
-        event.kind = 4;
-        let n = text.len().min(8);
-        event.before[..n].copy_from_slice(&text[..n]);
-        if text.len() > 8 {
-            event.after[..text.len() - 8].copy_from_slice(&text[8..]);
+        if self.audit {
+            let event = self.observations.last_mut().unwrap();
+            event.kind = 4;
+            let n = text.len().min(8);
+            event.before[..n].copy_from_slice(&text[..n]);
+            if text.len() > 8 {
+                event.after[..text.len() - 8].copy_from_slice(&text[8..]);
+            }
         }
         if let Some(boundaries) = self.text_boundaries.as_mut() {
             let expected = boundaries
