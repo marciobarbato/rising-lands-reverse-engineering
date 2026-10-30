@@ -211,7 +211,7 @@ The window mask (`sondas/<P>/mascara-janela.json`) is the published M2.3 mask, p
 
 Pass 2 ran at about 2–3 s/frame per job on the Mac mini.
 
-## S1 script (stages 1–6 verified; final runs not launched)
+## S1 script and final runs
 
 [roteiro_s1.py](roteiro_s1.py) builds [entradas/S1.json](entradas/S1.json), the S1-b plan. Each stage was run natively, resumed from the previous stage's snapshot, and checked through its `comandos.jsonl` and objective trace (`.local/m3/s1dev`):
 
@@ -232,15 +232,19 @@ Pass 2 ran at about 2–3 s/frame per job on the Mac mini.
 
 **Continuation to victory** [B, development run resumed from the stage-6 snapshot at 5300, not replay-checked]:
 - Stone reaches 50 at **frame 11784**: marks 0x4e1d8a and 0x4e1d91 (records 2 and 9).
-- Both raids (9000 and 10800) pass with no loss of the tracked units or structures.
+- Both raids (9000 and 10800) pass with no loss of the tracked units or structures. One untracked worker, unit 8 (type 5, harvesting alone), is killed at **frame 11858**: the player unit count 0x4e1a3a falls from 16 to 15, since dead units are in state 4.
 - Food reaches 50 at **frame 16933** (stone 67). `TestFinDeMission` stores **AL = 1** (0x4e05a0), mark 0x4e1d89 (record 1) and the latch 0x4e1d84 = 1. 0x4e061c then counts one per frame.
 - At **frame 17032** (counter 100): `PlaySnd_StopAllSound`, `MenuInit(0x13)`. From 17033 the result screen runs `PartieGetResultat`; it ran cleanly to frame 18000.
 - Stage 7 adds a left click at 17040. With both click flags set (CalculGame 0x42ca46), the UP at **frame 17043** runs `MissionNext` (MakeMissionName, FileExists), then `IaRechercheAjuste`, `Engin_StoreExperimente`, `RechercheStore`, `PlayerStore` and `MenuInit(0x11)` (`ObjectifLoadText`, the next objectives screen). No `MissionLoad` follows.
 - [entradas/S1.json](entradas/S1.json) therefore stops at frame 17050.
 - Enter must not be scripted on that screen: 0x42ca60 loops on `GetAsyncKeyState(0x0d)` while the key is held.
 
+**Final runs** [B, replay-checked]. Two independent runs of [entradas/S1.json](entradas/S1.json) from F0 on the Mac mini, through frames 129–17050 (16,922 frames each; 10,136 s and 10,172 s on parallel lease slots), give equal record files: quadros, entradas, comandos (96 lines) and fronteiras (51,419 lines). The capture is [sondas/S1](sondas/S1) (`replay.json`, `relatorio.json`, `resumo.json`, `*.jsonl.xz`).
+- The timeline matches the development run: unit count 16 → 15 at 11858; AL = 1 at 16933 (food 50, stone 67); `MenuInit` first entered at 17032; `PartieGetResultat` at 17033; `MissionNext` at 17043; no `MissionLoad`.
+- 48 SetPlayerOrdre orders; 284 routines first entered beyond the no-input run to frame 9,200.
+
 ### Resumable next steps
 
 1. Done: AL = 1 at 16933, `MenuInit(0x13)` at 17032, confirmation click → `MissionNext` at 17043 (stage 7, stop 17050).
-2. Run S1 twice from F0 (`entrada_roteirizada.py correr --entrada .../entradas/S1.json --instantaneo-cada 1000`, two lease slots, about 2 h each). Compare the runs, then package with `relatorio_sondas.py S1`.
+2. Done: the two final runs from F0, equal (above).
 3. Pass 2 of the S1 window with `passo2_sondas.py` (records from F0, then segments every 250 frames).
