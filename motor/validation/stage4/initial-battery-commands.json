@@ -1,0 +1,359 @@
+{
+  "revision": "e41d7555b003a712777ee57f191377cb1320ef7d",
+  "library_sha256": "7070b80561c84bc36cb3b4543f2a25d2e20bc8c6dc4318b754f1a73e159c38b2",
+  "jobs": [
+    {
+      "tag": "engine-gate",
+      "command": [
+        "sh",
+        "motor/validate.sh"
+      ]
+    },
+    {
+      "tag": "P1",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/player_proof.py",
+        "--probe",
+        "P1",
+        "--python",
+        "--whole-state",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/P1.json"
+      ]
+    },
+    {
+      "tag": "P2",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/player_proof.py",
+        "--probe",
+        "P2",
+        "--python",
+        "--whole-state",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/P2.json"
+      ]
+    },
+    {
+      "tag": "common-check",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "scripts/check.py"
+      ]
+    },
+    {
+      "tag": "m23-part-0",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/frame_long_differential.py",
+        "part",
+        "--part",
+        "0",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/m23-part-0.json.xz"
+      ]
+    },
+    {
+      "tag": "m23-part-1",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/frame_long_differential.py",
+        "part",
+        "--part",
+        "1",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/m23-part-1.json.xz"
+      ]
+    },
+    {
+      "tag": "m23-part-2",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/frame_long_differential.py",
+        "part",
+        "--part",
+        "2",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/m23-part-2.json.xz"
+      ]
+    },
+    {
+      "tag": "m23-part-3",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/frame_long_differential.py",
+        "part",
+        "--part",
+        "3",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/m23-part-3.json.xz"
+      ]
+    },
+    {
+      "tag": "m23-part-4",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/frame_long_differential.py",
+        "part",
+        "--part",
+        "4",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/m23-part-4.json.xz"
+      ]
+    },
+    {
+      "tag": "m23-part-5",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/frame_long_differential.py",
+        "part",
+        "--part",
+        "5",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/m23-part-5.json.xz"
+      ]
+    },
+    {
+      "tag": "m23-part-6",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/frame_long_differential.py",
+        "part",
+        "--part",
+        "6",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/m23-part-6.json.xz"
+      ]
+    },
+    {
+      "tag": "m23-part-7",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/frame_long_differential.py",
+        "part",
+        "--part",
+        "7",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/m23-part-7.json.xz"
+      ]
+    },
+    {
+      "tag": "m23-part-8",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/frame_long_differential.py",
+        "part",
+        "--part",
+        "8",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/m23-part-8.json.xz"
+      ]
+    },
+    {
+      "tag": "m23-part-9",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/frame_long_differential.py",
+        "part",
+        "--part",
+        "9",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/m23-part-9.json.xz"
+      ]
+    },
+    {
+      "tag": "leaf",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/player_leaf_proof.py",
+        "--binary",
+        "motor/target/release/player_fixtures",
+        "--output",
+        ".local/stage4-restart/leaf.json"
+      ]
+    },
+    {
+      "tag": "m22",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/frame_differential.py",
+        "--m22",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/m22.json"
+      ]
+    },
+    {
+      "tag": "render-128",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/render_proof.py",
+        "--frames",
+        "128",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/render-128.json"
+      ]
+    },
+    {
+      "tag": "render-9200",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/render_proof.py",
+        "--frames",
+        "9200",
+        "--no-python",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/render-9200.json.xz"
+      ]
+    },
+    {
+      "tag": "P3",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/player_proof.py",
+        "--probe",
+        "P3",
+        "--python",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/P3.json"
+      ]
+    },
+    {
+      "tag": "P6",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/player_proof.py",
+        "--probe",
+        "P6",
+        "--python",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/P6.json"
+      ]
+    },
+    {
+      "tag": "P7",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/player_proof.py",
+        "--probe",
+        "P7",
+        "--python",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/P7.json"
+      ]
+    },
+    {
+      "tag": "K1",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/player_proof.py",
+        "--probe",
+        "K1",
+        "--python",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/K1.json"
+      ]
+    },
+    {
+      "tag": "render-P1",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/render_probe_proof.py",
+        "--probe",
+        "P1",
+        "--binary",
+        "motor/target/release/render_probe_stream",
+        "--output",
+        ".local/stage4-restart/render-P1.json"
+      ]
+    },
+    {
+      "tag": "render-P2",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/render_probe_proof.py",
+        "--probe",
+        "P2",
+        "--binary",
+        "motor/target/release/render_probe_stream",
+        "--output",
+        ".local/stage4-restart/render-P2.json"
+      ]
+    },
+    {
+      "tag": "render-P3",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/render_probe_proof.py",
+        "--probe",
+        "P3",
+        "--binary",
+        "motor/target/release/render_probe_stream",
+        "--output",
+        ".local/stage4-restart/render-P3.json"
+      ]
+    }
+  ]
+}

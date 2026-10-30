@@ -596,3 +596,38 @@ independently at that revision, retaining the input source revision `a7f5d49`.
 The segmented reader validates original opening/end continuity without reloading
 the native world and reports the compared prefix separately from the full
 4,544-phase window. This evidence-reader addition changes no native code.
+
+### Stage 4 measured delivery
+
+Round 3 is complete against pinned `a7f5d49`: Ctrl deposit, help pages
+9/0xc/0xb/2/7, structure targeting/tag-0x10 production and thirteen predicates.
+Its 203 original cases give 201 completed equal and two exact Combat stops.
+The full input leaf battery gives **659 completed equal / 666 exercised**, seven
+exact stops, two explicit out-of-frame skips and zero mismatches; all 13 declared
+text requests agree.
+
+P1 and P2 match 501/501 and 601/601 frames and 1,002/1,002 and 1,202/1,202
+whole-state phases. P3/P6/P7 match frames 129–219 and stop at the same CAVE body
+`0x426aff` on frame 220. P6 additionally matches its 183-phase reachable
+whole-state prefix under the newly published policy, including
+`between_frames220`. K1 matches frames 129–140 and stops at the same AffGame
+view boundary `0x415b77` on frame 141. No later original state is loaded.
+
+The fresh no-input regressions are **257/257 M2.2 phases** and
+**18,401/18,401 M2.3 phases**. Renderer surfaces remain **128/128** against Python
+and original and **9,200/9,200** against original in a serial native chain;
+qualified Graphics 1.7 probes remain P1 501, P2 601 and P3 172 surfaces equal.
+The shared-MacBook release measurement is **83.22 logic frames/s**,
+**195.80 renders/s**, and **56.44 engine + render frames/s**, excluding app
+presentation and proof work.
+
+Native implementation `e41d755`, reader `8d60b00`; main snapshot `13dd534` is
+merged as `7b3f58d`. Native code and release library bytes are unchanged across
+the reader/main merges. The merged-tree engine gate passes, as does the common
+check (**1,982 tests, 621 optional skips**). The engine gate and common check
+execute in 289.931 and 414.860 seconds after lease grant, respectively.
+[The handoff](../motor/HANDOFF.md) and [hashed report package](../motor/validation/stage4/summary.json)
+record exact masks, timings, stops, original evidence pins, skipped work and
+reproduction commands. This remains ABI 1.5 and Graphics 1.7; it does not claim
+later construction/work/combat simulation, initialized audio, glyphs or app
+presentation beyond the declared domain.
