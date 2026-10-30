@@ -49,6 +49,7 @@ LOCAL = 0x508041
 BUSCA_UNIDADE, BUSCA_OCUPADA, BUSCA_SUCESSO, BUSCA_ROTA = 0x496304, 0x4e0f36, 0x4e0f37, 0x4e0f3c
 ESTADO_11, ESTADO_13, SAIDA = 0x4564ef, 0x4558e4, 0x454ccd
 ESTADO_5 = 0x456600                     # EnginNextEtape's switch target for state 5 (work)
+ESTADO_19 = 0x4554db                    # state 19 (hunger: Economy's alimentacao.estado_fome)
 PROGRESSO = 0x44b1c1
 
 
@@ -308,6 +309,10 @@ def proxima_etapa_entrada(m, p, unidade, tabelas, construcao, etapa=None):
                 and 'EnginNextEtape:state5' in p:
             p['EnginNextEtape:state5'](sitio=ESTADO_5, unidade=unidade & 0xffff)
             return SAIDA
+        if erro.rotina == 'EnginNextEtape state 19' and erro.sitio == ESTADO_19 == tabelas['estados'][19] \
+                and 'EnginNextEtape:state19' in p:
+            p['EnginNextEtape:state19'](sitio=ESTADO_19, unidade=unidade & 0xffff)
+            return SAIDA
         raise
 
 
@@ -347,8 +352,15 @@ def instalar_donos(m, p, donos, tabelas):
       Core's ``visao_grupos`` (EAX structure, EDX player, EBX light flag; other registers 0, which they do not read);
     - ``EnginNextEtape:state13``: Core's ``estado_entrada`` with ESI = the unit record, EDI = the unit;
     - ``EnginNextEtape:state5``: ``estado_trabalho`` with Core's BatimentEnDestruction/BatimentGetPlayer and
-      Economy's CalculWorkEngin.
-    ``proxima_etapa_entrada`` dispatches states 5/13 to the last two."""
+      Economy's CalculWorkEngin;
+    - ``EnginNextEtape:state19``: Economy's ``alimentacao.estado_fome`` (the hunger body 0x4554db) with ESI = the
+      unit record, DI = the unit; EBX, ECX and EBP enter as 0. The body overwrites EBX and EBP before reading
+      them and sets CX = DI (0x4555f2) before using ECX as the unit index; ECX's high word enters 0, as at all 231
+      state-19 entries of Economy's native capture (``captura-alimentacao-exibicao``, return EnginNextEtape+0x8a1).
+      The dispatcher discards the exit registers (the epilogue 0x454ccd restores them);
+    - ``EnginSetFatigue`` (0x45498f, the starving unit's switch to state 19, AX = the unit; other registers 0):
+      Core's ``fadiga_vegetacao`` when importable (``DonosM3.rotina_core``); until then the named stop stays.
+    ``proxima_etapa_entrada`` dispatches states 5/13/19 to the three ``EnginNextEtape:state*`` providers."""
     from reinicio_ia import DependenciaIA
     estrutura_pinada = p['BatimentNextEtape']
 
@@ -380,3 +392,8 @@ def instalar_donos(m, p, donos, tabelas):
             return donos.ciclo.calcul_work_engin(dict(regs, ESP=0))
         return donos.ee.chamar(nome, regs)
     p['EnginNextEtape:state5'] = lambda sitio, unidade: estado_trabalho(m, chamar, unidade)
+    p['EnginNextEtape:state19'] = lambda sitio, unidade: donos.fome.estado_fome(dict(
+        zero, ESI=(m.u32(0x4e19a0) + unidade * 276) & 0xffffffff, EDI=unidade, ESP=0))
+    fadiga = donos.rotina_core('EnginSetFatigue')
+    if fadiga is not None and 'EnginSetFatigue' not in p:
+        p['EnginSetFatigue'] = lambda sitio, unidade: fadiga(dict(zero, EAX=unidade), sitio)['EAX']
