@@ -9,7 +9,8 @@ victory state or change the menu-mode byte to create a screen.
 validated. It restores an actual scripted S1 checkpoint at frame 17000, isolates each real MenuInit(0x13),
 PartieGetResultat, MenuInit(0x11) and AffObjectif call, records entry/exit memory metadata, bounded render inputs,
 full surfaces and raster/text arguments, restores
-the exact entry, then requires the ordinary call's surface to equal the isolated result. Declared writes are empty.
+the exact entry, then requires the ordinary call's full surface, whole native state, raster arguments and text arguments to equal
+the isolated result. Declared writes are empty.
 No glyph provider is substituted. Every ordinary phase also retains its complete surface, raster arguments and whole-state hash. Complete native
 asset banks are hashed as memory metadata and are not copied into tracked evidence. Text arguments are read through
 the terminator (bounded to65536 bytes); an unreadable argument is an explicit text-read stop, never a fabricated
@@ -28,7 +29,10 @@ python3 "/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py" 
 ```
 
 The checkpoint carries the original scripted bindings. The producer reads the immutable S1 input from `fd56f69`;
-that input must match the native run. This is only 50 frames after the supplied late checkpoint, with an internal
+that input must match the native run. When the published native S1 frame ledger is available locally, add
+`--probe-records pesquisas-paralelas/missoes/m3/sondas/S1/quadros.jsonl.xz` to verify both ordinary phase surfaces
+and every whole-state hash against it. A checkpoint at16933..17031 is accepted, and both real MenuInit transitions
+at17032/17043 are required before the producer can report success. This is only 50 frames after the supplied late checkpoint, with an internal
 18-minute budget. If there is no late checkpoint, Missions must produce it on the Mac mini from its accepted native
 S1 run. No multi-thousand-frame MacBook command is authorized by this request.
 
