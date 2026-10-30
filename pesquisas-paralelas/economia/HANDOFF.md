@@ -2,6 +2,59 @@
 
 Chat: `01a18262-c6d5-7cd3-80fa-8431bf5f2657` (Economy and Production). Worktree: `/Users/marcio/git/Rising Lands/worktrees/re-economy`. Branch: `feat/re-economy`. Organization base: `6634be3af2d255846a847d8aa21ad4edf1cdb589`. Implementation commit: `f5a5e9b` (`Reconstruct troop completion preparation and cargo credits`); the following handoff commit and serialized integration result are identified in the completion chat. Only economy-owned paths changed.
 
+## Recruitment placement DX delivery (2026-10-30)
+
+Base: `origin/main` `e41cc77`, merged into `feat/re-economy`. Only Economy-owned paths changed.
+No integration into main or acceptance operation; transport WIP remains parked.
+
+**Contract.** SortieTroupe CALL `0x420f8c` → SetSortEngin `0x445fbc` forwards AX existing unit and
+DX exit cell, with `ARGUMENTOS['SetSortEngin']['EDX'] = 0xffff`. `celula` is CalculPosition's actual
+returned AX (CALL `0x420f5a` → `0x420698`), saved by the native producer in EBP (`0x420f5f`), reloaded
+into EDX at `0x420f83` and preserved by EnginSetExperimente. The S1 observation AX 4 / DX `0x0e0f`
+is not a constant in the implementation. Core's required inputs are all forwarded:
+
+| CALL / callee | Registers |
+|---|---|
+| `0x420f69` EnginSetType `0x457b87` | AX unit, DX exit cell, BL CalculPosition direction, CL live requested type |
+| `0x420f75` EnginAddVie `0x457122` | AX unit, DX 1000 |
+| `0x420f7c` EnginResetFatigue `0x4530fd` | AX unit |
+| `0x420f85` EnginSetExperimente `0x44fe42` | AX unit, DX exit cell |
+| `0x420f8c` SetSortEngin `0x445fbc` | AX unit, DX exit cell |
+
+**Scope and order.** Existing protected structure/unit domains are unchanged. Remove colonist, credit
+carried stone then food, calculate position, convert, heal, reset fatigue, apply experience, place,
+set movement, optional request, abandonment/cleanup and messages retain their order. Missing callbacks
+stop after prior effects with no retry or rollback. Core owns the five bodies; AI/runtime owns the
+subsequent S1 proof and messages. This delivery does not claim a completed S1 frame 2547.
+
+**Evidence.** Intact RISING.EXE SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+Original-only cave/recruitment and abandonment captures are unchanged. Shared CPU-free/native Replay
+compares every required input, including missing registers. Reports expose all five calls' arguments
+and masks. Mutation probes cover omitted/altered inputs at frames 297/869/1363; a separate synthetic
+protocol probe checks a different CalculPosition result reaching conversion, experience and placement.
+No foreign-file byte pin is introduced.
+
+**Validation.** CPU-free recruitment replay: **342/342, 0 mismatches**, including Core's exit-position
+provider; abandonment: **81/81**, with and without it. Fresh native reruns through
+`/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py`, using
+`validar_caverna_recrutamento.py --captura <existing capture> --saida <report>`:
+
+- [Recruitment](validacao-caverna-recrutamento-emulada.json): **342 compared, 0 mismatches, 0 errors,
+  0 outside-domain cases**, rerun equal to the unchanged capture (343 recorded calls, 596.974 s).
+  All 30 recruit-call argument comparisons match (six instances of each of the five calls);
+  Core serves CalculPosition ×6 and RechercheDecalageSortie ×7.
+- [Abandonment](validacao-abandono-santuario-emulada.json): **81 compared, 0 mismatches, 0 errors,
+  0 outside-domain cases**, rerun equal to the unchanged capture (294.843 s). All 10 recruit-call argument
+  comparisons match (two instances of each of the five calls); Core serves CalculPosition ×2,
+  RechercheDecalageSortie ×1 and EteintTerrain ×2.
+
+Final domain gate: `python3 -B scripts/check.py --domain economy` passed **547 tests, 209 optional skips,
+0 failures**, documentation links OK (52.413 s). The two requested native differentials ran separately
+under the heavy lease; the gate did not opt into unrelated native suites. `git diff --check` and the
+Economy-only ownership review pass. Only argument masks, added argument observations, translation hash
+and elapsed time differ from the preceding native reports; their counts, reproduction and outcomes agree.
+
 ## Recruitment direction ABI delivery (2026-10-30)
 
 Base: `origin/main` `92fab50` merged into `feat/re-economy`. Only Economy-owned paths changed;

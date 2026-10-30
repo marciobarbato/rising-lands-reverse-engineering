@@ -78,7 +78,7 @@ ARGUMENTOS = {
     'EnginSetType': {'EAX': 0xffff, 'EDX': 0xffff, 'EBX': 0xff, 'ECX': 0xff},
     'EnginAddVie': {'EAX': 0xffff, 'EDX': 0xffff},
     'EnginResetFatigue': {'EAX': 0xffff}, 'EnginSetExperimente': {'EAX': 0xffff, 'EDX': 0xffff},
-    'SetSortEngin': {'EAX': 0xffff}, 'SetDeplaceEngin': {'EAX': 0xffff, 'EDX': 0xffff},
+    'SetSortEngin': {'EAX': 0xffff, 'EDX': 0xffff}, 'SetDeplaceEngin': {'EAX': 0xffff, 'EDX': 0xffff},
     'EnginAsk': {'EAX': 0xffff, 'EDX': 0xff, 'EBX': 0xff},
     'BatimentAjouteMatiere': {'EAX': 0xff, 'EDX': 0xffff, 'EBX': 0xff, 'ECX': 0xffff},
     'TerrainDeposeMatiere': {'EAX': 0xff, 'EDX': 0xffff, 'EBX': 0xffff, 'ECX': 0xff},
@@ -501,7 +501,8 @@ class CavernaRecrutamento:
         self._ext('EnginAddVie', 0x420f75, EAX=unidade, EDX=1000)
         self._ext('EnginResetFatigue', 0x420f7c, EAX=unidade)
         self._ext('EnginSetExperimente', 0x420f85, EAX=unidade, EDX=celula)
-        self._ext('SetSortEngin', 0x420f8c, EAX=unidade)
+        # EBP saves CalculPosition's cell; EnginSetExperimente preserves its DX at this call.
+        self._ext('SetSortEngin', 0x420f8c, EAX=unidade, EDX=celula)
         self._ext('SetDeplaceEngin', 0x420f99, EAX=unidade, EDX=m.u16(e + 0x7c))
         if m.u8(e + 4) == m.u8(JOGADOR_LOCAL):
             self._ext('EnginAsk', 0x420fb2, EAX=unidade, EDX=6, EBX=0)
