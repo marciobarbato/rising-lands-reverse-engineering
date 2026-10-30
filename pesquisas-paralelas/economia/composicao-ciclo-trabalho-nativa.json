@@ -1,0 +1,170 @@
+{
+ "counts": {
+  "BatimentAjouteMatiere": {
+   "error": 0,
+   "match": 3,
+   "mismatch": 0,
+   "uncertain_register": 0
+  },
+  "BatimentLogeEngin": {
+   "error": 0,
+   "match": 1,
+   "mismatch": 1,
+   "uncertain_register": 0
+  },
+  "CalculWorkEngin": {
+   "error": 0,
+   "match": 390,
+   "mismatch": 0,
+   "uncertain_register": 4
+  },
+  "MineEndWork": {
+   "error": 0,
+   "match": 1,
+   "mismatch": 0,
+   "uncertain_register": 0
+  },
+  "MineRecolte": {
+   "error": 0,
+   "match": 2,
+   "mismatch": 0,
+   "uncertain_register": 0
+  },
+  "MineSetWork": {
+   "error": 0,
+   "match": 2,
+   "mismatch": 0,
+   "uncertain_register": 0
+  },
+  "TerrainRecolte": {
+   "error": 0,
+   "match": 3,
+   "mismatch": 0,
+   "uncertain_register": 0
+  }
+ },
+ "failures": [
+  {
+   "arg": "0x1",
+   "bytes": [
+    "0x47933a26",
+    "0x47933a27",
+    "0x47933a28",
+    "0x47933a29",
+    "0x47933a2a",
+    "0x47933a2b",
+    "0x47933a2c",
+    "0x47933a2d",
+    "0x47933a2e",
+    "0x47933a2f",
+    "0x47933aa6",
+    "0x47933aa7",
+    "0x47933aa8",
+    "0x47933aa9",
+    "0x47933aaa",
+    "0x47933aab",
+    "0x47933aac",
+    "0x47933aad",
+    "0x47933aae",
+    "0x47933aaf"
+   ],
+   "frame": 125,
+   "n_bytes": 196,
+   "outcome": "mismatch",
+   "registers": {},
+   "replay": [],
+   "routine": "BatimentLogeEngin",
+   "unconsumed": 0
+  },
+  {
+   "arg": "0xe",
+   "frame": 214,
+   "outcome": "uncertain_register",
+   "registers": {
+    "EAX": [
+     "0x0",
+     "0x474ee000"
+    ]
+   },
+   "routine": "CalculWorkEngin"
+  },
+  {
+   "arg": "0xe",
+   "frame": 218,
+   "outcome": "uncertain_register",
+   "registers": {
+    "EAX": [
+     "0x0",
+     "0x474ee000"
+    ]
+   },
+   "routine": "CalculWorkEngin"
+  },
+  {
+   "arg": "0xe",
+   "frame": 222,
+   "outcome": "uncertain_register",
+   "registers": {
+    "EAX": [
+     "0x0",
+     "0x474ee000"
+    ]
+   },
+   "routine": "CalculWorkEngin"
+  },
+  {
+   "arg": "0xe",
+   "frame": 226,
+   "outcome": "uncertain_register",
+   "registers": {
+    "EAX": [
+     "0x0",
+     "0x474ee000"
+    ]
+   },
+   "routine": "CalculWorkEngin"
+  }
+ ],
+ "replayed_original": {
+  "ChercheGc": 3,
+  "ChercheGcLibre": 1,
+  "MineGetCapacite": 1,
+  "PlaySnd_PostSound": 1,
+  "Random": 6,
+  "SetMiniMap": 1,
+  "TerrainEstGc": 4
+ },
+ "reproduction": {
+  "between_frames": true,
+  "code_unchanged": true,
+  "frame1": true,
+  "load_tail": true
+ },
+ "schema": "rising-lands/economy-work-cycle-composition-native/1",
+ "seconds": 741.884,
+ "served_by_translation": {
+  "AnimWorkEngin": 27,
+  "BagContient": 8,
+  "BagContientTroupe": 1,
+  "BagPrend": 2,
+  "BagRetire": 3,
+  "BatimentAdjacent": 4,
+  "BatimentGetCase": 2,
+  "BatimentGetVolume": 1,
+  "BatimentHabitable": 1,
+  "BatimentModifyMap": 1,
+  "BonusGetValEngin": 5,
+  "DecouvreTerrain": 1,
+  "DeplaceEngin": 349,
+  "EnginGetBag": 1,
+  "EnginGetPlayer": 4,
+  "EnginGetType": 4,
+  "EnginPeutPasser": 2,
+  "GetCaseCentrale": 1,
+  "IllumineTerrain": 1,
+  "InitBatimentPlayer": 1,
+  "PlaceLibre": 2,
+  "RetireEngin": 2,
+  "SetEnginCollision": 1
+ }
+}
