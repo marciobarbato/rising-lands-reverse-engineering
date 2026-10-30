@@ -1,11 +1,25 @@
 //! Semantic pilot state and an explicit original-address projection.
 mod clock;
 pub mod frame;
+pub mod frame_combat;
+pub mod frame_runtime_state;
+pub mod frame_tasks;
+pub mod render;
+pub mod render_assets;
+mod render_hud;
+mod render_scene;
+mod render_scripted;
+mod render_units;
+pub use frame_runtime_state::RuntimeState;
 pub mod frame_ai;
 pub mod frame_core;
 pub mod frame_economy;
 pub mod frame_input;
 pub mod frame_missions;
+pub mod frame_movement;
+pub mod frame_path;
+pub mod frame_raid;
+pub mod frame_spawn;
 pub mod frame_state;
 pub use frame_state::{FrameGlobals, FrameState, StructureState, UnitState};
 pub mod frame_units;

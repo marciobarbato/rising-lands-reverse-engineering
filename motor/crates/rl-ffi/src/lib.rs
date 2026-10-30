@@ -10,7 +10,7 @@ use std::{
     sync::{Mutex, OnceLock},
 };
 
-pub const ABI_VERSION: u32 = 0x00010001;
+pub const ABI_VERSION: u32 = 0x00010004;
 const MAX_BLOCKS: u32 = 65536;
 const MAX_BYTES: usize = 64 * 1024 * 1024;
 #[repr(C)]
@@ -19,7 +19,9 @@ pub struct RlBloco {
     pub length: u32,
     pub data: *const u8,
 }
+mod render_abi;
 struct Registry {
+    renderers: BTreeMap<u64, render_abi::BoundRenderer>,
     next: u64,
     worlds: BTreeMap<u64, World>,
 }
@@ -37,11 +39,13 @@ enum AbiError {
     Poisoned,
     ResourceLimit,
     VersionMismatch,
+    StaleGeneration,
+    RenderInput(&'static str),
 }
 impl AbiError {
     fn code(&self) -> i32 {
         match self {
-            Self::InvalidArgument => 1,
+            Self::InvalidArgument | Self::RenderInput(_) => 1,
             Self::InvalidHandle => 2,
             Self::Memory(_) => 3,
             Self::UnknownRoutine => 4,
@@ -51,11 +55,13 @@ impl AbiError {
             Self::Poisoned => 8,
             Self::ResourceLimit => 9,
             Self::VersionMismatch => 10,
+            Self::StaleGeneration => 11,
         }
     }
     fn message(&self) -> String {
         match self {
             Self::Memory(e) | Self::UnsupportedPath(e) => e.to_string(),
+            Self::RenderInput(s) => (*s).to_owned(),
             _ => format!("{self:?}"),
         }
     }
@@ -94,6 +100,7 @@ fn with_registry<T>(f: impl FnOnce(&mut Registry) -> Result<T>) -> Result<T> {
             Mutex::new(Registry {
                 next: 1,
                 worlds: BTreeMap::new(),
+                renderers: BTreeMap::new(),
             })
         })
         .lock()
@@ -118,7 +125,7 @@ pub unsafe extern "C" fn rl_criar_mundo(
     output: *mut u64,
 ) -> i32 {
     status(|| {
-        if version != ABI_VERSION && version != 0x00010000 {
+        if ![ABI_VERSION, 0x00010000, 0x00010001, 0x00010002, 0x00010003].contains(&version) {
             return Err(AbiError::VersionMismatch);
         }
         if output.is_null() {
@@ -471,6 +478,8 @@ pub unsafe extern "C" fn rl_executar_rotina_quadro(
             .or_else(|| rl_core::frame_core::isolated(id))
             .or_else(|| rl_core::frame_economy::isolated(id))
             .or_else(|| rl_core::frame::isolated(id))
+            .or_else(|| rl_core::frame_movement::isolated(id))
+            .or_else(|| rl_core::frame_combat::isolated(id))
             .ok_or(AbiError::UnknownRoutine)?;
         if count as usize != arity || output.is_null() || (count != 0 && args.is_null()) {
             return Err(AbiError::InvalidArgument);
@@ -482,16 +491,14 @@ pub unsafe extern "C" fn rl_executar_rotina_quadro(
         };
         let result = with_world(handle, |world| {
             let mut memory = world.project()?;
-            let result = if id < 150 {
-                rl_core::frame_ai::call(&mut memory, name, values)?
-            } else if id < 200 {
-                rl_core::frame_units::call(&mut memory, name, values)?
-            } else if id < 250 {
-                rl_core::frame_core::call(&mut memory, name, values)?
-            } else if id < 300 {
-                rl_core::frame_economy::call(&mut memory, name, values)?
-            } else {
-                rl_core::frame::call(&mut memory, name, values)?
+            let result = match id {
+                100..=149 | 400..=449 => rl_core::frame_ai::call(&mut memory, name, values)?,
+                150..=199 => rl_core::frame_units::call(&mut memory, name, values)?,
+                200..=249 => rl_core::frame_core::call(&mut memory, name, values)?,
+                250..=299 => rl_core::frame_economy::call(&mut memory, name, values)?,
+                450..=499 => rl_core::frame_movement::call(&mut memory, name, values)?,
+                550..=599 => rl_core::frame_combat::call(&mut memory, name, values)?,
+                _ => rl_core::frame::call(&mut memory, name, values)?,
             };
             world.replace_memory(memory)?;
             Ok(result)

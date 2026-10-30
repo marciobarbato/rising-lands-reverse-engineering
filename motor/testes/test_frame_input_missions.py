@@ -6,6 +6,9 @@ bytes; they are not claimed to reproduce the whole original entry image.
 Missing pages in other isolated fixtures are synthetic, as documented by the
 shared helper. Native claims cover captured writes and defined return bits.
 """
+from pinned_reference import activate, reference_file, pinned_file
+SOURCE_ROOT = activate()
+
 import base64
 import ctypes as C
 import hashlib
@@ -93,7 +96,7 @@ class InputMissionsProviders(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         for path,expected in PINS.items():
-            if hashlib.sha256((ROOT/path).read_bytes()).hexdigest()!=expected:
+            if hashlib.sha256(pinned_file(ROOT/path).read_bytes()).hexdigest()!=expected:
                 raise AssertionError(f'Reference identity changed: {path}')
         cls.abi=Frames()
         fn=cls.abi.lib.rl_executar_rotina_quadro
