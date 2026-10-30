@@ -40,3 +40,15 @@ the existing writer/reader mask, without a new exemption. CRT changes, unowned l
 or unexpected cursor writers must remain named stops until separately proved. A full matrix must not be inferred
 from its corners or the earlier sampled grid. The final domain table and comparison report will enumerate only
 actually captured successful calls. No new original observation is claimed merely because this plan exists.
+
+## Observer-log compaction check
+
+The first 280 origins use the initial producer. Its host-state pickle retained 106,458 old binding-log events.
+For later batches the producer uses Missions' existing `EventosCompactos.descartar_ate` to discard those retained
+observations while preserving their logical indices. A before/after complete native-memory hash is identical.
+The old and compacted producers execute the same first origin through both roots: **2/2** native returns, every
+register, DGROUP/CRT/heap difference and complete surface hash are identical; opening DGROUP/projectile bytes are
+also identical. `validacao/grade-vistas19-compactacao.json` pins both original recordings and the producer.
+Host pickle size falls from45,589,347 to15,259,965 bytes. This removes observer history, not game bytes or callbacks.
+No native body, original asset or capture boundary is substituted. The compacted proof is committed before use
+for the remaining finite matrix. The native cases still each restore the same accepted frame128.

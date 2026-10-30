@@ -13,6 +13,12 @@ from emulador import RETORNO
 
 def main(a):
     original.REF=REF;m=original.modulo_entrada();b,_,k=m.abrir(a.start,None);assert k==128
+    # Same observer-log compaction used by the original scripted-input harness. Logical event indices survive.
+    # Keep the proof of native-memory preservation and independently recheck the first origin against v1.
+    import delta_estado_missao as delta
+    before_compaction=b.resumo_imagem(b.imagem())['sha256'];host_before=len(pickle.dumps(original.seg._python(b)))
+    events=delta.compactar_eventos(b);discarded=len(events);events.descartar_ate(discarded)
+    assert before_compaction==b.resumo_imagem(b.imagem())['sha256']
     iso=Isolamento(b,());ctx,image=iso._salvar();host=pickle.dumps(original.seg._python(b));dd=b.directdraw
     surfaces=bytes(b.cpu.mem_read(dd.base_superficies,dd.tamanho_superficies));rows=[];t=time.monotonic()
     assert bytes(b.cpu.mem_read(0x497168,4))==struct.pack('<HH',64,64)
@@ -55,6 +61,8 @@ def main(a):
         executable_sha256=__import__('emulador').HASH_ORIGINAL,source_sha256=sha(Path(__file__).read_bytes()),
         snapshot_sha256=sha(Path(a.snapshot).read_bytes()),code_sha256=b.sha256_codigo(),map=[64,64],viewport=[25,17],
         offset=a.offset,count=a.count,elapsed_seconds=time.monotonic()-t,
+        host_observer_compaction=dict(discarded_events=discarded,logical_event_count=len(events),
+            pickle_bytes_before=host_before,pickle_bytes_after=len(host),native_state_sha256=before_compaction),
         opening_dgroup_zlib=base64.b64encode(zlib.compress(image['dgroup'][1])).decode(),
         projectile_base=hex(int.from_bytes(image['dgroup'][1][0x5080f0-0x494000:0x5080f4-0x494000],'little')),
         opening_projectiles_zlib=base64.b64encode(zlib.compress(next(v for n,(ad,v) in image.items()
