@@ -1,4 +1,4 @@
-"""App-owned copied-buffer ABI 1.5 binding. Serialized worker use only.
+"""App-owned copied-buffer ABI 1.6 binding. Serialized worker use only.
 
 Layouts follow motor/include/rising_engine.h; no Rust pointers escape.
 """
@@ -8,7 +8,7 @@ import os
 from pathlib import Path
 import sys
 
-VERSION = 0x00010005
+VERSION = 0x00010006
 NAMES = ('eax', 'ebx', 'ecx', 'edx', 'esi', 'edi', 'ebp')
 ROUTINES = {'Random': 1, 'LongRand': 2, 'rand': 3, 'IntToBCD': 4, 'BCDToInt': 5}
 
@@ -40,6 +40,8 @@ class Pilot:
         u32, u64 = C.c_uint32, C.c_uint64
         signatures = {
             'rl_versao': ([], u32),
+            'rl_execucao_definir': ([u64, u32], C.c_int32),
+            'rl_execucao_modo': ([u64, C.POINTER(u32)], C.c_int32),
             'rl_criar_mundo': ([u32, u32, u32, C.POINTER(u64)], C.c_int32),
             'rl_liberar_mundo': ([u64], C.c_int32),
             'rl_carregar_blocos': ([u64, C.POINTER(Block), u32], C.c_int32),
@@ -53,7 +55,7 @@ class Pilot:
         for name, (arguments, result) in signatures.items():
             fn = getattr(self.lib, name)
             fn.argtypes, fn.restype = arguments, result
-        if self.lib.rl_versao() != VERSION:
+        if self.lib.rl_versao() >> 16 != 1 or self.lib.rl_versao() & 0xffff < 6:
             raise RuntimeError('Pilot C ABI version mismatch')
 
     def error(self):
@@ -104,7 +106,7 @@ class Pilot:
     def free(self, handle):
         self.check(self.lib.rl_liberar_mundo(handle))
 
-FRAME_VERSION = 0x00010005
+FRAME_VERSION = 0x00010006
 REGISTERS = ('eax', 'ebx', 'ecx', 'edx', 'esi', 'edi', 'ebp', 'esp')
 
 
@@ -159,7 +161,7 @@ def unpack_blocks(raw):
 class Frames(Pilot):
     def __init__(self, path=None):
         super().__init__(path)
-        if self.lib.rl_versao() != FRAME_VERSION:
+        if self.lib.rl_versao() >> 16 != 1 or self.lib.rl_versao() & 0xffff < 6:
             raise RuntimeError('Frame C ABI version mismatch')
         u32, u64 = C.c_uint32, C.c_uint64
         self.lib.rl_passo_quadro.argtypes = [u64, u32, C.POINTER(FrameInput)]

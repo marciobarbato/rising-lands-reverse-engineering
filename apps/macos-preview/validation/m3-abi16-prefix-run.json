@@ -1,0 +1,28 @@
+{
+ "command": [
+  "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+  "-B",
+  "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/source/apps/macos-preview/scripts/validate_native_macos.py",
+  "--root",
+  "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/source",
+  "--library",
+  "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+  "--driver",
+  "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+  "--codec",
+  "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_projection.dylib",
+  "--inputs",
+  "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+  "--graphics-sources",
+  "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/graphics-inputs",
+  "--frames",
+  "128",
+  "--python-oracle",
+  "--output",
+  "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-abi16-live-prefix.json"
+ ],
+ "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+ "seconds": 14.529329416,
+ "exit_code": 0,
+ "source": "b44fe804a696413f79904b9d36b01f30138cfac5"
+}

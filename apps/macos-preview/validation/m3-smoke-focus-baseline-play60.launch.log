@@ -1,0 +1,1 @@
+The application cannot be opened for an unexpected reason, error=Error Domain=RBSRequestErrorDomain Code=5 "Launch failed." UserInfo={NSLocalizedFailureReason=Launch failed., NSUnderlyingError=0x779ec74bd0 {Error Domain=NSPOSIXErrorDomain Code=162 "Unknown error: 162" UserInfo={NSLocalizedDescription=Launchd job spawn failed}}}

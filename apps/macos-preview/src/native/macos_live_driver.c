@@ -1,4 +1,4 @@
-/* App orchestration/transport only. Actual logic and pixels come from Rust ABI1.5. */
+/* App orchestration/transport only. Actual logic and pixels come from Rust ABI1.6. */
 #include "MacOSLiveDriver.h"
 #include "rising_engine.h"
 #include <CommonCrypto/CommonDigest.h>
@@ -19,7 +19,7 @@ extern int32_t macos_projection_sha256(const uint8_t*,uint32_t,const Span*,uint3
 struct MacOSLiveDriver {
  void *library;
  FN(rl_versao); FN(rl_criar_mundo); FN(rl_carregar_blocos); FN(rl_passo_quadro);
- FN(rl_passo_quadro_entrada);FN(rl_eventos_entrada);
+ FN(rl_execucao_definir); FN(rl_execucao_modo); FN(rl_passo_quadro_entrada);FN(rl_eventos_entrada);
  FN(rl_liberar_mundo); FN(rl_projetar_tudo); FN(rl_erro_mensagem);
  FN(rl_render_contrato); FN(rl_render_criar); FN(rl_render_geracao); FN(rl_render_quadro); FN(rl_render_liberar);
  int validation;
@@ -82,14 +82,14 @@ MacOSLiveDriver *macos_live_create(const char*library,const char*root,char*error
 #ifndef MACOS_STATIC_ENGINE
  d->library=dlopen(library,RTLD_NOW|RTLD_LOCAL);if(!d->library){snprintf(error,capacity,"%s",dlerror());goto bad;}
 #endif
- LOAD(rl_versao);LOAD(rl_criar_mundo);LOAD(rl_carregar_blocos);LOAD(rl_passo_quadro);LOAD(rl_liberar_mundo);LOAD(rl_passo_quadro_entrada);LOAD(rl_eventos_entrada);LOAD(rl_projetar_tudo);LOAD(rl_erro_mensagem);
+ LOAD(rl_execucao_definir);LOAD(rl_execucao_modo);LOAD(rl_versao);LOAD(rl_criar_mundo);LOAD(rl_carregar_blocos);LOAD(rl_passo_quadro);LOAD(rl_liberar_mundo);LOAD(rl_passo_quadro_entrada);LOAD(rl_eventos_entrada);LOAD(rl_projetar_tudo);LOAD(rl_erro_mensagem);
  LOAD(rl_render_contrato);LOAD(rl_render_criar);LOAD(rl_render_geracao);LOAD(rl_render_quadro);LOAD(rl_render_liberar);
- if(d->rl_versao()!=0x10005||d->rl_render_contrato()!=0x10007){snprintf(error,capacity,"ABI1.5 / Graphics1.7 required");goto bad;}
+ if((d->rl_versao()>>16)!=1||(d->rl_versao()&0xffff)<6||d->rl_render_contrato()!=0x10007){snprintf(error,capacity,"ABI1.6 / Graphics1.7 required");goto bad;}
  uint32_t n=0;uint8_t*s0=file(root,"s0.bin",&n);if(!s0){snprintf(error,capacity,"Missing S0");goto bad;}
  d->bulk_capacity=n;d->bulk=malloc(n);uint32_t count=n>=4?le(s0):0,off=4;if(!count||count>65536){free(s0);goto bad;}RlBloco*blocks=calloc(count,sizeof(*blocks));
  if(!d->bulk||!blocks||count>65536){free(s0);free(blocks);goto bad;}
  for(uint32_t i=0;i<count;i++){if((uint64_t)off+8>n){free(s0);free(blocks);goto bad;}blocks[i].address=le(s0+off);blocks[i].length=le(s0+off+4);off+=8;if((uint64_t)off+blocks[i].length>n){free(s0);free(blocks);goto bad;}blocks[i].data=s0+off;off+=blocks[i].length;}
- int c=d->rl_criar_mundo(0x10005,20,0,&d->world);if(!c)c=d->rl_carregar_blocos(d->world,blocks,count);free(blocks);free(s0);if(c){fail(d,c,"S0");snprintf(error,capacity,"%s",d->status.message);goto bad;}
+ int c=d->rl_criar_mundo(0x10006,20,0,&d->world);if(!c)c=d->rl_carregar_blocos(d->world,blocks,count);free(blocks);free(s0);if(c){fail(d,c,"S0");snprintf(error,capacity,"%s",d->status.message);goto bad;}
  uint8_t*in=file(root,"input1.bin",&n);if(!in||n!=sizeof(d->input)){free(in);goto bad;}memcpy(&d->input,in,n);free(in);
  in=file(root,"input2.bin",&n);if(!in||n!=sizeof(d->phase2)){free(in);goto bad;}memcpy(&d->phase2,in,n);free(in);
  RlRenderBytes assets[9]={0};uint8_t*back[9]={0};char name[40];
@@ -110,6 +110,8 @@ MacOSLiveDriver *macos_live_create(const char*library,const char*root,char*error
 }
 int32_t macos_live_validation(MacOSLiveDriver*d,uint32_t enabled){
  if(!d||d->status.phase_index!=UINT32_MAX||enabled>1)return 1;
+ int c=d->rl_execucao_definir(d->world,enabled?RL_EXECUCAO_AUDITORIA:RL_EXECUCAO_JOGO);
+ if(c)return fail(d,c,"execution mode");
  d->validation=(int)enabled;return 0;
 }
 static int input_error(MacOSLiveDriver*d,const char*name){d->status.stopped=1;snprintf(d->status.message,sizeof(d->status.message),"%s",name);return 1;}

@@ -1,0 +1,73 @@
+{
+  "baseline": "m3-input-answers.json",
+  "current": "m3-abi16-answers.json",
+  "all_unchanged": true,
+  "rows": [
+    {
+      "probe": "P1",
+      "unchanged": {
+        "input_sha256": true,
+        "export_sha256": true,
+        "native_log_sha256": true,
+        "expected_answers_sha256": true,
+        "actual_answers_sha256": true
+      },
+      "answers": 7522
+    },
+    {
+      "probe": "P2",
+      "unchanged": {
+        "input_sha256": true,
+        "export_sha256": true,
+        "native_log_sha256": true,
+        "expected_answers_sha256": true,
+        "actual_answers_sha256": true
+      },
+      "answers": 9034
+    },
+    {
+      "probe": "P3",
+      "unchanged": {
+        "input_sha256": true,
+        "export_sha256": true,
+        "native_log_sha256": true,
+        "expected_answers_sha256": true,
+        "actual_answers_sha256": true
+      },
+      "answers": 45032
+    },
+    {
+      "probe": "P6",
+      "unchanged": {
+        "input_sha256": true,
+        "export_sha256": true,
+        "native_log_sha256": true,
+        "expected_answers_sha256": true,
+        "actual_answers_sha256": true
+      },
+      "answers": 33873
+    },
+    {
+      "probe": "P7",
+      "unchanged": {
+        "input_sha256": true,
+        "export_sha256": true,
+        "native_log_sha256": true,
+        "expected_answers_sha256": true,
+        "actual_answers_sha256": true
+      },
+      "answers": 53099
+    },
+    {
+      "probe": "K1",
+      "unchanged": {
+        "input_sha256": true,
+        "export_sha256": true,
+        "native_log_sha256": true,
+        "expected_answers_sha256": true,
+        "actual_answers_sha256": true
+      },
+      "answers": 7037
+    }
+  ]
+}
