@@ -1,0 +1,41 @@
+{
+ "entries": [
+  {
+   "call": "0x475063",
+   "entry": "0x417698",
+   "frame": 11501,
+   "mode": 18,
+   "monster_count_u32": 2,
+   "monster_count_u8": 2,
+   "phase": "between_frames11501",
+   "registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x3",
+    "ECX": "0xc01d0001",
+    "EDI": "0x0",
+    "EDX": "0x2007fe8",
+    "ESI": "0x0",
+    "ESP": "0x2007fe4"
+   },
+   "view": [
+    10,
+    10
+   ]
+  }
+ ],
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "recorder_sha256": "b45aac9a193caf5061ac5798e2729421adfc6fc266d51ee1184fe371b2d73d45",
+ "s1": {
+  "code_unchanged": true,
+  "frames_checked": 2,
+  "last_frame": 11501,
+  "snapshot": {
+   "path": ".local/m3/passo2/S1/instantaneo-11500.pickle",
+   "sha256": "db59fb6c15913a5ffa8474e54267e3d4b7ef0e7332b87502e73011c7baf58c94"
+  }
+ },
+ "schema": "rising-lands/s1-graphics-guard-entry/1",
+ "source_revision": "377c625f05b5633e6fa5bbf24498ba2dd2965978",
+ "translation_executed": false
+}

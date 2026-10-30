@@ -1018,3 +1018,32 @@ Strict/planning S1 indicators and the owning domain gate follow this committed
 binding. S1 pass-2 is still absent from fetched Missions `7eeb395` and main
 `3e2ed77`; no new whole-state S1 proof is claimed. No foreign files/hash pins,
 original evidence, masks or snapshots were changed; feature pushes only.
+
+### Strict/planning reach and current AI handler stop
+
+Committed source `377c625`: strict equals **10,672 frames, 129–10800**, then
+Graphics' AffGame entry `0x417698` at CALL `0x475063`, guard `0x41591f`,
+stops at **between_frames10801** on monster count 2 (only 0/1 covered).
+Planning equals **11,534 frames, 129–11662**, then this front's
+`iabDetection_AjouteEnnemiOuAlerteConflit 0x489b5a`, indirect CALL `0x482e2e`,
+stops inside **frame11663**. Both have no first difference. Planning records
+863 declared Graphics bypasses; it remains `.local/m3-1/s1-economia-planejamento.json`.
+Strict report: `validacao/s1-economia-strict.json`. Original handler capture
+is queued under the heavy lease before any translation is added.
+
+Graphics' exact native contract is independently observed in
+`evidencias/s1-guarda-monstros-original.json`: **between_frames11501**, not
+a guessed register file for 10801. EAX=ESI=EDI=EBP=0, EBX=3,
+ECX=`0xc01d0001`, EDX=`0x2007fe8`, ESP=`0x2007fe4`; u8/u32 `[0x50b178]`=2,
+mode0x12, view(10,10), CALL `0x475063`. Native states 11500 and 11501 both
+equal the committed S1 record, executable code unchanged; no game callee
+was replaced or skipped. The snapshot was copied from Core's read-only
+native inputs to ignored `.local/m3/` and hash-checked:
+`db59fb6c15913a5ffa8474e54267e3d4b7ef0e7332b87502e73011c7baf58c94`.
+
+Fresh leased domain gate passes **135 tests, 127 executed successfully,
+eight explicit native skips**, zero failures/errors, 142.263 seconds, docs
+links pass. The 1,058 native leaf comparisons ran separately from the gate's
+skips. Latest fetch: main `1531678` (new Graphics order-window surfaces,
+multi-monster guard unchanged), Missions `7eeb395`; S1 pass-2 remains absent.
+No main merge/acceptance and no whole-state S1 proof is claimed.
