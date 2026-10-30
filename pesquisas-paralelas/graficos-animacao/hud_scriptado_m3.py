@@ -88,7 +88,13 @@ def tooltip(h):
     h.caixa(x,y,x+width-1,y+height-1,1,False)
     shaded_box(h,x+1,y+1,x+width-2,y+height-2,shadow=True,clipped=False)
     request=dict(text=bytes(text),x=x+3,y=y+1,right=x+width-2,bottom=y+height-2,font=1,flags=(0,0))
-    h.chamadas.append(['AffText',request['x'],request['y'],request['right'],request['bottom'],bytes(text).hex(),1,0,0])
+    afftext(h,request)
+    write(h,'largura_tela_u16',0x49a018,old_width);write(h,'altura_tela_u16',0x49a01a,old_height)
+
+def afftext(h,request):
+    """One real AffText call, preserving its position in the full display sequence."""
+    m=h.m
+    h.chamadas.append(['AffText',request['x'],request['y'],request['right'],request['bottom'],request['text'].hex(),request['font'],*request['flags']])
     if h.texto is False:
         raise DependenciaQuadro(0x459454,'AffText glyph renderer is not supplied (probes declare this boundary non-executed)',
             superficie=bytes(h.saida),chamadas=h.chamadas,efeitos=h.efeitos)
@@ -105,4 +111,3 @@ def tooltip(h):
             chamadas=h.chamadas,efeitos=h.efeitos) from error
     if not isinstance(rendered,bytes) or len(rendered)!=len(h.saida):raise ValueError('Text renderer must return the complete indexed surface')
     h.saida[:]=rendered
-    write(h,'largura_tela_u16',0x49a018,old_width);write(h,'altura_tela_u16',0x49a01a,old_height)

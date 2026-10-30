@@ -70,11 +70,16 @@ def main(a):
                 outputs.append(captured)
             old, new = outputs
             assert old['after'] == entry['after'] and old['blits'] == entry['blits'], (name, entry['frame'], 'baseline restoration')
-            assert new['text_boundaries'] == old['text_boundaries']
+            # Earlier real glyphs legitimately change a later call's incoming
+            # surface and raster offset. The original request itself must agree.
+            requests=lambda row:[{k:v for k,v in call.items() if k not in ('surface_before','blits_before')}
+                                 for call in row['text_boundaries']]
+            assert requests(new)==requests(old)
             for key in (new['after'], new['exit_dgroup']): blobs[key] = cap.blobs[key]
             rows.append(dict(source=name, frame=entry['frame'], baseline_equal=True,
                 before=entry['before'], after=new['after'], exit_dgroup=new['exit_dgroup'],
                 blits=new['blits'], text_calls=len(new['text_boundaries']),
+                text_requests=requests(new),
                 changed_pixels=sum(x != y for x, y in zip(blob(entry['after']), zlib.decompress(base64.b64decode(cap.blobs[new['after']]))))))
             cap.blobs.clear()
             if len(rows)%50 == 0: print('original glyph-enabled surfaces', len(rows), flush=True)

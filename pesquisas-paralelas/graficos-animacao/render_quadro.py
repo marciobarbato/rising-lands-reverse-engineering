@@ -22,7 +22,7 @@ from graficos import RAIZ
 import json
 
 # Contract version: major for breaking changes; minor for optional inputs and newly evidenced branches.
-VERSAO_RENDER_QUADRO = (1, 11)
+VERSAO_RENDER_QUADRO = (1, 12)
 LARGURA, ALTURA = 800, 600
 DGROUP, DGROUP_FIM = 0x494000, 0x523000
 ESTRUTURAS, PASSO_ESTRUTURA = 0x49a0c8, 276

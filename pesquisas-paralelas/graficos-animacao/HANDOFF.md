@@ -1515,3 +1515,172 @@ must port/adopt the published bitmap contract and rerun normal human Test B; no
 Rust/app files are edited here. Other languages, colour replacement, control bytes,
 opaque message-bank pointers, general menus/LoadPie and unproved late-S1 states
 remain addressed dependencies. No main merge or acceptance is performed.
+
+## Late S1 and glyph-enabled full surfaces, API 1.12 — 2026-10-30
+
+API1.11 was committed/pushed as `bc38477` before this step. API1.12 extends the
+same read-only `renderizar_quadro` entry contract; `texto=None` remains the real
+bitmap provider, explicit callbacks remain supported and `texto=False` is the
+named dependency diagnostic. Only Graphics-owned tracked paths change. No main
+merge, acceptance record or Rust/app edit is performed.
+
+### Original-first inputs and results
+
+Five bounded original runs cover S1 **11251–12500**, sourced from replay-checked
+S1 `82ec5eaa98d4f212b650c2c8ce2b293a30fb50ef` and immutable native checkpoints.
+They verify **1250/1250 complete frame states and 2500/2500 phase surfaces**.
+A passive observer additionally verifies every captured world block unchanged
+through AffGame and records every changing DGROUP byte. There are15 changing
+DGROUP byte addresses across the interval; the shared RNG cursor never changes.
+Those addresses include real input zones, not merely display bookkeeping.
+
+The original executable is still intact `RISING.EXE`
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`; loaded code
+SHA-256 `02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4`.
+No normalized PE executes. InitTextLangue/TextGetMessage retain the declared
+Missions display-v2 boundary; literal tooltip and queued PT-BR message bytes
+already present in the actual original scenario are rendered unchanged.
+
+The native glyph-enabled experiment restores each actual display entry, first
+requires the historical full surface/raster sequence to match, then removes only
+AffText and executes the intact original again. Normal default rendering matches
+**1250/1250 full800x600 surfaces**, every raster argument and DGROUP effect,
+including **1649 actual AffText calls**:
+
+| Glyph-enabled original window | Full surfaces | AffText calls |
+|---|---:|---:|
+| 11251–11750 | 500/500 | 500 |
+| 11751–12000 | 250/250 | 496 |
+| 12001–12250 | 250/250 | 403 |
+| 12251–12500 | 250/250 | 250 |
+
+These are isolated original display calls from recorded native entry states;
+they are not a newly simulated glyph-enabled whole-state trajectory. The
+independent chained comparison matches the historical S1 text-boundary contract
+**1250/1250**, **110550 raster calls**, cache and saved-background continuity,
+with no pixel/raster/effect/render/logic stop. Transport partitions preserve
+original rows and encoded payload strings verbatim. The new500-frame native
+archive exceeds Git's size ceiling and is retained unchanged in
+`.local/s1-native-archives`; its four published parts and ledger retain provenance.
+
+Prepared original full-frame cases additionally prove **141/141** CAVE cases
+(damage0..100 inclusive, all32 drawing-clock phases and levels0..7), **2/2**
+player-0 soldier counterparts, **3/3** two/three/five-live-raider fixtures and
+**32/32** animated message-marker phases and **1/1** visible farmer hunger-state19
+counterpart (only the original unit type byte changes). Explicit input writes are retained in
+each row; no unit allocation, order or simulation result is invented. Prepared
+fire/multi-raider observers assert unchanged world blocks. Each comparison
+checks the entire indexed buffer, raster sequence and DGROUP effects; the
+prepared world-audited cases also check the logical output projection. The extra
+focused late-scene glyph proof is **33/33**. The API1.11 glyph scenes remain
+**536/536** on current source, plus the unchanged real objectives page proof7/7.
+
+### Reconstructed behavior and mutation order
+
+- AffEngin `0x41591f` now composes the proved late normal/attack/death branches
+  (`0x412390`, `0x41374c`, `0x41559a`). Owner4 really draws its coloured body
+  twice: `0x411c9f`, then the common `0x41121b` pass. Identical pixels do not
+  justify dropping the second native call. Corpse counters/phases are consumed,
+  never advanced; selection/effect branches outside the proved inputs still stop.
+- The player army/farmer normal hunger state19, thief attack and shifted fatigue
+  icons use their original anchors and common tails. The actual late farmer
+  material/fatigue pair(1,4) is added. Friendly soldier counterparts are prepared
+  display cases; they are not claims about extra natural S1 orders.
+- CAVE `0x40958e` uses levels0..7 and full health100 with damage0..100. The health
+  gauge subtracts the two original200-scale percentages before scaling to60
+  pixels. AffFlamme `0x40323c`, type3 branch `0x4045b9..0x404a23`, has15 ordered
+  layers. Its threshold value is `200*damage/maximum`, not100%; the bob phase is
+  `(live_clock508f80 + actual facade-trigger cell + x_offset)&31`. Every threshold
+  and all32 phases are checked against original full frames.
+- MessageBoxAffiche `0x469c44` consumes the actual256-slot ring at
+  `0x4e7754+518*head`, head/tail `0x507d54/56`. Timer399 returns before drawing;
+  the proved one-line domain has offset word+0x102=`ffff`. It resets input zones,
+  optionally draws the original animated marker, then draws font1/colour0/clip1
+  text at(0,496,768,512), before the alliance/cursor tail. No message lookup or
+  placeholder text is fabricated. Two-line wrapping remains `0x469d7f`.
+
+### Critical logic/input contract: InitGameZone stores
+
+Message boxes call Core-owned **InitGameZone(1,0) `0x471830`**. Graphics reuses
+`chamadas_quadro_core.iniciar_zonas_jogo` through the owned
+`ambiente_graficos_core` bootstrap. A local memory overlay records the original
+ordered stores without mutating the caller. No foreign implementation-file
+hash is pinned; native comparisons exercise the committed Core provider.
+
+`renderizar_quadro(...).efeitos` exports these values as usual. Crucially,
+**`desenhar_jogo(...).escritas` now also returns the changed input-zone stores**,
+before the existing flip/shake effects. They are read by input processing and
+must not be masked as display-only. At S1 frame11754 the actual stores are:
+
+```
+(0x509b68, 4, 512)
+(0x509b6c, 4, 45)
+(0x509b70, 4, 544)
+```
+
+The Core provider preserves four zero-extended u16 coordinates in dwords,
+maximum-index updates and the final active-range words. Rendering and logic
+consume the same preserved AffGame-entry state; consumers should project each
+logical output once. Whole-window comparisons now check those returned logical
+input writes directly against native DGROUP, in addition to the full render
+projection. Returning an empty callback here would silently lose original state.
+No mask is widened. Unknown geometry/control/body/effect domains remain named
+stops. The clean soldier-wave domain is bounded to five live raiders, known
+friendly states/tasks, effect/oscillation bytes0 and the proved sanctuary/CAVE
+configuration; it is not an arbitrary-population purity claim.
+
+The full800-unit pool is required only when validating the added wave/fire or
+multiple-projectile domains. Historical no-wave providers with DGROUP/projectile
+reads remain supported. An unavailable pool in a new domain is an addressed
+`0x41591f` dependency, never an assumed empty population.
+
+### Validation diagnostics and remaining scope
+
+The first multi-text capture attempt correctly stopped because the older
+single-call producer demanded equal pre-text surfaces after earlier real glyphs
+had already changed them. The corrected producer compares the original requests,
+retains the actual full output buffers, and preserves the earlier536-call producer
+bytes via its own `bc38477` revision. No original evidence is rewritten.
+
+One750-call glyph experiment hit the harness's existing cumulative600-second wall
+budget after700 calls. It produced no committed partial evidence and contributes
+nothing to the passing count. The complete range was recaptured in three250-call
+leased invocations. All passing native commands retain the whole-invocation
+19-minute alarm; the largest prepared matrix's native core took512.897s.
+
+The native audit also exposed the input-zone writes above. An intermediate
+empty-effect guard rejected frame11754; the final implementation models those
+stores through Core rather than suppressing them. Intermediate renderer stops
+and raster differences are summarized in `validacao/s1-tardio-diagnostics.json`.
+The first domain-gate attempt exposed an eager census on legacy partial-memory
+fixtures and stale current-provider reports. The census is now conditional; the
+20 focused legacy tests pass, and the CAVE/view/P7 current-provider comparisons
+are rerun against their unchanged original evidence before the final gate.
+The refreshed logical-domain results are P3 **3001/3001**, P6 **2272/2272**,
+P7 **3572/3572**, the finite view matrix **3840/3840** and actual P7 origins
+**7/7**, all with zero mismatches. Their current-provider bindings are Graphics
+files; no foreign implementation hash is introduced.
+The next complete gate exposed only two stale negative inputs: a nonempty queue
+and CAVE level1 now belong to the proved domain. Their tests now reject queue
+index256 and level8, respectively; both focused negatives pass. The renderer
+and source-bound native proofs are unchanged by this test correction.
+
+Final validation: `python3 -B scripts/check.py --domain graphics` passes
+**305/305 tests**, zero failures/skips, in **259.837s**; output is retained at
+`validacao/s1-api112-domain-gate-final.log`. The final chained1250-surface proof
+takes **187.296s**. All11 new/current full-surface comparison reports have been
+checked against the final Graphics source bindings and their expected N/N.
+
+Final reports are `validacao/s1-tardio-api112-final.json`, the500/750 glyph-set
+reports, `cave-fogo-api112-final.json`, `s1-soldado-aliado-api112-final.json`,
+`s1-raide-multi-api112-final.json`, `s1-icone-alerta-api112-final.json` and
+`s1-fome-fazendeiro-api112-final.json`.
+Exact Mac-mini commands for earlier/later natural windows are in
+[LATE_S1_RENDER.md](LATE_S1_RENDER.md). Frames11001–11250 and after12500 are not
+claimed as newly compared here. Other unit/effect variants, two-line alerts,
+nonzero layout/camera variants, general AffGame menu modes `0x4176a8`, actual
+MenuInit/LoadPie and opaque TEXTES lookup remain scoped dependencies.
+
+Engine/macOS must port/adopt both the real bitmap path and the additive logical
+zone outputs, then rerun normal human Test B. This Graphics delivery does not
+claim the Rust frame141 stop is already removed or record mission acceptance.
