@@ -230,6 +230,8 @@ class _Hud:
         if selected == 0xffff: return
         if selected >= 1000: self.parar(0x401d18)
         record = 0x49a0c8+276*selected
+        if self.m.u8(record+4)!=self.camera:return
+        if self.m.u8(record+8)==3 and self.m.u8(record+5)==5:return
         if (self.m.u8(record+4) == self.camera == 0 and self.m.u8(record+8) == 2
                 and self.m.u8(record+5) == 5 and self.m.u16(record+0x74) == 0): return
         self.parar(0x401d18)
