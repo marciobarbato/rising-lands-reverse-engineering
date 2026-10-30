@@ -15,8 +15,9 @@ It returns EAX..EBP and ESP at the exit 0x454ccd (ESP unchanged). EnginNextEtape
 written by the abort branches are not modeled (those branches are outside the translated domain). ``memoria``:
 ``u8/u16/u32(addr, value=None)`` (``memoria_quadro_core.MemoriaQuadro``).
 
-Named dependencies (never defaulted), through ``externo(nome, chamada, registradores) -> registradores`` at the
-argument widths of ``ARGUMENTOS`` (a provider may add ``_incertos``):
+Named dependencies (never defaulted), through ``externo(nome, chamada, registradores) -> registradores`` with the
+whole register file EAX..EBP, the callee's entry ESP and ``_pilha`` (the pushed words); ``ARGUMENTOS`` names the
+argument bits each callee reads (a provider may add ``_incertos``):
 - Core: BatimentAdjacent, DeplaceEngin, BatimentGetType, BatimentGetPlayer, BatimentEnDestruction,
   TerrainGetSacType, TerrainEstDecouvert, EnginGetVolume;
 - Economy: TestRessource (``ordens_economia``), BatimentEnleveMatiere 0x4235bd, EnginRestaureEtat 0x45315f
@@ -25,8 +26,10 @@ argument widths of ``ARGUMENTOS`` (a provider may add ``_incertos``):
 - Audio: PlaySnd_PostSound (frame boundary; one pushed word, popped by the callee).
 
 Outside the translated domain (``ForaDoDominioFome``, raised before any store of the branch): the validity checks of
-saved states +0xa0 = 1, 0xb, 0xd, 0xf, 0x12, 0x14, 0x15, 0x17, 0x18, and the abort of saved state 5 when its depot
-structure (mode 2) is destroyed or no longer the unit's owner's (0x455107).
+saved states +0xa0 = 1, 0xb, 0xd, 0xf, 0x12, 0x15, 0x17, 0x18; the abort of saved state 5 when its depot structure
+(mode 2) is destroyed or no longer the unit's owner's (0x455107); the aborts of saved state 0x14 (unloading) when its
+unload structure +0xc0 (0x454ddd) or its mode-2 depot (0x454ef8) is destroyed or lost. Saved states 5 and 0x14 whose
+structures stand go on to the meal.
 """
 M32 = 0xffffffff
 REG7 = ('EAX', 'EBX', 'ECX', 'EDX', 'ESI', 'EDI', 'EBP')
@@ -44,7 +47,7 @@ ARGUMENTOS = {
     'TerrainEstDecouvert': {'EAX': 0xffff, 'EDX': 0xff}, 'EnginGetVolume': {'EAX': 0xffff},
     'TestRessource': {'EAX': 0xffff, 'EDX': 0xffff, 'EBX': 0xffff}, 'BatimentEnleveMatiere': {'EAX': 0xff,
     'EDX': 0xffff, 'EBX': 0xff}, 'EnginRestaureEtat': {'EAX': 0xffff},
-    'ChercheVegetLibre': {'EAX': 0xffff, 'EDX': 0xff, 'EBX': 0xff},
+    'ChercheVegetLibre': {'EAX': 0xffff, 'EDX': 0xff, 'EBX': 0xff, 'ECX': 0xff},
     'PlaySnd_PostSound': {'EAX': M32, 'EDX': M32, 'EBX': M32, 'ECX': M32},
 }
 PILHA_EXTERNA = {'TestRessource': 1, 'ChercheVegetLibre': 1, 'PlaySnd_PostSound': 1}
@@ -77,19 +80,23 @@ class Alimentacao:
         self.externo = externo
         self.proprias = set(ROTINAS) if proprias is None else set(proprias)
         self.incertos = {}
+        self._esp = 0
 
-    def _ext(self, nome, chamada, pilha=(), **regs):
-        """Call ``nome`` at ``chamada``; returns EAX..EBP as the callee leaves them (registers a provider does not
-        return keep the caller's values)."""
+    def _ext(self, nome, chamada, r, pilha=()):
+        """Call ``nome`` at ``chamada`` with the whole register file ``r`` (EAX..EBP) and the callee's entry ESP (the
+        body's ESP minus the pushed words and the return address); returns EAX..EBP as the callee leaves them
+        (registers a provider does not return keep the caller's values). ``ARGUMENTOS`` names the argument bits each
+        callee reads (what the validators compare); every register is passed."""
+        esp = (self._esp - 4 * len(pilha) - 4) & M32
         if nome in self.proprias and nome in ROTINAS:
-            entrada = {k: regs.get(k, 0) & M32 for k in REG7}
-            entrada['ESP'] = 0
+            entrada = {k: r[k] & M32 for k in REG7}
+            entrada['ESP'] = esp
             saida = getattr(self, '_' + nome)(entrada)
             return {k: saida[k] & M32 for k in REG7}
         if self.externo is None:
             raise DependenciaFome(nome, chamada)
-        larguras = ARGUMENTOS[nome]
-        entrada = {k: regs[k] & larguras[k] for k in larguras}
+        entrada = {k: r[k] & M32 for k in REG7}
+        entrada['ESP'] = esp
         if pilha:
             entrada['_pilha'] = list(pilha)
         saida = self.externo(nome, chamada, entrada)
@@ -99,9 +106,9 @@ class Alimentacao:
 
     def _chamar(self, r, nome, chamada, pilha=(), **regs):
         """``_ext`` over the register file ``r`` (dict EAX..EBP): the call's argument registers are set in ``r``
-        first, then every register the callee returns replaces ``r``'s."""
+        first, the whole file is passed, then every register the callee returns replaces ``r``'s."""
         r.update({k: v & M32 for k, v in regs.items()})
-        saida = self._ext(nome, chamada, pilha, **regs)
+        saida = self._ext(nome, chamada, r, pilha)
         for k in REG7:
             if k in saida:
                 r[k] = saida[k]
@@ -155,15 +162,19 @@ class Alimentacao:
         self.incertos = {}
         r = {k: regs[k] & M32 for k in REG7}
         esp = regs.get('ESP', 0) & M32
+        self._esp = esp
         esi = r['ESI']
         di = r['EDI'] & 0xffff
         a0 = m.u16(esi + 0xa0)
         r['EDX'] = (r['EDX'] & 0xffff0000) | a0
         r['EAX'] = r['EDX']
         if a0 in VERIFICACOES:
-            if a0 != 5:
+            if a0 == 5:
+                self._verificar_trabalho(r, esi)
+            elif a0 == 0x14:
+                self._verificar_descarga(r, esi)
+            else:
                 raise ForaDoDominioFome('EstadoFome', VERIFICACOES[a0], f'saved state {a0:#x} validity check')
-            self._verificar_trabalho(r, esi)
         self._refeicao(r, esi, di)
         saida = dict(r, ESP=esp)
         if self.incertos:
@@ -183,6 +194,26 @@ class Alimentacao:
             if r['EAX'] & 0xff == m.u8(esi):
                 return
         raise ForaDoDominioFome('EstadoFome', 0x455107, 'saved state 5: its depot structure is destroyed or lost')
+
+    def _verificar_descarga(self, r, esi):
+        """Saved state 0x14 (unloading), 0x454db5: the unload structure +0xc0 destroyed or not the owner's -> the
+        abort 0x454ddd (outside the domain); else, with depot mode +0x82 = 2, its structure +0x80 must also stand and
+        be the owner's (else the abort 0x454ef8, outside the domain); then on to the meal."""
+        m = self.m
+        self._chamar(r, 'BatimentEnDestruction', 0x454dbe, EAX=m.u16(esi + 0xc0))
+        if not r['EAX'] & 0xff:
+            self._chamar(r, 'BatimentGetPlayer', 0x454dd0, EAX=m.u16(esi + 0xc0))
+            if r['EAX'] & 0xff == m.u8(esi):
+                r['EAX'] = m.u8(esi + 0x82)
+                if r['EAX'] != 2:
+                    return
+                self._chamar(r, 'BatimentEnDestruction', 0x454ed9, EAX=m.u16(esi + 0x80))
+                if not r['EAX'] & 0xff:
+                    self._chamar(r, 'BatimentGetPlayer', 0x454eeb, EAX=m.u16(esi + 0x80))
+                    if r['EAX'] & 0xff == m.u8(esi):
+                        return
+                raise ForaDoDominioFome('EstadoFome', 0x454ef8, 'saved state 0x14: its depot structure is lost')
+        raise ForaDoDominioFome('EstadoFome', 0x454ddd, 'saved state 0x14: its unload structure is destroyed or lost')
 
     def _refeicao(self, r, esi, di):
         m = self.m
@@ -308,14 +339,34 @@ class Alimentacao:
         return getattr(self, '_' + nome)(entrada)
 
 
+# Registers each served routine's behaviour depends on: a provider call without one raises ``ArgumentoNaoPassado``.
+ARGUMENTOS_EXIGIDOS = {'EstadoFome': ('ESI', 'EDI', 'EDX'), 'TerrainRetireMatiere': ('EAX',)}
+
+
 def provedor_fome(alimentacao, outros=None):
     """``externo(nome, chamada, registradores)`` serving TerrainRetireMatiere and the state-19 body to another module
-    (Core's states 16/17, ai-runtime's dispatcher); other names go to ``outros`` or raise ``DependenciaFome``."""
+    (Core's states 16/17, ai-runtime's dispatcher), in the shape of Core's providers: a register of
+    ``ARGUMENTOS_EXIGIDOS`` that is missing raises ``ArgumentoNaoPassado`` before anything runs; any other missing
+    register enters as 0 and, when the routine returns it unchanged, comes back in ``_incertos``. Other names go to
+    ``outros`` or raise ``DependenciaFome``."""
     def externo(nome, chamada, regs):
-        if NOME_GRAVADO.get(nome, nome) not in ROTINAS:
+        proprio = NOME_GRAVADO.get(nome, nome)
+        if proprio not in ROTINAS:
             if outros is None:
                 raise DependenciaFome(nome, chamada, 'no provider for this routine')
             return outros(nome, chamada, regs)
-        saida = alimentacao.chamar(nome, {k: regs.get(k, 0) for k in REG7} | {'ESP': regs.get('ESP', 0)})
-        return {k: v for k, v in saida.items() if k != 'ESP'}
+        faltando = [k for k in ARGUMENTOS_EXIGIDOS[proprio] if k not in regs]
+        if faltando:
+            from entrada_estruturas import ArgumentoNaoPassado
+            raise ArgumentoNaoPassado(nome, chamada, faltando)
+        entrada = {k: regs.get(k, 0) & M32 for k in REG7}
+        entrada['ESP'] = regs.get('ESP', 0) & M32
+        saida = alimentacao.chamar(nome, entrada)
+        resultado = {k: saida[k] & M32 for k in REG7}
+        incertos = {k: M32 for k in REG7 if k not in regs and resultado[k] == entrada[k]}
+        for k, v in (saida.get('_incertos') or {}).items():
+            incertos[k] = incertos.get(k, 0) | v
+        if incertos:
+            resultado['_incertos'] = incertos
+        return resultado
     return externo

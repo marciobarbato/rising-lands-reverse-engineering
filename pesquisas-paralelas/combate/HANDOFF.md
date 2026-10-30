@@ -1,6 +1,102 @@
-# Combat handoff — 2026-10-29
+# Combat handoff — 2026-10-30
 
-## Live raid attack, damage and lifecycle contract (current task)
+## M3 turret orders and M4 contact audit (current delivery)
+
+Branch `feat/re-combat`, fast-forward sync to main `3e0de77`. Evidence first:
+`40e05dc` captures 188 original turret-order leaves plus the partial raid
+contact inventory; `aa82d33` adds two original contact leaves at a clean AI
+callback boundary. No main merge/push or milestone acceptance is authorized.
+Only intact RISING.EXE SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`
+executes. Original evidence, predecessor hashes and normalized PE are unchanged.
+
+The [turret matrix](TURRET_CAPTURE_MATRIX.md) records the original-only phase.
+Missions' existing readers restore P1/frame250 and P6/frame2020 with raw and
+compressed part hashes and whole-state summaries verified. The latter contains
+the genuinely selected sanctuary/completed cave. Declared type/owner/bonus,
+step-cell and selection variations exercise the leaves, without claiming
+physical turret placement. Original hooks only record or halt.
+
+### Consumer contract
+
+Use `ordens_torres_combate.OrdensTorresCombate(m, *, bonus=None)` after
+`ambiente_combate_raid`; `m` is the caller's live `MemoriaQuadro`-compatible
+address space. Construction initializes no bytes. The
+[complete API](../../docs/COMBAT.md#m3-turret-input-providers-2026-10-30)
+specifies widths, supported domains, registers and mutation order.
+
+- `batiment_peut_attaquer(regs)` / provider `BatimentPeutAttaquer 0x42436c`:
+  AX structure, DL mode, BX target. The source type prefix handles all bytes;
+  turrets 10/11 cover initialized modes 1/3/5. No game writes. AL alone is
+  boolean; full EAX/EBX/EDX clobbers and every saved register are returned.
+- `batiment_init_attaque_select(regs)` / provider
+  `BatimentInitAttaqueSelect 0x4242cc` (tag14 call at `0x45f13f`): AL player,
+  DL mode, BX reference. Read current selection; store reference u16 at +86
+  before mode byte at +7b; skip both for mode3 self-target. All mode/reference
+  byte/word values are accepted on valid selected records.
+- Both require and return EAX/EBX/ECX/EDX/ESI/EDI/EBP. Optional actual entry
+  ESP returns ESP+4; optional EFLAGS is reconstructed (query requires ESP).
+  Explicit `retorno=` also returns EIP. The proof compares all ten fields,
+  not only AL. `chamar(name, regs)` is the equivalent named dispatcher.
+- `input_providers.funcoes.update(live.provedores())` installs both named
+  methods for AI/runtime, replacing its non-turret prefix. Rust uses the same
+  byte offsets/widths/register results; integration belongs to those owners.
+
+Named read-only dependencies already on main are Economy's
+`BonusUnidades.da_memoria(m).consultar(owner, 11, 4, ecx=7)`
+(`BonusGetValEngin 0x428cc0`) and Core's masked-centre getter
+`caso_estrutura(m, id)` (`BatimentGetCase 0x41aee2`). No sound, navigation or
+foreign effect callback is needed for these two leaves. Protected input errors
+raise explicitly. Turret modes other than 1/3/5 read native uninitialized
+stack locals and are outside the supported domain.
+
+### Validation and remaining stops
+
+Fresh native differential: `BatimentPeutAttaquer` **148/148**, and
+`BatimentInitAttaqueSelect` **40/40**, **0 mismatches**, whole checkpoint and
+all ten register fields. The regression also checks the original store order.
+See [native report](validacao/ordens-torres-native.json).
+
+The bounded raid window restores real M2.3/frame9000 and uses only original
+movement/orders for soldiers0..2 and raid16 around target0x2e03. Its native
+contact occurs at10671; auto-target attack entered earlier at10608. Two
+isolated original contact entries compare with **0 mismatches**:
+CalculAttaqueEngin (whole memory/six preserved registers) and InfligeDegat
+(whole memory/exact named callback arguments before AI message0x48).
+The [report](validacao/fronteira-contato-local.json) records the precise scope.
+The first unrestricted damage attempt faults at KERNEL32!GetPrivateProfileStringA
+(IAT0x5231b0, target0x1235f0) after PlayerResetAllie/MessageBoxSet; the partial
+capture remains preserved in xz.
+The supplemental capture halts before `iagUnitSendMessage(0,0x48,16)` at
+`0x4829c8`, with no native fault or substituted game body.
+
+No new missing Combat body was identified before that AI-owned stop. Message
+0x48, diplomacy MAJSympathie/PlayerResetAllie, presentation/import bindings,
+and Core level/death/removal remain named dependencies for a complete fight.
+No death/removal entry was reached in this bounded window. It is not full
+CalculGame/D1: only four actors advance, with an explicit staging interval and
+reciprocal contact orders. S1 full snapshots were unavailable in this checkout;
+the committed Missions probes supplied the input states. The coordinator's
+Mac mini all-16-unit D1/full scripted-input death capture remains separate.
+
+Run the domain gate and optional focused original suite with:
+
+```sh
+python3 -B scripts/check.py --domain combat
+python3 "/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py" combat-turret-native-tests -- env RISING_EMULAR=1 python3 -B -m unittest discover -s pesquisas-paralelas/combate -p test_ordens_torres_combate.py -v
+```
+
+The unchanged historical native corpus is not rerun for this slice. Original
+captures/differentials are separately leased, bounded jobs; no multi-hour Mac
+mini run is needed to reproduce the completed turret leaves.
+
+Final local gate: **284 tests, 154 optional native skips**, passed. The skips
+include the focused native test, which is run separately under the lease with
+`RISING_EMULAR=1`: **4 tests passed, 0 skips**, 96.631 seconds after grant.
+See `check-turret-orders.log` and
+`test-turret-orders-native.log` for actual gate/test outputs.
+
+## Live raid attack, damage and lifecycle contract (2026-10-29 delivery)
 
 Branch `feat/re-combat`; initial sync `c08e1fb`. Evidence-first commits:
 `58c8516` (30 real-state probe leaves), `4d4e2f4` (2,024 original calls and

@@ -2,6 +2,7 @@
  "capture": "pesquisas-paralelas/economia/evidencias/alimentacao/captura-alimentacao-exibicao.json.xz",
  "capture_raw_sha256": "a6a390df155975bf6e870c51ab1de05bfe8624704f859549cfe390cc32a40e8c",
  "compared": 231,
+ "core_fatigue_provider": "2596912bcf92d72cf9cbe02bb5d948a9a00f713ea3c64822d9521578a1d2be0d",
  "counts": {
   "EnginNextEtape:19": {
    "error": 0,
@@ -2103,6 +2104,7 @@
   }
  ],
  "schema": "rising-lands/economy-hunger-validation/1",
- "seconds": 753.966,
- "translation": "8b87a20091fbf29c0560eaf2f96bdbb59b25d6313802b01c9a23fef475d65aa3"
+ "seconds": 726.416,
+ "served_by_translation": {},
+ "translation": "41ab57eae996921d41b4dca3ef0a0b1ed0bf71b6a0de854be4b560110d378923"
 }
