@@ -24,6 +24,8 @@ def main():
     ap.add_argument('--de', type=int, required=True)
     ap.add_argument('--ate', type=int, required=True)
     ap.add_argument('--saida', required=True)
+    ap.add_argument('--entrada-deteccao', action='store_true',
+                    help='also capture complete live records needed by Combat\'s public message adapter')
     args = ap.parse_args()
     path = ROOT/args.saida
     if path.exists():
@@ -40,15 +42,44 @@ def main():
     s1 = bs.BancadaS1(args.de)
     reads = Leituras(s1.b.cpu)
     cases = []
+    stores = []
+    if args.entrada_deteccao:
+        import unicorn
+        from unicorn import x86_const as X
+        def write(cpu, access, address, size, value, extra):
+            if reads.ativo and not bs.PILHA_NATIVA <= address < bs.PILHA_NATIVA+bs.TAMANHO_PILHA:
+                stores.append([hex(cpu.reg_read(X.UC_X86_REG_EIP)), hex(address), size,
+                               hex(value & ((1 << (8*size))-1))])
+        s1.b.cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE, write)
+        s1.b.cpu.ctl_flush_tb()
 
     def choose(name, regs, ret, observer):
         if observer.quadro == args.ate and ret == caller_return:
+            stores.clear()
             reads.iniciar()
             return True
         return False
 
     def close(case, blocks):
         case['read_before_write'] = reads.finalizar()
+        if args.entrada_deteccao:
+            def get(address, size):
+                for base, raw in blocks.values():
+                    if base <= address and address+size <= base+len(raw):
+                        return raw[address-base:address-base+size]
+                raise ValueError(f'Unmapped original entry span {address:#x}+{size}')
+            u32 = lambda address: int.from_bytes(get(address, 4), 'little')
+            unit, target = (int(case['entry_registers'][k], 16) for k in ('EAX', 'EDX'))
+            pool = u32(0x4e19a0)
+            record = pool+276*unit
+            group = 0x51a9e0+32*u32(record+0x10c)
+            behavior = get(group+27, 1)[0]
+            pointer = 0x498e94+4*behavior
+            spans = [(record, 276),
+                     (0x49a0c8+276*(target&0x7fff), 276) if target&0x8000 else (pool+276*target, 276),
+                     (group, 32), (pointer, 4), (u32(pointer), 20)]
+            case['adapter_entry_spans'] = [[hex(a), get(a, n).hex()] for a, n in spans]
+            case['stores'] = list(stores)
         cases.append(case)
 
     # This caller contract takes no pushed words (plain RET).

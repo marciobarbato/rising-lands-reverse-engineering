@@ -1057,3 +1057,11 @@ the committed S1 trajectory; code unchanged, 110.527 seconds. Evidence:
 `evidencias/s1-deteccao-conflito-original.json`. The observer decodes the
 CALL length and installs the explicit indirect return hook. No handler
 translation has been added at this checkpoint; capture is committed first.
+
+The additive v2 capture retains the same actual call/return, reads and effects,
+plus full entry records needed by Combat's public message adapter and the
+ordered native store trace. These spans are explicitly adapter inputs, not
+additional reads attributed to the original handler. The fresh original run
+again checks all 164 states and unchanged code (121.665 seconds). V1 remains
+unchanged. The adapter is being prepared against this evidence; it has not
+executed during either capture. No battle algorithm is forked from Combat.
