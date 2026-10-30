@@ -1,0 +1,1573 @@
+{
+  "absent_from_all_campaign_initial_entities": {
+    "note": "Absence from initial entities is not absence from gameplay: recruitment, research, production and scripts can introduce content.",
+    "structure_types": [
+      {
+        "id": 20,
+        "name_pt_br": "MONASTÉRIO DE FUSÃO",
+        "record_sha256": "1964542004373e5a2a15ec271fdc3b01ee96be3342f9959ca918f52da67ef303",
+        "symbol_original": "MONASTEREFUSION",
+        "table_va": "0x49619c"
+      }
+    ],
+    "unit_types": [
+      {
+        "id": 3,
+        "name_pt_br": "DELL'ORSO",
+        "symbol_original": "OURS DE COMBAT"
+      },
+      {
+        "id": 10,
+        "name_pt_br": "MENSAGEIRO",
+        "symbol_original": "MESSAGER"
+      },
+      {
+        "id": 16,
+        "name_pt_br": "HELICÓPTERO",
+        "symbol_original": "HELIPEDE"
+      },
+      {
+        "id": 17,
+        "name_pt_br": "BALÃO",
+        "symbol_original": "ZEEPELIN"
+      },
+      {
+        "id": 18,
+        "name_pt_br": "ARAIGNEE",
+        "symbol_original": "ARAIGNEE"
+      },
+      {
+        "id": 19,
+        "name_pt_br": "FOURMI",
+        "symbol_original": "FOURMI"
+      },
+      {
+        "id": 25,
+        "name_pt_br": "RHINO",
+        "symbol_original": "RHINO"
+      }
+    ]
+  },
+  "all_eta_including_unselected": {
+    "baseline": "MONDE01",
+    "baseline_feature_count": 91,
+    "campaign_feature_total": 179,
+    "candidate_scope": "all 38 ETA files; NET excluded",
+    "exact_best_up_to_three": {
+      "1": {
+        "covers_all": false,
+        "missing_features": [
+          "condition.required_structure.1",
+          "condition.required_structure.2",
+          "condition.required_structure.6",
+          "owner.monster_entities",
+          "owner.sentinel_200_entities",
+          "raid.profile_group.13",
+          "raid.profile_group.14",
+          "raid.profile_group.3",
+          "raid.profile_group.7",
+          "resource.stone_sacks",
+          "script.initial_attack_records",
+          "special.mission06_illumination_result_override",
+          "special.mission08_13_structure_owner_tally",
+          "special.mission23_monster_reserve_and_advance_branch",
+          "structure.initial.type.17",
+          "structure.initial.type.18",
+          "structure.initial.type.21",
+          "unit.initial.type.11",
+          "unit.initial.type.12",
+          "unit.initial.type.13",
+          "unit.initial.type.14",
+          "unit.initial.type.15",
+          "unit.initial.type.20",
+          "unit.initial.type.21",
+          "unit.initial.type.22",
+          "unit.initial.type.23",
+          "unit.initial.type.24",
+          "unit.initial.type.4",
+          "unit.initial.type.6"
+        ],
+        "missions": [
+          "MONDE17"
+        ],
+        "new_features_covered": 59,
+        "new_features_total": 88,
+        "tied_optimal_sets": [
+          [
+            "MONDE17"
+          ],
+          [
+            "MONDE17A"
+          ],
+          [
+            "MONDE23"
+          ]
+        ]
+      },
+      "2": {
+        "covers_all": false,
+        "missing_features": [
+          "condition.required_structure.1",
+          "condition.required_structure.2",
+          "raid.profile_group.13",
+          "raid.profile_group.14",
+          "raid.profile_group.3",
+          "raid.profile_group.7",
+          "script.initial_attack_records",
+          "special.mission06_illumination_result_override",
+          "special.mission08_13_structure_owner_tally",
+          "structure.initial.type.18",
+          "unit.initial.type.4"
+        ],
+        "missions": [
+          "MONDE17",
+          "MONDE23"
+        ],
+        "new_features_covered": 77,
+        "new_features_total": 88,
+        "tied_optimal_sets": [
+          [
+            "MONDE17",
+            "MONDE23"
+          ],
+          [
+            "MONDE17A",
+            "MONDE23"
+          ],
+          [
+            "MONDE17B",
+            "MONDE23"
+          ],
+          [
+            "MONDE17C",
+            "MONDE23"
+          ],
+          [
+            "MONDE22",
+            "MONDE23"
+          ]
+        ]
+      },
+      "3": {
+        "covers_all": false,
+        "missing_features": [
+          "condition.required_structure.1",
+          "condition.required_structure.2",
+          "special.mission06_illumination_result_override",
+          "special.mission08_13_structure_owner_tally",
+          "structure.initial.type.18",
+          "unit.initial.type.4"
+        ],
+        "missions": [
+          "MONDE17",
+          "MONDE23",
+          "MONDE25"
+        ],
+        "new_features_covered": 82,
+        "new_features_total": 88,
+        "tied_optimal_sets": [
+          [
+            "MONDE17",
+            "MONDE21",
+            "MONDE23"
+          ],
+          [
+            "MONDE17",
+            "MONDE22",
+            "MONDE23"
+          ],
+          [
+            "MONDE17",
+            "MONDE23",
+            "MONDE24"
+          ],
+          [
+            "MONDE17",
+            "MONDE23",
+            "MONDE25"
+          ],
+          [
+            "MONDE17A",
+            "MONDE21",
+            "MONDE23"
+          ],
+          [
+            "MONDE17A",
+            "MONDE22",
+            "MONDE23"
+          ],
+          [
+            "MONDE17A",
+            "MONDE23",
+            "MONDE24"
+          ],
+          [
+            "MONDE17A",
+            "MONDE23",
+            "MONDE25"
+          ],
+          [
+            "MONDE17B",
+            "MONDE21",
+            "MONDE23"
+          ],
+          [
+            "MONDE17B",
+            "MONDE22",
+            "MONDE23"
+          ],
+          [
+            "MONDE17B",
+            "MONDE23",
+            "MONDE24"
+          ],
+          [
+            "MONDE17B",
+            "MONDE23",
+            "MONDE25"
+          ],
+          [
+            "MONDE17C",
+            "MONDE21",
+            "MONDE23"
+          ],
+          [
+            "MONDE17C",
+            "MONDE22",
+            "MONDE23"
+          ],
+          [
+            "MONDE17C",
+            "MONDE23",
+            "MONDE24"
+          ],
+          [
+            "MONDE17C",
+            "MONDE23",
+            "MONDE25"
+          ]
+        ]
+      }
+    },
+    "exact_minimum_additional_cover": {
+      "count": 7,
+      "covers_all": true,
+      "missions": [
+        "MONDE02",
+        "MONDE06",
+        "MONDE07",
+        "MONDE08",
+        "MONDE17",
+        "MONDE23",
+        "MONDE25"
+      ],
+      "search_states": 8
+    },
+    "greedy_order": [
+      "MONDE17",
+      "MONDE23",
+      "MONDE21",
+      "MONDE08",
+      "MONDE02",
+      "MONDE04",
+      "MONDE06",
+      "MONDE07"
+    ],
+    "greedy_steps": [
+      {
+        "added_features": [
+          "condition.kind.3",
+          "condition.kind.5",
+          "owner.opponent_clan_entities",
+          "raid.profile_group.1",
+          "raid.profile_group.10",
+          "raid.profile_group.11",
+          "raid.profile_group.12",
+          "raid.profile_group.15",
+          "raid.profile_group.2",
+          "raid.profile_group.4",
+          "raid.profile_group.5",
+          "raid.profile_group.6",
+          "raid.profile_group.8",
+          "raid.profile_group.9",
+          "research.declared_apparition_gate.GENIECIVIL4",
+          "research.declared_apparition_gate.GENIECIVIL5",
+          "research.declared_apparition_gate.GENIECIVIL6",
+          "research.declared_apparition_gate.RELIGIEUX0",
+          "research.declared_apparition_gate.RELIGIEUX1",
+          "research.declared_apparition_gate.RELIGIEUX2",
+          "research.declared_apparition_gate.RELIGIEUX3",
+          "research.declared_mission_gate.GENIECIVIL6",
+          "research.declared_mission_gate.RELIGIEUX0",
+          "research.declared_mission_gate.RELIGIEUX1",
+          "research.declared_mission_gate.RELIGIEUX10",
+          "research.declared_mission_gate.RELIGIEUX11",
+          "research.declared_mission_gate.RELIGIEUX12",
+          "research.declared_mission_gate.RELIGIEUX13",
+          "research.declared_mission_gate.RELIGIEUX14",
+          "research.declared_mission_gate.RELIGIEUX15",
+          "research.declared_mission_gate.RELIGIEUX16",
+          "research.declared_mission_gate.RELIGIEUX17",
+          "research.declared_mission_gate.RELIGIEUX2",
+          "research.declared_mission_gate.RELIGIEUX3",
+          "research.declared_mission_gate.RELIGIEUX4",
+          "research.declared_mission_gate.RELIGIEUX5",
+          "research.declared_mission_gate.RELIGIEUX6",
+          "research.declared_mission_gate.RELIGIEUX7",
+          "research.declared_mission_gate.RELIGIEUX8",
+          "research.declared_mission_gate.RELIGIEUX9",
+          "script.ghost_records",
+          "structure.initial.type.0",
+          "structure.initial.type.1",
+          "structure.initial.type.10",
+          "structure.initial.type.11",
+          "structure.initial.type.12",
+          "structure.initial.type.13",
+          "structure.initial.type.14",
+          "structure.initial.type.15",
+          "structure.initial.type.16",
+          "structure.initial.type.19",
+          "structure.initial.type.3",
+          "structure.initial.type.4",
+          "structure.initial.type.5",
+          "structure.initial.type.6",
+          "structure.initial.type.7",
+          "structure.initial.type.8",
+          "structure.initial.type.9",
+          "unit.initial.type.2"
+        ],
+        "mission": "MONDE17"
+      },
+      {
+        "added_features": [
+          "condition.required_structure.6",
+          "owner.monster_entities",
+          "owner.sentinel_200_entities",
+          "resource.stone_sacks",
+          "special.mission23_monster_reserve_and_advance_branch",
+          "structure.initial.type.17",
+          "structure.initial.type.21",
+          "unit.initial.type.11",
+          "unit.initial.type.12",
+          "unit.initial.type.13",
+          "unit.initial.type.14",
+          "unit.initial.type.15",
+          "unit.initial.type.20",
+          "unit.initial.type.21",
+          "unit.initial.type.22",
+          "unit.initial.type.23",
+          "unit.initial.type.24",
+          "unit.initial.type.6"
+        ],
+        "mission": "MONDE23"
+      },
+      {
+        "added_features": [
+          "condition.required_structure.2",
+          "raid.profile_group.13",
+          "raid.profile_group.14",
+          "raid.profile_group.3",
+          "raid.profile_group.7"
+        ],
+        "mission": "MONDE21"
+      },
+      {
+        "added_features": [
+          "special.mission08_13_structure_owner_tally",
+          "structure.initial.type.18"
+        ],
+        "mission": "MONDE08"
+      },
+      {
+        "added_features": [
+          "condition.required_structure.1"
+        ],
+        "mission": "MONDE02"
+      },
+      {
+        "added_features": [
+          "script.initial_attack_records"
+        ],
+        "mission": "MONDE04"
+      },
+      {
+        "added_features": [
+          "special.mission06_illumination_result_override"
+        ],
+        "mission": "MONDE06"
+      },
+      {
+        "added_features": [
+          "unit.initial.type.4"
+        ],
+        "mission": "MONDE07"
+      }
+    ],
+    "includes_declarative_research_gates": true,
+    "minimum_certificate": {
+      "explanation": "Five forced missions leave 13 features; no one remaining mission supplies all 13. The exhibited seven-map set covers the universe.",
+      "features_left_after_forced": [
+        "raid.profile_group.11",
+        "raid.profile_group.12",
+        "raid.profile_group.13",
+        "raid.profile_group.14",
+        "raid.profile_group.15",
+        "raid.profile_group.3",
+        "raid.profile_group.5",
+        "raid.profile_group.6",
+        "raid.profile_group.7",
+        "script.initial_attack_records",
+        "structure.initial.type.12",
+        "structure.initial.type.8",
+        "unit.initial.type.2"
+      ],
+      "forced_missions": [
+        "MONDE02",
+        "MONDE06",
+        "MONDE07",
+        "MONDE08",
+        "MONDE23"
+      ],
+      "largest_single_mission_residual_coverage": 9,
+      "lower_bound": 7,
+      "singleton_features_force": {
+        "condition.required_structure.1": "MONDE02",
+        "condition.required_structure.6": "MONDE23",
+        "special.mission06_illumination_result_override": "MONDE06",
+        "special.mission23_monster_reserve_and_advance_branch": "MONDE23",
+        "structure.initial.type.17": "MONDE23",
+        "structure.initial.type.18": "MONDE08",
+        "structure.initial.type.21": "MONDE23",
+        "unit.initial.type.11": "MONDE23",
+        "unit.initial.type.12": "MONDE23",
+        "unit.initial.type.15": "MONDE23",
+        "unit.initial.type.20": "MONDE23",
+        "unit.initial.type.22": "MONDE23",
+        "unit.initial.type.4": "MONDE07"
+      }
+    },
+    "new_feature_total": 88,
+    "rare_campaign_features": [
+      {
+        "feature": "condition.kind.1",
+        "missions": [
+          "MONDE01"
+        ]
+      },
+      {
+        "feature": "condition.required_structure.1",
+        "missions": [
+          "MONDE02"
+        ]
+      },
+      {
+        "feature": "condition.required_structure.3",
+        "missions": [
+          "MONDE01",
+          "MONDE14"
+        ]
+      },
+      {
+        "feature": "condition.required_structure.6",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "special.mission06_illumination_result_override",
+        "missions": [
+          "MONDE06"
+        ]
+      },
+      {
+        "feature": "special.mission08_13_structure_owner_tally",
+        "missions": [
+          "MONDE08",
+          "MONDE13"
+        ]
+      },
+      {
+        "feature": "special.mission23_monster_reserve_and_advance_branch",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "structure.initial.type.17",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "structure.initial.type.18",
+        "missions": [
+          "MONDE08"
+        ]
+      },
+      {
+        "feature": "structure.initial.type.21",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.11",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.12",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.13",
+        "missions": [
+          "MONDE04",
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.14",
+        "missions": [
+          "MONDE13",
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.15",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.20",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.22",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.23",
+        "missions": [
+          "MONDE23",
+          "MONDE24"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.24",
+        "missions": [
+          "MONDE23",
+          "MONDE24"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.4",
+        "missions": [
+          "MONDE07"
+        ]
+      }
+    ],
+    "tie_break": "single/greedy: lexical ID; exact equal-score sets: prefer presence of initial attack records, then lexical ID; equal weights per feature"
+  },
+  "baseline": "MONDE01",
+  "baseline_feature_count": 91,
+  "campaign_feature_total": 179,
+  "candidate_scope": "34 ETA files selectable by documented MakeMissionName; NET excluded",
+  "exact_best_up_to_three": {
+    "1": {
+      "covers_all": false,
+      "missing_features": [
+        "condition.required_structure.1",
+        "condition.required_structure.2",
+        "condition.required_structure.6",
+        "owner.monster_entities",
+        "owner.sentinel_200_entities",
+        "raid.profile_group.13",
+        "raid.profile_group.14",
+        "raid.profile_group.3",
+        "raid.profile_group.7",
+        "resource.stone_sacks",
+        "script.initial_attack_records",
+        "special.mission06_illumination_result_override",
+        "special.mission08_13_structure_owner_tally",
+        "special.mission23_monster_reserve_and_advance_branch",
+        "structure.initial.type.17",
+        "structure.initial.type.18",
+        "structure.initial.type.21",
+        "unit.initial.type.11",
+        "unit.initial.type.12",
+        "unit.initial.type.13",
+        "unit.initial.type.14",
+        "unit.initial.type.15",
+        "unit.initial.type.20",
+        "unit.initial.type.21",
+        "unit.initial.type.22",
+        "unit.initial.type.23",
+        "unit.initial.type.24",
+        "unit.initial.type.4",
+        "unit.initial.type.6"
+      ],
+      "missions": [
+        "MONDE17A"
+      ],
+      "new_features_covered": 59,
+      "new_features_total": 88,
+      "tied_optimal_sets": [
+        [
+          "MONDE17A"
+        ],
+        [
+          "MONDE23"
+        ]
+      ]
+    },
+    "2": {
+      "covers_all": false,
+      "missing_features": [
+        "condition.required_structure.1",
+        "condition.required_structure.2",
+        "raid.profile_group.13",
+        "raid.profile_group.14",
+        "raid.profile_group.3",
+        "raid.profile_group.7",
+        "script.initial_attack_records",
+        "special.mission06_illumination_result_override",
+        "special.mission08_13_structure_owner_tally",
+        "structure.initial.type.18",
+        "unit.initial.type.4"
+      ],
+      "missions": [
+        "MONDE17A",
+        "MONDE23"
+      ],
+      "new_features_covered": 77,
+      "new_features_total": 88,
+      "tied_optimal_sets": [
+        [
+          "MONDE17A",
+          "MONDE23"
+        ],
+        [
+          "MONDE17B",
+          "MONDE23"
+        ],
+        [
+          "MONDE17C",
+          "MONDE23"
+        ],
+        [
+          "MONDE22",
+          "MONDE23"
+        ]
+      ]
+    },
+    "3": {
+      "covers_all": false,
+      "missing_features": [
+        "condition.required_structure.1",
+        "condition.required_structure.2",
+        "special.mission06_illumination_result_override",
+        "special.mission08_13_structure_owner_tally",
+        "structure.initial.type.18",
+        "unit.initial.type.4"
+      ],
+      "missions": [
+        "MONDE17A",
+        "MONDE23",
+        "MONDE25"
+      ],
+      "new_features_covered": 82,
+      "new_features_total": 88,
+      "tied_optimal_sets": [
+        [
+          "MONDE17A",
+          "MONDE21",
+          "MONDE23"
+        ],
+        [
+          "MONDE17A",
+          "MONDE22",
+          "MONDE23"
+        ],
+        [
+          "MONDE17A",
+          "MONDE23",
+          "MONDE24"
+        ],
+        [
+          "MONDE17A",
+          "MONDE23",
+          "MONDE25"
+        ],
+        [
+          "MONDE17B",
+          "MONDE21",
+          "MONDE23"
+        ],
+        [
+          "MONDE17B",
+          "MONDE22",
+          "MONDE23"
+        ],
+        [
+          "MONDE17B",
+          "MONDE23",
+          "MONDE24"
+        ],
+        [
+          "MONDE17B",
+          "MONDE23",
+          "MONDE25"
+        ],
+        [
+          "MONDE17C",
+          "MONDE21",
+          "MONDE23"
+        ],
+        [
+          "MONDE17C",
+          "MONDE22",
+          "MONDE23"
+        ],
+        [
+          "MONDE17C",
+          "MONDE23",
+          "MONDE24"
+        ],
+        [
+          "MONDE17C",
+          "MONDE23",
+          "MONDE25"
+        ]
+      ]
+    }
+  },
+  "exact_minimum_additional_cover": {
+    "count": 7,
+    "covers_all": true,
+    "missions": [
+      "MONDE02",
+      "MONDE06",
+      "MONDE07",
+      "MONDE08",
+      "MONDE17A",
+      "MONDE23",
+      "MONDE25"
+    ],
+    "search_states": 7
+  },
+  "greedy_order": [
+    "MONDE17A",
+    "MONDE23",
+    "MONDE21",
+    "MONDE08",
+    "MONDE02",
+    "MONDE04",
+    "MONDE06",
+    "MONDE07"
+  ],
+  "greedy_steps": [
+    {
+      "added_features": [
+        "condition.kind.3",
+        "condition.kind.5",
+        "owner.opponent_clan_entities",
+        "raid.profile_group.1",
+        "raid.profile_group.10",
+        "raid.profile_group.11",
+        "raid.profile_group.12",
+        "raid.profile_group.15",
+        "raid.profile_group.2",
+        "raid.profile_group.4",
+        "raid.profile_group.5",
+        "raid.profile_group.6",
+        "raid.profile_group.8",
+        "raid.profile_group.9",
+        "research.declared_apparition_gate.GENIECIVIL4",
+        "research.declared_apparition_gate.GENIECIVIL5",
+        "research.declared_apparition_gate.GENIECIVIL6",
+        "research.declared_apparition_gate.RELIGIEUX0",
+        "research.declared_apparition_gate.RELIGIEUX1",
+        "research.declared_apparition_gate.RELIGIEUX2",
+        "research.declared_apparition_gate.RELIGIEUX3",
+        "research.declared_mission_gate.GENIECIVIL6",
+        "research.declared_mission_gate.RELIGIEUX0",
+        "research.declared_mission_gate.RELIGIEUX1",
+        "research.declared_mission_gate.RELIGIEUX10",
+        "research.declared_mission_gate.RELIGIEUX11",
+        "research.declared_mission_gate.RELIGIEUX12",
+        "research.declared_mission_gate.RELIGIEUX13",
+        "research.declared_mission_gate.RELIGIEUX14",
+        "research.declared_mission_gate.RELIGIEUX15",
+        "research.declared_mission_gate.RELIGIEUX16",
+        "research.declared_mission_gate.RELIGIEUX17",
+        "research.declared_mission_gate.RELIGIEUX2",
+        "research.declared_mission_gate.RELIGIEUX3",
+        "research.declared_mission_gate.RELIGIEUX4",
+        "research.declared_mission_gate.RELIGIEUX5",
+        "research.declared_mission_gate.RELIGIEUX6",
+        "research.declared_mission_gate.RELIGIEUX7",
+        "research.declared_mission_gate.RELIGIEUX8",
+        "research.declared_mission_gate.RELIGIEUX9",
+        "script.ghost_records",
+        "structure.initial.type.0",
+        "structure.initial.type.1",
+        "structure.initial.type.10",
+        "structure.initial.type.11",
+        "structure.initial.type.12",
+        "structure.initial.type.13",
+        "structure.initial.type.14",
+        "structure.initial.type.15",
+        "structure.initial.type.16",
+        "structure.initial.type.19",
+        "structure.initial.type.3",
+        "structure.initial.type.4",
+        "structure.initial.type.5",
+        "structure.initial.type.6",
+        "structure.initial.type.7",
+        "structure.initial.type.8",
+        "structure.initial.type.9",
+        "unit.initial.type.2"
+      ],
+      "mission": "MONDE17A"
+    },
+    {
+      "added_features": [
+        "condition.required_structure.6",
+        "owner.monster_entities",
+        "owner.sentinel_200_entities",
+        "resource.stone_sacks",
+        "special.mission23_monster_reserve_and_advance_branch",
+        "structure.initial.type.17",
+        "structure.initial.type.21",
+        "unit.initial.type.11",
+        "unit.initial.type.12",
+        "unit.initial.type.13",
+        "unit.initial.type.14",
+        "unit.initial.type.15",
+        "unit.initial.type.20",
+        "unit.initial.type.21",
+        "unit.initial.type.22",
+        "unit.initial.type.23",
+        "unit.initial.type.24",
+        "unit.initial.type.6"
+      ],
+      "mission": "MONDE23"
+    },
+    {
+      "added_features": [
+        "condition.required_structure.2",
+        "raid.profile_group.13",
+        "raid.profile_group.14",
+        "raid.profile_group.3",
+        "raid.profile_group.7"
+      ],
+      "mission": "MONDE21"
+    },
+    {
+      "added_features": [
+        "special.mission08_13_structure_owner_tally",
+        "structure.initial.type.18"
+      ],
+      "mission": "MONDE08"
+    },
+    {
+      "added_features": [
+        "condition.required_structure.1"
+      ],
+      "mission": "MONDE02"
+    },
+    {
+      "added_features": [
+        "script.initial_attack_records"
+      ],
+      "mission": "MONDE04"
+    },
+    {
+      "added_features": [
+        "special.mission06_illumination_result_override"
+      ],
+      "mission": "MONDE06"
+    },
+    {
+      "added_features": [
+        "unit.initial.type.4"
+      ],
+      "mission": "MONDE07"
+    }
+  ],
+  "includes_declarative_research_gates": true,
+  "minimum_certificate": {
+    "explanation": "Five forced missions leave 13 features; no one remaining mission supplies all 13. The exhibited seven-map set covers the universe.",
+    "features_left_after_forced": [
+      "raid.profile_group.11",
+      "raid.profile_group.12",
+      "raid.profile_group.13",
+      "raid.profile_group.14",
+      "raid.profile_group.15",
+      "raid.profile_group.3",
+      "raid.profile_group.5",
+      "raid.profile_group.6",
+      "raid.profile_group.7",
+      "script.initial_attack_records",
+      "structure.initial.type.12",
+      "structure.initial.type.8",
+      "unit.initial.type.2"
+    ],
+    "forced_missions": [
+      "MONDE02",
+      "MONDE06",
+      "MONDE07",
+      "MONDE08",
+      "MONDE23"
+    ],
+    "largest_single_mission_residual_coverage": 9,
+    "lower_bound": 7,
+    "singleton_features_force": {
+      "condition.required_structure.1": "MONDE02",
+      "condition.required_structure.6": "MONDE23",
+      "special.mission06_illumination_result_override": "MONDE06",
+      "special.mission23_monster_reserve_and_advance_branch": "MONDE23",
+      "structure.initial.type.17": "MONDE23",
+      "structure.initial.type.18": "MONDE08",
+      "structure.initial.type.21": "MONDE23",
+      "unit.initial.type.11": "MONDE23",
+      "unit.initial.type.12": "MONDE23",
+      "unit.initial.type.15": "MONDE23",
+      "unit.initial.type.20": "MONDE23",
+      "unit.initial.type.22": "MONDE23",
+      "unit.initial.type.4": "MONDE07"
+    }
+  },
+  "network_only_features": [
+    "condition.kind.255"
+  ],
+  "new_feature_total": 88,
+  "rare_campaign_features": [
+    {
+      "feature": "condition.kind.1",
+      "missions": [
+        "MONDE01"
+      ]
+    },
+    {
+      "feature": "condition.required_structure.1",
+      "missions": [
+        "MONDE02"
+      ]
+    },
+    {
+      "feature": "condition.required_structure.3",
+      "missions": [
+        "MONDE01",
+        "MONDE14"
+      ]
+    },
+    {
+      "feature": "condition.required_structure.6",
+      "missions": [
+        "MONDE23"
+      ]
+    },
+    {
+      "feature": "special.mission06_illumination_result_override",
+      "missions": [
+        "MONDE06"
+      ]
+    },
+    {
+      "feature": "special.mission08_13_structure_owner_tally",
+      "missions": [
+        "MONDE08",
+        "MONDE13"
+      ]
+    },
+    {
+      "feature": "special.mission23_monster_reserve_and_advance_branch",
+      "missions": [
+        "MONDE23"
+      ]
+    },
+    {
+      "feature": "structure.initial.type.13",
+      "missions": [
+        "MONDE17A",
+        "MONDE23"
+      ]
+    },
+    {
+      "feature": "structure.initial.type.17",
+      "missions": [
+        "MONDE23"
+      ]
+    },
+    {
+      "feature": "structure.initial.type.18",
+      "missions": [
+        "MONDE08"
+      ]
+    },
+    {
+      "feature": "structure.initial.type.21",
+      "missions": [
+        "MONDE23"
+      ]
+    },
+    {
+      "feature": "unit.initial.type.11",
+      "missions": [
+        "MONDE23"
+      ]
+    },
+    {
+      "feature": "unit.initial.type.12",
+      "missions": [
+        "MONDE23"
+      ]
+    },
+    {
+      "feature": "unit.initial.type.13",
+      "missions": [
+        "MONDE04",
+        "MONDE23"
+      ]
+    },
+    {
+      "feature": "unit.initial.type.14",
+      "missions": [
+        "MONDE13",
+        "MONDE23"
+      ]
+    },
+    {
+      "feature": "unit.initial.type.15",
+      "missions": [
+        "MONDE23"
+      ]
+    },
+    {
+      "feature": "unit.initial.type.20",
+      "missions": [
+        "MONDE23"
+      ]
+    },
+    {
+      "feature": "unit.initial.type.22",
+      "missions": [
+        "MONDE23"
+      ]
+    },
+    {
+      "feature": "unit.initial.type.23",
+      "missions": [
+        "MONDE23",
+        "MONDE24"
+      ]
+    },
+    {
+      "feature": "unit.initial.type.24",
+      "missions": [
+        "MONDE23",
+        "MONDE24"
+      ]
+    },
+    {
+      "feature": "unit.initial.type.4",
+      "missions": [
+        "MONDE07"
+      ]
+    }
+  ],
+  "tie_break": "single/greedy: lexical ID; exact equal-score sets: prefer presence of initial attack records, then lexical ID; equal weights per feature",
+  "without_declarative_research_gates": {
+    "baseline": "MONDE01",
+    "baseline_feature_count": 21,
+    "campaign_feature_total": 83,
+    "candidate_scope": "34 ETA files selectable by documented MakeMissionName; NET excluded",
+    "exact_best_up_to_three": {
+      "1": {
+        "covers_all": false,
+        "missing_features": [
+          "condition.required_structure.1",
+          "condition.required_structure.2",
+          "condition.required_structure.6",
+          "owner.monster_entities",
+          "owner.sentinel_200_entities",
+          "raid.profile_group.13",
+          "raid.profile_group.14",
+          "raid.profile_group.3",
+          "raid.profile_group.7",
+          "resource.stone_sacks",
+          "script.initial_attack_records",
+          "special.mission06_illumination_result_override",
+          "special.mission08_13_structure_owner_tally",
+          "special.mission23_monster_reserve_and_advance_branch",
+          "structure.initial.type.17",
+          "structure.initial.type.18",
+          "structure.initial.type.21",
+          "unit.initial.type.11",
+          "unit.initial.type.12",
+          "unit.initial.type.13",
+          "unit.initial.type.14",
+          "unit.initial.type.15",
+          "unit.initial.type.20",
+          "unit.initial.type.21",
+          "unit.initial.type.22",
+          "unit.initial.type.23",
+          "unit.initial.type.24",
+          "unit.initial.type.4",
+          "unit.initial.type.6"
+        ],
+        "missions": [
+          "MONDE17A"
+        ],
+        "new_features_covered": 33,
+        "new_features_total": 62,
+        "tied_optimal_sets": [
+          [
+            "MONDE17A"
+          ],
+          [
+            "MONDE23"
+          ]
+        ]
+      },
+      "2": {
+        "covers_all": false,
+        "missing_features": [
+          "condition.required_structure.1",
+          "condition.required_structure.2",
+          "raid.profile_group.13",
+          "raid.profile_group.14",
+          "raid.profile_group.3",
+          "raid.profile_group.7",
+          "script.initial_attack_records",
+          "special.mission06_illumination_result_override",
+          "special.mission08_13_structure_owner_tally",
+          "structure.initial.type.18",
+          "unit.initial.type.4"
+        ],
+        "missions": [
+          "MONDE17A",
+          "MONDE23"
+        ],
+        "new_features_covered": 51,
+        "new_features_total": 62,
+        "tied_optimal_sets": [
+          [
+            "MONDE17A",
+            "MONDE23"
+          ],
+          [
+            "MONDE17B",
+            "MONDE23"
+          ],
+          [
+            "MONDE17C",
+            "MONDE23"
+          ],
+          [
+            "MONDE22",
+            "MONDE23"
+          ]
+        ]
+      },
+      "3": {
+        "covers_all": false,
+        "missing_features": [
+          "condition.required_structure.1",
+          "condition.required_structure.2",
+          "special.mission06_illumination_result_override",
+          "special.mission08_13_structure_owner_tally",
+          "structure.initial.type.18",
+          "unit.initial.type.4"
+        ],
+        "missions": [
+          "MONDE17A",
+          "MONDE23",
+          "MONDE25"
+        ],
+        "new_features_covered": 56,
+        "new_features_total": 62,
+        "tied_optimal_sets": [
+          [
+            "MONDE17A",
+            "MONDE21",
+            "MONDE23"
+          ],
+          [
+            "MONDE17A",
+            "MONDE22",
+            "MONDE23"
+          ],
+          [
+            "MONDE17A",
+            "MONDE23",
+            "MONDE24"
+          ],
+          [
+            "MONDE17A",
+            "MONDE23",
+            "MONDE25"
+          ],
+          [
+            "MONDE17B",
+            "MONDE21",
+            "MONDE23"
+          ],
+          [
+            "MONDE17B",
+            "MONDE22",
+            "MONDE23"
+          ],
+          [
+            "MONDE17B",
+            "MONDE23",
+            "MONDE24"
+          ],
+          [
+            "MONDE17B",
+            "MONDE23",
+            "MONDE25"
+          ],
+          [
+            "MONDE17C",
+            "MONDE21",
+            "MONDE23"
+          ],
+          [
+            "MONDE17C",
+            "MONDE22",
+            "MONDE23"
+          ],
+          [
+            "MONDE17C",
+            "MONDE23",
+            "MONDE24"
+          ],
+          [
+            "MONDE17C",
+            "MONDE23",
+            "MONDE25"
+          ]
+        ]
+      }
+    },
+    "exact_minimum_additional_cover": {
+      "count": 7,
+      "covers_all": true,
+      "missions": [
+        "MONDE02",
+        "MONDE06",
+        "MONDE07",
+        "MONDE08",
+        "MONDE17A",
+        "MONDE23",
+        "MONDE25"
+      ],
+      "search_states": 7
+    },
+    "greedy_order": [
+      "MONDE17A",
+      "MONDE23",
+      "MONDE21",
+      "MONDE08",
+      "MONDE02",
+      "MONDE04",
+      "MONDE06",
+      "MONDE07"
+    ],
+    "greedy_steps": [
+      {
+        "added_features": [
+          "condition.kind.3",
+          "condition.kind.5",
+          "owner.opponent_clan_entities",
+          "raid.profile_group.1",
+          "raid.profile_group.10",
+          "raid.profile_group.11",
+          "raid.profile_group.12",
+          "raid.profile_group.15",
+          "raid.profile_group.2",
+          "raid.profile_group.4",
+          "raid.profile_group.5",
+          "raid.profile_group.6",
+          "raid.profile_group.8",
+          "raid.profile_group.9",
+          "script.ghost_records",
+          "structure.initial.type.0",
+          "structure.initial.type.1",
+          "structure.initial.type.10",
+          "structure.initial.type.11",
+          "structure.initial.type.12",
+          "structure.initial.type.13",
+          "structure.initial.type.14",
+          "structure.initial.type.15",
+          "structure.initial.type.16",
+          "structure.initial.type.19",
+          "structure.initial.type.3",
+          "structure.initial.type.4",
+          "structure.initial.type.5",
+          "structure.initial.type.6",
+          "structure.initial.type.7",
+          "structure.initial.type.8",
+          "structure.initial.type.9",
+          "unit.initial.type.2"
+        ],
+        "mission": "MONDE17A"
+      },
+      {
+        "added_features": [
+          "condition.required_structure.6",
+          "owner.monster_entities",
+          "owner.sentinel_200_entities",
+          "resource.stone_sacks",
+          "special.mission23_monster_reserve_and_advance_branch",
+          "structure.initial.type.17",
+          "structure.initial.type.21",
+          "unit.initial.type.11",
+          "unit.initial.type.12",
+          "unit.initial.type.13",
+          "unit.initial.type.14",
+          "unit.initial.type.15",
+          "unit.initial.type.20",
+          "unit.initial.type.21",
+          "unit.initial.type.22",
+          "unit.initial.type.23",
+          "unit.initial.type.24",
+          "unit.initial.type.6"
+        ],
+        "mission": "MONDE23"
+      },
+      {
+        "added_features": [
+          "condition.required_structure.2",
+          "raid.profile_group.13",
+          "raid.profile_group.14",
+          "raid.profile_group.3",
+          "raid.profile_group.7"
+        ],
+        "mission": "MONDE21"
+      },
+      {
+        "added_features": [
+          "special.mission08_13_structure_owner_tally",
+          "structure.initial.type.18"
+        ],
+        "mission": "MONDE08"
+      },
+      {
+        "added_features": [
+          "condition.required_structure.1"
+        ],
+        "mission": "MONDE02"
+      },
+      {
+        "added_features": [
+          "script.initial_attack_records"
+        ],
+        "mission": "MONDE04"
+      },
+      {
+        "added_features": [
+          "special.mission06_illumination_result_override"
+        ],
+        "mission": "MONDE06"
+      },
+      {
+        "added_features": [
+          "unit.initial.type.4"
+        ],
+        "mission": "MONDE07"
+      }
+    ],
+    "includes_declarative_research_gates": false,
+    "minimum_certificate": {
+      "explanation": "Five forced missions leave 13 features; no one remaining mission supplies all 13. The exhibited seven-map set covers the universe.",
+      "features_left_after_forced": [
+        "raid.profile_group.11",
+        "raid.profile_group.12",
+        "raid.profile_group.13",
+        "raid.profile_group.14",
+        "raid.profile_group.15",
+        "raid.profile_group.3",
+        "raid.profile_group.5",
+        "raid.profile_group.6",
+        "raid.profile_group.7",
+        "script.initial_attack_records",
+        "structure.initial.type.12",
+        "structure.initial.type.8",
+        "unit.initial.type.2"
+      ],
+      "forced_missions": [
+        "MONDE02",
+        "MONDE06",
+        "MONDE07",
+        "MONDE08",
+        "MONDE23"
+      ],
+      "largest_single_mission_residual_coverage": 9,
+      "lower_bound": 7,
+      "singleton_features_force": {
+        "condition.required_structure.1": "MONDE02",
+        "condition.required_structure.6": "MONDE23",
+        "special.mission06_illumination_result_override": "MONDE06",
+        "special.mission23_monster_reserve_and_advance_branch": "MONDE23",
+        "structure.initial.type.17": "MONDE23",
+        "structure.initial.type.18": "MONDE08",
+        "structure.initial.type.21": "MONDE23",
+        "unit.initial.type.11": "MONDE23",
+        "unit.initial.type.12": "MONDE23",
+        "unit.initial.type.15": "MONDE23",
+        "unit.initial.type.20": "MONDE23",
+        "unit.initial.type.22": "MONDE23",
+        "unit.initial.type.4": "MONDE07"
+      }
+    },
+    "new_feature_total": 62,
+    "rare_campaign_features": [
+      {
+        "feature": "condition.kind.1",
+        "missions": [
+          "MONDE01"
+        ]
+      },
+      {
+        "feature": "condition.required_structure.1",
+        "missions": [
+          "MONDE02"
+        ]
+      },
+      {
+        "feature": "condition.required_structure.3",
+        "missions": [
+          "MONDE01",
+          "MONDE14"
+        ]
+      },
+      {
+        "feature": "condition.required_structure.6",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "special.mission06_illumination_result_override",
+        "missions": [
+          "MONDE06"
+        ]
+      },
+      {
+        "feature": "special.mission08_13_structure_owner_tally",
+        "missions": [
+          "MONDE08",
+          "MONDE13"
+        ]
+      },
+      {
+        "feature": "special.mission23_monster_reserve_and_advance_branch",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "structure.initial.type.13",
+        "missions": [
+          "MONDE17A",
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "structure.initial.type.17",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "structure.initial.type.18",
+        "missions": [
+          "MONDE08"
+        ]
+      },
+      {
+        "feature": "structure.initial.type.21",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.11",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.12",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.13",
+        "missions": [
+          "MONDE04",
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.14",
+        "missions": [
+          "MONDE13",
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.15",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.20",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.22",
+        "missions": [
+          "MONDE23"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.23",
+        "missions": [
+          "MONDE23",
+          "MONDE24"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.24",
+        "missions": [
+          "MONDE23",
+          "MONDE24"
+        ]
+      },
+      {
+        "feature": "unit.initial.type.4",
+        "missions": [
+          "MONDE07"
+        ]
+      }
+    ],
+    "tie_break": "single/greedy: lexical ID; exact equal-score sets: prefer presence of initial attack records, then lexical ID; equal weights per feature"
+  }
+}
