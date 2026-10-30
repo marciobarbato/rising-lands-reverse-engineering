@@ -1,0 +1,1459 @@
+{
+ "compared": "per frame: inputs consumed, SetPlayerOrdre/ProcessInputGame, counter, game frame, RNGs, CRT seed, 0x4e1d18, view, selection head, objective block, units 11..15 whole-record SHA-256 prefix",
+ "core_construction_reference": null,
+ "diagnostic_graphics_planning": false,
+ "first_difference": null,
+ "frames_equal": 3722,
+ "frames_requested": 16922,
+ "graphics_planning_stops": null,
+ "input_sha256": "622a882d5439afc88431102fb98df60dcc44a59714742c9278ba4d7d8413c18c",
+ "last_frame": 3851,
+ "orders_python": [
+  {
+   "frame": 133,
+   "player": 0,
+   "site": "0x42ba20",
+   "tag": 1,
+   "word2": 4113,
+   "word4": 4113,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 133,
+   "jump_target": "0x45ee46",
+   "packet": "01001110111000000000",
+   "player": 0,
+   "tag": 1
+  },
+  {
+   "frame": 153,
+   "player": 0,
+   "site": "0x42a03c",
+   "tag": 4,
+   "word2": 3,
+   "word4": 3093,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 153,
+   "jump_target": "0x45ef73",
+   "packet": "04000300150c00000000",
+   "player": 0,
+   "tag": 4
+  },
+  {
+   "frame": 173,
+   "player": 0,
+   "site": "0x42ba20",
+   "tag": 1,
+   "word2": 4110,
+   "word4": 4110,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 173,
+   "jump_target": "0x45ee46",
+   "packet": "01000e100e1000000000",
+   "player": 0,
+   "tag": 1
+  },
+  {
+   "frame": 181,
+   "player": 0,
+   "site": "0x42bbd6",
+   "tag": 5,
+   "word2": 8218,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 181,
+   "jump_target": "0x45efc1",
+   "packet": "05001a20000000000000",
+   "player": 0,
+   "tag": 5
+  },
+  {
+   "frame": 182,
+   "player": 0,
+   "site": "0x42bbd6",
+   "tag": 5,
+   "word2": 8218,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 182,
+   "jump_target": "0x45efc1",
+   "packet": "05001a20000000000000",
+   "player": 0,
+   "tag": 5
+  },
+  {
+   "frame": 183,
+   "player": 0,
+   "site": "0x42bbd6",
+   "tag": 5,
+   "word2": 8218,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 183,
+   "jump_target": "0x45efc1",
+   "packet": "05001a20000000000000",
+   "player": 0,
+   "tag": 5
+  },
+  {
+   "frame": 193,
+   "player": 0,
+   "site": "0x42ba20",
+   "tag": 1,
+   "word2": 4108,
+   "word4": 4108,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 193,
+   "jump_target": "0x45ee46",
+   "packet": "01000c100c1000000000",
+   "player": 0,
+   "tag": 1
+  },
+  {
+   "frame": 201,
+   "player": 0,
+   "site": "0x42bbd6",
+   "tag": 5,
+   "word2": 8219,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 201,
+   "jump_target": "0x45efc1",
+   "packet": "05001b20000000000000",
+   "player": 0,
+   "tag": 5
+  },
+  {
+   "frame": 202,
+   "player": 0,
+   "site": "0x42bbd6",
+   "tag": 5,
+   "word2": 8219,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 202,
+   "jump_target": "0x45efc1",
+   "packet": "05001b20000000000000",
+   "player": 0,
+   "tag": 5
+  },
+  {
+   "frame": 203,
+   "player": 0,
+   "site": "0x42bbd6",
+   "tag": 5,
+   "word2": 8219,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 203,
+   "jump_target": "0x45efc1",
+   "packet": "05001b20000000000000",
+   "player": 0,
+   "tag": 5
+  },
+  {
+   "frame": 1833,
+   "player": 0,
+   "site": "0x42b9aa",
+   "tag": 2,
+   "word2": 0,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 1833,
+   "jump_target": "0x45eeaf",
+   "packet": "02000000000000000000",
+   "player": 0,
+   "tag": 2
+  },
+  {
+   "frame": 1845,
+   "player": 0,
+   "site": "0x42aecf",
+   "tag": 33,
+   "word2": 0,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 1845,
+   "jump_target": "0x45f221",
+   "packet": "21000000000000000000",
+   "player": 0,
+   "tag": 33
+  },
+  {
+   "frame": 1863,
+   "player": 0,
+   "site": "0x42ba20",
+   "tag": 1,
+   "word2": 3598,
+   "word4": 3598,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 1863,
+   "jump_target": "0x45ee46",
+   "packet": "01000e0e0e0e00000000",
+   "player": 0,
+   "tag": 1
+  },
+  {
+   "frame": 1873,
+   "player": 0,
+   "site": "0x42aecf",
+   "tag": 16,
+   "word2": 3,
+   "word4": 1,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 1873,
+   "jump_target": "0x45f167",
+   "packet": "10000300010000000000",
+   "player": 0,
+   "tag": 16
+  },
+  {
+   "frame": 2003,
+   "player": 0,
+   "site": "0x42b9aa",
+   "tag": 2,
+   "word2": 0,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2003,
+   "jump_target": "0x45eeaf",
+   "packet": "02000000000000000000",
+   "player": 0,
+   "tag": 2
+  },
+  {
+   "frame": 2013,
+   "player": 0,
+   "site": "0x42bf88",
+   "tag": 17,
+   "word2": 7,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2013,
+   "jump_target": "0x45f19f",
+   "packet": "11000700000000000000",
+   "player": 0,
+   "tag": 17
+  },
+  {
+   "frame": 2043,
+   "player": 0,
+   "site": "0x42ba20",
+   "tag": 1,
+   "word2": 8218,
+   "word4": 8218,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2043,
+   "jump_target": "0x45ee46",
+   "packet": "01001a201a2000000000",
+   "player": 0,
+   "tag": 1
+  },
+  {
+   "frame": 2069,
+   "player": 0,
+   "site": "0x429c88",
+   "tag": 7,
+   "word2": 8220,
+   "word4": 2,
+   "word6": 1,
+   "word8": 1
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2069,
+   "jump_target": "0x45f041",
+   "packet": "07001c20020001000100",
+   "player": 0,
+   "tag": 7
+  },
+  {
+   "frame": 2113,
+   "player": 0,
+   "site": "0x42ba20",
+   "tag": 1,
+   "word2": 8219,
+   "word4": 8219,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2113,
+   "jump_target": "0x45ee46",
+   "packet": "01001b201b2000000000",
+   "player": 0,
+   "tag": 1
+  },
+  {
+   "frame": 2139,
+   "player": 0,
+   "site": "0x429c88",
+   "tag": 7,
+   "word2": 8218,
+   "word4": 2,
+   "word6": 1,
+   "word8": 1
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2139,
+   "jump_target": "0x45f041",
+   "packet": "07001a20020001000100",
+   "player": 0,
+   "tag": 7
+  },
+  {
+   "frame": 2173,
+   "player": 0,
+   "site": "0x42ba20",
+   "tag": 1,
+   "word2": 3093,
+   "word4": 3093,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2173,
+   "jump_target": "0x45ee46",
+   "packet": "0100150c150c00000000",
+   "player": 0,
+   "tag": 1
+  },
+  {
+   "frame": 2181,
+   "player": 0,
+   "site": "0x42bbd6",
+   "tag": 5,
+   "word2": 2091,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2181,
+   "jump_target": "0x45efc1",
+   "packet": "05002b08000000000000",
+   "player": 0,
+   "tag": 5
+  },
+  {
+   "frame": 2182,
+   "player": 0,
+   "site": "0x42bbd6",
+   "tag": 5,
+   "word2": 2091,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2182,
+   "jump_target": "0x45efc1",
+   "packet": "05002b08000000000000",
+   "player": 0,
+   "tag": 5
+  },
+  {
+   "frame": 2183,
+   "player": 0,
+   "site": "0x42bbd6",
+   "tag": 5,
+   "word2": 2091,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2183,
+   "jump_target": "0x45efc1",
+   "packet": "05002b08000000000000",
+   "player": 0,
+   "tag": 5
+  },
+  {
+   "frame": 2563,
+   "player": 0,
+   "site": "0x42b9aa",
+   "tag": 2,
+   "word2": 0,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2563,
+   "jump_target": "0x45eeaf",
+   "packet": "02000000000000000000",
+   "player": 0,
+   "tag": 2
+  },
+  {
+   "frame": 2573,
+   "player": 0,
+   "site": "0x42bf88",
+   "tag": 17,
+   "word2": 7,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2573,
+   "jump_target": "0x45f19f",
+   "packet": "11000700000000000000",
+   "player": 0,
+   "tag": 17
+  },
+  {
+   "frame": 2593,
+   "player": 0,
+   "site": "0x42ba20",
+   "tag": 1,
+   "word2": 3598,
+   "word4": 3598,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2593,
+   "jump_target": "0x45ee46",
+   "packet": "01000e0e0e0e00000000",
+   "player": 0,
+   "tag": 1
+  },
+  {
+   "frame": 2601,
+   "player": 0,
+   "site": "0x42bbd6",
+   "tag": 5,
+   "word2": 2091,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2601,
+   "jump_target": "0x45efc1",
+   "packet": "05002b08000000000000",
+   "player": 0,
+   "tag": 5
+  },
+  {
+   "frame": 2602,
+   "player": 0,
+   "site": "0x42bbd6",
+   "tag": 5,
+   "word2": 2091,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2602,
+   "jump_target": "0x45efc1",
+   "packet": "05002b08000000000000",
+   "player": 0,
+   "tag": 5
+  },
+  {
+   "frame": 2603,
+   "player": 0,
+   "site": "0x42bbd6",
+   "tag": 5,
+   "word2": 2091,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2603,
+   "jump_target": "0x45efc1",
+   "packet": "05002b08000000000000",
+   "player": 0,
+   "tag": 5
+  },
+  {
+   "frame": 2643,
+   "player": 0,
+   "site": "0x42ba20",
+   "tag": 1,
+   "word2": 2346,
+   "word4": 2346,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2643,
+   "jump_target": "0x45ee46",
+   "packet": "01002a092a0900000000",
+   "player": 0,
+   "tag": 1
+  },
+  {
+   "frame": 2669,
+   "player": 0,
+   "site": "0x429c88",
+   "tag": 6,
+   "word2": 2091,
+   "word4": 2,
+   "word6": 1,
+   "word8": 2
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 2669,
+   "jump_target": "0x45efe2",
+   "packet": "06002b08020001000200",
+   "player": 0,
+   "tag": 6
+  },
+  {
+   "frame": 3173,
+   "player": 0,
+   "site": "0x42b9aa",
+   "tag": 2,
+   "word2": 0,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 3173,
+   "jump_target": "0x45eeaf",
+   "packet": "02000000000000000000",
+   "player": 0,
+   "tag": 2
+  },
+  {
+   "frame": 3183,
+   "player": 0,
+   "site": "0x42bf88",
+   "tag": 17,
+   "word2": 5,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 3183,
+   "jump_target": "0x45f19f",
+   "packet": "11000500000000000000",
+   "player": 0,
+   "tag": 17
+  },
+  {
+   "frame": 3203,
+   "player": 0,
+   "site": "0x42ba20",
+   "tag": 1,
+   "word2": 3600,
+   "word4": 3600,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 3203,
+   "jump_target": "0x45ee46",
+   "packet": "0100100e100e00000000",
+   "player": 0,
+   "tag": 1
+  },
+  {
+   "frame": 3238,
+   "player": 0,
+   "site": "0x429c88",
+   "tag": 6,
+   "word2": 2091,
+   "word4": 2,
+   "word6": 1,
+   "word8": 2
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 3238,
+   "jump_target": "0x45efe2",
+   "packet": "06002b08020001000200",
+   "player": 0,
+   "tag": 6
+  },
+  {
+   "frame": 3273,
+   "player": 0,
+   "site": "0x42ba20",
+   "tag": 1,
+   "word2": 2347,
+   "word4": 2347,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 3273,
+   "jump_target": "0x45ee46",
+   "packet": "01002b092b0900000000",
+   "player": 0,
+   "tag": 1
+  },
+  {
+   "frame": 3299,
+   "player": 0,
+   "site": "0x429c88",
+   "tag": 6,
+   "word2": 2091,
+   "word4": 2,
+   "word6": 1,
+   "word8": 2
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 3299,
+   "jump_target": "0x45efe2",
+   "packet": "06002b08020001000200",
+   "player": 0,
+   "tag": 6
+  },
+  {
+   "frame": 3753,
+   "player": 0,
+   "site": "0x42b9aa",
+   "tag": 2,
+   "word2": 0,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 3753,
+   "jump_target": "0x45eeaf",
+   "packet": "02000000000000000000",
+   "player": 0,
+   "tag": 2
+  },
+  {
+   "frame": 3763,
+   "player": 0,
+   "site": "0x42bf88",
+   "tag": 17,
+   "word2": 5,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 3763,
+   "jump_target": "0x45f19f",
+   "packet": "11000500000000000000",
+   "player": 0,
+   "tag": 17
+  },
+  {
+   "frame": 3823,
+   "player": 0,
+   "site": "0x42ba20",
+   "tag": 1,
+   "word2": 3598,
+   "word4": 3598,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 3823,
+   "jump_target": "0x45ee46",
+   "packet": "01000e0e0e0e00000000",
+   "player": 0,
+   "tag": 1
+  }
+ ],
+ "probe": "S1",
+ "probe_files_sha256": {
+  "comandos.jsonl.xz": "e73b75aab67caba52aac114f03709ad6b296e4cbef439668bbaef8f94824bbc7",
+  "entradas.jsonl.xz": "fd1df062f4d197dd3930e2d817381485c15ee4bb8c6b290b3c3817d545edec1e",
+  "quadros.jsonl.xz": "248091794a0e4aec176e02591a676d97d36d58f0928cc12574769a8d9a64e96b",
+  "replay.json": "f2e9c3013862c3905eb127bfefdd71b5295824ddc1c4165a8a12019b5239327f"
+ },
+ "probe_ref": {
+  "ref": "bab6c7c",
+  "sha": "bab6c7c14781c4263fbacabf2c978158c78a6192"
+ },
+ "schema": "rising-lands/m3-1-input-chain-check/1",
+ "seconds": 182.523,
+ "source_revision": "8b6f1c954620b63af47fa742d1e124aa0f396ecf",
+ "source_sha256": {
+  "pesquisas-paralelas/ia-runtime/affgame_hud_ia.py": "afdb24dacf4c58646b81e16e6826a106065a2e8b200e3013ed3f89bdb9332708",
+  "pesquisas-paralelas/ia-runtime/composicao_encadeada_ia.py": "4d4f45ce5fc2c2599884d876f7c189554c61b71852115a83d4c96a6f4efc873b",
+  "pesquisas-paralelas/ia-runtime/composicao_entrada_ia.py": "4dff2595d83ba90bfa88a2710fc009bd9a78657177ba09129f644d661f90e754",
+  "pesquisas-paralelas/ia-runtime/composicao_quadros_ia.py": "afdc8a396b254f5e65167b215c9a785d18cba530169c683ad5c35d63ed786e43",
+  "pesquisas-paralelas/ia-runtime/construcao_entrada_ia.py": "14d8519f20e7fc4c6e0fefaef3258e5745a79af33aebcf443c10904efedfba08",
+  "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "0d3c50f9c07dcd4badb4d37217e3d6e8407c9146de968258addff2a2de982928",
+  "pesquisas-paralelas/ia-runtime/provar_entrada_ia.py": "95a48267e6c089cc6822fed55a240cd711c3f95031352eccb2481bc9500c3a29",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "8cbfcf4ef6322258f7fc7a060a7ba9fd2437ae9ed95815cfb88e244aad0e272c",
+  "pesquisas-paralelas/ia-runtime/proxima_etapa_quadro.py": "d9a3c39db33703c43d0cc16de2446b6cf860f894aa2d875a1828bbfda3f11f80"
+ },
+ "start": {
+  "frame": 128,
+  "source": "pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz",
+  "summary": {
+   "blocks": 25197,
+   "bytes": 16175335,
+   "sha256": "eb714f7d5a694ad91bab9b41c37a28860006c89be03f9170e3b312064a4b04b2"
+  }
+ },
+ "stop": {
+  "dependency": "SacGetCapacite required at 0x004299da; earlier stores retained",
+  "frame": 3851,
+  "orders_before_stop": {
+   "equal": true,
+   "probe": [],
+   "python": []
+  },
+  "owner": null,
+  "phase": "frame3851"
+ },
+ "text_boundary": {
+  "binding": "TextGetMessage as Missions' declared display-scenario boundary (EAX 0, no cleanup, logged)",
+  "frames": [
+   {
+    "frame": 2040,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2041,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2042,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2043,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2044,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2045,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2046,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2047,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2048,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2049,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2050,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2051,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2052,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2053,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2054,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2055,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2056,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2110,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2111,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2112,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2113,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2114,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2115,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2116,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2117,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2118,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2119,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2120,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2121,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2122,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2123,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2124,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2125,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2126,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 2651,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 2652,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 2653,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 2654,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 2655,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 2656,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 2657,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 2658,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 2659,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 2660,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 2661,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 2662,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 2663,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 2664,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 2665,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3225,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3226,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3227,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3228,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3229,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3230,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3231,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3232,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3233,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3234,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3281,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3282,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3283,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3284,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3285,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3286,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3287,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3288,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3289,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3290,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3291,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3292,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3293,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3294,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3295,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x429a0e"
+    ]
+   },
+   {
+    "frame": 3842,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 3843,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 3844,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 3845,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 3846,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 3847,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 3848,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   },
+   {
+    "frame": 3849,
+    "probe_entries": 1,
+    "python_frame_phase": 1,
+    "sites": [
+     "0x4299f4"
+    ]
+   }
+  ],
+  "frames_equal": 82,
+  "note": "probe_entries counts every TextGetMessage entry of frame k (both phases); python_frame_phase counts the frame-phase calls of the chain (InputGame); the display-phase callers are Graphics'"
+ }
+}

@@ -131,8 +131,8 @@ final class NativeMetalGameView: NSView {
     override func rightMouseDragged(with event:NSEvent){mouse(event,0x200)}
     override func mouseDown(with event:NSEvent){mouse(event,event.clickCount>1 && event.clickCount%2==0 ? 0x203:0x201)}
     override func mouseUp(with event:NSEvent){mouse(event,0x202)}
-    override func rightMouseDown(with event:NSEvent){mouse(event,event.buttonNumber==0 ? 0x201:0x204)}
-    override func rightMouseUp(with event:NSEvent){mouse(event,event.buttonNumber==0 ? 0x202:0x205)}
+    override func rightMouseDown(with event:NSEvent){mouse(event,0x204)}
+    override func rightMouseUp(with event:NSEvent){mouse(event,0x205)}
     func key(_ key:Int,_ down:Bool){if down{heldKeys.insert(key)}else{heldKeys.remove(key)};inputEvent?(["kind":"key","vkey":key,"down":down])}
     override func keyDown(with event:NSEvent){synchronizeModifiers(event.modifierFlags);if let k=[36:13,76:13,53:27,49:32,123:37,126:38,124:39,125:40,117:46,7:88,29:48,18:49,19:50,20:51,21:52,23:53,22:54,26:55,28:56,25:57][Int(event.keyCode)]{key(k,true)}}
     override func keyUp(with event:NSEvent){synchronizeModifiers(event.modifierFlags);if let k=[36:13,76:13,53:27,49:32,123:37,126:38,124:39,125:40,117:46,7:88,29:48,18:49,19:50,20:51,21:52,23:53,22:54,26:55,28:56,25:57][Int(event.keyCode)]{key(k,false)}}
@@ -295,10 +295,10 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         presenter=try metal.makePlayPresenter()
         window.center();window.makeKeyAndOrderFront(nil)
     }
-    func benchmarkClick(_ x:Double,_ y:Double,right:Bool=false){
+    func benchmarkClick(_ x:Double,_ y:Double,right:Bool=false,clickCount:Int=1,flags:NSEvent.ModifierFlags=[]){
         window.makeKeyAndOrderFront(nil);window.makeFirstResponder(metal)
         let point=metal.convert(NSPoint(x:metal.bounds.width*x/800,y:metal.bounds.height*(1-y/600)),to:nil)
-        for type in (right ? [NSEvent.EventType.rightMouseDown,.rightMouseUp]:[NSEvent.EventType.leftMouseDown,.leftMouseUp]){if let event=NSEvent.mouseEvent(with:type,location:point,modifierFlags:[],timestamp:ProcessInfo.processInfo.systemUptime,windowNumber:window.windowNumber,context:nil,eventNumber:1,clickCount:1,pressure:1){window.sendEvent(event)}}
+        for type in (right ? [NSEvent.EventType.rightMouseDown,.rightMouseUp]:[NSEvent.EventType.leftMouseDown,.leftMouseUp]){if let event=NSEvent.mouseEvent(with:type,location:point,modifierFlags:flags,timestamp:ProcessInfo.processInfo.systemUptime,windowNumber:window.windowNumber,context:nil,eventNumber:1,clickCount:clickCount,pressure:1){window.sendEvent(event)}}
     }
     func benchmarkPointer(_ x:Double,_ y:Double){
         let point=metal.convert(NSPoint(x:metal.bounds.width*x/800,y:metal.bounds.height*(1-y/600)),to:nil)

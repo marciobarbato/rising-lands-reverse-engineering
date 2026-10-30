@@ -1,0 +1,46 @@
+{
+ "bundle_snapshot_sha256": "22dbc758c26923ab13f1f1aa0d8b2126d1f764bd6d0e3e77d51ae0fb2c956a5a",
+ "driver_sha256": "59b3f37271ce6d0613041cca0d66d62f440d562ee946dacc5b08a11816b38e7e",
+ "engine_sha256": "51c6faba9071ae28cac045ef023f0e7877e1ced600f26b9d61adec21d3c72646",
+ "full_session_ready": true,
+ "hash_contract": {
+  "indicator_reader_sha256": "2d391d854b0497bc6d7fc8418a3547d90e8f93b9be54b7e9ebf29b533a1a67ad",
+  "mask_path": "pesquisas-paralelas/missoes/m3/sondas/P6/mascara-janela.json",
+  "mask_sha256": "56cf9039a04d32bfbea4a4098a1111f4d7f59669028d633fadb41e06e3c05dbb",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "scope": "All mapped game blocks, names/base/length preserved; published P6 cumulative exclusion mask, zeroed verbatim. Static executable tables and native stack excluded as in Test A. No session-specific mask additions."
+ },
+ "initialization": "Accepted S0 + four original static tables; real 128-frame prefix; no later state reload",
+ "input_sha256": "394364c4e57737cf35abd858aebc85809e125a6622661d944b7e2406c6636fe0",
+ "mode": "app validation: persistent audited policy 2, production C input phase; no post-prefix rendering",
+ "order_coverage": {
+  "build_cave": true,
+  "ctrl_depot": true,
+  "lodge_colonist": true,
+  "move": true,
+  "recruit": true,
+  "select": true
+ },
+ "order_tags": [
+  1,
+  4,
+  2,
+  33,
+  1,
+  16,
+  1,
+  5,
+  5,
+  5,
+  1,
+  7,
+  7,
+  2,
+  17
+ ],
+ "schema": "rising-lands/macos-test-b-replay/1",
+ "seconds": 254.06035762499997,
+ "source_revision": "c9bc5d79b048f579a2ee9323db955e7a3cf05086",
+ "status": "completed",
+ "stop_frame": 3701
+}

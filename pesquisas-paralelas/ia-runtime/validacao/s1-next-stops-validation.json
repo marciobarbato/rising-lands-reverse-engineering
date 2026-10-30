@@ -1,0 +1,123 @@
+{
+ "domain_gate": {
+  "command": "python3 -B scripts/check.py --domain ai-runtime",
+  "errors": 0,
+  "failures": 0,
+  "seconds": 136.861,
+  "skips": 8,
+  "successful": 124,
+  "tests": 132
+ },
+ "economy_stop_original": {
+  "call": "0x4299da",
+  "entry": "0x475736",
+  "evidence": "pesquisas-paralelas/ia-runtime/evidencias/s1-parada-saco-original.json",
+  "routine": "SacGetCapacite",
+  "s1": {
+   "code_unchanged": true,
+   "frames_checked": 602,
+   "last_frame": 3851,
+   "snapshot": {
+    "path": ".local/m3/passo2/S1/instantaneo-03250.pickle",
+    "sha256": "169488a6e34ce20586a087bf846682cdcba8cc2905efbc27f12f43125ae4a884"
+   }
+  },
+  "seconds": 390.908,
+  "sha256": "caafd5310b717e54328fb0e27636e3b48d541a1a0861166c2e683e924030312c",
+  "translation_executed": false
+ },
+ "implementation_revision": "8b6f1c954620b63af47fa742d1e124aa0f396ecf",
+ "indicator_runs": [
+  {
+   "call": "0x44ca17",
+   "frames_equal": 3148,
+   "modes": [
+    "strict",
+    "planning"
+   ],
+   "range": [
+    129,
+    3276
+   ],
+   "routine": "MineGetCapacite",
+   "source": "9ae3e4d",
+   "stop_frame": 3277
+  },
+  {
+   "call": "0x4299da",
+   "frames_equal": 3722,
+   "modes": [
+    "strict",
+    "planning"
+   ],
+   "owner": "economy",
+   "range": [
+    129,
+    3850
+   ],
+   "routine": "SacGetCapacite",
+   "source": "8b6f1c9",
+   "stop_frame": 3851
+  }
+ ],
+ "logs": {
+  ".local/m3-1/s1-mine-capture.log": {
+   "exit_code": 0,
+   "sha256": "cb2c15fad1f743524591c4fd8950ae49d904157ccfb37a65229b04dad7545e22"
+  },
+  ".local/m3-1/s1-mine-focused.log": {
+   "exit_code": 0,
+   "sha256": "5133ac84ae46729abd7570e085857017c7112a938ae06ad3bd0cc1e2e70a298c"
+  },
+  ".local/m3-1/s1-mine-gate.log": {
+   "exit_code": 0,
+   "sha256": "ec17896247249ac702656703c434a246ddcc9b02bc8841426f0a513d3074e2f8"
+  },
+  ".local/m3-1/s1-mine-native.log": {
+   "exit_code": 0,
+   "sha256": "1c83877783112e2fb2767b9bfcd871eaaa53c128df3edc6417d39fa7a7c1932c"
+  },
+  ".local/m3-1/s1-mine-plan.log": {
+   "exit_code": 0,
+   "sha256": "bdb16f0f5379b9b8bd3d0e128351580da8d0ce29e994a22e29f88e1059153c61"
+  },
+  ".local/m3-1/s1-mine-strict.log": {
+   "exit_code": 0,
+   "sha256": "7146169f231873cf47492fc5767b1658cccad16e05352f395e6e2f46e90c5b64"
+  },
+  ".local/m3-1/s1-next-gate.log": {
+   "exit_code": 0,
+   "sha256": "7371d37aa9f71e4c248953309bb00a6e5cdd89f36037bc40fc3ad5e32fdbe20c"
+  },
+  ".local/m3-1/s1-next-plan.log": {
+   "exit_code": 0,
+   "sha256": "1b305f44b0c9bea101aef2ca8a8ee5c05356c5d270e4be68be54784644930e61"
+  },
+  ".local/m3-1/s1-next-strict.log": {
+   "exit_code": 0,
+   "sha256": "c7b758c7cff4c3ec2e52067a9211f2b2243483d439d2b303ceed3455db744058"
+  },
+  ".local/m3-1/s1-sack-contract.log": {
+   "exit_code": 0,
+   "sha256": "411e87cf6ed7ed94de5b7f189de592f55b712a7b535b666c690f84f0fbdd35b4"
+  }
+ },
+ "native_mine": {
+  "comparisons": 101,
+  "equal": 101,
+  "mismatches": 0,
+  "report": "consulta-mina-native.json"
+ },
+ "original_capture_commit": "bb99dac",
+ "planning_reports": {
+  ".local/m3-1/s1-mine-planejamento.json": "92befa5f61e74140e868d8de6da6ffb5955dbafa5db33769657d2560e4d8dca5",
+  ".local/m3-1/s1-next-planejamento.json": "534313aa25e7b93f5c211f66ba8e3bce5e1058ecc2595f74ecd64e6e3504b7d6"
+ },
+ "schema": "rising-lands/ai-runtime-s1-next-stops-validation/1",
+ "whole_state_s1": {
+  "latest_fetched_main": "84e4fe79d42f3dbd6f359b827781e02fb449c544",
+  "latest_fetched_missions": "7eeb395232b35dcf62be9451078f5d61a86dd130",
+  "reason": "No pass-2 manifest on fetched main 84e4fe7 or Missions 7eeb395",
+  "result": "not_run"
+ }
+}
