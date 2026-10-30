@@ -72,6 +72,7 @@ def executar_nativo():
     ``record``: the isolated call's result (as Economy's bench records it); ``snapshots[name]`` = (entry registers,
     blocks) at the first entry of that routine inside the call; ``cases[case]`` = the native leaf run (entry/exit
     registers, changed bytes, snapshot blocks)."""
+    import emulador  # noqa: F401  (puts .local/python, with unicorn, on sys.path)
     import capturar_ciclo_trabalho as cct
     from bancada_ciclo_trabalho import Ciclo
     import unicorn
