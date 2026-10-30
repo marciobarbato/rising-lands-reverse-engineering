@@ -13,7 +13,7 @@ final class NativePlayPresenter {
     var slots=[Slot](),latest:Int?,timer:DispatchSourceTimer?
     var lastTexture:MTLTexture?,failure:String?
     var published=0,dropped=0,submitted=0
-    var uploadSeconds=0.0,submitSeconds=0.0,gpuSeconds=0.0
+    var uploadSeconds=0.0,submitSeconds=0.0,gpuSeconds=0.0,drawableWaitSeconds=0.0
     var presented=[Double]()
     var uniqueGameFrames=0,lastPresentedFrame:UInt64?
     var latestFrame:UInt64=0
@@ -40,7 +40,7 @@ final class NativePlayPresenter {
     func start() {
         stop()
         lock.lock();presented.removeAll(keepingCapacity:true);uniqueGameFrames=0;lastPresentedFrame=nil
-        published=0;dropped=0;submitted=0;uploadSeconds=0;submitSeconds=0;gpuSeconds=0;failure=nil;lock.unlock()
+        published=0;dropped=0;submitted=0;uploadSeconds=0;submitSeconds=0;gpuSeconds=0;drawableWaitSeconds=0;failure=nil;lock.unlock()
         let timer=DispatchSource.makeTimerSource(queue:queue)
         timer.schedule(deadline:.now(),repeating:1.0/120,leeway:.microseconds(100))
         timer.setEventHandler{[weak self] in autoreleasepool{self?.draw()}}
@@ -60,6 +60,7 @@ final class NativePlayPresenter {
         guard let drawable=layer.nextDrawable(),let command=commands.makeCommandBuffer() else{
             lock.lock();slots[index].readers-=1;failure="MetalDrawableUnavailable";lock.unlock();return
         }
+        let acquired=ProcessInfo.processInfo.systemUptime
         let pass=MTLRenderPassDescriptor();pass.colorAttachments[0].texture=drawable.texture
         pass.colorAttachments[0].loadAction = .dontCare;pass.colorAttachments[0].storeAction = .store
         guard let encoder=command.makeRenderCommandEncoder(descriptor:pass) else{
@@ -77,7 +78,7 @@ final class NativePlayPresenter {
             self.gpuSeconds+=max(0,result.gpuEndTime-result.gpuStartTime);self.lock.unlock()
         }
         command.present(drawable);command.commit()
-        lock.lock();lastTexture=drawable.texture;submitted+=1;submitSeconds+=ProcessInfo.processInfo.systemUptime-started;lock.unlock()
+        lock.lock();lastTexture=drawable.texture;submitted+=1;drawableWaitSeconds+=acquired-started;submitSeconds+=ProcessInfo.processInfo.systemUptime-acquired;lock.unlock()
     }
     func clear(){lock.lock();latest=nil;lock.unlock()}
     func currentFailure()->String?{lock.lock();defer{lock.unlock()};return failure}
@@ -88,7 +89,7 @@ final class NativePlayPresenter {
         let bins=(0..<(detailed ? max(0,Int(seconds)):0)).map{b in times.filter{$0>=start+Double(b) && $0<start+Double(b+1)}.count}
         return ["presented":times.count,"displayFPS":Double(times.count)/seconds,"minOneSecondFPS":bins.min() ?? 0,"oneSecondPresentations":bins,
                 "uniqueGameFramesPresented":uniqueGameFrames,"published":published,"publicationDrops":dropped,"submitted":submitted,
-                "uploadSeconds":uploadSeconds,"submitSeconds":submitSeconds,"gpuSeconds":gpuSeconds,"displayError":failure as Any? ?? NSNull()]
+                "uploadSeconds":uploadSeconds,"submitSeconds":submitSeconds,"drawableWaitSeconds":drawableWaitSeconds,"gpuSeconds":gpuSeconds,"displayError":failure as Any? ?? NSNull()]
     }
 }
 

@@ -277,7 +277,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
                 DispatchQueue.main.asyncAfter(deadline:.now()+duration){
                     live.perform("live-pause"){value in
                         pulse.invalidate()
-                        var result=value;result["mainTimerMaxGapMS"]=maxPulseGap*1000;result["mainTimerPulses"]=pulses;result["commit"]=Bundle.main.object(forInfoDictionaryKey:"RisingLandsSourceCommit") as? String
+                        var result=value;result["mainTimerMaxGapMS"]=maxPulseGap*1000;result["mainTimerPulses"]=pulses;result["mainTimerMaxDelayMS"]=max(0,maxPulseGap-0.05)*1000;result["commit"]=Bundle.main.object(forInfoDictionaryKey:"RisingLandsSourceCommit") as? String
                         result["native_window_visible"]=live.window.isVisible
                         result["requestedSeconds"]=duration
                         result["screenMaximumFPS"]=live.window.screen?.maximumFramesPerSecond ?? 0
