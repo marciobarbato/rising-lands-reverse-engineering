@@ -763,3 +763,32 @@ phases; and the stronger carried-cache/effect surface gates. Final play logic
 averages0.2591ms/frame over9,200 frames under a shared lease, with terminal hashes
 unchanged. Full contracts, qualifications, reports and remaining S1/D1 work are
 in the [handoff](../motor/HANDOFF.md#second-continuation-piece--measured-delivery).
+
+## Recruitment owners and S1 continuation
+
+The feature continuation verifies Core's five recruit-conversion owners against
+277/277 intact-original cases, with all supplied bytes and eight exit registers
+exact, and ports GetCaseCentrale separately from the collision-mask centre.
+Additive reference profiles chain9/chain10 preserve every earlier pin and mask.
+C ABI1.6 and Graphics1.9 remain unchanged.
+
+[Final regression evidence](../motor/validation/chain10/piece4/summary.json)
+reproduces K1 through629, P3 through3129, P6 through2400 and P7 through3700,
+with all501/3,001/2,272/3,572 advancing surfaces exact. P6 also retains all4,544
+whole-state and paired play/audit phases. S1's original indicator/input/order
+prefix reaches3850; its own-world surface prefix is1,885/1,885 through2013.
+Rust and pinned Python Graphics both stop at2014,0x4022c8, on the unproved
+structure-selection domain. Rust logic separately stops at3851 on
+SacGetCapacite0x4299da. Pinned Python logic stops at2547 because Economy has
+not forwarded DX into SetSortEngin0x420f8c. S1 whole-state equality, completed
+selection rendering, glyph reconstruction, mission completion and Test B remain
+outside these bounded proofs. Exact contracts and retained diagnostics are in
+[the handoff](../motor/HANDOFF.md#chain10-piece4--final-source-regression-and-s1-render-boundary).
+
+The [final exclusive play measurement](../motor/validation/chain10/piece5/summary.json)
+keeps every measured logic frame below4ms. S1's3,722 completed frames average
+0.3021ms (maximum0.6420);9,200 M2 frames average0.2754ms (maximum1.6225), with
+logic+render0.6753ms. Prior P3/P6/P7 full terminal projections and M2 terminal
+state/surface hashes, generation and clock remain exact. These are explicit
+play-mode C ABI measurements, excluding initialization, proof work and app
+presentation. The bounded S1 renderer/Python dependencies above remain open.

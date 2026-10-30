@@ -1,0 +1,78 @@
+{
+  "abi": "1.6 unchanged",
+  "artifacts": {
+    "S1-native.json": {
+      "compressed_sha256": "b27332abba18fcb0c02fd0c321583419fbfbb57c188ac2ceab555752aaf697b8",
+      "path": "S1-native.json.xz",
+      "raw_bytes": 5148189,
+      "raw_sha256": "7350ad572acfe9ddcbdcce98a536a1cf50e9d3b35931476dffe678c78c2ad58b"
+    },
+    "S1-native.log": {
+      "compressed_sha256": "eefc2ac9bfbb0c97e7ae42d01a7aa6f64ed49faa45f703005e3e5dbdd8ca7977",
+      "path": "S1-native.log.xz",
+      "raw_bytes": 2414,
+      "raw_sha256": "9034343586858001a568a23a0dcd13bc479692eb5648be249fc5dad1c2fc9d78"
+    },
+    "build.log": {
+      "compressed_sha256": "6bafa5f673dc3ac3561996b13aca5cf6bede8675abce742817003250edabc5af",
+      "path": "build.log.xz",
+      "raw_bytes": 332,
+      "raw_sha256": "57284ecc54443a7fe11c4e538cb7878c7bd11e88c24dda1a1d8a99996269511c"
+    },
+    "gate.log": {
+      "compressed_sha256": "ab779cb6e5ab423660337bb097d299dbf7a751c2075c1882b786b40d3c6137c1",
+      "path": "gate.log.xz",
+      "raw_bytes": 15943,
+      "raw_sha256": "12ecb6941f3d0771bc054a9b53fb6c9e1704ee230549db125a1f61dc65f8e1d3"
+    },
+    "recruit-owners-debug.json": {
+      "compressed_sha256": "8ae4f8484df2bd5ba37a4309e76eb2576875894fea306c8be1856dcb61017dba",
+      "path": "recruit-owners-debug.json.xz",
+      "raw_bytes": 110785,
+      "raw_sha256": "3bb96e3e5c5db30bab67327f5a07143514b294eff0d88bea90c540e266d03414"
+    },
+    "recruit-owners-debug.log": {
+      "compressed_sha256": "a149f38a081d8a879ca12c2c8a47af1022fb3bd2a98e16a515bccda8ff58ded7",
+      "path": "recruit-owners-debug.log.xz",
+      "raw_bytes": 902,
+      "raw_sha256": "129c4de494c4a92bceae79a9921582cd238c9ebceb4ce5d08eb487cf3e8ae5da"
+    }
+  },
+  "gate": {
+    "passed": true,
+    "pilot_captures": 75,
+    "python_tests": 63,
+    "rust_tests": 30,
+    "swift_metal": true
+  },
+  "graphics": "1.9 unchanged",
+  "owners": {
+    "binary": "debug original fixture transport; release separately rebuilt from the same source",
+    "by_routine": {
+      "EnginAddVie": 83,
+      "EnginResetFatigue": 11,
+      "EnginSetExperimente": 103,
+      "EnginSetType": 57,
+      "SetSortEngin": 23
+    },
+    "cases": 277,
+    "equal": 277,
+    "register_masks": null,
+    "skips": 0
+  },
+  "s1_diagnostic": {
+    "field": "unit12 record hash; no provider stop; investigation pending",
+    "first_difference_frame": 2836,
+    "frames_equal": 2707,
+    "native_indicator_prefix": [
+      129,
+      2835
+    ],
+    "python_prefix": [
+      129,
+      2546
+    ],
+    "python_stop": "EnginSetType call 0x420f69 in frame2547 with prior chain8 reference"
+  },
+  "schema": "rising-lands/rust-chain9-recruit-owner-delivery/1"
+}
