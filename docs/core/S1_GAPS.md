@@ -6,7 +6,7 @@
 - Captures `a` and `b` are committed.
 - Capture `c` is NOT RUN.
 - Window `a` is natively validated: **638 comparisons, 0 mismatches**, all seven registers, ESP, changed bytes and boundary requests; 951 S1 frame states reproduced, original code unchanged. Report: `relatorios/lacunas-s1-a-emulada.json`.
-- Window `b` comparison is running. `consultas_luta` is still awaiting the original-only `c` capture and its native differential.
+- Window `b` is natively validated: **120 comparisons, 0 mismatches**; 1,201 S1 frame states reproduced, original code unchanged. Report: `relatorios/lacunas-s1-b-emulada.json`. `consultas_luta` is still awaiting the original-only `c` capture and its native differential.
 - The next steps are in "Resume".
 
 ## Bench: S1 resumed from its own snapshots
@@ -46,8 +46,11 @@ python3 "…/heavy_lease.py" core -- python3 -B ferramentas/validar_lacunas_s1.p
 | a | TypeEnginPeutEcraser | 198 | 0 |
 | a | IsIndirectlyBlocking | 294 | 0 |
 | a | IsDirectlyBlocking | 52 | 0 |
+| b | ChercheVeget | 45 | 0 |
+| b | ChercheGc | 35 | 0 |
+| b | ChercheGcLibre | 40 | 0 |
 
-These are fresh native comparisons under `heavy_lease.py`, not historical smoke totals. The committed original-only capture was reproduced exactly in every case. No translation correction was needed for window `a`.
+These are fresh native comparisons under `heavy_lease.py`, not historical smoke totals. The committed original-only captures were reproduced exactly in every case. No translation correction was needed for windows `a` or `b`.
 
 All take `chamar(nome, regs, pilha=())` with EAX..EBP and an optional ESP, and return EAX..EBP and ESP, every register. The full contracts, with addresses, are in the module docstrings.
 
