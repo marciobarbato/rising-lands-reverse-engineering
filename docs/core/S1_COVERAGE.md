@@ -2,7 +2,7 @@
 
 Data: [`relatorios/cobertura-s1.json`](../../relatorios/cobertura-s1.json). Generator: `python3 -B ferramentas/cobertura_s1.py` (read-only; about 30 s, no Unicorn). It is a coverage survey, not evidence.
 
-Core continuation, 2026-10-30: the 16 Core gap names below now have bounded original-validated bodies or committed Economy/Combat providers. Core's windows a/b/c pass 1,410 fresh comparisons; the two additional register queries pass 546, all zero mismatches. See [S1_GAPS](S1_GAPS.md) and [STATE_QUERIES](STATE_QUERIES.md) for exact domains, counts and owner reuse. The historical main snapshot, raw survey and counts below remain unchanged; this note does not claim complete reconstructed S1-chain acceptance or update other owners' status.
+Core continuation, 2026-10-30: the 16 Core gap names below now have bounded original-validated bodies or committed Economy/Combat providers. Core's windows a/b/c pass 1,410 fresh comparisons; the two additional register queries pass 546, all zero mismatches. See [S1_GAPS](S1_GAPS.md) and [STATE_QUERIES](STATE_QUERIES.md) for exact domains, counts and owner reuse. The historical main snapshot, raw survey and counts below remain unchanged; this note does not claim complete reconstructed S1-chain acceptance or update other owners' status. These Core deliveries are on main since `71335aa`.
 
 ## Sources
 
