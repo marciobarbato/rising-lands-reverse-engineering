@@ -876,3 +876,26 @@ three missing-DX boundaries, no mismatches. This replaces the mutable validation
 report taken before the final city route was added; original captures remain
 unchanged. All six reports' recorded owned source hashes now match the final
 implementation exactly. The final documentation-link-only rerun also passes.
+
+## S1 next stops — original mine-query capture (2026-10-30)
+
+Merged main `9ae3e4d` (Economy `dfb87bd` register forwarding). Fresh strict and
+planning S1 indicators now match 3,148 frames, 129–3276, and stop in frame
+3277 at MineGetCapacite entry `0x475541`, CalculWorkEngin CALL `0x44ca17`.
+Neither run has a first difference; planning has zero Graphics bypasses.
+See [S1_NEXT_STOPS.md](S1_NEXT_STOPS.md) for the running contract table.
+
+Before binding this missing AI/runtime route, the leased original-only
+`capturar_consulta_mina_ia.py` captured 101 returns: real S1 AX=0 → EAX=49,
+plus all 20 indices × reserve 0/1/32767/32768/65535 with poisoned upper bits.
+Every other data register is preserved; no non-stack stores or callbacks.
+The real native ESP advances by four. All 28 S1 states from snapshot 3250
+through 3277 reproduce the committed trajectory; executable code unchanged.
+Snapshot provenance/hash and the seven real registers are in the linked table.
+Oracle is intact RISING.EXE SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+
+The Economy query already exists; this checkpoint supplies original evidence
+only. Consumer binding and native differential follow. The owning domain gate
+is running. No foreign source, evidence or hash pin is changed; no main merge
+or acceptance. S1 pass-2 is still absent from main and Missions `7eeb395`.
