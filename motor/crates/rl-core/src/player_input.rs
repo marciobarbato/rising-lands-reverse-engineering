@@ -6,6 +6,12 @@ use crate::{
     },
     MemoriaJogo, Result,
 };
+#[path = "player_pages.rs"]
+mod pages;
+pub(crate) fn selection_leaf(m: &MemoriaJogo, name: &str, a: u32, d: u32, b: u32) -> Result<u32> {
+    pages::leaf(m, name, a, d, b)
+}
+
 const X: u32 = 0x5099a8;
 const Y: u32 = 0x5099aa;
 const Z: u32 = 0x5099ac;
@@ -66,12 +72,7 @@ fn obstacle(m: &MemoriaJogo, c: u32) -> Result<bool> {
     Ok((t < 0x2be && m.b(m.d(0x507db0)? + t)? != 0) || (1..=11).contains(&obj(m, c)?))
 }
 fn army(t: u32) -> bool {
-    t <= 3
-        || t == 8
-        || (11..=12).contains(&t)
-        || t == 15
-        || (16..=17).contains(&t)
-        || (20..=25).contains(&t)
+    t <= 3 || t == 8 || (11..=12).contains(&t) || (15..=16).contains(&t) || (18..=25).contains(&t)
 }
 fn land(m: &MemoriaJogo, p: u32) -> Result<bool> {
     for u in selections(m, p)? {
@@ -82,25 +83,7 @@ fn land(m: &MemoriaJogo, p: u32) -> Result<bool> {
     Ok(true)
 }
 fn can_attack(m: &MemoriaJogo, p: u32, mode: u32, target: u32) -> Result<bool> {
-    if mode == 1 && kind(m, target)? == 17 {
-        return Ok(false);
-    }
-    if mode == 5 {
-        return Ok(true);
-    }
-    for u in selections(m, p)? {
-        if !alive(m, u)? {
-            continue;
-        }
-        if !army(kind(m, u)?) {
-            return Ok(false);
-        }
-        return stop(
-            "EnginSelectPeutAttaquer with an army type selected (TypeEnginPeutAttaquer)",
-            0x4723e2,
-        );
-    }
-    Ok(true)
+    Ok(pages::leaf(m, "EnginSelectPeutAttaquer", p, mode, target)? & 255 != 0)
 }
 fn can_enter(m: &MemoriaJogo, p: u32, mode: u32, target: u32) -> Result<bool> {
     for u in selections(m, p)? {
@@ -549,6 +532,7 @@ impl Input {
             self.info2 = 65535;
             self.flag = false
         }
+        let (mut under_mode, mut under_object) = (5, c);
         if lit(m, c, p)? {
             let w = m.w(m.d(0x4e0f38)? + 2 * c)?;
             let s = if w & 0x8000 != 0 {
@@ -558,12 +542,14 @@ impl Input {
             };
             m.sw(0x496ac4, s)?;
             if s != 65535 {
+                (under_mode, under_object) = (3, s);
                 self.info = 0x495d8c + 52 * m.b(player::structure(s) + 8)? + 0x13;
                 self.info2 = 65535
             }
             let u = find(m, c)?;
             m.sw(0x496ac2, u)?;
             if u != 65535 {
+                (under_mode, under_object) = (1, u);
                 self.info = 0x4965ae + 50 * kind(m, u)? + 12;
                 self.info2 = 65535;
                 let r = unit(m, u)?;
@@ -574,14 +560,14 @@ impl Input {
             }
         }
         match page {
-            9 => return stop("InputGame help page 9 (deposit target)", 0x429b90),
-            12 => return stop("InputGame help page 0xc", 0x429daa),
-            11 => return stop("InputGame help page 0xb", 0x429e31),
+            9 => return self.deposit(m, p, c),
+            12 => return self.group_page(m, p),
+            11 => return self.engineer_page(m, p),
             13 => return stop("InputGame help page 0xd", 0x42a080),
             5 => return stop("InputGame help page 0x5", 0x42a110),
             10 => return stop("InputGame help page 0xa", 0x42a373),
-            2 => return stop("InputGame help page 0x2", 0x42a4a2),
-            7 => return stop("InputGame help page 0x7", 0x42a600),
+            2 => return self.attack_page(m, p, under_mode, under_object),
+            7 => return self.sell_page(m, p, c),
             3 => return self.placement(m, p, c),
             1 => {
                 self.cursor(m, 0x1df5, m.d(0x508f80)? & 7)?;
@@ -651,25 +637,25 @@ impl Input {
         c: u32,
     ) -> Result<()> {
         if count(m, p)? != 0 {
-            return stop(
-                "InputGame structure under the cursor with troops selected",
-                0x42ac32,
-            );
+            return self.structure_troops(m, p, s, x, y, c);
         }
         if sel_structure(m, p)? == s && m.b(B0)? != 0 {
             return self.ord(m, p, 0x21, [s, 0, 0, 0], 0x42aecf);
         }
-        if sel_structure(m, p)? != 65535 {
-            return stop("InputGame structure under the cursor with a structure selected (BatimentPeutAttaquer)",0x42b289);
+        let selected = sel_structure(m, p)?;
+        if selected != 65535 {
+            let ok =
+                self.core(m, "BatimentPeutAttaquer", [selected, 3, s, s], 0x42b2a3)? & 255 != 0;
+            let owner = m.b(player::structure(s) + 4)?;
+            if ok && owner != p && owner != 200 {
+                self.cursor(m, 0x1dfd, m.d(0x508f80)? % 6)?;
+                if self.clicked(m)? {
+                    self.ord(m, p, 14, [3, s, 0, 0], 0x42aecf)?;
+                }
+                return Ok(());
+            }
         }
-        if m.b(player::structure(s) + 4)? != p {
-            return Ok(());
-        }
-        self.cursor(m, 0x1df0, m.d(0x508f80)? % 5)?;
-        if m.b(AE)? != 0 {
-            self.drag(m, x, y, c)?
-        }
-        Ok(())
+        self.own_structure(m, p, s, x, y, c)
     }
     fn over_unit(&self, m: &mut MemoriaJogo, p: u32, u: u32, x: u32, y: u32, c: u32) -> Result<()> {
         if m.w(PAGE)? == 8 {
@@ -727,11 +713,24 @@ impl Input {
         if count(m, p)? == 0 {
             return Ok(());
         }
-        if (field(m, c)? || sack_kind(m, c)? == 1)
+        let s = m.w(0x496ac4)?;
+        let cave = s != 65535 && m.b(player::structure(s) + 8)? == 3;
+        if (field(m, c)? || sack_kind(m, c)? == 1 || cave)
             && self.core(m, "EnginTravailSelectionne", [p, 1, 0, 0], 0x42b375)? & 255 != 0
         {
             if m.w(PAGE)? == 8 {
-                return stop("InputGame deposit page 8 over a field", 0x42b393);
+                return self.arm_deposit(
+                    m,
+                    c,
+                    if field(m, c)? {
+                        1
+                    } else if cave {
+                        3
+                    } else {
+                        2
+                    },
+                    1,
+                );
             }
             self.cursor(m, 0x1e10, m.d(0x508f80)? % 6)?;
             if m.b(AE)? != 0 && m.b(AF)? != 0 {
@@ -747,11 +746,22 @@ impl Input {
             }
             return Ok(());
         }
-        if (mine(m, c)? || sack_kind(m, c)? == 2)
+        if (mine(m, c)? || sack_kind(m, c)? == 2 || cave)
             && self.core(m, "EnginTravailSelectionne", [p, 2, 0, 0], 0x42b375)? & 255 != 0
         {
             if m.w(PAGE)? == 8 {
-                return stop("InputGame deposit page 8 over a mine", 0x42b525);
+                return self.arm_deposit(
+                    m,
+                    c,
+                    if mine(m, c)? {
+                        0
+                    } else if cave {
+                        3
+                    } else {
+                        2
+                    },
+                    2,
+                );
             }
             self.cursor(m, 0x1e10, m.d(0x508f80)? % 6)?;
             if m.b(AE)? != 0 && m.b(AF)? != 0 {
@@ -931,7 +941,15 @@ pub fn input(m: &mut MemoriaJogo, p: u32) -> Result<()> {
         m.sb(0x496d48, 1)?
     }
     if player::key(m, 0x11, 0x4295fc)? < 0 {
-        return stop("InputGame Ctrl held (deposit mode 8/9)", 0x429601);
+        let carriers = count(m, p)? != 0
+            && pages::leaf(m, "EnginSelectPeuventTransporter", p, 0, 0)? & 255 != 0;
+        if m.w(PAGE)? != 9 {
+            if carriers {
+                m.sw(PAGE, 8)?;
+            }
+        } else if !carriers {
+            m.sw(PAGE, 0)?;
+        }
     } else if matches!(m.w(PAGE)?, 8 | 9) {
         m.sw(PAGE, 0)?
     }

@@ -19,7 +19,7 @@ import tarfile
 
 REPO = Path(__file__).resolve().parents[2]
 LOGIC_REVISION = '7ceeff909b52b7d4f59723f35dfe43a9deda41ff'
-INPUT_REVISION = '845c08886ba01e5c1cd8f77c553e5e233d99f547'
+INPUT_REVISION = 'a7f5d4939e7826e02a8b348995edb9c793657f4c'
 GRAPHICS_REVISION = 'ce441852bcada750a8f91da8ed3302f1668c4405'
 ROOTS = ('ferramentas', 'integracao', 'pesquisas-paralelas', 'evidencias', 'relatorios')
 GRAPHICS = 'pesquisas-paralelas/graficos-animacao'

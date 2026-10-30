@@ -567,7 +567,8 @@ accepted. Inputs/outputs are owned copies; no Python, OS polling or host callbac
 runs inside a native frame. Cursor hold is explicit, keys reset per frame and
 WndProc messages retain their declared order.
 
-The input reference is a separate immutable profile pinned to main `845c088`.
+The input reference is a separate immutable profile pinned to the AI/runtime merge `a7f5d49` (contained in merged main
+`ef52cb0`).
 The no-input and Graphics reference revisions remain unchanged. Input source
 updates therefore cannot invalidate earlier proofs, and immutable original
 probe/capture/policy pins stay exact. The implementation covers the reference's
@@ -582,3 +583,10 @@ world starts once at frame 128, carries its state through each phase and never
 loads a later oracle state. The [handoff](../motor/HANDOFF.md) defines call order,
 transactional behavior, proof scope, standalone fixture limitations and current
 provider boundaries. Final measured results are recorded separately below.
+
+Input round 3 adds Ctrl deposit mode, help pages 9/0xc/0xb/2/7 and
+structure targeting with troops, including tag-0x10 production and the upstream
+army-type correction. Its thirteen predicates and all declared text requests
+are checked against the 203 new original captures. Remaining stops are matched
+by name/address. The renderer keeps its independently pinned Graphics 1.7
+contract while the merged tree contains Graphics 1.8.

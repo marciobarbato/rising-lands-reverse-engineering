@@ -38,8 +38,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         for a in &mut args {
             *a = word(&mut input)?
         }
+        let flags = word(&mut input)?;
         let mut answers = DeclaredInput {
             display_sound_boundary: true,
+            display_text_boundary: flags & 2 != 0,
             cursor: Some((word(&mut input)? as i32, word(&mut input)? as i32)),
             ..Default::default()
         };
@@ -82,6 +84,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         for (a, b) in blocks {
             put(&mut out, a)?;
             blob(&mut out, b)?
+        }
+        let texts = rl_core::player::fixture_text_requests(&memory);
+        put(&mut out, texts.len() as u32)?;
+        for request in texts {
+            for value in request {
+                put(&mut out, value)?;
+            }
         }
     }
     out.flush()?;

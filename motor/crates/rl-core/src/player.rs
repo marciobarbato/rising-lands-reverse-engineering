@@ -210,6 +210,17 @@ pub fn phase(
     }
 }
 
+/// Captured text requests from the offline fixture transaction, in call order.
+pub fn fixture_text_requests(m: &MemoriaJogo) -> Vec<[u32; 3]> {
+    m.player
+        .as_ref()
+        .into_iter()
+        .flat_map(|r| r.events.iter())
+        .filter(|e| e.kind == 9)
+        .map(|e| [e.site, e.values[0], e.values[1]])
+        .collect()
+}
+
 /// Offline routine adapter. It supplies exactly the declared answer table and
 /// exposes semantic returns only; register leftovers are not invented.
 pub fn fixture(
@@ -450,6 +461,21 @@ pub fn fixture(
             } else {
                 None
             }
+        }
+        "EnginSelectPeutAttaquer"
+        | "EnginSelectEstTroupe"
+        | "EnginSelectEstEngin"
+        | "EnginSelectContientMiroir"
+        | "EnginSelectPeuventTransporter"
+        | "EnginSelectEstBlesse"
+        | "EnginSelectPeutDeposer"
+        | "BatimentEstDepot"
+        | "BatimentEstNeutre"
+        | "BatimentEstEnnemi"
+        | "PlayerEstAllie"
+        | "BatimentPeutSeVendre"
+        | "ChercheIndiceBatiment" => {
+            Some(crate::player_input::selection_leaf(m, name, ax, dx, bx)?)
         }
         _ => return stop("unported player routine fixture", 0x429278),
     };

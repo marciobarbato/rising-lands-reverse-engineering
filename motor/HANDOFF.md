@@ -757,9 +757,9 @@ stops. That default never changes the production renderer. Full P3 after frame
 
 ## Stage 4 — declared player input, implementation contract
 
-The feature branch merges main `845c088` (Core vision/groups and Missions'
-P1/P2 pass-2 evidence). The new input reference profile is pinned to that exact
-commit; the previous no-input logic and Graphics profiles remain at their
+The feature branch merges main `ef52cb0`, including Core vision/groups, Missions'
+P1/P2 pass-2 evidence, Economy's CAVE routines and Graphics 1.8. The input
+reference profile is pinned to the contained AI/runtime merge `a7f5d49`; the previous no-input logic and Graphics profiles remain at their
 reviewed revisions. All transitive source/fixture bytes still come from Git
 objects. `player-reference-pins.json` additionally checks immutable input files,
 probe records, masks, policies and captures in both the snapshot and checkout.
@@ -826,3 +826,22 @@ changing KeyTestRelease stream and InitInputPlayer's allocator: neither is a
 per-frame fixed-key-table operation from the already loaded checkpoint.
 No new original emulation or asset payload is included. Completed committed-run
 results, regression logs and remaining boundaries follow in the delivery record.
+
+### Input round 3 resync
+
+`player_pages.rs` mechanically follows the input reference at `a7f5d49`:
+Ctrl deposit mode, pages 9/0xc/0xb/2/7, field/mine/cave deposit staging,
+structure targeting with troops, and thirteen selection/structure predicates.
+It produces tags 0x10/0x14/0x15/0xe/0x22/0x24 and the four deposit-table
+packets through the same packet writer. It includes the upstream army-type
+correction. Core's newly bound `EnginSelectPeutEntrer` mode-3 boolean projection
+is shared by those hover branches; this does not wire state-13 execution.
+
+The 203 new original leaf captures are pinned exactly. The offline adapter
+supplies a zero-return text boundary only where the original case explicitly
+records that non-execution contract. It compares the consumed text message,
+call site and return in order. This also completes six earlier leaf cases
+whose captures declare the same boundary. Every remaining leaf stop must match
+the pinned Python report by name and original address; unknown stops fail the
+proof. Production ABI text/sound flags remain explicit. No original x86 run,
+reference edit, glyph reconstruction or Graphics 1.8 renderer port is implied.
