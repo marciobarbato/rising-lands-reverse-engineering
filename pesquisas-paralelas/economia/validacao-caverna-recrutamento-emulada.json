@@ -1,0 +1,3149 @@
+{
+ "capture": "pesquisas-paralelas/economia/evidencias/caverna-recrutamento/captura-caverna-recrutamento-exibicao.json.xz",
+ "capture_raw_sha256": "431171cc0b618b039e0ffb43f40d15a6878c798cb40cccc857e530f88c642443",
+ "compared": 342,
+ "counts": {
+  "BatimentHabitable": {
+   "error": 0,
+   "match": 2,
+   "mismatch": 0,
+   "outside_domain": 0
+  },
+  "BatimentNextEtape": {
+   "error": 0,
+   "match": 117,
+   "mismatch": 0,
+   "outside_domain": 0
+  },
+  "BatimentSetTechnologie": {
+   "error": 0,
+   "match": 2,
+   "mismatch": 0,
+   "outside_domain": 0
+  },
+  "CalculTroupe": {
+   "error": 0,
+   "match": 103,
+   "mismatch": 0,
+   "outside_domain": 0
+  },
+  "InitBatimentNeutre": {
+   "error": 0,
+   "match": 3,
+   "mismatch": 0,
+   "outside_domain": 0
+  },
+  "InitBatimentPlayer": {
+   "error": 0,
+   "match": 3,
+   "mismatch": 0,
+   "outside_domain": 0
+  },
+  "InitRecruteTroupe": {
+   "error": 0,
+   "match": 10,
+   "mismatch": 0,
+   "outside_domain": 0
+  },
+  "SortieTroupe": {
+   "error": 0,
+   "match": 102,
+   "mismatch": 0,
+   "outside_domain": 0
+  }
+ },
+ "errors": 0,
+ "mismatches": 0,
+ "outside_domain": 0,
+ "recorded_calls": 343,
+ "reproduction": {
+  "between_frames": true,
+  "code_unchanged": true,
+  "frame1": true,
+  "load_tail": true
+ },
+ "rerun_equals_capture": true,
+ "results": [
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 2,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 2,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 3,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 4,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 5,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 6,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 7,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 8,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 9,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 10,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 11,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 12,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 12,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 13,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 14,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 15,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 16,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 17,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 18,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 19,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 20,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 20,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": "tag 17 slot 0: InitRecruteTroupe(type 5, player 0)",
+   "arg": "0x5",
+   "changed_bytes": 8,
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "InitRecruteTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": "tag 17 slot 2: InitRecruteTroupe(type 7, player 0)",
+   "arg": "0x7",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 40,
+   "outcome": "match",
+   "routine": "InitRecruteTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 40,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 40,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 40,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": "tag 17 slot 0: InitRecruteTroupe(type 5, player 0)",
+   "arg": "0x5",
+   "changed_bytes": 6,
+   "foreign_calls": 1,
+   "frame": 50,
+   "outcome": "match",
+   "routine": "InitRecruteTroupe"
+  },
+  {
+   "action": "tag 17 slot 1: InitRecruteTroupe(type 6, player 0)",
+   "arg": "0x6",
+   "changed_bytes": 7,
+   "foreign_calls": 1,
+   "frame": 50,
+   "outcome": "match",
+   "routine": "InitRecruteTroupe"
+  },
+  {
+   "action": "tag 17 slot 2: InitRecruteTroupe(type 7, player 0)",
+   "arg": "0x7",
+   "changed_bytes": 7,
+   "foreign_calls": 1,
+   "frame": 50,
+   "outcome": "match",
+   "routine": "InitRecruteTroupe"
+  },
+  {
+   "action": "tag 17 slot 0: InitRecruteTroupe(type 5, player 0)",
+   "arg": "0x5",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 50,
+   "outcome": "match",
+   "routine": "InitRecruteTroupe"
+  },
+  {
+   "action": "tag 17 slot 0: InitRecruteTroupe(type 5, player 0)",
+   "arg": "0x5",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 50,
+   "outcome": "match",
+   "routine": "InitRecruteTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 50,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 50,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 60,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 60,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 60,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 80,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 80,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 80,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 100,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 100,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 100,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 118,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 119,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 120,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 120,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 120,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 121,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 122,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 123,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 124,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 975,
+   "foreign_calls": 3,
+   "frame": 125,
+   "outcome": "match",
+   "routine": "BatimentHabitable"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 0,
+   "frame": 125,
+   "outcome": "match",
+   "routine": "BatimentSetTechnologie"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 1,
+   "foreign_calls": 0,
+   "frame": 125,
+   "outcome": "match",
+   "routine": "InitBatimentPlayer"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 125,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 126,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 127,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 128,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 129,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 130,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 131,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 132,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 133,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 134,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 135,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 140,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 140,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 140,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": "BatimentNextEtape(cave)",
+   "arg": "0x1",
+   "changed_bytes": 1,
+   "foreign_calls": 1,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": "BatimentNextEtape(cave)",
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": "BatimentNextEtape(cave)",
+   "arg": "0x1",
+   "changed_bytes": 1,
+   "foreign_calls": 1,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": "BatimentNextEtape(cave)",
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": "BatimentNextEtape(cave)",
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": "BatimentNextEtape(cave)",
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": "BatimentNextEtape(cave)",
+   "arg": "0x1",
+   "changed_bytes": 1,
+   "foreign_calls": 1,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": "BatimentNextEtape(cave)",
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": "BatimentNextEtape(cave)",
+   "arg": "0x1",
+   "changed_bytes": 1,
+   "foreign_calls": 1,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": "BatimentNextEtape(cave)",
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": "BatimentNextEtape(cave)",
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": "BatimentNextEtape(cave)",
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": "BatimentRetireColon(cave)",
+   "arg": "0x1",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "InitBatimentNeutre"
+  },
+  {
+   "action": "BatimentHabitable(0)",
+   "arg": "0x0",
+   "changed_bytes": 325,
+   "foreign_calls": 6,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "BatimentHabitable"
+  },
+  {
+   "action": "BatimentHabitable(0)",
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 3,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "BatimentSetTechnologie"
+  },
+  {
+   "action": "InitBatimentPlayer(0, 0)",
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "InitBatimentPlayer"
+  },
+  {
+   "action": "InitBatimentNeutre(0, 0)",
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "InitBatimentNeutre"
+  },
+  {
+   "action": "InitBatimentPlayer(cave, 0)",
+   "arg": "0x1",
+   "changed_bytes": 1,
+   "foreign_calls": 0,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "InitBatimentPlayer"
+  },
+  {
+   "action": "InitBatimentNeutre(cave, 0)",
+   "arg": "0x1",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "InitBatimentNeutre"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 150,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 160,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 160,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 160,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 180,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 180,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 180,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 200,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 200,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 200,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 220,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 220,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 220,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 240,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 240,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 240,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 260,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 260,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 260,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 280,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 280,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 280,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 289,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 290,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 290,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 291,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 291,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 292,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 292,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 293,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 293,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 294,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 294,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 295,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 295,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 296,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 296,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 133,
+   "foreign_calls": 17,
+   "frame": 297,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 133,
+   "foreign_calls": 15,
+   "frame": 297,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": "tag 17 slot 2: InitRecruteTroupe(type 7, player 0)",
+   "arg": "0x7",
+   "changed_bytes": 8,
+   "foreign_calls": 1,
+   "frame": 298,
+   "outcome": "match",
+   "routine": "InitRecruteTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 298,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 298,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 300,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 300,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 300,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 320,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 320,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 320,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 340,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 340,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 340,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 360,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 360,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 360,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 380,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 380,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 380,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 400,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 400,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 400,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 420,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 420,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 420,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 440,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 440,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 440,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 460,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 460,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 460,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 480,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 480,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 480,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 500,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 500,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 500,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 520,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 520,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 520,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 540,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 540,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 540,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 560,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 560,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 560,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 580,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 580,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 580,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 600,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 600,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 600,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 620,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 620,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 620,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 640,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 640,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 640,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 660,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 660,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 660,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 680,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 680,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 680,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 700,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 700,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 700,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 720,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 720,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 720,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 740,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 740,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 740,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 760,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 760,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 760,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 780,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 780,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 780,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 800,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 800,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 800,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 820,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 820,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 820,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 840,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 840,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 840,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 860,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 860,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 860,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 861,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 861,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 862,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 862,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 863,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 863,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 864,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 864,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 865,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 865,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 866,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 866,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 867,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 867,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 868,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 868,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 133,
+   "foreign_calls": 17,
+   "frame": 869,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 133,
+   "foreign_calls": 15,
+   "frame": 869,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": "tag 17 slot 1: InitRecruteTroupe(type 6, player 0)",
+   "arg": "0x6",
+   "changed_bytes": 8,
+   "foreign_calls": 1,
+   "frame": 870,
+   "outcome": "match",
+   "routine": "InitRecruteTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 870,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 870,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 880,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 880,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 880,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 900,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 900,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 900,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 920,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 920,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 920,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 940,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 940,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 940,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 960,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 960,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 960,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 980,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 980,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 980,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 1000,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1000,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1000,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 1020,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1020,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1020,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 1040,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1040,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1040,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 1060,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1060,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1060,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 1080,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1080,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1080,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 1100,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1100,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1100,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 1120,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1120,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1120,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 1140,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1140,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1140,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 1160,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1160,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1160,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 1180,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1180,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1180,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 1200,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1200,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1200,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 1220,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1220,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1220,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 1240,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1240,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1240,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 1260,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1260,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1260,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 1280,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1280,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1280,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 1300,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1300,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1300,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 1320,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1320,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1320,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 1340,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1340,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1340,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1354,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 1355,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1355,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 1356,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1356,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 1357,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1357,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 1358,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1358,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 1359,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1359,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 1360,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1360,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1360,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 2,
+   "foreign_calls": 2,
+   "frame": 1361,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1361,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 1362,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1362,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 133,
+   "foreign_calls": 17,
+   "frame": 1363,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 133,
+   "foreign_calls": 15,
+   "frame": 1363,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": "tag 17 slot 0: InitRecruteTroupe(type 5, player 0)",
+   "arg": "0x5",
+   "changed_bytes": 8,
+   "foreign_calls": 1,
+   "frame": 1364,
+   "outcome": "match",
+   "routine": "InitRecruteTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 1364,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1364,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 1380,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1380,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1380,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 1,
+   "foreign_calls": 2,
+   "frame": 1400,
+   "outcome": "match",
+   "routine": "CalculTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x0",
+   "changed_bytes": 0,
+   "foreign_calls": 0,
+   "frame": 1400,
+   "outcome": "match",
+   "routine": "SortieTroupe"
+  },
+  {
+   "action": null,
+   "arg": "0x1",
+   "changed_bytes": 0,
+   "foreign_calls": 1,
+   "frame": 1400,
+   "outcome": "match",
+   "routine": "BatimentNextEtape"
+  }
+ ],
+ "schema": "rising-lands/economy-cave-recruitment-validation/1",
+ "seconds": 673.483,
+ "translation": "a24ff542ea4bae7f1fd1f0b8ac946961f943805777d6277445fed734d204de89"
+}

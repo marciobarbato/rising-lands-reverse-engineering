@@ -130,6 +130,9 @@ fn delete_bank(
 pub fn call(m: &mut MemoriaJogo, name: &str, a: &[u32]) -> Result<u32> {
     match name {
         "EvenementEnCours" => Ok(u32::from(m.u8(0x4e1b0e)?)),
+        "ProjectileInit" | "ProjectileSet" | "ProjectileLineaire" => {
+            crate::frame_combat::call(m, name, a)
+        }
         "MissionGetNum" => Ok(u32::from(m.u8(0x496fe4)?)),
         "InputGame" => {
             frame_input::input(m, a[0] as u8, &mut Vec::new())?;

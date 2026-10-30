@@ -395,3 +395,149 @@ Main `5f4052c` (Missions' evidence `de154b5`). The report is [M2_3_PROVA_9200_QU
   - Zero crossings, measured per part (`comparar_parte` now reports them instead of a constant), and no Core provider stop.
 - **Tool:** `provar_quadros_9200_ia.py` — `parte N`, `agregar`, or `tudo --paralelo 4 --lease <heavy_lease.py>` (one command, about 24 min on the MacBook with four parts at a time).
 - **Next:** the coordinator's second-machine reproduction must match the ten `phase_chain_sha256` values listed in the report.
+
+
+## M3.1 groundwork — input path, declared-input chain (2026-10-29)
+
+Main `ea62eb4` (after the M2.3 proof `ecaf853` was integrated). The details are in [docs/AI_RUNTIME.md](../../docs/AI_RUNTIME.md#m31-groundwork--the-input-path-inputgame--setplayerordre--processinputgame--setters).
+
+- **Capture first:**
+  - `9f08979`: the case matrix and capture script.
+  - `887b6c7`: `evidencias/captura-entrada-ordens-ia.json`, 124 native leaf calls at Core's frame-1 ProcessInputGame pause, all returned, with path and code reproduced.
+- **Translation:**
+  - `277891c`: `entrada_ordens_ia`, `provedores_entrada_ia`, `composicao_entrada_ia`, `provar_entrada_ia` and `validar_entrada_ordens_ia`.
+  - The follow-up commit records the orders of a stopped probe frame.
+- **Native differential:** 124 cases, 113 equal, **0 mismatches**, 11 named-dependency stops. Compared: registers, whole changed state, sound requests and key answers.
+- **Declared-input API:** `RoteiroEntrada(scripted-input file)` and `ComposicaoEntrada(..., roteiro, inicio=128, ...)`. `executar(n)` yields phases with `ordens` and `eventos`.
+- **Probe chain check** (Python, from the M2.2 frame-128 state, indicator level; reports `validacao/m3-1-sonda-*.json`):
+  - P1: 501/501 frames equal.
+  - P2: 601/601 frames equal.
+  - P3: 24 frames equal, then tag 4 equal at 153 and a stop at EnginNextEtape state 11.
+  - K1: 11 frames equal, then a stop at WM_KEYDOWN.
+- **Named dependencies:**
+  - Core: `construcao_core` (BatimentPosable) is on `feat/re-core` `63200b5`, not on main. The proofs used a read-only extraction (`--nucleo-ref .local/entrada/nucleo-ref`); without it, every page-3 hover stops there.
+  - Economy or the owner to decide: SetDechargeCaveEnginSelect (tag 19), InitRecruteTroupe (tag 17).
+  - Combat: BatimentInitAttaqueSelect (tag 14 with a structure selected).
+  - MiniMapSetPos/MiniMapRecentre.
+  - Missions: the text table `[0x5099a4]` is 0 in the display bench, so TextGetMessage over a field, mine or sack is a named stop. This blocks P4/P5 hovers.
+- **Next for this front:** EnginNextEtape state 11 (0x4564ef: the `+0x89`/BatimentEnDestruction test, then CalculConstruireBatiment and the tail 0x454ccd). Then WndProc key messages 0x100/0x101 and the help pages 2/7/8/9/0xb/0xc (Ctrl deposit tags 8/19).
+- **Captures needed:** pass-2 delta captures of the P1/P2/P3 windows (M2.2 form, with per-phase states) for the whole-state proof under the published mask. Also P4/P5 runs, and a text-loaded scenario or the text-table owner's answer.
+
+**Statuses:**
+- Implemented: the input path above and the declared-input chain.
+- Validated against the original: the leaf cases natively (0 mismatches), and P1/P2 at indicator level over every frame.
+- Integrated: no.
+- Tested in a real mission: no.
+
+## M3.1 round 2 — state 11, construction progress, keys, text boundary (2026-10-29)
+
+Branch `feat/re-ai-runtime` after `298095b` (round 1, not yet on main). Details: [docs/AI_RUNTIME.md](../../docs/AI_RUNTIME.md#m31-round-2--state-11-builder-construction-progress-structure-entry-dispatch-keys).
+
+- **Capture first:** `51a7f46` adds `evidencias/captura-construcao-teclas-ia.json`. It holds 90 native leaf calls, all returned, with path and code reproduced.
+- **Translation:** `58bdd81`.
+  - `construcao_entrada_ia`: state 11, the progress branch and completion, and six structure/animation leaves.
+  - The state-13 dispatch.
+  - WndProc 0x100/0x101, the group-number and GoLastAttaque keys, and ProcessInputGame tags 0xb/0xc/0x10/0x21.
+- **Native differential:** 90 cases, 79 equal, **0 mismatches**, 11 named stops. Round 1 was rerun: 124 cases, 113 equal, 0 mismatches.
+- **Text:** `c23352a` binds TextGetMessage in the chain as Missions' declared boundary (EAX 0, logged).
+- **Chain check** (probes `b1cd5bd`):
+  - P1: 501/501.
+  - P2: 601/601.
+  - P3/P6/P7: 91 frames equal, then a stop in frame 220 at the type-3 cave body.
+  - P4: 293 frames equal, then a Graphics view-origin stop at 422.
+  - P5: 443 frames equal, then a Graphics view-origin stop at 572.
+  - K1: 12 frames equal, then a Graphics view-origin stop at 141.
+- **Read-only extraction:** Core's `construcao_core` is on main `2ad381a` but not yet on this branch. The runs used `--nucleo-ref .local/entrada/nucleo-ref`; the file is identical to main's (SHA-256 `7ccf640c…`).
+- **Named dependencies:**
+  - Economy: the type-3 body `0x426aff`, BatimentRetireColon, BatimentHabitable.
+  - Core: BatimentIllumine/BatimentDecouvre, the state-13 body (CalculEntreBatiment), Sauve/RestaureSelectionGroupe, SetEnginSelectRentreBatiment/Engin, EnginGetCentreGroupe, MiniMapRecentre.
+  - SetMurAllentour.
+  - Graphics: AffGame vegetation/terrain handlers at unsampled view origins. This blocks K1, P4 and P5.
+- **Not done (next for this front):**
+  - InputGame help pages 9/0xc/0xb/2/7 and the Ctrl deposit mode: `0x429601`, page 9 at `0x429b90` with the depot table `0x42923c` → tags 6/7/8/0x13, and pages 8 over a field or mine at `0x42b393`/`0x42b525`.
+  - The tag-16 producer: the structure under the cursor with troops selected, `0x42ac32`.
+  - P7's depot press at 3228 needs these.
+- **Captures needed:**
+  - Graphics: native samples of the AffGame view origins that K1 (1..19, 0..), P4 (10, 16) and P5 (31, 0) reach.
+  - The probes' pass-2 delta windows, for the whole-state proof.
+
+**Statuses:**
+- Implemented: the above.
+- Validated against the original: the leaf differential, and the chains at indicator level.
+- Integrated: no.
+- Tested in a real mission: no.
+
+## M3.1 round 3: Ctrl deposit mode, help pages 9/0xc/0xb/2/7, structure under the cursor with troops (2026-10-29)
+
+Branch `feat/re-ai-runtime`, pushed at `9409355`. Not integrated. Details are in [docs/AI_RUNTIME.md](../../docs/AI_RUNTIME.md#m31-round-3--ctrl-deposit-mode-help-pages-90xc0xb27-structure-under-the-cursor-with-troops).
+
+- **Capture first:**
+  - `d0bc84d` adds the matrix `casos_paginas_deposito_ia.py` and the capture script `capturar_paginas_deposito_ia.py`.
+  - `c4ff87d` adds `evidencias/captura-paginas-deposito-ia.json`: 203 native leaf calls, all returned, path and code reproduced.
+  - Page 0xb over a cell with no structure is not a case. BatimentGetType(0xffff) at `0x429ea2` reads `0x15d9fbc`, and the native smoke run faulted there. The translation stops there by name.
+- **Translation** (`9409355`, `entrada_ordens_ia.py`):
+  - Ctrl `0x429601`.
+  - Page 9 `0x429b90` with the table `0x42923c` → tags 6/7/8/0x13.
+  - Page 0xc (tag 0x24), page 0xb (tag 0x22), page 2 (tag 0xe), page 7 (tag 0xa + BatimentDeselectionner).
+  - Page 8 over a field or mine (`0x42b393`/`0x42b525`).
+  - `0x42ac32` complete:
+    - page 8 over a cave (deposit mode 3);
+    - enemy structures (tag 0x10 for type-10 units, tag 0xe);
+    - builder repair (tag 0x14);
+    - wounded units to a type-0x13/0xe structure (tag 0x15);
+    - entry (tag 0x10, through Core's EnginSelectPeutEntrer);
+    - unbuilt (tag 5).
+  - The no-troops path with a structure selected (`0x42b289`) now calls Combat's BatimentPeutAttaquer by name.
+  - Thirteen leaves: EnginSelectPeutAttaquer, EstTroupe, EstEngin, ContientMiroir, PeuventTransporter, EstBlesse and PeutDeposer; BatimentEstDepot, EstNeutre, EstEnnemi and PeutSeVendre; PlayerEstAllie; ChercheIndiceBatiment.
+  - Fixed: `_armee` (TypeEnginEstArmee) was wrong for types 0x11..0x13.
+  - Fixed: the TextGetMessage provider keyword collided with `sitio`, so the chain binding would have raised TypeError on first use. The keyword is now `local`.
+  - Economy's `extracao` is imported with its own siblings, because Graphics has a `construcoes` with the same name.
+- **Native differential** (`validar_paginas_deposito_ia.py --nucleo-ref .local/entrada/nucleo-ref-r3`): 203 cases, 201 equal, **0 mismatches**, 2 named stops (Combat's BatimentPeutAttaquer).
+  - The `--nucleo-ref` directory holds `git show 90fd831:ferramentas/entrada_estruturas.py` (SHA-256 `5221608b…`).
+  - TextGetMessage is the bench's display boundary (EAX 0, never executed). The differential binds it as the chain does and compares the message number.
+  - Rounds 1 and 2 were rerun (output in `.local`): 124/113/0 and 90/79/0.
+  - CPU-free replay: `testes/test_paginas_deposito_ia.py`. `RISING_NUCLEO_REF` optionally adds Core's extraction; without it, the EnginSelectPeutEntrer cases must stop by name.
+- **Gate:** `scripts/check.py --domain ai-runtime` passes (112 tests).
+- **Provider wiring done:**
+  - Core's EnginSelectionnable (`selecao_ordens`).
+  - Core's EnginSelectPeutEntrer (`provedores_entrada_ia.entrada_estruturas`, used when importable).
+
+### Paused here: resumable next steps, in priority order
+
+1. **Whole-state proof of the input chain over P1 (129–629) and P2 (129–729).** This is the coordinator's top priority. The deliverable is `validacao/m3-1-prova-p1-p2.json` plus an `.md`.
+   - **Inputs.** The Mac mini windows are at `origin/feat/re-missions` `01745da`/`f56ed1d`. When they reach main (check `git merge-base --is-ancestor f56ed1d origin/main`), merge main. Until then, `.local/m3-1/ref/P1|P2/` holds `git show` copies.
+   - **Window format** (`rising-lands/m3-probe-window-part/1`):
+     - `opening_state.full_state` is the frame-128 state, with its summary, compared_summary and masked_sha256.
+     - The phases run `between_frames129..frame629`, as complete deltas (`state_delta`) with `bindings`, `boundaries`, entry/exit `registers` and `rng`, and an `allocations` count.
+     - The mask is `mascara-janela.json` `cumulative.exclusion_mask` (the M2.3 mask plus display-only bytes proven in the window). Note that the manifest's `definitions.mask` names "policy cumulative.exclusion_mask".
+   - **Plan.** Write `provar_entrada_janelas_ia.py`, modeled on `provar_quadros_9200_ia.py` (per-part reports, an `agregar` step, a one-command run, phase-chain hashes).
+     - Reuse the pinned `comparar_quadros_ia.comparar_sequencia` / `fases_referencia` / `MascaraEnderecos` / `ContextoExibicao`. Import them; do not modify them.
+     - Use `comp = ComposicaoEntrada(s0, dict(named_inputs=cap_v2['named_inputs'], phases=parte['phases']), entrada, m1, RoteiroEntrada(entradas/P1.json), inicio=128, alocacoes=<from the M2.2 capture: cap['allocations']>, regs_inicio=parte['phases'][0]['entry']['registers'])`.
+     - Check that the opening state equals the M2.2 frame-128 full state.
+     - Crossings: measured with `travessias_medidas`.
+   - **Failure rule.** Stop at the first divergence and report it precisely.
+2. **The P6 window (129–2400, 4,544 phases, 3 parts):** the same tool. Report how far it goes with today's providers and its first divergence or named stop. The cave body `0x426aff` at frame 220 is expected.
+3. **Wire Core's vision/groups** (`feat/re-core` `d07ed89`, `ferramentas/visao_grupos.py`; contract in `docs/core/VISION_GROUPS.md`). Check first that `d07ed89` is on main.
+   - `provedores_visao(m, som)` provides BatimentIllumine/BatimentDecouvre as keyword providers in the `laco_despachantes` shape, plus MiniMapSetPos(x, y) and MiniMapRecentre.
+   - `VisaoGrupos(m, som).chamar(nome, regs)` covers SauveSelectionGroupe, RestaureSelectionGroupe and EnginGetCentreGroupe (tags 0xb/0xc, the Shift group key).
+   - Bind them in `provedores_entrada_ia.provedores_vivos` (and the chain's `p` dict for the frame-phase Illumine/Decouvre).
+   - Rerun the round-1/2 differentials. This should clear `process_tag11/12`, `input_group2_shift_centre` and `p2_minimap_right_held`.
+4. **Wire Core's `entrada_estruturas`** (still only on `feat/re-core` at last check):
+   - `chamar('EnginNextEtape:state13', ESI=record, EDI=unit, ...)` for state 13. Adapt `construcao_entrada_ia.proxima_etapa_entrada`: it currently calls the provider with only the call site and the unit, so it must build REG7 with ESI = the record and EDI = the unit.
+   - `SetEnginSelectRentreBatiment` for tag 0x10 sub 3, and `BatimentRetireColon` for tag 0x21 (Core raises `ForaDoDominioEntrada` outside its domain).
+   - Its named dependencies: Economy's BatimentLogeEngin (now `ciclo_trabalho.CicloTrabalho.batiment_loge_engin`, on main), iagUnitSendMessage messages 0x44/0x47/0x42 (this front; only 0x49 is translated, in `incursao_ia`) and PlayerInitPropositionAlliance.
+5. **Economy's `ciclo_trabalho`** (on main): CalculWorkEngin for unit state 5. Find EnginNextEtape's state-5 target in `proxima_etapa_quadro`'s table and dispatch it like state 11. Also its BatimentLogeEngin (above).
+6. **Audio:** `pesquisas-paralelas/audio/provedor_pedidos_m3_audio.py` on main (`M3_REQUEST_CONTRACT.md`). Not checked yet against this front's `som(nome, regs, pilha) -> EAX` boundary.
+7. **Rerun `provar_entrada_ia.py`** on P1..P7 and K1 after 3–5. Main now carries Economy's CAVE body (0x426aff) and recruitment, so check main for them first. Since round 2, P3/P6/P7 stop at frame 220 (the cave body); P4, P5 and K1 stop at Graphics view origins. The probe reports in `validacao/` were not rerun this round.
+- **Named dependencies still open:**
+  - Combat: BatimentPeutAttaquer, BatimentInitAttaqueSelect.
+  - Economy: SetDechargeCaveEnginSelect, InitRecruteTroupe, BatimentHabitable, the 0x426aff body.
+  - SetMurAllentour.
+  - SacGetCapacite.
+  - Graphics: AffGame at unsampled view origins.
+
+**Statuses:**
+- Implemented: round 3 above.
+- Validated against the original: the leaf differential (0 mismatches).
+- Integrated: no.
+- Tested in a real mission: no.

@@ -15,6 +15,14 @@ if [ "$(uname -s)" = Darwin ]; then
         -module-cache-path target/swift-module-cache \
         testes/abi_smoke.swift -o target/abi-smoke
     target/abi-smoke
+    render_inputs_dir=$(mktemp -d target/render-smoke.XXXXXX)
+    python3 -B testes/render_swift_inputs.py --output "$render_inputs_dir/input.bin"
+    xcrun swiftc -I include -L target/debug -lrising_engine \
+        -Xlinker -rpath -Xlinker "$(pwd)/target/debug" \
+        -module-cache-path target/swift-module-cache \
+        testes/render_smoke.swift -o target/render-smoke
+    target/render-smoke "$render_inputs_dir/input.bin"
+    rm -rf "$render_inputs_dir"
 else
     echo 'Swift/macOS interoperability is not run on this host; the pilot delivery requires aarch64-apple-darwin.'
 fi

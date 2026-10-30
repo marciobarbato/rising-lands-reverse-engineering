@@ -1,0 +1,503 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "BatimentIllumine",
+      "start": "0x419233",
+      "end_exclusive": "0x41934f",
+      "sha256": "ad498ef1989b82944b71ee50dc091ba94f63fb95b0ab49474f000edb4ea12576",
+      "file": "00419233.asm"
+    },
+    {
+      "name": "BatimentDecouvre",
+      "start": "0x419d54",
+      "end_exclusive": "0x419e97",
+      "sha256": "476e3f6cf516910725fb65fab4d3db88d7bb0b2b32056937cc5e29c4c66e2b1d",
+      "file": "00419d54.asm"
+    },
+    {
+      "name": "IllumineCase",
+      "start": "0x476968",
+      "end_exclusive": "0x476adc",
+      "sha256": "2c423b5cdb3aae2fb700f3885d97d8564333fb3aff04997782a03e588112b3a1",
+      "file": "00476968.asm"
+    },
+    {
+      "name": "EteintCase",
+      "start": "0x476adc",
+      "end_exclusive": "0x476c64",
+      "sha256": "27ad609d372e696a5543585fc2c07c2840918dfc2ec21b2316b730c923fe47b9",
+      "file": "00476adc.asm"
+    },
+    {
+      "name": "DecouvreCase",
+      "start": "0x47670a",
+      "end_exclusive": "0x476851",
+      "sha256": "bd501f025169c5917b71b3e4c1b0bc38b7c5ca59b6810cbb27a9d739ad047e0e",
+      "file": "0047670a.asm"
+    },
+    {
+      "name": "SauveSelectionGroupe",
+      "start": "0x4726f7",
+      "end_exclusive": "0x472769",
+      "sha256": "9a6905cdf4ab59dfd361d94f631031b706af3625fcd2d4eecfdf43603bab6b5b",
+      "file": "004726f7.asm"
+    },
+    {
+      "name": "RestaureSelectionGroupe",
+      "start": "0x472769",
+      "end_exclusive": "0x47290b",
+      "sha256": "d780c0918947c7d8b54fb1019f7df25c9bce9f9aadc94d4bf75f2989a71a86eb",
+      "file": "00472769.asm"
+    },
+    {
+      "name": "EnginGetCentreGroupe",
+      "start": "0x442139",
+      "end_exclusive": "0x44228e",
+      "sha256": "4903ccba3cd10a407ec3bcda8140c3f652ce69bb0be4da59716b50ebba7d2b9c",
+      "file": "00442139.asm"
+    },
+    {
+      "name": "MiniMapRecentre",
+      "start": "0x46a01b",
+      "end_exclusive": "0x46a19e",
+      "sha256": "e8ce646c9cfd3a7dedf5748085e6ec44879388a93ae43fda23aca15f4335d5a4",
+      "file": "0046a01b.asm"
+    },
+    {
+      "name": "MiniMapSetPos",
+      "start": "0x46a19e",
+      "end_exclusive": "0x46a1d7",
+      "sha256": "6f022b51cb8bda2f9e2a812a8a82ce10509800ffb39f1d437302b513bccd9dc2",
+      "file": "0046a19e.asm"
+    },
+    {
+      "name": "CalculPosition",
+      "start": "0x420698",
+      "end_exclusive": "0x420ba5",
+      "sha256": "3c2bddefc6775ef368d5aaa125b29bc4b7c24be481a7e1524d70e2105255c090",
+      "file": "00420698.asm"
+    },
+    {
+      "name": "RechercheDecalageSortie",
+      "start": "0x41d1d0",
+      "end_exclusive": "0x41d2fc",
+      "sha256": "292228ca7a6f076ed78ffcd8d14370de728ad8da8b45f4bdad67f23a2d1d43d5",
+      "file": "0041d1d0.asm"
+    },
+    {
+      "name": "TypeEnginEstEnLoop",
+      "start": "0x440c44",
+      "end_exclusive": "0x440c5d",
+      "sha256": "c12adcb52b89b80043793745117f691f4a3cdb2bfbaea5a73d3ca256f3ae0fe0",
+      "file": "00440c44.asm"
+    },
+    {
+      "name": "EnginEstVivant",
+      "start": "0x443dad",
+      "end_exclusive": "0x443dfc",
+      "sha256": "3b5046ab5fb0637e5674c1059b1569e82f7c00c57f9061d20716484e69fd785d",
+      "file": "00443dad.asm"
+    },
+    {
+      "name": "EnginGetEtat",
+      "start": "0x440e11",
+      "end_exclusive": "0x440e31",
+      "sha256": "2c698aaec94970e72b564f9d6f045191ff4b621b59558f32b128951dfc6a44ba",
+      "file": "00440e11.asm"
+    },
+    {
+      "name": "EnginGetPlayer",
+      "start": "0x442045",
+      "end_exclusive": "0x442064",
+      "sha256": "51a88e03cba6292ad8cbbe0ddf8859022a4d1c53308d94c8346f5532c59b4a98",
+      "file": "00442045.asm"
+    },
+    {
+      "name": "EnginGetType",
+      "start": "0x442025",
+      "end_exclusive": "0x442045",
+      "sha256": "c9b68df49797eb19c9c9e3fa5cc823a9e5f142a7d05ee7ddbee4044eeeb35036",
+      "file": "00442025.asm"
+    },
+    {
+      "name": "epilogue 0x419c43 (BatimentDecouvre)",
+      "start": "0x419c43",
+      "end_exclusive": "0x419c4b",
+      "sha256": "bbcc62e33cf0212462299f18676ae80d3a241e5a259638564930800646a86a55",
+      "file": "00419c43.asm"
+    },
+    {
+      "name": "epilogue 0x4725eb (SauveSelectionGroupe)",
+      "start": "0x4725eb",
+      "end_exclusive": "0x4725ee",
+      "sha256": "767e946b7b97cd51f2f9cdc9a123840cfc6499a0e318a7039a02741d89d06407",
+      "file": "004725eb.asm"
+    },
+    {
+      "name": "epilogue 0x41dbe5 (CalculPosition)",
+      "start": "0x41dbe5",
+      "end_exclusive": "0x41dbed",
+      "sha256": "bb20e4882883f5b4a63df236f6f8c3c322a989a4178cde1b9d02453443e59cd6",
+      "file": "0041dbe5.asm"
+    },
+    {
+      "name": "epilogue 0x41db1d (RechercheDecalageSortie, CalculPosition)",
+      "start": "0x41db1d",
+      "end_exclusive": "0x41db24",
+      "sha256": "7227c48dab9cf58cef6ab93b965ca6429bd0f282cc829c7d338a55a23a93f08d",
+      "file": "0041db1d.asm"
+    }
+  ],
+  "jump_tables": [
+    {
+      "name": "CalculPosition geometry by structure type",
+      "address": "0x420640",
+      "entries": [
+        "0x420885",
+        "0x42072e",
+        "0x4207a2",
+        "0x4207a2",
+        "0x420981",
+        "0x420819",
+        "0x4207a2",
+        "0x420afd",
+        "0x420a79",
+        "0x420b9e",
+        "0x420885",
+        "0x420885",
+        "0x420b9e",
+        "0x420afd",
+        "0x420902",
+        "0x4209fe",
+        "0x4207a2",
+        "0x420b9e",
+        "0x420b65",
+        "0x420981",
+        "0x4209fe",
+        "0x420981"
+      ]
+    },
+    {
+      "name": "RechercheDecalageSortie by structure type",
+      "address": "0x41d178",
+      "entries": [
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d23d",
+        "0x41d208",
+        "0x41d208",
+        "0x41d23d",
+        "0x41d256",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d23d",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208"
+      ]
+    },
+    {
+      "name": "TypeEnginEstEnLoop by type - 0xb",
+      "address": "0x440c2c",
+      "entries": [
+        "0x440c57",
+        "0x440c57",
+        "0x440c57",
+        "0x440c57",
+        "0x440c57",
+        "0x440c57"
+      ]
+    },
+    {
+      "name": "CalculPosition correction table 0x4202d0",
+      "address": "0x4202d0",
+      "entries": [
+        "0x4206fd",
+        "0x420712",
+        "0x420704",
+        "0x42070b",
+        "0x420719",
+        "0x42070b",
+        "0x420719",
+        "0x420712",
+        "0x42070b",
+        "0x420719",
+        "0x420764",
+        "0x420764",
+        "0x420719",
+        "0x420720",
+        "0x420712",
+        "0x420719",
+        "0x420719",
+        "0x420727",
+        "0x4206fd",
+        "0x420719",
+        "0x420719",
+        "0x420719"
+      ]
+    },
+    {
+      "name": "CalculPosition correction table 0x420328",
+      "address": "0x420328",
+      "entries": [
+        "0x420771",
+        "0x420786",
+        "0x420778",
+        "0x42077f",
+        "0x42078d",
+        "0x42077f",
+        "0x42078d",
+        "0x420786",
+        "0x42077f",
+        "0x42078d",
+        "0x4207d7",
+        "0x4207d7",
+        "0x42078d",
+        "0x420794",
+        "0x420786",
+        "0x42078d",
+        "0x42078d",
+        "0x42079b",
+        "0x420771",
+        "0x42078d",
+        "0x42078d",
+        "0x42078d"
+      ]
+    },
+    {
+      "name": "CalculPosition correction table 0x420380",
+      "address": "0x420380",
+      "entries": [
+        "0x4207e8",
+        "0x4207fd",
+        "0x4207ef",
+        "0x4207f6",
+        "0x420804",
+        "0x4207f6",
+        "0x420804",
+        "0x4207fd",
+        "0x4207f6",
+        "0x420804",
+        "0x4207d7",
+        "0x4207d7",
+        "0x420804",
+        "0x42080b",
+        "0x4207fd",
+        "0x420804",
+        "0x420804",
+        "0x420812",
+        "0x4207e8",
+        "0x420804",
+        "0x420804",
+        "0x420804"
+      ]
+    },
+    {
+      "name": "CalculPosition correction table 0x4203d8",
+      "address": "0x4203d8",
+      "entries": [
+        "0x420845",
+        "0x42085d",
+        "0x42084c",
+        "0x420853",
+        "0x420867",
+        "0x420853",
+        "0x420867",
+        "0x42085d",
+        "0x420853",
+        "0x420867",
+        "0x4207d7",
+        "0x4207d7",
+        "0x420867",
+        "0x420871",
+        "0x42085d",
+        "0x420867",
+        "0x420867",
+        "0x42087b",
+        "0x420845",
+        "0x420867",
+        "0x420867",
+        "0x420867"
+      ]
+    },
+    {
+      "name": "CalculPosition correction table 0x420430",
+      "address": "0x420430",
+      "entries": [
+        "0x4208bc",
+        "0x4208da",
+        "0x4208c6",
+        "0x4208d0",
+        "0x4208e4",
+        "0x4208d0",
+        "0x4208e4",
+        "0x4208da",
+        "0x4208d0",
+        "0x4208e4",
+        "0x4207d7",
+        "0x4207d7",
+        "0x4208e4",
+        "0x4208ee",
+        "0x4208da",
+        "0x4208e4",
+        "0x4208e4",
+        "0x4208f8",
+        "0x4208bc",
+        "0x4208e4",
+        "0x4208e4",
+        "0x4208e4"
+      ]
+    },
+    {
+      "name": "CalculPosition correction table 0x420488",
+      "address": "0x420488",
+      "entries": [
+        "0x42093b",
+        "0x420959",
+        "0x420945",
+        "0x42094f",
+        "0x420963",
+        "0x42094f",
+        "0x420963",
+        "0x420959",
+        "0x42094f",
+        "0x420963",
+        "0x4207d7",
+        "0x4207d7",
+        "0x420963",
+        "0x42096d",
+        "0x420959",
+        "0x420963",
+        "0x420963",
+        "0x420977",
+        "0x42093b",
+        "0x420963",
+        "0x420963",
+        "0x420963"
+      ]
+    },
+    {
+      "name": "CalculPosition correction table 0x4204e0",
+      "address": "0x4204e0",
+      "entries": [
+        "0x4209b8",
+        "0x4209d6",
+        "0x4209c2",
+        "0x4209cc",
+        "0x4209e0",
+        "0x4209cc",
+        "0x4209e0",
+        "0x4209d6",
+        "0x4209cc",
+        "0x4209e0",
+        "0x4207d7",
+        "0x4207d7",
+        "0x4209e0",
+        "0x4209ea",
+        "0x4209d6",
+        "0x4209e0",
+        "0x4209e0",
+        "0x4209f4",
+        "0x4209b8",
+        "0x4209e0",
+        "0x4209e0",
+        "0x4209e0"
+      ]
+    },
+    {
+      "name": "CalculPosition correction table 0x420538",
+      "address": "0x420538",
+      "entries": [
+        "0x420a33",
+        "0x420a51",
+        "0x420a3d",
+        "0x420a47",
+        "0x420a5b",
+        "0x420a47",
+        "0x420a5b",
+        "0x420a51",
+        "0x420a47",
+        "0x420a5b",
+        "0x4207d7",
+        "0x4207d7",
+        "0x420a5b",
+        "0x420a65",
+        "0x420a51",
+        "0x420a5b",
+        "0x420a5b",
+        "0x420a6f",
+        "0x420a33",
+        "0x420a5b",
+        "0x420a5b",
+        "0x420a5b"
+      ]
+    },
+    {
+      "name": "CalculPosition correction table 0x420590",
+      "address": "0x420590",
+      "entries": [
+        "0x420ab7",
+        "0x420ad5",
+        "0x420ac1",
+        "0x420acb",
+        "0x420adf",
+        "0x420acb",
+        "0x420adf",
+        "0x420ad5",
+        "0x420acb",
+        "0x420adf",
+        "0x4207d7",
+        "0x4207d7",
+        "0x420adf",
+        "0x420ae9",
+        "0x420ad5",
+        "0x420adf",
+        "0x420adf",
+        "0x420af3",
+        "0x420ab7",
+        "0x420adf",
+        "0x420adf",
+        "0x420adf"
+      ]
+    },
+    {
+      "name": "CalculPosition correction table 0x4205e8",
+      "address": "0x4205e8",
+      "entries": [
+        "0x420b34",
+        "0x420b49",
+        "0x420b3b",
+        "0x420b42",
+        "0x420b50",
+        "0x420b42",
+        "0x420b50",
+        "0x420b49",
+        "0x420b42",
+        "0x420b50",
+        "0x420b96",
+        "0x420b96",
+        "0x420b50",
+        "0x420b57",
+        "0x420b49",
+        "0x420b50",
+        "0x420b50",
+        "0x420b5e",
+        "0x420b34",
+        "0x420b50",
+        "0x420b50",
+        "0x420b50"
+      ]
+    }
+  ]
+}

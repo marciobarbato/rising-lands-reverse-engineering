@@ -1,0 +1,53 @@
+{
+ "schema": "rising-lands/compressed-evidence-manifest/2",
+ "probe": "P2",
+ "capture": "M3 probe P2: frames 129-729 from the M2.2 frame-128 state, scripted input, complete deltas",
+ "encoding": {
+  "format": "xz",
+  "check": "crc64",
+  "filter": "lzma2",
+  "preset": "9e"
+ },
+ "parts": [
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/P2/captura-janela.parte00.json.xz",
+   "compressed_sha256": "f6ec02882d359ef6f8deddd261d3622ce671d06cfc11a20db9a3ea55f3d64ea1",
+   "compressed_bytes": 9192992,
+   "raw_sha256": "74218a46fbee02677eb75f2f7bd41c845bd9a510211b6ccac913a1268d3c0f76",
+   "raw_bytes": 121665136,
+   "part": 0,
+   "frames": [
+    129,
+    729
+   ],
+   "phases": 1202
+  }
+ ],
+ "mask": {
+  "path": "pesquisas-paralelas/missoes/m3/sondas/P2/mascara-janela.json",
+  "sha256": "1f1595825d4ec2a0644bda8e53d30be17ec563d8c13421410831f4b3308a196e"
+ },
+ "opening": {
+  "blocks": 25197,
+  "bytes": 16175335,
+  "sha256": "eb714f7d5a694ad91bab9b41c37a28860006c89be03f9170e3b312064a4b04b2"
+ },
+ "definitions": {
+  "mask": "policy cumulative.exclusion_mask: sorted address ranges [start, end)",
+  "compared_summary": "resumo_imagem of the state (native_stack excluded) with every masked byte set to 0: blocks sorted by name, each hashed as struct.pack(\"<II\", base, size) + bytes",
+  "masked_sha256": "SHA-256 over, for each block sorted by name and each mask range intersecting it in address order, struct.pack(\"<II\", start, length) + the bytes of that intersection",
+  "summary": "resumo_imagem of the full state (native_stack excluded)",
+  "state_delta": "complete delta (display bytes included): released, then allocated, then ranges (delta_estado_missao)"
+ },
+ "replay_check": {
+  "result": "equal",
+  "parts": [
+   {
+    "part": 0,
+    "phases": 1202,
+    "full_states_checked": 4
+   }
+  ],
+  "chain": "part 0 opens with the frame-128 state; every later opening state is the previous replayed end"
+ }
+}

@@ -1,0 +1,269 @@
+{
+ "by_routine": {
+  "AnimWorkEngin": {
+   "mismatches": 0,
+   "steps": 18
+  },
+  "BagAccepte": {
+   "mismatches": 0,
+   "steps": 9
+  },
+  "BagContient": {
+   "mismatches": 0,
+   "steps": 28
+  },
+  "BagContientTroupe": {
+   "mismatches": 0,
+   "steps": 10
+  },
+  "BagPrend": {
+   "mismatches": 0,
+   "steps": 5
+  },
+  "BagRetire": {
+   "mismatches": 0,
+   "steps": 12
+  },
+  "BatimentAdjacent": {
+   "mismatches": 0,
+   "steps": 25
+  },
+  "BatimentGetCase": {
+   "mismatches": 0,
+   "steps": 2
+  },
+  "BatimentGetCaseEntrer": {
+   "mismatches": 0,
+   "steps": 25
+  },
+  "BatimentGetVolume": {
+   "mismatches": 0,
+   "steps": 3
+  },
+  "BatimentModifyMap": {
+   "mismatches": 0,
+   "steps": 2
+  },
+  "BatimentRetireColon": {
+   "mismatches": 0,
+   "steps": 3
+  },
+  "CalculEntreBatiment": {
+   "mismatches": 0,
+   "steps": 11
+  },
+  "DecouvreTerrain": {
+   "mismatches": 0,
+   "steps": 2
+  },
+  "EnginGetBag": {
+   "mismatches": 0,
+   "steps": 4
+  },
+  "EnginGetPlayer": {
+   "mismatches": 0,
+   "steps": 1
+  },
+  "EnginGetType": {
+   "mismatches": 0,
+   "steps": 1
+  },
+  "EnginGetVolume": {
+   "mismatches": 0,
+   "steps": 3
+  },
+  "EnginNextEtape:state13": {
+   "mismatches": 0,
+   "steps": 130
+  },
+  "EnginPeutPasser": {
+   "mismatches": 0,
+   "steps": 4
+  },
+  "EnginSelectPeutEntrer": {
+   "mismatches": 0,
+   "steps": 111
+  },
+  "GetCaseCentrale": {
+   "mismatches": 0,
+   "steps": 12
+  },
+  "IllumineTerrain": {
+   "mismatches": 0,
+   "steps": 2
+  },
+  "PlaceLibre": {
+   "mismatches": 0,
+   "steps": 19
+  },
+  "RetireEngin": {
+   "mismatches": 0,
+   "steps": 9
+  },
+  "SetDeplaceEngin": {
+   "mismatches": 0,
+   "steps": 2
+  },
+  "SetEnginCollision": {
+   "mismatches": 0,
+   "steps": 2
+  },
+  "SetEnginRentreBatiment": {
+   "mismatches": 0,
+   "steps": 18
+  },
+  "SetEnginSelectRentreBatiment": {
+   "mismatches": 0,
+   "steps": 30
+  },
+  "TerrainEstDecouvert": {
+   "mismatches": 0,
+   "steps": 2
+  }
+ },
+ "capture": {
+  "path": "evidencias/entrada-estruturas/captura-entrada-estruturas-exibicao.json.xz",
+  "sha256": "2f81d1045b7c1a72f66452129c8031fee80cf8ba2c5c18857ea07b738fa809ea"
+ },
+ "changed_bytes_compared": 5043,
+ "comparisons": 505,
+ "declared_domain_stops": [
+  {
+   "address": "0x449c56",
+   "case": "entre_unit_type_out_of_branch"
+  }
+ ],
+ "mismatches": [],
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "path_reproduction": {
+  "between_frames": true,
+  "code_unchanged": true,
+  "frame1": true,
+  "load_tail": true,
+  "paused": true
+ },
+ "pause": {
+  "caller": "CalculGame+0xb4d",
+  "caller_return": "0x42d3b5",
+  "registers": {
+   "EAX": "0x0",
+   "EBP": "0x0",
+   "EBX": "0x0",
+   "ECX": "0x5",
+   "EDI": "0x0",
+   "EDX": "0x1a1a000e",
+   "EIP": "0x45edc0",
+   "ESI": "0x0",
+   "ESP": "0x2007ebc"
+  },
+  "routine": "ProcessInputGame",
+  "state_sha256": {
+   "blocks": 25198,
+   "bytes": 16240871,
+   "sha256": "6e8620b99ac650d032d575570da2a28bbab6cf700b09d6ed1efae5bb085724ed"
+  }
+ },
+ "providers": {
+  "bonus": "Economy bonus_unidades.BonusUnidades over the live tables 0x4dfba0/0x4965ae",
+  "externo": "the original nested call replayed (BatimentLogeEngin, iagUnitSendMessage, PlayerInitPropositionAlliance, InitBatimentNeutre): arguments checked, its stores applied, its exit registers returned",
+  "som": "returns the received EAX (the frame bench declaration for PlaySnd_*), compared"
+ },
+ "replayed_foreign_calls": 7,
+ "schema": "rising-lands/monde01-structure-entry-differential/1",
+ "seconds": 250.177,
+ "source_sha256": {
+  "ferramentas/bancada_entrada_estruturas.py": "660cf29cd538cb5ebf81ff35b7b9cf0c9d34aabc97a83d3b4740c71930cf7078",
+  "ferramentas/capturar_entrada_estruturas.py": "07dc6dfe3792b5e27c0a4ff9ee35159495b05d0c3e82fd7fff9729f8a457e5ab",
+  "ferramentas/casos_entrada_estruturas.py": "35f4b6c8b74e76b13a92b3841ef55a2227f39426b8efb284396f3221d237c2ac",
+  "ferramentas/entrada_estruturas.py": "a38767e0d3ca3ce282c4a50d4e7f22eb233f1508fdf0c4c16ce402b5b697b290",
+  "ferramentas/validar_entrada_estruturas.py": "aa8df181e25cacb4cd279cb8cdc74b88757d376ab03c33284ce8085bf6319205"
+ },
+ "uncertain": [
+  {
+   "bits": {
+    "EAX": "0xffffff00",
+    "EBX": "0xffffffff",
+    "ECX": "0xffffffff",
+    "EDX": "0xffffffff"
+   },
+   "case": "peutpasser_free"
+  },
+  {
+   "bits": {
+    "EAX": "0xffffff00",
+    "EBX": "0xffffffff",
+    "ECX": "0xffffffff",
+    "EDX": "0xffffffff"
+   },
+   "case": "peutpasser_unit"
+  },
+  {
+   "bits": {
+    "EAX": "0xffffff00",
+    "EBX": "0xffffffff",
+    "ECX": "0xffffffff",
+    "EDX": "0xffffffff"
+   },
+   "case": "peutpasser_sanctuary"
+  },
+  {
+   "bits": {
+    "EAX": "0xffffff00",
+    "EBX": "0xffffffff",
+    "ECX": "0xffffffff",
+    "EDX": "0xffffffff"
+   },
+   "case": "peutpasser_own_cell"
+  },
+  {
+   "bits": {
+    "EBX": "0xffff0000"
+   },
+   "case": "decouvre_cave_r7"
+  },
+  {
+   "bits": {
+    "EBX": "0xffff0000"
+   },
+   "case": "decouvre_far_r3"
+  },
+  {
+   "bits": {
+    "EBX": "0xffff0000"
+   },
+   "case": "illumine_cave_r5"
+  },
+  {
+   "bits": {
+    "EBX": "0xffff0000"
+   },
+   "case": "illumine_far_r3"
+  },
+  {
+   "bits": {
+    "EAX": "0xffffffff",
+    "EDX": "0xffffffff"
+   },
+   "case": "modifymap_cave_on"
+  },
+  {
+   "bits": {
+    "EAX": "0xffffffff",
+    "EDX": "0xffffffff"
+   },
+   "case": "modifymap_cave_off"
+  },
+  {
+   "bits": {
+    "EAX": "0xffffffff"
+   },
+   "case": "window_colonist_into_cave/1.1"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "window_colonist_into_cave/1.53"
+  }
+ ]
+}
