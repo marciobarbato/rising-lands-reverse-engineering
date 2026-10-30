@@ -278,4 +278,7 @@ Pass 2 ran at about 2–3 s/frame per job on the Mac mini.
 - These sites were checked by code hooks on a rerun of frames 15655–15658 from the D1-d snapshot at 15654.
 - From 15656 the menu loop runs (`MenuDisplay`, `AffText`) to frame 17500. The latch stays 0 and AL stays 1 in every snapshot.
 
-**Final runs**: two runs of [entradas/D1.json](entradas/D1.json) from F0 are queued on D1's lease slot. Their replay comparison and capture will go in `sondas/D1`.
+**Final runs** [B, replay-checked]. Two independent runs of [entradas/D1.json](entradas/D1.json) from F0 on the Mac mini, through frames 129–15700 (15,572 frames each; 8,901 s and 9,840 s), give equal record files: quadros, entradas (217,801 lines), comandos (38) and fronteiras (46,959). The capture is [sondas/D1](sondas/D1).
+- The timeline is identical to the development chain: the count falls at 11429, 11561, 12456–13687 (12 deaths), 15344 and **15555 (0, AL = 1)**; `MenuInit` is first entered at 15654 and `PartieGetResultat` at 15655; `MissionNext` and `MissionReStart` are never entered.
+- 19 SetPlayerOrdre orders (the group march at 11011–11013 is tag 5 to 16191 = (63,63)); 160 routines first entered beyond the no-input run to frame 9,200.
+- The published `resumo.json` is the second run's, which saved a snapshot every 250 frames (83 snapshots, kept locally in `.local/m3/d1final/D1-b`). Combat's fatal windows restore from these (11250–11750 and 15250–15700); the first run saved one every 2,500 frames.
