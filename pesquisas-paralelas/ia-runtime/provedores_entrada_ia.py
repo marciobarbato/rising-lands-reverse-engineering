@@ -357,13 +357,16 @@ class DonosM3:
     - Economy ``restauracao.Restauracao`` (when importable): EnginRestaureEtat, BatimentEnleveMatiere,
       SetDechargeCaveEnginSelect (tag 19) and SetDechargeCaveEngin; its Core callees ResetOrdre, EnginAsk,
       SetEnginConstruitBatiment (``selecao_ordens``), SetDeplaceEngin, BatimentGetCase, SetEnginRentreBatiment;
-      not provided: BatimentGetDecalageConstruction, EnginEstVivant (Core), SetAttaqueEngin (Combat);
+      Core state queries through ``provedor_consultas_estado``; SetAttaqueEngin remains Combat's dependency;
     - Core ``incursao_core``: SetMiniMap (``definir_minimapa``; CalculWorkEngin's mode 4 at 0x44c437) and, once
       published, TerrainEstGc (``terreno_esta_gc``, CalculWorkEngin 0x44d8cd); ``chamadas_quadro_core``: Random
       (CalculWorkEngin 0x44db44/0x44db54);
     - Core ``fadiga_vegetacao.FadigaVegetacao`` (``fadiga``, when importable): EnginSetFatigue, ChercheVegetLibre,
       ChercheTypeBatimentProximite, EteintTerrain (Economy's SortieTroupe abandonment), TestRessource through
       ``externo``.
+    - Core's S1 searches/blocking through ``provedor_buscas``, read-only state queries through
+      ``provedor_consultas_estado`` and fight/list queries through ``provedor_lacunas_s1``. The strict
+      provider requires every register and real readable entry ESP where its contract specifies it.
 
     A Core routine reaches its caller as soon as Core exports it through ``provedor_entrada``
     (``ROTINAS_ECONOMIA``) or ``EntradaEstruturas.ROTINAS``: e.g. EteintTerrain for Economy's SortieTroupe
@@ -422,11 +425,24 @@ class DonosM3:
             self.fadiga = fadiga_vegetacao.FadigaVegetacao(m, externo=self.externo, som=self._som_fadiga())
             self._fadiga = fadiga_vegetacao.provedor_fadiga(self.fadiga)
             self.nomes_fadiga = frozenset(fadiga_vegetacao.ROTINAS)
+        from buscas_bloqueios import BuscasBloqueios, ROTINAS as BUSCAS, provedor_buscas
+        from consultas_estado_core import ConsultasEstadoCore, ROTINAS as ESTADO, provedor_consultas_estado
+        from provedores_lacunas_core import ROTINAS as LACUNAS, provedor_lacunas_s1
+        self._buscas = provedor_buscas(BuscasBloqueios(m))
+        self._consultas_estado = provedor_consultas_estado(ConsultasEstadoCore(m))
+        self.nomes_buscas, self.nomes_estado = frozenset(BUSCAS), frozenset(ESTADO)
+        self.nomes_lacunas = frozenset(LACUNAS) - self.nomes_buscas - self.nomes_estado
+        # Core explicitly delegates these two bodies to their committed owners. No replacement bodies or
+        # empty callbacks: restoration may be unavailable, and Combat's refuge is imported only on demand.
+        self._lacunas = provedor_lacunas_s1(m, som=som, restauracao=self._restauracao,
+                                           refugio=self._refugio)
         self.chamadas = []                       # (name, original call) of every cross-module call, in order
 
     def externo(self, nome, chamada, regs):
         from reinicio_ia import DependenciaIA
         self.chamadas.append((nome, chamada))
+        if nome in self.nomes_buscas or nome in self.nomes_estado or nome in self.nomes_lacunas:
+            return self._nova_rotina_core(nome, chamada, regs)
         if nome in self.nomes_core:
             return self._core(nome, chamada, regs)
         if nome in ('CalculPosition', 'RechercheDecalageSortie'):
@@ -492,6 +508,39 @@ class DonosM3:
             return self.mensagem_unidade(regs, chamada)
         raise DependenciaIA(nome, chamada)
 
+    def _nova_rotina_core(self, nome, chamada, regs):
+        """Keep Core's partial-search and strict-query protocols, without inventing preserved registers or ESP.
+
+        CicloTrabalho supplies only argument registers and consumes AX from ChercheGc/Libre. Core's search
+        adapter marks every unknown bit, including stack-residue EAX high bits. Strict fight/state queries
+        instead require the complete actual register file. Named owner/domain failures remain named chain
+        stops; unexpected exceptions still propagate.
+        """
+        from buscas_bloqueios import ForaDoDominioBuscas
+        from consultas_luta import DependenciaLuta, ForaDoDominioLuta
+        from entrada_estruturas import ArgumentoNaoPassado
+        from fadiga_vegetacao import ForaDoDominioFadiga
+        from provedores_lacunas_core import DependenciaLacunaS1, EXIGE_ESP
+        from reinicio_ia import DependenciaIA
+        try:
+            if nome in self.nomes_buscas:
+                return self._buscas(nome, chamada, regs)
+            if nome in self.nomes_estado:
+                return self._consultas_estado(nome, chamada, regs)
+            if nome in EXIGE_ESP and not regs.get('ESP'):
+                raise DependenciaLacunaS1(nome, chamada, 'actual readable entry ESP unavailable')
+            return self._lacunas(nome, chamada, regs)
+        except (ArgumentoNaoPassado, DependenciaLacunaS1, DependenciaLuta, ForaDoDominioBuscas,
+                ForaDoDominioLuta, ForaDoDominioFadiga) as erro:
+            raise DependenciaIA(f'{nome} (Core): {erro}', chamada) from erro
+
+    def _refugio(self, nome, chamada, regs):
+        """Core's explicit owner callback: Combat's exact refuge query, with original call site and registers."""
+        from refugio_luta_combate import refugio_registradores
+        if nome != 'ChercheBatimentProximiteCaveOuSanctuaire':
+            raise KeyError(nome)
+        return refugio_registradores(self.m, regs, chamada=chamada)
+
     def selecao(self):
         """Core's ``selecao_ordens.SelecaoOrdens`` over the live memory (its SetAttaqueEngin through Combat), built
         once."""
@@ -546,6 +595,8 @@ class DonosM3:
     def rotina_core(self, nome):
         """``f(regs, chamada=0) -> regs`` for a Core routine ``nome`` this composition can run (``fadiga_vegetacao``,
         ``provedor_entrada``'s exports or ``EntradaEstruturas``' routines), or None while Core has not published it."""
+        if nome in self.nomes_buscas or nome in self.nomes_estado or nome in self.nomes_lacunas:
+            return lambda regs, chamada=0: self.externo(nome, chamada, regs)
         if nome in self.nomes_fadiga:
             return lambda regs, chamada=0: self._fadiga(nome, chamada, {k: regs.get(k, 0) & M32 for k in REG7})
         if nome in self.nomes_core or nome in self.nomes_ee:
