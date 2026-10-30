@@ -882,9 +882,10 @@ def reproduzir(prova_caminho, nome, partes, lease, relatorios, paralelo=None):
         ok = r is not None and cadeia == e['phase_chain_sha256'] and r['summary']['result'] == e['result']
         iguais += ok
         linhas.append(dict(part=n_parte, equal=ok, chain=cadeia, expected_chain=e['phase_chain_sha256'],
-                           result=r and r['summary']['result'], expected_result=e['result']))
+                           result=r and r['summary']['result'], expected_result=e['result'],
+                           revision=r and r['source_revision'], expected_revision=e.get('source_revision')))
     print(json.dumps(dict(window=nome, proof=str(prova_caminho), proof_revision=prova['source_revision'],
-                          revision=revisao(), parts_reproduced=f'{iguais}/{len(linhas)}', parts=linhas), indent=1))
+                          parts_reproduced=f'{iguais}/{len(linhas)}', parts=linhas), indent=1))
     return 0 if iguais == len(linhas) else 2
 
 

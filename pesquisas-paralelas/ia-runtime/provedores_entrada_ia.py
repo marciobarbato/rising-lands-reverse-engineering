@@ -351,7 +351,7 @@ class DonosM3:
         except ImportError:
             self.fadiga, self._fadiga, self.nomes_fadiga = None, None, frozenset()
         else:
-            self.fadiga = fadiga_vegetacao.FadigaVegetacao(m, externo=self.externo, som=som)
+            self.fadiga = fadiga_vegetacao.FadigaVegetacao(m, externo=self.externo, som=self._som_fadiga())
             self._fadiga = fadiga_vegetacao.provedor_fadiga(self.fadiga)
             self.nomes_fadiga = frozenset(fadiga_vegetacao.ROTINAS)
         self.chamadas = []                       # (name, original call) of every cross-module call, in order
@@ -429,6 +429,17 @@ class DonosM3:
         if incertos:
             saida['_incertos'] = incertos
         return saida
+
+    def _som_fadiga(self):
+        """``som`` for Core's ``fadiga_vegetacao``: its only sound is EnginSetFatigue's hungry voice, posted from the
+        shared tail's CALL 0x44b33d (the address its own ``DependenciaFadiga`` declares); that call site is handed to
+        a boundary recorder that takes one (``chamada``), since ``fadiga_vegetacao`` passes none."""
+        if self.som is None:
+            return None
+        import inspect
+        if 'chamada' not in inspect.signature(self.som).parameters:
+            return self.som
+        return lambda nome, regs, pilha: self.som(nome, regs, pilha, chamada=0x44b33d)
 
     def rotina_core(self, nome):
         """``f(regs, chamada=0) -> regs`` for a Core routine ``nome`` this composition can run (``fadiga_vegetacao``,
