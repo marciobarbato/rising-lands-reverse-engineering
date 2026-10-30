@@ -18,6 +18,14 @@ MASK = 'pesquisas-paralelas/missoes/m3/sondas/P6/mascara-janela.json'
 REQUIRED_ORDERS = {'select': 1, 'move': 5, 'build_cave': 4, 'lodge_colonist': 16, 'ctrl_depot': 7, 'recruit': 17}
 
 
+def order_coverage(rows):
+    setters = [r for r in rows if r.get('event', 'SetPlayerOrdre') == 'SetPlayerOrdre']
+    return {name: any(r['tag'] == tag and
+                     (name != 'build_cave' or r.get('word2') == 3) and
+                     (name != 'ctrl_depot' or r.get('word4') == 2)
+                     for r in setters) for name, tag in REQUIRED_ORDERS.items()}
+
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 

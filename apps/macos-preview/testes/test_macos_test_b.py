@@ -6,7 +6,7 @@ import tempfile
 import unittest
 ROOT=Path(__file__).resolve().parents[3]
 sys.path.insert(0,str(ROOT/'apps/macos-preview/src'))
-from macos_test_b import compare, load_rows
+from macos_test_b import compare, load_rows, order_coverage
 
 
 class TestBComparisonTests(unittest.TestCase):
@@ -41,3 +41,10 @@ class TestBComparisonTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'identity'):compare(aa,oo)
             text=(oo/'states.jsonl').read_text();(oo/'states.jsonl').write_text(text+text.splitlines()[0]+'\n')
             with self.assertRaisesRegex(ValueError,'Duplicate'):load_rows(oo/'states.jsonl')
+
+    def test_order_coverage_requires_cave_type_and_ctrl_depot_argument(self):
+        rows=[dict(tag=k) for k in (1,5,4,16,7,17)]
+        coverage=order_coverage(rows)
+        self.assertFalse(coverage['build_cave']);self.assertFalse(coverage['ctrl_depot'])
+        rows[2]['word2']=3;rows[4]['word4']=2
+        self.assertTrue(all(order_coverage(rows).values()))

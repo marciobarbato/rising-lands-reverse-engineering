@@ -817,3 +817,99 @@ CPU, driver, blitter and message workload affect it, and native Apple Silicon
 throughput is not a historical calibration. The engine's 20 Hz virtual TickClock
 is unchanged to retain all state/frame/clock equalities. No original capture,
 mask, reference pin, engine source or graphics fallback is changed.
+
+## M3.3 Test B recording and replay pipeline (2026-10-30)
+
+`apps/macos-preview/scripts/test_b_pipeline.py` consumes the canonical JSON
+export from `MacOSSessionRecorder`. `validate` imports the complete Missions
+module and calls its unchanged `carregar_entrada` on the actual saved bytes.
+`app` runs the production app C input entry in audited validation policy 2,
+starting at accepted S0 and executing the real 128-frame prefix. As in Test A,
+this validation tool omits rendering after that prefix. The window's existing
+**Validar** button still runs its no-input visual proof; use this command for
+recorded-input validation.
+
+`original` calls Missions' unchanged `correr` with the exact exported file.
+A read-only observer adds `states.jsonl` alongside the standard
+`quadros.jsonl`, `entradas.jsonl`, `comandos.jsonl`, `fronteiras.jsonl` and
+`resumo.json`. The child retains Missions' durable native fast-exit behavior;
+the parent closes the companion stream and writes its manifest. Neither the
+scripted bindings nor WndProc/game bytes are patched by this consumer.
+
+The frame hash covers all mapped game blocks, in original name order with
+base/length headers, under the **unchanged published P6 cumulative mask** in
+`m3/sondas/P6/mascara-janela.json`. Its source policy is integrity-checked and
+its SHA-256 is in both manifests. No exclusions are added for a new session.
+Original static executable tables and native stack follow Test A's separate
+contract. Indicator hashes (including unit-record hashes, objective/resources,
+selection, RNG and UI bytes) are reported separately. Raw original DGROUP,
+unmasked mapped-state and display hashes are not substituted for this masked
+state hash. A mask mismatch, changed input identity or missing/duplicate frame
+cannot pass. Every differing or missing frame goes into the JSON and Markdown
+comparison reports. The reused P6 mask does not claim a new session-specific
+Missions policy acceptance.
+
+### Recording the real human session
+
+1. Build/open the app, open **Rust ao vivo**, choose **Jogar**, and start from
+   **Reiniciar**. Advance/run to frame 128 or later without touching the game
+   surface or issuing orders. Pause. There must be no earlier unrecorded input;
+   otherwise reset and start again.
+2. Choose **Nova gravação** and confirm **● Gravando entrada**. Run the session,
+   using the map/HUD to select, move, build a CAVE, lodge a colonist, issue a
+   depot order while holding **Control**, and recruit. These must be actual
+   engine orders; the validation replay's `order_coverage` reports their tags
+   (1, 5, 4/type 3, 16, 7/depot argument, 17). Continuous dragging remains outside
+   this recorder's supported domain. Keep focus while holding a key; losing
+   focus records its release.
+3. Continue at least 3,000 frames beyond frame 128 (stop at 3,129 or later).
+   Pause, choose **Parar gravação**, then **Exportar entrada** and save, for
+   example, `.local/test-b/entradas/human.json`. Preserve that file unchanged.
+   Reset is disabled while recording. An engine/recorder stop must be reported;
+   it does not count as a complete Test B session.
+4. Run `validate`, `app`, then the original replay on the Mac mini, and
+   `compare` below. A synthetic session proves plumbing only. Human Test B
+   acceptance requires the real recording, all six actual order kinds,
+   at least 3,000 replayed frames, and an empty divergence list.
+
+### Commands
+
+Run from this feature worktree (use an unused output directory for each run):
+
+```sh
+PIPE=apps/macos-preview/scripts/test_b_pipeline.py
+APP="/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app"
+INPUT=.local/test-b/entradas/human.json
+python3 -B "$PIPE" validate --input "$INPUT"
+python3 -B "$PIPE" app --input "$INPUT" --bundle "$APP/Contents/Resources/preview" --output .local/test-b/human-app
+```
+
+The repeatable synthetic proof drives the actual AppKit window, Metal view,
+recording controls, serial event queue and `MacOSSessionRecorder`; it saves the
+same canonical export as the native save action:
+
+```sh
+python3 -B "$PIPE" record --app "$APP" --output .local/test-b/synthetic-ui.json
+python3 -B "$PIPE" validate --input .local/test-b/synthetic-ui.input.json
+python3 -B "$PIPE" app --input .local/test-b/synthetic-ui.input.json --bundle "$APP/Contents/Resources/preview" --output .local/test-b/synthetic-app
+```
+
+On the Mac mini, use a checkout of this feature commit, fetch over HTTPS, and
+copy the input byte-for-byte into that checkout. Create the standard checkpoint
+once if it is absent:
+
+```sh
+python3 -B pesquisas-paralelas/missoes/m3/checkpoint_quadro128.py --saida .local/test-b/quadro128
+python3 -B apps/macos-preview/scripts/test_b_pipeline.py original --input apps/macos-preview/validation/test-b/entradas/synthetic.json --inicio .local/test-b/quadro128 --output .local/test-b/original-full
+```
+
+Copy the original output directory back without changing its files, then:
+
+```sh
+python3 -B "$PIPE" compare --app .local/test-b/synthetic-app --original .local/test-b/original-full --output .local/test-b/comparison-full.json
+```
+
+`--ate FRAME` bounds either replay or the comparison. On the MacBook every
+original prefix must use `heavy_lease.py` and `original --minutes 19` (a hard
+wall-clock limit below 20 minutes). The full original run belongs on the mini.
+Synthetic proof results and the measured runtime estimate are recorded below.

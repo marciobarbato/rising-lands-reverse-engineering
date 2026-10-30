@@ -16,7 +16,7 @@ import sys
 import time
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'src'))
 from macos_scripted_input import ScriptedInput, FrameAnswerMapper, canonical, owner_contract
-from macos_test_b import HashContract, compare, sha, REQUIRED_ORDERS
+from macos_test_b import HashContract, compare, sha, order_coverage
 
 
 def write(path, value):
@@ -25,11 +25,10 @@ def write(path, value):
 
 def app(a, script):
     from macos_native_driver import NativeDriver
-    from macos_rust_abi import Frames
     from macos_m22_playback import MacOSM22Playback
     # Only copied ABI diagnostics, not the engine's simulator/reference imports.
     sys.path.insert(0, str(a.root/'motor/testes'))
-    from player_abi import Player, orders
+    from player_abi import Player, orders, inputs
     driver = NativeDriver(a.bundle/'librising_macos_live.dylib', a.bundle/'librising_engine.dylib', a.bundle/'native-inputs')
     engine = Player(a.bundle/'librising_engine.dylib')
     contract = HashContract(a.root)
@@ -45,6 +44,7 @@ def app(a, script):
                     engine_sha256=sha(a.bundle/'librising_engine.dylib'),
                     initialization='Accepted S0 + four original static tables; real 128-frame prefix; no later state reload')
     tags = []
+    order_rows = []
     started = time.monotonic()
     try:
         if driver.lib.macos_live_validation(driver.handle, 0): raise RuntimeError('Play policy refused')
@@ -60,7 +60,21 @@ def app(a, script):
                 answers = mapper.declared_answers()
                 for phase in (2, 3):
                     code = driver.input_phase(phase, answers)
-                    for order in orders(engine.consumed(driver.status().world)):
+                    consumed = engine.consumed(driver.status().world)
+                    for event in consumed:
+                        if event.kind not in range(1, 7): continue
+                        kind = {1:'peek_message', 2:'get_message', 3:'translate_message', 4:'dispatch_message', 5:'cursor', 6:'key'}[event.kind]
+                        phase_name = ('between_frames' if phase == 2 else 'frame')+str(frame)
+                        mapped = mapper.poll(kind, phase=phase_name, site=event.site,
+                                             vk=event.values[0] if event.kind == 6 else None)
+                        actual = inputs([event])[0]
+                        actual['phase'] = phase_name
+                        if kind == 'dispatch_message':
+                            actual.pop('wndproc_flags_after')
+                            actual['hwnd'] = event.values[3]
+                        if actual != mapped: raise RuntimeError(f'Frame {frame}: consumed answer differs from recorder: {actual} / {mapped}')
+                    for order in orders(consumed):
+                        order_rows.append(order)
                         of.write(json.dumps(order, sort_keys=True)+'\n')
                         if order.get('event', 'SetPlayerOrdre') == 'SetPlayerOrdre': tags.append(order['tag'])
                     if code: raise RuntimeError(f'Frame {frame} phase {phase}: '+bytes(driver.status().message).decode())
@@ -71,13 +85,15 @@ def app(a, script):
                          for base, data in snap.items() if base not in static}
                 f.write(json.dumps(contract.sample(frame, state), sort_keys=True)+'\n')
                 if frame % 500 == 0: print('App replay frame', frame, flush=True)
+        mapper.finish()
         manifest['status'] = 'completed'
     except Exception as e:
         manifest.update(status='stopped', stop=str(e))
     finally:
         driver.close()
     manifest.update(seconds=time.monotonic()-started, order_tags=tags,
-                    order_coverage={name: tag in tags for name, tag in REQUIRED_ORDERS.items()})
+                    order_coverage=order_coverage(order_rows))
+    manifest['full_session_ready'] = manifest['status'] == 'completed' and stop-128 >= 3000 and all(manifest['order_coverage'].values())
     write(a.output/'manifest.json', manifest)
     print(json.dumps(manifest, indent=1))
     return int(manifest['status'] != 'completed')
@@ -139,6 +155,10 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--root', type=Path, default=Path(__file__).resolve().parents[3])
     sub = p.add_subparsers(dest='command', required=True)
+    q = sub.add_parser('record', help='Drive the actual app UI; produces synthetic evidence, never human acceptance')
+    q.add_argument('--app', type=Path, required=True)
+    q.add_argument('--output', type=Path, required=True)
+    q.add_argument('--plan', type=Path, default=Path(__file__).resolve().parents[1]/'test-b-ui-plan.json')
     for command in ('validate', 'app', 'original'):
         q = sub.add_parser(command)
         q.add_argument('--input', type=Path, required=True)
@@ -154,6 +174,21 @@ def main():
     for name in ('app', 'original', 'output'): q.add_argument('--'+name, type=Path, required=True)
     q.add_argument('--ate', type=int)
     a = p.parse_args()
+    if a.command == 'record':
+        if a.output.exists() or a.output.with_suffix('.input.json').exists(): p.error('Refusing to overwrite UI evidence')
+        a.output.parent.mkdir(parents=True, exist_ok=True)
+        command = ['open', '-W', '-n', str(a.app.resolve()), '--args', '--inspection',
+                   '--test-b-session', str(a.output.resolve()), '--test-b-plan', str(a.plan.resolve())]
+        result = subprocess.run(command, timeout=900, capture_output=True, text=True)
+        a.output.with_suffix('.launch.log').write_text(result.stdout+result.stderr)
+        report = json.loads(a.output.read_text())
+        script = ScriptedInput(a.root, a.output.with_suffix('.input.json').read_bytes())
+        if result.returncode or not report['passed'] or script.stop_frame-128 < 3000:
+            print(json.dumps(dict(passed=False, error=report.get('error'), phase=report.get('phase')), indent=1))
+            return 1
+        print(json.dumps(dict(passed=True, synthetic=True, frames=script.stop_frame-128,
+                              input_sha256=sha(a.output.with_suffix('.input.json')))))
+        return 0
     if a.command == 'compare':
         if a.output.exists(): p.error('Refusing to overwrite report')
         report = compare(a.app, a.original, a.ate)

@@ -1887,3 +1887,42 @@ the validated build afbc0f0. Only `feat/macos-playable` is committed/pushed.
 No merge to main, acceptance, Test B or unrelated work is performed. Remaining
 dependencies include the broader renderer domain and human Test B replay on
 the original; full mission/campaign/audio are not claimed.
+
+## Recorded-session Test B pipeline (2026-10-30)
+
+The new `scripts/test_b_pipeline.py` accepts arbitrary actual
+`MacOSSessionRecorder` exports, validates them through the complete unchanged
+Missions validator, runs the production app C phase entry with audited policy
+2, wraps the unchanged Missions original runner with a read-only state observer,
+and reports every frame hash difference/missing frame. Input is Missions schema
+v1, start frame128, held signed key answers, ordered u32 message triples and
+800×600 cursor coordinates. App initialization remains S0 plus the original four
+static tables, then the actual 128-frame prefix; no later oracle-state reload.
+Mutation order is unchanged: render/prefix; phase2 declared messages/cursor/keys;
+phase3 same keys without messages; read-only state/order observations after each
+successful phase/frame. The input mapper independently checks actual consumed
+poll requests; WndProc flag stores remain engine/original outputs.
+
+Intact original SHA256 remains
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`;
+WndProc `0x4181a1`, SetPlayerOrdre `0x45ecd4`, ProcessInputGame `0x45edc0` and
+Missions' original input bindings are unchanged. The full-memory hash uses the
+published P6 cumulative exclusion mask verbatim; its source policy/hash and the
+indicator reader identity are carried in both manifests. Unknown allocations,
+changed layouts, unmasked display effects and engine stops are exposed, not
+replaced with defaults or newly excluded bytes. App recorded-input validation
+omits post-prefix rendering, as Test A does; the actual synthetic UI capture
+renders normally and keeps named renderer stops.
+
+The explicit CLI-only synthetic automation sends NSEvents through NSWindow to
+the real Metal view and uses the production WebView recorder/save path. It is
+never human acceptance evidence. Right-button handlers now use the AppKit
+right-event type rather than `buttonNumber`, which constructed NSEvents may
+report as zero. Other input semantics and click scheduling are unchanged.
+Three comparison tests check successful prefixes, all changed/missing frames,
+and refusal of mismatched identities/duplicate frames. Native build, synthetic
+UI, app replay and bounded original-prefix results follow after execution.
+
+The human recording procedure, feature/mini commands, hash scope and remaining
+acceptance requirements are in `docs/MACOS_PLAYABLE.md` under Test B. Only the
+macOS-owned paths change. No main merge or acceptance is performed.
