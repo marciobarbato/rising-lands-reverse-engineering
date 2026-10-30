@@ -1294,3 +1294,41 @@ Result over 407 recorded calls: **403 match, 4 uncertain, 0 mismatch** after the
 - 1,079 foreign calls were served by translations (349 DeplaceEngin); 17 stayed the original's.
 - The 4 uncertain are CalculWorkEngin returning DeplaceEngin's EAX, which Core declares unreconstructed.
 - Frame 125's lodging used to mismatch (196 minimap bytes). The cause was Economy's: BatimentModifyMap at `0x41fa88` was called without EDX, while the original has DL = 1 (`0x41fa7c mov edx, 1`, kept through BatimentHabitable); the provider defaulted it to 0 and ran mode 7. Core found it (`e713bfa`). With `EDX=1` the composition is **403 match, 4 uncertain, 0 mismatch**.
+
+## Transport, cave unload and hunger target checks (Stage 28)
+
+**Status:** native smoke in progress; the following is the proposed contract, pending the committed original-only transport capture and differential results. The parked draft `cc439b7` was restored only after `57099c0` became reachable from fetched main `41ab539`. Delivery is on `feat/re-economy`; the coordinator owns main integration.
+
+### Entry points and memory
+
+[`transporte.py`](../pesquisas-paralelas/economia/transporte.py) exposes `Transporte(memoria, *, externo=None, proprias=None).chamar(nome, regs)`. Memory supplies `u8/u16/u32(address, value=None)` over live original addresses. There is no copied world, allocator, invented terrain search or fallback for a missing callback. AX selects a unit in the pool `[0x4e19a0]` (276-byte records). EAX..EBP and ESP enter; all registers except EAX are restored on return, ESP advances by four. Flags are outside this API.
+
+| Routine | Original entry | Dispatcher call | Control flow |
+|---|---|---|---|
+| CalculTransporteEngin | `0x44f2d4` | state 18, `0x455e28` | Types 11..17 with depot mode other than 1 use five vehicle phases; other inputs call EnginCalculTransporte |
+| EnginCalculTransporte | `0x44ea78` | nested in CalculTransporteEngin | Four phases: approach sack, load, approach depot, unload |
+| CalculDechargeCaveEngin | `0x44e35c` | state 20, `0x455d1c` | Four phases: approach cave, debit stock into Bag, approach depot, unload |
+
+The order tuple is `+0x80` (target u16), `+0x82` (mode byte: 0 none, 1 ground, 2 structure), `+0x84` (resource u16). Phase/timer are bytes `+0x89/+0x8b`; `+0xb2` retains the source cell, `+0xc0` the active structure. Phase bytes above the switch limit return without advancing a phase. Original unchecked memory accesses remain the caller's responsibility; no broad input-domain guarantee follows from the case matrix. Bags must be coherent: a matching capacity-slot tag beyond live count can make the original EnginRetireType loop forever when BagRetire cannot remove it. The first smoke exposed exactly this malformed restored input ([failed native probe](../pesquisas-paralelas/economia/evidencias/transporte/sondagem-bolsa-incoerente.json)); the corrected empty-Bag setup clears values and tags, and the full-Bag setup declares one real entry. The matrix uses capacities 1/2 and declared type changes for vehicle branches; those cases do not establish a naturally recruited vehicle cycle.
+
+### Mutation and callback order
+
+- **Cave loading** is a withdrawal, not a credit. Room means Bag goods counter `+0x66 + 1 <= capacity`. At the load timer's zero, TestRessource runs before BatimentEnleveMatiere(resource, 1, owner). Only then are Bag counter, entry tag 2, entry value and live count written, followed by timer 10. Food, stone and parts use their respective TestRessource input. A failed sufficiency test adds nothing. An exception after the debit preserves that debit.
+- **Sack loading** calls TerrainRetireMatiere before appending the good. Search uses ChercheVegetLibre with the original resource selector, radius and pushed unit; the random-offset search consumes two Random calls in order. A full Bag selects the depot route. Source/depot exhaustion and missing destinations take the original idle/movement paths.
+- **Delivery order differs by branch.** EnginCalculTransporte and cave unload credit a structure via BatimentAjouteMatiere before BagRetire. Vehicle phase 4 calls BagRetire before BatimentAjouteMatiere; its ground branch subsequently calls EnginRetireType too. Ground delivery uses the original EnginRetireType boundary. These sequences must not be made transactional or reordered.
+- **Vehicles** lock a structure before approaching its central cell minus `0xfe`, rotate at arrival, open BatimentPorte and wait for TuyauEstSortie before unloading. An empty Bag closes the door and unlocks the structure before clearing `+0xc0` and returning to the source. TuyauEstSortie remains an external Economy leaf here.
+- Whenever the original retargets, the destination store precedes release of a path search owned by this unit (`0x496304`, `0x4e0f36/37/3c`) and clearing `+0x88`. No navigation algorithm is duplicated.
+
+`provedor_transporte(transporte, outros=None)` serves all three names in Core's register-provider shape. Missing required EAX raises `ArgumentoNaoPassado` before execution. Every external call receives EAX..EBP, its entry ESP and any pushed words in `_pilha`. `DependenciaTransporte` identifies the callee and original call address, retaining earlier effects; exceptions propagate. The default in-process Economy callees are TerrainRetireMatiere (`alimentacao`), TestRessource (`ordens_economia`), BatimentEnleveMatiere (`restauracao`) and BatimentAjouteMatiere (`ciclo_trabalho`). Other calls require `externo`; the validation harness's recorded-call replay is not a production provider.
+
+### Hunger target validity
+
+[`alimentacao.py`](../pesquisas-paralelas/economia/alimentacao.py) extends `provedor_fome` without changing its body-entry contract (ESI record, DI unit, incoming EDX; all registers passed). Saved states 1/24 release invalid attack targets; 11/21 check structure destruction; 15 checks a repair/build target; 13 checks the followed unit or structure and owner/type rules; 18 checks its structure depot; 23 checks its attack structure. Saved state 5 and both state-20 target checks now execute their aborts instead of raising an unsupported-branch exception.
+
+An abort first restores collision when necessary (work abort: a type-7 unit ends mine work first), then discovery, light and minimap, then SetDeplaceEngin, then clears the depot tuple (`+0x82 := 0`, `+0x80 := 0xffff`). The state-20 abort also clears `+0xc0`. Original dispatcher frame locals written by these aborts are dead at the body exit and are not part of the returned memory contract. Dependencies retain the existing owners: Core collision/movement/discovery and target predicates, Graphics SetMiniMap, AI/runtime iagUnitSendMessage, and Economy MineEndWork/PlayerGetType. Missing providers never stand in for successful original calls.
+
+### Evidence and validation
+
+[`extrair_transporte.py`](../pesquisas-paralelas/economia/extrair_transporte.py) exports six intact intervals and four jump tables to [`manifesto.json`](../pesquisas-paralelas/economia/evidencias/transporte/manifesto.json), including the saved-state check and target-release continuation. Original EXE SHA-256 remains `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`. The parked code was drafted before the new capture; its first comparison must happen only after the capture commit. No frozen predecessor capture or original-byte evidence is rewritten.
+
+Pending: smoke/capture, sparse replay, native differential, three invalidated report refreshes, and the Economy domain gate. These component comparisons do not establish a whole-mission transport or victory proof.

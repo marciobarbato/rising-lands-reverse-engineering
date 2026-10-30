@@ -148,8 +148,8 @@ def main():
                      mode=captura['mode'],
                      translation={p: hashlib.sha256((PASTA / p).read_bytes()).hexdigest()
                                   for p in ('restauracao.py', 'alimentacao.py')},
-                     core_fatigue_provider=None if provedores is None else hashlib.sha256(
-                         (RAIZ / 'ferramentas/fadiga_vegetacao.py').read_bytes()).hexdigest(),
+                     core_fatigue_provider=None if provedores is None else
+                         'fadiga_vegetacao.provedor_fadiga',
                      results=[], counts={}, served_by_translation={})
     gravadas = []
 

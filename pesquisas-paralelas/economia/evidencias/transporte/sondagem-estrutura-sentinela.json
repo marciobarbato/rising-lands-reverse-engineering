@@ -1,0 +1,41 @@
+{
+  "schema": "rising-lands/economy-transport-invalid-structure-probe/1",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "translation_executed": false,
+  "completed_capture": false,
+  "outcome": "native_fault",
+  "native_stop": {
+    "error": "Invalid memory read (UC_ERR_READ_UNMAPPED)",
+    "stack_scan": [
+      "+4:EnginCalculTransporte+0x5d7",
+      "+34:CalculTransporteEngin+0x68",
+      "+120:Cyclage+0xc1",
+      "+138:AffGame+0x827",
+      "+154:ProgIteration+0x3d",
+      "+158:ProgIteration+0x55",
+      "+170:_WinMain@16+0xa2"
+    ],
+    "eip": "0x41a725",
+    "routine": "BatimentEnDestruction+0x1a",
+    "stack_return": "0xf18",
+    "stack_return_routine": "0xf18",
+    "registers": {
+      "EAX": "0x15d9fb4",
+      "EBX": "0x1",
+      "ECX": "0x0",
+      "EDX": "0xffff",
+      "ESI": "0x474a8f18",
+      "EDI": "0xe",
+      "EBP": "0xe",
+      "ESP": "0x2007e8c",
+      "EIP": "0x41a725",
+      "EFLAGS": "0x6"
+    },
+    "phase": "between_frames"
+  },
+  "last_case_started": "case 173 frame 406: CalculTransporteEngin unit 14, type 0xd, depot 1 (EnginCalculTransporte), phase 3, timer 1, carried",
+  "source_context_revision": "41ab53969b85af4fd230bc5d51e1e9a0a0bda883",
+  "source_log_sha256": "6dd517ad9917ccfef5e174020e6bc9fb8c4703c6ab8dddd3c09761250bad9f52",
+  "scope": "Restored type-13, mode-1 phase-3 case inherited structure +0xc0=0xffff. EnginCalculTransporte unconditionally calls BatimentEnDestruction before its depot-mode branch; the original read is unmapped in this mission image.",
+  "correction": "Declare standing sanctuary 0 at +0xc0 in this restored case. Do not map invented bytes or change the original callee. Natural ground-transport flow is not established by this correction."
+}

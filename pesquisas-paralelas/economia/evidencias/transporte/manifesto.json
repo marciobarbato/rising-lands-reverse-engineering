@@ -1,0 +1,94 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "CalculDechargeCaveEngin",
+      "start": "0x44e35c",
+      "end_exclusive": "0x44ea67",
+      "sha256": "f9633424cf39630486af5fb3270ed6d40e393e95660c6fd59cc8694d311d5954",
+      "file": "0044e35c.asm"
+    },
+    {
+      "name": "EnginCalculTransporte and shared epilogue",
+      "start": "0x44ea78",
+      "end_exclusive": "0x44f2a3",
+      "sha256": "21648247244c28b74399dffb61f9edb69d73db62bf797f15e9276264a82a5264",
+      "file": "0044ea78.asm"
+    },
+    {
+      "name": "CalculTransporteEngin",
+      "start": "0x44f2d4",
+      "end_exclusive": "0x44f8a7",
+      "sha256": "8dc7dfe754868f37b0743c5605345fd6f02e317857680c2924ff9f64edebc8d5",
+      "file": "0044f2d4.asm"
+    },
+    {
+      "name": "shared register restore",
+      "start": "0x440d58",
+      "end_exclusive": "0x440d5e",
+      "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+      "file": "00440d58.asm"
+    },
+    {
+      "name": "EnginNextEtape saved-state checks",
+      "start": "0x454c93",
+      "end_exclusive": "0x455554",
+      "sha256": "40015693cabb4043e411792025eadf48ff650e42a7cf21173d656445f7b8110d",
+      "file": "00454c93.asm"
+    },
+    {
+      "name": "EnginNextEtape target-release continuation",
+      "start": "0x4567b7",
+      "end_exclusive": "0x4567ce",
+      "sha256": "ea60a8c9ce1797701b8ec857ad4aa4c5f238a500800a6e57b95cf968039c658f",
+      "file": "004567b7.asm"
+    }
+  ],
+  "jump_tables": [
+    {
+      "name": "CalculDechargeCaveEngin phases",
+      "address": "0x44e34c",
+      "entries": [
+        "0x44e3b2",
+        "0x44e4a9",
+        "0x44e723",
+        "0x44e8eb"
+      ]
+    },
+    {
+      "name": "EnginCalculTransporte phases",
+      "address": "0x44ea68",
+      "entries": [
+        "0x44eac4",
+        "0x44ebe2",
+        "0x44ee5b",
+        "0x44f041"
+      ]
+    },
+    {
+      "name": "CalculTransporteEngin types 11..17",
+      "address": "0x44f2a4",
+      "entries": [
+        "0x44f317",
+        "0x44f317",
+        "0x44f317",
+        "0x44f317",
+        "0x44f317",
+        "0x44f317",
+        "0x44f317"
+      ]
+    },
+    {
+      "name": "CalculTransporteEngin vehicle phases",
+      "address": "0x44f2c0",
+      "entries": [
+        "0x44f344",
+        "0x44f419",
+        "0x44f6bd",
+        "0x44f6f2",
+        "0x44f759"
+      ]
+    }
+  ]
+}
