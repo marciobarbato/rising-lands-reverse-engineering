@@ -1,0 +1,90 @@
+{
+ "milestone": "M3.1 (partial) — scripted-input windows P1 (select, frames 129-629) and P2 (move, 129-729) of MONDE01: the Python chain with InputGame/ProcessInputGame equals the original whole-state in every phase, including the M3.1 order fields",
+ "decision": "ACCEPTED (P1/P2 part only)",
+ "m3_1_decision": "OPEN: the remaining M3.1 windows are P6 (CAVE order and work cycle, 129-2400; strict proof stops at between_frames221 on a Graphics guard) and the S1 order-issue windows (pass-2 S1 capture landing on feat/re-missions)",
+ "decided_at": "2026-10-30 01:35 BRT",
+ "decided_by": "coordinator (Claude) on committed-main reproduction on two machines (MacBook and Mac mini)",
+ "main": "c9c85ebacd4c2eb9974f91a6781bc429a080e378 (merge of feat/re-ai-runtime with the proof)",
+ "scope": "Display scenario -v2, MONDE01 new campaign, declared Windows inputs, scripted input files of Missions probes P1/P2 (pass-2 whole-state captures). Compared per phase: whole state under each window's cumulative display-only mask, RNGs, bindings and boundaries outside display, allocation count, registers, HUD flag, consumed scripted inputs, WndProc flag bytes, SetPlayerOrdre/ProcessInputGame records, order packets [0x4e2458+4p], selection areas 0x508728+512p and fields +2/+0xb2/+0xb7/+0xb8/+0xbe/+0x110 of all 800 unit slots (none masked).",
+ "proof": {
+  "path": "pesquisas-paralelas/ia-runtime/validacao/m3-1-prova-p1-p2.json",
+  "sha256": "75964d69bb19f8e1b1fefc146413bc3e4d8cfcfc00d039897c27639d7b3c147e",
+  "source_revision": "21bbb3727622e6f43a94fc5f2458663ad9b978d0",
+  "summary": {
+   "crossings": 0,
+   "phases": 2204,
+   "phases_equal": 2204,
+   "result": "equal",
+   "windows": {
+    "P1": "1002/1002",
+    "P2": "1202/1202"
+   }
+  },
+  "windows": {
+   "P1": {
+    "frames": [
+     129,
+     629
+    ],
+    "phases": 1002,
+    "compared_bytes_per_phase": 16019748,
+    "phase_chain_sha256": "7220a6312b573670eb3206d8ba11771ac24c4ca0238bd8c3e832f53a4e7fe2e6"
+   },
+   "P2": {
+    "frames": [
+     129,
+     729
+    ],
+    "phases": 1202,
+    "compared_bytes_per_phase": 16014614,
+    "phase_chain_sha256": "208aef46776a260bca0bbf0cd25bce5f675ad9a895129b0f77e4a054a85e0fbb"
+   }
+  },
+  "reproduce": "python3 -B pesquisas-paralelas/ia-runtime/provar_entrada_janelas_ia.py tudo --janelas P1 P2 --lease <heavy_lease.py> --relatorios <dir> --saida <proof.json>"
+ },
+ "reproductions": {
+  "macbook": {
+   "path": "integracao/validacao/cxr-20261030-m3r1-m3-1-p1-p2-proof-main-c9c85eb-macbook.json",
+   "summary": {
+    "crossings": 0,
+    "phases": 2204,
+    "phases_equal": 2204,
+    "result": "equal",
+    "windows": {
+     "P1": "1002/1002",
+     "P2": "1202/1202"
+    }
+   },
+   "seconds": {
+    "P1": 266.3,
+    "P2": 313.2
+   }
+  },
+  "mac_mini": {
+   "path": "integracao/validacao/cxr-20261030-m3r1-m3-1-p1-p2-proof-main-c9c85eb-mac-mini.json",
+   "summary": {
+    "crossings": 0,
+    "phases": 2204,
+    "phases_equal": 2204,
+    "result": "equal",
+    "windows": {
+     "P1": "1002/1002",
+     "P2": "1202/1202"
+    }
+   },
+   "seconds": {
+    "P1": 290.7,
+    "P2": 339.5
+   }
+  }
+ },
+ "chain_hashes_identical_on_both_machines": {
+  "P1": "7220a6312b573670eb3206d8ba11771ac24c4ca0238bd8c3e832f53a4e7fe2e6",
+  "P2": "208aef46776a260bca0bbf0cd25bce5f675ad9a895129b0f77e4a054a85e0fbb"
+ },
+ "not_compared": [
+  "top_callee on boundaries (the window harness records null; owner Missions)",
+  "Core `som` call site read from _fronteira's endereco argument (Core asked to pass it)"
+ ],
+ "also": "The Rust engine stage 4 (ABI 1.5, main 2eadf69) independently reproduces P1 1,002 and P2 1,202 phases whole-state; the coordinator re-ran P1 (1002/1002) and M2.2 (257/257) before integrating it."
+}

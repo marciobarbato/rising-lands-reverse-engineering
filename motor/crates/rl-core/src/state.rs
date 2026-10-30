@@ -209,6 +209,8 @@ pub struct World {
     pub clock: TickClock,
     pub frame_events: Vec<crate::FrameEvent>,
     pub frame_freed: MemoriaJogo,
+    pub player_events: Vec<crate::player::PlayerEvent>,
+    pub player_cursor: (i32, i32),
 }
 impl World {
     pub fn new(rate: u32, epoch: u32) -> Result<Self> {
@@ -224,6 +226,8 @@ impl World {
             clock,
             frame_events: Vec::new(),
             frame_freed: MemoriaJogo::default(),
+            player_events: Vec::new(),
+            player_cursor: (0, 0),
         })
     }
     pub fn project(&self) -> Result<MemoriaJogo> {
@@ -231,7 +235,9 @@ impl World {
     }
     pub fn replace_memory(&mut self, memory: MemoriaJogo) -> Result<()> {
         let generation = self.generation.wrapping_add(1);
+        let player_cursor = self.player_cursor;
         *self = Self::load(memory, self.clock.clone())?;
+        self.player_cursor = player_cursor;
         self.generation = generation;
         Ok(())
     }
@@ -251,6 +257,36 @@ impl World {
             self.clock.advance(1);
         }
         Ok(output)
+    }
+    /// Declared input phases are transactional. Failed attempts expose diagnostics
+    /// separately, while game bytes, clock, cursor hold and generation stay unchanged.
+    pub fn input_step(
+        &mut self,
+        phase: u32,
+        input: crate::FrameInput,
+        mut answers: crate::player::DeclaredInput,
+    ) -> Result<crate::FrameInput> {
+        let xy = answers.cursor.unwrap_or(self.player_cursor);
+        answers.cursor = Some(xy);
+        let mut memory = self.project()?;
+        let result = crate::player::phase(&mut memory, phase, input, answers);
+        match result {
+            Ok((output, events, consumed)) => {
+                self.replace_memory(memory)?;
+                self.frame_phase = phase;
+                self.frame_events = events;
+                self.player_events = consumed;
+                self.player_cursor = xy;
+                if phase == 3 {
+                    self.clock.advance(1);
+                }
+                Ok(output)
+            }
+            Err(error) => {
+                self.player_events = memory.player.take().map(|r| r.events).unwrap_or_default();
+                Err(error)
+            }
+        }
     }
     /// An isolated routine call, NOT a game frame. Errors publish no state/register change.
     pub fn step(&mut self, routine: Routine, input: Registers) -> Result<Registers> {

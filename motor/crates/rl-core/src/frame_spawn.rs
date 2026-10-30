@@ -296,6 +296,9 @@ fn create(m: &mut MemoriaJogo, cell: u16, d: u8, t: u8, owner: u8) -> Result<u32
     Ok(i)
 }
 pub fn minimap(m: &mut MemoriaJogo, owner: u8, cell: u16, mode: u8) -> Result<u32> {
+    if matches!(mode, 1..=3 | 6 | 7) {
+        return crate::player_sight::minimap(m, owner, cell, mode);
+    }
     let mw = u32::from(m.u16(0x496fe0)?);
     let mh = u32::from(m.u16(0x496fe2)?);
     let w = u32::from(m.u16(0x497168)?);

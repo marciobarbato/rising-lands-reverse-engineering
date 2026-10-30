@@ -1,0 +1,1742 @@
+{
+  "engine-stage4-common-check": {
+    "events": [
+      {
+        "at": "2026-10-30T00:54:17.951559+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:54:17.952149+00:00",
+        "event": "grant",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T01:00:27.324297+00:00",
+        "event": "release",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T01:00:27.325250+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 369.372148,
+    "queue_seconds": 0.00059
+  },
+  "engine-stage4-common-merged-main": {
+    "events": [
+      {
+        "at": "2026-10-30T02:59:43.015699+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:59:43.016042+00:00",
+        "event": "grant",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T03:06:37.876101+00:00",
+        "event": "release",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T03:06:37.877115+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 414.860059,
+    "queue_seconds": 0.000343
+  },
+  "engine-stage4-gate-merged-main": {
+    "events": [
+      {
+        "at": "2026-10-30T02:59:43.015163+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:59:43.015637+00:00",
+        "event": "grant",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T03:04:32.946762+00:00",
+        "event": "release",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T03:04:32.947166+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 289.931125,
+    "queue_seconds": 0.000474
+  },
+  "engine-stage4-input-K1": {
+    "events": [
+      {
+        "at": "2026-10-30T00:46:59.818143+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:46:59.819283+00:00",
+        "event": "grant",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:47:24.633138+00:00",
+        "event": "release",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:47:24.633997+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 24.813855,
+    "queue_seconds": 0.00114
+  },
+  "engine-stage4-input-P3": {
+    "events": [
+      {
+        "at": "2026-10-30T00:45:33.635863+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:45:33.637091+00:00",
+        "event": "grant",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:46:03.144886+00:00",
+        "event": "release",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:46:03.145246+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 29.507795,
+    "queue_seconds": 0.001228
+  },
+  "engine-stage4-input-P6": {
+    "events": [
+      {
+        "at": "2026-10-30T00:46:03.232143+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:46:03.232639+00:00",
+        "event": "grant",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:46:31.455916+00:00",
+        "event": "release",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:46:31.456077+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 28.223277,
+    "queue_seconds": 0.000496
+  },
+  "engine-stage4-input-P7": {
+    "events": [
+      {
+        "at": "2026-10-30T00:46:31.536666+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:46:31.537158+00:00",
+        "event": "grant",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:46:59.720739+00:00",
+        "event": "release",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:46:59.721159+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 28.183581,
+    "queue_seconds": 0.000492
+  },
+  "engine-stage4-leaf-final": {
+    "events": [
+      {
+        "at": "2026-10-30T00:54:19.998042+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:54:19.998603+00:00",
+        "event": "grant",
+        "slots": [
+          3
+        ]
+      },
+      {
+        "at": "2026-10-30T00:56:14.837357+00:00",
+        "event": "release",
+        "slots": [
+          3
+        ]
+      },
+      {
+        "at": "2026-10-30T00:56:14.837568+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 114.838754,
+    "queue_seconds": 0.000561
+  },
+  "engine-stage4-logic-257": {
+    "events": [
+      {
+        "at": "2026-10-30T00:47:24.761343+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:47:24.763933+00:00",
+        "event": "grant",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:48:07.267236+00:00",
+        "event": "release",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:48:07.267566+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 42.503303,
+    "queue_seconds": 0.00259
+  },
+  "engine-stage4-m23-a-0": {
+    "events": [
+      {
+        "at": "2026-10-30T00:42:33.086925+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:42:33.087658+00:00",
+        "event": "grant",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T00:48:56.792650+00:00",
+        "event": "release",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T00:48:56.792869+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 383.704992,
+    "queue_seconds": 0.000733
+  },
+  "engine-stage4-m23-a-1": {
+    "events": [
+      {
+        "at": "2026-10-30T00:48:56.877167+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:48:56.877661+00:00",
+        "event": "grant",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T00:55:36.933701+00:00",
+        "event": "release",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T00:55:36.933924+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 400.05604,
+    "queue_seconds": 0.000494
+  },
+  "engine-stage4-m23-a-2": {
+    "events": [
+      {
+        "at": "2026-10-30T00:55:37.017494+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:55:37.017965+00:00",
+        "event": "grant",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T01:01:46.954759+00:00",
+        "event": "release",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T01:01:46.954999+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 369.936794,
+    "queue_seconds": 0.000471
+  },
+  "engine-stage4-m23-a-3": {
+    "events": [
+      {
+        "at": "2026-10-30T01:01:47.035935+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:01:47.036455+00:00",
+        "event": "grant",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T01:07:44.584823+00:00",
+        "event": "release",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T01:07:44.585106+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 357.548368,
+    "queue_seconds": 0.00052
+  },
+  "engine-stage4-m23-a-4": {
+    "events": [
+      {
+        "at": "2026-10-30T01:07:44.670089+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:07:44.670656+00:00",
+        "event": "grant",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T01:13:30.770799+00:00",
+        "event": "release",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T01:13:30.773224+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 346.100143,
+    "queue_seconds": 0.000567
+  },
+  "engine-stage4-m23-b-5": {
+    "events": [
+      {
+        "at": "2026-10-30T00:42:33.086924+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:42:33.087542+00:00",
+        "event": "grant",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T00:48:45.754067+00:00",
+        "event": "release",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T00:48:45.754259+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 372.666525,
+    "queue_seconds": 0.000618
+  },
+  "engine-stage4-m23-b-6": {
+    "events": [
+      {
+        "at": "2026-10-30T00:48:45.837886+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:48:45.838348+00:00",
+        "event": "grant",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T00:55:27.377176+00:00",
+        "event": "release",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T00:55:27.378177+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 401.538828,
+    "queue_seconds": 0.000462
+  },
+  "engine-stage4-m23-b-7": {
+    "events": [
+      {
+        "at": "2026-10-30T00:55:27.462560+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:55:27.462990+00:00",
+        "event": "grant",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T01:01:37.953637+00:00",
+        "event": "release",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T01:01:37.956330+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 370.490647,
+    "queue_seconds": 0.00043
+  },
+  "engine-stage4-m23-b-8": {
+    "events": [
+      {
+        "at": "2026-10-30T01:01:38.037743+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:01:38.038305+00:00",
+        "event": "grant",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T01:07:37.127497+00:00",
+        "event": "release",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T01:07:37.128420+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 359.089192,
+    "queue_seconds": 0.000562
+  },
+  "engine-stage4-m23-b-9": {
+    "events": [
+      {
+        "at": "2026-10-30T01:07:37.214018+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:07:37.214581+00:00",
+        "event": "grant",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T01:08:57.778175+00:00",
+        "event": "release",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T01:08:57.778449+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 80.563594,
+    "queue_seconds": 0.000563
+  },
+  "engine-stage4-m23-plan": {
+    "events": [
+      {
+        "at": "2026-10-30T00:39:30.200045+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:39:30.200795+00:00",
+        "event": "grant",
+        "slots": [
+          3
+        ]
+      },
+      {
+        "at": "2026-10-30T00:39:45.312063+00:00",
+        "event": "release",
+        "slots": [
+          3
+        ]
+      },
+      {
+        "at": "2026-10-30T00:39:45.312510+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 15.111268,
+    "queue_seconds": 0.00075
+  },
+  "engine-stage4-reader-P1-reader": {
+    "events": [
+      {
+        "at": "2026-10-30T02:27:16.374015+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:27:16.374941+00:00",
+        "event": "grant",
+        "slots": [
+          5
+        ]
+      },
+      {
+        "at": "2026-10-30T02:31:11.900135+00:00",
+        "event": "release",
+        "slots": [
+          5
+        ]
+      },
+      {
+        "at": "2026-10-30T02:31:11.900409+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 235.525194,
+    "queue_seconds": 0.000926
+  },
+  "engine-stage4-reader-P2-reader": {
+    "events": [
+      {
+        "at": "2026-10-30T02:31:11.955857+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:31:11.956303+00:00",
+        "event": "grant",
+        "slots": [
+          5
+        ]
+      },
+      {
+        "at": "2026-10-30T02:35:13.558977+00:00",
+        "event": "release",
+        "slots": [
+          5
+        ]
+      },
+      {
+        "at": "2026-10-30T02:35:13.559250+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 241.602674,
+    "queue_seconds": 0.000446
+  },
+  "engine-stage4-reader-P6-whole": {
+    "events": [
+      {
+        "at": "2026-10-30T02:25:59.257141+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:25:59.258500+00:00",
+        "event": "grant",
+        "slots": [
+          5
+        ]
+      },
+      {
+        "at": "2026-10-30T02:27:16.295766+00:00",
+        "event": "release",
+        "slots": [
+          5
+        ]
+      },
+      {
+        "at": "2026-10-30T02:27:16.296858+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 77.037266,
+    "queue_seconds": 0.001359
+  },
+  "engine-stage4-reader-common-final": {
+    "events": [
+      {
+        "at": "2026-10-30T02:25:59.273422+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:47:12.159442+00:00",
+        "event": "grant",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T02:54:27.420526+00:00",
+        "event": "release",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T02:54:27.420738+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 435.261084,
+    "queue_seconds": 1272.88602
+  },
+  "engine-stage4-reader-gate-final": {
+    "events": [
+      {
+        "at": "2026-10-30T02:25:59.273061+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:47:12.307213+00:00",
+        "event": "grant",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T02:52:10.650083+00:00",
+        "event": "release",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T02:52:10.651055+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 298.34287,
+    "queue_seconds": 1273.034152
+  },
+  "engine-stage4-render-128": {
+    "events": [
+      {
+        "at": "2026-10-30T00:48:07.356718+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:48:07.357145+00:00",
+        "event": "grant",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:48:39.835106+00:00",
+        "event": "release",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:48:39.835523+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 32.477961,
+    "queue_seconds": 0.000427
+  },
+  "engine-stage4-render-9200": {
+    "events": [
+      {
+        "at": "2026-10-30T00:48:39.926450+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:48:39.927026+00:00",
+        "event": "grant",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:51:07.635680+00:00",
+        "event": "release",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:51:07.636053+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 147.708654,
+    "queue_seconds": 0.000576
+  },
+  "engine-stage4-render-P1": {
+    "events": [
+      {
+        "at": "2026-10-30T00:51:07.721115+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:51:07.721604+00:00",
+        "event": "grant",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:52:16.691339+00:00",
+        "event": "release",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:52:16.691695+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 68.969735,
+    "queue_seconds": 0.000489
+  },
+  "engine-stage4-render-P2": {
+    "events": [
+      {
+        "at": "2026-10-30T00:52:16.787765+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:52:16.788351+00:00",
+        "event": "grant",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:53:55.017469+00:00",
+        "event": "release",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:53:55.018244+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 98.229118,
+    "queue_seconds": 0.000586
+  },
+  "engine-stage4-render-P3": {
+    "events": [
+      {
+        "at": "2026-10-30T00:53:55.123818+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T00:53:55.124817+00:00",
+        "event": "grant",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:54:17.867489+00:00",
+        "event": "release",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T00:54:17.867811+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 22.742672,
+    "queue_seconds": 0.000999
+  },
+  "engine-stage4-restart-K1": {
+    "events": [
+      {
+        "at": "2026-10-30T02:06:26.436321+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:09:52.696969+00:00",
+        "event": "grant",
+        "slots": [
+          5
+        ]
+      },
+      {
+        "at": "2026-10-30T02:10:21.635233+00:00",
+        "event": "release",
+        "slots": [
+          5
+        ]
+      },
+      {
+        "at": "2026-10-30T02:10:21.635410+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 28.938264,
+    "queue_seconds": 206.260648
+  },
+  "engine-stage4-restart-P1": {
+    "events": [
+      {
+        "at": "2026-10-30T01:42:29.695235+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:42:29.695712+00:00",
+        "event": "grant",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T01:46:17.279510+00:00",
+        "event": "release",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T01:46:17.279757+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 227.583798,
+    "queue_seconds": 0.000477
+  },
+  "engine-stage4-restart-P2": {
+    "events": [
+      {
+        "at": "2026-10-30T01:42:29.694880+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:42:29.695456+00:00",
+        "event": "grant",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T01:46:59.705551+00:00",
+        "event": "release",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T01:46:59.706100+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 270.010095,
+    "queue_seconds": 0.000576
+  },
+  "engine-stage4-restart-P3": {
+    "events": [
+      {
+        "at": "2026-10-30T02:04:44.545637+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:05:04.567645+00:00",
+        "event": "grant",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T02:05:43.889953+00:00",
+        "event": "release",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T02:05:43.891040+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 39.322308,
+    "queue_seconds": 20.022008
+  },
+  "engine-stage4-restart-P3-preview": {
+    "events": [
+      {
+        "at": "2026-10-30T01:38:58.878087+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:38:58.879120+00:00",
+        "event": "grant",
+        "slots": [
+          4
+        ]
+      },
+      {
+        "at": "2026-10-30T01:39:35.409331+00:00",
+        "event": "release",
+        "slots": [
+          4
+        ]
+      },
+      {
+        "at": "2026-10-30T01:39:35.409735+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 36.530211,
+    "queue_seconds": 0.001033
+  },
+  "engine-stage4-restart-P6": {
+    "events": [
+      {
+        "at": "2026-10-30T02:05:04.608780+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:16:49.651216+00:00",
+        "event": "grant",
+        "slots": [
+          4
+        ]
+      },
+      {
+        "at": "2026-10-30T02:17:24.770101+00:00",
+        "event": "release",
+        "slots": [
+          4
+        ]
+      },
+      {
+        "at": "2026-10-30T02:17:24.771035+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 35.118885,
+    "queue_seconds": 705.042436
+  },
+  "engine-stage4-restart-P7": {
+    "events": [
+      {
+        "at": "2026-10-30T02:05:43.965147+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:05:43.966002+00:00",
+        "event": "grant",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T02:06:26.360991+00:00",
+        "event": "release",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T02:06:26.361223+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 42.394989,
+    "queue_seconds": 0.000855
+  },
+  "engine-stage4-restart-common-check": {
+    "events": [
+      {
+        "at": "2026-10-30T01:42:29.695460+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:42:29.696004+00:00",
+        "event": "grant",
+        "slots": [
+          4
+        ]
+      },
+      {
+        "at": "2026-10-30T01:50:29.789958+00:00",
+        "event": "release",
+        "slots": [
+          4
+        ]
+      },
+      {
+        "at": "2026-10-30T01:50:29.790193+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 480.093954,
+    "queue_seconds": 0.000544
+  },
+  "engine-stage4-restart-engine-gate": {
+    "events": [
+      {
+        "at": "2026-10-30T01:42:29.694253+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:42:29.694787+00:00",
+        "event": "grant",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T01:48:06.897888+00:00",
+        "event": "release",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T01:48:06.898327+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 337.203101,
+    "queue_seconds": 0.000534
+  },
+  "engine-stage4-restart-leaf": {
+    "events": [
+      {
+        "at": "2026-10-30T02:02:23.254150+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:02:23.254639+00:00",
+        "event": "grant",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T02:05:04.539590+00:00",
+        "event": "release",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T02:05:04.539914+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 161.284951,
+    "queue_seconds": 0.000489
+  },
+  "engine-stage4-restart-leaf-preview": {
+    "events": [
+      {
+        "at": "2026-10-30T01:34:17.010774+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:34:17.013704+00:00",
+        "event": "grant",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T01:36:36.703946+00:00",
+        "event": "release",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T01:36:36.704363+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 139.690242,
+    "queue_seconds": 0.00293
+  },
+  "engine-stage4-restart-leaf-strict": {
+    "events": [
+      {
+        "at": "2026-10-30T01:38:30.764774+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:38:30.767217+00:00",
+        "event": "grant",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T01:41:01.538834+00:00",
+        "event": "release",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T01:41:01.539328+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 150.771617,
+    "queue_seconds": 0.002443
+  },
+  "engine-stage4-restart-m22": {
+    "events": [
+      {
+        "at": "2026-10-30T02:02:55.685325+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:02:55.686342+00:00",
+        "event": "grant",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T02:03:07.461599+00:00",
+        "event": "release",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T02:03:07.461794+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 11.775257,
+    "queue_seconds": 0.001017
+  },
+  "engine-stage4-restart-m22-full": {
+    "events": [
+      {
+        "at": "2026-10-30T02:18:12.572430+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:19:48.698904+00:00",
+        "event": "grant",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T02:20:29.242459+00:00",
+        "event": "release",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T02:20:29.242613+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 40.543555,
+    "queue_seconds": 96.126474
+  },
+  "engine-stage4-restart-m23-part-0": {
+    "events": [
+      {
+        "at": "2026-10-30T01:46:17.340936+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:46:17.341902+00:00",
+        "event": "grant",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T01:53:41.271908+00:00",
+        "event": "release",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T01:53:41.272156+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 443.930006,
+    "queue_seconds": 0.000966
+  },
+  "engine-stage4-restart-m23-part-1": {
+    "events": [
+      {
+        "at": "2026-10-30T01:46:59.772250+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:46:59.772930+00:00",
+        "event": "grant",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T01:54:08.022851+00:00",
+        "event": "release",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T01:54:08.023350+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 428.249921,
+    "queue_seconds": 0.00068
+  },
+  "engine-stage4-restart-m23-part-2": {
+    "events": [
+      {
+        "at": "2026-10-30T01:48:06.959030+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:48:06.959520+00:00",
+        "event": "grant",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T01:55:19.444151+00:00",
+        "event": "release",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T01:55:19.445089+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 432.484631,
+    "queue_seconds": 0.00049
+  },
+  "engine-stage4-restart-m23-part-3": {
+    "events": [
+      {
+        "at": "2026-10-30T01:50:29.851387+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:50:29.852155+00:00",
+        "event": "grant",
+        "slots": [
+          4
+        ]
+      },
+      {
+        "at": "2026-10-30T01:57:31.989679+00:00",
+        "event": "release",
+        "slots": [
+          4
+        ]
+      },
+      {
+        "at": "2026-10-30T01:57:31.990661+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 422.137524,
+    "queue_seconds": 0.000768
+  },
+  "engine-stage4-restart-m23-part-4": {
+    "events": [
+      {
+        "at": "2026-10-30T01:53:41.330539+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:53:41.331046+00:00",
+        "event": "grant",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T02:00:46.133135+00:00",
+        "event": "release",
+        "slots": [
+          2
+        ]
+      },
+      {
+        "at": "2026-10-30T02:00:46.133407+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 424.802089,
+    "queue_seconds": 0.000507
+  },
+  "engine-stage4-restart-m23-part-5": {
+    "events": [
+      {
+        "at": "2026-10-30T01:54:08.089885+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:54:08.090458+00:00",
+        "event": "grant",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T02:01:16.757746+00:00",
+        "event": "release",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T02:01:16.758008+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 428.667288,
+    "queue_seconds": 0.000573
+  },
+  "engine-stage4-restart-m23-part-6": {
+    "events": [
+      {
+        "at": "2026-10-30T01:55:19.518818+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:55:19.519365+00:00",
+        "event": "grant",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T02:02:23.189244+00:00",
+        "event": "release",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T02:02:23.189692+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 423.669879,
+    "queue_seconds": 0.000547
+  },
+  "engine-stage4-restart-m23-part-7": {
+    "events": [
+      {
+        "at": "2026-10-30T01:57:32.050608+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:57:32.051200+00:00",
+        "event": "grant",
+        "slots": [
+          4
+        ]
+      },
+      {
+        "at": "2026-10-30T02:04:44.480000+00:00",
+        "event": "release",
+        "slots": [
+          4
+        ]
+      },
+      {
+        "at": "2026-10-30T02:04:44.480287+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 432.4288,
+    "queue_seconds": 0.000592
+  },
+  "engine-stage4-restart-m23-part-8": {
+    "events": [
+      {
+        "at": "2026-10-30T02:00:46.211018+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:04:44.518823+00:00",
+        "event": "grant",
+        "slots": [
+          4
+        ]
+      },
+      {
+        "at": "2026-10-30T02:11:57.538205+00:00",
+        "event": "release",
+        "slots": [
+          4
+        ]
+      },
+      {
+        "at": "2026-10-30T02:11:57.538418+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 433.019382,
+    "queue_seconds": 238.307805
+  },
+  "engine-stage4-restart-m23-part-9": {
+    "events": [
+      {
+        "at": "2026-10-30T02:01:16.826007+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:01:16.826601+00:00",
+        "event": "grant",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T02:02:55.622414+00:00",
+        "event": "release",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T02:02:55.622634+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 98.795813,
+    "queue_seconds": 0.000594
+  },
+  "engine-stage4-restart-plan": {
+    "events": [
+      {
+        "at": "2026-10-30T01:42:07.108993+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T01:42:07.109479+00:00",
+        "event": "grant",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T01:42:22.127805+00:00",
+        "event": "release",
+        "slots": [
+          0
+        ]
+      },
+      {
+        "at": "2026-10-30T01:42:22.128080+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 15.018326,
+    "queue_seconds": 0.000486
+  },
+  "engine-stage4-restart-render-128": {
+    "events": [
+      {
+        "at": "2026-10-30T02:03:07.528218+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:03:07.528720+00:00",
+        "event": "grant",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T02:03:42.504324+00:00",
+        "event": "release",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T02:03:42.504487+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 34.975604,
+    "queue_seconds": 0.000502
+  },
+  "engine-stage4-restart-render-9200": {
+    "events": [
+      {
+        "at": "2026-10-30T02:03:42.561397+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:03:42.561914+00:00",
+        "event": "grant",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T02:06:46.376375+00:00",
+        "event": "release",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T02:06:46.376914+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 183.814461,
+    "queue_seconds": 0.000517
+  },
+  "engine-stage4-restart-render-P1": {
+    "events": [
+      {
+        "at": "2026-10-30T02:06:46.450746+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:06:46.451313+00:00",
+        "event": "grant",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T02:07:58.404117+00:00",
+        "event": "release",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T02:07:58.404298+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 71.952804,
+    "queue_seconds": 0.000567
+  },
+  "engine-stage4-restart-render-P2": {
+    "events": [
+      {
+        "at": "2026-10-30T02:07:58.465783+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:07:58.466296+00:00",
+        "event": "grant",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T02:09:25.587754+00:00",
+        "event": "release",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T02:09:25.587950+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 87.121458,
+    "queue_seconds": 0.000513
+  },
+  "engine-stage4-restart-render-P3": {
+    "events": [
+      {
+        "at": "2026-10-30T02:09:25.659209+00:00",
+        "event": "wait"
+      },
+      {
+        "at": "2026-10-30T02:09:25.659821+00:00",
+        "event": "grant",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T02:09:51.751979+00:00",
+        "event": "release",
+        "slots": [
+          1
+        ]
+      },
+      {
+        "at": "2026-10-30T02:09:51.752192+00:00",
+        "code": 0,
+        "event": "exit"
+      }
+    ],
+    "execution_seconds": 26.092158,
+    "queue_seconds": 0.000612
+  }
+}
