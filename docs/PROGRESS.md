@@ -1,6 +1,6 @@
 # Consolidated progress — MONDE01
 
-Round: **CXR-20261030-M3R2 (M3 round 2 — M3.1 P1/P2 part ACCEPTED at `c9c85eb`, P6 part ACCEPTED at `92fab50`; S1 victory and D1 defeat on the original)**. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)); M2.1 at `32bb391`; M2.2 at `b9f4b5d`; **M2.3 and M2 at `ea62eb4`** ([record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json)); **M3.1 P1/P2 part at `c9c85eb`** ([record](../integracao/validacao/cxr-20261030-m3r1-m3-1-p1-p2-acceptance.json)). Handover: [HANDOVER_CLAUDE_20261030_1910](HANDOVER_CLAUDE_20261030_1910.md). [Roadmap](ROADMAP_MONDE01.md), [M3 plan](M3_PLAN.md), [snapshots](progress/README.md).
+Round: **CXR-20261030-M3R2 (M3 round 2 — M3.1 P1/P2 part ACCEPTED at `c9c85eb`, P6 part ACCEPTED at `92fab50`; S1 victory and D1 defeat on the original)**. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)); M2.1 at `32bb391`; M2.2 at `b9f4b5d`; **M2.3 and M2 at `ea62eb4`** ([record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json)); **M3.1 P1/P2 part at `c9c85eb`** ([record](../integracao/validacao/cxr-20261030-m3r1-m3-1-p1-p2-acceptance.json)). Handover: [HANDOVER_CLAUDE_20261030_2010](HANDOVER_CLAUDE_20261030_2010.md). [Roadmap](ROADMAP_MONDE01.md), [M3 plan](M3_PLAN.md), [snapshots](progress/README.md).
 
 ## Indicadores medidos (atualizados a cada integração)
 
@@ -9,15 +9,17 @@ Estimativa global da MONDE01: **~60% (50–70%)** desde 30/10 13h50 (era 50% (40
 | Indicador | Valor | Atualizado |
 |---|---|---|
 | Critérios aceitos (M1, M2.1–2.3, M3.1–3.5, M4.1–4.3) | **4 de 12** completos + M3.1 com 3 de 4 janelas (P1, P2, P6; falta S1) | 30/10 19h10 |
-| Alcance da cadeia Python no S1 (vitória no quadro 17.050) | **10.800 / 17.050 quadros (63%)** em indicadores estritos, na `main`; 11.752 em modo de diagnóstico. Próximas paradas: 10.801 (Gráficos, `AffGame` com 2 monstros), 11.753 (som do ataque, resolvido por Combate em `631d76b`) | 30/10 19h10 |
-| Alcance do motor Rust | P1, P2, P3, P6 (4.544/4.544), P7 e K1 completos na `main`; S1 até 10.800 (estado) e 2.013 (telas) em `feat/codex-rust-engine` `aaf7705`, ainda não integrado | 30/10 19h10 |
-| Telas do S1 (M3.2) | **2.792/2.792** telas completas iguais nas janelas de ordens 130–5.090 (Graphics API 1.10) | 30/10 19h10 |
+| Alcance da cadeia Python no S1 (vitória no quadro 17.050) | **10.800 / 17.050 quadros (63%)** em indicadores estritos, na `main`; 11.752 em modo de diagnóstico. Próximas paradas: 10.801 (Gráficos, `AffGame` com 2 monstros; Gráficos 1.12, na `main` em `f397b4f`, deve cobrir — falta rodar a verificação), 11.753 (som do ataque, resolvido por Combate em `631d76b`) | 30/10 20h10 |
+| Alcance do motor Rust | P1, P2, P3, P6 (4.544/4.544), P7 e K1 completos; **S1 até 10.800 (estado, 10.672/10.672 quadros) e 2.013 (telas)**, integrado pela manutenção (`aaf7705`). Reproduzido pelo coordenador na MacBook: dylib idêntica (`0783fa8d…`), K1 501/501, S1 10.672/10.672 com parada em 10.801 `0x41591f` | 30/10 20h10 |
+| Telas do S1 (M3.2) | **2.792/2.792** telas completas iguais nas janelas de ordens 130–5.090; **Graphics API 1.12** (`f397b4f`): fim do S1 11.251–12.500 **1.250/1.250** telas (combate, fogo, morte, incursões) e glifos nativos do `AffText`. Faltam 11.001–11.250 e depois de 12.500 (comandos para o Mac mini em `LATE_S1_RENDER.md`) | 30/10 20h10 |
 | Teste A no app (metade de estado) | **6 de 6 sondas iguais** (P1 501, P2 601, P3 3.001, P6 2.272, P7 3.572, K1 501 quadros) | 30/10 13h50 |
-| Teste B | pipeline pronto (prefixo 222/222 no original); sessão humana bloqueada pelos glifos do texto (`0x459454`, em andamento em Gráficos) | 30/10 19h10 |
-| Capturas originais (S1, D1, passo 2 do S1) | **3 de 3**: o passo 2 do S1 (33.844 fases, política aprovada) está em `feat/re-missions` `86c27f0`, ainda não integrado | 30/10 19h10 |
+| Teste B | pipeline pronto (prefixo 222/222 no original); glifos do texto prontos em Gráficos 1.12 (`bc38477`, na `main`); falta o motor Rust e o app adotarem antes da sessão humana | 30/10 20h10 |
+| Capturas originais (S1, D1, passo 2 do S1) | **3 de 3**, todas na `main`: o passo 2 do S1 (33.844 fases, política aprovada) entrou em `7454d08`. A prova formal do S1 (IA/runtime) ainda não rodou | 30/10 20h10 |
 | App macOS | 60 quadros de jogo/s com ordens e **som** (efeitos originais); lógica Rust ~0,3 ms/quadro | 30/10 19h10 |
 
 ## Resumo executivo
+
+**30/10, 20h10 (fim do dia).** Integrados na `main`: o handover da pausa (`bf26fc8`), Gráficos 1.12 com os glifos do texto e o fim do S1 (`f397b4f`), o passo 2 do S1 de Missões (`7454d08`) e o motor Rust S1 até 10.800 (pela manutenção, depois de reprodução na MacBook). A estimativa continua em ~60% (50–70%): nada foi aceito hoje à noite. Próximos passos: prova formal do S1 e a cadeia além de 10.801 (brief pronto), adoção dos glifos no Rust e no app, Teste B humano. Handover: [HANDOVER_CLAUDE_20261030_2010](HANDOVER_CLAUDE_20261030_2010.md).
 
 **30/10, fim do dia (pausa até o reset da cota do Codex).** A cadeia Python passou de 2.546 para 10.800 quadros no S1, incluindo a primeira incursão, e o motor Rust acompanha até o mesmo ponto. Gráficos 1.10 cobre as janelas de ordens do S1 até o quadro 5.090. O app ganhou som. O passo 2 do S1 está pronto no ramo de Missões. Decisões do usuário: depois da MONDE01, rigor reduzido em todas as missões (só Rust, validação automática por rotina e por ponto de controle; volta ao rigor completo se algo divergir); seletor de velocidade e app abrindo direto no jogo só na versão final para humanos. Handover: [HANDOVER_CLAUDE_20261030_1910](HANDOVER_CLAUDE_20261030_1910.md).
 
