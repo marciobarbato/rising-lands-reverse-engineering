@@ -1,0 +1,4 @@
+[lease] combat-fatal-original-leaves waiting
+[lease] combat-fatal-original-leaves granted slots [3]
+{"case": "message48-raider-target-65535", "fault": "UcError: Invalid memory read (UC_ERR_READ_UNMAPPED)", "limit": false}
+{"cases": {"iagUnitSendMessage": 13, "PlayerResetAllie": 7, "PlayerAAttaqueSet": 7, "MAJSympathie": 29, "MessageBoxSet": 10, "EnginSetLevelExperience": 12, "SetDyingEngin": 6, "EnginNextEtape": 990, "CalculEnginNextEtape": 3, "EnginInfligeDegat": 9, "InfligeDegat": 3}, "returns": 1088, "faults": 1, "limits": 0, "outside": 0}

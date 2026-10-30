@@ -130,7 +130,12 @@ def main():
     ap.add_argument('--quadros', type=int, help='frames after 128 (default: the probe\'s frames)')
     ap.add_argument('--nucleo-ref', help='directory with Core\'s construcao_core.py (read-only extraction)')
     ap.add_argument('--saida', required=True)
+    ap.add_argument('--diagnostico-planejamento', action='store_true',
+                    help='diagnostic only (never evidence; --saida under .local/): a Graphics display-path stop is '
+                         'recorded and the drawing taken as writing no logic byte')
     a = ap.parse_args()
+    if a.diagnostico_planejamento and not (ROOT / a.saida).resolve().is_relative_to((ROOT / '.local').resolve()):
+        raise SystemExit('A planning diagnostic writes under .local/ only')
     if a.nucleo_ref:
         sys.path.append(str(ROOT / a.nucleo_ref))
     sha_ref = subprocess.run(['git', '-C', str(ROOT), 'rev-parse', a.ref], capture_output=True, text=True,
@@ -150,7 +155,7 @@ def main():
     _, _, entrada, m1 = carregar_cenario_exibicao()
     roteiro = RoteiroEntrada(dados)
     comp = ComposicaoEntrada(estado, cap, entrada, m1, roteiro, inicio=128, alocacoes=cap['allocations'],
-                             regs_inicio=regs)
+                             regs_inicio=regs, planejamento=a.diagnostico_planejamento)
     n = a.quadros or (max(quadros_ref) - 128)
     quadros, parada, primeira_diferenca, textos = [], None, None, []
     ordens_py = []
@@ -205,6 +210,11 @@ def main():
         start=dict(frame=128, source=str(M22.relative_to(ROOT)), summary=cap['phases'][-1]['state_after']['summary']),
         frames_requested=n, frames_equal=sum(q['equal'] for q in quadros), last_frame=k,
         orders_python=ordens_py, first_difference=primeira_diferenca, stop=parada,
+        diagnostic_graphics_planning=a.diagnostico_planejamento,
+        graphics_planning_stops=dict(count=len(comp.ctx.paradas_planejamento),
+                                     first=comp.ctx.paradas_planejamento[:3],
+                                     kinds=sorted({p['routine'] for p in comp.ctx.paradas_planejamento}))
+        if a.diagnostico_planejamento else None,
         text_boundary=dict(
             binding='TextGetMessage as Missions\' declared display-scenario boundary (EAX 0, no cleanup, logged)',
             frames=textos, frames_equal=sum(t['python_frame_phase'] == t['probe_entries'] for t in textos),

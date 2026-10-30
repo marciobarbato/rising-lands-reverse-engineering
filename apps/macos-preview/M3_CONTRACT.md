@@ -397,3 +397,35 @@ calls an observer, projects memory, computes hashes or increments equality count
 The status layout and engine ABI are unchanged. `macos_live_read` refuses play.
 The native UI changes modes by recreating S0. Its default is play; native smoke
 and horizon tools explicitly request validation. Input stays record-only in both.
+
+## ABI 1.5 player input
+
+The consumer now requires engine ABI `0x00010005` and still checks the independent
+Rust Graphics contract `0x00010007`. Python inspection/proofs accept Graphics
+1.9, pinning the new 128-frame HUD report SHA256
+`00edcef1dea49c5bc8ea8290b1502210b89c209970d78aae2d476be22aa6831d`.
+The preceding ABI1.4/Graphics1.8 sections are historical.
+
+Jogar queues native mouse/key events on the world worker. Input starts after the
+128 real M2 prefix frames. WM_MOUSEMOVE at k, DOWN at k+1 and UP at k+3 preserve
+the cursor and serialize clicks; physical UP is not a second scripted release.
+Ctrl and the other declared asynchronous keys hold until physical release/focus
+loss. Per-frame keys are expanded explicitly, not interpreted as repeated edges.
+The bounded 4096-message queue fails visibly on overflow. No wall clock or display
+callback supplies a game-frame number. Recording observes the same events.
+
+`macos_live_human_phase` builds `MacOSDeclaredInput`; `macos_live_input_phase`
+copies that descriptor into ABI1.5 and calls `rl_passo_quadro_entrada`. Phase2
+receives messages/cursor/keys, phase3 receives the same keys with no messages.
+The native live render remains before phase2. Each successful phase retains its
+actual register/context output. Test tools call the identical phase entry without
+rendering to compare the simulation through an earlier renderer dependency.
+They never load frame128 or a later captured state into the native world.
+`macos_live_frame_context` and optional order-tag diagnostics are proof/benchmark
+APIs, unused by normal play. Validation mode remains no-input and record-only.
+
+Flags 2/4 explicitly select the published Missions text/sound non-execution
+boundaries, matching its probes. This does not establish glyph rendering or audio
+playback. Engine failures retain atomic world/context semantics and publish the
+named stop. Rust renderer partial results also stop the UI with their actual
+surface; neither a skipped draw nor substitute pixels hide a dependency.

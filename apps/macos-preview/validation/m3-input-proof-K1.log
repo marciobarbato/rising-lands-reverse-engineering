@@ -1,0 +1,30 @@
+{
+ "schema": "rising-lands/macos-test-a-state/1",
+ "probe": "K1",
+ "world_source": "S0 plus original static tables; 128 real no-input frames; no oracle state reload",
+ "driver_sha256": "bff17d09b48dd53437ea9fec5ef70224cac69804f4dc32f2c38f720a9113c9e1",
+ "library_sha256": "5fa0292dc7485957baf8106be007b6292b9c64578d4b9e574a3357d14911b477",
+ "input_sha256": "92a69cdd087cdc644ef3b8d7abdbf3cfa176d7f564a914b17b2dfc901e4a0600",
+ "canonical_roundtrip": true,
+ "reference": {
+  "logic": "a7f5d4939e7826e02a8b348995edb9c793657f4c",
+  "graphics": "ce441852bcada750a8f91da8ed3302f1668c4405",
+  "tree_manifest_sha256": "5942cc4f4c76d7a9311be6f61be5a146819a7a99685a4f6f46011767c7c31276",
+  "source_and_fixtures": "Git objects; no working-tree source hash gate"
+ },
+ "frames_equal": 12,
+ "frames_compared": 12,
+ "frames_requested": 501,
+ "frame_hash_scope": "Exact engine indicator comparator fields, including unit record hashes and objective/UI bytes; DGROUP excluded",
+ "first_difference": null,
+ "first_engine_stop": {
+  "frame": 141,
+  "phase": 2,
+  "code": 5,
+  "detail": "entrada entre quadros \u00b7 quadro 141 \u00b7 ABI 5: AffGame at 0x00415b77",
+  "inputs_before_stop": [],
+  "orders_before_stop": []
+ },
+ "rendering_executed": false,
+ "seconds": 2.219420167
+}
