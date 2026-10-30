@@ -1,6 +1,6 @@
 # Register queries and S1 provider completion
 
-Status: original-only query capture prepared; wrappers and differential pending. The completed S1 a/b/c comparisons are in [S1_GAPS](S1_GAPS.md).
+Status: **546 original-only query calls captured**, no game mutations or boundary calls, code unchanged; wrappers and differential pending. The completed S1 a/b/c comparisons are in [S1_GAPS](S1_GAPS.md).
 
 ## Query contract
 
