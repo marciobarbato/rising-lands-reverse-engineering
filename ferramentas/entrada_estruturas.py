@@ -27,8 +27,8 @@ DecouvreTerrain (``descobrir_area``), IllumineTerrain (``iluminar_area``), Batim
 (``modificar_minimapa_estrutura``) and EnginPeutPasser (``consultar_passagem``).
 
 Uncertain register bits. Those world effects do not reconstruct the registers their loops leave. Where a result
-depends on them it carries ``_incertos = {register: mask}`` (masked bits 0), never a guess: RetireEngin's EAX
-for owners other than 4/0xc8 (EteintTerrain's), DecouvreTerrain/IllumineTerrain/BatimentModifyMap/
+depends on them it carries ``_incertos = {register: mask}`` (masked bits 0), never a guess: DecouvreTerrain's
+and IllumineTerrain's EBX high word (stack residue), BatimentModifyMap/
 EnginPeutPasser's clobbered registers, and DeplaceEngin's (``construcao_core``) deep-callee EAX. Every other
 bit is exact.
 
@@ -253,7 +253,7 @@ class EntradaEstruturas:
             i = edx & 0xffff
             if m.u8((bag + i + 0x42) & M32) == tag:
                 caso = (tag - 1) & 0xff
-                valor = m.u16((bag + 2 * i + 6) & M32)
+                valor = m.u16((bag + 2 * i + 6) & M32) if caso in (0, 1, 2, 5, 6) else None
                 if caso == 0:
                     if m.u8((self._pool() + valor * PASSO + 1) & M32) == alvo:
                         ebx = (ebx + 1) & M32
@@ -540,12 +540,12 @@ class EntradaEstruturas:
         s = r['EAX'] & 0xffff
         e = self._est(s)
         tipo = self.m.u8(e + 8)
-        origem = self.m.u16(e + 2)
         if tipo == 0xe:
-            return dict(r, EAX=((((s * PASSO) & 0xffff0000) | origem) + 0x402) & M32, EDX=e)
+            return dict(r, EAX=((((s * PASSO) & 0xffff0000) | self.m.u16(e + 2)) + 0x402) & M32, EDX=e)
         if tipo != 8:
             return dict(r, EAX=0, EDX=e)
         t = self._tipo_unidade(r['EDX'] & 0xffff) & 0xff
+        origem = self.m.u16(e + 2)
         if t == 3 or self._est_engin(t) & 0xff:
             return dict(r, EAX=origem + 0x403, EDX=e)
         return dict(r, EAX=origem + 0x303, EDX=e)
@@ -578,7 +578,8 @@ class EntradaEstruturas:
     def retire_engin(self, r):
         """RetireEngin 0x457058: AX unit leaves the map: DeselectionEngin; ResetEnginCollision at +8, and at +0x7c
         when different; +0x72 = 0; SetMiniMap(owner, +8, 5); owners other than 0xc8/4 EteintTerrain(+8,
-        +0xbb + +0xf5). EBX/ECX/EDX/ESI preserved; EAX: SetMiniMap's or EteintTerrain's (``_incertos``)."""
+        +0xbb + +0xf5). EBX/ECX/EDX/ESI preserved; EAX: SetMiniMap's row counter, or EteintTerrain's last row index
+        (radius + 1, sign-extended word: its loop bound at 0x476fba)."""
         m = self.m
         u = r['EAX'] & 0xffff
         c = self._rec(u)
@@ -593,8 +594,9 @@ class EntradaEstruturas:
         w.minimapa(dono, celula, 5)
         if dono in (0xc8, 4):
             return dict(r, EAX=self._linhas_minimapa())
-        w.apagar_area(m.u16(c + 8), (m.u8(c + 0xbb) + m.u8(c + 0xf5)) & 0xffff, dono)
-        return dict(r, EAX=0, _incertos={'EAX': M32})
+        raio = (m.u8(c + 0xbb) + m.u8(c + 0xf5)) & 0xffff
+        w.apagar_area(m.u16(c + 8), raio, dono)
+        return dict(r, EAX=_s16(raio + 1) & M32)          # EteintTerrain's: its last row index, sign-extended
 
     def _linhas_minimapa(self):
         """SetMiniMap 0x46a388's exit EAX: its row counter after the rows of one cell (minimap height / map
@@ -670,10 +672,13 @@ class EntradaEstruturas:
                     _incertos={'EBX': 0xffff0000})
 
     def illumine_terrain(self, r):
-        """IllumineTerrain 0x476cb3 (M2.3's ``iluminar_area``). Registers other than ECX/ESI/EDI/EBP are the
-        loop's and are marked uncertain."""
-        self.mundo().iluminar_area(r['EAX'] & 0xffff, r['EDX'] & 0xffff, r['EBX'] & 0xff)
-        return dict(r, EAX=0, EBX=0, EDX=0, _incertos={'EAX': M32, 'EBX': M32, 'EDX': M32})
+        """IllumineTerrain 0x476cb3 (M2.3's ``iluminar_area``). Exit registers from its second row loop's bound
+        (0x476df9): EAX = DX + 1 (the row word, sign-extended), EDX = DX (u16), EBX low word = DX + 1 (the row
+        dword incremented: its high word is a 16-bit local's never-written upper half, uncertain). ECX/ESI/EDI/EBP
+        preserved."""
+        raio = r['EDX'] & 0xffff
+        self.mundo().iluminar_area(r['EAX'] & 0xffff, raio, r['EBX'] & 0xff)
+        return dict(r, EAX=_s16(raio + 1) & M32, EBX=(raio + 1) & 0xffff, EDX=raio, _incertos={'EBX': 0xffff0000})
 
     def batiment_modify_map(self, r):
         """BatimentModifyMap 0x419e97 (``minimapa_estruturas``): DL nonzero mode 6, zero mode 7. EBX/ECX/ESI/EDI/
@@ -696,7 +701,7 @@ class EntradaEstruturas:
         ecx = r['EAX']
         rec = self._rec(u)
         tipo_s = m.u8(self._est(s) + 8)
-        tipo_u = m.u8(rec + 1)
+        tipo_u = m.u8(rec + 1) if tipo_s in (8, 0xe, 0x12) else None    # read only where the original does
         if tipo_s == 8 and tipo_u != 9:
             ax = self.batiment_get_case_entrer(dict(r, EAX=s, EDX=u))['EAX']
             m.u16(rec + 0xb2, ax)
@@ -1266,13 +1271,33 @@ class EntradaEstruturas:
         return dict(r, EAX=edi)
 
 
+# Argument registers a provided routine's behaviour depends on (the bits it reads): AX cell / DX radius / BL player
+# for the discovery and light discs, AX structure / DL on-off (SetMiniMap mode 6 or 7) for BatimentModifyMap, AX cell
+# / DL player for TerrainEstDecouvert. ``provedor_entrada`` refuses a call that omits one instead of entering 0.
+ARGUMENTOS_EXIGIDOS = {
+    'DecouvreTerrain': ('EAX', 'EDX', 'EBX'), 'IllumineTerrain': ('EAX', 'EDX', 'EBX'),
+    'BatimentModifyMap': ('EAX', 'EDX'), 'TerrainEstDecouvert': ('EAX', 'EDX'),
+}
+
+
+class ArgumentoNaoPassado(ValueError):
+    """A caller of ``provedor_entrada`` omitted an argument register the routine's behaviour depends on."""
+    def __init__(self, rotina, chamada, registradores):
+        self.rotina, self.chamada, self.registradores = rotina, chamada, tuple(registradores)
+        super().__init__(f'{rotina} called at 0x{chamada:x} without its argument register(s) '
+                         f'{", ".join(registradores)}; pass them (the original passes them), nothing was run')
+
+
 def provedor_entrada(entrada, outros=None):
     """Economy's ``externo(nome, chamada, registradores) -> registradores`` for the Core routines its work cycle
     and lodging credit call (``ROTINAS_ECONOMIA``), run by ``entrada`` (an ``EntradaEstruturas`` over the same
     memory). Same shape as ``construcao_core.provedor_construcao``.
 
     Input: the argument registers (Economy passes only those, at their ``ARGUMENTOS`` widths) or all of EAX..EBP,
-    optionally ``_incertos``. A missing register enters as 0 with a full uncertain mask. Output: EAX..EBP as the
+    optionally ``_incertos``. A missing register enters as 0 with a full uncertain mask, except a register the
+    routine's behaviour depends on (``ARGUMENTOS_EXIGIDOS``): missing, it raises ``ArgumentoNaoPassado`` before
+    any store (BatimentModifyMap without DL would silently pick mode 7, the frame-125 divergence of Economy's
+    work-cycle composition; see docs/core/MINIMAP_FRAME125.md). Output: EAX..EBP as the
     callee leaves them, after its stores; ``_incertos`` marks the bits not reconstructed (see the module
     docstring) and carries input masks for registers the callee leaves unchanged. Any other name goes to
     ``outros`` (same signature) or raises ``DependenciaRamoCore`` at its call."""
@@ -1281,6 +1306,9 @@ def provedor_entrada(entrada, outros=None):
             if outros is None:
                 raise DependenciaRamoCore(nome, chamada, 'no provider for this routine')
             return outros(nome, chamada, regs)
+        faltando = [k for k in ARGUMENTOS_EXIGIDOS.get(nome, ()) if k not in regs]
+        if faltando:
+            raise ArgumentoNaoPassado(nome, chamada, faltando)
         entrada_regs = {k: regs.get(k, 0) & M32 for k in REG7}
         incertos_in = dict(regs.get('_incertos') or {})
         for k in REG7:

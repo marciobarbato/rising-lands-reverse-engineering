@@ -201,40 +201,63 @@ the last assertion/stage and game/visibility diagnostics.
 
 The 2026-10-29 architecture decision targets a Rust engine/render library with
 a C ABI called by Swift. Python stays as the validated reference and current
-inspection/playback runtime; whether it ships later remains undecided. Live frame logic now uses the published Rust ABI 1.1; Python supplies the current Graphics renderer and copied-buffer bridge. See the live session below.
+inspection/playback runtime; whether it ships later remains undecided. Live logic and rendering now use Rust ABI 1.4 with native Metal presentation. See the live session below.
 
 
 ## Live no-input Rust session and input recording
 
-Open the inspection page, select **Abrir Rust ao vivo**, then advance the load
-tail and frames or select **Executar Rust**. Each frame runs Rust ABI 1.1,
-projects original-address memory into persistent Graphics views and renders through Graphics 1.5 with HUD. Live output uses a raw indexed canvas; PNG is retained for explicit evidence export and immutable playback.
-Through frame 128, masked state and full surface hashes must match accepted
-M2.2 before publication. Later frames carry explicit unverified-reference status.
-A named engine/Graphics stop pauses execution and remains visible. Reopening
-Rust resets to S0. The legacy evidence selectors still navigate immutable
-playback. The UI and all player-facing labels remain Brazilian Portuguese.
+Open the inspection page and select **Abrir Rust ao vivo**. The app opens a
+native **Rust e Metal** window. **Executar**, **Pausar**, **Avançar quadro** and
+**Reiniciar** control one serial ABI 1.4 world and renderer, initialized from
+accepted display-v2 S0 and original static tables. The native driver renders
+at the exact phase-1/3 generation before phase 2. Phase 2 alone applies display
+logic effects. Swift uploads original indexed pixels and RGB palette to
+reusable Metal resources and presents every completed frame. Python supplies
+only evidence inspection, asset/input preparation and proof oracles.
 
-Image mouse/key events are **record-only** and start no earlier than frame 129.
-The native save panel exports the raw event/poll journal. The Missions scripted
-export is an explicit dependency until its schema lands; unsupported orders
-are never sent to the engine. See [contract v6](../apps/macos-preview/M3_CONTRACT.md)
-for exact ownership, copying, ordering, mask, recorder and stop semantics.
+The live driver checks all 257 M2.2 masked state hashes and 11 checkpoints,
+plus original full-surface hashes through frame 9200. The full 18,401-state
+M2.3 audit uses the same stepping/render path in proof mode. Beyond the pinned
+window, surface verification is explicitly unavailable; execution continues
+to its first named engine/render stop. The driver latches the reason without
+replaying captured frames or inventing state. Reset creates valid replacement
+handles before releasing the previous world/renderer. Original-address reads
+are explicit diagnostics. The normal native no-input scenario injects no
+human orders. The prior recorder/export scaffolding remains an independent
+inspection feature; native gameplay input/orders are not implemented here.
 
-Builds require the hash-checked intact `INSTALHD/RISING.EXE` for four static
-jump tables, the relocatable Python runtime, assets and installed Rust toolchain.
-Cargo output goes to the ignored build target; `motor/` sources are untouched.
-The dylib is copied/signature-checked with the existing app packaging path.
+The Swift executable statically links the unchanged Rust C ABI and app driver,
+so existing hardened ad-hoc signing remains enabled without a library-validation
+exception. The shared library remains available to proof tooling and is hash-
+recorded separately. The builder compiles integrated `motor/` into its ignored
+target from the same immutable Git archive as the app. The app requires ABI
+**1.4** and checks `rl_render_contrato()==0x00010007` (Rust Graphics **1.7**)
+before creating the renderer. The temporary external-engine override has been
+retired; a set `RISING_MACOS_ENGINE_SOURCE` fails explicitly. Builds use main's
+integrated `motor/`, with no implicit library or source fallback.
+
+Python evidence inspection explicitly accepts Graphics **1.8** and pins its
+native 128-frame HUD report SHA-256
+`613ec2348b7fe0d597690ca4601af7f825c0d227133cdddc6b10e822e8eee845`.
+The predecessor 1.7 and current 1.8 hashes match for all 128 no-input frames.
+The existing habitation reader consumes the actual CAVE bag as well as the
+sanctuary. No new callback or external region is required by Graphics 1.8.
+Rust exposes its separately published Graphics **1.7** domain. Saved-background
+and text-boundary exports are additive in ABI 1.4; glyphs retain their named
+stop and no text substitution is installed. Native orders, continuous drag
+recording and later Graphics 1.8 worker/lodging branches remain outside this
+no-input live session. The UI remains Brazilian Portuguese.
 
 ## Renderer port input
 
-The app needs a **versioned C ABI**, callable directly from Swift, with no
+This input spec is implemented by engine **ABI 1.4** and consumed by the native app.
+The original requested interface follows for traceability. The app needs no
 Python projection or PNG work per displayed frame. At 25 fps the frame budget
 is 40 ms: target at most 12 ms logic, 22 ms rendering, 4 ms transfer/presentation
 and 2 ms headroom on the declared Apple Silicon host. Measure the whole
 fixed-step pipeline; these are budgets for implementation, not achieved rates.
 
-Proposed call shape (names are a request, not existing engine symbols):
+Original requested call shape (the published ABI header defines final layouts):
 
 ```c
 rl_render_criar(world, assets, initial_surface, initial_cache, &renderer);
@@ -289,6 +312,83 @@ checkpoints from the no-input world. Test the actual Swift output-buffer path,
 wrong sizes/generations, resets, named stops and palette changes. Swift should
 upload indexed pixels plus palette to a reusable Metal texture/shader (or a
 native RGBA surface), scaling only at presentation. PNG remains an explicit
-evidence export. The current indexed WebKit canvas transport is a temporary
-bridge and retains exact original pixels; it implements none of this proposed
-Rust renderer ABI.
+evidence export. The native live window now uses Rust indexed buffers and Metal. The indexed
+WebKit canvas and Python renderer remain diagnostic/evidence tools only.
+
+### Integrated ABI 1.4 validation
+
+APP_BUILD at `e760756c44f79950cedc146ac17654b19c2d18c0`, after merging main
+`ef52cb0`, builds the integrated engine without an override. The exact
+`scripts/workstream.py` APP_BUILD command passes 109 consumer tests, 27 native
+exercise checks and 20 inspection/live checks. `sh motor/validate.sh` passes
+with its commit-pinned references: 28 Rust tests, 61 Python tests plus the
+10 renderer child tests, 75 original-x86 comparisons and both Swift smokes.
+The engine gate uses a debug library; the application ships a release library.
+
+The bundled live path equals **257/257 states, 11/11 checkpoints and 128/128
+full surfaces**, including Python 1.8 surface/palette/cache/effect comparisons.
+Test A retains **155,597/155,597 answers** and all six canonical byte round
+trips. The real visible native UI measures **41.386 fps**, 401 frames in 9.689 s,
+including startup proofs and Metal presentation. Its GPU readback checks all
+1,920,000 displayed pixels; the UI smoke verifies all 406 reached surfaces.
+Common checks pass 1,976 tests with 620 optional skips. See the
+[delivery evidence](../apps/macos-preview/validation/m3-abi14-delivery.json).
+
+The ABI 1.4 9,200-frame horizon was not rerun in this adoption; the previous
+ABI 1.3 horizon below is historical. Orders, Test A's game-state half, Test B,
+continuous human drags and glyph rendering remain separate dependencies.
+
+### Historical ABI 1.3 application measurements
+
+Development build `869ffaa22db49105c39c31444790b4648551a886` uses the approved
+ABI 1.3 engine source `363faa9c252ffb00d62c81db0da2ee5d4a3d7615`. The real
+visible Swift/Metal window measures **40.914 fps** over 406 frames in 9.923 s,
+including the required 257-state startup audit and all reached surface checks.
+The previous Python/raw-canvas application measured 8.470 fps; its separate
+worker-only rate was 9.898 fps. These are shared-machine measurements, not an
+exclusive benchmark or a comparison of identical frame counts.
+
+| Component | Native UI milliseconds/frame |
+| --- | ---: |
+| Rust logic | 11.042 |
+| Rust renderer, including generation query | 4.451 |
+| State export/hash and surface proofs | 8.000 |
+| Metal upload, presentation and GPU completion | 0.921 |
+| Loop/notification overhead | 0.027 |
+| Total | 24.441 |
+
+Host projection is confined to proof/debug reads. Python rendering, per-frame
+pixel JSON, PNG encoding and Python IPC are absent from native live drawing.
+The native smoke also reads back all 1,920,000 actual displayed GPU pixels and
+compares each against the indexed output and palette. PNG export runs only
+after pausing, outside the rate measurement. The
+[handoff](../apps/macos-preview/HANDOFF.md#rust-renderer-integration--abi-13)
+records complete-window proofs, the first engine stop and build provenance.
+
+## Frame input recording and Test A answers
+
+After the native session completes frame128, choose **Nova gravação** in the
+inspection page or native game window. **● Gravando entrada** is visible while
+recording. The native view captures mouse events and the declared keys; macOS
+Control maps to Windows Ctrl, Option to Alt. The next game-frame poll receives
+each event's frame stamp. Wall-clock timestamps never enter the script.
+**Parar gravação** ends capture; **Exportar entrada** writes a file accepted
+unchanged by Missions' scripted-input harness. The save panel preserves the
+canonical bytes. A new recording replaces the preceding recording explicitly.
+
+Clicks use the declared k/k+1/k+3 cadence and hold the cursor through release.
+Ctrl remains held per frame until release/focus loss, supporting recorded depot
+mode. Moves during a click wait until its end; this first half does not record
+continuous drags. Reset is disabled while recording. Orders remain unavailable
+and no recorded answer enters the Rust world. Record/export failures are visible
+and block exporting an incomplete session as success.
+
+The [input contract](../apps/macos-preview/M3_CONTRACT.md#m33-test-a--frame-input-interchange-and-answer-stream)
+describes `ScriptedInput`, `FrameAnswerMapper` and `MacOSSessionRecorder`.
+The [Test A answer report](../apps/macos-preview/validation/m3-test-a-answers.json)
+compares every declared answer against P1/P2/P3/P6/P7/K1, using the native logs
+only as poll requests. All **155,597 answers** match, with no first difference;
+all six export/import/export byte round trips match. Native WndProc flag stores
+and whole-state hashes belong to Test A's deferred state half. It requires
+engine order support. The 3,000-frame human original replay (Test B) is also
+pending; no M3 acceptance is claimed.

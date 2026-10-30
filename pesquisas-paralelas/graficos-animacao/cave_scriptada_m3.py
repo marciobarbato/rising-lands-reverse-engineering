@@ -7,9 +7,9 @@ import struct
 from graficos import compor_indices
 from objetos import compor_sombra
 from sobreposicoes_entrada_m3 import bob, i16, word
+from camadas_exibicao_m3 import TABLES
 
-PARTES={2:((7032,0,0),(7049,74,5),(7033,89,95),(7041,151,131),(7057,18,63)),
-        3:((7094,0,0),(7095,3,10),(7103,43,0),(7111,60,23),(7119,64,41),(7127,12,46),(7135,21,16))}
+PARTES={int(k):tuple(tuple(row) for row in rows) for k,rows in TABLES['uninhabited_layers'].items()}
 
 def clip(c,left,top,right,bottom):
     c.tela.gravar('recorte',struct.pack('<4H',*(v&65535 for v in (top,bottom,left,right))))
@@ -28,12 +28,17 @@ def facade(c,x,y,cell,index,*,habitacao=None):
     if c.mundo.palavra('terreno',cell)!={2:0x2ed,3:0x30d}[kind]:c.parar(0x40f23b,'facade trigger and structure type disagree')
     if word(r,6):c.parar(0x4085cb,'structure damage/fire (+0x06 nonzero)')
     inhabited=c._consulta_habitada(index,0x4087aa) if habitacao is None else habitacao
-    if inhabited:c.parar(0x40958e if kind==3 else 0x408ac8,'construction facade outside captured uninhabited domain')
+    if inhabited:
+        if kind==3:
+            from camadas_exibicao_m3 import cave
+            cave(c,r,x,y,cell);return
+        c.parar(0x408ac8,'construction facade outside captured uninhabited domain')
     m=c.leitura_entrada
     if m is None:c.parar(0x408ac8,'construction facade requires the live type-table read view')
     maximum=m.u16(0x495d90+52*kind)
-    if maximum!={2:600,3:100}[kind] or word(r,0xa)>maximum:c.parar(0x408ac8,'construction health outside captured maximum')
-    height,scaffold,dx,dy={2:(153,7031,150,93),3:(97,7093,57,47)}[kind]
+    spec=TABLES['construction'][str(kind)]
+    if maximum!=spec['maximum'] or word(r,0xa)>maximum:c.parar(0x408ac8,'construction health outside captured maximum')
+    height,scaffold=spec['height'],spec['scaffold'];dx,dy=spec['anchor']
     x,y=i16(x-dx),i16(y-dy);w,h=c.tela.palavras('janela')
     state=200*word(r,0xa)//maximum
     if kind==3 and mode in (0,1,2,6,7) and state>=100 and r[0x76]:
@@ -53,7 +58,7 @@ def facade(c,x,y,cell,index,*,habitacao=None):
         y=max(0,i16(y+200+jitter()-word(r,0x84)))
         clip(c,0,y,w*32,bottom);x=i16(x+jitter())
     for ident,ox,oy in PARTES[kind]:bob(c,x+ox,y+oy,ident)
-    for ident,ox,oy in PARTES[kind]:gray(c,x+ox,y+(38 if kind==3 and ident==7119 else oy),ident)
+    for ident,ox,oy in PARTES[kind]:gray(c,x+ox,y+TABLES['gray_y_overrides'].get(str(kind),{}).get(str(ident),oy),ident)
 
 def construction_builder(c,r,x,y,index):
     if (r[0]!=0 or c.camera!=0 or r[1]!=7 or r[2] not in (11,15) or r[0x89] not in (0,1)
@@ -69,8 +74,14 @@ def construction_builder(c,r,x,y,index):
 
 def order_markers(c,r):
     if not r[0xbd] or not r[0x82] or r[2]==17:return
-    if r[0x82]!=1:c.parar(0x412923,'selected order marker outside captured cell-target mode 1')
+    if r[0x82] not in (1,2) or r[0x82]==2 and r[1]!=5:c.parar(0x412923,'selected order marker outside captured cell/depot modes')
     ox,oy=c.tela.palavras('origem');w,h=c.tela.palavras('janela');phase=(c.tela.u('quadro_u32')//5)&1
-    for offset,base in ((0xb2,0x1e43),(0x80,0x1e45)):
-        cell=word(r,offset);cx,cy=cell%256,cell//256
+    second=word(r,0x80)
+    if r[0x82]==2:
+        from camadas_exibicao_m3 import TABLES
+        record=c._estrutura(second,0x412637);delta=TABLES['structure_centres'].get(str(record[8]))
+        if delta is None:c.parar(0x412637,'depot marker structure type is not captured')
+        second=(word(record,2)+delta[0]+256*delta[1])&65535
+    for cell,base in ((word(r,0xb2),0x1e43),(second,0x1e45)):
+        cx,cy=cell%256,cell//256
         if ox<=cx<ox+w and oy<=cy<oy+h:bob(c,(cx-ox)*32,(cy-oy)*32,base+phase)

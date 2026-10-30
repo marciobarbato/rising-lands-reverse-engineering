@@ -556,3 +556,78 @@ Prepared common validation passes **1,936 tests**, 614 optional skips. No
 renderer case is skipped. The [handoff](../motor/HANDOFF.md) records precise
 qualification, source/library hashes, reproduction commands and gaps. These
 results neither port Graphics 1.8 nor establish M3 simulation/app acceptance.
+
+## Stage 4 — declared input, ABI 1.5
+
+`rl_passo_quadro_entrada` adds the live scripted-input contract to phases 2/3:
+a copied cursor/message/key descriptor plus the existing frame context.
+`rl_eventos_entrada` copies consumed-input and order-packet events, including
+prefix diagnostics after an atomic failed phase. All old ABI versions remain
+accepted. Inputs/outputs are owned copies; no Python, OS polling or host callback
+runs inside a native frame. Cursor hold is explicit, keys reset per frame and
+WndProc messages retain their declared order.
+
+The input reference is a separate immutable profile pinned to the AI/runtime merge `a7f5d49` (contained in merged main
+`ef52cb0`).
+The no-input and Graphics reference revisions remain unchanged. Input source
+updates therefore cannot invalidate earlier proofs, and immutable original
+probe/capture/policy pins stay exact. The implementation covers the reference's
+input/selection/order/construction domain, shares the native physical/path/sight
+providers and preserves every remaining named dependency. Explicit flags select
+Missions' skipped text/sound roots; normal sound uses Audio's validated unopened
+state and real returns. It does not initialize playback or reconstruct glyphs.
+
+P1/P2 proof supports their newly published pass-2 state captures and exact
+window masks in addition to the Python/original indicator comparisons. A native
+world starts once at frame 128, carries its state through each phase and never
+loads a later oracle state. The [handoff](../motor/HANDOFF.md) defines call order,
+transactional behavior, proof scope, standalone fixture limitations and current
+provider boundaries. Final measured results are recorded separately below.
+
+Input round 3 adds Ctrl deposit mode, help pages 9/0xc/0xb/2/7 and
+structure targeting with troops, including tag-0x10 production and the upstream
+army-type correction. Its thirteen predicates and all declared text requests
+are checked against the 203 new original captures. Remaining stops are matched
+by name/address. The renderer keeps its independently pinned Graphics 1.7
+contract while the merged tree contains Graphics 1.8.
+
+The branch also merges Missions main `16b63ac`. P6 whole-state evidence is pinned
+independently at that revision, retaining the input source revision `a7f5d49`.
+The segmented reader validates original opening/end continuity without reloading
+the native world and reports the compared prefix separately from the full
+4,544-phase window. This evidence-reader addition changes no native code.
+
+### Stage 4 measured delivery
+
+Round 3 is complete against pinned `a7f5d49`: Ctrl deposit, help pages
+9/0xc/0xb/2/7, structure targeting/tag-0x10 production and thirteen predicates.
+Its 203 original cases give 201 completed equal and two exact Combat stops.
+The full input leaf battery gives **659 completed equal / 666 exercised**, seven
+exact stops, two explicit out-of-frame skips and zero mismatches; all 13 declared
+text requests agree.
+
+P1 and P2 match 501/501 and 601/601 frames and 1,002/1,002 and 1,202/1,202
+whole-state phases. P3/P6/P7 match frames 129–219 and stop at the same CAVE body
+`0x426aff` on frame 220. P6 additionally matches its 183-phase reachable
+whole-state prefix under the newly published policy, including
+`between_frames220`. K1 matches frames 129–140 and stops at the same AffGame
+view boundary `0x415b77` on frame 141. No later original state is loaded.
+
+The fresh no-input regressions are **257/257 M2.2 phases** and
+**18,401/18,401 M2.3 phases**. Renderer surfaces remain **128/128** against Python
+and original and **9,200/9,200** against original in a serial native chain;
+qualified Graphics 1.7 probes remain P1 501, P2 601 and P3 172 surfaces equal.
+The shared-MacBook release measurement is **83.22 logic frames/s**,
+**195.80 renders/s**, and **56.44 engine + render frames/s**, excluding app
+presentation and proof work.
+
+Native implementation `e41d755`, reader `8d60b00`; main snapshot `13dd534` is
+merged as `7b3f58d`. Native code and release library bytes are unchanged across
+the reader/main merges. The merged-tree engine gate passes, as does the common
+check (**1,982 tests, 621 optional skips**). The engine gate and common check
+execute in 289.931 and 414.860 seconds after lease grant, respectively.
+[The handoff](../motor/HANDOFF.md) and [hashed report package](../motor/validation/stage4/summary.json)
+record exact masks, timings, stops, original evidence pins, skipped work and
+reproduction commands. This remains ABI 1.5 and Graphics 1.7; it does not claim
+later construction/work/combat simulation, initialized audio, glyphs or app
+presentation beyond the declared domain.

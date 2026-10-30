@@ -170,57 +170,15 @@
  },
  "replayed_foreign_calls": 7,
  "schema": "rising-lands/monde01-structure-entry-differential/1",
- "seconds": 242.207,
+ "seconds": 276.287,
  "source_sha256": {
   "ferramentas/bancada_entrada_estruturas.py": "660cf29cd538cb5ebf81ff35b7b9cf0c9d34aabc97a83d3b4740c71930cf7078",
   "ferramentas/capturar_entrada_estruturas.py": "07dc6dfe3792b5e27c0a4ff9ee35159495b05d0c3e82fd7fff9729f8a457e5ab",
   "ferramentas/casos_entrada_estruturas.py": "35f4b6c8b74e76b13a92b3841ef55a2227f39426b8efb284396f3221d237c2ac",
-  "ferramentas/entrada_estruturas.py": "5221608b3ddee3cebf884762f514c86aecd575ecda190675fef1cc0b3a37327c",
+  "ferramentas/entrada_estruturas.py": "c673d9b066b873e1a172be9d30432c5ba3824e47ccff715217a8fd2d17fa48b5",
   "ferramentas/validar_entrada_estruturas.py": "aa8df181e25cacb4cd279cb8cdc74b88757d376ab03c33284ce8085bf6319205"
  },
  "uncertain": [
-  {
-   "bits": {
-    "EAX": "0xffffffff"
-   },
-   "case": "retire_unit13"
-  },
-  {
-   "bits": {
-    "EAX": "0xffffffff"
-   },
-   "case": "retire_unit13_upper"
-  },
-  {
-   "bits": {
-    "EAX": "0xffffffff"
-   },
-   "case": "retire_unit13_moving"
-  },
-  {
-   "bits": {
-    "EAX": "0xffffffff"
-   },
-   "case": "retire_unit13_selected"
-  },
-  {
-   "bits": {
-    "EAX": "0xffffffff"
-   },
-   "case": "retire_colonist_released"
-  },
-  {
-   "bits": {
-    "EAX": "0xffffffff"
-   },
-   "case": "retire_hidden_unit"
-  },
-  {
-   "bits": {
-    "EAX": "0xffffffff"
-   },
-   "case": "retire_builder"
-  },
   {
    "bits": {
     "EAX": "0xffffff00",
@@ -271,17 +229,13 @@
   },
   {
    "bits": {
-    "EAX": "0xffffffff",
-    "EBX": "0xffffffff",
-    "EDX": "0xffffffff"
+    "EBX": "0xffff0000"
    },
    "case": "illumine_cave_r5"
   },
   {
    "bits": {
-    "EAX": "0xffffffff",
-    "EBX": "0xffffffff",
-    "EDX": "0xffffffff"
+    "EBX": "0xffff0000"
    },
    "case": "illumine_far_r3"
   },

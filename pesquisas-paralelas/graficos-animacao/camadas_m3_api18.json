@@ -1,0 +1,42 @@
+{
+ "schema": "rising-lands/m3-render-layers/1",
+ "native_evidence": ["cbe2604","7ad141d","4befc76","ae13da0","e3ab05b"],
+ "capture_environment": {"TextGetMessage":{"declared_eax":0,"body_executed":false,"dereference_5099a4":false},
+   "AffText":{"body_executed":false,"production_missing_provider_stop":"0x459454"}},
+ "tooltip_hex": ["434f4e53545255544f52","41524d415ac94d","53414e5455c152494f","46415a454e444549524f"],
+ "normal_extensions": {"9":[13]},
+ "fatigue_pairs": {"5":[[4,4],[3,4]],"7":[[4,4],[3,4]]},
+ "structure_centres": {"3":[1,0]},
+ "worker": {"type":5,"state":5,"anchor":[11,11],"count":8,
+   "tasks":{"0":{"empty_base":1594,"full_base":1690,"stride":8},
+            "1":{"base":1662,"stride":4},
+            "2":{"empty_base":1594,"full_base":1690,"stride":8},
+            "3":{"empty_base":1594,"full_base":1690,"stride":8}}},
+ "construction": {
+  "2":{"maximum":600,"height":153,"scaffold":7031,"anchor":[150,93]},
+  "3":{"maximum":100,"height":97,"scaffold":7093,"anchor":[57,47]}
+ },
+ "uninhabited_layers": {
+  "2":[[7032,0,0],[7049,74,5],[7033,89,95],[7041,151,131],[7057,18,63]],
+  "3":[[7094,0,0],[7095,3,10],[7103,43,0],[7111,60,23],[7119,64,41],[7127,12,46],[7135,21,16]]
+ },
+ "gray_y_overrides":{"3":{"7119":38}},
+ "cave": {
+  "type": 3, "terrain_trigger": 781, "anchor": [57,47], "height": 97,
+  "owner": 0, "mode": 5,
+  "layers": [
+   {"op":"player", "base":7094, "offset":[0,0]},
+   {"op":"plain", "base":7095, "offset":[3,10], "clock":1, "cell_phase":true, "mask":7},
+   {"op":"plain", "base":7103, "offset":[43,0], "clock":1, "cell_phase":true, "mask":7},
+   {"op":"plain", "base":7111, "offset":[60,23], "clock":1, "cell_phase":true, "mask":7},
+   {"op":"plain", "base":7127, "offset":[12,46], "clock":1, "cell_phase":true, "mask":7, "animate_if_byte":116},
+   {"op":"plain", "base":7135, "offset":[21,16], "player_level":true},
+   {"op":"plain", "base":7119, "offset":[64,41], "variant_byte":118, "split":8, "upper_base":7137, "upper_y":38},
+   {"op":"plain", "base":7151, "offset":[64,38], "clock":1, "cell_phase":true, "mask":7, "when_full":true}
+  ]
+ },
+ "selection": {
+  "2":{"anchor":[150,93],"frame_right":175,"height":153,"gauge_y":90,"maximum":600,"capacity":16,"counts":[7,8]},
+  "3":{"anchor":[57,47],"frame_right":83,"height":97,"gauge_y":34,"maximum":100,"capacity":2,"counts":[1]}
+ }
+}

@@ -4,7 +4,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* ABI1.4. Frame logic and native indexed rendering are additive.
+/* ABI1.5. Frame logic and native indexed rendering are additive.
  * Addresses are original u32 values, NOT host pointers. Handles are opaque
  * integer tokens, never dereferenceable; zero/stale/double-free are rejected.
  * Calls are serialized inside the library. Caller must synchronize handle use
@@ -16,7 +16,7 @@ extern "C" {
  * Load replaces ALL blocks atomically, preserving the explicit virtual clock.
  * Count<=65536 and total<=64MiB. Empty load is allowed; empty regions are not.
  */
-#define RL_ABI_VERSION 0x00010004u
+#define RL_ABI_VERSION 0x00010005u
 enum { RL_OK=0, RL_INVALID_ARGUMENT=1, RL_INVALID_HANDLE=2, RL_MEMORY_ERROR=3,
  RL_UNKNOWN_ROUTINE=4, RL_UNSUPPORTED_PATH=5, RL_BUFFER_TOO_SMALL=6,
  RL_PANIC=7, RL_POISONED=8, RL_RESOURCE_LIMIT=9, RL_VERSION_MISMATCH=10, RL_STALE_GENERATION=11 };
@@ -143,6 +143,41 @@ int32_t rl_render_cache(RlRenderer renderer,uint8_t *keys,uint32_t key_capacity,
 uint32_t rl_render_contrato(void);
 int32_t rl_render_fundo_salvo(RlRenderer renderer,uint8_t *buffer,uint32_t capacity,
  uint32_t *required,uint32_t *address,uint64_t *generation);
+/* ABI 1.5: declared per-frame input from monde01-scripted-input/1.
+ * Phase 2 pumps ordered messages; phase 3 consumes the same frame's key table
+ * (message_count must then be zero). Cursor flag 1 holds the supplied screen
+ * point until changed; omitted keys answer zero for this phase, never held.
+ * Flags 2/4 explicitly declare Missions' TextGetMessage/sound non-execution
+ * boundaries. Without flag4 sound uses Audio's exact unopened-display domain;
+ * initialized audio remains a named dependency.
+ * No pointers escape. Descriptor size must equal sizeof(RlDeclaredInput).
+ * Keys are unique vkeys 0..255 with signed 32-bit schema answers; polling uses
+ * the signed low16. Messages are 0x100/101 or 0x200..205, in exact order.
+ * Calls fail atomically for world/clock/generation/cursor/input and preserve
+ * old frame events. A stopped attempt publishes its actual input/order prefix
+ * through rl_eventos_entrada; this diagnostic is separate from game state.
+ * RlPlayerInputEvent is 64 bytes. values by kind:
+ * 1 peek: present,msg,wp,lp; 2 get: msg,wp,lp; 3 translate: result;
+ * 4 dispatch: msg,wp,lp,hwnd,three LE words of 11 WndProc flag bytes;
+ * 5 cursor: x,y; 6 key: vk,signed answer bits;
+ * 7 SetPlayerOrdre: player,tag,word2,word4,word6,word8;
+ * 8 ProcessInputGame: player,tag,three LE packet words (10 bytes),jump target;
+ * 9 TextGetMessage declared boundary: message,EAX;
+ * 10 sound boundary: post, EAX,EDX,EBX,ECX,has_volume,volume.
+ * phase is 2/3, frame is the original cycle counter. Unused words are padding.
+ * Event queries never consume or modify a successful/stopped attempt's log.
+ */
+typedef struct { uint32_t message,wparam,lparam; } RlInputMessage;
+typedef struct { uint32_t vk; int32_t value; } RlInputKey;
+typedef struct {
+ uint32_t size,flags; int32_t cursor_x,cursor_y;
+ const RlInputMessage *messages; uint32_t message_count;
+ const RlInputKey *keys; uint32_t key_count;
+} RlDeclaredInput;
+typedef struct { uint32_t kind,phase,site,frame,values[12]; } RlPlayerInputEvent;
+enum { RL_INPUT_CURSOR=1, RL_INPUT_DISPLAY_TEXT_BOUNDARY=2, RL_INPUT_DISPLAY_SOUND_BOUNDARY=4 };
+int32_t rl_passo_quadro_entrada(RlMundo world,uint32_t phase,RlFrameInput *input,const RlDeclaredInput *declared);
+int32_t rl_eventos_entrada(RlMundo world,RlPlayerInputEvent *buffer,uint32_t capacity,uint32_t *required);
 #ifdef __cplusplus
 }
 #endif
