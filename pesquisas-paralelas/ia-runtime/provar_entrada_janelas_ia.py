@@ -681,8 +681,10 @@ def agregar(relatorios, janelas, planejamento=False):
                 bindings_outside_display=cont(lambda r: r.get('bindings', {}).get('equal')),
                 boundaries_outside_display=cont(lambda r: r.get('boundaries', {}).get('equal')),
                 allocation_count=cont(lambda r: r.get('allocation_count', {}).get('equal')),
+                # A between-frames phase that stops before its exit has no exit registers.
                 between_frames_exit_registers=dict(equal=sum(all(v['equal'] for v in r['registers'].values())
-                                                             for r in entre), checked=len(entre)),
+                                                             for r in entre if 'registers' in r),
+                                                   checked=sum('registers' in r for r in entre)),
                 carried_entry_registers=dict(equal=sum(all(v['equal'] for v in r['carried_entry_registers'].values())
                                                        for r in entre if 'carried_entry_registers' in r),
                                              checked=sum('carried_entry_registers' in r for r in entre)),
