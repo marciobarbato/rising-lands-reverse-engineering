@@ -102,9 +102,13 @@ JANELAS = {
     # S1 (frames 129-17050, ~17 parts): the Mac mini's pass-2 capture on feat/re-missions. Unpinned until it lands:
     # `fixar S1 --ref origin/feat/re-missions` rewrites this entry with the landed files' SHA-256 and the commit.
     # S1-BEGIN
-    'S1': dict(manifesto=f'{SONDAS}/S1/captura-janela.manifest.json', sha=None,
-               comandos=f'{SONDAS}/S1/comandos.jsonl.xz', sha_comandos=None,
-               entradas=f'{SONDAS}/S1/entradas.jsonl.xz', sha_entradas=None, ref=None),
+    'S1': dict(manifesto=f'{SONDAS}/S1/captura-janela.manifest.json',
+               sha='a7ee59f4226b1df92de375bf51fb9d2b57e79dfb17b607e8dfd5c38204b25a76',
+               comandos=f'{SONDAS}/S1/comandos.jsonl.xz',
+               sha_comandos='e73b75aab67caba52aac114f03709ad6b296e4cbef439668bbaef8f94824bbc7',
+               entradas=f'{SONDAS}/S1/entradas.jsonl.xz',
+               sha_entradas='fd1df062f4d197dd3930e2d817381485c15ee4bb8c6b290b3c3817d545edec1e',
+               ref='559f148f6e6440244d562c4e192748240ce5c60a'),
     # S1-END
 }
 INICIO = 128
@@ -143,6 +147,13 @@ def arquivo(nome, caminho, esperado=None):
     hash."""
     local = ROOT / caminho
     ref = JANELAS[nome].get('ref')
+    if not local.exists() and (ROOT / f'{caminho}.xz').exists():
+        # Missions may publish a large JSON (S1's window policy) xz-compressed; the pinned hash is the raw file's.
+        copia = ROOT / '.local/m3-1/xz' / caminho
+        if not copia.exists():
+            copia.parent.mkdir(parents=True, exist_ok=True)
+            copia.write_bytes(lzma.decompress((ROOT / f'{caminho}.xz').read_bytes()))
+        return copia
     if not ref or (local.exists() and (esperado is None or sha(local) == esperado)):
         return local
     copia = ROOT / '.local/m3-1/ref' / nome / ref[:12] / Path(caminho).name
@@ -824,7 +835,10 @@ def fixar(nome, ref):
     def blob(caminho):
         r = subprocess.run(['git', '-C', str(ROOT), 'show', f'{commit}:{caminho}'], capture_output=True)
         if r.returncode:
-            raise SystemExit(f'{nome}: {caminho} is not in {commit[:12]}')
+            rx = subprocess.run(['git', '-C', str(ROOT), 'show', f'{commit}:{caminho}.xz'], capture_output=True)
+            if rx.returncode:
+                raise SystemExit(f'{nome}: {caminho} is not in {commit[:12]}')
+            return lzma.decompress(rx.stdout)
         return r.stdout
     j = JANELAS[nome]
     bruto = blob(j['manifesto'])
