@@ -2,7 +2,41 @@
 
 The working mode changed on 2026-10-29: one Claude coordinator, Codex as its subordinate executor, the Mac mini for long native runs (see [parallel work](PARALLEL_WORK.md#working-mode-since-2026-10-29-current-at-2026-10-30)). Use the current prompt below to resume. The seven-chat prompt that follows it is kept as the historical reference for the 2026-10-28 organization; its front list, ownership and integration authorizations still hold, but not its "exactly seven chats, no subagents" mode.
 
-## Current coordinator prompt (2026-10-30)
+## Current coordinator prompt (2026-10-31, playable goal)
+
+Since 2026-10-31 the plan of record is [ROADMAP_PLAYABLE](ROADMAP_PLAYABLE.md). Use this prompt to resume. The 2026-10-30 prompt below is history.
+
+```text
+Resume the Rising Lands for Mac project as its coordinator.
+
+Goal: a playable, modernized macOS port of the 1997 Brazilian edition of Rising Lands that plays like the original I played as a child: same units, economy, AI raids, missions, sprites and sound, plus modern tools (game speed, difficulty, save anywhere, scaling, at least 60 fps). Byte-exact equivalence is NOT a goal. Time and quota matter more than proof rigor.
+
+Workspace: /Users/marcio/git/Rising Lands
+Canonical repository: /Users/marcio/git/Rising Lands/engenharia-reversa
+Coordinator worktree: /Users/marcio/git/Rising Lands/worktrees/maintenance (coordinator/maintenance)
+Remote: https://github.com/marciobarbato/rising-lands-reverse-engineering.git
+
+Read, in order, and nothing else unless a task needs it: docs/ROADMAP_PLAYABLE.md (the plan of record; its section 3 replaces the old original-first rules), the latest docs/HANDOVER_CLAUDE_*.md, the top of docs/ENGINE.md and motor/HANDOFF.md, AGENTS.md. Do not read or extend the historical proof material (ROADMAP_MONDE01, M3_PLAN, acceptance records) unless porting a routine needs a fact from it.
+
+Start with phase P0:
+1. Fetch origin. Check `codex_task.py list` and the Mac mini session. Let anything already running finish and integrate it if its gate is green. Dispatch no new proof work (formal S1 proof, M4 chain proofs, Test B, late-S1 render windows, Combat fatal windows).
+2. Build the play bot and stop census (P1 item 1): a headless Rust driver that plays MONDE01 from S0 with seeded random but plausible input and records every engine stop (name, address, frame, input history), restarting from checkpoints. Report the baseline: median stop-free minutes over 20 seeds and the ranked stop table.
+
+Then run the P1 loop until its exit criterion (30 stop-free bot minutes on 20 seeds, and I win MONDE01 by hand in the app):
+- Take the most frequent stops in batches of about 10 routines. Port each directly from the Ghidra decompile and asm to Rust in motor/ (no new Python), and pass a routine differential against the original in the Unicorn harness, using bot checkpoint states plus generated variations.
+- Adopt the Graphics 1.12 text glyphs in the Rust renderer early, so the renderer stop near frame 2,013 disappears.
+- Make the app open straight into MONDE01 play, with the inspection UI behind a menu item.
+- The x86 fallback (Unicorn embedded in the engine for unported routines) is an optional experiment, time-boxed to one agent-day; adopt it only if it meets the roadmap's criterion.
+Continue with P2 (MissionLoad and the startup state in Rust, load check on all 38 ETA files, campaign chain) and the later phases in order.
+
+Working mode: you plan, review and merge. Use fresh subagents with short briefs and Codex through local-data/coordination/codex-bridge/codex_task.py (check `quota` first; one executor per area of motor/ at a time; Codex never merges). Give tasks in large batches. Long multi-seed bot runs and checkpoint comparisons go to the Mac mini. Merge motor/ work through `python3 scripts/workstream.py integrate maintenance` from the maintenance worktree when `sh motor/validate.sh` is green; you are authorized to merge and push to main this way. No rounds, no acceptance JSON files, no status-only handovers: one handover per session.
+
+Kept rules: the intact RISING.EXE is the only oracle; when behaviour is unknown, read the asm instead of inventing it; explicit wrapping arithmetic; Rust engine, Swift app, C only for small tooling; documentation and commits in English, game content and audio in PT-BR; play mode at least 60 fps. On "pause", let running work finish; never force-kill unless told.
+
+Report to me in Portuguese, briefly, leading with the metrics table from ROADMAP_PLAYABLE section 7 (stop-free minutes, top stops, stages loading in Rust, stages won, fps). Re-estimate the remaining time after the first census.
+```
+
+## Historical coordinator prompt (2026-10-30)
 
 ```text
 Resume the reverse engineering of the Brazilian edition of Rising Lands as the project coordinator.

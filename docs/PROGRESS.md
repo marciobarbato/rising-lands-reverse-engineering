@@ -2,6 +2,16 @@
 
 Round: **CXR-20261030-M3R2 (M3 round 2 — M3.1 P1/P2 part ACCEPTED at `c9c85eb`, P6 part ACCEPTED at `92fab50`; S1 victory and D1 defeat on the original)**. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)); M2.1 at `32bb391`; M2.2 at `b9f4b5d`; **M2.3 and M2 at `ea62eb4`** ([record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json)); **M3.1 P1/P2 part at `c9c85eb`** ([record](../integracao/validacao/cxr-20261030-m3r1-m3-1-p1-p2-acceptance.json)). Handover: [HANDOVER_CLAUDE_20261030_2010](HANDOVER_CLAUDE_20261030_2010.md). [Roadmap](ROADMAP_MONDE01.md), [M3 plan](M3_PLAN.md), [snapshots](progress/README.md).
 
+## Mudança de objetivo (31/10)
+
+O objetivo passou a ser um port jogável e modernizado para Mac, não a equivalência byte a byte. O plano é o [ROADMAP_PLAYABLE](ROADMAP_PLAYABLE.md). Os indicadores abaixo ficam congelados nos valores de 30/10. A partir de agora o relatório lidera com: minutos de jogo sem parada (mediana de 20 sementes do robô de jogo), paradas distintas e as cinco mais frequentes, missões que carregam em Rust (de 38 ETA), missões vencidas e fps no modo jogo.
+
+| Indicador novo | Valor | Atualizado |
+|---|---|---|
+| Minutos sem parada na MONDE01 (robô) | não medido (jogo humano: 5–15 s) | 31/10 |
+| Missões que carregam em Rust | 0 de 38 (o motor parte do S0 capturado da MONDE01) | 31/10 |
+| Missões vencidas no app | 0 | 31/10 |
+
 ## Indicadores medidos (atualizados a cada integração)
 
 Estimativa global da MONDE01: **~60% (50–70%)** desde 30/10 13h50 (era 50% (40–60%); subiu com o M2 aceito, o M3.1 P1/P2/P6, o Teste A completo e as capturas originais de vitória e derrota). Os indicadores abaixo são medidos, não estimados.

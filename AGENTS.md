@@ -1,6 +1,8 @@
 # Repository instructions
 
-Read the latest `docs/HANDOVER_CLAUDE_*.md`, `docs/STATUS.md`, `docs/M3_PLAN.md`, `docs/PARALLEL_WORK.md`, and your domain manual before changing research. This is the canonical repository; the directory above it is the local workspace. Do not initialize a second Git repository there.
+**Since 2026-10-31 the goal is a playable, modernized Mac port, not a byte-exact reconstruction.** [docs/ROADMAP_PLAYABLE.md](docs/ROADMAP_PLAYABLE.md) is the plan of record. Its section 3 replaces the original-first, whole-state and per-front rules below wherever they conflict: port directly from Ghidra/asm to Rust in `motor/`, write no new Python, validate with routine differentials, checkpoint comparisons and the play bot, and report stop-free play time. The rest of this file still applies to the existing research folders.
+
+Read `docs/ROADMAP_PLAYABLE.md`, the latest `docs/HANDOVER_CLAUDE_*.md` and `motor/HANDOFF.md` before changing the engine. For the research folders, also read your domain manual. This is the canonical repository; the directory above it is the local workspace. Do not initialize a second Git repository there.
 
 ## Language
 
