@@ -1251,3 +1251,31 @@ the final gate and the last fetched refs. No runtime code changed after the
 passing reruns; this final checkpoint adds only the validation journal/handoff.
 `git diff --check` passes. Only AI/runtime-owned paths changed after main's
 initial fast-forward; the feature is pushed, with no main integration.
+
+## S1 strict whole-state proof on the Mac mini (2026-10-31)
+
+Pinned S1 to main `559f148` (`fixar`), then ran strict `tudo --janelas S1` on the Mac mini twice: at `8cf16d8`, and at `b4ebd73` after fixing aggregation. All 17 part chains are identical across both runs. Parts 3 and 4 also match a partial MacBook run. The proof is **not accepted** (21,778/21,787 compared phases equal, out of 33,844 in the window): [m3-1-prova-s1-nao-aceita.json](validacao/m3-1-prova-s1-nao-aceita.json), source `b4ebd73`, clean tree, window chain `f049ce7d…`.
+
+Tool fixes on the way: `arquivo`/`fixar` read the S1 window policy from its `.json.xz` sibling (pinned hash is the raw file's), written atomically (parallel parts had read a partial cache file); `agregar` counts exit registers only for between-frames phases that reach their exit.
+
+| Part | Frames | Equal | Result |
+|---|---|---|---|
+| 0 | 129–1128 | 24/2000 | difference `between_frames141`: DGROUP `0x49a054` Python 1, original 0 |
+| 1 | 1129–2128 | 1764/2000 | difference `between_frames2011`: same byte `0x49a054` |
+| 2 | 2129–3128 | 884/2000 | difference `between_frames2571`: same byte `0x49a054` |
+| 3 | 3129–4128 | 104/2000 | difference `between_frames3181`: same byte `0x49a054` |
+| 4 | 4129–5128 | 147/2000 | difference `frame4202`: `TextGetMessage` boundary registers (original EAX/EBX/ECX/EDX, Python EAX only) |
+| 5–9 | 5129–10128 | 10000/10000 | equal |
+| 10 | 10129–11128 | 1344/2000 | stop `between_frames10801` (AffGame two-monster guard `0x41591f`) |
+| 11 | 11129–12128 | 1249/2000 | stop `frame11753` (PostSound site) |
+| 12 | 12129–13128 | 0/2000 | stop at its first phase `between_frames12129` |
+| 13–15 | 13129–16128 | 6000/6000 | equal |
+| 16 | 16129–17050 | 262/1828 | stop `between_frames16260` |
+
+Next (Task B): find the `0x49a054` writer (one byte explains parts 0–3), model the `TextGetMessage` boundary registers, then the 10,801 / 11,753 / 12,129 / 16,260 stops. Reproduce from `b4ebd73`:
+
+```sh
+python3 -B pesquisas-paralelas/ia-runtime/provar_entrada_janelas_ia.py tudo --janelas S1 --lease <heavy_lease.py> --saida <new path>
+```
+
+Graphics late-S1 windows on the same mini (main `559f148`, evidence in the mini's `worktrees/gfx-late-559f148/.local/s1-late-mini-original/`): glyph-enabled full surfaces 12,501–15,000 2500/2500 and 15,751–17,031 1281/1281; 11,001–11,250 0/250, 15,001–15,250 228/250, 15,251–15,500 3/250 and 15,501–15,750 64/250 all stop at `0x4135fa` (tired icon with a nonzero body shift, origin not verified). Total 4076/4531.
