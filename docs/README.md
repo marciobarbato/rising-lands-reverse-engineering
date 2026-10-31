@@ -2,7 +2,7 @@
 
 The maintained manuals below replace the scattered research handoffs. Historical wording, complete prior notes, frozen deliveries, and their hashes remain recoverable as described in [migration](MIGRATION.md). Read current status before using an old report as a statement about today's runtime.
 
-**Start here:** the latest [coordinator handover (2026-10-30 19:10)](HANDOVER_CLAUDE_20261030_1910.md), then the top of [consolidated progress](PROGRESS.md) and [status](STATUS.md).
+**Start here:** the [playable roadmap](ROADMAP_PLAYABLE.md) (plan of record since 2026-10-31: a playable, modernized Mac port, not a byte-exact proof), then the latest coordinator handover and the top of [consolidated progress](PROGRESS.md). The milestone table below is frozen history.
 
 ## Milestones at a glance (2026-10-30 07:00)
 
@@ -25,6 +25,7 @@ The maintained manuals below replace the scattered research handoffs. Historical
 | [Claude handover 2026-10-28](HANDOVER_CLAUDE_20261028.md) | Historical: the 2026-10-28 freeze, preserved writers/worktrees |
 | [Consolidated progress](PROGRESS.md) | Milestone acceptance, per-round integrations, critical path, Portuguese executive summary; [snapshots](progress/README.md) |
 | [Status](STATUS.md) | Current milestone state, per-front state and pointers |
+| [Playable roadmap](ROADMAP_PLAYABLE.md) | **Plan of record since 2026-10-31**: goal, new validation rules, phases P0–P5, metrics |
 | [Roadmap to MONDE01](ROADMAP_MONDE01.md) | Milestones, dependency map, fronts, oracle strategy, completion inventory |
 | [M3/M4 plan](M3_PLAN.md) | Acceptance criteria and their current state, scripted-input capture, workstreams, the Rust engine decision, future features |
 | [Parallel work](PARALLEL_WORK.md) | Fronts, ownership, the coordinator/Codex/Mac mini working mode, integration rules |

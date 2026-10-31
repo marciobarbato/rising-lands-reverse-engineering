@@ -1,5 +1,7 @@
 # Roadmap to a running original mission (MONDE01)
 
+> **Superseded on 2026-10-31 by [ROADMAP_PLAYABLE](ROADMAP_PLAYABLE.md).** Kept as history; its acceptances stand, its open criteria are no longer pursued.
+
 Coordinator architecture for the seven-front research round, written 2026-10-28 at main `2da89cd7655998f3b3f240be192b4b2badf94b63`. It replaces the four-chat plan as the authorized organization. Every claim below about reconstructed behavior refers to the committed contracts in the domain manuals; nothing here upgrades a bounded fixture into a running game. Original addresses apply only to executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
 
 ## Recovery snapshot — 2026-10-28

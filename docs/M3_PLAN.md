@@ -1,5 +1,7 @@
 # M3/M4 plan — interactive MONDE01, then mission completion
 
+> **Superseded on 2026-10-31 by [ROADMAP_PLAYABLE](ROADMAP_PLAYABLE.md).** Kept as history; its acceptances stand, its open criteria are no longer pursued.
+
 Status: plan published 2026-10-29, with the user's architecture decisions at the end. Sections 0–5 are the original plan, based on `origin/main` `8e90beb` and `origin/runs/core/coverage-9200` `7193999`, and are kept as written; the [status section](#status-2026-10-30-0700) records what has since been done and accepted. Acceptance itself lives only in the records under `integracao/validacao/`. Original addresses apply only to intact `RISING.EXE` SHA-256 `6c556520…8543fb`.
 
 ## Status (2026-10-30 07:00)
