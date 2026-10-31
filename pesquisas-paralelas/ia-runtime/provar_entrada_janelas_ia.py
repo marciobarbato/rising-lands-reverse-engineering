@@ -152,7 +152,10 @@ def arquivo(nome, caminho, esperado=None):
         copia = ROOT / '.local/m3-1/xz' / caminho
         if not copia.exists():
             copia.parent.mkdir(parents=True, exist_ok=True)
-            copia.write_bytes(lzma.decompress((ROOT / f'{caminho}.xz').read_bytes()))
+            # Parts start in parallel: write under a private name and rename, so no part reads a partial file.
+            temporario = copia.with_name(f'{copia.name}.{os.getpid()}')
+            temporario.write_bytes(lzma.decompress((ROOT / f'{caminho}.xz').read_bytes()))
+            temporario.replace(copia)
         return copia
     if not ref or (local.exists() and (esperado is None or sha(local) == esperado)):
         return local
